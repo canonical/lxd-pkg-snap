@@ -27,7 +27,7 @@ parts:
     build-packages:
       - libapparmor-dev
       - libcap-dev
-      - libgnutls-dev
+      - libgnutls28-dev
       - libseccomp-dev
       - pkg-config
     plugin: autotools
