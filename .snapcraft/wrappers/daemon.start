@@ -1,5 +1,10 @@
 #!/bin/sh
 set -eu
+
+if [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    aa-exec -p unconfined -- $0 $@
+fi
+
 export LXD_DIR=${SNAP_COMMON}/lxd/
 export LXD_LXC_TEMPLATE_CONFIG=${SNAP}/lxc/config/
 export HOME=/tmp/

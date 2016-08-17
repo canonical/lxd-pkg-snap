@@ -1,6 +1,10 @@
 #!/bin/sh
 set -eu
 
+if [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    aa-exec -p unconfined -- $0 $@
+fi
+
 ## LXD
 if [ -e ${SNAP_COMMON}/lxd.pid ]; then
     PID=$(cat ${SNAP_COMMON}/lxd.pid)
