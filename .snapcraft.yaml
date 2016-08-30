@@ -1,5 +1,5 @@
 name: lxd
-version: git
+version: 2.1
 summary: LXD - the container lighervisor
 description: LXD is a container manager for system containers.
  It offers a REST API to remotely manage containers over the network,
@@ -25,7 +25,7 @@ apps:
 parts:
   lxc:
     source: git://github.com/lxc/lxc
-#    source-tag: lxc-2.0.3
+    source-tag: lxc-2.0.4
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -54,7 +54,7 @@ parts:
 
   lxcfs:
     source: git://github.com/lxc/lxcfs
-#    source-tag: lxcfs-2.0.2
+    source-tag: lxcfs-2.0.3
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -81,7 +81,7 @@ parts:
 
   lxd:
     source: git://github.com/lxc/lxd
-#    source-tag: lxd-2.0.3
+    source-tag: lxd-2.1
     after:
       - lxc
     build-packages:
