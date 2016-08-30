@@ -9,16 +9,18 @@ confinement: strict
 apps:
   benchmark:
     command: wrappers/lxd-benchmark
-    plugs: [network-control]
+    plugs: [network]
   daemon:
     command: wrappers/daemon.start
     stop-command: wrappers/daemon.stop
     daemon: simple
-    plugs: [lxd]
+    plugs: [lxd-support]
   lxc:
     command: wrappers/lxc
+    plugs: [network]
   lxd:
     command: wrappers/lxd
+    plugs: [lxd-support]
 
 parts:
   lxc:
