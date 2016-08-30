@@ -68,7 +68,6 @@ parts:
     organize:
       snap/lxd/current/lxc: lxc
       snap/lxd/current/lxcfs: lxcfs
-      
     snap:
       - bin/fusermount
       - lib/x86_64-linux-gnu/libfuse.so.*
@@ -128,7 +127,5 @@ parts:
       - bin/lxd-bridge-proxy
 
   wrappers:
-    plugin: copy
+    plugin: dump
     source: .snapcraft/
-    files:
-      "*": .
