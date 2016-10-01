@@ -129,4 +129,4 @@ parts:
 
   wrappers:
     plugin: dump
-    source: .snapcraft/
+    source: snapcraft/
