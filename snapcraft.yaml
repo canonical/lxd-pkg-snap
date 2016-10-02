@@ -94,6 +94,7 @@ parts:
       - iptables
       - rsync
       - squashfs-tools
+      - vim-tiny
       - xz-utils
       - zfsutils-linux
     plugin: go
@@ -106,6 +107,7 @@ parts:
       usr/bin/xz: bin/xz
       usr/bin/unsquashfs: bin/unsquashfs
       usr/bin/rsync: bin/rsync
+      usr/bin/vim.tiny: bin/vim.tiny
       usr/sbin/dnsmasq: bin/dnsmasq
       sbin/ebtables: bin/ebtables
       sbin/iptables: bin/iptables
@@ -118,6 +120,7 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
+      - bin/vim.tiny
       - bin/xz
       - bin/zfs
       - bin/zpool
