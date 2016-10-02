@@ -10,7 +10,7 @@ confinement: strict
 apps:
   benchmark:
     command: wrappers/lxd-benchmark
-    plugs: [network]
+    plugs: [lxd-support]
   daemon:
     command: wrappers/daemon.start
     stop-command: wrappers/daemon.stop
