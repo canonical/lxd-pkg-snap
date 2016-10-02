@@ -2,7 +2,7 @@
 set -eu
 
 if [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
-    aa-exec -p unconfined -- $0 $@
+    exec aa-exec -p unconfined -- $0 $@
 fi
 
 ## LXD
