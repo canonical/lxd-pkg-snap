@@ -35,5 +35,12 @@ PID=$!
 echo $PID > ${SNAP_COMMON}/lxd.pid
 lxd waitready
 
+## Put database in versioned path
+if [ ! -L ${SNAP_COMMON}/lxd/lxd.db ]; then
+    mkdir -p ${SNAP_DATA}/lxd/
+    mv ${SNAP_COMMON}/lxd/lxd.db ${SNAP_DATA}/lxd/lxd.db
+    ln -s ../../current/lxd/lxd.db ${SNAP_COMMON}/lxd/lxd.db
+fi
+
 ## Wait for the daemon to die
 wait $PID
