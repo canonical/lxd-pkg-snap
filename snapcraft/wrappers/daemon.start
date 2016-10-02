@@ -34,8 +34,6 @@ aa-exec -p unconfined -- lxd --group lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.l
 PID=$!
 echo $PID > ${SNAP_COMMON}/lxd.pid
 lxd waitready
-lxc profile device set default eth0 nictype macvlan --force-local
-lxc profile device set default eth0 parent ${OUT_DEVICE} --force-local
 
 ## Wait for the daemon to die
 wait $PID

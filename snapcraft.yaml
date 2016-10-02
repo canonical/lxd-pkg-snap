@@ -1,5 +1,5 @@
 name: lxd
-version: 2.1
+version: 2.3
 grade: stable
 summary: LXD - the container lighervisor
 description: LXD is a container manager for system containers.
@@ -82,7 +82,7 @@ parts:
 
   lxd:
     source: git://github.com/lxc/lxd
-    source-tag: lxd-2.1
+    source-tag: lxd-2.3
     after:
       - lxc
     build-packages:
@@ -90,6 +90,8 @@ parts:
     stage-packages:
       - acl
       - dnsmasq-base
+      - ebtables
+      - iptables
       - rsync
       - squashfs-tools
       - xz-utils
@@ -99,17 +101,20 @@ parts:
     go-packages:
       - github.com/lxc/lxd/lxc
       - github.com/lxc/lxd/lxd
-      - github.com/lxc/lxd/lxd-bridge/lxd-bridge-proxy
       - github.com/lxc/lxd/test/lxd-benchmark
     organize:
       usr/bin/xz: bin/xz
       usr/bin/unsquashfs: bin/unsquashfs
       usr/bin/rsync: bin/rsync
       usr/sbin/dnsmasq: bin/dnsmasq
+      sbin/ebtables: bin/ebtables
+      sbin/iptables: bin/iptables
       sbin/zfs: bin/zfs
       sbin/zpool: bin/zpool
     snap:
       - bin/dnsmasq
+      - bin/ebtables
+      - bin/iptables
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
@@ -125,7 +130,6 @@ parts:
       - bin/lxc
       - bin/lxd
       - bin/lxd-benchmark
-      - bin/lxd-bridge-proxy
 
   wrappers:
     plugin: dump
