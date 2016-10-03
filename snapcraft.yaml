@@ -18,7 +18,7 @@ apps:
     plugs: [lxd-support]
   lxc:
     command: wrappers/lxc
-    plugs: [network]
+    plugs: [network, home]
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
