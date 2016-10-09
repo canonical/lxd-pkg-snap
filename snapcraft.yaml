@@ -1,0 +1,139 @@
+name: lxd
+version: 2.4.1
+grade: stable
+summary: LXD - the container lighervisor
+description: LXD is a container manager for system containers.
+ It offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+confinement: strict
+
+apps:
+  benchmark:
+    command: wrappers/lxd-benchmark
+    plugs: [lxd-support]
+  daemon:
+    command: wrappers/daemon.start
+    stop-command: wrappers/daemon.stop
+    daemon: simple
+    plugs: [lxd-support]
+  lxc:
+    command: wrappers/lxc
+    plugs: [network, home]
+  lxd:
+    command: wrappers/lxd
+    plugs: [lxd-support]
+
+parts:
+  lxc:
+    source: git://github.com/lxc/lxc
+    source-tag: lxc-2.0.5
+    build-packages:
+      - libapparmor-dev
+      - libcap-dev
+      - libgnutls28-dev
+      - libseccomp-dev
+      - pkg-config
+    plugin: autotools
+    configflags:
+      - --disable-selinux
+      - --disable-python
+      - --disable-lua
+      - --disable-tests
+      - --disable-examples
+      - --disable-doc
+      - --disable-api-docs
+      - --disable-bash
+      - --disable-cgmanager
+      - --enable-apparmor
+      - --enable-seccomp
+      - --enable-capabilities
+      - --with-rootfs-path=/var/snap/lxd/common/lxc/
+    snap:
+      - lib/liblxc.so.1
+      - lib/liblxc.so.1.2.0
+      - libexec/lxc/lxc-monitord
+
+  lxcfs:
+    source: git://github.com/lxc/lxcfs
+    source-tag: lxcfs-2.0.4
+    build-packages:
+      - libfuse-dev
+      - libpam0g-dev
+      - pkg-config
+    stage-packages:
+      - fuse
+    plugin: autotools
+    configflags:
+      - --datarootdir=/snap/lxd/current/
+      - --localstatedir=/var/snap/lxd/common/var/
+    organize:
+      snap/lxd/current/lxc: lxc
+      snap/lxd/current/lxcfs: lxcfs
+    snap:
+      - bin/fusermount
+      - lib/x86_64-linux-gnu/libfuse.so.*
+
+      - bin/lxcfs
+      - lib/liblxcfs.so
+      - lib/liblxcfs.so.*
+
+      - lxc
+      - lxcfs
+
+  lxd:
+    source: git://github.com/lxc/lxd
+    source-tag: lxd-2.4.1
+    after:
+      - lxc
+    build-packages:
+      - pkg-config
+    stage-packages:
+      - acl
+      - dnsmasq-base
+      - ebtables
+      - iptables
+      - rsync
+      - squashfs-tools
+      - vim-tiny
+      - xz-utils
+      - zfsutils-linux
+    plugin: go
+    go-importpath: github.com/lxc/lxd
+    go-packages:
+      - github.com/lxc/lxd/lxc
+      - github.com/lxc/lxd/lxd
+      - github.com/lxc/lxd/test/lxd-benchmark
+    organize:
+      usr/bin/xz: bin/xz
+      usr/bin/unsquashfs: bin/unsquashfs
+      usr/bin/rsync: bin/rsync
+      usr/bin/vim.tiny: bin/vim.tiny
+      usr/sbin/dnsmasq: bin/dnsmasq
+      sbin/ebtables: bin/ebtables
+      sbin/iptables: bin/iptables
+      sbin/zfs: bin/zfs
+      sbin/zpool: bin/zpool
+    snap:
+      - bin/dnsmasq
+      - bin/ebtables
+      - bin/iptables
+      - bin/rsync
+      - bin/setfacl
+      - bin/unsquashfs
+      - bin/vim.tiny
+      - bin/xz
+      - bin/zfs
+      - bin/zpool
+      - usr/lib/libnvpair.so.*
+      - usr/lib/libuutil.so.*
+      - usr/lib/libzfs.so.*
+      - usr/lib/libzfs_core.so.*
+      - usr/lib/libzpool.so.*
+
+      - bin/lxc
+      - bin/lxd
+      - bin/lxd-benchmark
+
+  wrappers:
+    plugin: dump
+    source: snapcraft/
