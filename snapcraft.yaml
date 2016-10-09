@@ -26,6 +26,7 @@ apps:
 parts:
   lxc:
     source: https://github.com/lxc/lxc
+    source-type: git
     source-tag: lxc-2.0.5
     build-packages:
       - libapparmor-dev
@@ -55,6 +56,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
+    source-type: git
     source-tag: lxcfs-2.0.4
     build-packages:
       - libfuse-dev
@@ -82,6 +84,7 @@ parts:
 
   lxd:
     source: https://github.com/lxc/lxd
+    source-type: git
     source-tag: lxd-2.4.1
     after:
       - lxc
