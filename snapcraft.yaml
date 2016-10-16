@@ -95,11 +95,9 @@ parts:
       - acl
       - dnsmasq-base
       - ebtables
-      - iptables
       - rsync
       - squashfs-tools
       - vim-tiny
-      - xz-utils
       - zfsutils-linux
     plugin: go
     go-buildtags:
@@ -110,25 +108,21 @@ parts:
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/test/lxd-benchmark
     organize:
-      usr/bin/xz: bin/xz
       usr/bin/unsquashfs: bin/unsquashfs
       usr/bin/rsync: bin/rsync
       usr/bin/vim.tiny: bin/vim.tiny
       usr/lib/: lib/
       usr/sbin/dnsmasq: bin/dnsmasq
       sbin/ebtables: bin/ebtables
-      sbin/iptables: bin/iptables
       sbin/zfs: bin/zfs
       sbin/zpool: bin/zpool
     snap:
       - bin/dnsmasq
       - bin/ebtables
-      - bin/iptables
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
       - bin/vim.tiny
-      - bin/xz
       - bin/zfs
       - bin/zpool
       - usr/lib/libnvpair.so.*
