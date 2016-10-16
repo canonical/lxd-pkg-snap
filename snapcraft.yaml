@@ -114,6 +114,7 @@ parts:
       usr/bin/unsquashfs: bin/unsquashfs
       usr/bin/rsync: bin/rsync
       usr/bin/vim.tiny: bin/vim.tiny
+      usr/lib/: lib/
       usr/sbin/dnsmasq: bin/dnsmasq
       sbin/ebtables: bin/ebtables
       sbin/iptables: bin/iptables
