@@ -90,6 +90,7 @@ parts:
       - lxc
     build-packages:
       - pkg-config
+      - libsqlite3-dev
     stage-packages:
       - acl
       - dnsmasq-base
@@ -101,6 +102,7 @@ parts:
       - xz-utils
       - zfsutils-linux
     plugin: go
+    go-buildtags: libsqlite3
     go-importpath: github.com/lxc/lxd
     go-packages:
       - github.com/lxc/lxd/lxc
@@ -128,9 +130,10 @@ parts:
       - bin/zfs
       - bin/zpool
       - usr/lib/libnvpair.so.*
+      - usr/lib/*/libsqlite3*
       - usr/lib/libuutil.so.*
-      - usr/lib/libzfs.so.*
       - usr/lib/libzfs_core.so.*
+      - usr/lib/libzfs.so.*
       - usr/lib/libzpool.so.*
 
       - bin/lxc
