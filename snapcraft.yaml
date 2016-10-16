@@ -73,7 +73,7 @@ parts:
       snap/lxd/current/lxcfs: lxcfs
     snap:
       - bin/fusermount
-      - lib/x86_64-linux-gnu/libfuse.so.*
+      - lib/*/libfuse.so.*
 
       - bin/lxcfs
       - lib/liblxcfs.so
