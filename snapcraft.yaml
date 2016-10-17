@@ -125,12 +125,12 @@ parts:
       - bin/vim.tiny
       - bin/zfs
       - bin/zpool
-      - usr/lib/libnvpair.so.*
-      - usr/lib/*/libsqlite3*
-      - usr/lib/libuutil.so.*
-      - usr/lib/libzfs_core.so.*
-      - usr/lib/libzfs.so.*
-      - usr/lib/libzpool.so.*
+      - lib/libnvpair.so.*
+      - lib/*/libsqlite3*
+      - lib/libuutil.so.*
+      - lib/libzfs_core.so.*
+      - lib/libzfs.so.*
+      - lib/libzpool.so.*
 
       - bin/lxc
       - bin/lxd
