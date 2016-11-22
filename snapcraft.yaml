@@ -16,6 +16,7 @@ apps:
     stop-command: wrappers/daemon.stop
     daemon: simple
     plugs: [lxd-support]
+    slots: [lxd]
   lxc:
     command: wrappers/lxc
     plugs: [network, home]
