@@ -94,6 +94,7 @@ parts:
       - libsqlite3-dev
     stage-packages:
       - acl
+      - btrfs-tools
       - dnsmasq-base
       - ebtables
       - rsync
@@ -118,6 +119,7 @@ parts:
       sbin/zfs: bin/zfs
       sbin/zpool: bin/zpool
     snap:
+      - bin/btrfs
       - bin/dnsmasq
       - bin/ebtables
       - bin/rsync
