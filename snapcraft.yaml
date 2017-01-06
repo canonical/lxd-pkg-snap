@@ -20,6 +20,7 @@ apps:
   lxc:
     command: wrappers/lxc
     plugs: [network, home]
+    aliases: [lxc]
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
