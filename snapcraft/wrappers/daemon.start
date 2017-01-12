@@ -30,7 +30,11 @@ if [ ! -d ${SNAP_COMMON}/lxd ]; then
 fi
 
 ## Start lxd
-aa-exec -p unconfined -- lxd --group lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log &
+if [ -d /sys/kernel/security/apparmor ]; then
+    aa-exec -p unconfined -- lxd --group lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log &
+else
+    lxd --group lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log &
+fi
 PID=$!
 echo $PID > ${SNAP_COMMON}/lxd.pid
 lxd waitready
