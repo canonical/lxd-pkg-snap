@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-if [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
     exec aa-exec -p unconfined -- $0 $@
 fi
 
@@ -30,7 +30,21 @@ if [ ! -d ${SNAP_COMMON}/lxd ]; then
 fi
 
 ## Start lxd
-aa-exec -p unconfined -- lxd --group lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log &
+CMD="lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
+
+if getent group lxd >/dev/null 2>&1; then
+    CMD="${CMD} --group lxd"
+else
+    echo "No \"lxd\" group found, only root will be able to use LXD."
+fi
+
+if [ -d /sys/kernel/security/apparmor ]; then
+    aa-exec -p unconfined -- ${CMD} &
+else
+    ${CMD} &
+fi
+
+## Wait for it to be ready
 PID=$!
 echo $PID > ${SNAP_COMMON}/lxd.pid
 lxd waitready
