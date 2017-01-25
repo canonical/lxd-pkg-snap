@@ -5,6 +5,12 @@ summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
  It offers a REST API to remotely manage containers over the network,
  using an image based workflow and with support for live migration.
+
+ Images are available for all Ubuntu releases and architectures as well
+ as for a wide number of other Linux distributions.
+
+ LXD containers are lightweight, secure by default and a great
+ alternative to virtual machines.
 confinement: strict
 
 apps:
