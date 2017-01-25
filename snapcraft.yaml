@@ -57,7 +57,7 @@ parts:
       - --enable-seccomp
       - --enable-capabilities
       - --with-rootfs-path=/var/snap/lxd/common/lxc/
-    snap:
+    prime:
       - lib/liblxc.so.1
       - lib/liblxc.so.1.2.0
       - libexec/lxc/lxc-monitord
@@ -79,7 +79,7 @@ parts:
     organize:
       snap/lxd/current/lxc: lxc
       snap/lxd/current/lxcfs: lxcfs
-    snap:
+    prime:
       - bin/fusermount
       - lib/*/libfuse.so.*
 
@@ -125,7 +125,7 @@ parts:
       sbin/ebtables: bin/ebtables
       sbin/zfs: bin/zfs
       sbin/zpool: bin/zpool
-    snap:
+    prime:
       - bin/btrfs
       - bin/dnsmasq
       - bin/ebtables
