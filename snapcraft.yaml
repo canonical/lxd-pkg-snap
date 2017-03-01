@@ -108,6 +108,7 @@ parts:
       - squashfs-tools
       - vim-tiny
       - zfsutils-linux
+      - try: [criu]
     plugin: go
     go-buildtags:
       - libsqlite3
