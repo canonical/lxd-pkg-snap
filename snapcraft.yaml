@@ -1,5 +1,5 @@
 name: lxd
-version: 2.9.3
+version: 2.10
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -93,7 +93,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.9.3
+    source-tag: lxd-2.10
     after:
       - lxc
     build-packages:
@@ -108,6 +108,7 @@ parts:
       - squashfs-tools
       - vim-tiny
       - zfsutils-linux
+      - try: [criu]
     plugin: go
     go-buildtags:
       - libsqlite3
