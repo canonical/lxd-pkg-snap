@@ -1,5 +1,5 @@
 name: lxd
-version: 2.10.1
+version: 2.11
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -57,6 +57,9 @@ parts:
       - --enable-seccomp
       - --enable-capabilities
       - --with-rootfs-path=/var/snap/lxd/common/lxc/
+      - --libexecdir=/snap/lxd/current/libexec/
+    organize:
+      snap/lxd/current/libexec: libexec
     prime:
       - lib/liblxc.so.1
       - lib/liblxc.so.1.2.0
@@ -93,7 +96,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.10.1
+    source-tag: lxd-2.11
     after:
       - lxc
     build-packages:
