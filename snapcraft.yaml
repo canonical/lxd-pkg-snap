@@ -17,6 +17,9 @@ apps:
   benchmark:
     command: wrappers/lxd-benchmark
     plugs: [lxd-support]
+  check-kernel:
+    command: wrappers/lxd-check-kernel
+    plugs: [lxd-support]
   daemon:
     command: wrappers/daemon.start
     stop-command: wrappers/daemon.stop
@@ -61,6 +64,7 @@ parts:
     organize:
       snap/lxd/current/libexec: libexec
     prime:
+      - bin/lxc-checkconfig
       - lib/liblxc.so.1
       - lib/liblxc.so.1.2.0
       - libexec/lxc/lxc-monitord
