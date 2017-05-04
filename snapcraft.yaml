@@ -33,6 +33,9 @@ apps:
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
+  migrate:
+    command: wrappers/migrate
+    plugs: [lxd-support]
 
 parts:
   lxc:

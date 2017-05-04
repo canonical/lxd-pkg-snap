@@ -1,0 +1,106 @@
+#!/bin/sh -eu
+
+# Re-exec outside of apparmor confinement
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
+fi
+
+HOST="/proc/1/root/"
+
+# Sanity checks
+echo "==> Looking for the existing LXD daemon"
+if ! chroot ${HOST} lxc finger --force-local >/dev/null 2>&1; then
+    echo "Couldn't find the existing LXD daemon."
+    exit 1
+fi
+
+echo "==> Validating existing LXD daemon"
+if ! chroot ${HOST} lxc info --force-local | grep -q "^- storage$"; then
+    echo "Existing LXD is too old, only 2.12 or higher is supported at this time."
+    exit 1
+fi
+
+if ! chroot ${HOST} lxc storage list --force-local | tail -n+3 | grep "^| " | cut -d' ' -f4 | grep -qE "^(zfs|dir|)$"; then
+    echo "Only \"dir\" and \"zfs\" storage pools are supported at this time."
+    exit 1
+fi
+
+echo "==> Checking that new LXD daemon is empty"
+COUNT=$(find "${SNAP_COMMON}/lxd/containers/" "${SNAP_COMMON}/lxd/images/" -maxdepth 1 -type d 2>/dev/null | wc -l)
+if [ "${COUNT}" -gt 2 ]; then
+    echo "The new daemon isn't empty."
+    exit 1
+fi
+
+# Overview
+echo "==> Existing LXD installation (deb package)"
+export LXD_DIR=${HOST}/var/lib/lxd/
+echo "Daemon"
+chroot ${HOST} lxc info --force-local | grep server
+echo ""
+chroot ${HOST} lxc storage list --force-local
+echo ""
+chroot ${HOST} lxc image list --force-local
+echo ""
+chroot ${HOST} lxc list --force-local
+
+# Prompt user about migration
+echo ""
+printf "==> Do you want to migrate the existing LXD to the snap environment? (yes/no): "
+read input
+
+if [ "${input}" != "yes" ]; then
+    echo "Migration aborted by the user."
+    exit 1
+fi
+echo ""
+
+# Shutdown the daemons
+echo "==> Shutting down LXD (deb package)"
+chroot ${HOST} lxd shutdown
+chroot ${HOST} systemctl stop lxd.service lxd.socket
+
+echo "==> Shutting down new LXD (snap package)"
+chroot ${HOST} systemctl stop snap.lxd.daemon.service
+
+# Move the data
+echo "==> Moving existing data to new LXD installation"
+export LXD_DIR=${SNAP_COMMON}/lxd/
+rm -Rf "${LXD_DIR}"
+mv "${HOST}/var/lib/lxd/" "${LXD_DIR}"
+mv "${HOST}/var/log/lxd/" "${SNAP_COMMON}/lxd/logs/"
+
+# Rewrite the symlinks
+echo "==> Rewriting the container symlinks"
+for ctn in "${LXD_DIR}/containers/"*; do
+    [ ! -L "${ctn}" ] && continue
+
+    ln -sf "$(readlink -m "${ctn}" | sed "s#/var/lib/lxd/#${LXD_DIR}#g")" "${ctn}"
+done
+
+# ZFS: Rewrite the mountpoints
+if which zfs >/dev/null; then
+    echo "==> Rewriting the ZFS mountpoints"
+    zfs list -H -t all -o name,mountpoint | while read line; do
+        # shellcheck disable=SC2086
+        set -- ${line}
+        if echo "${2}" | grep -q "^/var/lib/lxd/"; then
+            zfs set mountpoint="$(echo "${2}" | sed "s#/var/lib/lxd/#/var/snap/lxd/common/lxd/#")" "${1}"
+        fi
+    done
+fi
+
+# Prompt user about package removal
+echo ""
+printf "==> Do you want to remove the old LXD package? (yes/no): "
+read input
+
+echo ""
+if [ "${input}" = "yes" ]; then
+    echo "==> Removing the LXD package"
+    chroot ${HOST} apt-get remove --purge --yes lxd lxd-client >/dev/null
+fi
+
+# Start LXD again
+echo "==> Data migration done, restarting LXD"
+chroot ${HOST} systemctl start snap.lxd.daemon.service
