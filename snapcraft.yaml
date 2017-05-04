@@ -34,7 +34,7 @@ apps:
     command: wrappers/lxd
     plugs: [lxd-support]
   migrate-from-deb:
-    command: wrappers/migrate-from-deb
+    command: wrappers/lxd-migrate-to-deb
     plugs: [lxd-support]
 
 parts:
