@@ -33,8 +33,8 @@ apps:
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
-  migrate:
-    command: wrappers/migrate
+  migrate-from-deb:
+    command: wrappers/migrate-from-deb
     plugs: [lxd-support]
 
 parts:
