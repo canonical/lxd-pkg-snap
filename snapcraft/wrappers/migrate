@@ -47,7 +47,7 @@ chroot ${HOST} lxc list --force-local
 # Prompt user about migration
 echo ""
 printf "==> Do you want to migrate the existing LXD to the snap environment? (yes/no): "
-read input
+read -r input
 
 if [ "${input}" != "yes" ]; then
     echo "Migration aborted by the user."
@@ -81,7 +81,7 @@ done
 # ZFS: Rewrite the mountpoints
 if which zfs >/dev/null; then
     echo "==> Rewriting the ZFS mountpoints"
-    zfs list -H -t all -o name,mountpoint | while read line; do
+    zfs list -H -t all -o name,mountpoint | while read -r line; do
         # shellcheck disable=SC2086
         set -- ${line}
         if echo "${2}" | grep -q "^/var/lib/lxd/"; then
@@ -93,7 +93,7 @@ fi
 # Prompt user about package removal
 echo ""
 printf "==> Do you want to remove the old LXD package? (yes/no): "
-read input
+read -r input
 
 echo ""
 if [ "${input}" = "yes" ]; then

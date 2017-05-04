@@ -2,31 +2,30 @@
 set -eu
 
 if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
-    exec aa-exec -p unconfined -- $0 "$@"
+    exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-export LXD_DIR=${SNAP_COMMON}/lxd/
-export LXD_LXC_TEMPLATE_CONFIG=${SNAP}/lxc/config/
-export HOME=/tmp/
-OUT_DEVICE=$(ip -4 route show | grep ^default | cut -d ' ' -f5)
+export LXD_DIR="${SNAP_COMMON}/lxd/"
+export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
+export HOME="/tmp/"
 
 # LXCFS
 ## Create the mount point
-mkdir -p ${SNAP_COMMON}/var/lib/lxcfs
+mkdir -p "${SNAP_COMMON}/var/lib/lxcfs"
 
 ## Cleanup any leftover
-fusermount -u ${SNAP_COMMON}/var/lib/lxcfs >/dev/null 2>&1 || true
-rm -f ${SNAP_COMMON}/lxcfs.pid
+fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
+rm -f "${SNAP_COMMON}/lxcfs.pid"
 
 ## Start lxcfs
-lxcfs ${SNAP_COMMON}/var/lib/lxcfs -p ${SNAP_COMMON}/lxcfs.pid &
+lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
 
 # LXD
 ## Create the main directory
-mkdir -p ${SNAP_COMMON}/lxc
-if [ ! -d ${SNAP_COMMON}/lxd ]; then
-    mkdir -p ${SNAP_COMMON}/lxd ${SNAP_COMMON}/lxd/logs
-    chmod 0711 ${SNAP_COMMON}/lxd
+mkdir -p "${SNAP_COMMON}/lxc"
+if [ ! -d "${SNAP_COMMON}/lxd" ]; then
+    mkdir -p "${SNAP_COMMON}/lxd" "${SNAP_COMMON}/lxd/logs"
+    chmod 0711 "${SNAP_COMMON}/lxd"
 fi
 
 ## Start lxd
@@ -38,22 +37,18 @@ else
     echo "No \"lxd\" group found, only root will be able to use LXD."
 fi
 
-if [ -d /sys/kernel/security/apparmor ]; then
-    aa-exec -p unconfined -- ${CMD} &
-else
-    ${CMD} &
-fi
+${CMD} &
 
 ## Wait for it to be ready
 PID=$!
-echo $PID > ${SNAP_COMMON}/lxd.pid
+echo $PID > "${SNAP_COMMON}/lxd.pid"
 lxd waitready
 
 ## Put database in versioned path
-if [ ! -L ${SNAP_COMMON}/lxd/lxd.db ]; then
-    mkdir -p ${SNAP_DATA}/lxd/
-    mv ${SNAP_COMMON}/lxd/lxd.db ${SNAP_DATA}/lxd/lxd.db
-    ln -s ../../current/lxd/lxd.db ${SNAP_COMMON}/lxd/lxd.db
+if [ ! -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
+    mkdir -p "${SNAP_DATA}/lxd/"
+    mv "${SNAP_COMMON}/lxd/lxd.db" "${SNAP_DATA}/lxd/lxd.db"
+    ln -s "../../current/lxd/lxd.db" "${SNAP_COMMON}/lxd/lxd.db"
 fi
 
 ## Wait for the daemon to die
