@@ -9,6 +9,33 @@ export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
 export HOME="/tmp/"
 
+# Setup a functional /etc
+if mountpoint -q /etc; then
+    ## Unmount and replace with an empty tmpfs
+    umount -l /etc
+    mount -t tmpfs tmpfs /etc -o mode=0755
+
+    ## Pass the bits we need from the host
+    for i in hostname hosts passwd group resolv.conf; do
+        touch "/etc/${i}"
+        mount -o bind,ro /var/lib/snapd/hostfs/etc/${i} /etc/${i}
+    done
+
+    ## And the bits we need from the core snap
+    for i in alternatives apparmor apparmor.d ssl vim; do
+        mkdir "/etc/${i}"
+        mount -o bind,ro /snap/core/current/etc/${i} /etc/${i}
+    done
+fi
+
+# LXC
+## Host specific overrides
+mkdir -p "${SNAP_COMMON}/lxc"
+touch "${SNAP_COMMON}/lxc/local.conf"
+if ! grep -q "\-Ubuntu" /proc/version ; then
+    echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
+fi
+
 # LXCFS
 ## Create the mount point
 mkdir -p "${SNAP_COMMON}/var/lib/lxcfs"
@@ -22,7 +49,6 @@ lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
 
 # LXD
 ## Create the main directory
-mkdir -p "${SNAP_COMMON}/lxc"
 if [ ! -d "${SNAP_COMMON}/lxd" ]; then
     mkdir -p "${SNAP_COMMON}/lxd" "${SNAP_COMMON}/lxd/logs"
     chmod 0711 "${SNAP_COMMON}/lxd"

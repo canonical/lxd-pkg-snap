@@ -65,12 +65,17 @@ parts:
       - --with-rootfs-path=/var/snap/lxd/common/lxc/
       - --libexecdir=/snap/lxd/current/libexec/
     organize:
+      snap/lxd/current/lxc: lxc
       snap/lxd/current/libexec: libexec
     prime:
       - bin/lxc-checkconfig
       - lib/liblxc.so.1
       - lib/liblxc.so.1.2.0
       - libexec/lxc/lxc-monitord
+      - lxc/config/common.conf.d
+    install: |-
+      mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
+      ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
