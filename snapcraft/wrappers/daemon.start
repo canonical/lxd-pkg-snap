@@ -12,7 +12,7 @@ export HOME="/tmp/"
 # Escape resource limits
 ## pid cgroup
 pidns=$(grep ":pids:" /proc/self/cgroup | awk -F: '{print $NF}')
-if [ -n "${pidns}" ] && [ -e "/sys/fs/cgroup/pids/${pidns}" ]; then
+if [ -n "${pidns}" ] && [ "${pidns}" != "/" ] && [ -e "/sys/fs/cgroup/pids/${pidns}" ]; then
     echo max > "/sys/fs/cgroup/pids/${pidns}/pids.max"
 fi
 
