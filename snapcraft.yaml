@@ -42,6 +42,15 @@ parts:
     source: https://github.com/lxc/lxc
     source-type: git
     source-tag: lxc-2.0.8
+    prepare: |-
+      git cherry-pick d3264db2e39f57dc9ffb7996cf0e7e039942c6d9 # 0003-utils-fix-num-parsing-functions.patch
+      git cherry-pick ba7e919e738eb0661cd25eb265df63b6c27f363b # 0004-tests-lxc_safe_-u-int-add-corner-case-tests.patch
+      git cherry-pick 52c2c35311cf89609ba74b80cd905e4a361c8f05 # 0005-lxc-attach-allow-for-situations-without-dev-tty.patch
+      git cherry-pick 30f1523a682930addbfab2c489b7547a3ea9d604 # 0006-start-don-t-call-lxc_map_ids-without-id-map.patch
+      git cherry-pick ea45f04d2711b92e9025ab02762723254be16aad # 0007-conf-fix-build-without-libcap.patch
+      git cherry-pick e13ca528c235c2b69cc3d6343be45e1ddccf9d7f # 0008-start-pin-rootfs-when-privileged.patch
+      git cherry-pick 3ddaa189b6f6c6153e3ebeff87ef7689714e3995 # 0009-conf-ile-allow-to-clear-all-config-items.patch
+      git cherry-pick fc2ae783372a790de1b02be18a96f57c970a37bd # 0010-utils-fix-ppc64le-builds.patch
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -81,6 +90,14 @@ parts:
     source: https://github.com/lxc/lxcfs
     source-type: git
     source-tag: lxcfs-2.0.7
+    prepare: |-
+      git cherry-pick 23e74df60646518ec423668f910f7f10e8c00b27 # 0001-pam-non-functional-changes.patch
+      git cherry-pick b217984d0a60c62e10d812179b5aca2fda54c90a # 0002-pam-report-back-we-found-the-unified-hierarchy.patch
+      git cherry-pick 6702a9e2b102135f1d622d7349104096cd56867b # 0003-bindings-add-mountpoint-for-unified-hierarchy.patch
+      git cherry-pick ab932db16d4282f26ee003f1593619bc279a4941 # 0004-pam-chown-cgroup.procs-file-on-unified-hierarchy.patch
+      git cherry-pick 5b4ecae5e786af8d876556904d65c2a5f16128cf # 0005-bindings-calculate-uptime-via-proc-pid-stat.patch
+      git cherry-pick 2d9cd3b3655319710e1baafad9453ef69e75e950 # 0006-bindings-calculate-btime-correctly.patch
+      git cherry-pick 5dcba7d16daadc45e2e25cca3eef8caa5bbe05c4 # 0007-tests-fix-invalid-comparison.patch
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -109,6 +126,13 @@ parts:
     source: https://github.com/lxc/lxd
     source-type: git
     source-tag: lxd-2.14
+    prepare: |-
+      git cherry-pick 0ffe2b2ef14b1c6fc66df9f04f6c23a761183a0e # 0001-storage-insert-driver-correctly.patch
+      git cherry-pick 679aafe1fd65fed20fa3aa85359e6b053cecf276 # 0002-patches-fix-upgrade.patch
+      git cherry-pick b1eb7453d3911644a9b6d894de7e6dedd241b17d # 0003-zfs-fix-container-copy.patch
+      git cherry-pick 17de1869158f22d7a77e6e33f46fa51100af9d1d # 0004-storage-copy-move-bugfixes.patch
+      git cherry-pick 4263ec402833cd45b0705e5448a560f610756691 # 0005-test-add-more-copy-migration-tests.patch
+      git cherry-pick 865ec4ee242c6b6e1c44f440f686d1880e48afc1 # 0006-btrfs-Apply-default-flags-BEFORE-detecting-type.patch
     after:
       - lxc
     build-packages:
