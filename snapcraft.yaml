@@ -127,6 +127,7 @@ parts:
     source-type: git
     source-tag: lxd-2.14
     prepare: |-
+      cd ../src
       git cherry-pick 0ffe2b2ef14b1c6fc66df9f04f6c23a761183a0e # 0001-storage-insert-driver-correctly.patch
       git cherry-pick 679aafe1fd65fed20fa3aa85359e6b053cecf276 # 0002-patches-fix-upgrade.patch
       git cherry-pick b1eb7453d3911644a9b6d894de7e6dedd241b17d # 0003-zfs-fix-container-copy.patch
