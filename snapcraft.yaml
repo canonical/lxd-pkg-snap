@@ -170,6 +170,7 @@ parts:
       - bin/btrfs
       - bin/dnsmasq
       - bin/ebtables
+      - bin/mkfs.btrfs
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
