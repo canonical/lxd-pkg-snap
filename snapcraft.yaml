@@ -134,6 +134,7 @@ parts:
       git cherry-pick 17de1869158f22d7a77e6e33f46fa51100af9d1d # 0004-storage-copy-move-bugfixes.patch
       git cherry-pick 4263ec402833cd45b0705e5448a560f610756691 # 0005-test-add-more-copy-migration-tests.patch
       git cherry-pick 865ec4ee242c6b6e1c44f440f686d1880e48afc1 # 0006-btrfs-Apply-default-flags-BEFORE-detecting-type.patch
+      git cherry-pick 9aecf02fb4da3181ccbf40897341202b8b24e5bb # 0007-lxd-images-Initialize-image-info-in-direct-case.patch
     after:
       - lxc
     build-packages:
