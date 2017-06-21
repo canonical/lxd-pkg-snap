@@ -98,6 +98,7 @@ parts:
       git cherry-pick 5b4ecae5e786af8d876556904d65c2a5f16128cf # 0005-bindings-calculate-uptime-via-proc-pid-stat.patch
       git cherry-pick 2d9cd3b3655319710e1baafad9453ef69e75e950 # 0006-bindings-calculate-btime-correctly.patch
       git cherry-pick 5dcba7d16daadc45e2e25cca3eef8caa5bbe05c4 # 0007-tests-fix-invalid-comparison.patch
+      git cherry-pick 72dd97f7ecfa1e118f4b33b3d694694fcf6fd120 # 0008-temporarily-revert-the-virtualization-of-btime-field.patch
     build-packages:
       - libfuse-dev
       - libpam0g-dev
