@@ -39,6 +39,13 @@ fi
 prlimit -p $$ --nofile=1048576:1048576
 prlimit -p $$ --nproc=unlimited:unlimited
 
+# Bump sysctls
+if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
+    if [ "$(cat /proc/sys/fs/inotify/max_user_instances)" -lt "1024" ]; then
+        echo 1024 > /proc/sys/fs/inotify/max_user_instances
+    fi
+fi
+
 # LXC
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
