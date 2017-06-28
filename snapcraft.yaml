@@ -1,5 +1,5 @@
 name: lxd
-version: 2.14
+version: 2.15
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -82,6 +82,8 @@ parts:
     install: |-
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+      sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
+      sed -i "s#libdir=.*#libdir=$SNAPCRAFT_PART_INSTALL/lib#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
@@ -123,16 +125,9 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.14
+    source-tag: lxd-2.15
     prepare: |-
       cd ../src
-      git cherry-pick 0ffe2b2ef14b1c6fc66df9f04f6c23a761183a0e # 0001-storage-insert-driver-correctly.patch
-      git cherry-pick 679aafe1fd65fed20fa3aa85359e6b053cecf276 # 0002-patches-fix-upgrade.patch
-      git cherry-pick b1eb7453d3911644a9b6d894de7e6dedd241b17d # 0003-zfs-fix-container-copy.patch
-      git cherry-pick 17de1869158f22d7a77e6e33f46fa51100af9d1d # 0004-storage-copy-move-bugfixes.patch
-      git cherry-pick 4263ec402833cd45b0705e5448a560f610756691 # 0005-test-add-more-copy-migration-tests.patch
-      git cherry-pick 865ec4ee242c6b6e1c44f440f686d1880e48afc1 # 0006-btrfs-Apply-default-flags-BEFORE-detecting-type.patch
-      git cherry-pick 9aecf02fb4da3181ccbf40897341202b8b24e5bb # 0007-lxd-images-Initialize-image-info-in-direct-case.patch
     after:
       - lxc
     build-packages:
