@@ -33,12 +33,10 @@ if mountpoint -q /etc; then
 fi
 
 # Escape resource limits
-## pid cgroup
-pidcg=$(grep ":pids:" /proc/self/cgroup | awk -F: '{print $NF}')
-if [ -n "${pidcg}" ] && [ "${pidcg}" != "/" ] && [ -e "/sys/fs/cgroup/pids/${pidcg}" ]; then
-    echo "==> Escaping the systemd CGroup PID limit"
-    echo max > "/sys/fs/cgroup/pids/${pidcg}/pids.max"
-fi
+echo "==> Escaping the systemd cgroups"
+for ctr in /sys/fs/cgroup/*; do
+    echo "$$" > "${ctr}/tasks"
+done
 
 ## prlimits
 echo "==> Escaping the systemd process resource limits"
@@ -62,22 +60,27 @@ fi
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
 touch "${SNAP_COMMON}/lxc/local.conf"
-if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version ; then
+if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version; then
     echo "==> Detected kernel with partial AppArmor support"
     echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 fi
 
 # LXCFS
-## Create the mount point
-mkdir -p "${SNAP_COMMON}/var/lib/lxcfs"
+if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
+    echo "=> Re-using existing LXCFS"
+    kill -USR1 "$(cat "${SNAP_COMMON}/lxcfs.pid")" || true
+else
+    ## Create the mount point
+    mkdir -p "${SNAP_COMMON}/var/lib/lxcfs"
 
-## Cleanup any leftover
-fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
-rm -f "${SNAP_COMMON}/lxcfs.pid"
+    ## Cleanup any leftover
+    fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
+    rm -f "${SNAP_COMMON}/lxcfs.pid"
 
-## Start lxcfs
-echo "=> Starting LXCFS"
-lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+    ## Start lxcfs
+    echo "=> Starting LXCFS"
+    ( lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" & )
+fi
 
 # LXD
 ## Create the main directory
