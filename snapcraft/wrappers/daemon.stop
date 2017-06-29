@@ -1,24 +1,18 @@
 #!/bin/sh
 set -eu
 
+export LXD_DIR="${SNAP_COMMON}/lxd/"
+
 if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
 ## LXD
-if [ -e "${SNAP_COMMON}/lxd.pid" ]; then
-    PID=$(cat "${SNAP_COMMON}/lxd.pid")
-    /bin/kill -SIGPWR "$PID"
-    COUNT=0
-    while [ "$COUNT" != "30" ]; do
-        sleep 1
-        COUNT=$((COUNT+1))
-        ps "$PID" >/dev/null 2>&1 || break
-    done
-    ps "$PID" >/dev/null 2>&1 && /bin/kill -9 "$PID"
-fi
+echo "=> Stopping LXD (with container shutdown)"
+lxd shutdown || true
 
 ## LXCFS
+echo "=> Stopping LXCFS"
 if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
     PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
     /bin/kill "$PID"

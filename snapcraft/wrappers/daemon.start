@@ -5,12 +5,16 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+echo "=> Preparing the system"
+
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
 export HOME="/tmp/"
 
 # Setup a functional /etc
 if mountpoint -q /etc; then
+    echo "==> Preparing a clean copy of /etc"
+
     ## Unmount and replace with an empty tmpfs
     umount -l /etc
     mount -t tmpfs tmpfs /etc -o mode=0755
@@ -32,21 +36,25 @@ fi
 ## pid cgroup
 pidcg=$(grep ":pids:" /proc/self/cgroup | awk -F: '{print $NF}')
 if [ -n "${pidcg}" ] && [ "${pidcg}" != "/" ] && [ -e "/sys/fs/cgroup/pids/${pidcg}" ]; then
+    echo "==> Escaping the systemd CGroup PID limit"
     echo max > "/sys/fs/cgroup/pids/${pidcg}/pids.max"
 fi
 
 ## prlimits
+echo "==> Escaping the systemd process resource limits"
 prlimit -p $$ --nofile=1048576:1048576
 prlimit -p $$ --nproc=unlimited:unlimited
 
 # Handle sysctls
 if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
     if [ "$(cat /proc/sys/fs/inotify/max_user_instances)" -lt "1024" ]; then
+        echo "==> Increasing the number of inotify user instances"
         echo 1024 > /proc/sys/fs/inotify/max_user_instances
     fi
 fi
 
 if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
+    echo "==> Enabling unprivileged containers kernel support"
     echo 1 > /proc/sys/kernel/unprivileged_userns_clone
 fi
 
@@ -54,7 +62,8 @@ fi
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
 touch "${SNAP_COMMON}/lxc/local.conf"
-if ! grep -q "\-Ubuntu" /proc/version ; then
+if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version ; then
+    echo "==> Detected kernel with partial AppArmor support"
     echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 fi
 
@@ -67,6 +76,7 @@ fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
 rm -f "${SNAP_COMMON}/lxcfs.pid"
 
 ## Start lxcfs
+echo "=> Starting LXCFS"
 lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
 
 # LXD
@@ -85,6 +95,7 @@ else
     echo "No \"lxd\" group found, only root will be able to use LXD."
 fi
 
+echo "=> Starting LXD"
 ${CMD} &
 
 ## Wait for it to be ready
@@ -100,4 +111,5 @@ if [ ! -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
 fi
 
 ## Wait for the daemon to die
+echo "=> LXD is ready"
 wait $PID
