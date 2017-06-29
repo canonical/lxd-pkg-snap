@@ -134,6 +134,7 @@ parts:
       git cherry-pick cfb87802155a95329d328ae5a0115d58d541ca73 # 0001-lxc-publish-Fix-fingerprint-printing.patch
       git cherry-pick 640fcbd73a8e094a98dd6a81776ba0134acd1a96 # 0002-Fix-failure-to-launch-containers-with-random-names.patch
       git cherry-pick 172e25934d1b9bbb2398ca9b95628197e34c5758 # 0003-client-Fix-handling-of-public-LXD-remote.patch
+      git cherry-pick 1030ca30a95167de294b6f236dd6f98c270fd511 # 0004-cancel-Fix-crash-if-no-canceler-is-setup.patch
     after:
       - lxc
     build-packages:
