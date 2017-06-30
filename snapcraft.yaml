@@ -135,6 +135,7 @@ parts:
       git cherry-pick 640fcbd73a8e094a98dd6a81776ba0134acd1a96 # 0002-Fix-failure-to-launch-containers-with-random-names.patch
       git cherry-pick 172e25934d1b9bbb2398ca9b95628197e34c5758 # 0003-client-Fix-handling-of-public-LXD-remote.patch
       git cherry-pick 1030ca30a95167de294b6f236dd6f98c270fd511 # 0004-cancel-Fix-crash-if-no-canceler-is-setup.patch
+      git cherry-pick 083c5b2a8ad4c70f8a1769d7a902001bd9a7dd39 # 0005-client-Commonize-error-handling.patch
     after:
       - lxc
     build-packages:
