@@ -14,7 +14,7 @@ chroot /proc/1/root snap changes > "${STATUS}" || true
 reason="host shutdown"
 if ! lxc finger >/dev/null 2>&1; then
     reason="crashed"
-elif grep -q 'Auto-refresh snap "lxd"' "${STATUS}"; then
+elif grep -q 'Doing.*Auto-refresh snap "lxd"' "${STATUS}"; then
     reason="snap refresh"
 elif grep -q 'Doing.*Refresh "lxd"' "${STATUS}"; then
     reason="snap refresh"
