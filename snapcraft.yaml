@@ -133,6 +133,15 @@ parts:
       git cherry-pick 172e25934d1b9bbb2398ca9b95628197e34c5758 # 0003-client-Fix-handling-of-public-LXD-remote.patch
       git cherry-pick 1030ca30a95167de294b6f236dd6f98c270fd511 # 0004-cancel-Fix-crash-if-no-canceler-is-setup.patch
       git cherry-pick 083c5b2a8ad4c70f8a1769d7a902001bd9a7dd39 # 0005-client-Commonize-error-handling.patch
+      git cherry-pick 57c675067fc5df825c9c5d7b2bd0a203a19b3f03 # 0006-lxc-config-Removal-of-multiple-devices-at-once.patch
+      git cherry-pick 156cf14561ba750503e15b79f128b240e77b4991 # 0007-network-Don-t-fail-on-non-process-PIDs.patch
+      git cherry-pick cfabc1bbee547e74b70cbfb0bd66b30bbdc9d8e5 # 0008-config-Try-to-be-clever-about-in-snapshots.patch
+      git cherry-pick f8f723da1e616d4884452f58a964935218486e27 # 0009-Fix-readonly-mode-for-directory-mount.patch
+      git cherry-pick 7828ffa8cda8bcd56c22d73627c5dce7c744564d # 0010-client-Fix-race-condition-in-operation-handling.patch
+      git cherry-pick e749e77876a3300507fd7aa35e018a105c5d51ce # 0011-import-keep-volatile-keys.patch
+      git cherry-pick af4f77cb8baf801794e96c0b74d495d8289cd128 # 0012-import-remove-last-dependency-on-symlink.patch
+      git cherry-pick dd8d99e68d22f2af58e06862e82c6e19e2f50653 # 0013-Better-handle-errors-in-memory-reporting.patch
+      git cherry-pick 5134b57faa22827e4272c96e08dbaec5a9124b2b # 0014-client-Don-t-live-migrate-stopped-containers.patch
     after:
       - lxc
     build-packages:
