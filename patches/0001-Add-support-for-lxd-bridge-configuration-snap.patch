@@ -1,0 +1,87 @@
+From ac7c84c6aa025d72a9c9a564514094cc521b1516 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>
+Date: Thu, 13 Jul 2017 01:28:10 -0400
+Subject: [PATCH] Add support for lxd-bridge configuration (snap)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Stéphane Graber <stgraber@ubuntu.com>
+---
+ lxd/main_init.go         |  7 +++++++
+ lxd/main_init_network.go | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 lxd/main_init_network.go
+
+diff --git a/lxd/main_init.go b/lxd/main_init.go
+index d89afae0..df7d4964 100644
+--- a/lxd/main_init.go
++++ b/lxd/main_init.go
+@@ -368,6 +368,13 @@ they otherwise would.
+ 			networkPort = askInt("Port to bind LXD to [default=8443]: ", 1, 65535, "8443")
+ 			trustPassword = askPassword("Trust password for new clients: ")
+ 		}
++
++		if askBool("Do you want to configure the LXD bridge (yes/no) [default=yes]? ", "yes") {
++			err := initConfigureNetwork()
++			if err != nil {
++				return err
++			}
++		}
+ 	}
+ 
+ 	// Unset all storage keys, core.https_address and core.trust_password
+diff --git a/lxd/main_init_network.go b/lxd/main_init_network.go
+new file mode 100644
+index 00000000..c6952f03
+--- /dev/null
++++ b/lxd/main_init_network.go
+@@ -0,0 +1,45 @@
++package main
++
++import (
++	"fmt"
++	"io/ioutil"
++	"os"
++
++	"github.com/lxc/lxd/shared"
++)
++
++func initConfigureNetwork() error {
++	snapCommon := os.Getenv("SNAP_COMMON")
++	configPath := fmt.Sprintf("%s/lxd-bridge/config", snapCommon)
++
++	shared.RunCommand("lxd-bridge", "stop")
++
++	config := `USE_LXD_BRIDGE="true"
++LXD_BRIDGE="lxdbr0"
++LXD_DOMAIN="lxd"
++
++LXD_IPV4_ADDR="10.214.179.1"
++LXD_IPV4_NETMASK="255.255.255.0"
++LXD_IPV4_NETWORK="10.214.179.1/24"
++LXD_IPV4_DHCP_RANGE="10.214.179.2,10.214.179.254"
++LXD_IPV4_DHCP_MAX="252"
++LXD_IPV4_NAT="true"
++
++LXD_IPV6_ADDR="fdc9:2f0d:62bc:1953::1"
++LXD_IPV6_MASK="64"
++LXD_IPV6_NETWORK="fdc9:2f0d:62bc:1953::1/64"
++LXD_IPV6_NAT="true"
++`
++
++	err := ioutil.WriteFile(configPath, []byte(config), 0644)
++	if err != nil {
++		return err
++	}
++
++	_, err = shared.RunCommand("lxd-bridge", "start")
++	if err != nil {
++		return err
++	}
++
++	return nil
++}
+-- 
+2.11.0
+

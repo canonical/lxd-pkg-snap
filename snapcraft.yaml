@@ -109,6 +109,7 @@ parts:
     source-branch: stable-2.0
     prepare: |-
       cd ../src
+      git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
       cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
       sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^varrun=.*#varrun=\${SNAP_COMMON}/lxd-bridge/run#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
