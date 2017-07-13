@@ -29,8 +29,8 @@ echo "=> Stop reason is: ${reason}"
 
 # LXD bridge (for LXD 2.0.x)
 if [ -x "${SNAP}/bin/lxd-bridge" ]; then
-    echo "=> Starting lxd-bridge"
-    lxd-bridge stop
+    echo "=> Stopping lxd-bridge"
+    lxd-bridge stop || true
 fi
 
 # Handle refreshes

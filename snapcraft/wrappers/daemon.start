@@ -86,7 +86,7 @@ fi
 # LXD bridge (for LXD 2.0.x)
 if [ -x "${SNAP}/bin/lxd-bridge" ]; then
     echo "=> Starting lxd-bridge"
-    lxd-bridge start
+    lxd-bridge start || true
 fi
 
 # LXD
