@@ -1,0 +1,175 @@
+name: lxd
+version: git
+grade: devel
+summary: LXD - the container lightervisor
+description: LXD is a container manager for system containers.
+ It offers a REST API to remotely manage containers over the network,
+ using an image based workflow and with support for live migration.
+
+ Images are available for all Ubuntu releases and architectures as well
+ as for a wide number of other Linux distributions.
+
+ LXD containers are lightweight, secure by default and a great
+ alternative to virtual machines.
+confinement: strict
+
+apps:
+  benchmark:
+    command: wrappers/lxd-benchmark
+    plugs: [lxd-support]
+  check-kernel:
+    command: wrappers/lxd-check-kernel
+    plugs: [lxd-support]
+  daemon:
+    command: wrappers/daemon.start
+    stop-command: wrappers/daemon.stop
+    stop-timeout: 600s
+    daemon: simple
+    plugs: [lxd-support]
+    slots: [lxd]
+  lxc:
+    command: wrappers/lxc
+    plugs: [network, home]
+    aliases: [lxc]
+  lxd:
+    command: wrappers/lxd
+    plugs: [lxd-support]
+
+parts:
+  lxc:
+    source: https://github.com/lxc/lxc
+    source-type: git
+    build-packages:
+      - libapparmor-dev
+      - libcap-dev
+      - libgnutls28-dev
+      - libseccomp-dev
+      - pkg-config
+    plugin: autotools
+    configflags:
+      - --disable-selinux
+      - --disable-python
+      - --disable-lua
+      - --disable-tests
+      - --disable-examples
+      - --disable-doc
+      - --disable-api-docs
+      - --disable-bash
+      - --disable-cgmanager
+      - --enable-apparmor
+      - --enable-seccomp
+      - --enable-capabilities
+      - --with-rootfs-path=/var/snap/lxd/common/lxc/
+      - --libexecdir=/snap/lxd/current/libexec/
+    organize:
+      snap/lxd/current/lxc: lxc
+      snap/lxd/current/libexec: libexec
+    prime:
+      - bin/lxc-checkconfig
+      - lib/liblxc.so.1
+      - lib/liblxc.so.1.2.0
+      - libexec/lxc/lxc-monitord
+      - lxc/config/common.conf.d
+    install: |-
+      mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
+      ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+      sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
+      sed -i "s#libdir=.*#libdir=$SNAPCRAFT_PART_INSTALL/lib#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
+
+  lxcfs:
+    source: https://github.com/lxc/lxcfs
+    source-type: git
+    build-packages:
+      - libfuse-dev
+      - libpam0g-dev
+      - pkg-config
+    stage-packages:
+      - fuse
+    plugin: autotools
+    configflags:
+      - --datarootdir=/snap/lxd/current/
+      - --localstatedir=/var/snap/lxd/common/var/
+    organize:
+      snap/lxd/current/lxc: lxc
+      snap/lxd/current/lxcfs: lxcfs
+    prime:
+      - bin/fusermount
+      - lib/*/libfuse.so.*
+
+      - bin/lxcfs
+      - lib/liblxcfs.so
+      - lib/liblxcfs.so.*
+
+      - lxc
+      - lxcfs
+
+  lxd:
+    source: https://github.com/lxc/lxd
+    source-type: git
+    prepare: |-
+      cd ../src
+      cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
+      sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^varrun=.*#varrun=\${SNAP_COMMON}/lxd-bridge/run#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^varlib=.*#varlib=\${SNAP_COMMON}/lxd-bridge/lib#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^LXD_BRIDGE=\"lxdbr0\"#LXD_BRIDGE=\"\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+    after:
+      - lxc
+    build-packages:
+      - pkg-config
+      - libsqlite3-dev
+    stage-packages:
+      - acl
+      - btrfs-tools
+      - dnsmasq-base
+      - ebtables
+      - rsync
+      - squashfs-tools
+      - vim-tiny
+      - zfsutils-linux
+      - try: [criu]
+    plugin: go
+    go-buildtags:
+      - libsqlite3
+    go-importpath: github.com/lxc/lxd
+    go-packages:
+      - github.com/lxc/lxd/lxc
+      - github.com/lxc/lxd/lxd
+      - github.com/lxc/lxd/test/lxd-benchmark
+    organize:
+      usr/bin/unsquashfs: bin/unsquashfs
+      usr/bin/rsync: bin/rsync
+      usr/bin/vim.tiny: bin/vim.tiny
+      usr/lib/: lib/
+      usr/sbin/dnsmasq: bin/dnsmasq
+      sbin/ebtables: bin/ebtables
+      sbin/zfs: bin/zfs
+      sbin/zpool: bin/zpool
+    prime:
+      - bin/btrfs
+      - bin/dnsmasq
+      - bin/ebtables
+      - bin/mkfs.btrfs
+      - bin/rsync
+      - bin/setfacl
+      - bin/unsquashfs
+      - bin/vim.tiny
+      - bin/zfs
+      - bin/zpool
+      - lib/libnvpair.so.*
+      - lib/*/libsqlite3*
+      - lib/libuutil.so.*
+      - lib/libzfs_core.so.*
+      - lib/libzfs.so.*
+      - lib/libzpool.so.*
+
+      - bin/lxc
+      - bin/lxd
+      - bin/lxd-benchmark
+      - bin/lxd-bridge
+
+  wrappers:
+    plugin: dump
+    source: snapcraft/
