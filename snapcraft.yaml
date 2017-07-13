@@ -106,6 +106,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
+    source-branch: stable-2.0
     prepare: |-
       cd ../src
       cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
