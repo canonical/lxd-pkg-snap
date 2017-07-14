@@ -1,4 +1,4 @@
-From ac7c84c6aa025d72a9c9a564514094cc521b1516 Mon Sep 17 00:00:00 2001
+From 27cd3602782287ae4689c99942fbe49681366d2a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>
 Date: Thu, 13 Jul 2017 01:28:10 -0400
 Subject: [PATCH] Add support for lxd-bridge configuration (snap)
@@ -8,9 +8,9 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Stéphane Graber <stgraber@ubuntu.com>
 ---
- lxd/main_init.go         |  7 +++++++
- lxd/main_init_network.go | 45 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 52 insertions(+)
+ lxd/main_init.go         |   7 +
+ lxd/main_init_network.go | 472 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 479 insertions(+)
  create mode 100644 lxd/main_init_network.go
 
 diff --git a/lxd/main_init.go b/lxd/main_init.go
@@ -33,48 +33,475 @@ index d89afae0..df7d4964 100644
  	// Unset all storage keys, core.https_address and core.trust_password
 diff --git a/lxd/main_init_network.go b/lxd/main_init_network.go
 new file mode 100644
-index 00000000..c6952f03
+index 00000000..05c65c78
 --- /dev/null
 +++ b/lxd/main_init_network.go
-@@ -0,0 +1,45 @@
+@@ -0,0 +1,472 @@
 +package main
 +
 +import (
++	"bufio"
++	"encoding/binary"
++	"encoding/hex"
 +	"fmt"
 +	"io/ioutil"
++	"math"
++	"math/big"
++	"math/rand"
++	"net"
 +	"os"
++	"regexp"
++	"strconv"
++	"strings"
++	"sync"
++	"time"
 +
 +	"github.com/lxc/lxd/shared"
 +)
 +
 +func initConfigureNetwork() error {
++	// Figure out the config path
 +	snapCommon := os.Getenv("SNAP_COMMON")
 +	configPath := fmt.Sprintf("%s/lxd-bridge/config", snapCommon)
 +
-+	shared.RunCommand("lxd-bridge", "stop")
++	// Initialize the config
++	var bridgeName string
++	var bridgeIPv4 string
++	var bridgeIPv4Nat bool
++	var bridgeIPv4Addr string
++	var bridgeIPv4Range string
++	var bridgeIPv6 string
++	var bridgeIPv6Nat bool
++	var bridgeIPv6Addr string
 +
-+	config := `USE_LXD_BRIDGE="true"
-+LXD_BRIDGE="lxdbr0"
++	// I/O reader
++	reader := bufio.NewReader(os.Stdin)
++
++	// Random backported functions
++	networkGetIP := func(subnet *net.IPNet, host int64) net.IP {
++		// Convert IP to a big int
++		bigIP := big.NewInt(0)
++		bigIP.SetBytes(subnet.IP.To16())
++
++		// Deal with negative offsets
++		bigHost := big.NewInt(host)
++		bigCount := big.NewInt(host)
++		if host < 0 {
++			mask, size := subnet.Mask.Size()
++
++			bigHosts := big.NewFloat(0)
++			bigHosts.SetFloat64((math.Pow(2, float64(size-mask))))
++			bigHostsInt, _ := bigHosts.Int(nil)
++
++			bigCount.Set(bigHostsInt)
++			bigCount.Add(bigCount, bigHost)
++		}
++
++		// Get the new IP int
++		bigIP.Add(bigIP, bigCount)
++
++		// Generate an IPv6
++		if subnet.IP.To4() == nil {
++			newIp := make(net.IP, 16)
++			newIp = bigIP.Bytes()
++			return newIp
++		}
++
++		// Generate an IPv4
++		newIp := make(net.IP, 4)
++		binary.BigEndian.PutUint32(newIp, uint32(bigIP.Int64()))
++		return newIp
++	}
++
++	networkInRoutingTable := func(subnet *net.IPNet) bool {
++		filename := "route"
++		if subnet.IP.To4() == nil {
++			filename = "ipv6_route"
++		}
++
++		file, err := os.Open(fmt.Sprintf("/proc/net/%s", filename))
++		if err != nil {
++			return false
++		}
++		defer file.Close()
++
++		scanner := bufio.NewReader(file)
++		for {
++			line, _, err := scanner.ReadLine()
++			if err != nil {
++				break
++			}
++
++			fields := strings.Fields(string(line))
++
++			// Get the IP
++			ip := net.IP{}
++			if filename == "ipv6_route" {
++				ip, err = hex.DecodeString(fields[0])
++				if err != nil {
++					continue
++				}
++			} else {
++				bytes, err := hex.DecodeString(fields[1])
++				if err != nil {
++					continue
++				}
++
++				ip = net.IPv4(bytes[3], bytes[2], bytes[1], bytes[0])
++			}
++
++			// Get the mask
++			mask := net.IPMask{}
++			if filename == "ipv6_route" {
++				size, err := strconv.ParseInt(fmt.Sprintf("0x%s", fields[1]), 0, 64)
++				if err != nil {
++					continue
++				}
++
++				mask = net.CIDRMask(int(size), 128)
++			} else {
++				bytes, err := hex.DecodeString(fields[7])
++				if err != nil {
++					continue
++				}
++
++				mask = net.IPv4Mask(bytes[3], bytes[2], bytes[1], bytes[0])
++			}
++
++			// Generate a new network
++			lineNet := net.IPNet{IP: ip, Mask: mask}
++
++			// Ignore default gateway
++			if lineNet.IP.Equal(net.ParseIP("::")) {
++				continue
++			}
++
++			if lineNet.IP.Equal(net.ParseIP("0.0.0.0")) {
++				continue
++			}
++
++			// Check if we have a route to our new subnet
++			if lineNet.Contains(subnet.IP) {
++				return true
++			}
++		}
++
++		return false
++	}
++
++	networkValidName := func(value string) error {
++		// Validate the length
++		if len(value) < 2 {
++			return fmt.Errorf("Interface name is too short (minimum 2 characters)")
++		}
++
++		if len(value) > 15 {
++			return fmt.Errorf("Interface name is too long (maximum 15 characters)")
++		}
++
++		// Validate the character set
++		match, _ := regexp.MatchString("^[-a-zA-Z0-9]*$", value)
++		if !match {
++			return fmt.Errorf("Interface name contains invalid characters")
++		}
++
++		return nil
++	}
++
++	networkValidAddressCIDRV6 := func(value string) error {
++		if value == "" {
++			return nil
++		}
++
++		ip, subnet, err := net.ParseCIDR(value)
++		if err != nil {
++			return err
++		}
++
++		if ip.To4() != nil {
++			return fmt.Errorf("Not an IPv6 address: %s", value)
++		}
++
++		if ip.String() == subnet.IP.String() {
++			return fmt.Errorf("Not a usable IPv6 address: %s", value)
++		}
++
++		return nil
++	}
++
++	networkValidAddressCIDRV4 := func(value string) error {
++		if value == "" {
++			return nil
++		}
++
++		ip, subnet, err := net.ParseCIDR(value)
++		if err != nil {
++			return err
++		}
++
++		if ip.To4() == nil {
++			return fmt.Errorf("Not an IPv4 address: %s", value)
++		}
++
++		if ip.String() == subnet.IP.String() {
++			return fmt.Errorf("Not a usable IPv4 address: %s", value)
++		}
++
++		return nil
++	}
++
++	networkPingSubnet := func(subnet *net.IPNet) bool {
++		var fail bool
++		var failLock sync.Mutex
++		var wgChecks sync.WaitGroup
++
++		ping := func(ip net.IP) {
++			defer wgChecks.Done()
++
++			cmd := "ping"
++			if ip.To4() == nil {
++				cmd = "ping6"
++			}
++
++			_, err := shared.RunCommand(cmd, "-n", "-q", ip.String(), "-c", "1", "-W", "1")
++			if err != nil {
++				// Remote didn't answer
++				return
++			}
++
++			// Remote answered
++			failLock.Lock()
++			fail = true
++			failLock.Unlock()
++		}
++
++		poke := func(ip net.IP) {
++			defer wgChecks.Done()
++
++			addr := fmt.Sprintf("%s:22", ip.String())
++			if ip.To4() == nil {
++				addr = fmt.Sprintf("[%s]:22", ip.String())
++			}
++
++			_, err := net.DialTimeout("tcp", addr, time.Second)
++			if err == nil {
++				// Remote answered
++				failLock.Lock()
++				fail = true
++				failLock.Unlock()
++				return
++			}
++		}
++
++		// Ping first IP
++		wgChecks.Add(1)
++		go ping(networkGetIP(subnet, 1))
++
++		// Poke port on first IP
++		wgChecks.Add(1)
++		go poke(networkGetIP(subnet, 1))
++
++		// Ping check
++		if subnet.IP.To4() != nil {
++			// Ping last IP
++			wgChecks.Add(1)
++			go ping(networkGetIP(subnet, -2))
++
++			// Poke port on last IP
++			wgChecks.Add(1)
++			go poke(networkGetIP(subnet, -2))
++		}
++
++		wgChecks.Wait()
++
++		return fail
++	}
++
++	networkRandomSubnetV4 := func() (string, error) {
++		for i := 0; i < 100; i++ {
++			cidr := fmt.Sprintf("10.%d.%d.1/24", rand.Intn(255), rand.Intn(255))
++			_, subnet, err := net.ParseCIDR(cidr)
++			if err != nil {
++				continue
++			}
++
++			if networkInRoutingTable(subnet) {
++				continue
++			}
++
++			if networkPingSubnet(subnet) {
++				continue
++			}
++
++			return cidr, nil
++		}
++
++		return "", fmt.Errorf("Failed to automatically find an unused IPv4 subnet, manual configuration required")
++	}
++
++	networkRandomSubnetV6 := func() (string, error) {
++		for i := 0; i < 100; i++ {
++			cidr := fmt.Sprintf("fd42:%x:%x:%x::1/64", rand.Intn(65535), rand.Intn(65535), rand.Intn(65535))
++			_, subnet, err := net.ParseCIDR(cidr)
++			if err != nil {
++				continue
++			}
++
++			if networkInRoutingTable(subnet) {
++				continue
++			}
++
++			if networkPingSubnet(subnet) {
++				continue
++			}
++
++			return cidr, nil
++		}
++
++		return "", fmt.Errorf("Failed to automatically find an unused IPv6 subnet, manual configuration required")
++	}
++
++	askBool := func(question string, default_ string) bool {
++		for {
++			fmt.Printf(question)
++			input, _ := reader.ReadString('\n')
++			input = strings.TrimSuffix(input, "\n")
++			if input == "" {
++				input = default_
++			}
++			if shared.StringInSlice(strings.ToLower(input), []string{"yes", "y"}) {
++				return true
++			} else if shared.StringInSlice(strings.ToLower(input), []string{"no", "n"}) {
++				return false
++			}
++
++			fmt.Printf("Invalid input, try again.\n\n")
++		}
++	}
++
++	askString := func(question string, default_ string, validate func(string) error) string {
++		for {
++			fmt.Printf(question)
++			input, _ := reader.ReadString('\n')
++			input = strings.TrimSuffix(input, "\n")
++			if input == "" {
++				input = default_
++			}
++			if validate != nil {
++				result := validate(input)
++				if result != nil {
++					fmt.Printf("Invalid input: %s\n\n", result)
++					continue
++				}
++			}
++			if len(input) != 0 {
++				return input
++			}
++
++			fmt.Printf("Invalid input, try again.\n\n")
++		}
++	}
++
++	// Ask the questions
++	bridgeName = askString("What should the new bridge be called [default=lxdbr0]? ", "lxdbr0", networkValidName)
++
++	// IPv4 config
++	bridgeIPv4 = askString("What IPv4 address should be used (CIDR subnet notation, “auto” or “none”) [default=auto]? ", "auto", func(value string) error {
++		if shared.StringInSlice(value, []string{"auto", "none"}) {
++			return nil
++		}
++
++		return networkValidAddressCIDRV4(value)
++	})
++
++	if !shared.StringInSlice(bridgeIPv4, []string{"auto", "none"}) {
++		bridgeIPv4Nat = askBool("Would you like LXD to NAT IPv4 traffic on your bridge? [default=yes]? ", "yes")
++	}
++
++	if bridgeIPv4 == "auto" {
++		subnet, err := networkRandomSubnetV4()
++		if err != nil {
++			return err
++		}
++
++		bridgeIPv4 = fmt.Sprintf("%s", subnet)
++		bridgeIPv4Nat = true
++	}
++
++	if bridgeIPv4 != "none" {
++		_, bridgeIPv4Subnet, err := net.ParseCIDR(bridgeIPv4)
++		if err != nil {
++			return err
++		}
++
++		bridgeIPv4Range = fmt.Sprintf("%s,%s", networkGetIP(bridgeIPv4Subnet, 2).String(), networkGetIP(bridgeIPv4Subnet, -2).String())
++		bridgeIPv4Addr = networkGetIP(bridgeIPv4Subnet, 1).String()
++	} else {
++		bridgeIPv4 = ""
++	}
++
++	// IPv6 config
++	bridgeIPv6 = askString("What IPv6 address should be used (CIDR subnet notation, “auto” or “none”) [default=auto]? ", "auto", func(value string) error {
++		if shared.StringInSlice(value, []string{"auto", "none"}) {
++			return nil
++		}
++
++		return networkValidAddressCIDRV6(value)
++	})
++
++	if !shared.StringInSlice(bridgeIPv6, []string{"auto", "none"}) {
++		bridgeIPv6Nat = askBool("Would you like LXD to NAT IPv6 traffic on your bridge? [default=yes]? ", "yes")
++	}
++
++	if bridgeIPv6 == "auto" {
++		subnet, err := networkRandomSubnetV6()
++		if err != nil {
++			return err
++		}
++
++		bridgeIPv6 = fmt.Sprintf("%s", subnet)
++		bridgeIPv6Nat = true
++	}
++
++	if bridgeIPv6 != "none" {
++		_, bridgeIPv6Subnet, err := net.ParseCIDR(bridgeIPv6)
++		if err != nil {
++			return err
++		}
++
++		bridgeIPv6Addr = networkGetIP(bridgeIPv6Subnet, 1).String()
++	} else {
++		bridgeIPv6 = ""
++	}
++
++	// Generate the config file
++	config := fmt.Sprintf(`USE_LXD_BRIDGE="true"
++LXD_BRIDGE="%s"
 +LXD_DOMAIN="lxd"
 +
-+LXD_IPV4_ADDR="10.214.179.1"
++LXD_IPV4_ADDR="%s"
 +LXD_IPV4_NETMASK="255.255.255.0"
-+LXD_IPV4_NETWORK="10.214.179.1/24"
-+LXD_IPV4_DHCP_RANGE="10.214.179.2,10.214.179.254"
++LXD_IPV4_NETWORK="%s"
++LXD_IPV4_DHCP_RANGE="%s"
 +LXD_IPV4_DHCP_MAX="252"
-+LXD_IPV4_NAT="true"
++LXD_IPV4_NAT="%v"
 +
-+LXD_IPV6_ADDR="fdc9:2f0d:62bc:1953::1"
++LXD_IPV6_ADDR="%s"
 +LXD_IPV6_MASK="64"
-+LXD_IPV6_NETWORK="fdc9:2f0d:62bc:1953::1/64"
-+LXD_IPV6_NAT="true"
-+`
++LXD_IPV6_NETWORK="%s"
++LXD_IPV6_NAT="%v"
++`, bridgeName, bridgeIPv4Addr, bridgeIPv4, bridgeIPv4Range, bridgeIPv4Nat, bridgeIPv6Addr, bridgeIPv6, bridgeIPv6Nat)
 +
++	// Stop the current bridge
++	shared.RunCommand("lxd-bridge", "stop")
++
++	// Write the file
 +	err := ioutil.WriteFile(configPath, []byte(config), 0644)
 +	if err != nil {
 +		return err
 +	}
 +
++	// Restart the bridge
 +	_, err = shared.RunCommand("lxd-bridge", "start")
 +	if err != nil {
 +		return err
