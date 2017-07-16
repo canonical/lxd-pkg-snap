@@ -122,15 +122,15 @@ if [ ! -d "${SNAP_COMMON}/lxd" ]; then
 fi
 
 ## Start lxd
+echo "=> Starting LXD"
 CMD="lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group lxd >/dev/null 2>&1; then
     CMD="${CMD} --group lxd"
 else
-    echo "No \"lxd\" group found, only root will be able to use LXD."
+    echo "==> No \"lxd\" group found, only root will be able to use LXD."
 fi
 
-echo "=> Starting LXD"
 ${CMD} &
 
 ## Wait for it to be ready
