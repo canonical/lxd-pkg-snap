@@ -20,7 +20,7 @@ if ! chroot ${HOST} lxc info --force-local | grep -q "^- storage$"; then
     exit 1
 fi
 
-if ! chroot ${HOST} lxc storage list --force-local | tail -n+3 | grep "^| " | cut -d' ' -f4 | grep -qE "^(zfs|dir|)$"; then
+if ! chroot ${HOST} lxc storage list --force-local | tail -n+3 | grep "^| " | awk -F "|" '{print $4}' | sed "s/ //g" | grep -qE "^(zfs|dir|)$"; then
     echo "Only \"dir\" and \"zfs\" storage pools are supported at this time."
     exit 1
 fi
