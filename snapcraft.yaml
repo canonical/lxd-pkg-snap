@@ -129,6 +129,7 @@ parts:
     source-tag: lxd-2.16
     prepare: |-
       cd ../src
+      git cherry-pick 166683e7c24eba24b7f6eb9cc7ca818c2d858e38 # 0001-patches-fix-canmount-noauto-patch.patch
     after:
       - lxc
     build-packages:
