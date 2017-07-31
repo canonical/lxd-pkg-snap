@@ -106,6 +106,51 @@ parts:
       - lxc
       - lxcfs
 
+  zfs:
+    plugin: nil
+    stage-packages:
+      - zfsutils-linux
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/zfs
+      - bin/zpool
+      - lib/libnvpair.so.*
+      - lib/libuutil.so.*
+      - lib/libzfs_core.so.*
+      - lib/libzfs.so.*
+      - lib/libzpool.so.*
+
+  btrfs:
+    plugin: nil
+    stage-packages:
+      - btrfs-tools
+    prime:
+      - bin/btrfs
+      - bin/mkfs.btrfs
+
+  lvm:
+    plugin: nil
+    stage-packages:
+      - lvm2
+      - thin-provisioning-tools
+    organize:
+      sbin/: bin/
+      usr/sbin/: bin/
+    prime:
+      - bin/cache_*
+      - bin/era_*
+      - bin/pdata_tools
+      - bin/thin_*
+      - bin/lv*
+      - bin/vg*
+      - bin/pv*
+      - etc/lvm/lvm.conf
+      - lib/*/libdevmapper*
+      - lib/*/libreadline.so*
+      - lib/*/libaio.so*
+
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
@@ -116,13 +161,11 @@ parts:
       - libsqlite3-dev
     stage-packages:
       - acl
-      - btrfs-tools
       - dnsmasq-base
       - ebtables
       - rsync
       - squashfs-tools
       - vim-tiny
-      - zfsutils-linux
       - try: [criu]
     plugin: go
     go-buildtags:
@@ -133,31 +176,18 @@ parts:
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/test/lxd-benchmark
     organize:
-      usr/bin/unsquashfs: bin/unsquashfs
-      usr/bin/rsync: bin/rsync
-      usr/bin/vim.tiny: bin/vim.tiny
+      usr/bin/: bin/
+      usr/sbin/: bin/
+      sbin/: bin/
       usr/lib/: lib/
-      usr/sbin/dnsmasq: bin/dnsmasq
-      sbin/ebtables: bin/ebtables
-      sbin/zfs: bin/zfs
-      sbin/zpool: bin/zpool
     prime:
-      - bin/btrfs
       - bin/dnsmasq
       - bin/ebtables
-      - bin/mkfs.btrfs
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
       - bin/vim.tiny
-      - bin/zfs
-      - bin/zpool
-      - lib/libnvpair.so.*
       - lib/*/libsqlite3*
-      - lib/libuutil.so.*
-      - lib/libzfs_core.so.*
-      - lib/libzfs.so.*
-      - lib/libzpool.so.*
 
       - bin/lxc
       - bin/lxd
