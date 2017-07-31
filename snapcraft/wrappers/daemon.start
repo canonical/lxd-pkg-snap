@@ -71,11 +71,14 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
     kill -USR1 "$(cat "${SNAP_COMMON}/lxcfs.pid")" || true
 else
+    ## Undo any existing mount
+    umount -l "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
+    fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
+
     ## Create the mount point
     mkdir -p "${SNAP_COMMON}/var/lib/lxcfs"
 
     ## Cleanup any leftover
-    fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
     rm -f "${SNAP_COMMON}/lxcfs.pid"
 
     ## Start lxcfs
