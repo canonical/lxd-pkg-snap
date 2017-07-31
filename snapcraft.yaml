@@ -180,6 +180,7 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
       usr/lib/: lib/
+      usr/share/vim/vim74/debian.vim: etc/vimrc
     prime:
       - bin/dnsmasq
       - bin/ebtables
@@ -188,6 +189,7 @@ parts:
       - bin/unsquashfs
       - bin/vim.tiny
       - lib/*/libsqlite3*
+      - etc/vimrc
 
       - bin/lxc
       - bin/lxd
