@@ -182,6 +182,7 @@ parts:
       usr/lib/: lib/
       usr/share/vim/vim74/debian.vim: etc/vimrc
     prime:
+      - bin/criu
       - bin/dnsmasq
       - bin/ebtables
       - bin/rsync
@@ -189,6 +190,7 @@ parts:
       - bin/unsquashfs
       - bin/vim.tiny
       - lib/*/libsqlite3*
+      - lib/*/libprotobuf-c.so*
       - etc/vimrc
 
       - bin/lxc
