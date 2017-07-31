@@ -30,6 +30,10 @@ if mountpoint -q /etc; then
         mkdir "/etc/${i}"
         mount -o bind,ro /snap/core/current/etc/${i} /etc/${i}
     done
+
+    ## Setup for LVM
+    mkdir -p /etc/lvm/
+    sed -e "/# .*_executable =/s/# //g" -e "s#/usr/sbin/#${SNAP}/bin/#g" "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
 fi
 
 # Escape resource limits
