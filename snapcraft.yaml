@@ -106,6 +106,39 @@ parts:
       - lxc
       - lxcfs
 
+  ceph:
+    plugin: nil
+    stage-packages:
+      - ceph-common
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/ceph
+      - bin/python
+      - bin/python2*
+      - bin/rbd
+      - lib/python2.7
+      - lib/*/libboost_iostreams.so.*
+      - lib/*/libboost_program_options.so.*
+      - lib/*/libboost_random.so.*
+      - lib/*/libboost_regex.so.*
+      - lib/*/libboost_system.so.*
+      - lib/*/libboost_thread.so.*
+      - lib/*/libicudata.so.*
+      - lib/*/libicui18n.so.*
+      - lib/*/libicuuc.so.*
+      - lib/*/libnspr4.so
+      - lib/*/libnss3.so
+      - lib/*/nss/libsoftokn3.so
+      - lib/*/nss/libfreeblpriv3.so
+      - lib/*/libnssutil3.so
+      - lib/*/libplc4.so
+      - lib/*/libplds4.so
+      - lib/*/librados.so.*
+      - lib/*/librbd.so.*
+      - lib/*/libsmime3.so
+
   zfs:
     plugin: nil
     stage-packages:

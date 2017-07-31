@@ -31,6 +31,10 @@ if mountpoint -q /etc; then
         mount -o bind,ro /snap/core/current/etc/${i} /etc/${i}
     done
 
+    ## Setup for ceph
+    mkdir -p /etc/ceph "${SNAP_COMMON}/ceph"
+    mount --bind "${SNAP_COMMON}/ceph" /etc/ceph
+
     ## Setup for LVM
     mkdir -p /etc/lvm/
     sed -e "/# .*_executable =/s/# //g" -e "s#/usr/sbin/#${SNAP}/bin/#g" "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
