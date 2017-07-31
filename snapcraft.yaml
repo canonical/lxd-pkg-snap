@@ -184,6 +184,37 @@ parts:
       - lib/*/libreadline.so*
       - lib/*/libaio.so*
 
+  criu:
+    source: https://github.com/xemul/criu
+    source-type: git
+    plugin: nil
+    build-packages:
+      - asciidoc
+      - libcap-dev
+      - libnet1-dev
+      - libnl-3-dev
+      - libprotobuf-c-dev
+      - libprotobuf-dev
+      - protobuf-c-compiler
+      - protobuf-compiler
+      - python
+      - xmlto
+    build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armhf" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && \
+        [ "$(uname -m)" != "s390x" ] && exit 0
+
+      make
+    install: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armhf" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && \
+        [ "$(uname -m)" != "s390x" ] && exit 0
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
+      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/bin/"
+
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
@@ -199,7 +230,6 @@ parts:
       - rsync
       - squashfs-tools
       - vim-tiny
-      - try: [criu]
     plugin: go
     go-buildtags:
       - libsqlite3
@@ -215,7 +245,6 @@ parts:
       usr/lib/: lib/
       usr/share/vim/vim74/debian.vim: etc/vimrc
     prime:
-      - bin/criu
       - bin/dnsmasq
       - bin/ebtables
       - bin/rsync
@@ -223,7 +252,6 @@ parts:
       - bin/unsquashfs
       - bin/vim.tiny
       - lib/*/libsqlite3*
-      - lib/*/libprotobuf-c.so*
       - etc/vimrc
 
       - bin/lxc
