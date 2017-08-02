@@ -19,6 +19,11 @@ umount -l /etc >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /etc -o mode=0755
 
 ## Pass the bits we need from the host
+if [ -d /var/lib/snapd/hostfs/etc/writable ]; then
+    mkdir /etc/writable
+    mount -o bind,ro /var/lib/snapd/hostfs/etc/writable /etc/writable
+fi
+
 for i in hostname hosts passwd group resolv.conf; do
     touch "/etc/${i}"
     mount -o bind,ro /var/lib/snapd/hostfs/etc/${i} /etc/${i}
