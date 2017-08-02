@@ -46,15 +46,12 @@ sed \
     -e "s#cache_file_prefix = \"\"#cache_file_prefix = \"lxd\"#g" \
     -e "s#udev_sync = 1#udev_sync = 0#g" \
     -e "s#udev_rules = 1#udev_rules = 0#g" \
+    -e "s#use_lvmetad = 1#use_lvmetad = 0#g" \
     -e "s#monitoring = 1#monitoring = 0#g" \
     -e "s%# executable = \"/sbin/dmeventd\"%executable = \"${SNAP}/bin/dmeventd\"%g" \
     -e "/# .*_executable =/s/# //g" \
     -e "s#/usr/sbin/#${SNAP}/bin/#g" \
     "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
-
-if ! pgrep lvmetad; then
-    sed -e "s#use_lvmetad = 1#use_lvmetad = 0#g" -i /etc/lvm/lvm.conf
-fi
 
 # Escape resource limits
 echo "==> Escaping the systemd cgroups"
