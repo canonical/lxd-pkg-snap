@@ -150,6 +150,7 @@ parts:
   lvm:
     plugin: nil
     stage-packages:
+      - dmeventd
       - lvm2
       - thin-provisioning-tools
     organize:
@@ -157,16 +158,19 @@ parts:
       usr/sbin/: bin/
     prime:
       - bin/cache_*
+      - bin/dmeventd
       - bin/era_*
-      - bin/pdata_tools
-      - bin/thin_*
       - bin/lv*
-      - bin/vg*
+      - bin/pdata_tools
       - bin/pv*
+      - bin/thin_*
+      - bin/vg*
       - etc/lvm/lvm.conf
-      - lib/*/libdevmapper*
-      - lib/*/libreadline.so*
+      - lib/*/device-mapper/*
       - lib/*/libaio.so*
+      - lib/*/libdevmapper*
+      - lib/*/liblvm*
+      - lib/*/libreadline.so*
 
   criu:
     source: https://github.com/xemul/criu
