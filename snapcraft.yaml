@@ -157,35 +157,6 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
-  criu:
-    source: https://github.com/xemul/criu
-    source-type: git
-    plugin: nil
-    build-packages:
-      - asciidoc
-      - libcap-dev
-      - libnet1-dev
-      - libnl-3-dev
-      - libprotobuf-c-dev
-      - libprotobuf-dev
-      - protobuf-c-compiler
-      - protobuf-compiler
-      - python
-      - xmlto
-    build: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armhf" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      make
-    install: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armhf" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
-      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/bin/"
-
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
