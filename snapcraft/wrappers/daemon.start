@@ -69,20 +69,20 @@ done
 
 ## prlimits
 echo "==> Escaping the systemd process resource limits"
-prlimit -p $$ --nofile=1048576:1048576
-prlimit -p $$ --nproc=unlimited:unlimited
+prlimit -p $$ --nofile=1048576:1048576 || true
+prlimit -p $$ --nproc=unlimited:unlimited || true
 
 # Handle sysctls
 if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
     if [ "$(cat /proc/sys/fs/inotify/max_user_instances)" -lt "1024" ]; then
         echo "==> Increasing the number of inotify user instances"
-        echo 1024 > /proc/sys/fs/inotify/max_user_instances
+        echo 1024 > /proc/sys/fs/inotify/max_user_instances || true
     fi
 fi
 
 if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
     echo "==> Enabling unprivileged containers kernel support"
-    echo 1 > /proc/sys/kernel/unprivileged_userns_clone
+    echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
 fi
 
 # LXC
