@@ -217,6 +217,7 @@ parts:
       - lxc
     build-packages:
       - pkg-config
+      - libacl1-dev
       - libsqlite3-dev
     stage-packages:
       - acl
