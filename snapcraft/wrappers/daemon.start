@@ -125,7 +125,7 @@ fi
 ## Create the main directory
 if [ ! -d "${SNAP_COMMON}/lxd" ]; then
     mkdir -p "${SNAP_COMMON}/lxd" "${SNAP_COMMON}/lxd/logs"
-    chmod 0711 "${SNAP_COMMON}/lxd"
+    chmod 0755 "${SNAP_COMMON}/lxd"
 fi
 
 ## Start lxd
