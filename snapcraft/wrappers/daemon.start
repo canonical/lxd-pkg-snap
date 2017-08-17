@@ -11,17 +11,6 @@ export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
 export HOME="/tmp/"
 
-# FIXME: Setup bash completion on the host
-#        This should be handled by snapd directly (LP: #1590767)
-if [ -d "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
-    if [ ! -e "/var/lib/snapd/hostfs/etc/bash_completion.d/lxc" ]; then
-        echo "==> Setting up bash completion"
-        rm -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
-        ln -s "$(realpath "${SNAP}/..")/current/etc/bash_completion.d/snap.lxd.lxc" \
-            /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
-    fi
-fi
-
 # Setup a functional /run
 echo "==> Preparing a clean copy of /run"
 umount -l /run >/dev/null 2>&1 || true
@@ -45,7 +34,7 @@ if [ -d /var/lib/snapd/hostfs/etc/writable ]; then
     mount -o bind,ro /var/lib/snapd/hostfs/etc/writable /etc/writable
 fi
 
-for i in hostname hosts passwd group resolv.conf; do
+for i in hostname hosts nsswitch.conf passwd group resolv.conf; do
     touch "/etc/${i}"
     mount -o bind,ro /var/lib/snapd/hostfs/etc/${i} /etc/${i}
 done
@@ -55,6 +44,27 @@ for i in alternatives apparmor apparmor.d ssl vim; do
     mkdir "/etc/${i}"
     mount -o bind,ro /snap/core/current/etc/${i} /etc/${i}
 done
+
+# FIXME: Setup bash completion on the host
+#        This should be handled by snapd directly (LP: #1590767)
+if [ -d "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
+    if [ ! -e "/var/lib/snapd/hostfs/etc/bash_completion.d/lxc" ]; then
+        echo "==> Setting up bash completion"
+        rm -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
+        ln -s "$(realpath "${SNAP}/..")/current/etc/bash_completion.d/snap.lxd.lxc" \
+            /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
+    fi
+fi
+
+# FIXME: Setup the "lxd" group
+if ! getent group lxd; then
+    echo "==> Creating \"lxd\" group"
+    if grep -q ^group.*extrausers /etc/nsswitch.conf; then
+        chroot /var/lib/snapd/hostfs/ groupadd --system --extrausers lxd || true
+    else
+        chroot /var/lib/snapd/hostfs/ groupadd --system lxd || true
+    fi
+fi
 
 # Setup for LVM
 echo "==> Setting up LVM configuration"
