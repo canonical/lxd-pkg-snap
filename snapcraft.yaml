@@ -80,6 +80,9 @@ parts:
       - lib/*/librbd.so.*
       - lib/*/libsmime3.so
 
+  go:
+    source-tag: go1.8.3
+
   lvm:
     plugin: nil
     stage-packages:
@@ -230,6 +233,7 @@ parts:
       git cherry-pick be34be4a1490f563e48503504788194ec129adac # 0012-devices-do-not-mark-all-cpus-isolated-by-default.patch
       git cherry-pick f6595d97c95e0eaeaf0e390d40da378ce9f1f539 # 0013-gpu-fix-gpu-attach.patch
     after:
+      - go
       - lxc
     build-packages:
       - pkg-config
