@@ -47,12 +47,12 @@ done
 
 # FIXME: Setup bash completion on the host
 #        This should be handled by snapd directly (LP: #1590767)
-if [ -d "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
+if [ -w "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
     if [ ! -e "/var/lib/snapd/hostfs/etc/bash_completion.d/lxc" ]; then
         echo "==> Setting up bash completion"
         rm -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
         ln -s "$(realpath "${SNAP}/..")/current/etc/bash_completion.d/snap.lxd.lxc" \
-            /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
+            /var/lib/snapd/hostfs/etc/bash_completion.d/lxc || true
     fi
 fi
 
