@@ -40,6 +40,92 @@ apps:
     plugs: [lxd-support]
 
 parts:
+  # Dependencies
+  btrfs:
+    plugin: nil
+    stage-packages:
+      - btrfs-tools
+    prime:
+      - bin/btrfs
+      - bin/mkfs.btrfs
+
+  ceph:
+    plugin: nil
+    stage-packages:
+      - ceph-common
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/ceph
+      - bin/python
+      - bin/python2*
+      - bin/rbd
+      - lib/python2.7
+      - -lib/python2.7/sitecustomize.py
+      - lib/*/libboost_iostreams.so.*
+      - lib/*/libboost_program_options.so.*
+      - lib/*/libboost_random.so.*
+      - lib/*/libboost_regex.so.*
+      - lib/*/libboost_system.so.*
+      - lib/*/libboost_thread.so.*
+      - lib/*/libicudata.so.*
+      - lib/*/libicui18n.so.*
+      - lib/*/libicuuc.so.*
+      - lib/*/libnspr4.so
+      - lib/*/libnss3.so
+      - lib/*/nss/libsoftokn3.so
+      - lib/*/nss/libfreeblpriv3.so
+      - lib/*/libnssutil3.so
+      - lib/*/libplc4.so
+      - lib/*/libplds4.so
+      - lib/*/librados.so.*
+      - lib/*/librbd.so.*
+      - lib/*/libsmime3.so
+
+  lvm:
+    plugin: nil
+    stage-packages:
+      - dmeventd
+      - lvm2
+      - thin-provisioning-tools
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+      usr/sbin/: bin/
+    prime:
+      - bin/cache_*
+      - bin/dmeventd
+      - bin/era_*
+      - bin/lv*
+      - bin/pdata_tools
+      - bin/pv*
+      - bin/thin_*
+      - bin/vg*
+      - etc/lvm/lvm.conf
+      - lib/*/device-mapper/*
+      - lib/*/libaio.so*
+      - lib/*/libdevmapper*
+      - lib/*/liblvm*
+      - lib/*/libreadline.so*
+
+  zfs:
+    plugin: nil
+    stage-packages:
+      - zfsutils-linux
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/zfs
+      - bin/zpool
+      - lib/libnvpair.so.*
+      - lib/libuutil.so.*
+      - lib/libzfs_core.so.*
+      - lib/libzfs.so.*
+      - lib/libzpool.so.*
+
+  # Core components
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
@@ -106,90 +192,6 @@ parts:
 
       - lxc
       - lxcfs
-
-  ceph:
-    plugin: nil
-    stage-packages:
-      - ceph-common
-    organize:
-      usr/bin/: bin/
-      usr/lib/: lib/
-    prime:
-      - bin/ceph
-      - bin/python
-      - bin/python2*
-      - bin/rbd
-      - lib/python2.7
-      - -lib/python2.7/sitecustomize.py
-      - lib/*/libboost_iostreams.so.*
-      - lib/*/libboost_program_options.so.*
-      - lib/*/libboost_random.so.*
-      - lib/*/libboost_regex.so.*
-      - lib/*/libboost_system.so.*
-      - lib/*/libboost_thread.so.*
-      - lib/*/libicudata.so.*
-      - lib/*/libicui18n.so.*
-      - lib/*/libicuuc.so.*
-      - lib/*/libnspr4.so
-      - lib/*/libnss3.so
-      - lib/*/nss/libsoftokn3.so
-      - lib/*/nss/libfreeblpriv3.so
-      - lib/*/libnssutil3.so
-      - lib/*/libplc4.so
-      - lib/*/libplds4.so
-      - lib/*/librados.so.*
-      - lib/*/librbd.so.*
-      - lib/*/libsmime3.so
-
-  zfs:
-    plugin: nil
-    stage-packages:
-      - zfsutils-linux
-    organize:
-      sbin/: bin/
-      usr/lib/: lib/
-    prime:
-      - bin/zfs
-      - bin/zpool
-      - lib/libnvpair.so.*
-      - lib/libuutil.so.*
-      - lib/libzfs_core.so.*
-      - lib/libzfs.so.*
-      - lib/libzpool.so.*
-
-  btrfs:
-    plugin: nil
-    stage-packages:
-      - btrfs-tools
-    prime:
-      - bin/btrfs
-      - bin/mkfs.btrfs
-
-  lvm:
-    plugin: nil
-    stage-packages:
-      - dmeventd
-      - lvm2
-      - thin-provisioning-tools
-    organize:
-      sbin/: bin/
-      usr/lib/: lib/
-      usr/sbin/: bin/
-    prime:
-      - bin/cache_*
-      - bin/dmeventd
-      - bin/era_*
-      - bin/lv*
-      - bin/pdata_tools
-      - bin/pv*
-      - bin/thin_*
-      - bin/vg*
-      - etc/lvm/lvm.conf
-      - lib/*/device-mapper/*
-      - lib/*/libaio.so*
-      - lib/*/libdevmapper*
-      - lib/*/liblvm*
-      - lib/*/libreadline.so*
 
   lxd:
     source: https://github.com/lxc/lxd
