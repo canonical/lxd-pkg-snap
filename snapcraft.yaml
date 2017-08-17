@@ -40,6 +40,58 @@ apps:
     plugs: [lxd-support]
 
 parts:
+  # Dependencies
+  btrfs:
+    plugin: nil
+    stage-packages:
+      - btrfs-tools
+    prime:
+      - bin/btrfs
+      - bin/mkfs.btrfs
+
+  lvm:
+    plugin: nil
+    stage-packages:
+      - dmeventd
+      - lvm2
+      - thin-provisioning-tools
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+      usr/sbin/: bin/
+    prime:
+      - bin/cache_*
+      - bin/dmeventd
+      - bin/era_*
+      - bin/lv*
+      - bin/pdata_tools
+      - bin/pv*
+      - bin/thin_*
+      - bin/vg*
+      - etc/lvm/lvm.conf
+      - lib/*/device-mapper/*
+      - lib/*/libaio.so*
+      - lib/*/libdevmapper*
+      - lib/*/liblvm*
+      - lib/*/libreadline.so*
+
+  zfs:
+    plugin: nil
+    stage-packages:
+      - zfsutils-linux
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/zfs
+      - bin/zpool
+      - lib/libnvpair.so.*
+      - lib/libuutil.so.*
+      - lib/libzfs_core.so.*
+      - lib/libzfs.so.*
+      - lib/libzpool.so.*
+
+  # Core components
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
@@ -108,56 +160,6 @@ parts:
 
       - lxc
       - lxcfs
-
-  zfs:
-    plugin: nil
-    stage-packages:
-      - zfsutils-linux
-    organize:
-      sbin/: bin/
-      usr/lib/: lib/
-    prime:
-      - bin/zfs
-      - bin/zpool
-      - lib/libnvpair.so.*
-      - lib/libuutil.so.*
-      - lib/libzfs_core.so.*
-      - lib/libzfs.so.*
-      - lib/libzpool.so.*
-
-  btrfs:
-    plugin: nil
-    stage-packages:
-      - btrfs-tools
-    prime:
-      - bin/btrfs
-      - bin/mkfs.btrfs
-
-  lvm:
-    plugin: nil
-    stage-packages:
-      - dmeventd
-      - lvm2
-      - thin-provisioning-tools
-    organize:
-      sbin/: bin/
-      usr/lib/: lib/
-      usr/sbin/: bin/
-    prime:
-      - bin/cache_*
-      - bin/dmeventd
-      - bin/era_*
-      - bin/lv*
-      - bin/pdata_tools
-      - bin/pv*
-      - bin/thin_*
-      - bin/vg*
-      - etc/lvm/lvm.conf
-      - lib/*/device-mapper/*
-      - lib/*/libaio.so*
-      - lib/*/libdevmapper*
-      - lib/*/liblvm*
-      - lib/*/libreadline.so*
 
   lxd:
     source: https://github.com/lxc/lxd
