@@ -155,6 +155,7 @@ parts:
       - thin-provisioning-tools
     organize:
       sbin/: bin/
+      usr/lib/: lib/
       usr/sbin/: bin/
     prime:
       - bin/cache_*
@@ -209,9 +210,9 @@ parts:
       - github.com/lxc/lxd/test/lxd-benchmark
     organize:
       usr/bin/: bin/
+      usr/lib/: lib/
       usr/sbin/: bin/
       sbin/: bin/
-      usr/lib/: lib/
       usr/share/vim/vim74/debian.vim: etc/vimrc
     prime:
       - bin/dnsmasq
