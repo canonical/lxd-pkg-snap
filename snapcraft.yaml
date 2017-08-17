@@ -46,6 +46,9 @@ parts:
       - bin/btrfs
       - bin/mkfs.btrfs
 
+  go:
+    source-tag: go1.8.3
+
   lvm:
     plugin: nil
     stage-packages:
@@ -191,6 +194,7 @@ parts:
       sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
     after:
+      - go
       - lxc
     build-packages:
       - pkg-config
