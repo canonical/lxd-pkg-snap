@@ -83,6 +83,9 @@ parts:
       - lib/*/librbd.so.*
       - lib/*/libsmime3.so
 
+  go:
+    source-tag: go1.8.3
+
   lvm:
     plugin: nil
     stage-packages:
@@ -197,6 +200,7 @@ parts:
     source: https://github.com/lxc/lxd
     source-type: git
     after:
+      - go
       - lxc
     build-packages:
       - pkg-config
