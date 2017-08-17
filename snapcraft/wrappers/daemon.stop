@@ -7,7 +7,8 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-# Detect stop reason
+# FIXME: Detect stop reason
+#        This should be exposed by snapd directly
 STATUS=$(mktemp)
 chroot /proc/1/root snap changes > "${STATUS}" || true
 
