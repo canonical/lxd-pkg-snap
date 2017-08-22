@@ -1,0 +1,44 @@
+#!/bin/sh -eu
+
+# Utility functions
+get_bool() {
+    value=$(echo "${1:-}" | tr '[:upper:]' '[:lower:]')
+
+    # See if it's true
+    for yes in "true" "1" "yes" "on"; do
+        if [ "${value}" = "${yes}" ]; then
+            echo "true"
+            return
+        fi
+    done
+
+    # See if it's false
+    for no in "false" "0" "no" "off"; do
+        if [ "${value}" = "${no}" ]; then
+            echo "false"
+            return
+        fi
+    done
+
+    # Invalid value (or not set)
+    return
+}
+
+# Get the current config
+daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
+daemon_group=$(snapctl get daemon.group)
+ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
+openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
+
+# Generate the config
+config="${SNAP_COMMON}/config"
+
+{
+    echo "# This file is auto-generated, do NOT manually edit"
+    echo "daemon_debug=${daemon_debug:-"false"}"
+    echo "daemon_group=${daemon_group:-"lxd"}"
+    echo "ceph_builtin=${ceph_builtin:-"false"}"
+    echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
+} > "${config}"
+
+exit 0
