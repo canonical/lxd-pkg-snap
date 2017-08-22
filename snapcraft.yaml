@@ -39,6 +39,10 @@ apps:
     command: wrappers/lxd-migrate-from-deb
     plugs: [lxd-support]
 
+hooks:
+  configure:
+    plugs: [network]
+
 parts:
   # Dependencies
   btrfs:
@@ -265,3 +269,5 @@ parts:
   wrappers:
     plugin: dump
     source: snapcraft/
+    organize:
+      hooks/: snap/hooks/

@@ -63,19 +63,24 @@ echo "=> Stopping LXD (with container shutdown)"
 lxd shutdown || true
 
 ## OpenVswitch
-echo "=> Stopping Open vSwitch"
-(
-    set -e
-    export OVS_LOGDIR="${SNAP_COMMON}/openvswitch/logs/"
-    export OVS_RUNDIR="${SNAP_COMMON}/openvswitch/run/"
-    export OVS_DBDIR="${SNAP_COMMON}/openvswitch/db/"
-    export OVS_SYSCONFDIR="${SNAP_COMMON}/openvswitch/conf/"
-    export OVS_PKGDATADIR="${SNAP}/share/openvswitch/"
-    export OVS_BINDIR="${SNAP}/bin/"
-    export OVS_SBINDIR="${SNAP}/bin/"
+if [ -e "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" ]; then
+    PID=$(cat "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid")
+    if [ -e "/proc/${PID}" ]; then
+        echo "=> Stopping Open vSwitch"
+        (
+            set -e
+            export OVS_LOGDIR="${SNAP_COMMON}/openvswitch/logs/"
+            export OVS_RUNDIR="${SNAP_COMMON}/openvswitch/run/"
+            export OVS_DBDIR="${SNAP_COMMON}/openvswitch/db/"
+            export OVS_SYSCONFDIR="${SNAP_COMMON}/openvswitch/conf/"
+            export OVS_PKGDATADIR="${SNAP}/share/openvswitch/"
+            export OVS_BINDIR="${SNAP}/bin/"
+            export OVS_SBINDIR="${SNAP}/bin/"
 
-    "${SNAP}/share/openvswitch/scripts/ovs-ctl" stop
-)
+            "${SNAP}/share/openvswitch/scripts/ovs-ctl" stop
+        )
+    fi
+fi
 
 ## LXCFS
 echo "=> Stopping LXCFS"
