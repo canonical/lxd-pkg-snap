@@ -6,7 +6,6 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 echo "=> Preparing the system"
-
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
 export HOME="/tmp/"
@@ -17,7 +16,6 @@ umount -l /run >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /run -o mode=0755,nosuid,nodev
 for entry in NetworkManager resolvconf snapd snapd.socket snapd-snap.socket systemd; do
     [ -e "/var/lib/snapd/hostfs/run/${entry}" ] || continue
-
     ln -s "/var/lib/snapd/hostfs/run/${entry}" "/run/${entry}"
 done
 
@@ -29,20 +27,15 @@ umount -l /etc >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /etc -o mode=0755
 
 ## Pass the bits we need from the host
-if [ -d /var/lib/snapd/hostfs/etc/writable ]; then
-    mkdir /etc/writable
-    mount -o bind,ro /var/lib/snapd/hostfs/etc/writable /etc/writable
-fi
-
-for i in hostname hosts nsswitch.conf passwd group resolv.conf; do
-    touch "/etc/${i}"
-    mount -o bind,ro /var/lib/snapd/hostfs/etc/${i} /etc/${i}
+for entry in hostname hosts nsswitch.conf passwd group resolv.conf writable; do
+    [ -e "/var/lib/snapd/hostfs/etc/${entry}" ] || continue
+    ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
 
 ## And the bits we need from the core snap
-for i in alternatives apparmor apparmor.d ssl vim; do
-    mkdir "/etc/${i}"
-    mount -o bind,ro /snap/core/current/etc/${i} /etc/${i}
+for entry in alternatives apparmor apparmor.d ssl vim; do
+    [ -e "/snap/core/current/etc/${entry}" ] || continue
+    ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
 done
 
 # FIXME: Setup bash completion on the host
