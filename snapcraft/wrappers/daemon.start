@@ -118,6 +118,8 @@ touch "${SNAP_COMMON}/lxc/local.conf"
 if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version; then
     echo "==> Detected kernel with partial AppArmor support"
     echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
+else
+    > "${SNAP_COMMON}/lxc/local.conf"
 fi
 
 # Open vSwitch
