@@ -75,6 +75,22 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
+  openvswitch:
+    plugin: nil
+    stage-packages:
+      - openvswitch-switch
+      - uuid-runtime
+    organize:
+      usr/bin/: bin/
+      usr/lib/openvswitch-switch/: bin/
+      usr/sbin/: bin/
+      usr/share/: share/
+    prime:
+      - bin/ovs-*
+      - bin/ovsdb-*
+      - bin/uuidgen
+      - share/openvswitch/
+
   zfs:
     plugin: nil
     stage-packages:
