@@ -120,6 +120,21 @@ if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version; t
     echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 fi
 
+# Open vSwitch
+echo "=> Starting Open vSwitch"
+export OVS_RUNDIR="${SNAP_COMMON}/openvswitch/run/"
+(
+    set -e
+    export OVS_LOGDIR="${SNAP_COMMON}/openvswitch/logs/"
+    export OVS_DBDIR="${SNAP_COMMON}/openvswitch/db/"
+    export OVS_SYSCONFDIR="${SNAP_COMMON}/openvswitch/conf/"
+    export OVS_PKGDATADIR="${SNAP}/share/openvswitch/"
+    export OVS_BINDIR="${SNAP}/bin/"
+    export OVS_SBINDIR="${SNAP}/bin/"
+
+    "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
+)
+
 # LXCFS
 if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
