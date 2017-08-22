@@ -57,7 +57,7 @@ if [ -w "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
 fi
 
 # FIXME: Setup the "lxd" group
-if ! getent group lxd; then
+if ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
     if grep -q ^group.*extrausers /etc/nsswitch.conf; then
         chroot /var/lib/snapd/hostfs/ groupadd --system --extrausers lxd || true
