@@ -69,7 +69,13 @@ fi
 # Shutdown the daemons
 ## LXD
 echo "=> Stopping LXD (with container shutdown)"
-lxd shutdown || true
+
+LXD="lxd"
+if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
+    LXD="${SNAP_COMMON}/lxd.debug"
+fi
+
+"${LXD}" shutdown || true
 
 ## OpenVswitch
 if [ -e "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" ]; then
