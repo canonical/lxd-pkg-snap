@@ -1,11 +1,12 @@
 #!/bin/sh
 set -eu
 
-export LXD_DIR="${SNAP_COMMON}/lxd/"
-
+# Re-exec outside of apparmor confinement
 if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
+
+export LXD_DIR="${SNAP_COMMON}/lxd/"
 
 # FIXME: Detect stop reason
 #        This should be exposed by snapd directly
