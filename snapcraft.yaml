@@ -1,5 +1,5 @@
 name: lxd
-version: 2.16
+version: 2.17
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -236,22 +236,9 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.16
+    source-tag: lxd-2.17
     prepare: |-
       cd ../src
-      git cherry-pick 166683e7c24eba24b7f6eb9cc7ca818c2d858e38 # 0001-patches-fix-canmount-noauto-patch.patch
-      git cherry-pick 8661a5d35d55855ecab544080645af1126283ee5 # 0002-Don-t-use-un-initialized-structs-in-import.patch
-      git cherry-pick 061843cee61654cf13726ea132cd00948afd5672 # 0003-client-fix-image-copy.patch
-      git cherry-pick 3c78a5dcdf4c9608e0f72ff6f9e3815de84b717f # 0004-network-Make-dev-work-as-a-network-name.patch
-      git cherry-pick 1d06f56e27cf4b2ae1b46837d85ff65f0b2a28d7 # 0005-Make-lxc-image-copy-fast-again.patch
-      git cherry-pick 17bd39ba6415b0f4f3e69d7566c8dea2ec6a81e1 # 0006-lxc-image-Fix-aliases-with-simplestreams-remotes.patch
-      git cherry-pick d8836461cfbe5187d8f6bbeb6f6eac8f88bdc83b # 0007-lxc-remote-Don-t-require-a-crt-for-public-remotes.patch
-      git cherry-pick 06506a0e4a68d84fa775a13c44c878dba2238410 # 0008-storage-Count-custom-volumes-in-pool-UsedBy.patch
-      git cherry-pick 7dcf1049334336ed5821437ff8047f233845645f # 0009-Make-stateful-snapshot-restores-work-again.patch
-      git cherry-pick d06a5fcfebe7ac2038d2478dca8081ec0d14b82d # 0010-Add-support-for-isolcpu-in-CPU-scheduler.patch
-      git cherry-pick 790949910b51ea89c1f2e0eea0d578f90155e81f # 0011-devices-handle-empty-isolcpus-set.patch
-      git cherry-pick be34be4a1490f563e48503504788194ec129adac # 0012-devices-do-not-mark-all-cpus-isolated-by-default.patch
-      git cherry-pick f6595d97c95e0eaeaf0e390d40da378ce9f1f539 # 0013-gpu-fix-gpu-attach.patch
     after:
       - go
       - lxc
