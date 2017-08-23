@@ -14,7 +14,9 @@ STATUS=$(mktemp)
 chroot /proc/1/root snap changes > "${STATUS}" || true
 
 reason="host shutdown"
-if ! lxc finger >/dev/null 2>&1; then
+if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
+    reason="reload"
+elif ! lxc finger >/dev/null 2>&1; then
     reason="crashed"
 elif grep -q 'Doing.*Auto-refresh snap "lxd"' "${STATUS}"; then
     reason="snap refresh"
@@ -28,6 +30,12 @@ fi
 
 rm "${STATUS}"
 echo "=> Stop reason is: ${reason}"
+
+# Handle reloads
+if [ "${reason}" = "reload" ]; then
+    rm -f "${SNAP_COMMON}/lxd/.reload"
+    exit 0
+fi
 
 # Handle refreshes
 if [ "${reason}" = "snap refresh" ]; then
