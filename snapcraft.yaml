@@ -29,7 +29,7 @@ apps:
     slots: [lxd]
   lxc:
     command: wrappers/lxc
-    plugs: [network, home]
+    plugs: [lxd-support]
     aliases: [lxc]
     completer: etc/bash_completion.d/snap.lxd.lxc
   lxd:
