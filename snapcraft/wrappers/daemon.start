@@ -189,7 +189,7 @@ ${CMD} &
 ## Wait for it to be ready
 PID=$!
 echo $PID > "${SNAP_COMMON}/lxd.pid"
-lxd waitready
+lxd waitready --timeout=600
 
 ## Put database in versioned path
 if [ ! -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
