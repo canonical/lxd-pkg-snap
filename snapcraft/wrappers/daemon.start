@@ -153,7 +153,15 @@ if [ ! -d "${SNAP_COMMON}/lxd" ]; then
 fi
 
 ## Start lxd
-CMD="lxd --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
+echo "=> Starting LXD"
+
+LXD="lxd"
+if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
+    LXD="${SNAP_COMMON}/lxd.debug"
+    echo "==> WARNING: Using a custom debug LXD binary!"
+fi
+
+CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group "${daemon_group}" >/dev/null 2>&1; then
     CMD="${CMD} --group ${daemon_group}"
@@ -171,7 +179,7 @@ ${CMD} &
 ## Wait for it to be ready
 PID=$!
 echo $PID > "${SNAP_COMMON}/lxd.pid"
-lxd waitready --timeout=600
+"${LXD}" waitready --timeout=600
 
 ## Put database in versioned path
 if [ ! -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
