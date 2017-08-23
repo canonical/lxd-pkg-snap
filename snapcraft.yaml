@@ -24,6 +24,7 @@ apps:
     command: wrappers/daemon.start
     stop-command: wrappers/daemon.stop
     stop-timeout: 600s
+    restart-condition: always
     daemon: simple
     plugs: [lxd-support]
     slots: [lxd]
