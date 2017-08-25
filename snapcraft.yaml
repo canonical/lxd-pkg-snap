@@ -22,7 +22,7 @@ apps:
     plugs: [lxd-support]
   daemon:
     command: wrappers/daemon.start
-#    reload-command: wrappers/daemon.reload
+    reload-command: wrappers/daemon.reload
     stop-command: wrappers/daemon.stop
     stop-timeout: 600s
     restart-condition: always
