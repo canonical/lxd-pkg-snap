@@ -18,13 +18,13 @@ if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
     reason="reload"
 elif ! lxc finger >/dev/null 2>&1; then
     reason="crashed"
-elif grep -q 'Doing.*Auto-refresh snap "lxd"' "${STATUS}"; then
+elif grep -q 'Doing.*Auto-refresh.*"lxd"' "${STATUS}"; then
     reason="snap refresh"
-elif grep -q 'Doing.*Refresh "lxd"' "${STATUS}"; then
+elif grep -q 'Doing.*Refresh.*"lxd"' "${STATUS}"; then
     reason="snap refresh"
-elif grep -q 'Doing.*Install "lxd"' "${STATUS}"; then
+elif grep -q 'Doing.*Install.*"lxd"' "${STATUS}"; then
     reason="snap refresh"
-elif grep -q 'Doing.*Remove "lxd"' "${STATUS}"; then
+elif grep -q 'Doing.*Remove.*"lxd"' "${STATUS}"; then
     reason="snap removal"
 fi
 
