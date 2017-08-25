@@ -217,6 +217,8 @@ parts:
 
       - lxc
       - lxcfs
+    install:
+      sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
   lxd:
     source: https://github.com/lxc/lxd
