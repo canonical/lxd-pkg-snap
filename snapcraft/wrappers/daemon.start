@@ -32,7 +32,7 @@ umount -l /etc >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /etc -o mode=0755
 
 ## Pass the bits we need from the host
-for entry in hostname hosts nsswitch.conf passwd group resolv.conf writable; do
+for entry in hostname hosts nsswitch.conf os-release passwd group resolv.conf writable; do
     [ -e "/var/lib/snapd/hostfs/etc/${entry}" ] || continue
     ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
