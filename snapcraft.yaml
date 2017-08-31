@@ -37,9 +37,6 @@ apps:
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
-  migrate-from-deb:
-    command: wrappers/lxd-migrate-from-deb
-    plugs: [lxd-support]
 
 hooks:
   configure:
