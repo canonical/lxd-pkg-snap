@@ -49,7 +49,7 @@ func run() error {
 
 	// Connect to the source LXD
 	fmt.Printf("=> Connecting to source server\n")
-	src, err := lxdConnect("/var/lib/lxd")
+	src, err := lxdConnect("/var/lib/snapd/rootfs/var/lib/lxd")
 	if err != nil {
 		return fmt.Errorf("Unable to connect to the source LXD: %v", err)
 	}
@@ -96,7 +96,7 @@ func run() error {
 	fmt.Printf("And finally your containers will be brought back to their previous state, completing the migration.\n")
 
 	fmt.Printf("\n")
-	if !*argYes && askBool("Are you ready to proceed (yes/no) [default=no]? ", "no") {
+	if !*argYes && !askBool("Are you ready to proceed (yes/no) [default=no]? ", "no") {
 		return fmt.Errorf("Aborted by the user")
 	}
 
@@ -173,8 +173,8 @@ func run() error {
 		// Atempt to stop lxd-bridge
 		systemdCtl("stop", "lxd-bridge")
 
-		if shared.PathExists("/etc/default/lxd-bridge") {
-			err = shared.FileMove("/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
+		if shared.PathExists("/var/lib/snapd/hostfs/etc/default/lxd-bridge") {
+			err = shared.FileMove("/var/lib/snapd/hostfs/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
 			if err != nil {
 				return fmt.Errorf("Failed to move the bridge configuration: %v", err)
 			}
