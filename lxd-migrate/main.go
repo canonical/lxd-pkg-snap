@@ -49,7 +49,7 @@ func run() error {
 
 	// Connect to the source LXD
 	fmt.Printf("=> Connecting to source server\n")
-	src, err := lxdConnect("/var/lib/snapd/rootfs/var/lib/lxd")
+	src, err := lxdConnect("/var/lib/snapd/hostfs/var/lib/lxd")
 	if err != nil {
 		return fmt.Errorf("Unable to connect to the source LXD: %v", err)
 	}
