@@ -174,7 +174,7 @@ func run() error {
 		systemdCtl("stop", "lxd-bridge")
 
 		if shared.PathExists("/var/lib/snapd/hostfs/etc/default/lxd-bridge") {
-			err = shared.FileMove("/var/lib/snapd/hostfs/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
+			_, err = shared.RunCommand("mv", "/var/lib/snapd/hostfs/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
 			if err != nil {
 				return fmt.Errorf("Failed to move the bridge configuration: %v", err)
 			}
