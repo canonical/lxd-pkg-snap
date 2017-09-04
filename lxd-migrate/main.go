@@ -49,7 +49,7 @@ func run() error {
 
 	// Connect to the source LXD
 	fmt.Printf("=> Connecting to source server\n")
-	src, err := lxdConnect("/var/lib/snapd/hostfs/var/lib/lxd")
+	src, err := lxdConnect("/var/lib/lxd")
 	if err != nil {
 		return fmt.Errorf("Unable to connect to the source LXD: %v", err)
 	}
@@ -173,8 +173,8 @@ func run() error {
 		// Atempt to stop lxd-bridge
 		systemdCtl("stop", "lxd-bridge")
 
-		if shared.PathExists("/var/lib/snapd/hostfs/etc/default/lxd-bridge") {
-			_, err = shared.RunCommand("mv", "/var/lib/snapd/hostfs/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
+		if shared.PathExists("/etc/default/lxd-bridge") {
+			_, err = shared.RunCommand("mv", "/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
 			if err != nil {
 				return fmt.Errorf("Failed to move the bridge configuration: %v", err)
 			}

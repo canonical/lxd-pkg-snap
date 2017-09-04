@@ -1,8 +1,6 @@
 #!/bin/sh -e
 # Work from the snap
 export PATH=/snap/bin/:${PATH}
-PREFIX=""
-[ -n "${SNAP}" ] && PREFIX="/var/lib/snapd/hostfs"
 
 # Functions
 maskcidr() {
@@ -13,13 +11,13 @@ maskcidr() {
 }
 
 # Skip if already converted
-if [ ! -e ${PREFIX}/etc/default/lxd-bridge ]; then
+if [ ! -e /etc/default/lxd-bridge ]; then
     echo "LXD bridge already converted"
     exit 0
 fi
 
 # Source current configuration
-. ${PREFIX}/etc/default/lxd-bridge
+. /etc/default/lxd-bridge
 
 # Setup temporary config dir
 export LXD_CONF=$(mktemp -d)
@@ -27,10 +25,10 @@ export LXD_CONF=$(mktemp -d)
 # Check if LXD is functional (chroot detection)
 if ! lxc finger --force-local >/dev/null 2>&1; then
     echo "This system isn't running LXD, assuming stock configuration."
-    mv ${PREFIX}/etc/default/lxd-bridge ${PREFIX}/etc/default/lxd-bridge.upgraded
+    mv /etc/default/lxd-bridge /etc/default/lxd-bridge.upgraded
 
     echo "Cleaning up lxd-bridge state files"
-    rm -Rf ${PREFIX}/var/lib/lxd-bridge ${PREFIX}/run/lxd-bridge "${LXD_CONF}"
+    rm -Rf /var/lib/lxd-bridge /run/lxd-bridge "${LXD_CONF}"
     exit 0
 fi
 
@@ -42,10 +40,10 @@ lxc profile unset default environment.http_proxy --force-local
 # Done for unconfigured bridges
 if [ "${USE_LXD_BRIDGE}" != "true" ] || [ -z "${LXD_BRIDGE}" ]; then
     echo "No bridge configuration to convert"
-    mv ${PREFIX}/etc/default/lxd-bridge ${PREFIX}/etc/default/lxd-bridge.upgraded
+    mv /etc/default/lxd-bridge /etc/default/lxd-bridge.upgraded
 
     echo "Cleaning up lxd-bridge state files"
-    rm -Rf ${PREFIX}/var/lib/lxd-bridge ${PREFIX}/run/lxd-bridge "${LXD_CONF}"
+    rm -Rf /var/lib/lxd-bridge /run/lxd-bridge "${LXD_CONF}"
     exit 0
 fi
 
@@ -70,13 +68,13 @@ if [ -e "/sys/class/net/${LXD_BRIDGE}" ]; then
 fi
 
 # Check for stock installation
-if [ "${EXISTING}" = "false" ] && [ "$(md5sum ${PREFIX}/etc/default/lxd-bridge | cut -d' ' -f1)" = "e8cfb4997d9443fe48302bb75326b09f" ]; then
+if [ "${EXISTING}" = "false" ] && [ "$(md5sum /etc/default/lxd-bridge | cut -d' ' -f1)" = "e8cfb4997d9443fe48302bb75326b09f" ]; then
     echo "Stock LXD installation detected, resetting to new defaults"
     lxc profile device remove default eth0 --force-local >/dev/null 2>&1 || true
-    mv ${PREFIX}/etc/default/lxd-bridge ${PREFIX}/etc/default/lxd-bridge.upgraded
+    mv /etc/default/lxd-bridge /etc/default/lxd-bridge.upgraded
 
     echo "Cleaning up lxd-bridge state files"
-    rm -Rf ${PREFIX}/var/lib/lxd-bridge ${PREFIX}/run/lxd-bridge "${LXD_CONF}"
+    rm -Rf /var/lib/lxd-bridge /run/lxd-bridge "${LXD_CONF}"
     exit 0
 fi
 
@@ -145,7 +143,7 @@ if [ -e /proc/sys/net/ipv6 ] && [ -n "${LXD_IPV6_ADDR}" ] && [ -n "${LXD_IPV6_MA
 fi
 
 echo "Done converting your bridge, renaming old configuration"
-mv ${PREFIX}/etc/default/lxd-bridge ${PREFIX}/etc/default/lxd-bridge.upgraded
+mv /etc/default/lxd-bridge /etc/default/lxd-bridge.upgraded
 
 echo "Cleaning up lxd-bridge state files"
-rm -Rf ${PREFIX}/var/lib/lxd-bridge ${PREFIX}/run/lxd-bridge "${LXD_CONF}"
+rm -Rf /var/lib/lxd-bridge /run/lxd-bridge "${LXD_CONF}"
