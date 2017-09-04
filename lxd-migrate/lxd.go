@@ -270,7 +270,7 @@ func (d *lxdDaemon) moveFiles(dst string) error {
 		}
 
 		for _, entry := range entries {
-			err := shared.FileMove(filepath.Join(src, entry.Name()), filepath.Join(dst, entry.Name()))
+			_, err := shared.RunCommand("mv", filepath.Join(src, entry.Name()), filepath.Join(dst, entry.Name()))
 			if err != nil {
 				return err
 			}
@@ -278,7 +278,7 @@ func (d *lxdDaemon) moveFiles(dst string) error {
 	}
 
 	// Move the daemon path to a new target
-	err := shared.FileMove(src, dst)
+	_, err := shared.RunCommand("mv", src, dst)
 	if err != nil {
 		return err
 	}
