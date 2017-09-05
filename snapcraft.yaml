@@ -186,6 +186,7 @@ parts:
       - libexec/lxc/lxc-monitord
       - lxc/config/common.conf.d
     install: |-
+      set -ex
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
       sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
@@ -218,6 +219,7 @@ parts:
       - lxc
       - lxcfs
     install:
+      set -ex
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
   lxd:
@@ -246,6 +248,7 @@ parts:
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/test/lxd-benchmark
     install: |-
+      set -ex
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       cp ../src/config/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
@@ -282,6 +285,7 @@ parts:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
     install: |-
+      set -ex
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
     prime:
