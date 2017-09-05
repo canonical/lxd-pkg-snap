@@ -246,7 +246,7 @@ parts:
     go-packages:
       - github.com/lxc/lxd/lxc
       - github.com/lxc/lxd/lxd
-      - github.com/lxc/lxd/test/lxd-benchmark
+      - github.com/lxc/lxd/lxd-benchmark
     install: |-
       set -ex
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
