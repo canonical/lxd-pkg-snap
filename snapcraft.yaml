@@ -37,6 +37,9 @@ apps:
   lxd:
     command: wrappers/lxd
     plugs: [lxd-support]
+  migrate:
+    command: wrappers/lxd-migrate
+    plugs: [lxd-support]
 
 hooks:
   configure:
@@ -306,6 +309,25 @@ parts:
       - bin/lxc
       - bin/lxd
       - bin/lxd-benchmark
+
+  lxd-migrate:
+    source: lxd-migrate/
+    after:
+      - go
+      - lxd
+    build-packages:
+      - libsqlite3-dev
+    plugin: go
+    go-buildtags:
+      - libsqlite3
+    go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
+    install: |-
+      set -ex
+      mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
+      cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
+    prime:
+      - bin/lxd-migrate
+      - bin/upgrade-bridge
 
   wrappers:
     plugin: dump
