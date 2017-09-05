@@ -154,6 +154,8 @@ parts:
     source-tag: lxc-2.0.8
     prepare: |-
       set -ex
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
       git cherry-pick d3264db2e39f57dc9ffb7996cf0e7e039942c6d9 # 0003-utils-fix-num-parsing-functions.patch
       git cherry-pick ba7e919e738eb0661cd25eb265df63b6c27f363b # 0004-tests-lxc_safe_-u-int-add-corner-case-tests.patch
       git cherry-pick 52c2c35311cf89609ba74b80cd905e4a361c8f05 # 0005-lxc-attach-allow-for-situations-without-dev-tty.patch
@@ -206,6 +208,8 @@ parts:
     source-tag: lxcfs-2.0.7
     prepare: |-
       set -ex
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
       git cherry-pick 23e74df60646518ec423668f910f7f10e8c00b27 # 0001-pam-non-functional-changes.patch
       git cherry-pick b217984d0a60c62e10d812179b5aca2fda54c90a # 0002-pam-report-back-we-found-the-unified-hierarchy.patch
       git cherry-pick 6702a9e2b102135f1d622d7349104096cd56867b # 0003-bindings-add-mountpoint-for-unified-hierarchy.patch
@@ -248,6 +252,8 @@ parts:
     prepare: |-
       set -ex
       cd ../src
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
       git cherry-pick 16f0aecd767da415c961161f1931be150d795365 # 0001-network-Switch-to-a-directory-based-dhcp-host.patch
       git cherry-pick 24a519d3ea2b02bf5ab22501a8c162b420e12ccc # 0002-network-Make-dnsmasq-quiet-when-not-in-debug-mode.patch
       git cherry-pick 0c138f1f5a6f676b400ac41d091795543770cf67 # 0003-shared-Fix-growing-of-buf-in-GroupId.patch
