@@ -208,6 +208,19 @@ func (d *lxdDaemon) wait() error {
 	return nil
 }
 
+func (d *lxdDaemon) reload() error {
+	// Reload or restart the relevant systemd units
+	if strings.HasPrefix(d.path, "/var/snap") {
+		return systemdCtl("reload", "snap.lxd.daemon.service")
+	}
+
+	if osInit() == "upstart" {
+		return upstartCtl("restart", "lxd")
+	}
+
+	return systemdCtl("restart", "lxd.service", "lxd.socket")
+}
+
 func (d *lxdDaemon) start() error {
 	// Start the relevant systemd units
 	if strings.HasPrefix(d.path, "/var/snap") {
