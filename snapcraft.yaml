@@ -197,6 +197,8 @@ parts:
     prepare: |-
       set -ex
       cd ../src
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
       git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
       cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
       sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
