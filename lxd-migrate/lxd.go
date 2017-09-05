@@ -385,19 +385,6 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 		return nil
 	}
 
-	// Handle older LXD daemons
-	if d.storagePools == nil {
-		zpool, ok := d.info.Config["storage.zfs_pool_name"]
-		if ok {
-			err := zfsRewrite(zpool.(string))
-			if err != nil {
-				return err
-			}
-		}
-
-		return nil
-	}
-
 	// Rewrite the container links
 	containers, err := ioutil.ReadDir(filepath.Join(dst, "containers"))
 	if err != nil {
@@ -409,6 +396,19 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 		if err != nil {
 			return err
 		}
+	}
+
+	// Handle older LXD daemons
+	if d.storagePools == nil {
+		zpool, ok := d.info.Config["storage.zfs_pool_name"]
+		if ok {
+			err := zfsRewrite(zpool.(string))
+			if err != nil {
+				return err
+			}
+		}
+
+		return nil
 	}
 
 	for _, pool := range d.storagePools {
