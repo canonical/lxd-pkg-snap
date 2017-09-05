@@ -173,7 +173,6 @@ if [ "${daemon_debug}" = "true" ]; then
     CMD="${CMD} --debug"
 fi
 
-echo "=> Starting LXD"
 ${CMD} &
 
 ## Wait for it to be ready
