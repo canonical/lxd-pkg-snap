@@ -153,6 +153,7 @@ parts:
     source-type: git
     source-tag: lxc-2.0.8
     prepare: |-
+      set -ex
       git cherry-pick d3264db2e39f57dc9ffb7996cf0e7e039942c6d9 # 0003-utils-fix-num-parsing-functions.patch
       git cherry-pick ba7e919e738eb0661cd25eb265df63b6c27f363b # 0004-tests-lxc_safe_-u-int-add-corner-case-tests.patch
       git cherry-pick 52c2c35311cf89609ba74b80cd905e4a361c8f05 # 0005-lxc-attach-allow-for-situations-without-dev-tty.patch
@@ -193,6 +194,7 @@ parts:
       - libexec/lxc/lxc-monitord
       - lxc/config/common.conf.d
     install: |-
+      set -ex
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
       sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
@@ -203,6 +205,7 @@ parts:
     source-type: git
     source-tag: lxcfs-2.0.7
     prepare: |-
+      set -ex
       git cherry-pick 23e74df60646518ec423668f910f7f10e8c00b27 # 0001-pam-non-functional-changes.patch
       git cherry-pick b217984d0a60c62e10d812179b5aca2fda54c90a # 0002-pam-report-back-we-found-the-unified-hierarchy.patch
       git cherry-pick 6702a9e2b102135f1d622d7349104096cd56867b # 0003-bindings-add-mountpoint-for-unified-hierarchy.patch
@@ -235,6 +238,7 @@ parts:
       - lxc
       - lxcfs
     install:
+      set -ex
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
   lxd:
@@ -242,6 +246,7 @@ parts:
     source-type: git
     source-tag: lxd-2.17
     prepare: |-
+      set -ex
       cd ../src
       git cherry-pick 16f0aecd767da415c961161f1931be150d795365 # 0001-network-Switch-to-a-directory-based-dhcp-host.patch
       git cherry-pick 24a519d3ea2b02bf5ab22501a8c162b420e12ccc # 0002-network-Make-dnsmasq-quiet-when-not-in-debug-mode.patch
@@ -271,6 +276,7 @@ parts:
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/test/lxd-benchmark
     install: |-
+      set -ex
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       cp ../src/config/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
