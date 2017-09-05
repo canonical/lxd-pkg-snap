@@ -195,6 +195,20 @@ func run() error {
 		return err
 	}
 
+	// Reload LXD
+	fmt.Printf("=> Reloading LXD post-upgrade\n")
+	err = dst.reload()
+	if err != nil {
+		return err
+	}
+
+	// Wait for LXD to be online
+	fmt.Printf("=> Waiting for LXD to come online\n")
+	err = dst.wait()
+	if err != nil {
+		return err
+	}
+
 	if src.networks == nil && dst.networks != nil {
 		// Update the network configuration
 		fmt.Printf("=> Converting the network configuration\n")
