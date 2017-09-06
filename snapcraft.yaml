@@ -154,7 +154,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-2.1
+    source-tag: lxc-2.1.0
     prepare: |-
       set -ex
       git config user.email "noreply@linuxcontainers.org"
