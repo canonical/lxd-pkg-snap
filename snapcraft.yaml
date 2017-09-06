@@ -182,7 +182,7 @@ parts:
     prime:
       - bin/lxc-checkconfig
       - lib/liblxc.so.1
-      - lib/liblxc.so.1.2.0
+      - lib/liblxc.so.1.3.0
       - libexec/lxc/lxc-monitord
       - lxc/config/common.conf.d
     install: |-
