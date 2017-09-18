@@ -254,6 +254,7 @@ parts:
       git cherry-pick 0c138f1f5a6f676b400ac41d091795543770cf67 # 0003-shared-Fix-growing-of-buf-in-GroupId.patch
       git cherry-pick f4b6f27e367ace763bcb3508a26c2634e7b82491 # 0004-Fix-live-migration-bad-URL-in-dumpsuccess.patch
       git cherry-pick 09e0667c0fa3280d8370cee479de8a9cc938e187 # 0005-apparmor-Support-new-stacking-syntax.patch
+      git cherry-pick a81eacbf79b4febdcaabf5606b6554ef1315f16e # Solus network fix
     after:
       - go
       - lxc
