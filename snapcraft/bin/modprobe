@@ -1,5 +1,7 @@
 #!/bin/sh
 for i in /bin/modprobe /sbin/modprobe /usr/bin/modprobe /usr/sbin/modprobe; do
+    [ ! -e "/var/lib/snapd/hostfs/${i}" ] && continue
+
     exec chroot /var/lib/snapd/hostfs "${i}" "$@"
 done
 
