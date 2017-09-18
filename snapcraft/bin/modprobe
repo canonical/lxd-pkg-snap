@@ -1,2 +1,7 @@
 #!/bin/sh
-exec chroot /var/lib/snapd/hostfs /bin/modprobe "$@"
+for i in /bin/modprobe /sbin/modprobe /usr/bin/modprobe /usr/sbin/modprobe; do
+    exec chroot /var/lib/snapd/hostfs "${i}" "$@"
+done
+
+echo "Unable to find modprobe" 1>&2
+exit 1
