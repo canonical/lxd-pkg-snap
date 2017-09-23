@@ -249,6 +249,8 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+      git cherry-pick bf2a221d1e8f7493dc8bb78cb7471966d1c34c5a  # dnsmasq static on renames
+      git cherry-pick 02c93305a9d33b5ccf71b5dc5fd471451daf8fec  # dnsmasq version handling
     after:
       - go
       - lxc
