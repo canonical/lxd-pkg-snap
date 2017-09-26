@@ -253,6 +253,15 @@ parts:
       git config user.name "LXD snap builder"
       git cherry-pick bf2a221d1e8f7493dc8bb78cb7471966d1c34c5a  # dnsmasq static on renames
       git cherry-pick 02c93305a9d33b5ccf71b5dc5fd471451daf8fec  # dnsmasq version handling
+      git cherry-pick fc6528884afba76fb96043f376d58f4f0271e991  # Extract uname handling code
+      git cherry-pick 0002355d93d88880ad708cb7f0cc84a82f573fe8  # Add helper to create temp files
+      git cherry-pick bb5ecf8fb53228ad93878e3e44e89aa95a2159f1  # Add some architecture aliases
+      git cherry-pick dbdb5db247f112aa2863c7314d82d4b4f4b01bc6  # Add helper to parse os-release
+      git cherry-pick ad742c736c078826f301f547ef1d3101c8b2f23c  # Add helper to get distro info
+      git cherry-pick f512caac5b6f30fb6c226b73350d0180bdd41d38  # Extend UA
+      git cherry-pick a364b4d99ea6bacf6dabea42d584866746c2c380  # Fix uname handling on some arches
+      git cherry-pick 1d52364d269e0d8a7702b8bbe5817e9361feda2c  # Only include kernel version in UA
+      git cherry-pick 9e9ba857b63cfe2d8e74aff5406b308c7049ce18  # Move testhelpers into osarch
     after:
       - go
       - lxc
