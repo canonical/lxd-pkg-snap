@@ -138,6 +138,7 @@ parts:
       - libcap-dev
       - libgnutls28-dev
       - libseccomp-dev
+      - libselinux1-dev
       - pkg-config
     plugin: autotools
     configflags:
@@ -152,6 +153,7 @@ parts:
       - --disable-cgmanager
       - --enable-apparmor
       - --enable-seccomp
+      - --enable-selinux
       - --enable-capabilities
       - --with-rootfs-path=/var/snap/lxd/common/lxc/
       - --libexecdir=/snap/lxd/current/libexec/
