@@ -123,7 +123,7 @@ mkdir -p "${SNAP_COMMON}/lxc"
 touch "${SNAP_COMMON}/lxc/local.conf"
 if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version; then
     echo "==> Detected kernel with partial AppArmor support"
-    echo "lxc.aa_allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
+    echo "lxc.apparmor.allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 else
     true > "${SNAP_COMMON}/lxc/local.conf"
 fi
