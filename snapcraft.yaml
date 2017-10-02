@@ -181,8 +181,8 @@ parts:
       - lib/*/libfuse.so.*
 
       - bin/lxcfs
-      - lib/liblxcfs.so
-      - lib/liblxcfs.so.*
+      - lib/lxcfs/liblxcfs.so
+      - lib/lxcfs/liblxcfs.so.*
 
       - lxc
       - lxcfs
