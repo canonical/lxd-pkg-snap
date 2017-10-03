@@ -262,6 +262,7 @@ parts:
       git cherry-pick a364b4d99ea6bacf6dabea42d584866746c2c380  # Fix uname handling on some arches
       git cherry-pick 1d52364d269e0d8a7702b8bbe5817e9361feda2c  # Only include kernel version in UA
       git cherry-pick 9e9ba857b63cfe2d8e74aff5406b308c7049ce18  # Move testhelpers into osarch
+      git cherry-pick 30c859499e24ba6255508cd664c09cf4c1731bbe  # log15 API breakage
     after:
       - go
       - lxc
