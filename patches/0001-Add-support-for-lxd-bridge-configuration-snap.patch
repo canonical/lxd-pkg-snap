@@ -1,4 +1,4 @@
-From 2ef83aa54b649608ad71be1f846edd6a62beb047 Mon Sep 17 00:00:00 2001
+From 209c8425dbd3491a0e20e3e88fcf704d270595ae Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>
 Date: Tue, 5 Sep 2017 00:54:45 -0400
 Subject: [PATCH] Add support for lxd-bridge configuration (snap)
@@ -14,11 +14,11 @@ Signed-off-by: Stéphane Graber <stgraber@ubuntu.com>
  create mode 100644 lxd/main_init_network.go
 
 diff --git a/lxd/main_init.go b/lxd/main_init.go
-index e752c953..23f31827 100644
+index 35087db3..1836e8bc 100644
 --- a/lxd/main_init.go
 +++ b/lxd/main_init.go
-@@ -402,6 +402,13 @@ func (cmd *CmdInit) validateArgs() error {
- 		if cmd.Args.StorageBackend != "" || cmd.Args.StorageCreateDevice != "" || cmd.Args.StorageCreateLoop != -1 || cmd.Args.StoragePool != "" || cmd.Args.NetworkAddress != "" || cmd.Args.NetworkPort != -1 || cmd.Args.TrustPassword != "" {
+@@ -392,6 +392,13 @@ func (cmd *CmdInit) validateArgs() error {
+ 		if cmd.Args.StorageBackend != "" || cmd.Args.StorageCreateDevice != "" || cmd.Args.StorageCreateLoop != -1 || cmd.Args.StorageDataset != "" || cmd.Args.NetworkAddress != "" || cmd.Args.NetworkPort != -1 || cmd.Args.TrustPassword != "" {
  			return fmt.Errorf("Init configuration is only valid with --auto")
  		}
 +
