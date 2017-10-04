@@ -8,20 +8,28 @@ fi
 
 # Re-exec in the host namespace
 if [ -z "${LXD_HOSTFS:-""}" ]; then
-    PWD=$(pwd)
-    if [ "${PWD}" = "/var/lib/snapd/void" ]; then
-        PWD="$(readlink -f "/proc/${PPID}/cwd")"
-    fi
+    if chroot /var/lib/snapd/hostfs true >/dev/null 2>&1; then
+        PWD=$(pwd)
+        if [ "${PWD}" = "/var/lib/snapd/void" ]; then
+            PWD="$(readlink -f "/proc/${PPID}/cwd")"
+        fi
 
-    export LXD_HOSTFS="${PWD}"
-    exec chroot /var/lib/snapd/hostfs "$0" "$@"
+        export LXD_HOSTFS="${PWD}"
+        exec chroot /var/lib/snapd/hostfs "$0" "$@"
+    else
+        LXD_HOSTFS="$(pwd)"
+    fi
 fi
+
+# Move to the expected directory
 cd "${LXD_HOSTFS}"
 unset LXD_HOSTFS
 
+# Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
 export EDITOR=vim.tiny
 export VISUAL=${EDITOR}
 export VIMINIT="source ${SNAP}/etc/vimrc"
 
+# Run lxc itself
 exec "${SNAP}/bin/lxc" "$@"
