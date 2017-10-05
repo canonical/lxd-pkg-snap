@@ -6,8 +6,8 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-# Re-exec in the host namespace
 if [ -z "${LXD_HOSTFS:-""}" ]; then
+    # Re-exec in the host namespace
     if chroot /var/lib/snapd/hostfs true >/dev/null 2>&1; then
         PWD=$(pwd)
         if [ "${PWD}" = "/var/lib/snapd/void" ]; then
@@ -16,14 +16,12 @@ if [ -z "${LXD_HOSTFS:-""}" ]; then
 
         export LXD_HOSTFS="${PWD}"
         exec chroot /var/lib/snapd/hostfs "$0" "$@"
-    else
-        LXD_HOSTFS="$(pwd)"
     fi
+else
+    # Move to the expected directory
+    cd "${LXD_HOSTFS}"
+    unset LXD_HOSTFS
 fi
-
-# Move to the expected directory
-cd "${LXD_HOSTFS}"
-unset LXD_HOSTFS
 
 # Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
