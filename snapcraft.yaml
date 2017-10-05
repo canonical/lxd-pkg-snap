@@ -288,7 +288,7 @@ parts:
     install: |-
       set -ex
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
-      echo 'export PATH="${PATH}:/snap/bin/"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
       cat ../src/config/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
       usr/bin/: bin/
