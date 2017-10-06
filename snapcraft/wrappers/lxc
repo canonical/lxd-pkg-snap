@@ -9,9 +9,11 @@ fi
 # Move to the right directory
 PWD=$(pwd)
 if [ "${PWD}" = "/var/lib/snapd/void" ]; then
-    PWD="$(readlink -f "/proc/${PPID}/cwd")"
+    PWD="$(readlink -f "/proc/${PPID}/cwd" || true)"
 fi
-cd "/var/lib/snapd/hostfs/${PWD}" 2>/dev/null || true
+if [ -n "${PWD}" ]; then
+    cd "/var/lib/snapd/hostfs/${PWD}" 2>/dev/null || true
+fi
 
 # Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
