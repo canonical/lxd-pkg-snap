@@ -6,15 +6,6 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-# Move to the right directory
-PWD=$(pwd)
-if [ "${PWD}" = "/var/lib/snapd/void" ]; then
-    PWD="$(readlink -f "/proc/${PPID}/cwd" || true)"
-fi
-if [ -n "${PWD}" ]; then
-    cd "/var/lib/snapd/hostfs/${PWD}" 2>/dev/null || true
-fi
-
 # Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
 export EDITOR=vim.tiny
