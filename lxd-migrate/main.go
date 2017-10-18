@@ -69,7 +69,8 @@ func run() error {
 
 	err = src.checkEmpty()
 	if err == nil {
-		return fmt.Errorf("The source server is empty, no migration needed.")
+		fmt.Printf("The source server is empty, no migration needed.\n")
+		return removePackages(src, dst)
 	}
 
 	err = dst.checkEmpty()
@@ -231,10 +232,14 @@ func run() error {
 		return err
 	}
 
+	return removePackages(src, dst)
+}
+
+func removePackages(src *lxdDaemon, dst *lxdDaemon) error {
 	// Offer to remove LXD on the source
 	fmt.Printf("\nThe migration is now complete and your containers should be back online.\n")
 	if *argYes || askBool("Do you want to uninstall the old LXD (yes/no) [default=no]? ", "no") {
-		err = src.uninstall()
+		err := src.uninstall()
 		if err != nil {
 			return err
 		}
