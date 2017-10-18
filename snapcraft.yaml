@@ -1,5 +1,5 @@
 name: lxd
-version: 2.18
+version: 2.19
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -245,35 +245,12 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.18
+    source-tag: lxd-2.19
     prepare: |-
       set -ex
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-      git cherry-pick bf2a221d1e8f7493dc8bb78cb7471966d1c34c5a  # dnsmasq static on renames
-      git cherry-pick 02c93305a9d33b5ccf71b5dc5fd471451daf8fec  # dnsmasq version handling
-      git cherry-pick fc6528884afba76fb96043f376d58f4f0271e991  # Extract uname handling code
-      git cherry-pick 0002355d93d88880ad708cb7f0cc84a82f573fe8  # Add helper to create temp files
-      git cherry-pick bb5ecf8fb53228ad93878e3e44e89aa95a2159f1  # Add some architecture aliases
-      git cherry-pick dbdb5db247f112aa2863c7314d82d4b4f4b01bc6  # Add helper to parse os-release
-      git cherry-pick ad742c736c078826f301f547ef1d3101c8b2f23c  # Add helper to get distro info
-      git cherry-pick f512caac5b6f30fb6c226b73350d0180bdd41d38  # Extend UA
-      git cherry-pick a364b4d99ea6bacf6dabea42d584866746c2c380  # Fix uname handling on some arches
-      git cherry-pick 1d52364d269e0d8a7702b8bbe5817e9361feda2c  # Only include kernel version in UA
-      git cherry-pick 9e9ba857b63cfe2d8e74aff5406b308c7049ce18  # Move testhelpers into osarch
-      git cherry-pick 30c859499e24ba6255508cd664c09cf4c1731bbe  # log15 API breakage
-      git cherry-pick d337eddac8e28634e6dd761281422f0ec17bd103  # Fix bad DB upgrade
-      git cherry-pick e9312b0072a7b88fdfaa2121b4963288de6288ec  # Cache expiry
-      git cherry-pick 9d095eeecaaf857ad79a964828d5c60400085b34  # UploadedAt as RFC3399
-      git cherry-pick 1f80dd55cc2499639131cc5df4a5286bcfad87aa  # Convert UploadedAt
-      git cherry-pick 1f8b9d14013f9d0ec71a62349031d111d5886ee0  # Fix handling of config triggers
-      git cherry-pick 1ff9be263db592b432bd64b4945acb29cfff49a5  # Don't update images while pruning
-      git cherry-pick 7f945d1b6bfdb83ffd00fa026c7d42738b8b30e4  # Fix list of updatable images
-      git cherry-pick e01e79150ebf888966cbfc93ea3740f62ed22dd8  # Fix storage remote operations
-      git cherry-pick be3b8ec723fb549dec7fbb060e9889ccb9e881c2  # Fix renaming networks
-      git cherry-pick 59e42cfb65698248a1d77e7eb08f9aae6e957898  # Support canceling parallel downloads
-      git cherry-pick bf26aa3cf47c4a8d5105bb20426cc378ab2f4bba  # Don't update network limits unconditionally
     after:
       - go
       - lxc
