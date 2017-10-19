@@ -154,7 +154,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-2.1.0
+    source-tag: lxc-2.1.1
     prepare: |-
       set -ex
       git config user.email "noreply@linuxcontainers.org"
@@ -202,19 +202,11 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-2.0.7
+    source-tag: lxcfs-2.0.8
     prepare: |-
       set -ex
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-      git cherry-pick 23e74df60646518ec423668f910f7f10e8c00b27 # 0001-pam-non-functional-changes.patch
-      git cherry-pick b217984d0a60c62e10d812179b5aca2fda54c90a # 0002-pam-report-back-we-found-the-unified-hierarchy.patch
-      git cherry-pick 6702a9e2b102135f1d622d7349104096cd56867b # 0003-bindings-add-mountpoint-for-unified-hierarchy.patch
-      git cherry-pick ab932db16d4282f26ee003f1593619bc279a4941 # 0004-pam-chown-cgroup.procs-file-on-unified-hierarchy.patch
-      git cherry-pick 5b4ecae5e786af8d876556904d65c2a5f16128cf # 0005-bindings-calculate-uptime-via-proc-pid-stat.patch
-      git cherry-pick 2d9cd3b3655319710e1baafad9453ef69e75e950 # 0006-bindings-calculate-btime-correctly.patch
-      git cherry-pick 5dcba7d16daadc45e2e25cca3eef8caa5bbe05c4 # 0007-tests-fix-invalid-comparison.patch
-      git cherry-pick 72dd97f7ecfa1e118f4b33b3d694694fcf6fd120 # 0008-temporarily-revert-the-virtualization-of-btime-field.patch
     build-packages:
       - libfuse-dev
       - libpam0g-dev
