@@ -227,6 +227,7 @@ parts:
       git config user.name "LXD snap builder"
       git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
       git cherry-pick 97be8b6fcfedcb023df7c386a181439e27e3a54f # 0001-network-Don-t-require-ipt_checksum.patch
+      git cherry-pick 7c88b008b7f01972b2b366430ae9ac0ed743caf3 # log15 API breakage
       cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
       sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^varrun=.*#varrun=\${SNAP_COMMON}/lxd-bridge/run#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
