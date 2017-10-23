@@ -210,13 +210,13 @@ parts:
     organize:
       snap/lxd/current/lxc: lxc
       snap/lxd/current/lxcfs: lxcfs
+      lib/lxcfs: lib
     prime:
       - bin/fusermount
       - lib/*/libfuse.so.*
 
       - bin/lxcfs
-      - lib/lxcfs/liblxcfs.so
-      - lib/lxcfs/liblxcfs.so.*
+      - lib/liblxcfs.so
 
       - lxc
       - lxcfs
