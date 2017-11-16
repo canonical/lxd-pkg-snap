@@ -1,5 +1,5 @@
 name: lxd
-version: 2.20
+version: "2.20"
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
