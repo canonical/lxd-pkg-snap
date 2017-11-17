@@ -243,6 +243,7 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+      git cherry-pick ca3c94f04fe9ac52f5abf7518d9329006028324c # Fix unsetting https address
     after:
       - go
       - lxc
