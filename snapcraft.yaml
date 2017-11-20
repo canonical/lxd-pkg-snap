@@ -262,6 +262,7 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
       usr/share/vim/vim74/debian.vim: etc/vimrc
+      lib/ebtables: lib/
     prime:
       - bin/dnsmasq
       - bin/ebtables
