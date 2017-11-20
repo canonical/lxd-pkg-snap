@@ -244,6 +244,7 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
       git cherry-pick ca3c94f04fe9ac52f5abf7518d9329006028324c # Fix unsetting https address
+      git cherry-pick 4887b70b692f5b15a728b3a6e80d1d9319152e54 # Fix remapping hardlinks
     after:
       - go
       - lxc
