@@ -16,10 +16,14 @@ confinement: strict
 apps:
   benchmark:
     command: wrappers/lxd-benchmark
-    plugs: [lxd-support]
+    plugs:
+      - lxd-support
+      - system-observe
   check-kernel:
     command: wrappers/lxd-check-kernel
-    plugs: [lxd-support]
+    plugs:
+      - lxd-support
+      - system-observe
   daemon:
     command: wrappers/daemon.start
     reload-command: wrappers/daemon.reload
@@ -27,19 +31,27 @@ apps:
     stop-timeout: 600s
     restart-condition: always
     daemon: simple
-    plugs: [lxd-support]
     slots: [lxd]
+    plugs:
+      - lxd-support
+      - system-observe
   lxc:
     command: wrappers/lxc
-    plugs: [lxd-support]
     aliases: [lxc]
     completer: etc/bash_completion.d/snap.lxd.lxc
+    plugs:
+      - lxd-support
+      - system-observe
   lxd:
     command: wrappers/lxd
-    plugs: [lxd-support]
+    plugs:
+      - lxd-support
+      - system-observe
   migrate:
     command: wrappers/lxd-migrate
-    plugs: [lxd-support]
+    plugs:
+      - lxd-support
+      - system-observe
 
 hooks:
   configure:
