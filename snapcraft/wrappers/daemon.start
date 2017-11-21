@@ -7,11 +7,14 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 echo "=> Preparing the system"
+export HOME="/tmp/"
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
 export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
-export HOME="/tmp/"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${SNAP_CURRENT}/lib:${SNAP_CURENT}/lib/${ARCH}"
+export PATH="${PATH}:${SNAP_CURRENT}/bin"
 
 # Load our configuration
 echo "==> Loading snap configuration"
