@@ -7,8 +7,9 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 echo "=> Preparing the system"
+export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
-export LXD_LXC_TEMPLATE_CONFIG="${SNAP}/lxc/config/"
+export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
 export HOME="/tmp/"
 
 # Load our configuration
@@ -53,7 +54,7 @@ if [ -w "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
     if [ ! -e "/var/lib/snapd/hostfs/etc/bash_completion.d/lxc" ]; then
         echo "==> Setting up bash completion"
         rm -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
-        ln -s "$(realpath "${SNAP}/..")/current/etc/bash_completion.d/snap.lxd.lxc" \
+        ln -s "${SNAP_CURRENT}/etc/bash_completion.d/snap.lxd.lxc" \
             /var/lib/snapd/hostfs/etc/bash_completion.d/lxc || true
     fi
 fi
@@ -182,7 +183,7 @@ fi
 ## Start lxd
 echo "=> Starting LXD"
 
-LXD="lxd"
+LXD="${SNAP_CURRENT}/bin/lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
     echo "==> WARNING: Using a custom debug LXD binary!"
