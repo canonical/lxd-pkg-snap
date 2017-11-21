@@ -183,7 +183,7 @@ fi
 ## Start lxd
 echo "=> Starting LXD"
 
-LXD="${SNAP_CURRENT}/bin/lxd"
+LXD="lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
     echo "==> WARNING: Using a custom debug LXD binary!"
