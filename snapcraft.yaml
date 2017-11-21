@@ -258,6 +258,7 @@ parts:
       git cherry-pick ca3c94f04fe9ac52f5abf7518d9329006028324c # Fix unsetting https address
       git cherry-pick 4887b70b692f5b15a728b3a6e80d1d9319152e54 # Fix remapping hardlinks
       git cherry-pick cfbc9d43d6c775fbe51883465933122501611620 # Skip sockets during publish
+      git cherry-pick 1aee50f0386481c55ac8c6bb8615bf3e716701d5 # Add support for LXD_EXEC_PATH env variable
     after:
       - go
       - lxc
