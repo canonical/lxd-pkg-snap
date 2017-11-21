@@ -10,6 +10,7 @@ echo "=> Preparing the system"
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
+export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
 export HOME="/tmp/"
 
 # Load our configuration
