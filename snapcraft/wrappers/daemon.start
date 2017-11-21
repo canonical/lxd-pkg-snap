@@ -96,8 +96,8 @@ sed \
 # Escape resource limits
 echo "==> Escaping the systemd cgroups"
 for ctr in /sys/fs/cgroup/*; do
-    [ -e "${ctr}/tasks" ] || continue
-    echo "$$" > "${ctr}/tasks"
+    [ -e "${ctr}/cgroup.procs" ] || continue
+    echo "$$" > "${ctr}/cgroup.procs"
 done
 
 ## prlimits
