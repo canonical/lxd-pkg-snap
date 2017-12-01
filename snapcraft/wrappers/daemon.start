@@ -47,10 +47,17 @@ for entry in hostname hosts nsswitch.conf os-release passwd group resolv.conf wr
 done
 
 ## And the bits we need from the core snap
-for entry in alternatives apparmor apparmor.d ssl vim; do
-    [ -e "/snap/core/current/etc/${entry}" ] || continue
+for entry in alternatives apparmor apparmor.d vim; do
     ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
 done
+
+## Handle SSL certs
+if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/share/ca-certificates" ]; then
+    ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
+    mount -o bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
+else
+    ln -s "/snap/core/current/etc/ssl" "/etc/ssl"
+fi
 
 # FIXME: Setup bash completion on the host
 #        This should be handled by snapd directly (LP: #1590767)
