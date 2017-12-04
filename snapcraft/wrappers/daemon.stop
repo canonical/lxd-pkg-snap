@@ -37,6 +37,11 @@ if [ "${reason}" = "reload" ]; then
     exit 0
 fi
 
+# Handle crashes
+if [ "${reason}" = "crashed" ]; then
+    exit 0
+fi
+
 # Handle refreshes
 if [ "${reason}" = "snap refresh" ]; then
     echo "=> Stopping LXD"
