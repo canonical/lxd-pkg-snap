@@ -51,6 +51,9 @@ for entry in alternatives apparmor apparmor.d vim; do
     ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
 done
 
+## Setup mtab
+ln -s "/proc/mounts" "/etc/mtab"
+
 ## Handle SSL certs
 if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/share/ca-certificates" ]; then
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
