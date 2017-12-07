@@ -265,8 +265,6 @@ parts:
       git cherry-pick cd54faabd341ae148610c1dfbc9bc7966db6c036 # Fix ZFS argument ordering
       git cherry-pick 215e8425299923da9ae1712ff70039d81cad97cc # Use HostPath for dir/btrfs
       git cherry-pick f07484897465a22768a6a30e69c4bd102b8453b6 # Default lxd-benchmark to one container
-      git cherry-pick c7398e08f9c0080f3e41c371294ad477b541ab0e # Add EscapePathFstab
-      git cherry-pick b12cf5923207e7dfd5b12b091dfa5e540e7239df # Escape fstab paths
       git cherry-pick 03f1963d64f2ec2843f868bf15566eed41310ac6 # Fix devlxd locking
       git cherry-pick edc4227e28b75775596324afda2eb62b06a83434 # Fix interface name check
       git cherry-pick 434a8710b669a7cb9e8211746fb716feb3286c2b # Escape URLs
