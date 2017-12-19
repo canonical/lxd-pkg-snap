@@ -1,5 +1,5 @@
 name: lxd
-version: "2.20"
+version: "2.21"
 grade: stable
 summary: LXD - the container lightervisor
 description: LXD is a container manager for system containers.
@@ -249,27 +249,12 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.20
+    source-tag: lxd-2.21
     prepare: |-
       set -ex
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-      git cherry-pick ca3c94f04fe9ac52f5abf7518d9329006028324c # Fix unsetting https address
-      git cherry-pick 4887b70b692f5b15a728b3a6e80d1d9319152e54 # Fix remapping hardlinks
-      git cherry-pick cfbc9d43d6c775fbe51883465933122501611620 # Skip sockets during publish
-      git cherry-pick 1aee50f0386481c55ac8c6bb8615bf3e716701d5 # Add support for LXD_EXEC_PATH env variable
-      git cherry-pick de70922e68967569c6bbacec162b24cd1a9664a2 # Skip non-existing GPUs
-      git cherry-pick 445ae96e98d68dd2a65568b6f9fc4dc97dfff83a # Fix profile auto-completion
-      git cherry-pick f2119227bab8827f5fe1feff130a6493eab3bba9 # Fix ZFS storage pool import
-      git cherry-pick cd54faabd341ae148610c1dfbc9bc7966db6c036 # Fix ZFS argument ordering
-      git cherry-pick 215e8425299923da9ae1712ff70039d81cad97cc # Use HostPath for dir/btrfs
-      git cherry-pick f07484897465a22768a6a30e69c4bd102b8453b6 # Default lxd-benchmark to one container
-      git cherry-pick 03f1963d64f2ec2843f868bf15566eed41310ac6 # Fix devlxd locking
-      git cherry-pick edc4227e28b75775596324afda2eb62b06a83434 # Fix interface name check
-      git cherry-pick 434a8710b669a7cb9e8211746fb716feb3286c2b # Escape URLs
-      git cherry-pick b72273f2afc12b5b26132fc0149144eb284378dd # Add missing name value in certificates list
-      git cherry-pick 03d1e5881c79ca7687a9e8cd7dcd84d4deb15fcc # Ensure new ZFS dataset allows devices, setuid and exec
     after:
       - go
       - lxc
