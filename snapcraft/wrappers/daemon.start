@@ -13,7 +13,7 @@ export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
 export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 
 # Load our configuration
