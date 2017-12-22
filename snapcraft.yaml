@@ -255,6 +255,8 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+      git cherry-pick ccb9b42a926fb67d66cda94ad0e3abb145a230ce  # Fix typo in lxc exec help
+      git cherry-pick a6eaf97fde1c8392c7cd6f8ecbafa11a9db00395  # Fix tc egress rules
       git cherry-pick 419fa4c39bbe0f12a35520fe22afecb791a252d8  # Fix device names with slashes
     after:
       - go
