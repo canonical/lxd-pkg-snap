@@ -28,7 +28,7 @@ verify_int () {
     value=$(echo "${1:-}")
 
     # Verify if the value is a positive integer
-    if [[ "${value}" =~ ^[0-9]+$ ]]; then
+    if $(echo "${value}" | grep -Eq '^[0-9]+$'); then
         echo "${value}"
         return
     fi
