@@ -37,7 +37,6 @@ apps:
       - system-observe
   lxc:
     command: wrappers/lxc
-    aliases: [lxc]
     completer: etc/bash_completion.d/snap.lxd.lxc
     plugs:
       - lxd-support
