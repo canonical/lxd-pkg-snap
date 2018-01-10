@@ -24,6 +24,19 @@ get_bool() {
     return
 }
 
+verify_int () {
+    value=$(echo "${1:-}")
+
+    # Verify if the value is a positive integer
+    if $(echo "${value}" | grep -Eq '^[0-9]+$'); then
+        echo "${value}"
+        return
+    fi
+
+    # Invalid value (or not set)
+    return
+}
+
 # Don't fail if the mount namespace isn't properly setup yet
 if [ ! -e /run/snapd-snap.socket ]; then
     exit 0
@@ -34,6 +47,7 @@ daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
 daemon_group=$(snapctl get daemon.group)
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
+waitready_timeout=$(verify_int "$(snapctl get waitready.timeout)")
 
 # Generate the config
 config="${SNAP_COMMON}/config"
@@ -44,6 +58,7 @@ config="${SNAP_COMMON}/config"
     echo "daemon_group=${daemon_group:-"lxd"}"
     echo "ceph_builtin=${ceph_builtin:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
+    echo "waitready_timeout=${waitready_timeout:-"600"}"
 } > "${config}"
 
 exit 0
