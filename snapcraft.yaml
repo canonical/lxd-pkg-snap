@@ -2,7 +2,9 @@ name: lxd
 version: 2.0.11
 grade: stable
 summary: LXD - the container lightervisor
-description: LXD is a container manager for system containers.
+description: |-
+ LXD is a container manager for system containers.
+
  It offers a REST API to remotely manage containers over the network,
  using an image based workflow and with support for live migration.
 
