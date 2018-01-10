@@ -11,6 +11,14 @@ description: LXD is a container manager for system containers.
 
  LXD containers are lightweight, secure by default and a great
  alternative to virtual machines.
+
+ Supported configuration options (snap set lxd [<key>=<value>...]):
+   - daemon_debug: Increases logging to debug level [default=false]
+   - daemon_group: Group of users that can interact with LXD [default=lxd]
+   - ceph_builtin: Use snap-specific ceph configuration [default=false]
+   - openvswitch_builtin: Run a snap-specific OVS daemon [default=false]
+   - waitready_timeout: How long to wait for LXD to be ready [default=600]
+
 confinement: strict
 
 apps:
