@@ -146,6 +146,18 @@ parts:
       - bin/uuidgen
       - share/openvswitch/
 
+  xfs:
+    plugin: nil
+    stage-packages:
+      - xfsprogs
+    organize:
+      usr/sbin/: bin/
+      sbin/: bin/
+    prime:
+      - bin/xfs_admin
+      - bin/xfs_growfs
+      - bin/mkfs.xfs
+
   zfs:
     plugin: nil
     stage-packages:
