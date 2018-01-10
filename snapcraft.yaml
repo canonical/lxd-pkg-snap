@@ -276,9 +276,20 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-      git cherry-pick ccb9b42a926fb67d66cda94ad0e3abb145a230ce  # Fix typo in lxc exec help
-      git cherry-pick a6eaf97fde1c8392c7cd6f8ecbafa11a9db00395  # Fix tc egress rules
-      git cherry-pick 419fa4c39bbe0f12a35520fe22afecb791a252d8  # Fix device names with slashes
+      git cherry-pick ccb9b42a926fb67d66cda94ad0e3abb145a230ce  # lxc/exec: Fix typo
+      git cherry-pick a6eaf97fde1c8392c7cd6f8ecbafa11a9db00395  # lxd/containers: Fix tc egress rules
+      git cherry-pick 419fa4c39bbe0f12a35520fe22afecb791a252d8  # Fix device names containing slashes
+      git cherry-pick a1a0475defb8b051ccbcd3eb3967f1a28f61136b  # storage/btrfs: Fix handling of UUID-based mounts
+      git cherry-pick 51ea2cefdf5cd98fb54c3c60c9a030fe3be5e9e2  # lxd/containers: No slahses in snapshot names
+      git cherry-pick a0b4721a8bba360d7ef3a791bb49439547ab54e0  # lxd/storage: Don't allow slashes in pool or volume names
+      git cherry-pick 1f932668fa7d0b1192d8df8c343f30ae17b5f521  # lxd/init: Strip leading and trailing spaces
+      git cherry-pick a53fe55976f10bcaee9c279542b91400b27cf93e  # console: Don't prevent setting lxc.console.logfile
+      git cherry-pick c160898722dd9293690f5cfb4da50d981218aaa4  # console: Fix version check in log API
+      git cherry-pick 8a888cb9d2ff3b9f0ab1c604d410585c3f90d4ea  # lxd/containers: Don't drop the description
+      git cherry-pick d840004886b702b3bea15d4a1d6e4f32717a6b62  # network: Serialize network creation
+      git cherry-pick 7be50c3b81311db6a7c9e3c9b7605885c5cffca4  # storage: Serialize storage pool creation
+      git cherry-pick a5e117873d926a8d14b4bcdad07de3be9d07060e  # lxd/containers: Fix container shutdown on exit
+
     after:
       - go
       - lxc
