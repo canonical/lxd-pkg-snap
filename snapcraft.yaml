@@ -163,8 +163,7 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
     prime:
-      - bin/xfs_admin
-      - bin/xfs_growfs
+      - bin/xfs_*
       - bin/mkfs.xfs
 
   zfs:
