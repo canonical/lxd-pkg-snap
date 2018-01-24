@@ -288,6 +288,15 @@ parts:
       git cherry-pick d840004886b702b3bea15d4a1d6e4f32717a6b62  # network: Serialize network creation
       git cherry-pick 7be50c3b81311db6a7c9e3c9b7605885c5cffca4  # storage: Serialize storage pool creation
       git cherry-pick a5e117873d926a8d14b4bcdad07de3be9d07060e  # lxd/containers: Fix container shutdown on exit
+      git cherry-pick 479d024f0b22d006679e47a7496c987f4d2cd62a  # fix parsing for container name tab-completion
+      git cherry-pick 747d70aeee6cf567b4d1d54cf2cf044e1ce6fa47  # lxc/file: Fix edit in a snap environment
+      git cherry-pick 82ccced4702f7736970fc3ff6ca72311f4d4faa3  # correct mistake in help
+      git cherry-pick c950b4a06f525b100d681883e6909fb407a608eb  # lxc client: return errArgs on empty pool
+      git cherry-pick 4a064e2f70595a30aef9bf1407aba34ad7792884  # networks: Drop all firewall rules when disabled
+      git cherry-pick 107beb0369b672f184dfe1483dabbde57d9af2c5  # container_lxc: ensure container is initialized
+      git cherry-pick 3e02c0389476dfc927458c053f45394d8c4f0061  # migrate: check pre-dump only on live migration
+      git cherry-pick f0c5e424d37bea46101bd65881afe2aed496eae4  # shared/hostpath: Also check SNAP_NAME
+      git cherry-pick 78e7e887d6bf10027f26233a5535aec2e8946d0c  # shared/hostpath: Properly handle prefix check
 
     after:
       - go
