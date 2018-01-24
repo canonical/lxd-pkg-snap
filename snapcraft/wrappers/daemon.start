@@ -74,7 +74,7 @@ if [ -w "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
 fi
 
 # FIXME: Setup the "lxd" group
-if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
+if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
     if grep -q "^group.*extrausers" /etc/nsswitch.conf; then
         chroot /var/lib/snapd/hostfs/ groupadd --system --extrausers lxd || true
@@ -85,7 +85,7 @@ fi
 
 # Setup for ceph
 echo "==> Setting up ceph configuration"
-if [ "${ceph_builtin}" = "true" ]; then
+if [ "${ceph_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ceph"
     ln -s "${SNAP_COMMON}/ceph" /etc/ceph
 else
@@ -144,7 +144,7 @@ else
 fi
 
 # Open vSwitch
-if [ "${openvswitch_builtin}" = "true" ]; then
+if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
     echo "=> Starting Open vSwitch"
     export OVS_RUNDIR="${SNAP_COMMON}/openvswitch/run/"
     (
@@ -211,7 +211,7 @@ else
     echo "==> No \"${daemon_group}\" group found, only root will be able to use LXD."
 fi
 
-if [ "${daemon_debug}" = "true" ]; then
+if [ "${daemon_debug:-"false"}" = "true" ]; then
     CMD="${CMD} --debug"
 fi
 
@@ -220,7 +220,7 @@ ${CMD} &
 ## Wait for it to be ready
 PID=$!
 echo $PID > "${SNAP_COMMON}/lxd.pid"
-"${LXD}" waitready --timeout="${waitready_timeout}"
+"${LXD}" waitready --timeout="${waitready_timeout:-"600"}"
 
 ## Put database in versioned path
 if [ ! -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
