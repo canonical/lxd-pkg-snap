@@ -200,6 +200,7 @@ echo "=> Starting LXD"
 LXD="lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
+    export LXD_EXEC_PATH="${LXD}"
     echo "==> WARNING: Using a custom debug LXD binary!"
 fi
 
