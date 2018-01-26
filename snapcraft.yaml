@@ -191,6 +191,14 @@ parts:
       set -ex
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      git cherry-pick a37f8ab2b1b171202a56ba5b4d3320cffc570a33  # console: non-functional changes
+      git cherry-pick ae1aaf5a3a4565e6ce676858fce3c72f334e7c38  # console: non-functional changes
+      git cherry-pick c62e51c253613749bc685f934622445caefe81d1  # console: fix console info message
+      git cherry-pick 7982b83356527b0eb20dca7c972fe2a50fd1c0fa  # console: report detach message on demand
+      git cherry-pick 8a01a32f641b9a279e1d84a3d36aa4e7ca6a6b7f  # console: use correct escape sequence check
+      git cherry-pick 8de44ef8ea7636cea93fa542297bd1e3ad4020b0  # console: prepare for generic signal handler
+      git cherry-pick 94b9b79499271a496447805b135482e7bae946fc  # console: exit mainloop on SIGTERM
     build-packages:
       - libapparmor-dev
       - libcap-dev
