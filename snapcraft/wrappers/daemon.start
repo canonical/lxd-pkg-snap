@@ -132,6 +132,12 @@ if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
     echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
 fi
 
+# Setup CRIU
+if [ "${criu_enable:-"false"}" = "true" ]; then
+    echo "==> Enabling CRIU"
+    export PATH="${SNAP_CURRENT}/criu:${PATH}"
+fi
+
 # LXC
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
