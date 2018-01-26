@@ -11,6 +11,13 @@ description: LXD is a container manager for system containers.
 
  LXD containers are lightweight, secure by default and a great
  alternative to virtual machines.
+
+ Supported configuration options (snap set lxd [<key>=<value>...]):
+   - criu_enable: Enable experimental live-migration support [default=false]
+   - daemon_debug: Increases logging to debug level [default=false]
+   - daemon_group: Group of users that can interact with LXD [default=lxd]
+   - waitready_timeout: How long to wait for LXD to be ready [default=600]
+
 confinement: strict
 
 apps:
@@ -203,6 +210,39 @@ parts:
     install: |-
       set -ex
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
+
+  criu:
+    source: https://github.com/checkpoint-restore/criu
+    source-type: git
+    plugin: nil
+    build-packages:
+      - asciidoc
+      - libcap-dev
+      - libnet1-dev
+      - libnl-3-dev
+      - libprotobuf-c-dev
+      - libprotobuf-dev
+      - protobuf-c-compiler
+      - protobuf-compiler
+      - python
+      - xmlto
+    build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armv7l" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      make
+    install: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armv7l" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
+      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
 
   lxd:
     source: https://github.com/lxc/lxd
