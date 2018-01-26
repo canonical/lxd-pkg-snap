@@ -305,7 +305,7 @@ parts:
       git cherry-pick 3e02c0389476dfc927458c053f45394d8c4f0061  # migrate: check pre-dump only on live migration
       git cherry-pick f0c5e424d37bea46101bd65881afe2aed496eae4  # shared/hostpath: Also check SNAP_NAME
       git cherry-pick 78e7e887d6bf10027f26233a5535aec2e8946d0c  # shared/hostpath: Properly handle prefix check
-
+      git cherry-pick 97a053c190a7f4b2fa0618cd76f275902fb4902a  # proxy: Fix environment handling
     after:
       - go
       - lxc
