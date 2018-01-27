@@ -15,10 +15,10 @@ description: |-
  alternative to virtual machines.
 
  Supported configuration options (snap set lxd [<key>=<value>...]):
-   - criu_enable: Enable experimental live-migration support [default=false]
-   - daemon_debug: Increases logging to debug level [default=false]
-   - daemon_group: Group of users that can interact with LXD [default=lxd]
-   - waitready_timeout: How long to wait for LXD to be ready [default=600]
+   - criu.enable: Enable experimental live-migration support [default=false]
+   - daemon.debug: Increases logging to debug level [default=false]
+   - daemon.group: Group of users that can interact with LXD [default=lxd]
+   - waitready.timeout: How long to wait for LXD to be ready [default=600]
 
 confinement: strict
 
