@@ -84,7 +84,7 @@ parts:
       - bin/mkfs.btrfs
 
   go:
-    source-tag: go1.9.2
+    source-tag: go1.9.3
 
   lvm:
     plugin: nil
