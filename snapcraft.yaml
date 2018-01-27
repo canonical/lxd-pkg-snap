@@ -112,7 +112,7 @@ parts:
       - lib/*/libsmime3.so
 
   go:
-    source-tag: go1.9.2
+    source-tag: go1.9.3
 
   lvm:
     plugin: nil
