@@ -15,12 +15,12 @@ description: |-
  alternative to virtual machines.
 
  Supported configuration options (snap set lxd [<key>=<value>...]):
-   - criu_enable: Enable experimental live-migration support [default=false]
-   - daemon_debug: Increases logging to debug level [default=false]
-   - daemon_group: Group of users that can interact with LXD [default=lxd]
-   - ceph_builtin: Use snap-specific ceph configuration [default=false]
-   - openvswitch_builtin: Run a snap-specific OVS daemon [default=false]
-   - waitready_timeout: How long to wait for LXD to be ready [default=600]
+   - criu.enable: Enable experimental live-migration support [default=false]
+   - daemon.debug: Increases logging to debug level [default=false]
+   - daemon.group: Group of users that can interact with LXD [default=lxd]
+   - ceph.builtin: Use snap-specific ceph configuration [default=false]
+   - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
+   - waitready.timeout: How long to wait for LXD to be ready [default=600]
 
 confinement: strict
 
