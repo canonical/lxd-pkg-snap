@@ -200,6 +200,13 @@ if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
     chmod 0700 "${SNAP_COMMON}/lxd/logs"
 fi
 
+## Check for existing LXDs
+pid=$(ss -nlpx src /var/snap/lxd/common/lxd/unix.socket 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
+if [ -n "${pid}" ]; then
+    echo "=> Killing conflicting LXD"
+    kill -9 "${pid}"
+fi
+
 ## Start lxd
 echo "=> Starting LXD"
 
