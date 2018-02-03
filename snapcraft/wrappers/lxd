@@ -6,7 +6,15 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
+export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_DIR=${SNAP_COMMON}/lxd/
+
+# Make sure we have a ZFS binary on the path
+export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
+export PATH="${SNAP_CURRENT}/zfs-0.7/bin:${PATH}"
 
 LXD="lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
