@@ -130,21 +130,42 @@ parts:
       - bin/xfs_*
       - bin/mkfs.xfs
 
-  zfs:
-    plugin: nil
-    stage-packages:
-      - zfsutils-linux
-    organize:
-      sbin/: bin/
-      usr/lib/: lib/
-    prime:
-      - bin/zfs
-      - bin/zpool
-      - lib/libnvpair.so.*
-      - lib/libuutil.so.*
-      - lib/libzfs_core.so.*
-      - lib/libzfs.so.*
-      - lib/libzpool.so.*
+  zfs-0.6:
+    source: https://github.com/zfsonlinux/zfs
+    source-type: git
+    source-tag: zfs-0.6.5.11
+    plugin: autotools
+    configflags:
+      - --with-config=user
+    build-packages:
+      - uuid-dev
+      - zlib1g-dev
+    install: |
+      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib/"
+      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+
+  zfs-0.7:
+    source: https://github.com/zfsonlinux/zfs
+    source-type: git
+    source-tag: zfs-0.7.5
+    plugin: autotools
+    configflags:
+      - --with-config=user
+    build-packages:
+      - libblkid-dev
+      - uuid-dev
+      - zlib1g-dev
+    install: |
+      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib/"
+      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   # Core components
   lxc:
