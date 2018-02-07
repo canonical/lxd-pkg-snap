@@ -177,6 +177,12 @@ parts:
     build-packages:
       - uuid-dev
       - zlib1g-dev
+    prepare: |-
+      set -ex
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
     install: |
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib"
