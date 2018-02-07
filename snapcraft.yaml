@@ -129,6 +129,17 @@ parts:
       - bin/uuidgen
       - share/openvswitch/
 
+  vim:
+    plugin: nil
+    stage-packages:
+      - vim-tiny
+    organize:
+      usr/bin/: bin/
+      usr/share/vim/vim74/debian.vim: etc/vimrc
+    prime:
+      - bin/vim.tiny
+      - etc/vimrc
+
   xfs:
     plugin: nil
     stage-packages:
@@ -316,7 +327,6 @@ parts:
       - ebtables
       - rsync
       - squashfs-tools
-      - vim-tiny
     plugin: go
     go-buildtags:
       - libsqlite3
@@ -335,7 +345,6 @@ parts:
       usr/lib/: lib/
       usr/sbin/: bin/
       sbin/: bin/
-      usr/share/vim/vim74/debian.vim: etc/vimrc
       lib/ebtables: lib/
     prime:
       - bin/dnsmasq
@@ -343,11 +352,9 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
-      - bin/vim.tiny
       - lib/*/libsqlite3*
       - lib/libebt*
 
-      - etc/vimrc
       - etc/bash_completion.d/snap.lxd.lxc
 
       - bin/lxc
