@@ -96,6 +96,11 @@ func run() error {
 	fmt.Printf("Once the data is moved, the destination LXD will start and apply any needed updates.\n")
 	fmt.Printf("And finally your containers will be brought back to their previous state, completing the migration.\n")
 
+	isMnt := shared.IsMountPoint(src.path)
+	if isMnt {
+		fmt.Printf("\nWARNING: /var/lib/lxd is a mountpoint. You will need to update your /etc/fstab after the migration.\n")
+	}
+
 	fmt.Printf("\n")
 	if !*argYes && !askBool("Are you ready to proceed (yes/no) [default=no]? ", "no") {
 		return fmt.Errorf("Aborted by the user")
@@ -141,10 +146,18 @@ func run() error {
 	}
 
 	// Move the data across
-	fmt.Printf("=> Moving the data\n")
-	err = src.moveFiles(dst.path)
-	if err != nil {
-		return fmt.Errorf("Failed to move the data: %v", err)
+	if !isMnt {
+		fmt.Printf("=> Moving the data\n")
+		err = src.moveFiles(dst.path)
+		if err != nil {
+			return fmt.Errorf("Failed to move the data: %v", err)
+		}
+	} else {
+		fmt.Printf("=> Moving the /var/lib/lxd mountpoint\n")
+		err = src.remount(dst.path)
+		if err != nil {
+			return fmt.Errorf("Failed to move the mountpoint: %v", err)
+		}
 	}
 
 	// Move the database into place
@@ -230,6 +243,11 @@ func run() error {
 	err = dst.showReport()
 	if err != nil {
 		return err
+	}
+
+	// Mount warning
+	if isMnt {
+		fmt.Printf("\nWARNING: Make sure to update /etc/fstab to mount the right path on top of /var/snap/lxd/common/lxd\n")
 	}
 
 	return removePackages(src, dst)
