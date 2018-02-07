@@ -343,6 +343,25 @@ func (d *lxdDaemon) cleanMounts() error {
 	return nil
 }
 
+func (d *lxdDaemon) remount(target string) error {
+	err := os.MkdirAll(target, 0755)
+	if err != nil {
+		return err
+	}
+
+	err = syscall.Mount(d.path, target, "none", syscall.MS_BIND|syscall.MS_REC, "")
+	if err != nil {
+		return err
+	}
+
+	err = syscall.Unmount(d.path, syscall.MNT_DETACH)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 	// Symlink rewrite function
 	rewriteSymlink := func(path string) error {
