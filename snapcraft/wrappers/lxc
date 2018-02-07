@@ -8,9 +8,12 @@ fi
 
 # Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
-export EDITOR=vim.tiny
-export VISUAL=${EDITOR}
-export VIMINIT="source ${SNAP}/etc/vimrc"
+
+if [ "${EDITOR:-}" != "nano" ]; then
+    export EDITOR=vim.tiny
+    export VIMINIT="source ${SNAP}/etc/vimrc"
+fi
+export VISUAL=${EDITOR:-}
 
 # Run lxc itself
 exec "${SNAP}/bin/lxc" "$@"

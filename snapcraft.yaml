@@ -103,6 +103,16 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
+  nano:
+    plugin: nil
+    stage-packages:
+      - nano
+    organize:
+      usr/bin/: bin/
+    prime:
+      - bin/nano
+      - etc/nanorc
+
   openvswitch:
     plugin: nil
     stage-packages:
