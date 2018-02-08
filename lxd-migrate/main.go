@@ -98,7 +98,7 @@ func run() error {
 
 	isMnt := shared.IsMountPoint(src.path)
 	if isMnt {
-		fmt.Printf("\nWARNING: /var/lib/lxd is a mountpoint. You will need to update your /etc/fstab after the migration.\n")
+		fmt.Printf("\nWARNING: /var/lib/lxd is a mountpoint. You will need to update that mount location after the migration.\n")
 	}
 
 	fmt.Printf("\n")
@@ -247,7 +247,7 @@ func run() error {
 
 	// Mount warning
 	if isMnt {
-		fmt.Printf("\nWARNING: Make sure to update /etc/fstab to mount the right path on top of /var/snap/lxd/common/lxd\n")
+		fmt.Printf("\nWARNING: Make sure to update your system to mount your LXD directory at /var/snap/lxd/common/lxd\n")
 	}
 
 	return removePackages(src, dst)
