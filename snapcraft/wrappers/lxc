@@ -15,5 +15,10 @@ if [ "${EDITOR:-}" != "nano" ]; then
 fi
 export VISUAL=${EDITOR:-}
 
+LXC="lxc"
+if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
+    LXC="${SNAP_COMMON}/lxc.debug"
+fi
+
 # Run lxc itself
-exec "${SNAP}/bin/lxc" "$@"
+exec "${LXC}" "$@"
