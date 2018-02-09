@@ -1,9 +1,0 @@
-#!/bin/sh
-for i in /bin/lsmod /sbin/lsmod /usr/bin/lsmod /usr/sbin/lsmod; do
-    [ ! -e "/var/lib/snapd/hostfs/${i}" ] && continue
-
-    exec "/var/lib/snapd/hostfs/${i}" "$@"
-done
-
-echo "Unable to find lsmod" 1>&2
-exit 1
