@@ -25,25 +25,11 @@ description: |-
 confinement: strict
 
 apps:
-  benchmark:
-    command: wrappers/lxd-benchmark
-    plugs:
-      - lxd-support
-      - system-observe
-  check-kernel:
-    command: wrappers/lxd-check-kernel
-    plugs:
-      - lxd-support
-      - system-observe
-  database:
-    command: wrappers/lxd-database
-    plugs:
-      - lxd-support
-      - system-observe
+  # Main commands
   daemon:
-    command: wrappers/daemon.start
-    reload-command: wrappers/daemon.reload
-    stop-command: wrappers/daemon.stop
+    command: commands/daemon.start
+    reload-command: commands/daemon.reload
+    stop-command: commands/daemon.stop
     stop-timeout: 600s
     restart-condition: always
     daemon: simple
@@ -52,18 +38,35 @@ apps:
       - lxd-support
       - system-observe
   lxc:
-    command: wrappers/lxc
+    command: commands/lxc
     completer: etc/bash_completion.d/snap.lxd.lxc
     plugs:
       - lxd-support
       - system-observe
   lxd:
-    command: wrappers/lxd
+    command: commands/lxd
+    plugs:
+      - lxd-support
+      - system-observe
+
+  # Sub-commands
+  benchmark:
+    command: commands/lxd-benchmark
+    plugs:
+      - lxd-support
+      - system-observe
+  check-kernel:
+    command: commands/lxd-check-kernel
+    plugs:
+      - lxd-support
+      - system-observe
+  database:
+    command: commands/lxd-database
     plugs:
       - lxd-support
       - system-observe
   migrate:
-    command: wrappers/lxd-migrate
+    command: commands/lxd-migrate
     plugs:
       - lxd-support
       - system-observe
