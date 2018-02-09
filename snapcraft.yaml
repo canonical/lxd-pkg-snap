@@ -31,6 +31,11 @@ apps:
     plugs:
       - lxd-support
       - system-observe
+  database:
+    command: wrappers/lxd-database
+    plugs:
+      - lxd-support
+      - system-observe
   daemon:
     command: wrappers/daemon.start
     reload-command: wrappers/daemon.reload
@@ -335,6 +340,7 @@ parts:
       - ebtables
       - rsync
       - squashfs-tools
+      - sqlite3
       - xdelta3
     plugin: go
     go-buildtags:
@@ -360,6 +366,7 @@ parts:
       - bin/ebtables
       - bin/rsync
       - bin/setfacl
+      - bin/sqlite3
       - bin/unsquashfs
       - bin/xdelta3
       - lib/*/libsqlite3*
