@@ -327,6 +327,7 @@ parts:
       - ebtables
       - rsync
       - squashfs-tools
+      - xdelta3
     plugin: go
     go-buildtags:
       - libsqlite3
@@ -352,6 +353,7 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
+      - bin/xdelta3
       - lib/*/libsqlite3*
       - lib/libebt*
 
