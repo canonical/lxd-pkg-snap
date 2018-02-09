@@ -81,6 +81,7 @@ parts:
     plugin: nil
     stage-packages:
       - ceph-common
+      - libdb5.3
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -97,6 +98,7 @@ parts:
       - lib/*/libboost_regex.so.*
       - lib/*/libboost_system.so.*
       - lib/*/libboost_thread.so.*
+      - lib/*/libdb-5.3.so
       - lib/*/libicudata.so.*
       - lib/*/libicui18n.so.*
       - lib/*/libicuuc.so.*
@@ -337,6 +339,11 @@ parts:
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/*/libnet*
+      - lib/*/libproto*
 
   lxd:
     source: https://github.com/lxc/lxd
