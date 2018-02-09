@@ -20,9 +20,17 @@ export PATH="${PATH}:${SNAP_CURRENT}/bin"
 echo "==> Loading snap configuration"
 . "${SNAP_COMMON}/config"
 
-# Fix modprobe
-echo "==> Setting up modprobe wrapper"
-mount -o bind "${SNAP}/bin/modprobe" "/sbin/modprobe"
+# Fix lsmod/modprobe
+echo "==> Setting up modprobe and lsmod wrappers"
+mount -o bind "${SNAP}/wrappers/modprobe" "/sbin/modprobe"
+mount -o bind "${SNAP}/wrappers/lsmod" "/sbin/lsmod"
+
+# Setup /boot
+if [ -e /var/lib/snapd/hostfs/boot ]; then
+    echo "==> Preparing /boot"
+    umount -l /boot >/dev/null 2>&1 || true
+    mount -o bind "/var/lib/snapd/hostfs/boot" "/boot"
+fi
 
 # Setup a functional /run
 echo "==> Preparing a clean copy of /run"
