@@ -21,9 +21,8 @@ echo "==> Loading snap configuration"
 . "${SNAP_COMMON}/config"
 
 # Fix lsmod/modprobe
-echo "==> Setting up modprobe and lsmod wrappers"
-mount -o bind "${SNAP}/wrappers/modprobe" "/sbin/modprobe"
-mount -o bind "${SNAP}/wrappers/lsmod" "/sbin/lsmod"
+echo "==> Setting up kmod wrapper"
+mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
