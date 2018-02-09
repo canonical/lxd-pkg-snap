@@ -1,0 +1,11 @@
+#!/bin/sh
+NAME=$(basename "${0}")
+
+for i in "/bin/${NAME}" "/sbin/${NAME}" "/usr/bin/${NAME}" "/usr/sbin/${NAME}"; do
+    [ ! -e "/var/lib/snapd/hostfs/${i}" ] && continue
+
+    exec "/var/lib/snapd/hostfs/${i}" "$@"
+done
+
+echo "Unable to find ${NAME}" 1>&2
+exit 1
