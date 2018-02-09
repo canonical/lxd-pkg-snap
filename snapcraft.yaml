@@ -320,6 +320,11 @@ parts:
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/*/libnet*
+      - lib/*/libproto*
 
   lxd:
     source: https://github.com/lxc/lxd
