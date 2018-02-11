@@ -330,6 +330,9 @@ parts:
       - protobuf-compiler
       - python
       - xmlto
+    stage-packages:
+      - libnet1
+      - libprotobuf-c1
     build: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
@@ -350,6 +353,7 @@ parts:
     organize:
       usr/lib/: lib/
     prime:
+      - criu/*
       - lib/*/libnet*
       - lib/*/libproto*
 
