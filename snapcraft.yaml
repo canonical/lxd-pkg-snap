@@ -405,7 +405,7 @@ parts:
       git cherry-pick 78e7e887d6bf10027f26233a5535aec2e8946d0c  # shared/hostpath: Properly handle prefix check
       git cherry-pick a4ae2539454cf794dec5b2dbeef90fbbb339c333  # lxc/config: Fix metadata edit
       git cherry-pick 959b822027b16cba6d47aaf222dd0a7eb07a3b9b  # containers: Default to pids cgroup for fork bomb mitigation
-
+      git cherry-pick 5b98ce0354c07eb367078b3508d5c87538f1d753  # lxc: Properly handle the --version flag
     after:
       - go
       - lxc
