@@ -106,7 +106,12 @@ sed \
     "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
 
 # Setup for ZFS
-VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs || true)
+if [ -e /sys/module/zfs/version ]; then
+    VERSION=$(cat /sys/module/zfs/version)
+else
+    VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs || true)
+fi
+
 if echo "${VERSION}" | grep -q ^0.7; then
     echo "==> Setting up ZFS (0.7)"
     export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
