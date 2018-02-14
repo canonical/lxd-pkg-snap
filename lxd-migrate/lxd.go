@@ -268,40 +268,18 @@ func (d *lxdDaemon) wipe() error {
 }
 
 func (d *lxdDaemon) moveFiles(dst string) error {
-	src := d.path
-
-	// If the daemon is on its own mounpoint, transfer its content one by one
-	if shared.IsMountPoint(src) {
-		err := os.MkdirAll(dst, 0755)
+	// Create the logs directory if missing (needed by LXD)
+	if !shared.PathExists(filepath.Join(d.path, "logs")) {
+		err := os.MkdirAll(filepath.Join(d.path, "logs"), 0755)
 		if err != nil {
 			return err
-		}
-
-		entries, err := ioutil.ReadDir(src)
-		if err != nil {
-			return err
-		}
-
-		for _, entry := range entries {
-			_, err := shared.RunCommand("mv", filepath.Join(src, entry.Name()), filepath.Join(dst, entry.Name()))
-			if err != nil {
-				return err
-			}
 		}
 	}
 
 	// Move the daemon path to a new target
-	_, err := shared.RunCommand("mv", src, dst)
+	_, err := shared.RunCommand("mv", d.path, dst)
 	if err != nil {
 		return err
-	}
-
-	// Create the logs directory if missing (needed by LXD)
-	if !shared.PathExists(filepath.Join(dst, "logs")) {
-		err := os.MkdirAll(filepath.Join(dst, "logs"), 0755)
-		if err != nil {
-			return err
-		}
 	}
 
 	return nil
@@ -343,20 +321,41 @@ func (d *lxdDaemon) cleanMounts() error {
 	return nil
 }
 
-func (d *lxdDaemon) remount(target string) error {
-	err := os.MkdirAll(target, 0755)
+func (d *lxdDaemon) remount(dst string) error {
+	// Create the logs directory if missing (needed by LXD)
+	if !shared.PathExists(filepath.Join(d.path, "logs")) {
+		err := os.MkdirAll(filepath.Join(d.path, "logs"), 0755)
+		if err != nil {
+			return err
+		}
+	}
+
+	// Attempt a simple rename (for btrfs subvolumes)
+	err := os.Rename(d.path, dst)
+	if err == nil {
+		return nil
+	}
+
+	// Create the target
+	err = os.MkdirAll(dst, 0755)
 	if err != nil {
 		return err
 	}
 
-	err = syscall.Mount(d.path, target, "none", syscall.MS_BIND|syscall.MS_REC, "")
+	// Bind-mount to the new target
+	err = syscall.Mount(d.path, dst, "none", syscall.MS_BIND|syscall.MS_REC, "")
 	if err != nil {
 		return err
 	}
 
+	// Attempt to unmount the source path
 	err = syscall.Unmount(d.path, syscall.MNT_DETACH)
 	if err != nil {
-		return err
+		// If unmounting fails, then the source may have been a subvolume, in this case, just hide it
+		err = syscall.Mount("tmpfs", d.path, "tmpfs", 0, "size=100k,mode=700")
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
