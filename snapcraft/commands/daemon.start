@@ -20,6 +20,13 @@ export PATH="${PATH}:${SNAP_CURRENT}/bin"
 echo "==> Loading snap configuration"
 . "${SNAP_COMMON}/config"
 
+# Setup mntns symlink
+if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
+    echo "==> Setting up mntns symlink"
+    rm -f "${SNAP_COMMON}/mntns"
+    ln -s /proc/self/root "${SNAP_COMMON}/mntns"
+fi
+
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
 mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
