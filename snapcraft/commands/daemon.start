@@ -24,7 +24,7 @@ echo "==> Loading snap configuration"
 if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     echo "==> Setting up mntns symlink"
     rm -f "${SNAP_COMMON}/mntns"
-    ln -s /proc/self/root "${SNAP_COMMON}/mntns"
+    ln -s /proc/$$/root "${SNAP_COMMON}/mntns"
 fi
 
 # Fix lsmod/modprobe
