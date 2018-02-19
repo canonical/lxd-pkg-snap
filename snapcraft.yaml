@@ -387,29 +387,71 @@ parts:
       git config user.name "LXD snap builder"
       git cherry-pick ccb9b42a926fb67d66cda94ad0e3abb145a230ce  # lxc/exec: Fix typo
       git cherry-pick a6eaf97fde1c8392c7cd6f8ecbafa11a9db00395  # lxd/containers: Fix tc egress rules
+      git cherry-pick e975a1f82df132bf149fe67dce8fc8dbb59e6bf8  # lxd/events: Cleanup event listener setup
       git cherry-pick 419fa4c39bbe0f12a35520fe22afecb791a252d8  # Fix device names containing slashes
+      git cherry-pick cda347dc94a24cd10717c981d79e175a5c944f8e  # Update issue template
       git cherry-pick a1a0475defb8b051ccbcd3eb3967f1a28f61136b  # storage/btrfs: Fix handling of UUID-based mounts
+      git cherry-pick 444808c3e492ca0d3e0e88a165119ca739058590  # doc: Add /images/<fingerprint>/secret to API list
+      git cherry-pick c7a011e6723689bdd82e20f8cdd0312cffcc9125  # doc: List /1.0/storage-pools API endpoints
       git cherry-pick 51ea2cefdf5cd98fb54c3c60c9a030fe3be5e9e2  # lxd/containers: No slahses in snapshot names
       git cherry-pick a0b4721a8bba360d7ef3a791bb49439547ab54e0  # lxd/storage: Don't allow slashes in pool or volume names
       git cherry-pick 1f932668fa7d0b1192d8df8c343f30ae17b5f521  # lxd/init: Strip leading and trailing spaces
+      git cherry-pick fcbbe21c0efc3eb8bb60c03232975a18e5651fe4  # change “your first time using LXD” to something less confusing
+      git cherry-pick 5c438fda3c9455a64c6ae48b78f375dafa727702  # doc/README: Update source build instructions
+      git cherry-pick 62efb7b9e0af3068c1dba25e88619df3806e3ffe  # doc/containers: Document CPU limits
       git cherry-pick a53fe55976f10bcaee9c279542b91400b27cf93e  # console: Don't prevent setting lxc.console.logfile
       git cherry-pick c160898722dd9293690f5cfb4da50d981218aaa4  # console: Fix version check in log API
       git cherry-pick 8a888cb9d2ff3b9f0ab1c604d410585c3f90d4ea  # lxd/containers: Don't drop the description
+      git cherry-pick b894f2709b41cb4001b4b96a8696415b449619af  # scripts/vagrant: The LXD PPA is gone
+      git cherry-pick f0751d938ed8c11b2aa3b234984ae006da55f286  # allow arbitrary users to read idmaps
+      git cherry-pick 422751d77dfa13363552caac756de46910ae780c  # drop \n from IdmapSet's ToLxcString
       git cherry-pick d840004886b702b3bea15d4a1d6e4f32717a6b62  # network: Serialize network creation
       git cherry-pick 7be50c3b81311db6a7c9e3c9b7605885c5cffca4  # storage: Serialize storage pool creation
       git cherry-pick a5e117873d926a8d14b4bcdad07de3be9d07060e  # lxd/containers: Fix container shutdown on exit
       git cherry-pick 479d024f0b22d006679e47a7496c987f4d2cd62a  # fix parsing for container name tab-completion
       git cherry-pick 747d70aeee6cf567b4d1d54cf2cf044e1ce6fa47  # lxc/file: Fix edit in a snap environment
+      git cherry-pick 77c5385ddc4e1880abd880af4c3ea83b54b050ca  # tests/basic: Pass -f on stop/restart
       git cherry-pick 82ccced4702f7736970fc3ff6ca72311f4d4faa3  # correct mistake in help
+      git cherry-pick 52ec2495b807483f3a72c86136bcd76a8ab48414  # shared/idmap:DefaultIdmapSet(): take a user argument
       git cherry-pick c950b4a06f525b100d681883e6909fb407a608eb  # lxc client: return errArgs on empty pool
       git cherry-pick 4a064e2f70595a30aef9bf1407aba34ad7792884  # networks: Drop all firewall rules when disabled
+      git cherry-pick 7feb4e533e8589f2e5b38ff7bd5312647212abf2  # test: fix shellcheck complaints
+      git cherry-pick 441aedc10ca4ce88f2d4f1c9678cb707b2ffa3dc  # lxd,shared: move archive functions to shared
+      git cherry-pick bc853cf3fc3f6a7d7782b652114bc2bd864fb980  # *: move download function to shared
       git cherry-pick 107beb0369b672f184dfe1483dabbde57d9af2c5  # container_lxc: ensure container is initialized
       git cherry-pick 3e02c0389476dfc927458c053f45394d8c4f0061  # migrate: check pre-dump only on live migration
       git cherry-pick f0c5e424d37bea46101bd65881afe2aed496eae4  # shared/hostpath: Also check SNAP_NAME
       git cherry-pick 78e7e887d6bf10027f26233a5535aec2e8946d0c  # shared/hostpath: Properly handle prefix check
+      git cherry-pick 8f02215ae6f1dbc9f184a833796763bb65a4c6f8  # termios: Workaround vet on go tip
       git cherry-pick a4ae2539454cf794dec5b2dbeef90fbbb339c333  # lxc/config: Fix metadata edit
       git cherry-pick 959b822027b16cba6d47aaf222dd0a7eb07a3b9b  # containers: Default to pids cgroup for fork bomb mitigation
+      git cherry-pick 8cf30e6f16ef15a74431a514161159a060e936dc  # tests: Check for mixed tabs/spaces and trailing whitespaces
+      git cherry-pick fcf824a1a31b4b3e7d98314c540956c3e3c0a5f2  # lxc/storage: Added missing quote in comment
+      git cherry-pick f591046a0622a19cd4aaf333510809502d4bed59  # api: Include message format for events
+      git cherry-pick 0401a14987dbe9a9cf330dcf6e38a60b6c5cccc6  # events: Use api message type
+      git cherry-pick 54e445a82b7782d76b58b527f5de59d74548c05a  # shared/version: Include storage backends in agent
+      git cherry-pick aba8eeaec65b2f972944872bca4a3e5ddad578e4  # tests: Drop leftover ls in pki test
       git cherry-pick 5b98ce0354c07eb367078b3508d5c87538f1d753  # lxc: Properly handle the --version flag
+      git cherry-pick e3629486fdb29cc74b457de1390bf0064d3e478f  # Make the test suite use lxc.apparmor.profile instead of lxc.aa_profile
+      git cherry-pick 13e07959c3c6f1a1446373dd158f49faa3e43e46  # Check for LXC version to decide which apparmor profile config key to use
+      git cherry-pick 91b70ff5f43adc588ed292b028eba45cab50b1cd  # lxd-benchmark: Fix new go vet warnings
+      git cherry-pick e4f374659f0dd9c935c86548b83d486579112b4f  # lxc: Make the <remote>/<alias> syntax work
+      git cherry-pick a32f083d562f4981204d7c8a624281390cfec90e  # shared/cancel: Properly lock map
+      git cherry-pick c4ef9a68cb62dbc70cacf440708bd9096197ce5e  # shared/cancel: Make the cancel code golint clean
+      git cherry-pick b0bbe25d99c72860464e25dd8accd54847a0ee1f  # lxd: Rework listening logic
+      git cherry-pick 979a7dedc7dfcdc97ca5e81355fee2bf5afd4973  # lxd: Make pongo2 look inside the container
+      git cherry-pick 5e40c98e1679523cfb936b93a7eedcc72bbe2d49  # vagrant: Remove vagrant integration (outdated)
+      git cherry-pick d717267dfd3474db053de09e68b5b0ee6d4afcb4  # Move bash completion under scripts
+      git cherry-pick 2cdda9f00d9b083da18cc834bfc0927c2eea68dd  # lxc: Fix golint
+      git cherry-pick d31c4894aaeefe0188569dcdd7a89a6cbcef7f10  # lxd-benchmark: Fix golint
+      git cherry-pick 73df413351946f4e3b686775a905f1d579d02a67  # lxd/types: Make golint clean
+      git cherry-pick 96715c32aa937c9a6c7c922bf9dc5f6e16fc4d1b  # lxd/util: Fix golint
+      git cherry-pick 5bc1159834697ebd05d1535bc9c80182cb3cbccd  # test/macaroon-identity: Fix golint
+      git cherry-pick 5f92b6469da921e2f07697c95666c9cbfe73be06  # tests: Update list of golint clean packages
+      git cherry-pick 241400755458169b2a1b2b1d96f80ead6a6dc7ad  # shared: Remove dead code
+
+      export GOPATH=$(realpath ../go)
+      go get -t -d ./...
     after:
       - go
       - lxc
