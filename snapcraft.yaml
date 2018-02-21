@@ -430,6 +430,8 @@ parts:
       git cherry-pick f591046a0622a19cd4aaf333510809502d4bed59  # api: Include message format for events
       git cherry-pick 0401a14987dbe9a9cf330dcf6e38a60b6c5cccc6  # events: Use api message type
       git cherry-pick 54e445a82b7782d76b58b527f5de59d74548c05a  # shared/version: Include storage backends in agent
+      git cherry-pick 69525b10f228b6599d02c603415e2faeed05c368  # api: Add NetworkLease struct
+      git cherry-pick 727d8b92ba6d1e565e0dca83e754c7069ff9580c  # client: Add network leases handling
       git cherry-pick aba8eeaec65b2f972944872bca4a3e5ddad578e4  # tests: Drop leftover ls in pki test
       git cherry-pick 5b98ce0354c07eb367078b3508d5c87538f1d753  # lxc: Properly handle the --version flag
       git cherry-pick e3629486fdb29cc74b457de1390bf0064d3e478f  # Make the test suite use lxc.apparmor.profile instead of lxc.aa_profile
@@ -449,6 +451,14 @@ parts:
       git cherry-pick 5bc1159834697ebd05d1535bc9c80182cb3cbccd  # test/macaroon-identity: Fix golint
       git cherry-pick 5f92b6469da921e2f07697c95666c9cbfe73be06  # tests: Update list of golint clean packages
       git cherry-pick 241400755458169b2a1b2b1d96f80ead6a6dc7ad  # shared: Remove dead code
+      git cherry-pick 31b98d61feca19097c1738caad059d6d8eb8e819  # zfs: Don't fail on missing image snapshot
+      git cherry-pick c98fa014a83955cb72e6be984483e7367e76be5a  # client: Check API extension for storage
+      git cherry-pick d54e6eeb9c06dc217ef1c94d367d34e403835025  # client: Check API extension for network
+      git cherry-pick 40c18267366d37f09e6292fa45627e8c7c331116  # doc: s/zfs/ceph/
+      git cherry-pick 4d867b566405d13c45f359da2ddd5d1d611e9836  # shared/api: add local storage volume {copy,move}
+      git cherry-pick 10522e96e849637f38284d0a4817dacb017eff9f  # client: add {Copy,Move}StoragePoolVolume()
+      git cherry-pick 46a6f734577562374f6cd9321823500c42284a08  # storage volumes: non-functional changes
+      git cherry-pick 2dac27d426fa215c6947069f7fbe93457e31f093  # tests: Drop lxd/sqlite golint test
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
