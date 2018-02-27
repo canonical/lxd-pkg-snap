@@ -210,11 +210,14 @@ parts:
       - zlib1g-dev
     prepare: |-
       set -ex
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
     install: |
+      set -ex
+
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib"
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
@@ -234,6 +237,8 @@ parts:
       - uuid-dev
       - zlib1g-dev
     install: |
+      set -ex
+
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib"
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
@@ -248,6 +253,7 @@ parts:
     source-tag: lxc-2.1.1
     prepare: |-
       set -ex
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
@@ -292,6 +298,7 @@ parts:
       - lxc/config/common.conf.d
     install: |-
       set -ex
+
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
       sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
@@ -303,6 +310,7 @@ parts:
     source-tag: lxcfs-2.0.8
     prepare: |-
       set -ex
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
     build-packages:
@@ -330,6 +338,7 @@ parts:
       - lxcfs
     install: |-
       set -ex
+
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
   criu:
@@ -360,6 +369,8 @@ parts:
 
       make
     install: |-
+      set -ex
+
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
@@ -381,6 +392,7 @@ parts:
     source-tag: lxd-2.21
     prepare: |-
       set -ex
+
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
@@ -486,6 +498,7 @@ parts:
       - github.com/lxc/lxd/lxd-benchmark
     install: |-
       set -ex
+
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
       cat ../src/scripts/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
@@ -525,6 +538,7 @@ parts:
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
     install: |-
       set -ex
+
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
     prime:
