@@ -183,6 +183,8 @@ parts:
     build-packages:
       - tclsh
     prepare: |-
+      set -ex
+
       git log -1 --format=format:%ci%n | sed -e 's/ [-+].*$//;s/ /T/;s/^/D /' > manifest
       git log -1 --format=format:%H > manifest.uuid
     prime:
@@ -223,11 +225,14 @@ parts:
       - zlib1g-dev
     prepare: |-
       set -ex
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
     install: |
+      set -ex
+
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib"
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
@@ -247,6 +252,8 @@ parts:
       - uuid-dev
       - zlib1g-dev
     install: |
+      set -ex
+
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib"
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
@@ -292,6 +299,7 @@ parts:
       - lxc/config/common.conf.d
     install: |-
       set -ex
+
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
       sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
@@ -325,6 +333,7 @@ parts:
       - lxcfs
     install: |-
       set -ex
+
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
   criu:
@@ -354,6 +363,8 @@ parts:
 
       make
     install: |-
+      set -ex
+
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
@@ -395,10 +406,13 @@ parts:
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/lxd-benchmark
     prepare: |-
+      set -ex
+
       # Build using our own sqlite
       sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
     install: |-
       set -ex
+
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
       cat ../src/scripts/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
@@ -434,10 +448,13 @@ parts:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
     prepare: |-
+      set -ex
+
       # Build using our own sqlite
       sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
     install: |-
       set -ex
+
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
     prime:
