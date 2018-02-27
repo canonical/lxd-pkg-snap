@@ -187,6 +187,7 @@ parts:
 
       git log -1 --format=format:%ci%n | sed -e 's/ [-+].*$//;s/ /T/;s/^/D /' > manifest
       git log -1 --format=format:%H > manifest.uuid
+      autoreconf -f -i
     prime:
       - bin/sqlite3
       - lib/libsqlite3*so*
