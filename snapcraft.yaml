@@ -296,7 +296,7 @@ parts:
     prime:
       - bin/lxc-checkconfig
       - lib/liblxc.so.1
-      - lib/liblxc.so.1.3.0
+      - lib/liblxc.so.1.*
       - lxc/config/common.conf.d
     install: |-
       set -ex
