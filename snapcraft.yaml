@@ -180,6 +180,8 @@ parts:
     source: https://github.com/CanonicalLTD/sqlite
     source-type: git
     plugin: autotools
+    configflags:
+      - --enable-replication
     build-packages:
       - tclsh
     prepare: |-
