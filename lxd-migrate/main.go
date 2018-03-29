@@ -2,19 +2,19 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/lxc/lxd/shared"
-	"github.com/lxc/lxd/shared/gnuflag"
 )
 
-var argYes = gnuflag.Bool("yes", false, "Answer yes to all questions")
+var argYes = flag.Bool("yes", false, "Answer yes to all questions")
 
 func main() {
-	gnuflag.Parse(true)
+	flag.Parse()
 
 	err := run()
 	if err != nil {
