@@ -218,7 +218,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -359,6 +358,9 @@ parts:
       sed -i "s#^LXD_BRIDGE=\"lxdbr0\"#LXD_BRIDGE=\"\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+
+      export GOPATH=$(realpath ../go)
+      go get -t -d ./...
     after:
       - go
       - lxc
