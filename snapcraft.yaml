@@ -270,6 +270,11 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
+    prepare: |-
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -311,6 +316,11 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
+    prepare: |-
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -386,6 +396,15 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
+    prepare: |-
+      set -ex
+
+      cd ../src
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      export GOPATH=$(realpath ../go)
+      go get -t -d ./...
     after:
       - go
       - lxc
