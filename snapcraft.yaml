@@ -276,7 +276,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
     build-packages:
       - libapparmor-dev
       - libcap-dev
