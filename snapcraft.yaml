@@ -270,6 +270,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
+    source-branch: stable-3.0
     prepare: |-
       set -ex
 
@@ -316,6 +317,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
+    source-branch: stable-3.0
     prepare: |-
       set -ex
 
@@ -396,6 +398,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
+    source-branch: stable-3.0
     prepare: |-
       set -ex
 
