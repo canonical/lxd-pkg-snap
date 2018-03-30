@@ -23,7 +23,7 @@ fi
 export LXD_CONF=$(mktemp -d)
 
 # Check if LXD is functional (chroot detection)
-if ! lxc finger --force-local >/dev/null 2>&1; then
+if ! lxc info --force-local >/dev/null 2>&1; then
     echo "This system isn't running LXD, assuming stock configuration."
     mv /etc/default/lxd-bridge /etc/default/lxd-bridge.upgraded
 
