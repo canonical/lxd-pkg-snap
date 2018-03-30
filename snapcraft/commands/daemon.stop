@@ -16,7 +16,7 @@ chroot /proc/1/root snap changes > "${STATUS}" || true
 reason="host shutdown"
 if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
     reason="reload"
-elif ! lxc finger >/dev/null 2>&1; then
+elif ! lxc info >/dev/null 2>&1; then
     reason="crashed"
 elif grep -q 'Doing.*Auto-refresh.*"lxd"' "${STATUS}"; then
     reason="snap refresh"
