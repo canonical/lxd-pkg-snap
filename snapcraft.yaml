@@ -1,6 +1,6 @@
 name: lxd
-version: git
-grade: devel
+version: "3.0.0"
+grade: stable
 summary: LXD - the container lightervisor
 description: |-
  LXD is a container manager for system containers.
@@ -270,6 +270,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
+    source-tag: lxc-3.0.0
     prepare: |-
       set -ex
 
@@ -316,6 +317,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
+    source-tag: lxcfs-3.0.0
     prepare: |-
       set -ex
 
@@ -396,6 +398,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
+    source-tag: lxd-3.0.0
     prepare: |-
       set -ex
 
