@@ -195,7 +195,7 @@ if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
 fi
 
 ## Check for existing LXDs
-pid=$(ss -nlpx src /var/snap/lxd/common/lxd/unix.socket 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
+pid=$(ss -nlpx src "${LXD_DIR}/unix.socket" 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
 if [ "${pid}" -gt 0 ] 2>/dev/null; then
     echo "=> Killing conflicting LXD"
     kill -9 "${pid}"
