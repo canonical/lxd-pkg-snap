@@ -406,6 +406,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 296e32201da30fb06d26a5c0e9a77cb70e8fa7ec  # lxc: Fix mistakenly hidden commands
+      git cherry-pick 61cd6cf8ce8f5b07f676c597d360506b72514657  # lxd/main: Add version subcommand
+      git cherry-pick ab3662d8d9a8b4389539cebbd0dd67b2b1a9809f  # lxc/main: Add version subcommand
+      git cherry-pick 71b5e7ea7905e877ca37f7647a84e2eab4cc720d  # lxd/migration: Pre-validate profiles
+      git cherry-pick 5ae969836a94118afe9d768987c507e57ef2f444  # client: Improve remote operation errors
+      git cherry-pick 97006054245ff90d03d1456d052d8eae322a14c0  # lxc/image: Fix crash due to bad arg parsing
+      git cherry-pick b631917b5a5249bc4ce57effc36ed9dad0914163  # lxd: add missing limits.h include
+      git cherry-pick 6f6c146a4cc313ff2746279ea9eeeda503b39fc4  # lxd/init: Fix --auto with network config
+
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
     after:
