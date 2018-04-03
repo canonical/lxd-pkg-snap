@@ -276,6 +276,9 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      git cherry-pick b19aabf5be93a9e9226875bd5d71b42db40a1ed7  # lxclock: use thread-safe *_OFD_* fcntl() locks
+      git cherry-pick e599717bc50303fb2e45cc82bc8e0857cd6d61aa  # conf: ensure umounts don't propagate to host
     build-packages:
       - libapparmor-dev
       - libcap-dev
