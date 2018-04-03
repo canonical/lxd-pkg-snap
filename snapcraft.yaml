@@ -403,6 +403,9 @@ parts:
     prepare: |-
       set -ex
 
+      # Build using our own sqlite
+      sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
+
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
@@ -440,11 +443,6 @@ parts:
       - github.com/lxc/lxd/lxc
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/lxd-benchmark
-    prepare: |-
-      set -ex
-
-      # Build using our own sqlite
-      sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
     install: |-
       set -ex
 
