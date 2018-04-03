@@ -418,6 +418,8 @@ parts:
       git cherry-pick 97006054245ff90d03d1456d052d8eae322a14c0  # lxc/image: Fix crash due to bad arg parsing
       git cherry-pick b631917b5a5249bc4ce57effc36ed9dad0914163  # lxd: add missing limits.h include
       git cherry-pick 6f6c146a4cc313ff2746279ea9eeeda503b39fc4  # lxd/init: Fix --auto with network config
+      git cherry-pick cc8d2052a6980377c934f46341af00fbd5c5f5ce  # lxc: Consistent naming of clustering terms
+      git cherry-pick 537106a6c194c98240ed3478dbfc4cb96bd9e756  # lxc/file: Fix pushing files to remote
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
