@@ -135,7 +135,7 @@ sed \
 if [ -e /sys/module/zfs/version ]; then
     VERSION=$(cat /sys/module/zfs/version)
 else
-    VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs || true)
+    VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs 2>/dev/null || true)
 fi
 
 if echo "${VERSION}" | grep -q ^0.7; then
