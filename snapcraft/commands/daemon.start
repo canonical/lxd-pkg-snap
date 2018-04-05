@@ -112,6 +112,10 @@ sed \
     -e "s#/usr/sbin/#${SNAP}/bin/#g" \
     "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
 
+# Rotate logs
+echo "==> Rotating logs"
+logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status"
+
 # Setup for ZFS
 if [ -e /sys/module/zfs/version ]; then
     VERSION=$(cat /sys/module/zfs/version)
