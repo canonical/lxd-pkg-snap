@@ -301,11 +301,13 @@ parts:
     organize:
       snap/lxd/current/lxc: lxc
       snap/lxd/current/libexec: libexec
+      share/lxc/hooks: lxc/hooks
     prime:
       - bin/lxc-checkconfig
       - lib/liblxc.so.1
       - lib/liblxc.so.1.*
       - lxc/config/common.conf.d
+      - lxc/hooks/nvidia
     install: |-
       set -ex
 
@@ -490,4 +492,5 @@ parts:
     plugin: dump
     source: snapcraft/
     organize:
+      wrappers/nvidia-container-cli: bin/
       hooks/: snap/hooks/

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Set environment to run nvidia-container-cli from the host system
+export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/var/lib/snapd/hostfs/usr/lib/${ARCH}"
+
+exec /var/lib/snapd/hostfs/usr/bin/nvidia-container-cli -r /var/lib/snapd/hostfs/ "$@"
