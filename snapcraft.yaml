@@ -505,5 +505,5 @@ parts:
     plugin: dump
     source: snapcraft/
     organize:
-      wrappers/nvidia-container-cli: bin/
       hooks/: snap/hooks/
+      wrappers/nvidia-container-cli: bin/
