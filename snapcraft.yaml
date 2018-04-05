@@ -438,3 +438,4 @@ parts:
     source: snapcraft/
     organize:
       hooks/: snap/hooks/
+      wrappers/nvidia-container-cli: bin/
