@@ -12,6 +12,7 @@ export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
+export LXD_LXC_HOOK="${SNAP_CURRENT}/lxc/hooks/"
 export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
@@ -53,6 +54,15 @@ echo "==> Preparing a clean copy of /etc"
 ## Unmount and replace with an empty tmpfs
 umount -l /etc >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /etc -o mode=0755
+
+## Generate a new ld.so.cache
+ldconfig
+
+## Make /var/lib/snapd/hostfs more useful to us
+for entry in dev proc sys; do
+    mountpoint -q "/var/lib/snapd/hostfs/${entry}" && continue
+    mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
+done
 
 ## Pass the bits we need from the host
 for entry in hostname hosts nsswitch.conf os-release passwd group resolv.conf resolvconf writable; do
