@@ -231,6 +231,20 @@ func run() error {
 		if err != nil {
 			return fmt.Errorf("Failed to convert the network configuration: %v", err)
 		}
+
+		// Reload LXD post-update (to re-create the bridge if needed)
+		fmt.Printf("=> Reloading LXD after network update")
+		err = dst.reload()
+		if err != nil {
+			return err
+		}
+
+		// Wait for LXD to be online
+		fmt.Printf("=> Waiting for LXD to come online\n")
+		err = dst.wait()
+		if err != nil {
+			return err
+		}
 	}
 
 	// Show the updated destination server
