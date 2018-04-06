@@ -425,6 +425,14 @@ parts:
       git cherry-pick 6f6c146a4cc313ff2746279ea9eeeda503b39fc4  # lxd/init: Fix --auto with network config
       git cherry-pick cc8d2052a6980377c934f46341af00fbd5c5f5ce  # lxc: Consistent naming of clustering terms
       git cherry-pick 537106a6c194c98240ed3478dbfc4cb96bd9e756  # lxc/file: Fix pushing files to remote
+      git cherry-pick c8cb12ac46f6b063573025127f4cbb0a56609a8e  # lxd/init: Don't setup a remote storage pool by default
+      git cherry-pick 36c46ff52d8bf72c8e5e9c1e9e743f77a140924c  # Fix lxd init failing to join a cluster in interactive mode with an existing zfs dataset
+      git cherry-pick 0a2026df0b215753d27a5dc5ab9d09c74b2cbe46  # lxc/query: Fix -d and -X
+      git cherry-pick 4b31dbed5bf3335ff0fcf44ef8106dc34c4dc726  # lxc/help: Make help respect --all too
+      git cherry-pick 2cacb1dd14fcd39ad0913c7ef88d97dec9e1dbe4  # Fix typo in help of "lxc network"
+      git cherry-pick 1ab21cc6a5f9f6ed5d1bf844caf6c4068747eb65  # Properly filter node-level storage configs by pool ID
+      git cherry-pick 6698a5c3a7af9b955c1edc02e2c026cd35304aa4  # lxd/init: Consistency
+      git cherry-pick b584bbdd9bc824137240595680cb6851416ef80d  # Make new gofmt happy
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
