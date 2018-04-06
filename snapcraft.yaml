@@ -433,6 +433,9 @@ parts:
       git cherry-pick 1ab21cc6a5f9f6ed5d1bf844caf6c4068747eb65  # Properly filter node-level storage configs by pool ID
       git cherry-pick 6698a5c3a7af9b955c1edc02e2c026cd35304aa4  # lxd/init: Consistency
       git cherry-pick b584bbdd9bc824137240595680cb6851416ef80d  # Make new gofmt happy
+      git cherry-pick 25d53756f896788c9972007ccb863672eb5fb363  # lxc/file: Allow using -r to follow symlinks
+      git cherry-pick 63aa43e00215cd9f1e0b12d29aff6194607006f3  # Replace juju/idmclient with CanonicalLtd/candidclient
+      git cherry-pick 24c3713d72004b96ec56a6a69f5e52269b8d7f87  # lxc/config: Fix adding trust cert on snap
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
