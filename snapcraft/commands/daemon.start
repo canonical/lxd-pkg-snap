@@ -195,7 +195,7 @@ else
 
     ## Start lxcfs
     echo "=> Starting LXCFS"
-    ( unshare -m -- lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" & )
+    ( lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" & )
 fi
 
 # LXD bridge (for LXD 2.0.x)
