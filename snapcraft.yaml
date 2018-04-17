@@ -436,6 +436,30 @@ parts:
       git cherry-pick 25d53756f896788c9972007ccb863672eb5fb363  # lxc/file: Allow using -r to follow symlinks
       git cherry-pick 63aa43e00215cd9f1e0b12d29aff6194607006f3  # Replace juju/idmclient with CanonicalLtd/candidclient
       git cherry-pick 24c3713d72004b96ec56a6a69f5e52269b8d7f87  # lxc/config: Fix adding trust cert on snap
+      git cherry-pick fe903635de1b84a80f76a6df59cbc203e7f20c38  # lxc/alias: Fix example in help message
+      git cherry-pick 465cba270c995722008da10bf86a0c006280b547  # client: Introduce LXD_SOCKET
+      git cherry-pick ac11e21092a38af2ba25cd58958a93f531304717  # containers: fix snapshot deletion
+      git cherry-pick 56d77caf7b9a3d4f3869fda1e267312f502a9afa  # lxc/init: Add missing --no-profiles
+      git cherry-pick 9e65d1f8b8004de8ee7bf25cf00ebe94f45ea573  # lxc/file: Fix pull target logic
+      git cherry-pick c9f3a1034612a19b5418c91a7973d22e578e494f  # devices: fail if Nvidia device minor is missing
+      git cherry-pick aa62937bc1278199028ee57be34ac259a817c9b8  # Add db.ContainersNodeList
+      git cherry-pick 61fa3def03dd91957cda29b8ceede55f5bfe8246  # storage: createContainerMountpoint() fix perms
+      git cherry-pick 326db08026ad3344033503e07863ad36ebc4d082  # ceph: s/0755/0711/g
+      git cherry-pick 3c52e6c458851a1c053492a504392789345ae801  # lvm: s/0755/0711/g
+      git cherry-pick 1714eba1f985e74328cde46af073f8543fbb3c29  # storage utils: s/0755/0711/g
+      git cherry-pick 5312af824d28daf15e250b555c98c180e408f7b3  # zfs: s/0755/0711/g
+      git cherry-pick 92532dc487db41b098ad56192965ec2e9ab8f9cf  # patches: add "storage_api_path_permissions"
+      git cherry-pick 56f2d585310741b5f380ce0f081a04b2e1d72406  # sys/fs: s/MkdirAll/Mkdir/g
+      git cherry-pick 910ef5bb75d32f6801bb34b68c8fedbda49885b5  # btrfs: fix permissions
+      git cherry-pick 7f7f06a15c11ade429ddeac346c0b4288f690ac3  # Pass a logger to raft-http
+      git cherry-pick e44fc1e7a589df9610185a0bce37f65e7c6c0b64  # Add new cluster.Promote function to turn a non-database node into a database one
+      git cherry-pick 7f8a1d1b0eabd660ef9bcd4bf4f7f4c5ffb4fff7  # Add new cluster.Rebalance function to check if we need to add database nodes
+      git cherry-pick 739f2c877539f1e860bba26428b66790a2632834  # Notify the cluster leader after a node removal, so it can rebalance
+      git cherry-pick 3c14b23b746426dbc9b3fe7793d06c3e576fd058  # lxd/init: Require root for interactive cluster join
+      git cherry-pick 24cf3b750f51934108f5da5cd17534b4609d0996  # Disable flaky unit tests for now
+      git cherry-pick bd1ae0aa86e285a0632f5c2bc6779e3f526b4be8  # Log the error that made Daemon.Init() fail
+      git cherry-pick 039e93793eeee9df3bfb86b6fa4804b83081878b  # client: Expose http URL in ConnectionInfo
+      git cherry-pick bd47a493090f77ddcde2db40320135ecfb88e6d5  # lxc/query: Add support for non-JSON endpoints
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
