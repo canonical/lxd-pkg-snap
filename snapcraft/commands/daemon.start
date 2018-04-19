@@ -154,8 +154,10 @@ if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
 fi
 
 if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
-    echo "==> Enabling unprivileged containers kernel support"
-    echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
+    if [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "0" ]; then
+        echo "==> Enabling unprivileged containers kernel support"
+        echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
+    fi
 fi
 
 # Setup CRIU
