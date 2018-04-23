@@ -390,7 +390,11 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 	zfsRewrite := func(zpool string) error {
 		output, err := shared.RunCommand("zfs", "list", "-H", "-t", "all", "-o", "name,mountpoint", "-r", zpool)
 		if err != nil {
-			return err
+			// Print a clear error message but don't fail as that'd leave a broken LXD
+			fmt.Println("")
+			fmt.Printf("ERROR: Unable to access the '%s' ZPOOL at this time: %v\n", zpool, err)
+			fmt.Printf("       Container mountpoints will need to be manually corrected.\n\n")
+			return nil
 		}
 
 		for _, line := range strings.Split(output, "\n") {
