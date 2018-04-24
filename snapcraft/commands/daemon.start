@@ -18,7 +18,13 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 
 # Load our configuration
+if [ ! -e "${SNAP_COMMON}/config" ]; then
+    echo "==> Creating missing snap configuration"
+    "${SNAP_CURRENT}/meta/hooks/configure"
+fi
+
 echo "==> Loading snap configuration"
+# shellcheck disable=SC1090
 . "${SNAP_COMMON}/config"
 
 # Setup mntns symlink
