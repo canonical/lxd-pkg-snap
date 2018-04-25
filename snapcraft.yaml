@@ -60,11 +60,6 @@ apps:
     plugs:
       - lxd-support
       - system-observe
-  database:
-    command: commands/lxd-database
-    plugs:
-      - lxd-support
-      - system-observe
   migrate:
     command: commands/lxd-migrate
     plugs:
