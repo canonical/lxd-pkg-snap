@@ -519,6 +519,7 @@ parts:
       git cherry-pick 1f3a6827c1879285779f4b26c7c6d629aa0d17b3  # Backup global database if non-clustered
       git cherry-pick d93f54a7033ec842b7aed8f835aae400d8fd5185  # lxd/init: Offer to setup a Fan bridge when clustered
       git cherry-pick 69217a8f9ac35d4e72ebf87a6298752b46d45f31  # lxd init: fix maas.api.url check when setting up existing bridge
+      git cherry-pick 270516df3c0e82adef0b86854d440da740069dd6  # Take raft snapshots more frequently and at shutdown
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
