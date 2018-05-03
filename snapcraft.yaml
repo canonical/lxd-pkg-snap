@@ -179,7 +179,7 @@ parts:
       - --enable-replication
     build-packages:
       - tclsh
-    prepare: |-
+    override-build: |-
       set -ex
 
       git log -1 --format=format:%ci%n | sed -e 's/ [-+].*$//;s/ /T/;s/^/D /' > manifest
@@ -187,6 +187,9 @@ parts:
       cp /usr/share/misc/config.guess .
       cp /usr/share/misc/config.sub .
       autoreconf -f -i
+
+      set +ex
+      snapcraftctl build
     prime:
       - bin/sqlite3
       - lib/libsqlite3*so*
@@ -223,14 +226,16 @@ parts:
     build-packages:
       - uuid-dev
       - zlib1g-dev
-    prepare: |-
+    override-build: |
       set -ex
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
-    install: |
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -251,7 +256,8 @@ parts:
       - libblkid-dev
       - uuid-dev
       - zlib1g-dev
-    install: |
+    override-build: |
+      snapcraftctl build
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -266,14 +272,6 @@ parts:
     source: https://github.com/lxc/lxc
     source-type: git
     source-tag: lxc-3.0.0
-    prepare: |-
-      set -ex
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-
-      git cherry-pick b19aabf5be93a9e9226875bd5d71b42db40a1ed7  # lxclock: use thread-safe *_OFD_* fcntl() locks
-      git cherry-pick e599717bc50303fb2e45cc82bc8e0857cd6d61aa  # conf: ensure umounts don't propagate to host
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -306,7 +304,17 @@ parts:
       - lib/liblxc.so.1.*
       - lxc/config/common.conf.d
       - lxc/hooks/nvidia
-    install: |-
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick b19aabf5be93a9e9226875bd5d71b42db40a1ed7  # lxclock: use thread-safe *_OFD_* fcntl() locks
+      git cherry-pick e599717bc50303fb2e45cc82bc8e0857cd6d61aa  # conf: ensure umounts don't propagate to host
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
@@ -318,11 +326,6 @@ parts:
     source: https://github.com/lxc/lxcfs
     source-type: git
     source-tag: lxcfs-3.0.0
-    prepare: |-
-      set -ex
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -346,7 +349,14 @@ parts:
 
       - lxc
       - lxcfs
-    install: |-
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
@@ -370,17 +380,10 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
-    build: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      make
-    install: |-
+    override-build: |
       set -ex
 
+      make
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
@@ -400,7 +403,29 @@ parts:
     source: https://github.com/lxc/lxd
     source-type: git
     source-tag: lxd-3.0.0
-    prepare: |-
+    after:
+      - go
+      - lxc
+      - sqlite
+    build-packages:
+      - pkg-config
+      - libacl1-dev
+    stage-packages:
+      - acl
+      - dnsmasq-base
+      - ebtables
+      - rsync
+      - squashfs-tools
+      - xdelta3
+    plugin: go
+    go-buildtags:
+      - libsqlite3
+    go-importpath: github.com/lxc/lxd
+    go-packages:
+      - github.com/lxc/lxd/lxc
+      - github.com/lxc/lxd/lxd
+      - github.com/lxc/lxd/lxd-benchmark
+    override-build: |
       set -ex
 
       # Build using our own sqlite
@@ -529,29 +554,9 @@ parts:
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
-    after:
-      - go
-      - lxc
-      - sqlite
-    build-packages:
-      - pkg-config
-      - libacl1-dev
-    stage-packages:
-      - acl
-      - dnsmasq-base
-      - ebtables
-      - rsync
-      - squashfs-tools
-      - xdelta3
-    plugin: go
-    go-buildtags:
-      - libsqlite3
-    go-importpath: github.com/lxc/lxd
-    go-packages:
-      - github.com/lxc/lxd/lxc
-      - github.com/lxc/lxd/lxd
-      - github.com/lxc/lxd/lxd-benchmark
-    install: |-
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -588,12 +593,14 @@ parts:
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
-    prepare: |-
+    override-build: |
       set -ex
 
       # Build using our own sqlite
       sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
-    install: |-
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
