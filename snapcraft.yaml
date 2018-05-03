@@ -525,6 +525,7 @@ parts:
       git cherry-pick 255efb832c32b0068bfb9e0181dc975b8cbdd473  # xattr: Support empty values
       git cherry-pick 42a38747acb3d9d69b283406dcaa675833cfc35e  # doc: s/status command/info command/
       git cherry-pick d12d18d9059f1542675fd8dd7443113685a8308e  # lxd/init: Explain password less behavior
+      git cherry-pick 8669276be808fc3a2aa4d868a9a92ebb013e8d45  # Make waitready less verbose
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
