@@ -170,14 +170,16 @@ parts:
     build-packages:
       - uuid-dev
       - zlib1g-dev
-    prepare: |-
+    override-build: |
       set -ex
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
-    install: |
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -198,7 +200,8 @@ parts:
       - libblkid-dev
       - uuid-dev
       - zlib1g-dev
-    install: |
+    override-build: |
+      snapcraftctl build
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -213,11 +216,6 @@ parts:
     source: https://github.com/lxc/lxc
     source-type: git
     source-tag: lxc-2.0.9
-    prepare: |-
-      set -ex
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -250,7 +248,14 @@ parts:
       - lib/liblxc.so.1
       - lib/liblxc.so.1.*
       - lxc/config/common.conf.d
-    install: |-
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
@@ -262,11 +267,6 @@ parts:
     source: https://github.com/lxc/lxcfs
     source-type: git
     source-tag: lxcfs-2.0.8
-    prepare: |-
-      set -ex
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -290,7 +290,14 @@ parts:
 
       - lxc
       - lxcfs
-    install: |-
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
@@ -314,17 +321,10 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
-    build: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      make
-    install: |-
+    override-build: |
       set -ex
 
+      make
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
@@ -344,23 +344,6 @@ parts:
     source: https://github.com/lxc/lxd
     source-type: git
     source-tag: lxd-2.0.11
-    prepare: |-
-      set -ex
-
-      cd ../src
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-      git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
-      cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
-      sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-      sed -i "s#^varrun=.*#varrun=\${SNAP_COMMON}/lxd-bridge/run#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-      sed -i "s#^varlib=.*#varlib=\${SNAP_COMMON}/lxd-bridge/lib#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-      sed -i "s#^LXD_BRIDGE=\"lxdbr0\"#LXD_BRIDGE=\"\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-      sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-      sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
-
-      export GOPATH=$(realpath ../go)
-      go get -t -d ./...
     after:
       - go
       - lxc
@@ -384,7 +367,29 @@ parts:
       - github.com/lxc/lxd/lxc
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/test/lxd-benchmark
-    install: |-
+    override-build: |
+      set -ex
+
+      # Build using our own sqlite
+      sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
+
+      cd ../src
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+      git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
+      cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
+      sed -i "s#^config=.*#config=\${SNAP_COMMON}/lxd-bridge/config#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^varrun=.*#varrun=\${SNAP_COMMON}/lxd-bridge/run#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^varlib=.*#varlib=\${SNAP_COMMON}/lxd-bridge/lib#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^LXD_BRIDGE=\"lxdbr0\"#LXD_BRIDGE=\"\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+      sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
+
+      export GOPATH=$(realpath ../go)
+      go get -t -d ./...
+
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -425,7 +430,9 @@ parts:
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
-    install: |-
+    override-build: |
+      set +ex
+      snapcraftctl build
       set -ex
 
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
