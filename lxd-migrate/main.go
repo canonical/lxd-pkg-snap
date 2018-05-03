@@ -160,24 +160,9 @@ func run() error {
 		}
 	}
 
-	// Move the database into place
-	fmt.Printf("=> Moving the database\n")
-	os.Remove("/var/snap/lxd/current/lxd/lxd.db")
-	os.MkdirAll("/var/snap/lxd/current/lxd/", 0755)
-
-	_, err = shared.RunCommand("mv", filepath.Join(dst.path, "lxd.db"), "/var/snap/lxd/current/lxd/lxd.db")
-	if err != nil {
-		return fmt.Errorf("Failed to move the database into place: %v", err)
-	}
-
-	err = os.Symlink("../../current/lxd/lxd.db", filepath.Join(dst.path, "lxd.db"))
-	if err != nil {
-		return fmt.Errorf("Failed to create database symlink: %v", err)
-	}
-
 	// Access the database
 	fmt.Printf("=> Backing up the database\n")
-	err = shared.FileCopy("/var/snap/lxd/current/lxd/lxd.db", "/var/snap/lxd/current/lxd/lxd.db.pre-migration")
+	err = shared.FileCopy("/var/snap/lxd/common/lxd/lxd.db", "/var/snap/lxd/common/lxd/lxd.db.pre-migration")
 	if err != nil {
 		return fmt.Errorf("Failed to backup the database: %v", err)
 	}
