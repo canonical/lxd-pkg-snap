@@ -519,7 +519,17 @@ parts:
       git cherry-pick 1f3a6827c1879285779f4b26c7c6d629aa0d17b3  # Backup global database if non-clustered
       git cherry-pick d93f54a7033ec842b7aed8f835aae400d8fd5185  # lxd/init: Offer to setup a Fan bridge when clustered
       git cherry-pick 69217a8f9ac35d4e72ebf87a6298752b46d45f31  # lxd init: fix maas.api.url check when setting up existing bridge
-      git cherry-pick 270516df3c0e82adef0b86854d440da740069dd6  # Take raft snapshots more frequently and at shutdown
+      git cherry-pick b45f1a493bd10182e6603633ff995b6ed3c08e36  # Take raft snapshots more frequently and at shutdown
+      git cherry-pick 04cdcde6e749f7bd757b5ab9ad8bfb30c6731bdf  # Add --schema flag to lxd sql to dump only the schema.
+      git cherry-pick 99a5ff046549e0a06c4253c8e246a1ec822ebf63  # Update database.md with information about lxd sql and patch.*.sql
+      git cherry-pick 7c55987686ab95d0b4f52d2a6b391e5812c37d1f  # Document how to dump the content or schema of databases
+      git cherry-pick 41b45f94929cb10ceecb11f3b564d37a12ec82f5  # Fix shell lints
+      git cherry-pick bcbd5f6525b03136c68d1660a4e64af8ea0f0cc6  # Disable snapshot logging, as it's too verbose now
+      git cherry-pick 13baee78f2a5898165ce1cf749638b294a0ca948  # Make .dump and .schema special queries, for consistency with sqlite3
+      git cherry-pick 5512155d44733bb7baa056369bc835c7746f4d76  # Run make i18n
+      git cherry-pick 255efb832c32b0068bfb9e0181dc975b8cbdd473  # xattr: Support empty values
+      git cherry-pick 42a38747acb3d9d69b283406dcaa675833cfc35e  # doc: s/status command/info command/
+      git cherry-pick d12d18d9059f1542675fd8dd7443113685a8308e  # lxd/init: Explain password less behavior
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
