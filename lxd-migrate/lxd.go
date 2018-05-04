@@ -461,6 +461,10 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 		if pool.Driver == "zfs" {
 			// For ZFS we must rewrite all the mountpoints
 			zpool := pool.Config["zfs.pool_name"]
+			if zpool == "" {
+				zpool = pool.Config["source"]
+			}
+
 			err = zfsRewrite(zpool)
 			if err != nil {
 				return err
