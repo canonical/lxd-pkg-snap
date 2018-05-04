@@ -426,6 +426,7 @@ parts:
       - rsync
       - squashfs-tools
       - xdelta3
+      - xtables-addons-common
     plugin: go
     go-buildtags:
       - libsqlite3
@@ -460,6 +461,7 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
       lib/ebtables: lib/
+      lib/xtables: lib/
     prime:
       - bin/dnsmasq
       - bin/ebtables
@@ -468,6 +470,7 @@ parts:
       - bin/unsquashfs
       - bin/xdelta3
       - lib/libebt*
+      - lib/libxt*
 
       - etc/bash_completion.d/snap.lxd.lxc
 
