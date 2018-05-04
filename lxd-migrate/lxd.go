@@ -450,7 +450,7 @@ func (d *lxdDaemon) rewriteStorage(dst *lxdDaemon) error {
 		source := pool.Config["source"]
 		newSource := convertPath(source, d.path, dst.path)
 		if source != newSource {
-			err := dbRewritePoolSource(dst, pool.Name, newSource)
+			err := dbRewritePoolSource(d, dst, pool.Name, newSource)
 			if err != nil {
 				return err
 			}
