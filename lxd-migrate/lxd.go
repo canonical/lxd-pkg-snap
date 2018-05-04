@@ -361,7 +361,7 @@ func (d *lxdDaemon) remount(dst string) error {
 	return nil
 }
 
-func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
+func (d *lxdDaemon) rewriteStorage(dst *lxdDaemon) error {
 	// Symlink rewrite function
 	rewriteSymlink := func(path string) error {
 		target, err := os.Readlink(path)
@@ -370,7 +370,7 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 			return nil
 		}
 
-		newTarget := convertPath(target, d.path, dst)
+		newTarget := convertPath(target, d.path, dst.path)
 		if target != newTarget {
 			err = os.Remove(path)
 			if err != nil {
@@ -410,7 +410,7 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 				continue
 			}
 
-			mountpoint = convertPath(mountpoint, d.path, dst)
+			mountpoint = convertPath(mountpoint, d.path, dst.path)
 			_, err := shared.RunCommand("zfs", "set", fmt.Sprintf("mountpoint=%s", mountpoint), name)
 			if err != nil {
 				return err
@@ -421,13 +421,13 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 	}
 
 	// Rewrite the container links
-	containers, err := ioutil.ReadDir(filepath.Join(dst, "containers"))
+	containers, err := ioutil.ReadDir(filepath.Join(dst.path, "containers"))
 	if err != nil {
 		return err
 	}
 
 	for _, ctn := range containers {
-		err := rewriteSymlink(filepath.Join(dst, "containers", ctn.Name()))
+		err := rewriteSymlink(filepath.Join(dst.path, "containers", ctn.Name()))
 		if err != nil {
 			return err
 		}
@@ -448,9 +448,9 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 
 	for _, pool := range d.storagePools {
 		source := pool.Config["source"]
-		newSource := convertPath(source, d.path, dst)
+		newSource := convertPath(source, d.path, dst.path)
 		if source != newSource {
-			err := db.updateStoragePoolSource(pool.Name, newSource)
+			err := dbRewritePoolSource(dst, pool.Name, newSource)
 			if err != nil {
 				return err
 			}
@@ -475,12 +475,42 @@ func (d *lxdDaemon) rewriteStorage(db *dbInstance, dst string) error {
 
 		if pool.Driver == "dir" {
 			// For dir we must rewrite any symlink
-			err := rewriteSymlink(filepath.Join(dst, "storage-pools", pool.Name))
+			err := rewriteSymlink(filepath.Join(dst.path, "storage-pools", pool.Name))
 			if err != nil {
 				return err
 			}
 
 			continue
+		}
+	}
+
+	return nil
+}
+
+func (d *lxdDaemon) backupDatabase() error {
+	for _, path := range []string{filepath.Join(d.path, "lxd.db"), filepath.Join(d.path, "raft"), filepath.Join(d.path, "database")} {
+		if !shared.PathExists(path) {
+			continue
+		}
+
+		backupPath := fmt.Sprintf("%s.pre-migration", path)
+		if shared.PathExists(backupPath) {
+			err := os.RemoveAll(backupPath)
+			if err != nil {
+				return err
+			}
+		}
+
+		if shared.IsDir(path) {
+			err := shared.DirCopy(path, backupPath)
+			if err != nil {
+				return err
+			}
+		} else {
+			err := shared.FileCopy(path, backupPath)
+			if err != nil {
+				return err
+			}
 		}
 	}
 
