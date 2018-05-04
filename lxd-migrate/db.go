@@ -12,8 +12,8 @@ import (
 	"github.com/lxc/lxd/shared"
 )
 
-func dbRewritePoolSource(dst *lxdDaemon, pool string, path string) error {
-	if strings.HasPrefix(dst.info.Environment.ServerVersion, "2.") {
+func dbRewritePoolSource(src *lxdDaemon, dst *lxdDaemon, pool string, path string) error {
+	if strings.HasPrefix(src.info.Environment.ServerVersion, "2.") {
 		// LXD 2.x target
 		db, err := sql.Open("sqlite3", filepath.Join(dst.path, "lxd.db"))
 		if err != nil {
@@ -29,6 +29,8 @@ func dbRewritePoolSource(dst *lxdDaemon, pool string, path string) error {
 		if err != nil {
 			return err
 		}
+
+		return nil
 	}
 
 	// Recent LXD target
@@ -47,6 +49,11 @@ func dbRewritePoolSource(dst *lxdDaemon, pool string, path string) error {
 	}
 
 	_, err = patch.WriteString(fmt.Sprintf("UPDATE storage_pools_config SET value='%s' WHERE key='source' AND storage_pool_id=(SELECT id FROM storage_pools WHERE name='%s');\n", path, pool))
+	if err != nil {
+		return err
+	}
+
+	err = patch.Close()
 	if err != nil {
 		return err
 	}
