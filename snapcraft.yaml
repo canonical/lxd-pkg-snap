@@ -173,6 +173,11 @@ parts:
     override-build: |
       set -ex
 
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
@@ -201,6 +206,14 @@ parts:
       - uuid-dev
       - zlib1g-dev
     override-build: |
+      set -ex
+
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      set +ex
       snapcraftctl build
       set -ex
 
