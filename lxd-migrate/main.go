@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/lxc/lxd/shared"
@@ -149,6 +148,13 @@ func run() error {
 		return fmt.Errorf("Failed to wipe the destination LXD: %v", err)
 	}
 
+	// Backup the database
+	fmt.Printf("=> Backing up the database\n")
+	err = src.backupDatabase()
+	if err != nil {
+		return fmt.Errorf("Failed to backup the database: %v", err)
+	}
+
 	// Move the data across
 	if !isMnt {
 		fmt.Printf("=> Moving the data\n")
@@ -164,22 +170,9 @@ func run() error {
 		}
 	}
 
-	// Access the database
-	fmt.Printf("=> Backing up the database\n")
-	err = shared.FileCopy("/var/snap/lxd/common/lxd/lxd.db", "/var/snap/lxd/common/lxd/lxd.db.pre-migration")
-	if err != nil {
-		return fmt.Errorf("Failed to backup the database: %v", err)
-	}
-
-	fmt.Printf("=> Opening the database\n")
-	db, err := dbOpen(filepath.Join(dst.path, "lxd.db"))
-	if err != nil {
-		return fmt.Errorf("Failed to open the database: %v", err)
-	}
-
 	// Deal with the storage backends
 	fmt.Printf("=> Updating the storage backends\n")
-	err = src.rewriteStorage(db, dst.path)
+	err = src.rewriteStorage(dst)
 	if err != nil {
 		return fmt.Errorf("Failed to update the storage pools: %v", err)
 	}
