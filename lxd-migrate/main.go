@@ -222,7 +222,7 @@ func run() error {
 		}
 
 		// Reload LXD post-update (to re-create the bridge if needed)
-		fmt.Printf("=> Reloading LXD after network update")
+		fmt.Printf("=> Reloading LXD after network update\n")
 		err = dst.reload()
 		if err != nil {
 			return err
