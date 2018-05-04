@@ -383,13 +383,13 @@ parts:
     override-build: |
       set -ex
 
-      make
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
 
+      make
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
     organize:
