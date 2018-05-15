@@ -420,6 +420,7 @@ parts:
       - acl
       - dnsmasq-base
       - ebtables
+      - iptables
       - rsync
       - squashfs-tools
       - xdelta3
@@ -462,7 +463,6 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
       lib/ebtables: lib/
-      lib/xtables: lib/
     prime:
       - bin/dnsmasq
       - bin/ebtables
@@ -471,7 +471,7 @@ parts:
       - bin/unsquashfs
       - bin/xdelta3
       - lib/libebt*
-      - lib/libxt*
+      - lib/xtables/*
 
       - etc/bash_completion.d/snap.lxd.lxc
 
