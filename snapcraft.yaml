@@ -1,5 +1,5 @@
 name: lxd
-version: "3.0.0"
+version: "3.1"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -415,7 +415,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.0.0
+    source-tag: lxd-3.1
     after:
       - go
       - lxc
@@ -449,123 +449,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 296e32201da30fb06d26a5c0e9a77cb70e8fa7ec  # lxc: Fix mistakenly hidden commands
-      git cherry-pick 61cd6cf8ce8f5b07f676c597d360506b72514657  # lxd/main: Add version subcommand
-      git cherry-pick ab3662d8d9a8b4389539cebbd0dd67b2b1a9809f  # lxc/main: Add version subcommand
-      git cherry-pick 11d1265afccc047d9622f2c5c40a0b7de1ed9935  # i18n: Update translation templates
-      git cherry-pick 71b5e7ea7905e877ca37f7647a84e2eab4cc720d  # lxd/migration: Pre-validate profiles
-      git cherry-pick 5ae969836a94118afe9d768987c507e57ef2f444  # client: Improve remote operation errors
-      git cherry-pick 186d86d47b73252ec72f87fb613f7f64ee896583  # Fix some typos and wording.
-      git cherry-pick caebcab651b9ec333bec015cf5b49033287bc9ac  # Wording fix.
-      git cherry-pick 97006054245ff90d03d1456d052d8eae322a14c0  # lxc/image: Fix crash due to bad arg parsing
-      git cherry-pick b631917b5a5249bc4ce57effc36ed9dad0914163  # lxd: add missing limits.h include
-      git cherry-pick 6f6c146a4cc313ff2746279ea9eeeda503b39fc4  # lxd/init: Fix --auto with network config
-      git cherry-pick cc8d2052a6980377c934f46341af00fbd5c5f5ce  # lxc: Consistent naming of clustering terms
-      git cherry-pick 4bae76faad94b4a8d7d41f5b8c0753dbab01a43e  # i18n: Update translation templates
-      git cherry-pick 537106a6c194c98240ed3478dbfc4cb96bd9e756  # lxc/file: Fix pushing files to remote
-      git cherry-pick c8cb12ac46f6b063573025127f4cbb0a56609a8e  # lxd/init: Don't setup a remote storage pool by default
-      git cherry-pick 36c46ff52d8bf72c8e5e9c1e9e743f77a140924c  # Fix lxd init failing to join a cluster in interactive mode with an existing zfs dataset
-      git cherry-pick 0a2026df0b215753d27a5dc5ab9d09c74b2cbe46  # lxc/query: Fix -d and -X
-      git cherry-pick 4b31dbed5bf3335ff0fcf44ef8106dc34c4dc726  # lxc/help: Make help respect --all too
-      git cherry-pick 2cacb1dd14fcd39ad0913c7ef88d97dec9e1dbe4  # Fix typo in help of "lxc network"
-      git cherry-pick 1ab21cc6a5f9f6ed5d1bf844caf6c4068747eb65  # Properly filter node-level storage configs by pool ID
-      git cherry-pick 4bf815dbaf25dd79f0ae9bfe7d8d063e8c9be2b5  # i18n: Update translation templates
-      git cherry-pick 6698a5c3a7af9b955c1edc02e2c026cd35304aa4  # lxd/init: Consistency
-      git cherry-pick b584bbdd9bc824137240595680cb6851416ef80d  # Make new gofmt happy
-      git cherry-pick 25d53756f896788c9972007ccb863672eb5fb363  # lxc/file: Allow using -r to follow symlinks
-      git cherry-pick 63aa43e00215cd9f1e0b12d29aff6194607006f3  # Replace juju/idmclient with CanonicalLtd/candidclient
-      git cherry-pick 24c3713d72004b96ec56a6a69f5e52269b8d7f87  # lxc/config: Fix adding trust cert on snap
-      git cherry-pick fe903635de1b84a80f76a6df59cbc203e7f20c38  # lxc/alias: Fix example in help message
-      git cherry-pick 4fde1a6329978de7200b49a9cf5536c54388b767  # i18n: Update translation templates
-      git cherry-pick 465cba270c995722008da10bf86a0c006280b547  # client: Introduce LXD_SOCKET
-      git cherry-pick cf7ec1deac2f836b9787e2946d196651f0786fb0  # Makefile: Add a manifest
-      git cherry-pick ac11e21092a38af2ba25cd58958a93f531304717  # containers: fix snapshot deletion
-      git cherry-pick 56d77caf7b9a3d4f3869fda1e267312f502a9afa  # lxc/init: Add missing --no-profiles
-      git cherry-pick e3b49b4c7d250dcb390726ba879fd3b05a869e5b  # i18n: Update translations
-      git cherry-pick 9e65d1f8b8004de8ee7bf25cf00ebe94f45ea573  # lxc/file: Fix pull target logic
-      git cherry-pick e9ec053202be81734b92488b286ff0c8e49138fe  # doc: Fix example in userns-idmap
-      git cherry-pick c9f3a1034612a19b5418c91a7973d22e578e494f  # devices: fail if Nvidia device minor is missing
-      git cherry-pick aa62937bc1278199028ee57be34ac259a817c9b8  # Add db.ContainersNodeList
-      git cherry-pick 61fa3def03dd91957cda29b8ceede55f5bfe8246  # storage: createContainerMountpoint() fix perms
-      git cherry-pick 326db08026ad3344033503e07863ad36ebc4d082  # ceph: s/0755/0711/g
-      git cherry-pick 3c52e6c458851a1c053492a504392789345ae801  # lvm: s/0755/0711/g
-      git cherry-pick 1714eba1f985e74328cde46af073f8543fbb3c29  # storage utils: s/0755/0711/g
-      git cherry-pick 5312af824d28daf15e250b555c98c180e408f7b3  # zfs: s/0755/0711/g
-      git cherry-pick 92532dc487db41b098ad56192965ec2e9ab8f9cf  # patches: add "storage_api_path_permissions"
-      git cherry-pick 56f2d585310741b5f380ce0f081a04b2e1d72406  # sys/fs: s/MkdirAll/Mkdir/g
-      git cherry-pick 910ef5bb75d32f6801bb34b68c8fedbda49885b5  # btrfs: fix permissions
-      git cherry-pick 7f7f06a15c11ade429ddeac346c0b4288f690ac3  # Pass a logger to raft-http
-      git cherry-pick e44fc1e7a589df9610185a0bce37f65e7c6c0b64  # Add new cluster.Promote function to turn a non-database node into a database one
-      git cherry-pick 7f8a1d1b0eabd660ef9bcd4bf4f7f4c5ffb4fff7  # Add new cluster.Rebalance function to check if we need to add database nodes
-      git cherry-pick 739f2c877539f1e860bba26428b66790a2632834  # Notify the cluster leader after a node removal, so it can rebalance
-      git cherry-pick 1eb53d3df81376ab6e46b854d098dbc677072b99  # Add integration test
-      git cherry-pick 7cc7148bde78bfa70d9ce4cc2a4b6a14056224c4  # doc: Tweak backup.md
-      git cherry-pick 3c14b23b746426dbc9b3fe7793d06c3e576fd058  # lxd/init: Require root for interactive cluster join
-      git cherry-pick 24cf3b750f51934108f5da5cd17534b4609d0996  # Disable flaky unit tests for now
-      git cherry-pick bd1ae0aa86e285a0632f5c2bc6779e3f526b4be8  # Log the error that made Daemon.Init() fail
-      git cherry-pick 039e93793eeee9df3bfb86b6fa4804b83081878b  # client: Expose http URL in ConnectionInfo
-      git cherry-pick bd47a493090f77ddcde2db40320135ecfb88e6d5  # lxc/query: Add support for non-JSON endpoints
-      git cherry-pick 8b0673c3c77ee0a995244210c8169488b75b0bcd  # Handle empty query strings
-      git cherry-pick ed5a1ac19ebb7b449f19d7ce45eb3a4c40322b94  # Support reading queries from standard in
-      git cherry-pick da5162f10f8f9c93a82abc8f9d780565a13c3107  # Support passing multiple queries
-      git cherry-pick d125f6c425169881cc2d9c0ea8e5c22f7be06a85  # Rename database files
-      git cherry-pick 57d71e4300154fd4eed1239c65e7b79e9084617c  # Support querying both local and global database
-      git cherry-pick abb7520ea384f0eac84d8979709585a5b48c528a  # Update integration tests
-      git cherry-pick 54d3782d7f6954b86658e9ccb573376a8da79816  # Normalize name of images_aliases table
-      git cherry-pick 4f189ee1a5d86062d987105ce935760b72f9925e  # Add query.Dump helper to dump schema and data
-      git cherry-pick 7a254720c3cbe8aa34f61b9fae00d4bd980ecc95  # Add support for dump command in lxd sql
-      git cherry-pick ddf770670b63d07cb8c5b70351d01b21dcc0ef77  # lxd/containers: Fix lxc.net check
-      git cherry-pick 7db2515f9591634710e81b75e6e17cdb3b96905e  # doc/backup.md: update snap path
-      git cherry-pick 4fac0a6ba8651689600a17d31aa652018cf8b2c3  # Add lxc cluster enable command
-      git cherry-pick 7ff22de6ca64f7ba1ada1399966043e51a1c7c5e  # Fix command description formatting
-      git cherry-pick 1db79ee0f092833c56d81f4a55a538d47b182572  # Update .pot files
-      git cherry-pick a16dddce5151cc14f4baf633f32b1125c4b44221  # Use an isolated LXD instance in integration tests
-      git cherry-pick 7d7c8c253e02a559cd2fde25bf2dfc0fd8e96835  # Start a container in the integration test
-      git cherry-pick 246512d5766bf3e385b7e8402ad765f687dc278f  # Address style comments
-      git cherry-pick 835d9f9875ffd68cca1d707030b9825a56915329  # add LXD_UNPRIVILEGED_ONLY to disallow privileged containers.
-      git cherry-pick 4036d2c4769bb24b407641f8cd69b663053896cc  # lxd: tweak LXD_UNPRIVILEGED_ONLY
-      git cherry-pick 56112079039024b443adbe8ee7b65e58bd86bb6f  # doc: add LXD_UNPRIVILEGED_ONLY
-      git cherry-pick 9876b53189bfdf8d6e2e0d4456b63c191bae0b3f  # tests: add tests for LXD_UNPRIVILEGED_ONLY
-      git cherry-pick f37d893046b39715d92616abd31da42f0eef93ca  # Reword errors when LXD_UNPRIVILEGED_ONLY is set
-      git cherry-pick d3e346a796f8a1686c750a48f7e9a0262d41feed  # lxd/containers: Allow sending progress
-      git cherry-pick 1ea32f9df77ca879e55f5e539fd0fe720dec8c9b  # lxc/rename: Deal with remote renames
-      git cherry-pick b4c4ac89913ef2c9a55401f3cf4da4ca375f10c2  # lxd/db: Don't crash on empty queries
-      git cherry-pick 9bd964031a87127dfa9cd42c1898c4f1cd209261  # lxd/sql: Drop custom table renderer
-      git cherry-pick 5fb4730adf844a5b645122319c6ee74ae35b331b  # lxd/network: Fix fan subnet calculation logic
-      git cherry-pick 9eb09a5516b0f601710095488c8c7ccd031cc28c  # Update translations from weblate
-      git cherry-pick dbe2e6b59e10ba2d9c98d51ff52ec135b35cb1b8  # lxc/main: Fix remote caching
-      git cherry-pick 8785334377bd00c3a4204000c68cae1003599dbb  # lxc/storage_volumes: Various fixes
-      git cherry-pick 1dfba7f33ef111752786fb92eb52958d51517498  # tests: Add extra cleanup code
-      git cherry-pick ce04222527ac85294e463b580e3ab5fa9a6485c5  # lxd/storage: Also set zfs.pool_name on upgrade
-      git cherry-pick 43e0144b5e9a60cf6bc0659cbcc0475a204a9abc  # migration: fix btrfs live migration
-      git cherry-pick 42eb1dcbaf94099fb7799791d2f78abcad58cfe6  # lxd/containers: Fix broken unix hotplug logic
-      git cherry-pick bffc184ca579f36ec2d638c9574ac7ca61d8b0b3  # lxc/list: Reduce number of API calls
-      git cherry-pick 61a354720045a7c29d8e1957ef98fabc67da2d2b  # Make the interaction betwean lxd daemon and waitready non-blocking
-      git cherry-pick b863961e395d358f983deb464fb917f9294f68d5  # Increase logging during startup
-      git cherry-pick a61bfd275d42d6f1d2e01eecc9ca791e99f855bb  # Remove log alias for waitready
-      git cherry-pick 184907e1783bf9901ea12814a819bc0678ddd1db  # Remove log alias for db.OpenCluster
-      git cherry-pick c26b693cb10883ff7a58729ea7d153a831196084  # Make Unavailable accept an error parameter
-      git cherry-pick 1e923f36fa91db7e16c1ad0a8d1ec6b424c0a3e6  # Add a new Schema.File() method to load extra queries from a file
-      git cherry-pick 884aab9db6e6cbe48b7b6a5320f3748913902b1a  # Add support for patch.local.sql and patch.global.sql
-      git cherry-pick b2a97e781d7c9b17a70665c8e14d14113036ee5e  # Add integration tests
-      git cherry-pick 679898a8364cd74f896129dffee55f6e94e1d4f5  # Add shared.DirCopy to recursively copy a directory.
-      git cherry-pick 8a07124f3438399d149eba6142a8f8fb9db0754a  # Update database.md
-      git cherry-pick 1f3a6827c1879285779f4b26c7c6d629aa0d17b3  # Backup global database if non-clustered
-      git cherry-pick d93f54a7033ec842b7aed8f835aae400d8fd5185  # lxd/init: Offer to setup a Fan bridge when clustered
-      git cherry-pick 69217a8f9ac35d4e72ebf87a6298752b46d45f31  # lxd init: fix maas.api.url check when setting up existing bridge
-      git cherry-pick b45f1a493bd10182e6603633ff995b6ed3c08e36  # Take raft snapshots more frequently and at shutdown
-      git cherry-pick 04cdcde6e749f7bd757b5ab9ad8bfb30c6731bdf  # Add --schema flag to lxd sql to dump only the schema.
-      git cherry-pick 99a5ff046549e0a06c4253c8e246a1ec822ebf63  # Update database.md with information about lxd sql and patch.*.sql
-      git cherry-pick 7c55987686ab95d0b4f52d2a6b391e5812c37d1f  # Document how to dump the content or schema of databases
-      git cherry-pick 41b45f94929cb10ceecb11f3b564d37a12ec82f5  # Fix shell lints
-      git cherry-pick bcbd5f6525b03136c68d1660a4e64af8ea0f0cc6  # Disable snapshot logging, as it's too verbose now
-      git cherry-pick 13baee78f2a5898165ce1cf749638b294a0ca948  # Make .dump and .schema special queries, for consistency with sqlite3
-      git cherry-pick 5512155d44733bb7baa056369bc835c7746f4d76  # Run make i18n
-      git cherry-pick 255efb832c32b0068bfb9e0181dc975b8cbdd473  # xattr: Support empty values
-      git cherry-pick 42a38747acb3d9d69b283406dcaa675833cfc35e  # doc: s/status command/info command/
-      git cherry-pick d12d18d9059f1542675fd8dd7443113685a8308e  # lxd/init: Explain password less behavior
-      git cherry-pick 8669276be808fc3a2aa4d868a9a92ebb013e8d45  # Make waitready less verbose
 
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
