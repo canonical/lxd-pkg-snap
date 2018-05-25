@@ -421,8 +421,8 @@ parts:
       - lxc
       - sqlite
     build-packages:
-      - pkg-config
       - libacl1-dev
+      - pkg-config
     stage-packages:
       - acl
       - dnsmasq-base
@@ -446,6 +446,7 @@ parts:
       # Build using our own sqlite
       sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
 
+      # Git cherry-picks
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
@@ -567,16 +568,19 @@ parts:
       git cherry-pick d12d18d9059f1542675fd8dd7443113685a8308e  # lxd/init: Explain password less behavior
       git cherry-pick 8669276be808fc3a2aa4d868a9a92ebb013e8d45  # Make waitready less verbose
 
+      # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
 
+      # Run the standard build
       set +ex
       snapcraftctl build
       set -ex
 
+      # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
-      cat ../src/scripts/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      cat scripts/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
