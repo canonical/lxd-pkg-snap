@@ -360,9 +360,9 @@ parts:
       - go
       - lxc
     build-packages:
-      - pkg-config
       - libacl1-dev
       - libsqlite3-dev
+      - pkg-config
     stage-packages:
       - acl
       - dnsmasq-base
@@ -383,6 +383,7 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
@@ -395,16 +396,19 @@ parts:
       sed -i "s#^USE_LXD_BRIDGE=\"true\"#USE_LXD_BRIDGE=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
       sed -i "s#^LXD_IPV6_PROXY=\"true\"#LXD_IPV6_PROXY=\"false\"#g" $SNAPCRAFT_PART_INSTALL/bin/lxd-bridge
 
+      # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
 
+      # Run the standard build
       set +ex
       snapcraftctl build
       set -ex
 
+      # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
-      cat ../src/config/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      cat config/bash/lxd-client >> ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
