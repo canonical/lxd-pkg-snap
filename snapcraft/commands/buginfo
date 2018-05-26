@@ -1,0 +1,77 @@
+#!/bin/sh
+set -u
+
+# Re-exec outside of apparmor confinement
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
+fi
+
+# Environment
+export LXD_DIR=${SNAP_COMMON}/lxd/
+
+echo "# Base information"
+if [ -e "/var/lib/snapd/hostfs/etc/os-release" ]; then
+    . /var/lib/snapd/hostfs/etc/os-release
+    echo " - Distribution: ${NAME}"
+    echo " - Distribution version: ${VERSION}"
+else
+    echo " - Distribution: unknown (no os-release)"
+fi
+echo " - Kernel version: $(uname -a)"
+echo " - LXC version: $(lxc --version)"
+echo " - LXD version: $(lxd --version)"
+echo " - Snap revision: ${SNAP_REVISION}"
+echo ""
+
+echo "# Detailed snap information"
+echo '```'
+chroot /var/lib/snapd/hostfs snap info lxd
+echo '```'
+echo ""
+
+echo "# Detailed LXD information"
+if lxc info >/dev/null 2>&1; then
+    echo "## Daemon configuration"
+    echo '```'
+    lxc info
+    echo '```'
+    echo ""
+
+    echo "## Containers"
+    echo '```'
+    lxc list
+    echo '```'
+    echo ""
+
+    echo "## Images"
+    echo '```'
+    lxc image list
+    echo '```'
+    echo ""
+
+    echo "## Default profile"
+    echo '```'
+    lxc profile show default
+    echo '```'
+    echo ""
+else
+    echo "LXD daemon unreachable"
+    echo ""
+fi
+
+echo "# Kernel log (last 50 lines)"
+echo '```'
+dmesg | tail -n 50
+echo '```'
+echo ""
+
+echo "# Daemon log (last 50 lines)"
+echo '```'
+tail -n 50 "${SNAP_COMMON}/lxd/logs/lxd.log"
+echo '```'
+echo ""
+
+echo "# Systemd log (last 50 lines)"
+echo '```'
+chroot /var/lib/snapd/hostfs journalctl -u snap.lxd.daemon -n50
+echo '```'
