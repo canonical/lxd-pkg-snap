@@ -53,6 +53,11 @@ apps:
     plugs:
       - lxd-support
       - system-observe
+  buginfo:
+    command: commands/buginfo
+    plugs:
+      - lxd-support
+      - system-observe
   check-kernel:
     command: commands/lxd-check-kernel
     plugs:
