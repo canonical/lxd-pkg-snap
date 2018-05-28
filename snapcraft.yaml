@@ -456,6 +456,12 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 0a5ed8d7423f4b55a5b0f82c30b2811a34dc880a  # lvm: use internal pool name
+      git cherry-pick ccb052fa4ed1033e4e121063783fee947f9e552d  # Serialize reads to the cluster database
+      git cherry-pick 7d31f08912d1483cd5bc60c4c0e57447510a8ab1  # Update translations from weblate
+      git cherry-pick dd7cc1b8ed51c6d0bb163e00e7396391d972eba3  # Redirect container/snapshost publish API requests to the relevant node
+      git cherry-pick bf5430038262a1174ce46ad9838a3544ee1565ff  # gpu: fallback to default device mode
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
