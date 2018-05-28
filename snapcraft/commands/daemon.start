@@ -283,4 +283,6 @@ echo $PID > "${SNAP_COMMON}/lxd.pid"
 
 ## Wait for the daemon to die
 echo "=> LXD is ready"
+set +e
 wait $PID
+echo "=> LXD exited with return code $?"
