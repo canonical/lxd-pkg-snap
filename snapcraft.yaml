@@ -572,6 +572,40 @@ parts:
       git cherry-pick 42a38747acb3d9d69b283406dcaa675833cfc35e  # doc: s/status command/info command/
       git cherry-pick d12d18d9059f1542675fd8dd7443113685a8308e  # lxd/init: Explain password less behavior
       git cherry-pick 8669276be808fc3a2aa4d868a9a92ebb013e8d45  # Make waitready less verbose
+      git cherry-pick d9209d53f7e194eb6823d54f7f7713a4d704a8e4  # devices: clone mode of device
+      git cherry-pick eaff58e4bc0302a26113248130e88949a9f042a0  # lxd/init: Have --auto setup networkng if missing
+      git cherry-pick e0d00ca1d909ff715ec56c8d3e47f5c50b787b7a  # container_lxc: fix optional property for disk devs
+      git cherry-pick c5ef771fda4758ab85829fb349469b6b2b6d913a  # test: Fix busybox image
+      git cherry-pick 315b347a8401d106611736c08e923001306a300a  # lxc/action: Fix pause
+      git cherry-pick 36a5841797f1b1a26ac3e07c7257990b8165a627  # lxd/callhook: Respect LXD_SOCKET environment variable
+      git cherry-pick e7aba79116a77944cbfedbc868b28d3ce846a8c0  # forkfile: only open O_RDWR if necessary
+      git cherry-pick 8644b7a573ccc3cd500a5aef1b13c2ba393cb537  # Consider a copy to be local only when not clustered
+      git cherry-pick 2e98366cd89e38032d070b03b6452704449ad51f  # Add integration tests
+      git cherry-pick 7475633a82493aa6cf324888a4dfefc0ec39ece1  # api: Add backup structs
+      git cherry-pick da0e1da9dfd69edd26163f6ef9beba0e5e8cda94  # client: Implement backup functionality
+      git cherry-pick 38bd1ee9306f45ef33084e41ce95de13d0b6905f  # shared: Implement RunCommandWithFds
+      git cherry-pick 4d6aaae330dd579683a178e378b0fd5c67d0753b  # btrfs: add doContainerCreate()
+      git cherry-pick a30ac5e7c20750b19406d0055f366b227437e14e  # btrfs: add doContainerSnapshotCreate()
+      git cherry-pick 03a95670abaeaad0db28769ff8b34e462ae8915f  # ceph: ensure fs consistency when snapshotting
+      git cherry-pick ea303a03f192090d91dfd1c044d00c993943eeed  # ceph: ensure fs consistency when restoring
+      git cherry-pick a3ec3cdc88dfa7d2b280d4d4dddbfd7e6cccb41d  # ceph: add doContainerCreate()
+      git cherry-pick 66bed0f3d70ef5f0916b3b6216747c5ff3b21f0b  # ceph: add doContainerMount()
+      git cherry-pick 76ff437f349bad581c78d23163c73f52819b3c9f  # lvm: add doContainerMount()
+      git cherry-pick 3201ee25f0675379b44a8ab5e954f5c63f2aa47d  # zfs: add doContainerMount()
+      git cherry-pick 66f4dbc6edec4be38fae00101442872a8c50a62e  # zfs: add do*() helpers
+      git cherry-pick ca20038ad3b4169eb267adf655f58c1cf430ea97  # lvm: use internal pool name
+      git cherry-pick fb23d525e4570910f784c85be236af4b85122f18  # lxd-p2c: Handle target URL smarter
+      git cherry-pick 0416aff1449bebd97c0fc4aacd460891d9c74025  # lxd-p2c: Ignore missing arg errors
+      git cherry-pick 9f2826d7d6f1cfbe21b34487d8bf4c257071fc08  # lxd-p2c: Delete containers on failure
+      git cherry-pick 3100ad2c425a80357069a8b9ccdd16ac88751e23  # lxd-p2c: Better report rsync errors
+      git cherry-pick 69e03d2f5543cb981074fea7d74183d323f6b964  # lxd-p2c: Allow overriding rsync args
+      git cherry-pick 1a364eaeecc0c75f9e6b31f9a6792dec63f290d1  # Serialize reads to the cluster database
+      git cherry-pick edd06dea30485304e9b1e86d73b386302fd10e61  # doc: Fix typo in api-extensions
+      git cherry-pick c9219c44e7cf0e36b8b0ee181c22bc1d6fe86402  # Redirect container/snapshost publish API requests to the relevant node
+      git cherry-pick 0a874de74d4f15c5148abe03560ad0b185c8e966  # gpu: fallback to default device mode
+      git cherry-pick 4eba4767ad7a7ec952b847894b60c96a82af1f9e  # Improve error messages and docs about node-specific config keys for pools and networks
+      git cherry-pick 9ceaaccc6c19bbe4f5672bd6cb5bd9bd2e5c5208  # Avoid wrapping long lines
+      git cherry-pick 2dce0da8c4126b09d3d76f645fdad6b41fc4b9d2  # lxd-p2c: Add rsync version check
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
