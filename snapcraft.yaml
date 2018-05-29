@@ -606,6 +606,10 @@ parts:
       git cherry-pick 4eba4767ad7a7ec952b847894b60c96a82af1f9e  # Improve error messages and docs about node-specific config keys for pools and networks
       git cherry-pick 9ceaaccc6c19bbe4f5672bd6cb5bd9bd2e5c5208  # Avoid wrapping long lines
       git cherry-pick 2dce0da8c4126b09d3d76f645fdad6b41fc4b9d2  # lxd-p2c: Add rsync version check
+      git cherry-pick 0a01d476158ae550cfbb4897eaac24a591d5e5b3  # lvm: s/LXDPool/LXDThinPool/g
+      git cherry-pick 74a4ad79999429d3cebaf7a3bf28e28a08aefce1  # Extract expandConfigFromProfiles from expandConfig to avoid db interaction
+      git cherry-pick 163580b0c53f669ef5b48d9e322b9b65c367b4d4  # Broadcast profile changes to other cluster nodes
+      git cherry-pick 2273754aec5825c9e0814c25a1010a8595b0d793  # lvm: use LXD pool name
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
