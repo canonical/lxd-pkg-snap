@@ -293,15 +293,53 @@ if [ "${daemon_debug:-"false"}" = "true" ]; then
     CMD="${CMD} --debug"
 fi
 
+# We deal with errors ourselves from this point on
+set +e
+
+# Spawn LXD
 ${CMD} &
+PID=$!
+echo ${PID} > "${SNAP_COMMON}/lxd.pid"
 
 ## Wait for it to be ready
-PID=$!
-echo $PID > "${SNAP_COMMON}/lxd.pid"
-"${LXD}" waitready --timeout="${waitready_timeout:-"600"}"
+"${LXD}" waitready --timeout="${waitready_timeout:-"600"}" &
+WAIT_PID=$!
+
+## Monitor LXD and waitready
+(
+    while :; do
+        sleep 1
+
+        if ! kill -0 "${WAIT_PID}" >/dev/null 2>&1; then
+            # "lxd waitready" exited
+            break
+        fi
+
+        if ! kill -0 "${PID}" >/dev/null 2>&1; then
+            # "lxd" exited
+            kill -9 "${WAIT_PID}"
+        fi
+    done
+) &
+
+## Wait for waitready to be done
+wait "${WAIT_PID}"
+RET=$?
+
+if [ "${RET}" -gt "0" ]; then
+    echo "=> LXD failed to start"
+    exit "${RET}"
+fi
 
 ## Wait for the daemon to die
 echo "=> LXD is ready"
-set +e
-wait $PID
-echo "=> LXD exited with return code $?"
+wait "$PID"
+RET=$?
+
+if [ "${RET}" -gt "0" ]; then
+    echo "=> LXD failed with return code ${RET}"
+else
+    echo "=> LXD exited cleanly"
+fi
+
+exit "${RET}"
