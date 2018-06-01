@@ -289,7 +289,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.0
+    source-tag: lxc-3.0.1
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -328,9 +328,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git cherry-pick b19aabf5be93a9e9226875bd5d71b42db40a1ed7  # lxclock: use thread-safe *_OFD_* fcntl() locks
-      git cherry-pick e599717bc50303fb2e45cc82bc8e0857cd6d61aa  # conf: ensure umounts don't propagate to host
-
       set +ex
       snapcraftctl build
       set -ex
@@ -343,7 +340,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.0
+    source-tag: lxcfs-3.0.1
     build-packages:
       - libfuse-dev
       - libpam0g-dev
