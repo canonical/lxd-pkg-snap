@@ -610,6 +610,9 @@ parts:
       git cherry-pick 74a4ad79999429d3cebaf7a3bf28e28a08aefce1  # Extract expandConfigFromProfiles from expandConfig to avoid db interaction
       git cherry-pick 163580b0c53f669ef5b48d9e322b9b65c367b4d4  # Broadcast profile changes to other cluster nodes
       git cherry-pick 2273754aec5825c9e0814c25a1010a8595b0d793  # lvm: use LXD pool name
+      git cherry-pick 50982a5113e4d34d6ed5fb354a1c2843d1167a7f  # Manually release the liblxc structs
+      git cherry-pick 622c33cc0a200341465f98e3a48cc83badc91e21  # Drop manual GC calls
+      git cherry-pick 65d2e5b3aedea69b0103c99631f86ef9c109f92e  # lxd/containers: Fix fd leak in metadata
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
