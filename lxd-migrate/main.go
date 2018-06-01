@@ -69,6 +69,12 @@ func run() error {
 	err = src.checkEmpty()
 	if err == nil {
 		fmt.Printf("The source server is empty, no migration needed.\n")
+
+		if src.networks == nil {
+			// Atempt to stop lxd-bridge
+			systemdCtl("stop", "lxd-bridge")
+		}
+
 		return removePackages(src, dst)
 	}
 
