@@ -70,9 +70,15 @@ func run() error {
 	if err == nil {
 		fmt.Printf("The source server is empty, no migration needed.\n")
 
-		if src.networks == nil {
-			// Atempt to stop lxd-bridge
-			systemdCtl("stop", "lxd-bridge")
+		if shared.PathExists("/usr/lib/lxd/lxd-bridge") {
+			shared.RunCommand("/usr/lib/lxd/lxd-bridge", "stop")
+
+			if shared.PathExists("/etc/default/lxd-bridge") {
+				_, err = shared.RunCommand("mv", "/etc/default/lxd-bridge", "/etc/default/lxd-bridge.migrated")
+				if err != nil {
+					return fmt.Errorf("Failed to move the bridge configuration: %v", err)
+				}
+			}
 		}
 
 		return removePackages(src, dst)
