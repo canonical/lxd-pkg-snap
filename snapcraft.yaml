@@ -1,5 +1,5 @@
 name: lxd
-version: "3.1"
+version: "3.2"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -417,7 +417,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.1
+    source-tag: lxd-3.2
     after:
       - go
       - lxc
@@ -452,30 +452,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 0a5ed8d7423f4b55a5b0f82c30b2811a34dc880a  # lvm: use internal pool name
-      git cherry-pick e5e7a2a31ff20842a104edf2d83927a2ab629705  # lxd-p2c: Handle target URL smarter
-      git cherry-pick c0566d1d35519304b685d832f3739634a314a575  # lxd-p2c: Ignore missing arg errors
-      git cherry-pick 1b0fa784373fc8b8c93076cff631ec3f1fcd97ff  # lxd-p2c: Delete containers on failure
-      git cherry-pick 76fe0267f91c711838f52b004a1b2c657cd6cd5f  # lxd-p2c: Better report rsync errors
-      git cherry-pick 38fa1bb708fc02231d18c1986aea6208df8ab9e1  # lxd-p2c: Allow overriding rsync args
-      git cherry-pick ccb052fa4ed1033e4e121063783fee947f9e552d  # Serialize reads to the cluster database
-      git cherry-pick f05e80f7b43df13fbb4c8386c3cbc9d48fbcac4e  # doc: Fix typo in api-extensions
-      git cherry-pick 7d31f08912d1483cd5bc60c4c0e57447510a8ab1  # Update translations from weblate
-      git cherry-pick dd7cc1b8ed51c6d0bb163e00e7396391d972eba3  # Redirect container/snapshost publish API requests to the relevant node
-      git cherry-pick bf5430038262a1174ce46ad9838a3544ee1565ff  # gpu: fallback to default device mode
-      git cherry-pick 5f0c3674a62c94482d3b9ae78e805bb08c61b127  # Improve error messages and docs about node-specific config keys for pools and networks
-      git cherry-pick e3920e0971f41f4ae7d6812ebdf0a8f2329b96e6  # Avoid wrapping long lines
-      git cherry-pick 19654b809baef9ba157f4e0133006023af74dddb  # lxd-p2c: Add rsync version check
-      git cherry-pick 0a01d476158ae550cfbb4897eaac24a591d5e5b3  # lvm: s/LXDPool/LXDThinPool/g
-      git cherry-pick 74a4ad79999429d3cebaf7a3bf28e28a08aefce1  # Extract expandConfigFromProfiles from expandConfig to avoid db interaction
-      git cherry-pick 163580b0c53f669ef5b48d9e322b9b65c367b4d4  # Broadcast profile changes to other cluster nodes
-      git cherry-pick 2273754aec5825c9e0814c25a1010a8595b0d793  # lvm: use LXD pool name
-      git cherry-pick 9aa110d64ad7862609996037c3ead4b717857b6e  # tests: Reduce ceph pg_num down to 1
-      git cherry-pick 113dfed450adca6a3a007bfa1df1d355a1fdb1de  # lxc-to-lxd: Respect LXD_SOCKET environment variable
-      git cherry-pick d70c1385eba7aeeabf7546bccc22ad6076dcf6bc  # Manually release the liblxc structs
-      git cherry-pick 88073c1168675d58bb5cb3c48e8b8572a256c477  # Drop manual GC calls
-      git cherry-pick 1471f19808fc3e07361a835bae904af01d4d9d8c  # lxd/containers: Fix fd leak in metadata
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
