@@ -1,0 +1,112 @@
+From 2555fba8252f99e0b0e02df4571088aa8d628164 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>
+Date: Sat, 23 Jun 2018 21:38:39 -0400
+Subject: [PATCH] Allow building without cuda sdk
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Stéphane Graber <stgraber@ubuntu.com>
+---
+ src/driver.c      |  3 +--
+ src/error.c       |  4 ++--
+ src/ext-headers.h | 57 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 60 insertions(+), 4 deletions(-)
+ create mode 100644 src/ext-headers.h
+
+diff --git a/src/driver.c b/src/driver.c
+index 08b0763..dd47130 100644
+--- a/src/driver.c
++++ b/src/driver.c
+@@ -17,8 +17,7 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
+-#include <cuda.h>
+-#include <nvml.h>
++#include "ext-headers.h"
+ 
+ #pragma GCC diagnostic push
+ #include "driver_rpc.h"
+diff --git a/src/error.c b/src/error.c
+index 680605b..cf62311 100644
+--- a/src/error.c
++++ b/src/error.c
+@@ -7,9 +7,9 @@
+ #include <dlfcn.h>
+ #include <errno.h>
+ 
+-#include <cuda.h>
+ #include <libelf.h>
+-#include <nvml.h>
++
++#include "ext-headers.h"
+ 
+ #include "error.h"
+ 
+diff --git a/src/ext-headers.h b/src/ext-headers.h
+new file mode 100644
+index 0000000..83de037
+--- /dev/null
++++ b/src/ext-headers.h
+@@ -0,0 +1,57 @@
++// Replacement for CUDA headers
++#define CUDAAPI
++
++#if defined(_WIN64) || defined(__LP64__)
++typedef unsigned long long CUdeviceptr;
++#else
++typedef unsigned int CUdeviceptr;
++#endif
++
++typedef int CUdevice;
++
++typedef enum cudaError_enum {
++	CUDA_SUCCESS = 0,
++	CUDA_ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND = 302,
++} CUresult;
++
++typedef enum CUdevice_attribute_enum {
++    CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID = 50,
++    CU_DEVICE_ATTRIBUTE_PCI_BUS_ID = 33,
++    CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID = 34,
++    CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR = 75,
++    CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR = 76,
++} CUdevice_attribute;
++
++CUresult CUDAAPI cuDeviceGetAttribute(int *pi, CUdevice_attribute attrib, CUdevice dev);
++CUresult CUDAAPI cuDeviceGet(CUdevice *device, int ordinal);
++CUresult CUDAAPI cuDriverGetVersion(int *driverVersion);
++CUresult CUDAAPI cuInit(unsigned int Flags);
++
++// Replacement for NVML headers
++#define DECLDIR
++
++#define NVML_DEVICE_NAME_BUFFER_SIZE 64
++#define NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE 80
++#define NVML_DEVICE_PCI_BUS_ID_BUFFER_SIZE 32
++#define NVML_DEVICE_UUID_BUFFER_SIZE 80
++
++#define nvmlInit nvmlInit_v2
++#define nvmlDeviceGetCount nvmlDeviceGetCount_v2
++#define nvmlDeviceGetHandleByPciBusId nvmlDeviceGetHandleByPciBusId_v2
++
++typedef enum nvmlReturn_enum {
++	NVML_SUCCESS = 0,
++	NVML_ERROR_FUNCTION_NOT_FOUND = 13,
++} nvmlReturn_t;
++
++typedef struct nvmlDevice_st* nvmlDevice_t;
++
++nvmlReturn_t DECLDIR nvmlDeviceGetCount(unsigned int *deviceCount);
++nvmlReturn_t DECLDIR nvmlDeviceGetHandleByPciBusId(const char *pciBusId, nvmlDevice_t *device);
++nvmlReturn_t DECLDIR nvmlDeviceGetHandleByUUID(const char *uuid, nvmlDevice_t *device);
++nvmlReturn_t DECLDIR nvmlDeviceGetMinorNumber(nvmlDevice_t device, unsigned int *minorNumber);
++nvmlReturn_t DECLDIR nvmlDeviceGetName(nvmlDevice_t device, char *name, unsigned int length);
++nvmlReturn_t DECLDIR nvmlDeviceGetUUID(nvmlDevice_t device, char *uuid, unsigned int length);
++nvmlReturn_t DECLDIR nvmlInit(void);
++nvmlReturn_t DECLDIR nvmlShutdown(void);
++nvmlReturn_t DECLDIR nvmlSystemGetDriverVersion(char *version, unsigned int length);
+-- 
+2.17.1
+
