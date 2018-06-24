@@ -168,6 +168,7 @@ parts:
       - bmake
       - curl
       - libseccomp-dev
+      - lsb-release
     override-build: |-
       set -ex
 
