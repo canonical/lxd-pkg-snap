@@ -164,6 +164,10 @@ parts:
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
     plugin: make
+    build-packages:
+      - bmake
+      - curl
+      - libseccomp-dev
     override-build: |-
       set -ex
 
@@ -175,7 +179,6 @@ parts:
 
       set +ex
       snapcraftctl build
-
     organize:
       usr/local/bin/nvidia-container-cli: bin/nvidia-container-cli.real
       usr/local/lib: lib/
