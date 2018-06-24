@@ -160,6 +160,29 @@ parts:
       - bin/nano
       - etc/nanorc
 
+  nvidia-container:
+    source: https://github.com/NVIDIA/libnvidia-container
+    source-type: git
+    plugin: make
+    override-build: |-
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git am ../../../patches/nvc-0001-no-headers.patch
+      git am ../../../patches/nvc-0002-preload-libraries.patch
+
+      set +ex
+      snapcraftctl build
+
+    organize:
+      usr/local/bin/nvidia-container-cli: bin/nvidia-container-cli.real
+      usr/local/lib: lib/
+    prime:
+      - bin/nvidia-container-cli.real
+      - lib/libnvidia-container.so*
+
   openvswitch:
     plugin: nil
     stage-packages:
