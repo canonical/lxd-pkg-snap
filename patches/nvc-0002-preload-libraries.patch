@@ -1,0 +1,37 @@
+From dc2d671b2c90a77b248de8fefcf5ac86d1845191 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>
+Date: Sat, 23 Jun 2018 22:54:36 -0400
+Subject: [PATCH] Preload libraries
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Stéphane Graber <stgraber@ubuntu.com>
+---
+ src/driver.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/src/driver.c b/src/driver.c
+index dd47130..821e8be 100644
+--- a/src/driver.c
++++ b/src/driver.c
+@@ -138,6 +138,16 @@ setup_rpc_service(struct driver *ctx, const char *root, uid_t uid, gid_t gid, pi
+         xclose(ctx->fd[SOCK_CLT]);
+ 
+         if (!str_equal(root, "/")) {
++                // Pre-loading pthread to avoid symbol mismatch with libc
++                if (xdlopen(ctx->err, "libm.so.6", RTLD_NOW) == NULL)
++                        goto fail;
++
++                if (xdlopen(ctx->err, "librt.so.1", RTLD_NOW) == NULL)
++                        goto fail;
++
++                if (xdlopen(ctx->err, "libpthread.so.0", RTLD_NOW) == NULL)
++                        goto fail;
++
+                 if (chroot(root) < 0 || chdir("/") < 0) {
+                         error_set(ctx->err, "change root failed");
+                         goto fail;
+-- 
+2.17.1
+
