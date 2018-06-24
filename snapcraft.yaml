@@ -172,11 +172,16 @@ parts:
     override-build: |-
       set -ex
 
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
       git am ../../../patches/nvc-0001-no-headers.patch
       git am ../../../patches/nvc-0002-preload-libraries.patch
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
+      cp ../../../snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
 
       set +ex
       snapcraftctl build
@@ -184,7 +189,7 @@ parts:
       usr/local/bin/nvidia-container-cli: bin/nvidia-container-cli.real
       usr/local/lib: lib/
     prime:
-      - bin/nvidia-container-cli.real
+      - bin/nvidia-container-cli*
       - lib/libnvidia-container.so*
 
   openvswitch:
@@ -561,4 +566,3 @@ parts:
     source: snapcraft/
     organize:
       hooks/: snap/hooks/
-      wrappers/nvidia-container-cli: bin/
