@@ -453,6 +453,21 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 03e624533b7166f7622a6e3154e82ac8696d3e42  # lxd/certificates: Log password failures
+      git cherry-pick def6d1f09fa47d364fb365270b60991307424021  # test: Fix static analysis
+      git cherry-pick b753839304025313966aa9ce6d22b1962e6cf830  # proxy: handle full socket buffer
+      git cherry-pick 0a3569da4e3894fa9e297f74cffe2a0d914c8e19  # gpu: special case passing all GPUs
+      git cherry-pick 2e2499317a6431efc1c03f334e51553af39a9f0a  # gpu: don't fail during parse
+      git cherry-pick 6cb20bfcb2631d7379ba922ba970b03c27fe6feb  # Allow identity mappings for unprivileged containers
+      git cherry-pick 0f84d27f7ccb7f94f9fe56db120e8f8a8260012f  # container: adapt allowedUnprivilegedOnlyMap()
+      git cherry-pick 8a0e9a4004c82dbc21f6616e0ec7b053611acb98  # gpu: handle cards among Nvidia devices
+      git cherry-pick b91025325780f1e9ff683c516e6ba43604f799da  # shared: Dereference directory symlinks
+      git cherry-pick 7eaec9877c074e721b72e21f5d9eb5ae1aabb8f1  # lxd,shared: Move parseNumberFromFile to shared
+      git cherry-pick a33e14c0f30847a261f61145a73abf678b8e0587  # gpu: fix Nvidia minor index parsing
+      git cherry-pick 2e942e632fa23e2eab2668e9ec58f7200c6b7d7e  # lxd/db: Don't hang after bad request
+      git cherry-pick ff536dad2a3a68dd8deae0343ed335a0fdde8df1  # lxd/apparmor: Allow ro bind-mounts and remounts
+      git cherry-pick da7504a92d2146718f206439f1588fc57ef1862d  # lxd/containers: Fix removing NVIDIA containers
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
