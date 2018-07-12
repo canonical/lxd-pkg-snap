@@ -471,7 +471,7 @@ parts:
       - xtables-addons-common
     plugin: go
     go-buildtags:
-      - libsqlite3
+      - libsqlite2
     go-importpath: github.com/lxc/lxd
     go-packages:
       - github.com/lxc/lxd/lxc
@@ -502,6 +502,42 @@ parts:
       git cherry-pick 2e942e632fa23e2eab2668e9ec58f7200c6b7d7e  # lxd/db: Don't hang after bad request
       git cherry-pick ff536dad2a3a68dd8deae0343ed335a0fdde8df1  # lxd/apparmor: Allow ro bind-mounts and remounts
       git cherry-pick da7504a92d2146718f206439f1588fc57ef1862d  # lxd/containers: Fix removing NVIDIA containers
+      git cherry-pick 7d707d6cbe27e00a5f4ba5d8a733945e0071c464  # idmap: support skipping directories
+      git cherry-pick 9220d724963769132d3e1375c847fd8db92a459c  # lxd: Properly set containerArgs in all cases
+      git cherry-pick c77ff001b16e480c8918da591b745c786f7900eb  # lxd/storage: Fix PATCH on storage pools
+      git cherry-pick 0011d2b5d05797b91df6d302c53f3a80f82364f0  # container: use lxcSetConfigItem() for lxc.log.file
+      git cherry-pick dd82f404a5728d69cbc6de375f8f7b8e55e09fd8  # lxc/cluster: Remove bad alias
+      git cherry-pick 4fe32c14dba37d872712cc27138f5edd3266509b  # doc: Fix storage volume examples
+      git cherry-pick c87dac872d473d1b03e442d923693835dc877136  # lxd/storage: Fix volume creation API
+      git cherry-pick 3024992f0bcfd7337f811efd4489954cafe769d5  # tests: Add alternative TCP port finder
+      git cherry-pick 16a174bab0743287a283f920d49aadecdd4389cf  # doc: Document hostname requirements
+      git cherry-pick 0bcc715939dfd864a010f28c255c3c033f25e921  # networks: Support stateful DHCPv6 with prefixes longer than /64
+      git cherry-pick 8de1c2ec39ad3bb12f9a478f08913a953fb9f161  # lxd/networks: Skip DHCP mangle if firewall off
+      git cherry-pick 69e842e1193e59908451b19d5d1673cc3891852d  # network: do not print writer struct on error
+      git cherry-pick 622a9e908572ca61db5696bcc9290ed1c7023c7e  # lxd/patches: Force a one-time config re-gen
+      git cherry-pick ad91ca03164c5d9b7c758ceb0e88933eb8eff30d  # storage pools: move structs
+      git cherry-pick 5e7ffb62a77358c069fa3310115de441db7513b9  # storage volumes: move structs
+      git cherry-pick 84768bee368eeea853a2133cbf5d943c0c09683e  # images: move structs
+      git cherry-pick 3a341e9aadc5be669dac2f4717ab2f978efeefab  # client: Export OperationWait
+      git cherry-pick 024c71f8655f6f0a0629eda00b8d8119e147dbeb  # lxd/operations: Forward to right cluster node
+      git cherry-pick 0b8790f5fc4e4163d134681c6bbef348d7af355b  # lxd/cluster: Only restart local containers
+      git cherry-pick 41c9100c82ee18c21c23e6f21d28c270485be12f  # images: consistenly name command structs
+      git cherry-pick ee4dfd0b0306f8421a1cebdeaea3003e396d0804  # cluster: move structs
+      git cherry-pick 721d7c2bbd4fe7567d8be794e0f484de25198ef3  # api 1.0: move struct
+      git cherry-pick 5aa3736d541e00e726637e60448a9e0dbfab138f  # api internal: move structs
+      git cherry-pick 19e4780e5c4727e53a53436392aee8aea4f86e37  # certificates: move structs
+      git cherry-pick 2f087ffdd6612a5bd606b2628f85bdd25c7ec333  # events: move structs
+      git cherry-pick e5ceed16f43370f1814cfb03449b87fc44902528  # operations: move structs
+      git cherry-pick 7dc6509fe5c27bf3547004a2eb70264fb2bbe122  # profiles: move structs
+      git cherry-pick 10baa2015541e394f7c740d67ff50274fb9973ca  # resources: move structs
+      git cherry-pick 9441c4dfe8b7a10cd2ed194926e7d534f5319e91  # container logs: move structs
+      git cherry-pick bf34856722d938fdca8e0e687beef601fb834762  # container post: move structs
+      git cherry-pick 866f48b8ee239366770b5e1cd45e56978d4da49d  # lxd/storage/btrfs: Fix recursive snapshots
+      git cherry-pick 53ab47de6670e6140003f4ae8d30bedcda47e887  # lxd/cluster: Fix attaching CEPH custom volumes
+      git cherry-pick df662310e1a2a08c86ac4f74ec7ae54f8442591e  # lxd/storage: Fix double quoting
+      git cherry-pick 95c4c6472c5698f137d92f5e0b5854254b5e3732  # doc: Fix missing escaping in api-extensions
+      git cherry-pick 02689d2c19563893bc10904d7026b18281f1f02c  # Reduce the frequency of raft snapshots
+      git cherry-pick f3f3c7a72a81cdecc129e5d814531acd6b967b0c  # lxd/storage/ceph: Don't keep snapshots mounted
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
