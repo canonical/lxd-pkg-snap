@@ -36,12 +36,7 @@ func run() error {
 	}
 
 	// Validate that nothing depends on the current LXD
-	err := packageRemovable("lxd")
-	if err != nil {
-		return err
-	}
-
-	err = packageRemovable("lxd-client")
+	err := packagesRemovable([]string{"lxd", "lxd-client"})
 	if err != nil {
 		return err
 	}
