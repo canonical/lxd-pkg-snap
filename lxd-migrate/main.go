@@ -257,6 +257,11 @@ func run() error {
 }
 
 func removePackages(src *lxdDaemon, dst *lxdDaemon) error {
+	// Check if called from the LXD preinst
+	if os.Getenv("LXD_PREINST") != "" {
+		return nil
+	}
+
 	// Offer to remove LXD on the source
 	fmt.Printf("\nThe migration is now complete and your containers should be back online.\n")
 	if *argYes || askBool("Do you want to uninstall the old LXD (yes/no) [default=no]? ", "no") {
