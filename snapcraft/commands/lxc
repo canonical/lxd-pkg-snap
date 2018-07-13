@@ -6,6 +6,12 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+# Migrate data if needed
+if [ ! -d "${HOME}/.config/lxc" ] && [ -d "/home/${USER}/.config/lxc" ]; then
+    mkdir -p "${HOME}/.config"
+    cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
+fi
+
 # Set the environment
 export LXD_DIR=${SNAP_COMMON}/lxd/
 
