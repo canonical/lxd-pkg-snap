@@ -7,9 +7,13 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 # Migrate data if needed
-if [ ! -d "${HOME}/.config/lxc" ] && [ -d "/home/${USER}/.config/lxc" ]; then
+if [ ! -d "${HOME}/.config/lxc" ]; then
     mkdir -p "${HOME}/.config"
-    cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
+    if [ -d "/home/${USER}/.config/lxc" ]; then
+        cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
+    elif [ "${USER}" = "root" ] && [ -d "/root/.config/lxc" ]; then
+        cp -r "/root/.config/lxc" "${HOME}/.config/lxc" || true
+    fi
 fi
 
 # Set the environment
