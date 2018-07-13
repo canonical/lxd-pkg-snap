@@ -471,7 +471,7 @@ parts:
       - xtables-addons-common
     plugin: go
     go-buildtags:
-      - libsqlite2
+      - libsqlite3
     go-importpath: github.com/lxc/lxd
     go-packages:
       - github.com/lxc/lxd/lxc
