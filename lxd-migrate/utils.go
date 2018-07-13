@@ -134,24 +134,27 @@ func osInit() string {
 	return init
 }
 
-func packageRemovable(name string) error {
-	output, err := shared.RunCommand("apt-cache", "-i", "rdepends", name)
+func packagesRemovable(names []string) error {
+	rdepends := []string{}
+
+	// Get all reverse depends
+	output, err := shared.RunCommand("apt-cache", append([]string{"-i", "rdepends"}, names...)...)
 	if err != nil {
 		return err
 	}
 
-	rdepends := []string{}
 	for _, line := range strings.Split(output, "\n") {
 		if !strings.HasPrefix(line, "  ") {
 			continue
 		}
 
 		pkg := strings.TrimSpace(line)
-		if !shared.StringInSlice(pkg, rdepends) && !shared.StringInSlice(pkg, []string{"lxd", "lxd-client"}) {
+		if !shared.StringInSlice(pkg, rdepends) && !shared.StringInSlice(pkg, names) {
 			rdepends = append(rdepends, pkg)
 		}
 	}
 
+	// Check for what's installed
 	problems := []string{}
 	for _, pkg := range rdepends {
 		output, err := shared.RunCommand("dpkg-query", "-W", "-f=${Status}", pkg)
@@ -161,7 +164,7 @@ func packageRemovable(name string) error {
 	}
 
 	if len(problems) > 0 {
-		return fmt.Errorf("The following packages depend on %s: %s", name, strings.Join(problems, ", "))
+		return fmt.Errorf("The following packages depend on %v: %s", names, strings.Join(problems, ", "))
 	}
 
 	return nil
