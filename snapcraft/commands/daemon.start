@@ -103,6 +103,16 @@ if [ -w "/var/lib/snapd/hostfs/etc/bash_completion.d/" ]; then
     fi
 fi
 
+# FIXME: Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /etc/nsswitch.conf; then
+        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false --extrausers lxd || true
+    else
+        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false lxd || true
+    fi
+fi
+
 # FIXME: Setup the "lxd" group
 if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
