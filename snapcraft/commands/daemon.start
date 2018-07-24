@@ -29,7 +29,7 @@ echo "==> Loading snap configuration"
 
 # Setup mntns symlink
 if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
-    echo "==> Setting up mntns symlink"
+    echo "==> Setting up mntns symlink ($(readlink /proc/self/ns/mnt))"
     rm -f "${SNAP_COMMON}/mntns"
     ln -s /proc/$$/root "${SNAP_COMMON}/mntns"
 fi
