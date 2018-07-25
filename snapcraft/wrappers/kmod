@@ -1,6 +1,15 @@
 #!/bin/sh
 NAME=$(basename "${0}")
 
+if [ "$(id -u)" != "0" ] && [ "${NAME}" = "modinfo" ]; then
+    TMPDIR=$(mktemp -d)
+    ln -s "/snap/core/current/bin/kmod" "${TMPDIR}/modinfo"
+    "${TMPDIR}/modinfo" "$@"
+    RET=$?
+    rm -Rf "${TMPDIR}"
+    exit "${RET}"
+fi
+
 if [ "${NAME}" = "lsmod" ]; then
     exec "/snap/core/current/bin/kmod" "list" "$@"
 fi
