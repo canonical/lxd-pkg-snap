@@ -45,7 +45,6 @@ fi
 # Get the current config
 daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
 daemon_group=$(snapctl get daemon.group)
-waitready_timeout=$(verify_int "$(snapctl get waitready.timeout)")
 criu_enable=$(get_bool "$(snapctl get criu.enable)")
 
 # Generate the config

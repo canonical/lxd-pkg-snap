@@ -293,7 +293,7 @@ PID=$!
 echo ${PID} > "${SNAP_COMMON}/lxd.pid"
 
 ## Wait for it to be ready
-"${LXD}" waitready --timeout="${waitready_timeout:-"0"}" &
+"${LXD}" waitready &
 WAIT_PID=$!
 
 ## Monitor LXD and waitready
