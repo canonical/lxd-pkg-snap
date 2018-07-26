@@ -47,7 +47,6 @@ daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
 daemon_group=$(snapctl get daemon.group)
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
-waitready_timeout=$(verify_int "$(snapctl get waitready.timeout)")
 criu_enable=$(get_bool "$(snapctl get criu.enable)")
 
 # Generate the config
@@ -59,7 +58,6 @@ config="${SNAP_COMMON}/config"
     echo "daemon_group=${daemon_group:-"lxd"}"
     echo "ceph_builtin=${ceph_builtin:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
-    echo "waitready_timeout=${waitready_timeout:-"0"}"
     echo "criu_enable=${criu_enable:-"false"}"
 } > "${config}"
 
