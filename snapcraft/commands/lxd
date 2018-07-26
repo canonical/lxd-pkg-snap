@@ -6,6 +6,14 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+# Check if native and snap installed
+pid=$(ss -nlpx src "/var/lib/lxd/unix.socket" 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
+if [ "${pid}" -gt 0 ] 2>/dev/null; then
+    echo "Error: Both native and snap packages are installed on this system"
+    echo "       Run \"lxd.migrate\" to complete your migration to the snap package"
+    exit 1
+fi
+
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
