@@ -55,7 +55,6 @@ config="${SNAP_COMMON}/config"
     echo "# This file is auto-generated, do NOT manually edit"
     echo "daemon_debug=${daemon_debug:-"false"}"
     echo "daemon_group=${daemon_group:-"lxd"}"
-    echo "waitready_timeout=${waitready_timeout:-"600"}"
     echo "criu_enable=${criu_enable:-"false"}"
 } > "${config}"
 
