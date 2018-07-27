@@ -20,7 +20,6 @@ description: |-
    - daemon.group: Group of users that can interact with LXD [default=lxd]
    - ceph.builtin: Use snap-specific ceph configuration [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
-   - waitready.timeout: How long to wait for LXD to be ready [default=600]
 
 confinement: strict
 
