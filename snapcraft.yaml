@@ -548,6 +548,12 @@ parts:
       - bin/lxd-migrate
       - bin/upgrade-bridge
 
+  shmounts:
+    source: shmounts/
+    plugin: make
+    prime:
+      - bin/setup-shmounts
+
   wrappers:
     plugin: dump
     source: snapcraft/
