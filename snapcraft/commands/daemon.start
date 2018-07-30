@@ -35,6 +35,33 @@ if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     ln -s /proc/$$/root "${SNAP_COMMON}/mntns"
 fi
 
+# Setup shmounts
+if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
+    echo "==> Setting up persistent shmounts path"
+    if ! mountpoint -q /media || ! setup-shmounts; then
+        echo "====> Failed to setup shmounts, continuing without"
+        mount -t tmpfs tmpfs "${SNAP_COMMON}/shmounts" -o size=1M,mode=0711
+    fi
+
+    if ! mountpoint -q "${SNAP_COMMON}/lxd/shmounts"; then
+        echo "====> Making LXD shmounts use the persistent path"
+        mkdir -p "${SNAP_COMMON}/shmounts/containers"
+        if [ ! -L "${SNAP_COMMON}/lxd/shmounts" ]; then
+            rm -rf "${SNAP_COMMON}/lxd/shmounts"
+            ln -s "${SNAP_COMMON}/shmounts/containers" "${SNAP_COMMON}/lxd/shmounts"
+        fi
+    fi
+
+    if ! mountpoint -q "${SNAP_COMMON}/var/lib/lxcfs"; then
+        echo "====> Making LXCFS use the persistent path"
+        mkdir -p "${SNAP_COMMON}/shmounts/lxcfs"
+        if [ ! -L "${SNAP_COMMON}/var/lib/lxcfs" ]; then
+            rm -rf "${SNAP_COMMON}/var/lib/lxcfs"
+            ln -s "${SNAP_COMMON}/shmounts/lxcfs" "${SNAP_COMMON}/var/lib/lxcfs"
+        fi
+    fi
+fi
+
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
 mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
