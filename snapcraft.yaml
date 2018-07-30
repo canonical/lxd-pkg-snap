@@ -210,6 +210,7 @@ parts:
   sqlite:
     source: https://github.com/CanonicalLTD/sqlite
     source-type: git
+    source-commit: 4b7dc3a207c39acfb8217b1c698d65baace390bd
     plugin: autotools
     configflags:
       - --enable-replication
