@@ -120,4 +120,8 @@ fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
 
 ## Cleanup
 rm -f "${SNAP_COMMON}/lxcfs.pid" "${SNAP_COMMON}/lxd.pid"
+
+## Flush our shared namespace from the host
+nsenter -t 1 -m umount -l /var/snap/lxd/common/ns || true
+
 exit 0
