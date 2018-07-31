@@ -230,6 +230,22 @@ parts:
       - bin/sqlite3
       - lib/libsqlite3*so*
 
+  dqlite:
+    after:
+      - sqlite
+    source: https://github.com/CanonicalLTD/dqlite
+    source-type: git
+    plugin: autotools
+    stage-packages:
+      - libuv1
+    build-packages:
+      - libuv1-dev
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/libdqlite*so*
+      - lib/*/libuv*
+
   vim:
     plugin: nil
     stage-packages:
@@ -451,6 +467,7 @@ parts:
     after:
       - go
       - lxc
+      - dqlite
       - sqlite
     build-packages:
       - libacl1-dev
@@ -475,8 +492,8 @@ parts:
     override-build: |
       set -ex
 
-      # Build using our own sqlite
-      sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/CanonicalLtd/go-sqlite3/sqlite3.go
+      # Setup for our shared libraries
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}"
 
       # Git cherry-picks
       cd ../src
@@ -531,8 +548,8 @@ parts:
     override-build: |
       set -ex
 
-      # Build using our own sqlite
-      sed -i "/#ifndef USE_LIBSQLITE3/i #cgo pkg-config: sqlite3" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
+      # Setup for our shared libraries
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}"
 
       set +ex
       snapcraftctl build
