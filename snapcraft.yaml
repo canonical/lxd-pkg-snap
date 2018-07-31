@@ -490,7 +490,7 @@ parts:
       set -ex
 
       # Setup for our shared libraries
-      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}"
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include"
 
       # Git cherry-picks
       cd ../src
@@ -546,7 +546,7 @@ parts:
       set -ex
 
       # Setup for our shared libraries
-      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}"
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include"
 
       set +ex
       snapcraftctl build
