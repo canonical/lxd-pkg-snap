@@ -167,6 +167,7 @@ int setup_ns() {
 
 int main() {
 	bool setup = true;
+	bool run_media = false;
 	int nsfd = -1, newnsfd = -1;
 
 	// Get a reference to current mtnns
@@ -213,14 +214,31 @@ int main() {
 		setup = true;
 	}
 
+	// Look for /run/media
+	if (access("/run/media", X_OK) == 0) {
+		run_media = true;
+	}
+
 	// Create temporary mountpoint
-	if (mkdir("/media/.lxd-shmounts", 0700) < 0 && errno != EEXIST) {
-		return -1;
+	if (run_media) {
+		if (mkdir("/run/media/.lxd-shmounts", 0700) < 0 && errno != EEXIST) {
+			return -1;
+		}
+	} else {
+		if (mkdir("/media/.lxd-shmounts", 0700) < 0 && errno != EEXIST) {
+			return -1;
+		}
 	}
 
 	// Bind-mount onto temporary mountpoint
-	if (mount("/var/snap/lxd/common/shmounts", "/media/.lxd-shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
-		return -1;
+	if (run_media) {
+		if (mount("/var/snap/lxd/common/shmounts", "/run/media/.lxd-shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
+			return -1;
+		}
+	} else {
+		if (mount("/var/snap/lxd/common/shmounts", "/media/.lxd-shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
+			return -1;
+		}
 	}
 
 	// Attach to the snapd mntns
@@ -249,12 +267,23 @@ int main() {
 	}
 
 	// Attempt to cleanup mount there too (may be gone or may be there)
-	mount("none", "/media/.lxd-shmounts", NULL, MS_REC|MS_PRIVATE, NULL);
-	umount2("/media/.lxd-shmounts", MNT_DETACH);
+	if (run_media) {
+		mount("none", "/run/media/.lxd-shmounts", NULL, MS_REC|MS_PRIVATE, NULL);
+		umount2("/run/media/.lxd-shmounts", MNT_DETACH);
+	} else {
+		mount("none", "/media/.lxd-shmounts", NULL, MS_REC|MS_PRIVATE, NULL);
+		umount2("/media/.lxd-shmounts", MNT_DETACH);
+	}
 
 	// Remove the temporary mountpoint
-	if (rmdir("/media/.lxd-shmounts") < 0 && errno != ENOENT) {
-		return -1;
+	if (run_media) {
+		if (rmdir("/run//media/.lxd-shmounts") < 0 && errno != ENOENT) {
+			return -1;
+		}
+	} else {
+		if (rmdir("/media/.lxd-shmounts") < 0 && errno != ENOENT) {
+			return -1;
+		}
 	}
 
 	// Close open fds
