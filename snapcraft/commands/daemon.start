@@ -40,6 +40,7 @@ if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
     echo "==> Setting up persistent shmounts path"
     if ! mountpoint -q /media || ! setup-shmounts; then
         echo "====> Failed to setup shmounts, continuing without"
+        mkdir -p "${SNAP_COMMON}/shmounts"
         mount -t tmpfs tmpfs "${SNAP_COMMON}/shmounts" -o size=1M,mode=0711
     fi
 
