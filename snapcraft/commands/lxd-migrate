@@ -6,6 +6,6 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-export LXD_DIR=${SNAP_COMMON}/lxd/
+export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
 exec lxd-migrate "$@"
