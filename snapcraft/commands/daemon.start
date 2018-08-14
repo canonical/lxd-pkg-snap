@@ -65,7 +65,7 @@ fi
 
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
-mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
+mountpoint -q /bin/mkod || mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
@@ -116,7 +116,7 @@ ln -s "/proc/mounts" "/etc/mtab"
 ## Handle SSL certs
 if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/share/ca-certificates" ]; then
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
-    mount -o bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
+    mountpoint -q "/usr/share/ca-certificates" || mount -o bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
     ln -s "/snap/core/current/etc/ssl" "/etc/ssl"
 fi
