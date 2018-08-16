@@ -336,7 +336,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.1
+    source-tag: lxc-3.0.2
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -375,9 +375,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git cherry-pick 200e6f5bda89e79dc69c08ca15991f454c004646  # parse: fix memory leak
-      git cherry-pick 8d6ee0ca9df061d998c2496501481b9914e23119  # autodev: adapt to changes in Linux 4.18
-
       set +ex
       snapcraftctl build
       set -ex
@@ -390,7 +387,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.1
+    source-tag: lxcfs-3.0.2
     build-packages:
       - libfuse-dev
       - libpam0g-dev
