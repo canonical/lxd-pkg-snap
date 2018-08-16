@@ -1,5 +1,5 @@
 name: lxd
-version: "3.0.1"
+version: "3.0.2"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -464,7 +464,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.0.1
+    source-tag: lxd-3.0.2
     after:
       - go
       - lxc
