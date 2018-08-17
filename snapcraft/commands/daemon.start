@@ -296,11 +296,17 @@ if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
 fi
 
 ## Check for existing LXDs
-pid=$(ss -nlpx src "${LXD_DIR}/unix.socket" 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
-if [ "${pid}" -gt 0 ] 2>/dev/null; then
-    echo "=> Killing conflicting LXD"
-    kill -9 "${pid}"
-fi
+for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
+    readlink "/proc/${pid}/exe" | grep -q "/snap/" || continue
+
+    rm -f "/var/snap/lxd/common/lxd/.validate"
+    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" || true
+    if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
+        echo "=> Killing conflicting LXD (pid=${pid})"
+        kill -9 "${pid}" || true
+        rm -f "/var/snap/lxd/common/lxd/.validate"
+    fi
+done
 
 ## Move the database out of the versioned path if present
 if [ -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
