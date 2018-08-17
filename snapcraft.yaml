@@ -502,6 +502,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 0505a8b5078b2e1ee276a37995ba8397d79ae46c  # shared/idmap: test fcaps support
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
