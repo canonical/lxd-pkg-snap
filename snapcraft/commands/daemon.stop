@@ -15,8 +15,10 @@ STATUS=$(snap-query /run/snapd.socket lxd 2>/dev/null || true)
 reason="host shutdown"
 if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
     reason="reload"
-elif ! lxc query / >/dev/null 2>&1; then
+elif [ -e "${SNAP_COMMON}/lxd/.crashed" ]; then
     reason="crashed"
+elif [ -e "${SNAP_COMMON}/lxd/.shutdown" ]; then
+    reason="shutdown"
 elif [ "${STATUS}" = "auto-refresh" ]; then
     reason="snap refresh"
 elif [ "${STATUS}" = "refresh-snap" ]; then
@@ -29,6 +31,12 @@ fi
 
 echo "=> Stop reason is: ${reason}"
 
+# Handle lxd shutdown
+if [ "${reason}" = "shutdown" ]; then
+    rm -f "${SNAP_COMMON}/lxd/.shutdown"
+    exit 0
+fi
+
 # Handle reloads
 if [ "${reason}" = "reload" ]; then
     rm -f "${SNAP_COMMON}/lxd/.reload"
@@ -37,6 +45,7 @@ fi
 
 # Handle crashes
 if [ "${reason}" = "crashed" ]; then
+    rm -f "${SNAP_COMMON}/lxd/.crashed"
     exit 0
 fi
 

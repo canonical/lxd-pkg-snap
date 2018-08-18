@@ -25,23 +25,37 @@ confinement: strict
 
 apps:
   # Main commands
+  activate:
+    command: commands/daemon.activate
+    daemon: oneshot
+    plugs:
+      - lxd-support
+      - system-observe
+
   daemon:
     command: commands/daemon.start
     reload-command: commands/daemon.reload
     stop-command: commands/daemon.stop
     stop-timeout: 600s
-    restart-condition: always
+    restart-condition: on-failure
     daemon: simple
     slots: [lxd]
     plugs:
       - lxd-support
+      - network-bind
       - system-observe
+    sockets:
+      unix:
+        listen-stream: $SNAP_COMMON/lxd/unix.socket
+        socket-mode: 0660
+
   lxc:
     command: commands/lxc
     completer: etc/bash_completion.d/snap.lxd.lxc
     plugs:
       - lxd-support
       - system-observe
+
   lxd:
     command: commands/lxd
     plugs:
