@@ -329,6 +329,9 @@ CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group "${daemon_group}" >/dev/null 2>&1; then
     CMD="${CMD} --group ${daemon_group}"
+    if [ -e "/var/snap/lxd/common/lxd/unix.socket" ]; then
+        chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
+    fi
 else
     echo "==> No \"${daemon_group}\" group found, only root will be able to use LXD."
 fi
@@ -341,7 +344,12 @@ fi
 set +e
 
 # Spawn LXD
-${CMD} &
+(
+    read -r sbpid _ < /proc/self/stat
+    export LISTEN_PID="${sbpid}"
+
+    exec ${CMD}
+)&
 PID=$!
 echo ${PID} > "${SNAP_COMMON}/lxd.pid"
 
@@ -381,8 +389,15 @@ wait "$PID"
 RET=$?
 
 if [ "${RET}" -gt "0" ]; then
+    touch "${SNAP_COMMON}/lxd/.crashed"
     echo "=> LXD failed with return code ${RET}"
 else
+    if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
+        echo "=> LXD is reloading"
+        exit 1
+    fi
+
+    touch "${SNAP_COMMON}/lxd/.shutdown"
     echo "=> LXD exited cleanly"
 fi
 

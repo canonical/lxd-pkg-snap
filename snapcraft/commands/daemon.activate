@@ -1,0 +1,29 @@
+#!/bin/sh
+set -eu
+
+# Re-exec outside of apparmor confinement
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
+fi
+
+export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
+export PATH="${PATH}:${SNAP_CURRENT}/bin"
+export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+
+if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
+    sleep 3s
+    if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
+        echo "==> System doesn't support socket activation, starting LXD now"
+        systemctl start snap.lxd.daemon
+        exit 0
+    fi
+fi
+
+LXD="lxd"
+if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
+    LXD="${SNAP_COMMON}/lxd.debug"
+fi
+
+exec "${LXD}" activateifneeded
