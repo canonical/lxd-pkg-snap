@@ -503,6 +503,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick 0505a8b5078b2e1ee276a37995ba8397d79ae46c  # shared/idmap: test fcaps support
+      git cherry-pick f87e3d4acd7d9d37a676ab2335ac94a5dbd6a8f6  # Add a few missing rows.Close() calls
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
