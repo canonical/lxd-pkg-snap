@@ -48,6 +48,7 @@ if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
         echo "====> Making LXD shmounts use the persistent path"
         mkdir -p "${SNAP_COMMON}/shmounts/containers"
         if [ ! -L "${SNAP_COMMON}/lxd/shmounts" ]; then
+            mkdir -p "${SNAP_COMMON}/lxd/"
             rm -rf "${SNAP_COMMON}/lxd/shmounts"
             ln -s "${SNAP_COMMON}/shmounts/containers" "${SNAP_COMMON}/lxd/shmounts"
         fi
@@ -57,6 +58,7 @@ if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
         echo "====> Making LXCFS use the persistent path"
         mkdir -p "${SNAP_COMMON}/shmounts/lxcfs"
         if [ ! -L "${SNAP_COMMON}/var/lib/lxcfs" ]; then
+            mkdir -p "${SNAP_COMMON}/var/lib/"
             rm -rf "${SNAP_COMMON}/var/lib/lxcfs"
             ln -s "${SNAP_COMMON}/shmounts/lxcfs" "${SNAP_COMMON}/var/lib/lxcfs"
         fi
