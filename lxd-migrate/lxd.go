@@ -237,6 +237,10 @@ func (d *lxdDaemon) start() error {
 func (d *lxdDaemon) stop() error {
 	// Stop the relevant systemd units
 	if strings.HasPrefix(d.path, "/var/snap") {
+		if systemdCtl("is-active", "snap.lxd.daemon.unix.socket") == nil {
+			return systemdCtl("stop", "snap.lxd.daemon.unix.socket", "snap.lxd.daemon.service")
+		}
+
 		return systemdCtl("stop", "snap.lxd.daemon.service")
 	}
 
