@@ -264,7 +264,7 @@ func removePackages(src *lxdDaemon, dst *lxdDaemon) error {
 
 	// Offer to remove LXD on the source
 	fmt.Printf("\nThe migration is now complete and your containers should be back online.\n")
-	if *argYes || askBool("Do you want to uninstall the old LXD (yes/no) [default=no]? ", "no") {
+	if *argYes || askBool("Do you want to uninstall the old LXD (yes/no) [default=yes]? ", "yes") {
 		err := src.uninstall()
 		if err != nil {
 			return err
