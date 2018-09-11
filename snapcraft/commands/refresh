@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chroot /proc/1/root snap refresh lxd --no-wait
