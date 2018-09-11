@@ -508,7 +508,7 @@ parts:
 
       # Setup for our shared libraries
       sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/CanonicalLtd/go-dqlite/internal/bindings/cluster.go
-      sed -i "^/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
+      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       # Git cherry-picks
       cd ../src
@@ -564,7 +564,7 @@ parts:
       set -ex
 
       # Setup for our shared libraries
-      sed -i "^/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
+      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       set +ex
       snapcraftctl build
