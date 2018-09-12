@@ -1,5 +1,5 @@
 name: lxd
-version: "3.4"
+version: "3.5"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -464,7 +464,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.4
+    source-tag: lxd-3.5
     after:
       - go
       - lxc
@@ -501,47 +501,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 915772166dffbca79c85e72f304db7070a2c5aac  # doc: Add example of exec with record-output
-      git cherry-pick 748c327fba668f1c2649c07b3dd56965df668b07  # lxd/devices: Iterate /sys/class/drm for GPUs
-      git cherry-pick d0f921b6896776c1e2522a94e0c44aa0f3fb2d44  # lxd/api: Sort list of endpoints
-      git cherry-pick aeefdf6d9e1f41a34442c3986e44b1a521bb540b  # doc: add note about ignoring mount options
-      git cherry-pick 0505a8b5078b2e1ee276a37995ba8397d79ae46c  # shared/idmap: test fcaps support
-      git cherry-pick f87e3d4acd7d9d37a676ab2335ac94a5dbd6a8f6  # Add a few missing rows.Close() calls
-      git cherry-pick 887e76b65d05834ac840d3b9acd4861c346cf41c  # Add autocomplete phrase
-      git cherry-pick f4230b6534c2078d93821d83a7c8e629c4bc3eeb  # lxd/patches: Profiles are in the cluster db
-      git cherry-pick 6df97d5ae58430d9a9d6b1d721400e3c01a307cc  # lxd/storage/ceph: Only freeze container if running
-      git cherry-pick 6c80fbb93422b83a18aea8b393d1cc6201f13b9e  # lxc: Only target if --target is passed
-      git cherry-pick 4cbfa326463a21e4e988f3ca4b813f098675ec82  # lxc/export: Don't crash on failure to delete backup
-      git cherry-pick 7620b6dc26337e68de4416d3edd8948842413466  # shared: Return decompressor in DetectCompression
-      git cherry-pick a3a1b3fb60d28da2b22ea77abcee87299ba79e24  # lxd/containers: Don't return nil on Storage calls
-      git cherry-pick f8ae6f2fe4f4428cbb1cc7d444e7bd6b3f1c005c  # bash completion for 'lxc network info'
-      git cherry-pick 41d9834550bebf41c1dd410afcf91581f3a79477  # shared/api: Don't re-define fields
-      git cherry-pick 7dfc2939ac278d8436ff4b892599c795c5482007  # global: Advertise rsync features
-      git cherry-pick 1e3e5dad6c2947b7310f03dc5237dc02fbb96c10  # tests: Always pass --force to stop
-      git cherry-pick 5de84171bfb74f139214b40c6e39f378a32714b3  # lxd/storage/btrfs: Fix clearing quotas
-      git cherry-pick 2ac6854c506081f6f4a099553ea13b5854f7ae9b  # lxd/containers: Also use apply_quota for CEPH
-      git cherry-pick d1828115daeb4f28fa042d1eadb32816696d7364  # lxd/containers: Simplify and fix pool update logic
-      git cherry-pick e276c1dbd2d1f99f592607a9f75e023570088174  # Add NodeIsOutdated() db API to check is a node is outdated
-      git cherry-pick 6c2238c769d71075d3be52d1155635cad3def402  # Trigger whatever is in the LXD_CLUSTER_UPDATE var is node is outdated
-      git cherry-pick 9b675c5d5e228d53cfdf5522b8e447c4222bb6df  # lxd/images: Add missing cleanup code
-      git cherry-pick 54fe3ac44d281545eb88bfb396f037a4f569b6e2  # lxd/containers: Fix bad function name
-      git cherry-pick e4b1a8f8156090fe1d554410f630b0e34d54cb9c  # tests: Avoid err == nil pattern
-      git cherry-pick 9d52f385ac765a24f3f94bfb9912d539d2633059  # lxd: Don't mask database errors
-      git cherry-pick 8850f7ea5eb189baf2f55d4b2c43f2d0477f5d66  # lxd/db: Use NoSuchObject consistently
-      git cherry-pick 66327edca6a283a73a1c1c403351ca23fb21fd77  # client: Avoid err == nil pattern
-      git cherry-pick b3b802b41c22d009325a7d2c2a37b5b8d168ab58  # lxd/profiles: Don't list snapshots in UsedBy
-      git cherry-pick 066ea3acbe4da5a7e1a292df203f933fd7a56fdd  # Make database queries timeout after 10s if cluster db is unavail
-      git cherry-pick 51cbd1cc0957e0fef99405c3805ca9caed36ad02  # tests: Fix pki with newer easyrsa
-      git cherry-pick 704b6be1c9610078bf119ceffd1fb519c1ae6fa3  # lxd/db: Fix internal DB test
-      git cherry-pick d6487549bc0c922e2f79e1266bebd3d5e9eed7dc  # doc: Fix and improve the description
-      git cherry-pick 5cbdcbb4b35f9fd5a311124e507c1ede3cf38ff1  # proxy: Only log errors
-      git cherry-pick 2e6af212ce79c01d8457df0fce4312b5dbef975d  # operations: return true if operation is done before timeout
-      git cherry-pick 22061ea99b7726fb5004c1b9e07ede58073c6ca6  # lxd/forkdns: Properly rewrite answer
-      git cherry-pick 5284cfbe7260816deadda03c1e6a6a790f038189  # lxd/proxy: Fix unix socket paths in snap
-      git cherry-pick e67790097ce4d853141a75c6689341740ce66a56  # lxd/containers: Avoid root device name conflict
-      git cherry-pick b627f7d22093a3746a00b8825c30d4d334127f77  # lxd/import: Add root disk if needed
-      git cherry-pick e9d3402394ceba0b7df227c40f554c8018d46d7e  # lxd/import: Don't delete container on import failure
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
