@@ -548,6 +548,7 @@ parts:
       git cherry-pick 2f21be88dfeddbcb0471ad7e7b17bbd209ed1c59  # container_lxc: switch to NetnsGetifaddrs()
       git cherry-pick 948fdd433e3963d67761a1a9e50a306c648e5caf  # shared: Add network state API
       git cherry-pick 5be80b1b55e7dc2dfbc9f01cbde10d9f270a1b4a  # api: Add extended cluster join API
+      git cherry-pick 6a81093042f57216843aacc0f858308b972c1c58  # lxd/init: Fix struct conflict
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
