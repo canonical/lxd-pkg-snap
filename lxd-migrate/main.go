@@ -38,7 +38,11 @@ func run() error {
 	// Validate that nothing depends on the current LXD
 	err := packagesRemovable([]string{"lxd", "lxd-client"})
 	if err != nil {
-		return err
+		if os.Getenv("LXD_PREINST") == "" {
+			return err
+		}
+
+		fmt.Printf("\nWARNING: %v\n", err)
 	}
 
 	// Connect to the source LXD
