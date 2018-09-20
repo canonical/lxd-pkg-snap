@@ -30,7 +30,7 @@ if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.s
     sleep 3s
     if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
         echo "==> System doesn't support socket activation, starting LXD now"
-        systemctl start snap.lxd.daemon
+        chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon
         exit 0
     fi
 fi
