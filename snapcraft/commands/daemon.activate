@@ -12,6 +12,20 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
+echo "=> Starting LXD activation"
+
+# Load our configuration
+if [ ! -e "${SNAP_COMMON}/config" ]; then
+    echo "==> Creating missing snap configuration"
+    "${SNAP_CURRENT}/meta/hooks/configure"
+fi
+
+echo "==> Loading snap configuration"
+# shellcheck disable=SC1090
+. "${SNAP_COMMON}/config"
+
+# Detect missing socket activation support
+echo "==> Checking for socket activation support"
 if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
     sleep 3s
     if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
@@ -21,9 +35,39 @@ if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.s
     fi
 fi
 
+# FIXME: Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /etc/nsswitch.conf; then
+        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false --extrausers lxd || true
+    else
+        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false lxd || true
+    fi
+fi
+
+# FIXME: Setup the "lxd" group
+if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" group"
+    if grep -q "^group.*extrausers" /etc/nsswitch.conf; then
+        chroot /var/lib/snapd/hostfs/ groupadd --system --extrausers lxd || true
+    else
+        chroot /var/lib/snapd/hostfs/ groupadd --system lxd || true
+    fi
+fi
+
+# Set socket ownership
+if getent group "${daemon_group}" >/dev/null 2>&1; then
+    if [ -e "/var/snap/lxd/common/lxd/unix.socket" ]; then
+        echo "==> Setting LXD socket ownership"
+        chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
+    fi
+fi
+
 LXD="lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
+    echo "==> WARNING: Using a custom debug LXD binary!"
 fi
 
+echo "==> Checking if LXD needs to be activated"
 exec "${LXD}" activateifneeded
