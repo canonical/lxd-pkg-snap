@@ -503,6 +503,28 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 303f45f0d73656f326d031e7086171ff7e493488  # lxd: Rename API endpoints
+      git cherry-pick 16c0a66c7d3243e844398c579611834c9ca4e904  # network_linux: add netns_getifaddrs()
+      git cherry-pick 3168821a774421a08aa892dd8044914fb45bd89e  # main_checkfeature: check kernel for netnsid support
+      git cherry-pick 6e636b6101223e0fc7dc18fddd721431990ae387  # network: add NetworkGetCounters()
+      git cherry-pick d1c91e4a856c190b256b11eff7acc7850362f863  # container_lxc: switch to NetnsGetifaddrs()
+      git cherry-pick 82086782d1ae790cfbb31548918295ae43ad3b02  # lxc: Identify snapshots when listed
+      git cherry-pick addbc5c878a586ccf222ca1ec965cd0896655ac1  # shared/version: Support detecting ChromeOS versions
+      git cherry-pick d9616dbc4b0417f0a4e9e6bb77ae34eb1c7466d4  # lxd/containers: Force bring up of SRIOV parent
+      git cherry-pick 00f16e3434e44b6d62ccb658d58453cd9436ab01  # netns_getifaddrs: fix argument passing
+      git cherry-pick f5e3090ba94d80b1f2711be314ca31f82dbf9f1d  # netnsid_getifaddrs: fix check for netnsid support
+      git cherry-pick 2c66e08949164350792544e0eb9d5527341da9c3  # doc: Fix storage API endpoints
+      git cherry-pick f8d0e9619afdacf0674afc7f55e767434360b903  # container_lxc: handle network retrieval smarter
+      git cherry-pick 20da925843de9d13dad5dd4460a97c3f5727b6ac  # netns_getifaddrs: don't print useless info
+      git cherry-pick 00e6bfb1c8bbb2b68cc562cd25da1844ea69c536  # Makefile: Set LDFLAGS for dqlite
+      git cherry-pick 515bb7ddb2daa08250edd317e50dc5280ebb9571  # lxd: Fix handling of CGroup-V2 systems
+      git cherry-pick cc6455459ff6f173b30c185ba359e2792b3e5da9  # tree-wide: pass -std=gnu11 -Wvla
+      git cherry-pick 89c01c5e3ff330d598658daddf320e860c23e49d  # lxd/containers: Rework exec FD handling
+      git cherry-pick eb5c617dd137524f6db091979519c28637b79620  # lxd/storage/lvm: Don't un-necessarily start/stop storage
+      git cherry-pick 7cf9c0ccfe6b0dc0eb5e3d2e3761f3b592e8d077  # lxd/storage/ceph: Don't un-necessarily mount snapshots
+      git cherry-pick be8c9de50b15846d3435419febd42274fac85006  # Added optional ?target=<member> to /containers POST documentation
+      git cherry-pick 39c3182b6717bed3418d7cc8eaf4e9c652f09a03  # lxd/containers: Fix cleanup on create failure
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
