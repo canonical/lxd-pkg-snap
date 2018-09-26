@@ -15,9 +15,9 @@ if [ "${pid}" -gt 0 ] 2>/dev/null; then
 fi
 
 # Migrate data if needed
-if [ ! -d "${HOME}/.config/lxc" ]; then
+if [ -n "${HOME:-}" ] && [ ! -d "${HOME}/.config/lxc" ]; then
     mkdir -p "${HOME}/.config"
-    if [ -d "/home/${USER}/.config/lxc" ]; then
+    if [ -n "${USER:-}" ] && [ -d "/home/${USER}/.config/lxc" ]; then
         cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
     elif [ "${USER}" = "root" ] && [ -d "/root/.config/lxc" ]; then
         cp -r "/root/.config/lxc" "${HOME}/.config/lxc" || true
