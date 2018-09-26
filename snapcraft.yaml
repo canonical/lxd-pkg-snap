@@ -162,7 +162,7 @@ parts:
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.0.0-rc.2
+    source-tag: v1.0.0
     plugin: make
     build-packages:
       - bmake
@@ -176,9 +176,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git am ../../../patches/nvc-0001-no-headers.patch
-      git am ../../../patches/nvc-0002-preload-libraries.patch
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
       cp ../../../snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
