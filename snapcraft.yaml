@@ -317,7 +317,7 @@ parts:
   zfs-0.7:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
-    source-tag: zfs-0.7.10
+    source-tag: zfs-0.7.11
     plugin: autotools
     configflags:
       - --with-config=user
