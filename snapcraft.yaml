@@ -521,6 +521,7 @@ parts:
       git cherry-pick 7cf9c0ccfe6b0dc0eb5e3d2e3761f3b592e8d077  # lxd/storage/ceph: Don't un-necessarily mount snapshots
       git cherry-pick be8c9de50b15846d3435419febd42274fac85006  # Added optional ?target=<member> to /containers POST documentation
       git cherry-pick 39c3182b6717bed3418d7cc8eaf4e9c652f09a03  # lxd/containers: Fix cleanup on create failure
+      git cherry-pick eb37e56027029f4c0591d60d40e79282ae48e2cf  # shared/network: Don't crash on VPN devices
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
