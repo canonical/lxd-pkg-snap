@@ -10,8 +10,7 @@ export LXD_DIR="${SNAP_COMMON}/lxd/"
 
 # FIXME: Detect stop reason
 #        This should be exposed by snapd directly
-STATUS=$(mktemp)
-chroot /proc/1/root snap changes > "${STATUS}" || true
+STATUS=$(snap-query /run/snapd.socket lxd 2>/dev/null || true)
 
 reason="host shutdown"
 if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
@@ -20,17 +19,16 @@ elif [ -e "${SNAP_COMMON}/lxd/.crashed" ]; then
     reason="crashed"
 elif [ -e "${SNAP_COMMON}/lxd/.shutdown" ]; then
     reason="shutdown"
-elif grep -q 'Doing.*Auto-refresh.*"lxd"' "${STATUS}"; then
+elif [ "${STATUS}" = "auto-refresh" ]; then
     reason="snap refresh"
-elif grep -q 'Doing.*Refresh.*"lxd"' "${STATUS}"; then
+elif [ "${STATUS}" = "refresh-snap" ]; then
     reason="snap refresh"
-elif grep -q 'Doing.*Install.*"lxd"' "${STATUS}"; then
+elif [ "${STATUS}" = "install-snap" ]; then
     reason="snap refresh"
-elif grep -q 'Doing.*Remove.*"lxd"' "${STATUS}"; then
+elif [ "${STATUS}" = "remove-snap" ]; then
     reason="snap removal"
 fi
 
-rm "${STATUS}"
 echo "=> Stop reason is: ${reason}"
 
 # Handle lxd shutdown
