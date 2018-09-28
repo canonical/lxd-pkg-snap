@@ -591,6 +591,15 @@ parts:
     prime:
       - bin/setup-shmounts
 
+  snap-query:
+    source: snap-query/
+    after:
+      - go
+    plugin: go
+    go-importpath: github.com/lxc/lxd-pkg-snap/snap-query
+    prime:
+      - bin/snap-query
+
   wrappers:
     plugin: dump
     source: snapcraft/
