@@ -303,7 +303,7 @@ for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
     readlink "/proc/${pid}/exe" | grep -q "/snap/" || continue
 
     rm -f "/var/snap/lxd/common/lxd/.validate"
-    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" || true
+    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
     if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
