@@ -300,7 +300,7 @@ fi
 
 ## Check for existing LXDs
 for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
-    readlink "/proc/${pid}/exe" | grep -q "/snap/" || continue
+    grep -q "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
     rm -f "/var/snap/lxd/common/lxd/.validate"
     touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
