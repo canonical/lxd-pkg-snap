@@ -523,6 +523,8 @@ parts:
       git cherry-pick 39c3182b6717bed3418d7cc8eaf4e9c652f09a03  # lxd/containers: Fix cleanup on create failure
       git cherry-pick eb37e56027029f4c0591d60d40e79282ae48e2cf  # shared/network: Don't crash on VPN devices
       git cherry-pick 3c2dc3179ebb7de2505ee071b8c55150b8e7d3e5  # lxd/containers: Fix bad nvidia information parsing
+      git cherry-pick 82d9e6db79b6d9ac9df538c496c19d6c5b43494c  # netns_getifaddrs: fix network stats retrieval
+      git cherry-pick da20eed1caa04fdc7106ed94aa2439cf5dda767c  # network: Fix counters on non-ethernet interfaces
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
