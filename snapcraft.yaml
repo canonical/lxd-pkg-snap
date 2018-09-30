@@ -539,6 +539,9 @@ parts:
       git cherry-pick 3c2dc3179ebb7de2505ee071b8c55150b8e7d3e5  # lxd/containers: Fix bad nvidia information parsing
       git cherry-pick 82d9e6db79b6d9ac9df538c496c19d6c5b43494c  # netns_getifaddrs: fix network stats retrieval
       git cherry-pick da20eed1caa04fdc7106ed94aa2439cf5dda767c  # network: Fix counters on non-ethernet interfaces
+      git cherry-pick f99d0d2b165b73588189bda202d9516c6027f07a  # doc: Add configuration for readthedocs
+      git cherry-pick a55f1030345d7b3498d4446d1b3879d8ebf3f133  # storage: Fix error strings
+      git cherry-pick 7f5c5cdb79b61cd71199b9aa3a587bc5932a0f4f  # lxd/storage/btrfs: Don't fail deleting pools on misisng disk
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
