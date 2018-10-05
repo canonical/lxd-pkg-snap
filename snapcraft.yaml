@@ -542,6 +542,15 @@ parts:
       git cherry-pick f99d0d2b165b73588189bda202d9516c6027f07a  # doc: Add configuration for readthedocs
       git cherry-pick a55f1030345d7b3498d4446d1b3879d8ebf3f133  # storage: Fix error strings
       git cherry-pick 7f5c5cdb79b61cd71199b9aa3a587bc5932a0f4f  # lxd/storage/btrfs: Don't fail deleting pools on misisng disk
+      git cherry-pick 243a2dc337a3b8d2faf6bd978b9d30b04db93080  # Split code in 2 seperate files
+      git cherry-pick 111966431ddf05a0c2b23330fcae91b847337ce7  # network: provide #ifdefs for RTM_* requests
+      git cherry-pick f9cddab396290799e798cca0b6881cc035686908  # Document LVM support for storage quotas
+      git cherry-pick f12d912d23ad90e277286999d76d6fdef93bf19f  # candid: Cleanup code a bit
+      git cherry-pick aadaf392689cde236780103645c0434d1854d6af  # network: fix netns_get_nsid() signature
+      git cherry-pick d2b913da89010b951be37340a38c3b1265800ec1  # apparmor: Allow cgroupv2 in cgns
+      git cherry-pick f930cf430041b059b9e25b1cb5b986b4571627f1  # candid: Fix client when using https candid server
+      git cherry-pick 9f5cf240f530e65b27e652d0476cd35c1ee69bcc  # lxd-p2c: Fix static build
+      git cherry-pick 9d2f1d3db10305131aed845fd8d2112cf989a8ac  # lxc/config: Only setup needed connection args
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
