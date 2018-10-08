@@ -549,6 +549,45 @@ parts:
       git cherry-pick 948fdd433e3963d67761a1a9e50a306c648e5caf  # shared: Add network state API
       git cherry-pick 5be80b1b55e7dc2dfbc9f01cbde10d9f270a1b4a  # api: Add extended cluster join API
       git cherry-pick 6a81093042f57216843aacc0f858308b972c1c58  # lxd/init: Fix struct conflict
+      git cherry-pick b6a8b252af7708ee726afba26373923d5b0cc638  # lxc: Identify snapshots when listed
+      git cherry-pick b25db2c5b396858959306f9567d980347be6be93  # shared/version: Support detecting ChromeOS versions
+      git cherry-pick e3a81b33fe9c829770b69f0078c634d928acf3f3  # lxd/containers: Force bring up of SRIOV parent
+      git cherry-pick 32f551f8c4332e5ec91a7b5c0cf82dc917d9e41d  # netns_getifaddrs: fix argument passing
+      git cherry-pick 0ec42850d764a8c6460f3d8190011fe696628d96  # netnsid_getifaddrs: fix check for netnsid support
+      git cherry-pick 40f9aa18c3993bc8742c5bdfd83f2531d38c6449  # doc: Fix storage API endpoints
+      git cherry-pick 9eac430a7622d44778e69d14791432f2fa1cc495  # container_lxc: handle network retrieval smarter
+      git cherry-pick 5bd407410c831be2ac94a6f6bdb84b651f380bc9  # shared: Add storage volume snapshot support
+      git cherry-pick 95b6bc8d09af14dbf3264194957b416e8a880163  # client: Add storage volume snapshot support
+      git cherry-pick 15477eb3bf2cf77be7c8dfcbaef50f861ad432db  # netns_getifaddrs: don't print useless info
+      git cherry-pick 1722ea8374167835578212e0e52c80de071e92e7  # shared/api: Fix StorageVolumeSource struct
+      git cherry-pick 6254d0421db645f770c7c3ee0a5943d5d491ce81  # Makefile: Set LDFLAGS for dqlite
+      git cherry-pick 05caca69ad995933fca3b2bf8f05f80d76fccb5d  # lxd: Fix handling of CGroup-V2 systems
+      git cherry-pick 8188999ee44b6ea68a87425a36cff9f8a14d5af4  # tree-wide: pass -std=gnu11 -Wvla
+      git cherry-pick 56381f85635c106b92e10da7b52eef93484c0a79  # lxd/containers: Rework exec FD handling
+      git cherry-pick 8eb785247e6d7124a772dfb95ce458fada004aa5  # Added optional ?target=<member> to /containers POST documentation
+      git cherry-pick 1b76fb7229d4f58d8951e596530cad728433b798  # lxd/storage/lvm: Don't un-necessarily start/stop storage
+      git cherry-pick 7cf9c0ccfe6b0dc0eb5e3d2e3761f3b592e8d077  # lxd/storage/ceph: Don't un-necessarily mount snapshots
+      git cherry-pick ddbba80f192e4de15dc3a848f79b88b5ce938306  # lxd/containers: Fix cleanup on create failure
+      git cherry-pick 0352df1acae8ae791c5722dd2d46a2fd2f3fcc78  # shared/network: Don't crash on VPN devices
+      git cherry-pick 35cb18a5da9b04d05c2659343fb3ae188966de2a  # lxd/containers: Fix bad nvidia information parsing
+      git cherry-pick 08f7dc6fe4de6e857920f821142dfdbedc53d2d0  # netns_getifaddrs: fix network stats retrieval
+      git cherry-pick d13c33f84561e9844dc93bf0eeb1dc1cb4aef35f  # network: Fix counters on non-ethernet interfaces
+      git cherry-pick 2d8b3d7c0cdd6c25eaab24d8becc44feefa9543c  # doc: Add configuration for readthedocs
+      git cherry-pick 48f874fb6a0cfddec712e2ca574d82a1485d9b36  # storage: Fix error strings
+      git cherry-pick d1a5b4d158f45c279a7f637f29467cda934b10e6  # lxd/storage/btrfs: Don't fail deleting pools on misisng disk
+      git cherry-pick 3a58a68891924b5dad8bc111fe1126069da65a08  # Split code in 2 seperate files
+      git cherry-pick 8460310e4be25a96d6b424d2299b64acf4dddfc0  # network: provide #ifdefs for RTM_* requests
+      git cherry-pick ca18091cc8afe2af26c4917e35fcee2d49574411  # Document LVM support for storage quotas
+      git cherry-pick 01b5595ec933c24e22905c6f6540136aef6ce8e2  # candid: Cleanup code a bit
+      git cherry-pick be7fa5b9d9ec42cac3baabb1554476c8dc9f53a7  # network: fix netns_get_nsid() signature
+      git cherry-pick a79fe17d9d5de454f51b0df35c5a5f76008a1440  # apparmor: Allow cgroupv2 in cgns
+      git cherry-pick c884892445e333b925f4b4e56591c9258de543d9  # candid: Fix client when using https candid server
+      git cherry-pick 1968c3f91e5ab77ebfb1f2df8480fe1e2daa2c72  # lxd-p2c: Fix static build
+      git cherry-pick 0b50a8a4c35fae5291a458aeac4efad6f621679e  # config: Add support for PEM encrypted keys
+      git cherry-pick a503ca3c38fb002c9fb13b13fe0f36f155905a9e  # lxc: Setup password helper
+      git cherry-pick 383f20e3ce1d4811e243de41165abc116cb95979  # lxc/config: Only setup needed connection args
+      git cherry-pick 9b32651d14530212a20ebdc69f10ddf4ad6f4dbe  # lxc/config: More TLS optimizations
+      git cherry-pick 204541551171e4a0ad4bde0a59bda700971a5ba5  # i18n: Update translation templates
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
