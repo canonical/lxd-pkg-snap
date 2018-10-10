@@ -29,7 +29,7 @@ echo "==> Checking for socket activation support"
 if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
     sleep 3s
     if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
-        echo "==> System doesn't support socket activation, starting LXD now"
+        echo "===> System doesn't support socket activation, starting LXD now"
         chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon
         exit 0
     fi
@@ -70,4 +70,9 @@ if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
 fi
 
 echo "==> Checking if LXD needs to be activated"
-exec "${LXD}" activateifneeded
+if ! "${LXD}" activateifneeded; then
+    echo "====> Activation check failed, forcing activation"
+    chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon
+fi
+
+exit 0
