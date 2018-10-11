@@ -1,5 +1,5 @@
 name: lxd
-version: "3.5"
+version: "3.6"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -476,7 +476,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.5
+    source-tag: lxd-3.6
     after:
       - go
       - lxc
@@ -513,44 +513,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 303f45f0d73656f326d031e7086171ff7e493488  # lxd: Rename API endpoints
-      git cherry-pick 16c0a66c7d3243e844398c579611834c9ca4e904  # network_linux: add netns_getifaddrs()
-      git cherry-pick 3168821a774421a08aa892dd8044914fb45bd89e  # main_checkfeature: check kernel for netnsid support
-      git cherry-pick 6e636b6101223e0fc7dc18fddd721431990ae387  # network: add NetworkGetCounters()
-      git cherry-pick d1c91e4a856c190b256b11eff7acc7850362f863  # container_lxc: switch to NetnsGetifaddrs()
-      git cherry-pick 82086782d1ae790cfbb31548918295ae43ad3b02  # lxc: Identify snapshots when listed
-      git cherry-pick addbc5c878a586ccf222ca1ec965cd0896655ac1  # shared/version: Support detecting ChromeOS versions
-      git cherry-pick d9616dbc4b0417f0a4e9e6bb77ae34eb1c7466d4  # lxd/containers: Force bring up of SRIOV parent
-      git cherry-pick 00f16e3434e44b6d62ccb658d58453cd9436ab01  # netns_getifaddrs: fix argument passing
-      git cherry-pick f5e3090ba94d80b1f2711be314ca31f82dbf9f1d  # netnsid_getifaddrs: fix check for netnsid support
-      git cherry-pick 2c66e08949164350792544e0eb9d5527341da9c3  # doc: Fix storage API endpoints
-      git cherry-pick f8d0e9619afdacf0674afc7f55e767434360b903  # container_lxc: handle network retrieval smarter
-      git cherry-pick 20da925843de9d13dad5dd4460a97c3f5727b6ac  # netns_getifaddrs: don't print useless info
-      git cherry-pick 00e6bfb1c8bbb2b68cc562cd25da1844ea69c536  # Makefile: Set LDFLAGS for dqlite
-      git cherry-pick 515bb7ddb2daa08250edd317e50dc5280ebb9571  # lxd: Fix handling of CGroup-V2 systems
-      git cherry-pick cc6455459ff6f173b30c185ba359e2792b3e5da9  # tree-wide: pass -std=gnu11 -Wvla
-      git cherry-pick 89c01c5e3ff330d598658daddf320e860c23e49d  # lxd/containers: Rework exec FD handling
-      git cherry-pick eb5c617dd137524f6db091979519c28637b79620  # lxd/storage/lvm: Don't un-necessarily start/stop storage
-      git cherry-pick 7cf9c0ccfe6b0dc0eb5e3d2e3761f3b592e8d077  # lxd/storage/ceph: Don't un-necessarily mount snapshots
-      git cherry-pick be8c9de50b15846d3435419febd42274fac85006  # Added optional ?target=<member> to /containers POST documentation
-      git cherry-pick 39c3182b6717bed3418d7cc8eaf4e9c652f09a03  # lxd/containers: Fix cleanup on create failure
-      git cherry-pick eb37e56027029f4c0591d60d40e79282ae48e2cf  # shared/network: Don't crash on VPN devices
-      git cherry-pick 3c2dc3179ebb7de2505ee071b8c55150b8e7d3e5  # lxd/containers: Fix bad nvidia information parsing
-      git cherry-pick 82d9e6db79b6d9ac9df538c496c19d6c5b43494c  # netns_getifaddrs: fix network stats retrieval
-      git cherry-pick da20eed1caa04fdc7106ed94aa2439cf5dda767c  # network: Fix counters on non-ethernet interfaces
-      git cherry-pick f99d0d2b165b73588189bda202d9516c6027f07a  # doc: Add configuration for readthedocs
-      git cherry-pick a55f1030345d7b3498d4446d1b3879d8ebf3f133  # storage: Fix error strings
-      git cherry-pick 7f5c5cdb79b61cd71199b9aa3a587bc5932a0f4f  # lxd/storage/btrfs: Don't fail deleting pools on misisng disk
-      git cherry-pick 243a2dc337a3b8d2faf6bd978b9d30b04db93080  # Split code in 2 seperate files
-      git cherry-pick 111966431ddf05a0c2b23330fcae91b847337ce7  # network: provide #ifdefs for RTM_* requests
-      git cherry-pick f9cddab396290799e798cca0b6881cc035686908  # Document LVM support for storage quotas
-      git cherry-pick f12d912d23ad90e277286999d76d6fdef93bf19f  # candid: Cleanup code a bit
-      git cherry-pick aadaf392689cde236780103645c0434d1854d6af  # network: fix netns_get_nsid() signature
-      git cherry-pick d2b913da89010b951be37340a38c3b1265800ec1  # apparmor: Allow cgroupv2 in cgns
-      git cherry-pick f930cf430041b059b9e25b1cb5b986b4571627f1  # candid: Fix client when using https candid server
-      git cherry-pick 9f5cf240f530e65b27e652d0476cd35c1ee69bcc  # lxd-p2c: Fix static build
-      git cherry-pick 9d2f1d3db10305131aed845fd8d2112cf989a8ac  # lxc/config: Only setup needed connection args
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
