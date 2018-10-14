@@ -514,6 +514,25 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 20aa1bc8b30aa9d4344fe3b66577acecbb83aa79  # client: Always use the "do()" wrapper
+      git cherry-pick 415cb16fa8b5ba63bac78d1388fec8bbf944f04f  # client: Fix URLs with missing project/target
+      git cherry-pick b4d2bc4f83b0b830b91dc1b354425a17de0b2117  # Link an image to a project when downloading it to init a container
+      git cherry-pick 9100528e831daf76d22cc116eb5c8aab28b3b61a  # Avoid downloading an image twice if it's already in another project
+      git cherry-pick 9db6680000db02d5f5b45ce4e9090023646f4025  # Auto-update images also in projects other than the default one
+      git cherry-pick 0e3141b38458491afa61020a6aa8dc7ad6baf488  # Associate a container with the profile from its own project
+      git cherry-pick 34dafe871163b62a9c7bd13dbbc857f67368ec12  # Improve error messages
+      git cherry-pick 99ac2e883a5376142e2b8d531a0b7a31ee5c308c  # Expand container devices and configs from the associated project
+      git cherry-pick cdc7f34bba9e6e43d7311540e195dc3f939b2c22  # lxd/containers: Fix cluster shutdown
+      git cherry-pick 4ecedb87df3b9c39c66c6bdc02a6e35343c84070  # Make custom volumes visible from non-default projects
+      git cherry-pick 73c6d1d8c48497af443c4a60c69d9539969fff17  # Include containers from all projects in the UsedBy field of a network
+      git cherry-pick 4ded3eb9702236d1925c5e10bb35f1fc2eaeb24b  # Re-create the project default profile when turning on the project profiles feature
+      git cherry-pick d4789fcea99b2d08e25c8f939328bcb34ce8d8cb  # Fix project-aware URIs in the UsedBy field of api.Profile
+      git cherry-pick 1df17d0bfacb72cb7cef051052b90488d597d9a9  # idmap: use global variable for vfs3 fcaps support
+      git cherry-pick ccd1ad703eafebe76239a189d49a32e6ca53efe1  # checkfeature: check for vfs3 fscaps support
+      git cherry-pick 9fb92663b3e229966054b39815e3bf1f0c2897a4  # Add 'project' to lxc_cmds
+      git cherry-pick 47eb327e0216bc30571eabc6e0fd9b524166a0d7  # lxd/db: Fix bad limits.cpu
+      git cherry-pick 1e6642c97a8fed91cfd4499e656e8385ea5f5003  # shared: Add limits.cpu validator
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
