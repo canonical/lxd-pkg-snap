@@ -533,6 +533,10 @@ parts:
       git cherry-pick 47eb327e0216bc30571eabc6e0fd9b524166a0d7  # lxd/db: Fix bad limits.cpu
       git cherry-pick 1e6642c97a8fed91cfd4499e656e8385ea5f5003  # shared: Add limits.cpu validator
       git cherry-pick 6137252f6012e54a5128389e2ba9f1d76f3fbc68  # Increase database timeout when creating indexes in db update 12
+      git cherry-pick ac40345be2b34a9902b585cbb2f4a525b151d756  # shared/network: Allow TLS1.3
+      git cherry-pick f94b460532f04885592c15d38078024a82ab5057  # global: Implement LXD_INSECURE_TLS env variable
+      git cherry-pick 25de9371ae0002e933e4bfbf29ab6906637a0516  # db: Fix listing container backups
+      git cherry-pick d6b03e0465c297d4f84026e8e1a2833df92682a5  # Speed up execution of update from v11 of the db
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
