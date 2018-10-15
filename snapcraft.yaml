@@ -532,6 +532,7 @@ parts:
       git cherry-pick 9fb92663b3e229966054b39815e3bf1f0c2897a4  # Add 'project' to lxc_cmds
       git cherry-pick 47eb327e0216bc30571eabc6e0fd9b524166a0d7  # lxd/db: Fix bad limits.cpu
       git cherry-pick 1e6642c97a8fed91cfd4499e656e8385ea5f5003  # shared: Add limits.cpu validator
+      git cherry-pick 6137252f6012e54a5128389e2ba9f1d76f3fbc68  # Increase database timeout when creating indexes in db update 12
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
