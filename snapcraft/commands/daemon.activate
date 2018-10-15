@@ -63,6 +63,13 @@ if getent group "${daemon_group}" >/dev/null 2>&1; then
     fi
 fi
 
+# Check if LXD ever started
+if [ ! -e "/var/snap/lxd/common/lxd/containers" ]; then
+    echo "==> LXD never started on this system, no need to start it now"
+    exit 0
+fi
+
+# Check if LXD should start
 LXD="lxd"
 if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
