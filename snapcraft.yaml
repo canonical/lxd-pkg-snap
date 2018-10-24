@@ -577,6 +577,7 @@ parts:
       git cherry-pick 34ffc2fc0288005529c49640803a3d526129415e  # Fix lxc exec when using a container inside a project
       git cherry-pick 6bea17daeeab025e9528df4b45263795edaeeeb2  # netns_getifaddrs: simplify
       git cherry-pick 292fb931e2cbcc24a79b44a3ca1e8717a815f8b0  # Prefix the container name with the project name when invoking forkconsole
+      git cherry-pick 055a41f71630f893017d910c04f20143cdb1bf23  # lxd/projects: Fix clustered exec/console
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
