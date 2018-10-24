@@ -544,6 +544,8 @@ parts:
       git cherry-pick 886bb9e63c4b6d89d00937dc307f1a2f8e467bb7  # Support creating project-bound container using an image on another node
       git cherry-pick 2024096d4b906ab3f044e40a6794eb6a3ba0f5e1  # Prevent event listeners from lying around even after Disconnect()
       git cherry-pick 34ffc2fc0288005529c49640803a3d526129415e  # Fix lxc exec when using a container inside a project
+      git cherry-pick 6bea17daeeab025e9528df4b45263795edaeeeb2  # netns_getifaddrs: simplify
+      git cherry-pick 292fb931e2cbcc24a79b44a3ca1e8717a815f8b0  # Prefix the container name with the project name when invoking forkconsole
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
