@@ -237,6 +237,7 @@ parts:
       - --with-config=user
     build-packages:
       - libblkid-dev
+      - libssl-dev
       - uuid-dev
       - zlib1g-dev
     override-build: |
