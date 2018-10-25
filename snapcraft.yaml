@@ -156,6 +156,11 @@ parts:
       - bin/pv*
       - bin/thin_*
       - bin/vg*
+      - -bin/vgimportclone
+      - -bin/lvmconf
+      - -bin/lvmdump
+      - -bin/lvmetad
+      - -bin/lvmpolld
       - etc/lvm/lvm.conf
       - lib/*/device-mapper/*
       - lib/*/libaio.so*
@@ -214,7 +219,9 @@ parts:
       usr/sbin/: bin/
       usr/share/: share/
     prime:
-      - bin/ovs-*
+      - bin/ovs-appctl
+      - bin/ovs-vsctl
+      - bin/ovs-vswitchd
       - bin/ovsdb-*
       - bin/uuidgen
       - share/openvswitch/
@@ -277,7 +284,9 @@ parts:
       usr/sbin/: bin/
       sbin/: bin/
     prime:
-      - bin/xfs_*
+      - bin/xfs_admin
+      - bin/xfs_db
+      - bin/xfs_growfs
       - bin/mkfs.xfs
 
   zfs-0.6:
