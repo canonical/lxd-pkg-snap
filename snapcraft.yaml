@@ -708,6 +708,48 @@ parts:
     prime:
       - bin/snap-query
 
+  strip:
+    after:
+      - btrfs
+      - ceph
+      - go
+      - lvm
+      - nano
+      - nvidia-container
+      - openvswitch
+      - sqlite
+      - dqlite
+      - vim
+      - xfs
+      - lxc
+      - lxcfs
+      - criu
+      - lxd
+      - lxd-migrate
+      - shmounts
+      - snap-query
+      - wrappers
+    plugin: nil
+    override-prime: |
+      set -x
+
+      # Strip some of the heavy bits
+      strip -s ${SNAPCRAFT_PRIME}/bin/lxc
+      strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
+      strip -s ${SNAPCRAFT_PRIME}/bin/snap*
+      strip -s ${SNAPCRAFT_PRIME}/lib/liblxc*
+      strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
+      strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
+
+      for zfs in zfs-0.6 zfs-0.7 zfs-0.8; do
+          [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
+          strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
+      done
+
+      [ -e "${SNAPCRAFT_PRIME}/criu/criu" ] && strip -s ${SNAPCRAFT_PRIME}/criu/criu
+
+      exit 0
+
   wrappers:
     plugin: dump
     source: snapcraft/
