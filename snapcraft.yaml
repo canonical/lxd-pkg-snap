@@ -578,6 +578,7 @@ parts:
       git cherry-pick 6bea17daeeab025e9528df4b45263795edaeeeb2  # netns_getifaddrs: simplify
       git cherry-pick 292fb931e2cbcc24a79b44a3ca1e8717a815f8b0  # Prefix the container name with the project name when invoking forkconsole
       git cherry-pick 055a41f71630f893017d910c04f20143cdb1bf23  # lxd/projects: Fix clustered exec/console
+      git cherry-pick 3f5e382d7e068d8b165230199c720c295dcea87c  # Fix bad check for recursive mounts
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
