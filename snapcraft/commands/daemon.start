@@ -388,6 +388,7 @@ RET=$?
 
 if [ "${RET}" -gt "0" ]; then
     echo "=> LXD failed to start"
+    touch "${SNAP_COMMON}/lxd/.crashed"
     exit "${RET}"
 fi
 
