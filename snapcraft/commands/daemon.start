@@ -264,6 +264,7 @@ if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
         export OVS_BINDIR="${SNAP}/bin/"
         export OVS_SBINDIR="${SNAP}/bin/"
 
+       mkdir -p "${OVS_SYSCONFDIR}/openvswitch"
        "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
     )
 else
