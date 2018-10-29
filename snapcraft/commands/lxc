@@ -19,7 +19,7 @@ if [ -n "${HOME:-}" ] && [ ! -d "${HOME}/.config/lxc" ]; then
     mkdir -p "${HOME}/.config"
     if [ -n "${USER:-}" ] && [ -d "/home/${USER}/.config/lxc" ]; then
         cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
-    elif [ "${USER}" = "root" ] && [ -d "/root/.config/lxc" ]; then
+    elif [ "${USER:-}" = "root" ] && [ -d "/root/.config/lxc" ]; then
         cp -r "/root/.config/lxc" "${HOME}/.config/lxc" || true
     fi
 fi
