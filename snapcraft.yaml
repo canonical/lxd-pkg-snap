@@ -589,6 +589,30 @@ parts:
       git cherry-pick 055a41f71630f893017d910c04f20143cdb1bf23  # lxd/projects: Fix clustered exec/console
       git cherry-pick 3f5e382d7e068d8b165230199c720c295dcea87c  # Fix bad check for recursive mounts
       git cherry-pick e27c89afcde9a38c92a940df55ad7a62c3c22cf3  # Destroy the correct ZFS volume when deleting a container in a project
+      git cherry-pick 74679aa2a6229f2a7a470dbd0b2268f3e23ac3bc  # Bump Go versions and use '.x' to always get latest patch versions
+      git cherry-pick adc0b1d8c8d53a49c39f922bc98dabd779f2ec30  # Update build instruction
+      git cherry-pick 35b1b9a5031e9a7712c1c0bab999275b62e7b9bd  # Consider the container's project when loading profiles in containerLoadAllInternal
+      git cherry-pick f6c129c36bd9fb0bea9b68fa1234d23638b32d9d  # doc: Bump to 1.10 or higher everywhere
+      git cherry-pick f97c75e511b8928bbb4deec1ea63cf7f30086b52  # Don't expire lxd.log by accident
+      git cherry-pick 0b59b2909d526d237fd517bd2fe9331d49487b42  # Add logic to the db package to load and expand profiles
+      git cherry-pick a7df21734a03353d5dc43ce8ed3ae9084c936ff4  # Wire expand config logic fromt the db package
+      git cherry-pick eb663cd797707b262565deea88f70169aaa07744  # Add logic to the db package to expand devices
+      git cherry-pick af4dabd1e24cf1f34287d7797a75547fd3d764af  # Wire expand devices logic fromt the db package
+      git cherry-pick 91739ea90a6159c252583b5ac5e5134757193382  # Add ContainerListExpanded to load containers and expand their configs/devices
+      git cherry-pick 7146e447367e6ca867f22b75efa77ceff4ef1103  # Add StorageVolumeIsAvailable to check if a Ceph volume can be attached
+      git cherry-pick a6bd52e5432006ae2cdfbf70154e6ccbde548e20  # Wire StorageVolumeIsAvailable to containerValidDevices
+      git cherry-pick b7152056f7dcff0c2a1e14ad3a9deb9253547530  # Small unrelated cleanup in projects integration test
+      git cherry-pick 0a6cf157d9df0a59c1111c632bb2fe744654b3b6  # Add integration test
+      git cherry-pick ba8048264f2afe0f73510ad4887c918aeb2644d6  # lxd/storage: Fix importing preseed dump
+      git cherry-pick 33818664f7a2ae4dfa598a537d3a856d0be8ed82  # lxd/migration: Use current idmap instead of next
+      git cherry-pick bc611084ad0f11ea50f0411d68d20837eff9c443  # Make the db mapper code generator handle compound natural keys
+      git cherry-pick 992da5d46dbd3674679f09cc05f3de76ee5c771e  # lxd/db: Send raft/dqlite logging to debug
+      git cherry-pick 5bf30cfe7c4b8f12ecc31cf27b9c5f118f5a5b72  # lxd/daemon: Clarify early loggging
+      git cherry-pick 71d0bbd4166b44610beaca20723e7829f1f66345  # checkfeature: Don't log error on missing feature
+      git cherry-pick bbb527b2198888368591e5a96b29a9ee97d3966c  # lxd/daemon: Improve logging of kernel features
+      git cherry-pick a4655cdcd0018134eaee48f1fc5a90e8009731f1  # lxd/daemon: Improve logging of inherited fds
+      git cherry-pick 39847149aeaa81862eb5dc13af5afaa1c2e5ed50  # shared/logging: Improve logfile output
+      git cherry-pick 1cc810ec72349e8a3fdcd761ebf270a475b71e77  # lxd/daemon: Don't mention MAAS unless configured
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
