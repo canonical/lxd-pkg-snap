@@ -613,6 +613,10 @@ parts:
       git cherry-pick a4655cdcd0018134eaee48f1fc5a90e8009731f1  # lxd/daemon: Improve logging of inherited fds
       git cherry-pick 39847149aeaa81862eb5dc13af5afaa1c2e5ed50  # shared/logging: Improve logfile output
       git cherry-pick 1cc810ec72349e8a3fdcd761ebf270a475b71e77  # lxd/daemon: Don't mention MAAS unless configured
+      git cherry-pick 293ebe9aae481a365fce0b2492a3403060527f6d  # client: Fix cancelation of image download
+      git cherry-pick 0b7d1bc213a235c7c53bcd2b81e823511a84eb63  # Increase go-dqlite client timeout when not-clustered
+      git cherry-pick 64443f8623d4e2b6c93053f0df329dde0f32f735  # Detect and shrink large boltdb files
+      git cherry-pick bf7ebb49c8e2fcd4ce3cc0267654e361a8f08e77  # lxd/projects: Fix profile updates
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
