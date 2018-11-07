@@ -87,6 +87,7 @@ if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
 fi
 
+touch "${SNAP_COMMON}/lxd/.host-shutdown"
 "${LXD}" shutdown || true
 
 ## OpenVswitch
@@ -129,6 +130,6 @@ fusermount -u "${SNAP_COMMON}/var/lib/lxcfs" >/dev/null 2>&1 || true
 rm -f "${SNAP_COMMON}/lxcfs.pid" "${SNAP_COMMON}/lxd.pid"
 
 ## Flush our shared namespace from the host
-nsenter -t 1 -m umount -l /var/snap/lxd/common/ns || true
+nsenter -t 1 -m umount -l /var/snap/lxd/common/ns 2>/dev/null || true
 
 exit 0
