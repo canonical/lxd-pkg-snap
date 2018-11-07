@@ -406,7 +406,12 @@ else
         exit 1
     fi
 
-    touch "${SNAP_COMMON}/lxd/.shutdown"
+    if [ -e "${SNAP_COMMON}/lxd/.host-shutdown" ]; then
+        rm -f "${SNAP_COMMON}/lxd/.host-shutdown"
+    else
+        touch "${SNAP_COMMON}/lxd/.shutdown"
+    fi
+
     echo "=> LXD exited cleanly"
 fi
 
