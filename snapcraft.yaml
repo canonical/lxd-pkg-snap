@@ -613,10 +613,23 @@ parts:
       git cherry-pick a4655cdcd0018134eaee48f1fc5a90e8009731f1  # lxd/daemon: Improve logging of inherited fds
       git cherry-pick 39847149aeaa81862eb5dc13af5afaa1c2e5ed50  # shared/logging: Improve logfile output
       git cherry-pick 1cc810ec72349e8a3fdcd761ebf270a475b71e77  # lxd/daemon: Don't mention MAAS unless configured
+      git cherry-pick 5c4534c3e6feb2ec3ba7f05db1f6cd79096dc5ed  # lxd: Register background tasks as operations
+      git cherry-pick 2dc82a4ace092b7187de510a6dbd76afca772aa0  # lxd: Set default expiry for backups
+      git cherry-pick 811dc5d21c921b2b06259978ca0c98ce4780d4bb  # lxd: Remove expired container backups
+      git cherry-pick 8165c24cce7f27d1df3ce45c3355cb2014449dd6  # lxc: Switch all progress op handling to cancelable
       git cherry-pick 293ebe9aae481a365fce0b2492a3403060527f6d  # client: Fix cancelation of image download
       git cherry-pick 0b7d1bc213a235c7c53bcd2b81e823511a84eb63  # Increase go-dqlite client timeout when not-clustered
       git cherry-pick 64443f8623d4e2b6c93053f0df329dde0f32f735  # Detect and shrink large boltdb files
+      git cherry-pick 37ccedc46928acaf908b6d545636c1b94b3ad988  # backup: Allow backups to not expire
       git cherry-pick bf7ebb49c8e2fcd4ce3cc0267654e361a8f08e77  # lxd/projects: Fix profile updates
+      git cherry-pick 7d88564c6268dd89a8593a8b84ca64f6de749b03  # loop: retry on EBUSY
+      git cherry-pick 2e699d7174fb502669c98a4dd5a6f2da565f1c85  # lxd/storage: Improve loop device errors
+      git cherry-pick 89e8b49ecd2f5b6e9e7837ada72649800d2b4a4e  # lxd/containers: Detect root disk pool changes
+      git cherry-pick 3563dcd2a3d7f58be4b95342a92078a6a878ef97  # lxd/containers: Fix missing project in args
+      git cherry-pick cf2da22374cec652551060270c47a8f6c172c687  # doc: Update cloud-init network documentation
+      git cherry-pick cd4b1ec3c6200b8ce9b941e997e276ca5680e2dc  # client: Fix error handling in operations
+      git cherry-pick d5f78aa746a9f9a5c41ffe5a943134861e8e7bc7  # lxd: Rework task handling
+      git cherry-pick 537509c792a12b915d7f7f126d5b360f22e095a5  # lxd/containers: Prevent duplicate profiles
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
