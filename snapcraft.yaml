@@ -1,5 +1,5 @@
 name: lxd
-version: "3.6"
+version: "3.7"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -516,7 +516,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.6
+    source-tag: lxd-3.7
     after:
       - go
       - lxc
@@ -553,83 +553,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 20aa1bc8b30aa9d4344fe3b66577acecbb83aa79  # client: Always use the "do()" wrapper
-      git cherry-pick 415cb16fa8b5ba63bac78d1388fec8bbf944f04f  # client: Fix URLs with missing project/target
-      git cherry-pick b4d2bc4f83b0b830b91dc1b354425a17de0b2117  # Link an image to a project when downloading it to init a container
-      git cherry-pick 9100528e831daf76d22cc116eb5c8aab28b3b61a  # Avoid downloading an image twice if it's already in another project
-      git cherry-pick 9db6680000db02d5f5b45ce4e9090023646f4025  # Auto-update images also in projects other than the default one
-      git cherry-pick 0e3141b38458491afa61020a6aa8dc7ad6baf488  # Associate a container with the profile from its own project
-      git cherry-pick 34dafe871163b62a9c7bd13dbbc857f67368ec12  # Improve error messages
-      git cherry-pick 99ac2e883a5376142e2b8d531a0b7a31ee5c308c  # Expand container devices and configs from the associated project
-      git cherry-pick cdc7f34bba9e6e43d7311540e195dc3f939b2c22  # lxd/containers: Fix cluster shutdown
-      git cherry-pick 4ecedb87df3b9c39c66c6bdc02a6e35343c84070  # Make custom volumes visible from non-default projects
-      git cherry-pick 73c6d1d8c48497af443c4a60c69d9539969fff17  # Include containers from all projects in the UsedBy field of a network
-      git cherry-pick 4ded3eb9702236d1925c5e10bb35f1fc2eaeb24b  # Re-create the project default profile when turning on the project profiles feature
-      git cherry-pick d4789fcea99b2d08e25c8f939328bcb34ce8d8cb  # Fix project-aware URIs in the UsedBy field of api.Profile
-      git cherry-pick 1df17d0bfacb72cb7cef051052b90488d597d9a9  # idmap: use global variable for vfs3 fcaps support
-      git cherry-pick ccd1ad703eafebe76239a189d49a32e6ca53efe1  # checkfeature: check for vfs3 fscaps support
-      git cherry-pick 9fb92663b3e229966054b39815e3bf1f0c2897a4  # Add 'project' to lxc_cmds
-      git cherry-pick 47eb327e0216bc30571eabc6e0fd9b524166a0d7  # lxd/db: Fix bad limits.cpu
-      git cherry-pick 1e6642c97a8fed91cfd4499e656e8385ea5f5003  # shared: Add limits.cpu validator
-      git cherry-pick 6137252f6012e54a5128389e2ba9f1d76f3fbc68  # Increase database timeout when creating indexes in db update 12
-      git cherry-pick b8d35a02146e163c7c44adce21824931ec6fa658  # Make containers on other nodes visible also in the non-default project
-      git cherry-pick 36d5b09d1379369c32f21d367a34cbfc86bc93fb  # Propagate events about all projects to all cluster nodes
-      git cherry-pick ac40345be2b34a9902b585cbb2f4a525b151d756  # shared/network: Allow TLS1.3
-      git cherry-pick f94b460532f04885592c15d38078024a82ab5057  # global: Implement LXD_INSECURE_TLS env variable
-      git cherry-pick 25de9371ae0002e933e4bfbf29ab6906637a0516  # db: Fix listing container backups
-      git cherry-pick d6b03e0465c297d4f84026e8e1a2833df92682a5  # Speed up execution of update from v11 of the db
-      git cherry-pick 906114c8c7db9efab2e7c96cbb82d7834c1e174d  # doc: add the appropriate titles to some documents
-      git cherry-pick f14cf6c867910bb24d70e76d8c4c32399c1048f7  # Sanitize references to containers table
-      git cherry-pick 886bb9e63c4b6d89d00937dc307f1a2f8e467bb7  # Support creating project-bound container using an image on another node
-      git cherry-pick 2024096d4b906ab3f044e40a6794eb6a3ba0f5e1  # Prevent event listeners from lying around even after Disconnect()
-      git cherry-pick 34ffc2fc0288005529c49640803a3d526129415e  # Fix lxc exec when using a container inside a project
-      git cherry-pick 6bea17daeeab025e9528df4b45263795edaeeeb2  # netns_getifaddrs: simplify
-      git cherry-pick 292fb931e2cbcc24a79b44a3ca1e8717a815f8b0  # Prefix the container name with the project name when invoking forkconsole
-      git cherry-pick 055a41f71630f893017d910c04f20143cdb1bf23  # lxd/projects: Fix clustered exec/console
-      git cherry-pick 3f5e382d7e068d8b165230199c720c295dcea87c  # Fix bad check for recursive mounts
-      git cherry-pick e27c89afcde9a38c92a940df55ad7a62c3c22cf3  # Destroy the correct ZFS volume when deleting a container in a project
-      git cherry-pick 74679aa2a6229f2a7a470dbd0b2268f3e23ac3bc  # Bump Go versions and use '.x' to always get latest patch versions
-      git cherry-pick adc0b1d8c8d53a49c39f922bc98dabd779f2ec30  # Update build instruction
-      git cherry-pick 35b1b9a5031e9a7712c1c0bab999275b62e7b9bd  # Consider the container's project when loading profiles in containerLoadAllInternal
-      git cherry-pick f6c129c36bd9fb0bea9b68fa1234d23638b32d9d  # doc: Bump to 1.10 or higher everywhere
-      git cherry-pick f97c75e511b8928bbb4deec1ea63cf7f30086b52  # Don't expire lxd.log by accident
-      git cherry-pick 0b59b2909d526d237fd517bd2fe9331d49487b42  # Add logic to the db package to load and expand profiles
-      git cherry-pick a7df21734a03353d5dc43ce8ed3ae9084c936ff4  # Wire expand config logic fromt the db package
-      git cherry-pick eb663cd797707b262565deea88f70169aaa07744  # Add logic to the db package to expand devices
-      git cherry-pick af4dabd1e24cf1f34287d7797a75547fd3d764af  # Wire expand devices logic fromt the db package
-      git cherry-pick 91739ea90a6159c252583b5ac5e5134757193382  # Add ContainerListExpanded to load containers and expand their configs/devices
-      git cherry-pick 7146e447367e6ca867f22b75efa77ceff4ef1103  # Add StorageVolumeIsAvailable to check if a Ceph volume can be attached
-      git cherry-pick a6bd52e5432006ae2cdfbf70154e6ccbde548e20  # Wire StorageVolumeIsAvailable to containerValidDevices
-      git cherry-pick b7152056f7dcff0c2a1e14ad3a9deb9253547530  # Small unrelated cleanup in projects integration test
-      git cherry-pick 0a6cf157d9df0a59c1111c632bb2fe744654b3b6  # Add integration test
-      git cherry-pick ba8048264f2afe0f73510ad4887c918aeb2644d6  # lxd/storage: Fix importing preseed dump
-      git cherry-pick 33818664f7a2ae4dfa598a537d3a856d0be8ed82  # lxd/migration: Use current idmap instead of next
-      git cherry-pick bc611084ad0f11ea50f0411d68d20837eff9c443  # Make the db mapper code generator handle compound natural keys
-      git cherry-pick 992da5d46dbd3674679f09cc05f3de76ee5c771e  # lxd/db: Send raft/dqlite logging to debug
-      git cherry-pick 5bf30cfe7c4b8f12ecc31cf27b9c5f118f5a5b72  # lxd/daemon: Clarify early loggging
-      git cherry-pick 71d0bbd4166b44610beaca20723e7829f1f66345  # checkfeature: Don't log error on missing feature
-      git cherry-pick bbb527b2198888368591e5a96b29a9ee97d3966c  # lxd/daemon: Improve logging of kernel features
-      git cherry-pick a4655cdcd0018134eaee48f1fc5a90e8009731f1  # lxd/daemon: Improve logging of inherited fds
-      git cherry-pick 39847149aeaa81862eb5dc13af5afaa1c2e5ed50  # shared/logging: Improve logfile output
-      git cherry-pick 1cc810ec72349e8a3fdcd761ebf270a475b71e77  # lxd/daemon: Don't mention MAAS unless configured
-      git cherry-pick 5c4534c3e6feb2ec3ba7f05db1f6cd79096dc5ed  # lxd: Register background tasks as operations
-      git cherry-pick 2dc82a4ace092b7187de510a6dbd76afca772aa0  # lxd: Set default expiry for backups
-      git cherry-pick 811dc5d21c921b2b06259978ca0c98ce4780d4bb  # lxd: Remove expired container backups
-      git cherry-pick 8165c24cce7f27d1df3ce45c3355cb2014449dd6  # lxc: Switch all progress op handling to cancelable
-      git cherry-pick 293ebe9aae481a365fce0b2492a3403060527f6d  # client: Fix cancelation of image download
-      git cherry-pick 0b7d1bc213a235c7c53bcd2b81e823511a84eb63  # Increase go-dqlite client timeout when not-clustered
-      git cherry-pick 64443f8623d4e2b6c93053f0df329dde0f32f735  # Detect and shrink large boltdb files
-      git cherry-pick 37ccedc46928acaf908b6d545636c1b94b3ad988  # backup: Allow backups to not expire
-      git cherry-pick bf7ebb49c8e2fcd4ce3cc0267654e361a8f08e77  # lxd/projects: Fix profile updates
-      git cherry-pick 7d88564c6268dd89a8593a8b84ca64f6de749b03  # loop: retry on EBUSY
-      git cherry-pick 2e699d7174fb502669c98a4dd5a6f2da565f1c85  # lxd/storage: Improve loop device errors
-      git cherry-pick 89e8b49ecd2f5b6e9e7837ada72649800d2b4a4e  # lxd/containers: Detect root disk pool changes
-      git cherry-pick 3563dcd2a3d7f58be4b95342a92078a6a878ef97  # lxd/containers: Fix missing project in args
-      git cherry-pick cf2da22374cec652551060270c47a8f6c172c687  # doc: Update cloud-init network documentation
-      git cherry-pick cd4b1ec3c6200b8ce9b941e997e276ca5680e2dc  # client: Fix error handling in operations
-      git cherry-pick d5f78aa746a9f9a5c41ffe5a943134861e8e7bc7  # lxd: Rework task handling
-      git cherry-pick 537509c792a12b915d7f7f126d5b360f22e095a5  # lxd/containers: Prevent duplicate profiles
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
