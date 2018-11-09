@@ -554,6 +554,9 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 604b302c55d0230f425ba4f1f3f3c40930fa07ac  # doc: Add kernel.keys.maxkeys to production-setup
+      git cherry-pick ef371a7f1d48842978474558ca92ff3ead0548f6  # lxd/migration: Fix CRIU rsync option negotiation
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
