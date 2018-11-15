@@ -556,6 +556,14 @@ parts:
 
       git cherry-pick 604b302c55d0230f425ba4f1f3f3c40930fa07ac  # doc: Add kernel.keys.maxkeys to production-setup
       git cherry-pick ef371a7f1d48842978474558ca92ff3ead0548f6  # lxd/migration: Fix CRIU rsync option negotiation
+      git cherry-pick 40f96410963d137b8a602ccf837100e0b97508ec  # lxd/storage/dir: Don't fail when quota are set
+      git cherry-pick d4266326b4b78fc2219936a967252fdbd2a0df7e  # lxd/containers: Fix snapshot URLs in projects
+      git cherry-pick 4453ec8bab05a0053350b6908d40e157b81dc8ac  # lxd/storage/zfs: Fix project copies
+      git cherry-pick a45f2d904801626c43d400a7cd463cea36c35ada  # lxd/projects: Fix copy of snapshots
+      git cherry-pick db6a032d3457b2ca9c9ea9f7678a6d251e8a8583  # lxd: Handle AppArmor policy cache directory
+      git cherry-pick 11cc65d562c4634203626b641591426ed87bc106  # test: Support AppArmor policy cache directory
+      git cherry-pick fe0fa4b39766d489a70dc9dee00b8bf5dc209be9  # lxd/storage/ceph: Fix copies within project
+      git cherry-pick efa9493704a2ec0ffcec69fc095b5afebac2335a  # lxd/networks: Fix projects in dnsmasq.hosts
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
