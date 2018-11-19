@@ -564,6 +564,12 @@ parts:
       git cherry-pick 11cc65d562c4634203626b641591426ed87bc106  # test: Support AppArmor policy cache directory
       git cherry-pick fe0fa4b39766d489a70dc9dee00b8bf5dc209be9  # lxd/storage/ceph: Fix copies within project
       git cherry-pick efa9493704a2ec0ffcec69fc095b5afebac2335a  # lxd/networks: Fix projects in dnsmasq.hosts
+      git cherry-pick d9651c6af36a28d650b5b5c486a55eea334bceea  # lxd/containers: Respect optional=true for disks
+      git cherry-pick 4900ad2b856f2e7df35d8f2b44074de2307fa93a  # use empty usb vendorid to pass through all usb devices
+      git cherry-pick 8fad7d097a224af38197dc0871d10d615e7dcb10  # doc: Add usb_optional_vendorid API extension
+      git cherry-pick 7f1c183bbb1bb2ce5f80d7eabc05b3244ed978c5  # lxc/import: gzip is the default
+      git cherry-pick 5c099487f7e94455bca99a21c789d011e9791e84  # i18n: Update translations
+      git cherry-pick c056f36e26bac996414dd6bd8a3b89ccc548650a  # lxc/image: Fix rootfs file handling on snap
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
