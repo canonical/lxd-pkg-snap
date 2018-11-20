@@ -570,6 +570,19 @@ parts:
       git cherry-pick 7f1c183bbb1bb2ce5f80d7eabc05b3244ed978c5  # lxc/import: gzip is the default
       git cherry-pick 5c099487f7e94455bca99a21c789d011e9791e84  # i18n: Update translations
       git cherry-pick c056f36e26bac996414dd6bd8a3b89ccc548650a  # lxc/image: Fix rootfs file handling on snap
+      git cherry-pick 85268314f2bb82789eb9643e1da440698438d555  # lxc/project: Check existence on switch
+      git cherry-pick 3f79e795596b43a2ee55ea506142dfab8e32d37f  # lxd/containers: Properly clear static leases
+      git cherry-pick 2dd76d08e0c7e7952aef91b5cf58fe6b9ff24643  # lxd/storage/zfs: Fix project migrations
+      git cherry-pick db194f91dbc416ff5f9742013717db89f6d71893  # tests: Test migration in projects
+      git cherry-pick 7275b04969d3a6b2b5b08d04c599cf4710072ea6  # lxd/storage/btrfs: Fix project migrations
+      git cherry-pick 032bab24eabb06664adf15a1c08bf6291e6775d9  # tests: Fix leftover file
+      git cherry-pick 1fc712b0491505097d9ca91f22e8eb892e13cc66  # lxd/storage/btrfs: Tweak errors
+      git cherry-pick df7dc7eff4a056599b92ac66ccbcd6641046a9ab  # lxd/storage: Fix snapshot migration with projects
+      git cherry-pick 485e7bb0a9ef9f778cf4950f2c26b9af340b34a4  # lxd/storage/ceph: Fix project migration
+      git cherry-pick 6cf5f5e7af2b4019040e052c819ae03adb1df6bd  # lxd/storage/dir: Fix project snapshot symlink
+      git cherry-pick d0ed6342961679c323cf6d88b1922f0dc2ca491e  # lxd/migration: Fix rsync project prefix
+      git cherry-pick d35ce769552fd58c9ad9dbf51f5a435e43a56a5f  # lxd/projects: Add config validation
+      git cherry-pick 752860f3183953217381d0c1b2f1d5993fdc7ee0  # doc: Add project documentation
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
