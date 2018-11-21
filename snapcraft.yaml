@@ -583,6 +583,7 @@ parts:
       git cherry-pick d0ed6342961679c323cf6d88b1922f0dc2ca491e  # lxd/migration: Fix rsync project prefix
       git cherry-pick d35ce769552fd58c9ad9dbf51f5a435e43a56a5f  # lxd/projects: Add config validation
       git cherry-pick 752860f3183953217381d0c1b2f1d5993fdc7ee0  # doc: Add project documentation
+      git cherry-pick 4dfcff12eb278a6ce4598969bbeae9dcff94182f  # lxd/storage: Fix more project copy issues
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
