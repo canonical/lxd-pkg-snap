@@ -1,5 +1,5 @@
 name: lxd
-version: "3.0.2"
+version: "3.0.3"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -388,7 +388,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.2
+    source-tag: lxc-3.0.3
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -439,7 +439,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.2
+    source-tag: lxcfs-3.0.3
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -516,7 +516,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.0.2
+    source-tag: lxd-3.0.3
     after:
       - go
       - lxc
@@ -553,93 +553,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 8ba3e1208439c7204c5afbf9b1e5f7d33f4e7548  # doc: add note about ignoring mount options
-      git cherry-pick ee4f4520135e17eacfd5304a180b301d9d2a1625  # shared/idmap: test fcaps support
-      git cherry-pick e105cd5d15850807085f63969031da783faeb08a  # Add a few missing rows.Close() calls
-      git cherry-pick 9a45cde725cb77634dde5f7059f111b06fbd6a0e  # lxd/patches: Profiles are in the cluster db
-      git cherry-pick 927a1b7afe7c0f967da4617e873456935d84d8c4  # lxd/storage/ceph: Only freeze container if running
-      git cherry-pick 98fffd7161c77b5043a79fcd652e88c89f3eb01d  # lxc: Only target if --target is passed
-      git cherry-pick 66a8cab84e222356f0066027b08bb87a54495ad3  # shared: Return decompressor in DetectCompression
-      git cherry-pick 823e4494d37f237ad3faa9c8a697b5a11fd975c5  # lxd/containers: Don't return nil on Storage calls
-      git cherry-pick eb7ace860b59709b28c34598eacc0f850c311b65  # tests: Fix mode of proxy.sh
-      git cherry-pick 40b2ad76ab72b3e508008e2b15a8efbc8e4000cb  # shared/api: Don't re-define fields
-      git cherry-pick 5173d8ae2bbe714ea4c794b154cf6877c85cbb9c  # lxd/storage/btrfs: Fix clearing quotas
-      git cherry-pick 1072d592141bf0c43399de768ab7adf75cfabebf  # lxd/containers: Also use apply_quota for CEPH
-      git cherry-pick 4d349ae84c36564641a4aa73deba6b2623eaee21  # lxd/containers: Simplify and fix pool update logic
-      git cherry-pick 88bb45d22b7a63bde48e421e26b19509a73d25cd  # Add NodeIsOutdated() db API to check is a node is outdated
-      git cherry-pick 135a34318aee8ea8244f8707f0599d93b146f7ce  # Trigger whatever is in the LXD_CLUSTER_UPDATE var is node is outdated
-      git cherry-pick a16eab246cebe1cad5d26d56f2c3d904a669c065  # lxd/images: Add missing cleanup code
-      git cherry-pick 4fae1a112ff9b39ad3d41668f3be7af090f8c45a  # lxd/containers: Fix bad function name
-      git cherry-pick 0f54be248e09db198e8b2a4ec7f40e4a0395ca42  # tests: Avoid err == nil pattern
-      git cherry-pick 858c22d6b62c8882d815b1239db0562db8dca22b  # lxd: Don't mask database errors
-      git cherry-pick 46f40fc78feef62875cf03fed4759523f6ce4c98  # Honor the CC environment variable when invoking go install
-      git cherry-pick 99e062e0fd959574bf8d5ddf1fc78133303f938a  # client: Avoid err == nil pattern
-      git cherry-pick f7cfae7386a94e5c8a7cc5f43f01bb30407100ea  # lxd/profiles: Don't list snapshots in UsedBy
-      git cherry-pick c44e12ba90cc6e8738e3d8bd2561e292a1489356  # Make database queries timeout after 10s if cluster db is unavail
-      git cherry-pick 539661623916f08449ae7647bb94fc2102de2dc7  # tests: Fix pki with newer easyrsa
-      git cherry-pick ac64c055690c2ac7389322cd9d716dd824f70cb9  # lxd/db: Fix internal DB test
-      git cherry-pick b567f5d4bc063e00bdf6b884073e67a1822d130b  # doc: Fix and improve the description
-      git cherry-pick 79bd55b5fdab11adce41176bc4210400a44c7ab7  # operations: return true if operation is done before timeout
-      git cherry-pick e1793b26655452540b4b56d4dc6766177a064593  # lxd/containers: Avoid root device name conflict
-      git cherry-pick 154d6bb234fab4b17de8d0200b93c56e107960b5  # lxd/import: Add root disk if needed
-      git cherry-pick c48fd4f65c9911a129c50dfbad74634605f0bed9  # global: Advertise rsync features
-      git cherry-pick e82d7863c5b215e450df0b55660cd00652d1ac90  # lxd/db: Use NoSuchObject consistently
-      git cherry-pick 73997f296709d238c17e3af7f55ef814ab270a3d  # proxy: Only log errors
-      git cherry-pick 602924e50956064ba2575289e2c5282cd55a7d35  # lxd/import: Don't delete container on import failure
-      git cherry-pick a22699317e3f5fc548dba6e119d124c97be50181  # i18n: Update translation templates
-      git cherry-pick ffc3e1e2cc26dda623d5fe9b28ebf5a98dd6ad51  # Support --domain flag for lxc remote
-      git cherry-pick 0cedd1cea60963100ca641a3efddc4474580a2f7  # Add configurable macaroon expiry
-      git cherry-pick 0a7ab0e5c09e2bb9157c5b7884506202784f76b3  # Support Candid domain validation
-      git cherry-pick 7107d15fa31be9993ac37ecafd24423bc097adf4  # Update Candid docs
-      git cherry-pick e90d8c1bd5a573c6e8f9301e7f9d36b0ac002050  # Update i18n
-      git cherry-pick 08b67a13fb1e7c8135f90751442488d4ace5ddcc  # lxd: Rename API endpoints
-      git cherry-pick 9555cd7781fff8edde0d079e94408abd425a617a  # network_linux: add netns_getifaddrs()
-      git cherry-pick 4d4d7ff39b3b23d5338b328acb71468026fd2110  # main_checkfeature: check kernel for netnsid support
-      git cherry-pick 960cb8247519d8da681b4c6d4e90b17887848a63  # network: add NetworkGetCounters()
-      git cherry-pick 2f21be88dfeddbcb0471ad7e7b17bbd209ed1c59  # container_lxc: switch to NetnsGetifaddrs()
-      git cherry-pick 948fdd433e3963d67761a1a9e50a306c648e5caf  # shared: Add network state API
-      git cherry-pick 5be80b1b55e7dc2dfbc9f01cbde10d9f270a1b4a  # api: Add extended cluster join API
-      git cherry-pick 6a81093042f57216843aacc0f858308b972c1c58  # lxd/init: Fix struct conflict
-      git cherry-pick b6a8b252af7708ee726afba26373923d5b0cc638  # lxc: Identify snapshots when listed
-      git cherry-pick b25db2c5b396858959306f9567d980347be6be93  # shared/version: Support detecting ChromeOS versions
-      git cherry-pick e3a81b33fe9c829770b69f0078c634d928acf3f3  # lxd/containers: Force bring up of SRIOV parent
-      git cherry-pick 32f551f8c4332e5ec91a7b5c0cf82dc917d9e41d  # netns_getifaddrs: fix argument passing
-      git cherry-pick 0ec42850d764a8c6460f3d8190011fe696628d96  # netnsid_getifaddrs: fix check for netnsid support
-      git cherry-pick 40f9aa18c3993bc8742c5bdfd83f2531d38c6449  # doc: Fix storage API endpoints
-      git cherry-pick 9eac430a7622d44778e69d14791432f2fa1cc495  # container_lxc: handle network retrieval smarter
-      git cherry-pick 5bd407410c831be2ac94a6f6bdb84b651f380bc9  # shared: Add storage volume snapshot support
-      git cherry-pick 95b6bc8d09af14dbf3264194957b416e8a880163  # client: Add storage volume snapshot support
-      git cherry-pick 15477eb3bf2cf77be7c8dfcbaef50f861ad432db  # netns_getifaddrs: don't print useless info
-      git cherry-pick 1722ea8374167835578212e0e52c80de071e92e7  # shared/api: Fix StorageVolumeSource struct
-      git cherry-pick 6254d0421db645f770c7c3ee0a5943d5d491ce81  # Makefile: Set LDFLAGS for dqlite
-      git cherry-pick 05caca69ad995933fca3b2bf8f05f80d76fccb5d  # lxd: Fix handling of CGroup-V2 systems
-      git cherry-pick 8188999ee44b6ea68a87425a36cff9f8a14d5af4  # tree-wide: pass -std=gnu11 -Wvla
-      git cherry-pick 56381f85635c106b92e10da7b52eef93484c0a79  # lxd/containers: Rework exec FD handling
-      git cherry-pick 8eb785247e6d7124a772dfb95ce458fada004aa5  # Added optional ?target=<member> to /containers POST documentation
-      git cherry-pick 1b76fb7229d4f58d8951e596530cad728433b798  # lxd/storage/lvm: Don't un-necessarily start/stop storage
-      git cherry-pick 7cf9c0ccfe6b0dc0eb5e3d2e3761f3b592e8d077  # lxd/storage/ceph: Don't un-necessarily mount snapshots
-      git cherry-pick ddbba80f192e4de15dc3a848f79b88b5ce938306  # lxd/containers: Fix cleanup on create failure
-      git cherry-pick 0352df1acae8ae791c5722dd2d46a2fd2f3fcc78  # shared/network: Don't crash on VPN devices
-      git cherry-pick 35cb18a5da9b04d05c2659343fb3ae188966de2a  # lxd/containers: Fix bad nvidia information parsing
-      git cherry-pick 08f7dc6fe4de6e857920f821142dfdbedc53d2d0  # netns_getifaddrs: fix network stats retrieval
-      git cherry-pick d13c33f84561e9844dc93bf0eeb1dc1cb4aef35f  # network: Fix counters on non-ethernet interfaces
-      git cherry-pick 2d8b3d7c0cdd6c25eaab24d8becc44feefa9543c  # doc: Add configuration for readthedocs
-      git cherry-pick 48f874fb6a0cfddec712e2ca574d82a1485d9b36  # storage: Fix error strings
-      git cherry-pick d1a5b4d158f45c279a7f637f29467cda934b10e6  # lxd/storage/btrfs: Don't fail deleting pools on misisng disk
-      git cherry-pick 3a58a68891924b5dad8bc111fe1126069da65a08  # Split code in 2 seperate files
-      git cherry-pick 8460310e4be25a96d6b424d2299b64acf4dddfc0  # network: provide #ifdefs for RTM_* requests
-      git cherry-pick ca18091cc8afe2af26c4917e35fcee2d49574411  # Document LVM support for storage quotas
-      git cherry-pick 01b5595ec933c24e22905c6f6540136aef6ce8e2  # candid: Cleanup code a bit
-      git cherry-pick be7fa5b9d9ec42cac3baabb1554476c8dc9f53a7  # network: fix netns_get_nsid() signature
-      git cherry-pick a79fe17d9d5de454f51b0df35c5a5f76008a1440  # apparmor: Allow cgroupv2 in cgns
-      git cherry-pick c884892445e333b925f4b4e56591c9258de543d9  # candid: Fix client when using https candid server
-      git cherry-pick 1968c3f91e5ab77ebfb1f2df8480fe1e2daa2c72  # lxd-p2c: Fix static build
-      git cherry-pick 0b50a8a4c35fae5291a458aeac4efad6f621679e  # config: Add support for PEM encrypted keys
-      git cherry-pick a503ca3c38fb002c9fb13b13fe0f36f155905a9e  # lxc: Setup password helper
-      git cherry-pick 383f20e3ce1d4811e243de41165abc116cb95979  # lxc/config: Only setup needed connection args
-      git cherry-pick 9b32651d14530212a20ebdc69f10ddf4ad6f4dbe  # lxc/config: More TLS optimizations
-      git cherry-pick 204541551171e4a0ad4bde0a59bda700971a5ba5  # i18n: Update translation templates
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
