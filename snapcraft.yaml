@@ -388,7 +388,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.2
+    source-tag: lxc-3.0.3
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -439,7 +439,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.2
+    source-tag: lxcfs-3.0.3
     build-packages:
       - libfuse-dev
       - libpam0g-dev
