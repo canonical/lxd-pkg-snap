@@ -589,6 +589,20 @@ parts:
       git cherry-pick 57fc5af28fa51c187280fb1aac308ce395762550  # test: Support AppArmor policy cache directory
       git cherry-pick 6ea4d2c3d3afa177ae8ee43d5d23423fc0cb6887  # lxd: Fix AppArmor cache policy version check
       git cherry-pick 35ed92513195d132ed00998dbed86b0f62350d9e  # lxd/storage: user_subvol_rm_allowed for btrfs
+      git cherry-pick 14e53938de268a32e48460c52cc6be639c99b4aa  # lxd/containers: Improve hwaddr retry logic
+      git cherry-pick 21657bf1df0ebfa77b762304d39a0e9afcb7d53e  # tests: Always pass -w to iptables
+      git cherry-pick 7555f492a4cb570e1d812ef5a7a70022af5aa2fe  # lxd/migration: Remove leftover debugging
+      git cherry-pick 28f8b5ed45f16238f2bcbf67c8351ec7798234c9  # lxd/db: Fix unit test not actually checking error
+      git cherry-pick 0c6568d109e68c441ce6c43f6497878e835a709c  # lxd/db: Fix typo in existing docstring
+      git cherry-pick fac2f2fcd0967a9f51cbc2f96b02a25d0dbe56d1  # lxd/storage/lvm: Fix project handling
+      git cherry-pick 6c078b26da292306cc5a8f75bc23de9ebc454167  # lxd/storage: Fix check for custom volume restore
+      git cherry-pick 55865df32b9bb98fd2bb1b64f4cd65e769fd5a56  # lxd/init: Fix typo
+      git cherry-pick aea1c72ff2ecb6c68875cc2a1201fd98a5e19562  # lxd/storage/zfs: Fix setting quotas on project
+      git cherry-pick 0f1e3f83b6d742fd860b7e867ed9d8e0027fed59  # shared/termios: Add shim for non-cgo builds
+      git cherry-pick 5aed995ab2cb6c37ae85cd889db3bf0719cd16b5  # lxd/storage/lvm: Run pvremove on VG deletion
+      git cherry-pick e553ecf4b76118d45d5f49ea6574c2d7a0e7fac3  # tests: Bump size to 120MB for btrfs
+      git cherry-pick 92e2cd23063f2beded9353fb26e522498ab489d9  # storage/zfs: Fix arguments in function call
+      git cherry-pick 0d30baebd4d83ba3c2e84f94984dcd31e7a7ba59  # shared/idmap: Workaround Go tip change
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
