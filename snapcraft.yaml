@@ -96,6 +96,7 @@ parts:
       - btrfs-tools
     prime:
       - bin/btrfs
+      - bin/btrfstune
       - bin/mkfs.btrfs
 
   ceph:
