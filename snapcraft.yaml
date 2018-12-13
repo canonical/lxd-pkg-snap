@@ -1,5 +1,5 @@
 name: lxd
-version: "3.7"
+version: "3.8"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -517,7 +517,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.7
+    source-tag: lxd-3.8
     after:
       - go
       - lxc
@@ -554,56 +554,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 604b302c55d0230f425ba4f1f3f3c40930fa07ac  # doc: Add kernel.keys.maxkeys to production-setup
-      git cherry-pick ef371a7f1d48842978474558ca92ff3ead0548f6  # lxd/migration: Fix CRIU rsync option negotiation
-      git cherry-pick 40f96410963d137b8a602ccf837100e0b97508ec  # lxd/storage/dir: Don't fail when quota are set
-      git cherry-pick d4266326b4b78fc2219936a967252fdbd2a0df7e  # lxd/containers: Fix snapshot URLs in projects
-      git cherry-pick 4453ec8bab05a0053350b6908d40e157b81dc8ac  # lxd/storage/zfs: Fix project copies
-      git cherry-pick a45f2d904801626c43d400a7cd463cea36c35ada  # lxd/projects: Fix copy of snapshots
-      git cherry-pick db6a032d3457b2ca9c9ea9f7678a6d251e8a8583  # lxd: Handle AppArmor policy cache directory
-      git cherry-pick 11cc65d562c4634203626b641591426ed87bc106  # test: Support AppArmor policy cache directory
-      git cherry-pick fe0fa4b39766d489a70dc9dee00b8bf5dc209be9  # lxd/storage/ceph: Fix copies within project
-      git cherry-pick efa9493704a2ec0ffcec69fc095b5afebac2335a  # lxd/networks: Fix projects in dnsmasq.hosts
-      git cherry-pick d9651c6af36a28d650b5b5c486a55eea334bceea  # lxd/containers: Respect optional=true for disks
-      git cherry-pick 4900ad2b856f2e7df35d8f2b44074de2307fa93a  # use empty usb vendorid to pass through all usb devices
-      git cherry-pick 8fad7d097a224af38197dc0871d10d615e7dcb10  # doc: Add usb_optional_vendorid API extension
-      git cherry-pick 7f1c183bbb1bb2ce5f80d7eabc05b3244ed978c5  # lxc/import: gzip is the default
-      git cherry-pick 5c099487f7e94455bca99a21c789d011e9791e84  # i18n: Update translations
-      git cherry-pick c056f36e26bac996414dd6bd8a3b89ccc548650a  # lxc/image: Fix rootfs file handling on snap
-      git cherry-pick 85268314f2bb82789eb9643e1da440698438d555  # lxc/project: Check existence on switch
-      git cherry-pick 3f79e795596b43a2ee55ea506142dfab8e32d37f  # lxd/containers: Properly clear static leases
-      git cherry-pick 2dd76d08e0c7e7952aef91b5cf58fe6b9ff24643  # lxd/storage/zfs: Fix project migrations
-      git cherry-pick db194f91dbc416ff5f9742013717db89f6d71893  # tests: Test migration in projects
-      git cherry-pick 7275b04969d3a6b2b5b08d04c599cf4710072ea6  # lxd/storage/btrfs: Fix project migrations
-      git cherry-pick 032bab24eabb06664adf15a1c08bf6291e6775d9  # tests: Fix leftover file
-      git cherry-pick 1fc712b0491505097d9ca91f22e8eb892e13cc66  # lxd/storage/btrfs: Tweak errors
-      git cherry-pick df7dc7eff4a056599b92ac66ccbcd6641046a9ab  # lxd/storage: Fix snapshot migration with projects
-      git cherry-pick 485e7bb0a9ef9f778cf4950f2c26b9af340b34a4  # lxd/storage/ceph: Fix project migration
-      git cherry-pick 6cf5f5e7af2b4019040e052c819ae03adb1df6bd  # lxd/storage/dir: Fix project snapshot symlink
-      git cherry-pick d0ed6342961679c323cf6d88b1922f0dc2ca491e  # lxd/migration: Fix rsync project prefix
-      git cherry-pick d35ce769552fd58c9ad9dbf51f5a435e43a56a5f  # lxd/projects: Add config validation
-      git cherry-pick 752860f3183953217381d0c1b2f1d5993fdc7ee0  # doc: Add project documentation
-      git cherry-pick 4dfcff12eb278a6ce4598969bbeae9dcff94182f  # lxd/storage: Fix more project copy issues
-      git cherry-pick 669a53ffcf16824ad5dcae33d4b8b45b48ef2e73  # lxd/init: Better handle disk sizes
-      git cherry-pick 08b527bc4088a2b0315b6f59ca19e62cd8df1097  # lxd/db: Avoid un-needed query on container move
-      git cherry-pick 57fc5af28fa51c187280fb1aac308ce395762550  # test: Support AppArmor policy cache directory
-      git cherry-pick 6ea4d2c3d3afa177ae8ee43d5d23423fc0cb6887  # lxd: Fix AppArmor cache policy version check
-      git cherry-pick 35ed92513195d132ed00998dbed86b0f62350d9e  # lxd/storage: user_subvol_rm_allowed for btrfs
-      git cherry-pick 14e53938de268a32e48460c52cc6be639c99b4aa  # lxd/containers: Improve hwaddr retry logic
-      git cherry-pick 21657bf1df0ebfa77b762304d39a0e9afcb7d53e  # tests: Always pass -w to iptables
-      git cherry-pick 7555f492a4cb570e1d812ef5a7a70022af5aa2fe  # lxd/migration: Remove leftover debugging
-      git cherry-pick 28f8b5ed45f16238f2bcbf67c8351ec7798234c9  # lxd/db: Fix unit test not actually checking error
-      git cherry-pick 0c6568d109e68c441ce6c43f6497878e835a709c  # lxd/db: Fix typo in existing docstring
-      git cherry-pick fac2f2fcd0967a9f51cbc2f96b02a25d0dbe56d1  # lxd/storage/lvm: Fix project handling
-      git cherry-pick 6c078b26da292306cc5a8f75bc23de9ebc454167  # lxd/storage: Fix check for custom volume restore
-      git cherry-pick 55865df32b9bb98fd2bb1b64f4cd65e769fd5a56  # lxd/init: Fix typo
-      git cherry-pick aea1c72ff2ecb6c68875cc2a1201fd98a5e19562  # lxd/storage/zfs: Fix setting quotas on project
-      git cherry-pick 0f1e3f83b6d742fd860b7e867ed9d8e0027fed59  # shared/termios: Add shim for non-cgo builds
-      git cherry-pick 5aed995ab2cb6c37ae85cd889db3bf0719cd16b5  # lxd/storage/lvm: Run pvremove on VG deletion
-      git cherry-pick e553ecf4b76118d45d5f49ea6574c2d7a0e7fac3  # tests: Bump size to 120MB for btrfs
-      git cherry-pick 92e2cd23063f2beded9353fb26e522498ab489d9  # storage/zfs: Fix arguments in function call
-      git cherry-pick 0d30baebd4d83ba3c2e84f94984dcd31e7a7ba59  # shared/idmap: Workaround Go tip change
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
