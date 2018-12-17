@@ -389,7 +389,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.3
+    source-tag: lxc-3.1.0
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -427,6 +427,8 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      git cherry-pick 4e5a9657cafad69d8447a385abb1a384423b54f8  # lxccontainer: fix mount api (mount_injection_file)
 
       set +ex
       snapcraftctl build
