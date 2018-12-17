@@ -557,6 +557,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 59ff7e03dd34d059a6c678d982e70d00a5e35112  # README: Update doc links
+      git cherry-pick 3e882b135febdfce8cab493846cb0f8998113a02  # lxd/storage/zfs: Fix dataset handling on copy
+      git cherry-pick d18d1be0979fa30bf3f6f43f1f383bd2cbaf937f  # lxd/forkmount: Fix version detection
+      git cherry-pick b9968b09eb2f771129c6881f58074a30cc32bf6c  # lxd/containers: Handle projects in forkmount
+      git cherry-pick 5317a941b42175c8f8caf2d684b4f1465a0db0eb  # lxd/main_forkmount: Remove debug statements
+      git cherry-pick ad885a5b1fffea841af04f9209c727b6c8906227  # lxd/forkmount: Require mount_injection_file
+      git cherry-pick f15cc8548129c5be54103e1ddbddde8ba80255f5  # Re-generate the fresh schema, bumping the schema version
+      git cherry-pick 47a0cbac9cd709fef2b02301090bfd64894468ff  # lxd/containers: bind default value is host
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
