@@ -33,6 +33,10 @@ if [ "${EDITOR:-}" != "nano" ]; then
 fi
 export VISUAL=${EDITOR:-}
 
+# Reset all locales as it isn't available in the snap (#29)
+LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+
 LXC="lxc"
 if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
     LXC="${SNAP_COMMON}/lxc.debug"
