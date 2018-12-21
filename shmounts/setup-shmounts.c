@@ -39,7 +39,7 @@ int setup_ns() {
 	ssize_t ret;
 	int pipe_fds[2];
 	char nspath[PATH_MAX];
-	int nsfd = -1, fd = -1, pid = -1;
+	int nsfd_host = -1, fd = -1, pid = -1;
 
 	// Create sync pipe
 	ret = pipe2(pipe_fds, O_CLOEXEC);
@@ -147,15 +147,15 @@ int setup_ns() {
 	}
 
 	// Re-attach to PID1 mntns
-	nsfd = open("/proc/1/ns/mnt", O_RDONLY);
-	if (nsfd < 0) {
+	nsfd_host = open("/proc/1/ns/mnt", O_RDONLY);
+	if (nsfd_host < 0) {
 		return -1;
 	}
 
-	if (setns(nsfd, CLONE_NEWNS) < 0) {
+	if (setns(nsfd_host, CLONE_NEWNS) < 0) {
 		return -1;
 	}
-	close(nsfd);
+	close(nsfd_host);
 
 	// Cleanup spare mount entry
 	if (umount("/var/snap/lxd/common/shmounts") < 0) {
@@ -168,29 +168,28 @@ int setup_ns() {
 int main() {
 	bool setup = true;
 	bool run_media = false;
-	int nsfd = -1, newnsfd = -1;
+	int nsfd_current = -1, nsfd_old = -1, nsfd_host = -1, nsfd_shmounts = -1;
 
 	// Get a reference to current mtnns
-	nsfd = open("/proc/self/ns/mnt", O_RDONLY);
-	if (nsfd < 0) {
+	nsfd_current = open("/proc/self/ns/mnt", O_RDONLY);
+	if (nsfd_current < 0) {
 		return -1;
 	}
 
 	// Attach to PID1 mntns
-	newnsfd = open("/proc/1/ns/mnt", O_RDONLY);
-	if (newnsfd < 0) {
+	nsfd_host = open("/proc/1/ns/mnt", O_RDONLY);
+	if (nsfd_host < 0) {
 		return -1;
 	}
 
-	if (setns(newnsfd, CLONE_NEWNS) < 0) {
+	if (setns(nsfd_host, CLONE_NEWNS) < 0) {
 		return -1;
 	}
-	close(newnsfd);
 
 	// Attempt to attach to our hidden mntns
-	newnsfd = open("/var/snap/lxd/common/ns/shmounts", O_RDONLY);
-	if (newnsfd >= 0) {
-		if (setns(newnsfd, CLONE_NEWNS) == 0) {
+	nsfd_shmounts = open("/var/snap/lxd/common/ns/shmounts", O_RDONLY);
+	if (nsfd_shmounts >= 0) {
+		if (setns(nsfd_shmounts, CLONE_NEWNS) == 0) {
 			setup = false;
 		}
 	}
@@ -202,12 +201,12 @@ int main() {
 		}
 
 		// Attach to the new hidden mntns
-		newnsfd = open("/var/snap/lxd/common/ns/shmounts", O_RDONLY);
-		if (newnsfd < 0) {
+		nsfd_shmounts = open("/var/snap/lxd/common/ns/shmounts", O_RDONLY);
+		if (nsfd_shmounts < 0) {
 			return -1;
 		}
 
-		if (setns(newnsfd, CLONE_NEWNS) < 0) {
+		if (setns(nsfd_shmounts, CLONE_NEWNS) < 0) {
 			return -1;
 		}
 
@@ -242,7 +241,7 @@ int main() {
 	}
 
 	// Attach to the snapd mntns
-	if (setns(nsfd, CLONE_NEWNS) < 0) {
+	if (setns(nsfd_current, CLONE_NEWNS) < 0) {
 		return -1;
 	}
 
@@ -262,7 +261,7 @@ int main() {
 	}
 
 	// Attach to the snapd mntns
-	if (setns(newnsfd, CLONE_NEWNS) < 0) {
+	if (setns(nsfd_host, CLONE_NEWNS) < 0) {
 		return -1;
 	}
 
@@ -287,7 +286,9 @@ int main() {
 	}
 
 	// Close open fds
-	close(nsfd);
-	close(newnsfd);
+	close(nsfd_host);
+	close(nsfd_old);
+	close(nsfd_current);
+	close(nsfd_shmounts);
 	return 0;
 }
