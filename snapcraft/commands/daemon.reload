@@ -6,6 +6,6 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-touch "${SNAP_COMMON}/lxd/.reload"
+echo reload > "${SNAP_COMMON}/state"
 PID=$(cat "${SNAP_COMMON}/lxd.pid")
 /bin/kill "$PID"
