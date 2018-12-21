@@ -19,6 +19,9 @@ export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export XTABLES_LIBDIR="${SNAP_CURRENT}/lib/xtables/"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 
+# Cleanup last state
+true > "${SNAP_COMMON}/state"
+
 # Load our configuration
 if [ ! -e "${SNAP_COMMON}/config" ]; then
     echo "==> Creating missing snap configuration"
@@ -388,8 +391,8 @@ RET=$?
 
 if [ "${RET}" -gt "0" ]; then
     echo "=> LXD failed to start"
-    touch "${SNAP_COMMON}/lxd/.crashed"
-    exit "${RET}"
+    echo "crashed" > "${SNAP_COMMON}/state"
+    exit 1
 fi
 
 ## Wait for the daemon to die
@@ -398,21 +401,22 @@ wait "$PID"
 RET=$?
 
 if [ "${RET}" -gt "0" ]; then
-    touch "${SNAP_COMMON}/lxd/.crashed"
+    echo "crashed" > "${SNAP_COMMON}/state"
     echo "=> LXD failed with return code ${RET}"
+    exit 1
 else
-    if [ -e "${SNAP_COMMON}/lxd/.reload" ]; then
+    if [ -e "${SNAP_COMMON}/state" ] && [ "$(cat "${SNAP_COMMON}/state")" = "reload" ]; then
         echo "=> LXD is reloading"
         exit 1
     fi
 
-    if [ -e "${SNAP_COMMON}/lxd/.host-shutdown" ]; then
-        rm -f "${SNAP_COMMON}/lxd/.host-shutdown"
+    if [ -e "${SNAP_COMMON}/state" ] && [ "$(cat "${SNAP_COMMON}/state")" = "host-shutdown" ]; then
+        true > "${SNAP_COMMON}/state"
     else
-        touch "${SNAP_COMMON}/lxd/.shutdown"
+        echo shutdown > "${SNAP_COMMON}/state"
     fi
 
     echo "=> LXD exited cleanly"
 fi
 
-exit "${RET}"
+exit 0
