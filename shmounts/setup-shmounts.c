@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <linux/limits.h>
+#include <mntent.h>
 #include <sched.h>
 #include <stdio.h>
 #include <sys/mount.h>
@@ -11,6 +12,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 static ssize_t lxc_write_nointr(int fd, const void *buf, size_t count)
 {
@@ -32,6 +34,36 @@ again:
 		goto again;
 
 	return ret;
+}
+
+
+int mkdir_p(const char *dir, mode_t mode)
+{
+	const char *tmp = dir;
+	const char *orig = dir;
+
+	do {
+		int ret;
+		char *makeme;
+
+		dir = tmp + strspn(tmp, "/");
+		tmp = dir + strcspn(dir, "/");
+
+		errno = ENOMEM;
+		makeme = strndup(orig, dir - orig);
+		if (!makeme)
+			return -1;
+
+		ret = mkdir(makeme, mode);
+		if (ret < 0 && errno != EEXIST) {
+			free(makeme);
+			return -1;
+		}
+
+		free(makeme);
+	} while (tmp != dir);
+
+	return 0;
 }
 
 int setup_ns() {
@@ -168,7 +200,11 @@ int setup_ns() {
 int main() {
 	bool setup = true;
 	bool run_media = false;
+	int fd = -1;
 	int nsfd_current = -1, nsfd_old = -1, nsfd_host = -1, nsfd_shmounts = -1;
+	FILE *mounts;
+	struct mntent *mountentry;
+	char path[PATH_MAX];
 
 	// Get a reference to current mtnns
 	nsfd_current = open("/proc/self/ns/mnt", O_RDONLY);
@@ -283,6 +319,101 @@ int main() {
 		if (rmdir("/media/.lxd-shmounts") < 0 && errno != ENOENT) {
 			return -1;
 		}
+	}
+
+	// Attempt to attach to previous LXD mntns
+	nsfd_old = open("/var/snap/lxd/common/ns/mntns", O_RDONLY);
+	if (nsfd_old >= 0) {
+		// Attach to old ns
+		if (setns(nsfd_old, CLONE_NEWNS) < 0) {
+			return -1;
+		}
+
+		// Move all the mounts we care about to shmounts
+		mounts = setmntent("/proc/mounts", "r");
+		if (mounts == NULL) {
+			return -1;
+		}
+
+		while ((mountentry = getmntent(mounts)) != NULL) {
+			if (strncmp("/var/snap/lxd/common/lxd/storage-pools/", mountentry->mnt_dir, 39) != 0) {
+				continue;
+			}
+
+			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/shmounts/storage-pools/%s", mountentry->mnt_dir + 39) < 0) {
+				return -1;
+			}
+
+			if (mkdir_p(path, 0700) < 0) {
+				return -1;
+			}
+
+			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_MOVE, NULL) < 0) {
+				return -1;
+			}
+		}
+
+		if (endmntent(mounts) < 0) {
+			return -1;
+		}
+
+		// Attach to current ns
+		if (setns(nsfd_current, CLONE_NEWNS) < 0) {
+			return -1;
+		}
+
+		// Move all the mounts into place
+		mounts = setmntent("/proc/mounts", "r");
+		if (mounts == NULL) {
+			return -1;
+		}
+
+		while ((mountentry = getmntent(mounts)) != NULL) {
+			if (strncmp("/var/snap/lxd/common/shmounts/storage-pools/", mountentry->mnt_dir, 44) != 0) {
+				continue;
+			}
+
+			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/lxd/storage-pools/%s", mountentry->mnt_dir + 44) < 0) {
+				return -1;
+			}
+
+			if (mkdir_p(path, 0700) < 0) {
+				return -1;
+			}
+
+			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_BIND, NULL) < 0) {
+				return -1;
+			}
+
+			if (umount2(mountentry->mnt_dir, MNT_DETACH) < 0) {
+				return -1;
+			}
+		}
+
+		if (endmntent(mounts) < 0) {
+			return -1;
+		}
+
+		// Attach back to host ns
+		if (setns(nsfd_host, CLONE_NEWNS) < 0) {
+			return -1;
+		}
+
+		// Get rid of the mount, we're done here
+		if (umount2("/var/snap/lxd/common/ns/mntns", MNT_DETACH) < 0) {
+			return -1;
+		}
+	}
+
+	// Save our current mntns
+	fd = open("/var/snap/lxd/common/ns/mntns", O_CREAT | O_RDWR);
+	if (fd < 0) {
+		return -1;
+	}
+	close(fd);
+
+	if (mount("/run/snapd/ns/lxd.mnt", "/var/snap/lxd/common/ns/mntns", NULL, MS_BIND, NULL) < 0) {
+		return -1;
 	}
 
 	// Close open fds
