@@ -91,6 +91,7 @@ hooks:
 parts:
   # Dependencies
   btrfs:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - btrfs-tools
@@ -100,6 +101,7 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - ceph-common
@@ -139,6 +141,7 @@ parts:
     source-tag: go1.11.2
 
   lvm:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - dmeventd
@@ -170,6 +173,7 @@ parts:
       - lib/*/libreadline.so*
 
   nano:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - nano
@@ -210,6 +214,7 @@ parts:
       - lib/libnvidia-container.so*
 
   openvswitch:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - openvswitch-switch
@@ -267,6 +272,7 @@ parts:
       - lib/*/libuv*
 
   vim:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - vim-tiny
@@ -278,6 +284,7 @@ parts:
       - etc/vimrc
 
   xfs:
+    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - xfsprogs
@@ -632,6 +639,7 @@ parts:
       - bin/snap-query
 
   strip:
+    source: snapcraft/empty
     after:
       - btrfs
       - ceph
