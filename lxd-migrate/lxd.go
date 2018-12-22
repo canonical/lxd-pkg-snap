@@ -177,7 +177,7 @@ func (d *lxdDaemon) shutdown() error {
 	return nil
 }
 
-func (d *lxdDaemon) wait() error {
+func (d *lxdDaemon) wait(clustered bool) error {
 	finger := make(chan error, 1)
 	go func() {
 		for {
@@ -198,10 +198,15 @@ func (d *lxdDaemon) wait() error {
 		}
 	}()
 
+	timeout := time.Second * time.Duration(300)
+	if clustered {
+		timeout = time.Hour
+	}
+
 	select {
 	case <-finger:
 		break
-	case <-time.After(time.Second * time.Duration(300)):
+	case <-time.After(time.Second * timeout):
 		return fmt.Errorf("LXD still not running after 5 minutes.")
 	}
 
