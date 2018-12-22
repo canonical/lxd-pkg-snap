@@ -88,10 +88,6 @@ func run() error {
 		return err
 	}
 
-	if src.info.Environment.ServerClustered {
-		return fmt.Errorf("The source server is part of a LXD cluster, this isn't supported.")
-	}
-
 	// Show migration report
 	fmt.Printf("\n=== Source server\n")
 	err = src.showReport()

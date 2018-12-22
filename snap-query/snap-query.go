@@ -9,9 +9,9 @@ import (
 )
 
 type snapChanges struct {
-	Type string `json:"type"`
-	StatusCode int `json:"status-code"`
-	Result []snapChangesResult `json:"result"`
+	Type       string              `json:"type"`
+	StatusCode int                 `json:"status-code"`
+	Result     []snapChangesResult `json:"result"`
 }
 
 type snapChangesResult struct {

@@ -41,6 +41,12 @@ func dbRewritePoolSource(src *lxdDaemon, dst *lxdDaemon, pool string, path strin
 		}
 	}
 
+	// Get the node name
+	nodeName := "none"
+	if src.info.Environment.ServerClustered {
+		nodeName = src.info.Environment.ServerName
+	}
+
 	// Setup the DB patch
 	patchPath := filepath.Join(dst.path, "database", "patch.global.sql")
 	patch, err := os.OpenFile(patchPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
@@ -48,7 +54,7 @@ func dbRewritePoolSource(src *lxdDaemon, dst *lxdDaemon, pool string, path strin
 		return err
 	}
 
-	_, err = patch.WriteString(fmt.Sprintf("UPDATE storage_pools_config SET value='%s' WHERE key='source' AND storage_pool_id=(SELECT id FROM storage_pools WHERE name='%s');\n", path, pool))
+	_, err = patch.WriteString(fmt.Sprintf("UPDATE storage_pools_config SET value='%s' WHERE key='source' AND storage_pool_id=(SELECT id FROM storage_pools WHERE name='%s') AND node_id=(SELECT id FROM nodes WHERE name='%s');\n", path, pool, nodeName))
 	if err != nil {
 		return err
 	}
