@@ -208,7 +208,14 @@ func run() error {
 
 	// Wait for LXD to be online
 	fmt.Printf("=> Waiting for LXD to come online\n")
-	err = dst.wait()
+
+	if src.info.Environment.ServerClustered {
+		fmt.Printf("\nWARNING: LXD cluster members must all run the exact same LXD version\n")
+		fmt.Printf("\n         You may now need to perform the same operation on the other members\n")
+		fmt.Printf("\n         The upgrade will hold here for up to an hour while you do so\n")
+	}
+
+	err = dst.wait(src.info.Environment.ServerClustered)
 	if err != nil {
 		return err
 	}
@@ -230,7 +237,7 @@ func run() error {
 
 		// Wait for LXD to be online
 		fmt.Printf("=> Waiting for LXD to come online\n")
-		err = dst.wait()
+		err = dst.wait(false)
 		if err != nil {
 			return err
 		}
