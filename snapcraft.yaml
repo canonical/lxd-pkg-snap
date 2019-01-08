@@ -1,5 +1,5 @@
 name: lxd
-version: "3.8"
+version: "3.9"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -526,7 +526,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.8
+    source-tag: lxd-3.9
     after:
       - go
       - lxc
@@ -563,39 +563,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 59ff7e03dd34d059a6c678d982e70d00a5e35112  # README: Update doc links
-      git cherry-pick 3e882b135febdfce8cab493846cb0f8998113a02  # lxd/storage/zfs: Fix dataset handling on copy
-      git cherry-pick d18d1be0979fa30bf3f6f43f1f383bd2cbaf937f  # lxd/forkmount: Fix version detection
-      git cherry-pick b9968b09eb2f771129c6881f58074a30cc32bf6c  # lxd/containers: Handle projects in forkmount
-      git cherry-pick 5317a941b42175c8f8caf2d684b4f1465a0db0eb  # lxd/main_forkmount: Remove debug statements
-      git cherry-pick ad885a5b1fffea841af04f9209c727b6c8906227  # lxd/forkmount: Require mount_injection_file
-      git cherry-pick f15cc8548129c5be54103e1ddbddde8ba80255f5  # Re-generate the fresh schema, bumping the schema version
-      git cherry-pick 47a0cbac9cd709fef2b02301090bfd64894468ff  # lxd/containers: bind default value is host
-      git cherry-pick b8abd8cfb91ad60f4df9399763f68f105bd86ce4  # shared/util: Export DownloadFileHash
-      git cherry-pick 352fd8bb3fa15e588f5d0c543ae2ce29114bef6c  # client: Use exported DownloadFileHash
-      git cherry-pick 7c017d6ec069ec2c24ddce7d0d89c6a1f10ed26f  # lxd/containers: Fix unix devices with liblxc 3.1
-      git cherry-pick af340ced4793d4a6e067cb61691dcb7499e7a8f4  # lxd: Fix go test
-      git cherry-pick 01adf16f98d8a03a3460594a5764c2db5410a7e6  # lxc-to-lxd: Fix go test
-      git cherry-pick 6408d39d97dd4f6fee1616ff5b0f2120c278bde4  # tests: Add env variable to skip static analysis
-      git cherry-pick 32b77d2c205a7dffaaf8888d41871b32ed4e7bc8  # tests: Reduce sleeps in proxy tests
-      git cherry-pick 6197e12f4f7d04c182a6ae0c88ce3d4b7c8c4a3d  # tests: Remove sleep in console test
-      git cherry-pick 0eddf02bbb9ecf3663367916d2f68b531786c133  # tests: Reduce delays in devlxd test
-      git cherry-pick 54d0caac5795dbb3a7767fc11c7e9859522e4547  # tests: Speed up basic tests
-      git cherry-pick bf4f894932829ab582e127b7eb5d553eb7eac40a  # tests: Reduce sleep in network test
-      git cherry-pick 94ee41a122f0f6ef2a4df573a044373242d25221  # tests: Reduce teardown delays
-      git cherry-pick 9e3fb54cdb220c669878c2e4c2275841399ea152  # tests: Drop startup sleep for cluster
-      git cherry-pick bef26be03d2bfd01a6dad02a572e78f4aa75c19e  # tests: Reduce clustering delays
-      git cherry-pick e211bdb1bb7c643607bf3ba4934e9e5b0c38b4bc  # bash: Add snapshot keys
-      git cherry-pick a95ba72a9ca421efb6585587ddb3b88a5abeeef9  # lxc/monitor: Fix rendering
-      git cherry-pick 18b9ae3224daadfef80ffddf47acfa6ee2f31016  # shared: Read certificates from host
-      git cherry-pick f1878ca74be8fb3e763ad390c3e3c3e4fe295812  # lxd/cluster: Fix schema upgrades
-      git cherry-pick 7fac9d3638cd75039d4d0b66b4117d3e946f4e5f  # image-handling.md: 'release' should be a string and not a list
-      git cherry-pick afbc671a4b96a33cc4e666cb74c10ad987027978  # lxd/projects: Fix crashes on project list
-      git cherry-pick 6a5d5c644987f1c98ae1cb7d04ddc75ec6c62975  # doc: Cleanup security.md
-      git cherry-pick 477a1c3dd221433da09d9c8cd1c3bf480c9e1fb0  # doc: Clarify measurement units
-      git cherry-pick 17c98fd381b402979127a91ce1e4d3fb21ac5aaf  # lxc/storage: Fix argument count check for delete
-      git cherry-pick 378872da2d2832b80530dd3fc9e63710d25a3348  # lxd/containers: Adapt to go-lxc Release
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
