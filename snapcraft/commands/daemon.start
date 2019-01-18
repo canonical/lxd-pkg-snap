@@ -99,12 +99,6 @@ mount -t tmpfs tmpfs /etc -o mode=0755
 ## Generate a new ld.so.cache
 ldconfig
 
-## Make /var/lib/snapd/hostfs more useful to us
-for entry in dev proc sys; do
-    mountpoint -q "/var/lib/snapd/hostfs/${entry}" && continue
-    mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
-done
-
 ## Pass the bits we need from the host
 for entry in hostname hosts nsswitch.conf os-release passwd group localtime resolv.conf resolvconf timezone writable; do
     [ -e "/var/lib/snapd/hostfs/etc/${entry}" ] || [ -L "/var/lib/snapd/hostfs/etc/${entry}" ] || continue
@@ -126,6 +120,21 @@ if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/sha
 else
     ln -s "/snap/core/current/etc/ssl" "/etc/ssl"
 fi
+
+## Try to handle special /etc/resolv.conf setups
+if [ -L /etc/resolv.conf ] && [ ! -e /etc/resolv.conf ]; then
+    echo "====> Unusual /etc/resolv.conf detected, using workaround"
+    rm -f /etc/resolv.conf
+    # shellcheck disable=SC2094
+    chroot /var/lib/snapd/hostfs/ cat /etc/resolv.conf > /etc/resolv.conf || true
+fi
+
+# Setup host access
+## Make /var/lib/snapd/hostfs more useful to us
+for entry in dev proc sys; do
+    mountpoint -q "/var/lib/snapd/hostfs/${entry}" && continue
+    mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
+done
 
 # FIXME: Setup bash completion on the host
 #        This should be handled by snapd directly (LP: #1590767)
@@ -247,7 +256,7 @@ fi
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
 touch "${SNAP_COMMON}/lxc/local.conf"
-if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\-Ubuntu" /proc/version; then
+if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\\-Ubuntu" /proc/version; then
     echo "==> Detected kernel with partial AppArmor support"
     echo "lxc.apparmor.allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 else
