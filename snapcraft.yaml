@@ -1,5 +1,5 @@
 name: lxd
-version: "3.9"
+version: "3.10"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -526,7 +526,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.9
+    source-tag: lxd-3.10
     after:
       - go
       - lxc
@@ -563,13 +563,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 3b117cd42c655b5bda9dab033160d196ce01e615  # lxc: Fix image list help
-      git cherry-pick 523480e19b0b1d2ef11b6a2057a7cc42246a28e5  # po: Update i18n
-      git cherry-pick 3a39f15702d6b261f48ac62dcc9661b5be51769c  # Fixed typo in backup.md
-      git cherry-pick 1cb3e047c8a2b1d5d0a2a54fdad3b50b6befd4c9  # Update translations from weblate
-      git cherry-pick 0a28862a18e02a9a6f11541bc65458a54a2c19d8  # i18n: Fix duplicate language
-      git cherry-pick 73470535cc5b79aeacc2e344fb33b6f99ebf4a00  # client: Properly reset listener on error
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
