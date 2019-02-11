@@ -564,6 +564,12 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 03ae822a43506311b7d92a50665d8bf45a85ca23  # lxc/profile: Make json/yaml consistent
+      git cherry-pick 8b6c03202d9b056fd05bd44b24019c5cc073e70b  # shared/osarch: Add gentoo armhf variant
+      git cherry-pick 6401f063087db5f71f1a74eb44f9f6ad6c11251e  # fix variable in range
+      git cherry-pick 88ddb8cb1216350dc28e16583396b9a5a67d41fb  # lxd: Fix snapshot expiry for scheduled snapshots
+      git cherry-pick d3529c8308df894fd364a6eae4f75668c15c0f28  # lxd/db: Fix tests for current go-sqlite3
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
