@@ -412,6 +412,7 @@ parts:
       - --disable-tools
       - --disable-api-docs
       - --disable-bash
+      - --disable-memfd-rexec
       - --enable-apparmor
       - --enable-seccomp
       - --enable-selinux
