@@ -436,6 +436,8 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick 4e5a9657cafad69d8447a385abb1a384423b54f8  # lxccontainer: fix mount api (mount_injection_file)
+      git cherry-pick c00d0e3b2a06b34ebe25c27208ab38075bbf33d2  # mount: Allow over-mounting
+      git cherry-pick 71521317b2a4432fb5aa1878a7933d563b7020cb  # mount: Cleanup allow over-mounting
 
       set +ex
       snapcraftctl build
@@ -569,6 +571,17 @@ parts:
       git cherry-pick 6401f063087db5f71f1a74eb44f9f6ad6c11251e  # fix variable in range
       git cherry-pick 88ddb8cb1216350dc28e16583396b9a5a67d41fb  # lxd: Fix snapshot expiry for scheduled snapshots
       git cherry-pick d3529c8308df894fd364a6eae4f75668c15c0f28  # lxd/db: Fix tests for current go-sqlite3
+      git cherry-pick 2965b9d04e493fe69338aa68ceeed06b864d807b  # lxd/storage: Drop unused function
+      git cherry-pick 44f45ee9048739b445dbe07bba63f4573c36d92c  # lxd/network: Rework IP validation functions
+      git cherry-pick 6517b5c333f2b62ea2fd5fefbd7f623efd19888d  # lxd/containers: Validate ipv4/ipv6 address
+      git cherry-pick bb44c49d468fae7cf1070aff5e1c3cc8afd7ff57  # lxd/network: Reword sysctl network functions
+      git cherry-pick 295132e3b5641bb301e7a19db72ad3617c0fc923  # lxd/containers: Skip interface removal if missing
+      git cherry-pick e2379cf367ef76f1b42f5a747c475c18cbdf6cac  # client: fix goroutine leak in ExecContainer
+      git cherry-pick 3a4c0d31698693a7cd92a5058a4a45b25c9bd7be  # shared/osarch: Add ArchLinux name for armv7
+      git cherry-pick 2149bdaf895a1145d49e7627b50e0097678de189  # lxd: remove /proc/self/cmdline parsing
+      git cherry-pick 4f4b5c57c3d4bd75bde3035e3c8f3ece7b71b7d1  # Revert "lxd: remove /proc/self/cmdline parsing"
+      git cherry-pick eab4f0aafdc812fe5fecc91bca0f910eb1555cae  # nsexec: make cmdline parsing more reliable
+      git cherry-pick 6cf20b3149c419a5dd842ce3f2c3e1e349771ec9  # lxd/storage/lvm: Call wipesignatures
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
