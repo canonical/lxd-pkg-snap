@@ -582,6 +582,17 @@ parts:
       git cherry-pick 4f4b5c57c3d4bd75bde3035e3c8f3ece7b71b7d1  # Revert "lxd: remove /proc/self/cmdline parsing"
       git cherry-pick eab4f0aafdc812fe5fecc91bca0f910eb1555cae  # nsexec: make cmdline parsing more reliable
       git cherry-pick 6cf20b3149c419a5dd842ce3f2c3e1e349771ec9  # lxd/storage/lvm: Call wipesignatures
+      git cherry-pick 70cea30d57c4ebfafd90ad0872c04f5d2824a1bc  # lxd/storage/ceph: Rework df handling
+      git cherry-pick 395f901bb4e1779edec46b3b0472ab3028f062b4  # config: Keep candid domains and cookies per-remote
+      git cherry-pick 474e8c01aa3c89d5b42c2383af236303ce15bdd2  # lxc: Update for per-remote candid domain/cookies
+      git cherry-pick 9a887fe00504071754a3a59ebecdd22bd54e7158  # tests: Update godeps
+      git cherry-pick c727035e5e466adcd95156e4cb6312be8a75da55  # lxd/containers: Set liblxc env for CVE-2019-5736
+      git cherry-pick 817f196eb9c5ffdd5cf00160fd1b2bdda9547f1c  # lxc/remote: Tweak remote list
+      git cherry-pick 31546ecfb806a79d5b9d318d7a218b0f47e1735e  # lxd: Fix duplicate scheduled snapshots
+      git cherry-pick e7904f0862ce230988b02ef65261f0c3037f348e  # lxd: Fix failing backup import
+      git cherry-pick cb744c13cc7812204a2a48263e4379107fb06aa1  # shared: Tweak progress metadata
+      git cherry-pick 49fc96ac9c393de0f8786a11c69ffbdb2f80e2ff  # lxd: Set correct progress data for backup/publish
+      git cherry-pick 5b287581ac020299a55577c820da3aa03220d2a7  # lxc/publish: Add progress reporting
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
