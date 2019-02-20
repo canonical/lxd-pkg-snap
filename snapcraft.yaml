@@ -438,6 +438,7 @@ parts:
       git cherry-pick 4e5a9657cafad69d8447a385abb1a384423b54f8  # lxccontainer: fix mount api (mount_injection_file)
       git cherry-pick c00d0e3b2a06b34ebe25c27208ab38075bbf33d2  # mount: Allow over-mounting
       git cherry-pick 71521317b2a4432fb5aa1878a7933d563b7020cb  # mount: Cleanup allow over-mounting
+      git cherry-pick d8bc14a762b1b710b221e3fa40f8de19816e062b  # Fix existing mount target check
 
       set +ex
       snapcraftctl build
