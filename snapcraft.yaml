@@ -594,6 +594,28 @@ parts:
       git cherry-pick cb744c13cc7812204a2a48263e4379107fb06aa1  # shared: Tweak progress metadata
       git cherry-pick 49fc96ac9c393de0f8786a11c69ffbdb2f80e2ff  # lxd: Set correct progress data for backup/publish
       git cherry-pick 5b287581ac020299a55577c820da3aa03220d2a7  # lxc/publish: Add progress reporting
+      git cherry-pick a7d392a9323c59f6294dbb032b6d5e24f8df2f4d  # lxd: copy C smarts from LXC into lxd/include/
+      git cherry-pick 9285e1ab6fc070c78f5289478e203c07f4a10dc4  # nsexec: cleanup macros do_setns
+      git cherry-pick 8e6db42fe064481b17a243641e1b71db0a8f260b  # nsexec: cleanup macros in_same_namespace
+      git cherry-pick 685fe578fb11bde07d243e0d21c9537d701247eb  # nsexec: cleanup macros attach_userns
+      git cherry-pick 5c52fba2719c36fbd6e5bc9156540b79942dda78  # nsexec: cleanup macros file_to_buf
+      git cherry-pick e20b83c6f1a81eee97391751e2eb4cd03ea0dc6b  # devlxd_gccgo: initialize to 0
+      git cherry-pick feae2b4985cde5f534fb3ae50dc3da2c8c6ee4d3  # network: include macro.h
+      git cherry-pick 75aed6e45d09a33c0d5131fff290a81ae7c630b5  # checkfeature: cleanup macros netns_set_nsid
+      git cherry-pick e7d52d3cccda6edb20f515490012fae53c79c937  # checkfeature: cleanup macros is_netnsid_aware
+      git cherry-pick 08b722a9977a55c1d104908981c91b95c2c4e08f  # forkfile: cleanup macros manip_file_in_ns
+      git cherry-pick f74710c79bf5c9f914439b65ad04a736f3fe54c3  # forkmount: cleanup macros
+      git cherry-pick cc95932b9799edc455cb2aa042edc4faa35abc74  # forkuevent: cleanup macros
+      git cherry-pick 27625e2efb81cde76d4c1c2573ca044625255fd1  # storage_cgo: include macro.h
+      git cherry-pick de975ab4b6328d109c8e7483be05a6d4b1432a29  # storage_cgo: cleanup macros find_associated_[...]
+      git cherry-pick 0ea0fd41437cf9aa068797f544adb35f7d76dfd4  # storage_cgo: cleanup macros get_un[...]_legacy
+      git cherry-pick b6b734f71d4fc5676faebecc1bc47c3607256b7a  # storage_cgo: cleanup macros get_unused_loop_dev
+      git cherry-pick ced7235853f5e8b8353b549998f26e505bdf3592  # storage_cgo: cleanup macros prepare_loop_dev
+      git cherry-pick ee728e15f4d9ee97d94a9ea2432ee55b7d4a7d12  # shift_linux: cleanup macros shiftowner
+      git cherry-pick a4980a4a0e83c8810b45e36f66efba5cf29b0a53  # util_linux_cgo: cleanup macros lxc_abstract_[...]
+      git cherry-pick 68eea39e9c8847c5ce87144f63ec19c93c666a75  # proxy: Add locking around UDP timer
+      git cherry-pick 2f434854ce3e57f31426f74ee00f6cfc2a011519  # Revert "client: fix goroutine leak in ExecContainer"
+      git cherry-pick ccb9863269a1b69631d44caa8bfcd168a31081f2  # lxd: Remove backup directory after creating tarball
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
