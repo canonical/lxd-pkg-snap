@@ -616,6 +616,7 @@ parts:
       git cherry-pick 68eea39e9c8847c5ce87144f63ec19c93c666a75  # proxy: Add locking around UDP timer
       git cherry-pick 2f434854ce3e57f31426f74ee00f6cfc2a011519  # Revert "client: fix goroutine leak in ExecContainer"
       git cherry-pick ccb9863269a1b69631d44caa8bfcd168a31081f2  # lxd: Remove backup directory after creating tarball
+      git cherry-pick 844383f90ae1c7e69905f9c6e4d519da9a50cba8  # util_linux_cgo: restore old behavior
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
