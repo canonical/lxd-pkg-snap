@@ -617,6 +617,21 @@ parts:
       git cherry-pick 2f434854ce3e57f31426f74ee00f6cfc2a011519  # Revert "client: fix goroutine leak in ExecContainer"
       git cherry-pick ccb9863269a1b69631d44caa8bfcd168a31081f2  # lxd: Remove backup directory after creating tarball
       git cherry-pick 844383f90ae1c7e69905f9c6e4d519da9a50cba8  # util_linux_cgo: restore old behavior
+      git cherry-pick 1a22b1956d85c501573f7446a9203359bafae958  # lxc/exec: Cleanup terminal logic
+      git cherry-pick ece1de996f1c75f95d4a7f6867ec5fcb208d4bde  # client: Empty stdin channel on exec completion
+      git cherry-pick 6ba7f91a86e2ece9a9f92f936b014ab65ec435a7  # lxc/list: Fix multiple filters
+      git cherry-pick f052dfdb95268418e0c69a21d1bcde2954d9a12c  # lxd/main_nsexec: Fix type of length in file_to_buf
+      git cherry-pick 1336407af2d68fee772706353127a9e73297d898  # When starting up, use the cluster.https_address as key for updating the nodes table
+      git cherry-pick 521d094defab7c829963c7d4656eac287743a424  # Use capital case in error messages returned by db.NodeInfo.IsEmpty()
+      git cherry-pick 2cd835c23148b14714ac1682cb303cdf7ab7f0cb  # db.NodeInfo.IsEmpty(): a node with custom volumes is not empty
+      git cherry-pick 10e1e0b57818ecc71205275b16abc397029f5c04  # Add integration test checking that nodes with custom volumes can't be removed
+      git cherry-pick 08d6576a8d2206eae7f01d3123c60b6ecf603810  # Prompt for confirmation when using --delete to remove a server
+      git cherry-pick a66e72d12af450fd57ffc63c3c001b984b5be44d  # lxc/monitor: Don't directly use Exit
+      git cherry-pick e6dbb2f41dd16628e0002239076ef0860e18f914  # lxc/console: Remove unused code
+      git cherry-pick 0a1d2ae8a15cda8532deb6a59e24a9604d030c52  # lxc: Improve error handling in execIfAliases
+      git cherry-pick 09896f7ffd3a93fa4419c779a95f23ea851b84cb  # lxc/exec: Don't use Exit
+      git cherry-pick 5ad177307d18f9b142156c3cbc89c86b6ebe85b5  # lxc/remote: Use candid if supported
+      git cherry-pick 50d0dff2131b921854884fa03f451b027d69e4fd  # lxd/profiles: Fix project update when clustered
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
