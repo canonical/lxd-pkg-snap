@@ -138,7 +138,7 @@ parts:
       - lib/*/libsmime3.so
 
   go:
-    source-tag: go1.11.5
+    source-tag: go1.12
 
   lvm:
     source: snapcraft/empty
