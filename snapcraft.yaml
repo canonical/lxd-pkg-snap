@@ -439,6 +439,7 @@ parts:
       git cherry-pick c00d0e3b2a06b34ebe25c27208ab38075bbf33d2  # mount: Allow over-mounting
       git cherry-pick 71521317b2a4432fb5aa1878a7933d563b7020cb  # mount: Cleanup allow over-mounting
       git cherry-pick d8bc14a762b1b710b221e3fa40f8de19816e062b  # Fix existing mount target check
+      git cherry-pick 048493a30739347f1e1256fa03fda2d913cd43c9  # hooks: drop namespace references before post-stop
 
       set +ex
       snapcraftctl build
