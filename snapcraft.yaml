@@ -570,6 +570,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick d8cbd48d66040ad97dd9646898c7071c6784e2ef  # lxd/patches: Fix LVM VG name
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
