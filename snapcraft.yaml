@@ -570,7 +570,12 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 78352aaabc1eb4850fce77ac9fb61b4ac026c7b2  # shared/osarch: Add i586 to arch aliases
       git cherry-pick d8cbd48d66040ad97dd9646898c7071c6784e2ef  # lxd/patches: Fix LVM VG name
+      git cherry-pick 577ee4106d75eac9f58f02013a0cddea5890263c  # client: Don't crash on missing stdin
+      git cherry-pick 5a87f8e61c8664a667d78d59ce864eb188c28b8d  # lxd/images: Fix simplestreams cache expiry
+      git cherry-pick 1a12314668bafd165ab50d9b8eca3d83ac9562b3  # tests: Handle built-in shiftfs
+      git cherry-pick 3b616ba52169a9dec20025f910db25ce4cbe1859  # lxd/storage: Don't hardcode default project
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
