@@ -20,6 +20,7 @@ description: |-
    - daemon.group: Group of users that can interact with LXD [default=lxd]
    - ceph.builtin: Use snap-specific ceph configuration [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
+   - shiftfs.enable: Enable shiftfs support [default=auto]
 
 confinement: strict
 
@@ -558,6 +559,8 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      git am ../../../patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
