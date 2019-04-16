@@ -20,6 +20,7 @@ description: |-
    - daemon.group: Group of users that can interact with LXD [default=lxd]
    - ceph.builtin: Use snap-specific ceph configuration [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
+   - shiftfs.enable: Enable shiftfs support [default=auto]
 
 confinement: strict
 
@@ -569,6 +570,8 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      git am ../../../patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
 
       git cherry-pick 78352aaabc1eb4850fce77ac9fb61b4ac026c7b2  # shared/osarch: Add i586 to arch aliases
       git cherry-pick d8cbd48d66040ad97dd9646898c7071c6784e2ef  # lxd/patches: Fix LVM VG name

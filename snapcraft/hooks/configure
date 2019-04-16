@@ -48,6 +48,7 @@ daemon_group=$(snapctl get daemon.group)
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 criu_enable=$(get_bool "$(snapctl get criu.enable)")
+shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
 
 # Generate the config
 config="${SNAP_COMMON}/config"
@@ -59,6 +60,7 @@ config="${SNAP_COMMON}/config"
     echo "ceph_builtin=${ceph_builtin:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
     echo "criu_enable=${criu_enable:-"false"}"
+    echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
 } > "${config}"
 
 exit 0
