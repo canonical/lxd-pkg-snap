@@ -579,6 +579,12 @@ parts:
       git cherry-pick 5a87f8e61c8664a667d78d59ce864eb188c28b8d  # lxd/images: Fix simplestreams cache expiry
       git cherry-pick 1a12314668bafd165ab50d9b8eca3d83ac9562b3  # tests: Handle built-in shiftfs
       git cherry-pick 3b616ba52169a9dec20025f910db25ce4cbe1859  # lxd/storage: Don't hardcode default project
+      git cherry-pick 97d98151a7e1322c177bb4bd17c67b7492779746  # lxd/storage/ceph: Don't mix stderr with json
+      git cherry-pick 7c6ce1495f3a418ac82d027bfddc1b7fdad0174d  # lxd/storage: Fix error message on differing maps
+      git cherry-pick 61349c60d3c97bb4c8df0e32dee9e5281ed84c4d  # shared/idmap: Add comparison function
+      git cherry-pick b7b68cf350698246f019ed302e39c7a3b97962f1  # lxd: Use idmap.Equals
+      git cherry-pick 252228d2007b7cb71effec420a588981abdd49d3  # lxd/proxy: Fix goroutine leak
+      git cherry-pick 3943365ccd27c96ad44f47908752d1ee7a2f0916  # shared: Fix Windows build
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
