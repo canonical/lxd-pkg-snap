@@ -295,6 +295,7 @@ parts:
       - bin/xfs_admin
       - bin/xfs_db
       - bin/xfs_growfs
+      - bin/xfs_repair
       - bin/mkfs.xfs
 
   zfs-0.6:
