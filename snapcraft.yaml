@@ -574,6 +574,18 @@ parts:
 
       git am ../../../patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
 
+      git cherry-pick 952268c41e6da771b4f409c394fb9ccf2d03c6c7  # network: Fixes custom MTU not being applied on hot plug
+      git cherry-pick 4c213df5c7df9383aa1dfcdf1d5431f4d486b880  # test: Added more tests for container nics
+      git cherry-pick a9fb5043cf6c157ed1f89618fed7af277dccae78  # lxd/containers: Be consistent with timestamps
+      git cherry-pick 12d73ede9e4f51a977e7720dfe0c0504de8a55e3  # lxd/db: Introduce ContainerConfigUpdate
+      git cherry-pick e5096c84a34fa03882c1c5fac2185afb36422005  # lxd/containers: Replace ConfigKeySet with VolatileSet
+      git cherry-pick e9dfcc59d5e23cb2369cdb7d05270090baa6bf91  # lxd/containers: Don't diff go-lxc structs
+      git cherry-pick c1f7f15ee30b198fffa6d44f6370d334746119b2  # test: ipvlan test activates ipv4 forwarding
+      git cherry-pick bdc6452b5428066c8cb26fd14f40e874084c589f  # container/lxc: Moves IPVLAN init code into own function
+      git cherry-pick 522dd1c2dcd54b7ea162e64074afcb902c29196b  # container/lxc: Fixes ipvlan support check
+      git cherry-pick 540ff2956013083f947a832c81a8bed860b3fc54  # test: Updates physical tests to detect MTU support in LXC
+      git cherry-pick bb3cf4e3932f137693eff46dbb0650bb8fd0c3e9  # test: Updates macvlan tests to detect MTU support in LXC
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
