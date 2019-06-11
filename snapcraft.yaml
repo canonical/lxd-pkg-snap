@@ -139,6 +139,22 @@ parts:
       - lib/*/librbd.so.*
       - lib/*/libsmime3.so
 
+  dqlite:
+    after:
+      - sqlite
+    source: https://github.com/CanonicalLTD/dqlite
+    source-type: git
+    plugin: autotools
+    stage-packages:
+      - libuv1
+    build-packages:
+      - libuv1-dev
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/libdqlite*so*
+      - lib/*/libuv*
+
   lvm:
     source: snapcraft/empty
     plugin: nil
@@ -253,22 +269,6 @@ parts:
     prime:
       - bin/sqlite3
       - lib/libsqlite3*so*
-
-  dqlite:
-    after:
-      - sqlite
-    source: https://github.com/CanonicalLTD/dqlite
-    source-type: git
-    plugin: autotools
-    stage-packages:
-      - libuv1
-    build-packages:
-      - libuv1-dev
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libdqlite*so*
-      - lib/*/libuv*
 
   vim:
     source: snapcraft/empty
