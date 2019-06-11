@@ -1,4 +1,5 @@
 name: lxd
+base: core
 version: "3.14"
 grade: stable
 summary: LXD - the container lightervisor
@@ -138,9 +139,6 @@ parts:
       - lib/*/librbd.so.*
       - lib/*/libsmime3.so
 
-  go:
-    source-tag: go1.12.5
-
   lvm:
     source: snapcraft/empty
     plugin: nil
@@ -203,7 +201,7 @@ parts:
       git config user.name "LXD snap builder"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
-      cp ../../../snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
+      cp ${SNAPCRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
 
       set +ex
       snapcraftctl build
@@ -536,7 +534,6 @@ parts:
     source-type: git
     source-tag: lxd-3.14
     after:
-      - go
       - lxc
       - dqlite
       - sqlite
@@ -572,7 +569,7 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git am ../../../patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
+      git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
@@ -612,7 +609,6 @@ parts:
   lxd-migrate:
     source: lxd-migrate/
     after:
-      - go
       - lxd
       - sqlite
     plugin: go
@@ -643,8 +639,6 @@ parts:
 
   snap-query:
     source: snap-query/
-    after:
-      - go
     plugin: go
     go-importpath: github.com/lxc/lxd-pkg-snap/snap-query
     prime:
@@ -655,7 +649,6 @@ parts:
     after:
       - btrfs
       - ceph
-      - go
       - lvm
       - nano
       - nvidia-container
