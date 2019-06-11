@@ -155,6 +155,15 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
 
+  libseccomp:
+    source: https://github.com/seccomp/libseccomp
+    source-type: git
+    plugin: autotools
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/libseccomp*so*
+
   lvm:
     source: snapcraft/empty
     plugin: nil
@@ -199,6 +208,8 @@ parts:
       - etc/nanorc
 
   nvidia-container:
+    after:
+      - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
     source-tag: v1.0.2
@@ -206,7 +217,6 @@ parts:
     build-packages:
       - bmake
       - curl
-      - libseccomp-dev
       - lsb-release
     override-build: |-
       set -ex
@@ -394,13 +404,14 @@ parts:
 
   # Core components
   lxc:
+    after:
+      - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
     build-packages:
       - libapparmor-dev
       - libcap-dev
       - libgnutls28-dev
-      - libseccomp-dev
       - libselinux1-dev
       - pkg-config
     plugin: autotools
