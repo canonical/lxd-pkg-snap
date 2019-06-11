@@ -299,7 +299,7 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
 
-  zfs-0.6:
+  zfs-0-6:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
     source-tag: zfs-0.6.5.11
@@ -333,7 +333,7 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
-  zfs-0.7:
+  zfs-0-7:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
     source-tag: zfs-0.7.13
@@ -363,7 +363,7 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
-  zfs-0.8:
+  zfs-0-8:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
     source-tag: zfs-0.8.0-rc4
