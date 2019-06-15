@@ -374,7 +374,7 @@ parts:
   zfs-0-8:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
-    source-tag: zfs-0.8.0
+    source-tag: zfs-0.8.1
     plugin: autotools
     configflags:
       - --with-config=user
