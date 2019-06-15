@@ -571,6 +571,9 @@ parts:
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
 
+      git cherry-pick a181ed43172755cf9fcd3e1068f914c373e7091b  # seccomp: define __NR_mknod if missing
+      git cherry-pick c655ed5575bec72fd6940770029d569a10e7f80d  # seccomp: rework missing syscall number definitions
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
