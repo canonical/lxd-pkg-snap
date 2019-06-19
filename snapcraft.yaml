@@ -573,6 +573,10 @@ parts:
 
       git cherry-pick a181ed43172755cf9fcd3e1068f914c373e7091b  # seccomp: define __NR_mknod if missing
       git cherry-pick c655ed5575bec72fd6940770029d569a10e7f80d  # seccomp: rework missing syscall number definitions
+      git cherry-pick f0cc1d5e8647f611460535ac18d38d369064b2cd  # networks: Fixes bug preventing 3rd party routes from being restored on network start
+      git cherry-pick 6f60c7de66f11b889c1bd8df9e8424ec1fa6f5e1  # tests: Increases nic bridge ping sleep time to 2s
+      git cherry-pick af69204925d12cc7175c01bf67bac3f3185d637c  # tests: Updates nic bridge tests to check for route restoration
+      git cherry-pick 8861340d4ffe59218b328e4d50ff0f2d38a52593  # lxd/patches: Handle btrfs snapshots properly
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
