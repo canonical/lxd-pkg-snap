@@ -545,6 +545,7 @@ parts:
       - dnsmasq-base
       - ebtables
       - iptables
+      - pigz
       - rsync
       - squashfs-tools
       - xdelta3
@@ -593,6 +594,7 @@ parts:
     prime:
       - bin/dnsmasq
       - bin/ebtables
+      - bin/pigz
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
