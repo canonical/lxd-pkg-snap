@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.0.3"
+version: "3.0.4"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -395,7 +395,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.0.3
+    source-tag: lxc-3.0.4
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -447,7 +447,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.3
+    source-tag: lxcfs-3.0.4
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -524,7 +524,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.0.3
+    source-tag: lxd-3.0.4
     after:
       - lxc
       - dqlite
