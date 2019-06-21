@@ -578,6 +578,9 @@ parts:
       git cherry-pick 6f60c7de66f11b889c1bd8df9e8424ec1fa6f5e1  # tests: Increases nic bridge ping sleep time to 2s
       git cherry-pick af69204925d12cc7175c01bf67bac3f3185d637c  # tests: Updates nic bridge tests to check for route restoration
       git cherry-pick 8861340d4ffe59218b328e4d50ff0f2d38a52593  # lxd/patches: Handle btrfs snapshots properly
+      git cherry-pick 9057eb9c8a374b6b7df27381e8e6ba0690835db8  # lxc/export: Expire the backup after 24 hours
+      git cherry-pick 00862c161d03cba6db20eeea94ef2d39fff608a5  # main: Fixes debug mode flag to actually enable debug mode
+      git cherry-pick 90958546748b3d369e80540082c36958a9cdc1d3  # shared/termios: Fix port to sys/unix
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
