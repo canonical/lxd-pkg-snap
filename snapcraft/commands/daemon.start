@@ -226,7 +226,7 @@ done
 # Fix common cgroup issues
 if [ -e /sys/fs/cgroup/cpuset/cgroup.clone_children ]; then
     # Attempt to enable clone_children behavior (ignore failures)
-    echo 1 > /sys/fs/cgroup/cpuset/cgroup.clone_children >/dev/null 2>&1 || true
+    echo 1 > /sys/fs/cgroup/cpuset/cgroup.clone_children 2>/dev/null || true
 fi
 
 # Update system limits
