@@ -223,6 +223,12 @@ for ctr in /sys/fs/cgroup/*; do
     echo "$$" > "${ctr}/cgroup.procs"
 done
 
+# Fix common cgroup issues
+if [ -e /sys/fs/cgroup/cpuset/cgroup.clone_children ]; then
+    # Attempt to enable clone_children behavior (ignore failures)
+    echo 1 > /sys/fs/cgroup/cpuset/cgroup.clone_children >/dev/null 2>&1 || true
+fi
+
 # Update system limits
 if [ "$(stat -c '%u' /proc)" = 0 ]; then
     ## prlimits
