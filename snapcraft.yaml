@@ -144,6 +144,7 @@ parts:
       - sqlite
     source: https://github.com/CanonicalLTD/dqlite
     source-type: git
+    source-tag: v0.3.0
     plugin: autotools
     stage-packages:
       - libuv1
