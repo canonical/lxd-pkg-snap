@@ -84,7 +84,7 @@ fi
 echo "==> Preparing a clean copy of /run"
 umount -l /run >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /run -o mode=0755,nosuid,nodev
-for entry in NetworkManager resolvconf snapd snapd.socket snapd-snap.socket systemd; do
+for entry in NetworkManager resolvconf netconfig snapd snapd.socket snapd-snap.socket systemd; do
     [ -e "/var/lib/snapd/hostfs/run/${entry}" ] || [ -L "/var/lib/snapd/hostfs/run/${entry}" ] || continue
     ln -s "/var/lib/snapd/hostfs/run/${entry}" "/run/${entry}"
 done
