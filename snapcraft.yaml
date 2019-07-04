@@ -436,6 +436,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick b28c281086fb4c9832e68ff9041825771f269384  # cgroups: hande cpuset initialization race
+
       set +ex
       snapcraftctl build
       set -ex
