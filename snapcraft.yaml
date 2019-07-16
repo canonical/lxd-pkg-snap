@@ -605,6 +605,36 @@ parts:
       git config user.name "LXD snap builder"
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
+      git cherry-pick 5d6d14c8765fa4ea80cb58c4db52f3e63b8fc6f8  # Makefile: include libraft and libco
+      git cherry-pick 39dc4ea33e853bed082b6feb58eb4be9952906b0  # seccomp: bugfix, cleanup, and simplify
+      git cherry-pick 0f2b6cf2aea6a30530d84440f4dc9a762ea1b8ad  # iptables: Moves iptables helper functions into own package
+      git cherry-pick 95f16ddf30afb58bf91dbd1c276c959853f9ad81  # seccomp: abstract syscall handling
+      git cherry-pick 5db82172311b567b3098aedf472b71bbc4100163  # lxd/project: Adds project package and updates references to it
+      git cherry-pick c192ee90329e934d7ecc1b00b54cd4e39c6ca0a0  # lxd/dnsmasq: Adds dnsmasq package and updates usage
+      git cherry-pick ee2ebe380e3303b83583043e28c11da7e1538f3b  # tests: Fix CEPH pool names
+      git cherry-pick f51f0be32e22cd91e8850002431311beb44451c0  # tests: Avoid ceph pool conflict
+      git cherry-pick 8e7a078554f38cad08420135cd9b612812bfe22a  # device/utils: Moves networkSysctlGet to device_utils
+      git cherry-pick da665b1f789d9f3b94c6aa6863f138d5fceec219  # device/utils: Moves networkSysctlSet to device_utils
+      git cherry-pick e14a9ab407a7f71b26a84488fd1908c6f5fc5e68  # device/utils: Moves networkGetDevMTU and networkSetDevMTU to device_utils
+      git cherry-pick b770c677d671872a4b267eabe77ccbdda965dc60  # device/utils: Moves networkGetDevMAC and networkSetDevMAC to device_utils
+      git cherry-pick 048dc04614931c3fc58ec7e4a8756f892eb870d0  # forksyscall: avoid calling close on garbage fd
+      git cherry-pick 2f7960044384a2bd78c955d58a10e4076f7546e6  # forksyscall: s/target_fd/cwd_fd/g
+      git cherry-pick 49fe45596b7b39eae57c3757d695618c0bc0362b  # forksyscall: add chdirchroot()
+      git cherry-pick a3d14a33862f61a338c9386c0f6be9dfe492d371  # instance: Adds new type instance
+      git cherry-pick ac7a12cd1d9f663c18d6a39f28f4628d38c1cd0c  # device/utils: Moves networkGetHostDevice to device_utils
+      git cherry-pick aa51828bef12831e07c9c47b85cbb232b945b3a9  # device/utils: Renames deviceRemoveInterface to NetworkRemoveInterface
+      git cherry-pick 349cb2654e1fa24530f3156bb7e18d8cddaf0ae5  # device/utils: Renames createVlanDeviceIfNeeded to NetworkCreateVlanDeviceIfNeeded
+      git cherry-pick caaa5d414eb8918da79db24705e6094e47928ef2  # device/utils: Adds networkSnapshotPhysicalNic and networkRestorePhysicalNic functions
+      git cherry-pick 1da6857638c2cb455f717fea1b6db2542e49cf4f  # device/utils: Renames deviceNextVeth to NetworkRandomDevName
+      git cherry-pick 5f1e0106c16020e0bf782d428b4fc94d5540b5c7  # device/utils: Moves NetworkAttachInterface to device_utils
+      git cherry-pick f85d25d062bfeb463ab3a38e178567c4e5225577  # device/instance/id: Adds instanceIdentifier interface
+      git cherry-pick 5196a2a13064aa39c22d55f4ee7bab5cca297378  # networks/utils: Removes networkUpdateStaticContainer
+      git cherry-pick f701329f058add83d326c4cdc7184052f14d662f  # forksyscall: switch chdirchroot() and setns() order
+      git cherry-pick 67db8369f33879c4e54be770b3ff011104912b7c  # doc/containers: Fix markdown escaping
+      git cherry-pick ef74ab3e6ea9a635074d687d31cbdf29bc9a7c63  # task/group: Moves wait group Done() after g.running update to avoid race on task end
+      git cherry-pick 4fc91dc1385ffa5dd8c6bf0911380ea4ed3b46bb  # forksyscall: use correct error handling for chdirchroot()
+      git cherry-pick 8369930e1e71cdb74a6043cd166b932796f2b56e  # Makefile: Make it easier to build from tarball
+      git cherry-pick b4e3f839141bad34f4683a2a967b01ae1d8f79a9  # Makefile: Rename dist to _dist to avoid Go recursion
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
