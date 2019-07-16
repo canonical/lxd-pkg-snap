@@ -294,8 +294,13 @@ if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
         export OVS_BINDIR="${SNAP}/bin/"
         export OVS_SBINDIR="${SNAP}/bin/"
 
-       mkdir -p "${OVS_SYSCONFDIR}/openvswitch"
-       "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
+        mkdir -p "${OVS_SYSCONFDIR}/openvswitch"
+        (
+            # Close socket activation fd
+            exec 3<&- || true
+
+           "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
+        )
     )
 else
     ln -s /var/lib/snapd/hostfs/run/openvswitch /run/openvswitch
@@ -318,7 +323,12 @@ else
 
     ## Start lxcfs
     echo "=> Starting LXCFS"
-    ( lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" & )
+    (
+        # Close socket activation fd
+        exec 3<&- || true
+
+        lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+    )
 fi
 
 # LXD
