@@ -635,6 +635,8 @@ parts:
       git cherry-pick 4fc91dc1385ffa5dd8c6bf0911380ea4ed3b46bb  # forksyscall: use correct error handling for chdirchroot()
       git cherry-pick 8369930e1e71cdb74a6043cd166b932796f2b56e  # Makefile: Make it easier to build from tarball
       git cherry-pick b4e3f839141bad34f4683a2a967b01ae1d8f79a9  # Makefile: Rename dist to _dist to avoid Go recursion
+      git cherry-pick 52e817fdf572cd4ffe17a45acabeaccbaeaccebf  # test: Updates static_analysis.sh
+      git cherry-pick 9abc24606fbdd99ef8e3262bac3323463e9e323b  # lxd/storage: Fix hangs on volume migration failures
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
