@@ -637,6 +637,9 @@ parts:
       git cherry-pick b4e3f839141bad34f4683a2a967b01ae1d8f79a9  # Makefile: Rename dist to _dist to avoid Go recursion
       git cherry-pick 52e817fdf572cd4ffe17a45acabeaccbaeaccebf  # test: Updates static_analysis.sh
       git cherry-pick 9abc24606fbdd99ef8e3262bac3323463e9e323b  # lxd/storage: Fix hangs on volume migration failures
+      git cherry-pick 647270893914299a2c0553b2db0f3f9ec235c113  # doc/userns: Update to match current behavior
+      git cherry-pick cb7d6790525952ced412059c3d9176aa9623735b  # lxd/seccomp: Don't mask errors
+      git cherry-pick 2db7684fe2b814c77dc5f52424bccdce8c1be234  # lxc/list: If no snapshots, show 0
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
