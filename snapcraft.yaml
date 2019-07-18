@@ -640,6 +640,15 @@ parts:
       git cherry-pick 647270893914299a2c0553b2db0f3f9ec235c113  # doc/userns: Update to match current behavior
       git cherry-pick cb7d6790525952ced412059c3d9176aa9623735b  # lxd/seccomp: Don't mask errors
       git cherry-pick 2db7684fe2b814c77dc5f52424bccdce8c1be234  # lxc/list: If no snapshots, show 0
+      git cherry-pick 495bcd3d08220712b2a81a5a1e7052f93a4385db  # shared: Don't open files to get their mode
+      git cherry-pick 00daff533635a7dd908977d3c7d1eaffe991cf60  # lxd/storage/ceph: Handle EBUSY on unmap
+      git cherry-pick 8e850c97fdd7082ba91dc5d6161c4d08b28b6a7c  # lxd/storage/ceph: Slightly speed up creation
+      git cherry-pick 768d014167a888dacbd8aed5553cfbafba576a4d  # lxd/cluster: Use hook for initial heartbeat
+      git cherry-pick c866ea64162da6bbc662a055501e3d08b2f1b141  # lxd/task: Attempt to run tasks on schedule
+      git cherry-pick 2ade5ce148ef6666657e25446e1ae831e07e8ce6  # tests: Always use pg_num=1 during tests
+      git cherry-pick 960f13679b6a842f9be78c223ac47da924629401  # cluster/hearbeat: Adds new RaftID field to heartbeat Members struct
+      git cherry-pick 468a9e0631faabf40ca3729a72d5fc8bee3cbd1d  # lxd/cluster/membership: Fix new DB server id
+      git cherry-pick 85bd3518fd9f66ef896bdc73fb9f26140e5f9b93  # daemon: Checks for non-empty members list from heartbeat
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
