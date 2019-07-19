@@ -110,6 +110,11 @@ for entry in alternatives apparmor apparmor.d vim; do
     ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
 done
 
+## And those we directly ship in the snap
+for entry in ethertypes protocols; do
+    ln -s "${SNAP}/etc/${entry}" "/etc/${entry}"
+done
+
 ## Setup mtab
 ln -s "/proc/mounts" "/etc/mtab"
 
