@@ -579,6 +579,7 @@ parts:
       - dnsmasq-base
       - ebtables
       - iptables
+      - netbase
       - pigz
       - rsync
       - squashfs-tools
@@ -681,6 +682,8 @@ parts:
       - lib/xtables/*
 
       - etc/bash_completion.d/snap.lxd.lxc
+      - etc/ethertypes
+      - etc/protocols
 
       - bin/lxc
       - bin/lxd
