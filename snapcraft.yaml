@@ -429,7 +429,7 @@ parts:
   lxc:
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-3.1.0
+    source-tag: lxc-3.2.1
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -469,14 +469,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git cherry-pick 4e5a9657cafad69d8447a385abb1a384423b54f8  # lxccontainer: fix mount api (mount_injection_file)
-      git cherry-pick c00d0e3b2a06b34ebe25c27208ab38075bbf33d2  # mount: Allow over-mounting
-      git cherry-pick 71521317b2a4432fb5aa1878a7933d563b7020cb  # mount: Cleanup allow over-mounting
-      git cherry-pick d8bc14a762b1b710b221e3fa40f8de19816e062b  # Fix existing mount target check
-      git cherry-pick 048493a30739347f1e1256fa03fda2d913cd43c9  # hooks: drop namespace references before post-stop
-      git cherry-pick 24548539af7fa95cd9ca7b971eb9f301065492e0  # network: do not log false friends
-      git cherry-pick 78ab281c61c97a700dec0071c82c308947591a11  # network: fix network device removal
-
       set +ex
       snapcraftctl build
       set -ex
@@ -489,7 +481,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.0.4
+    source-tag: lxcfs-3.1.1
     build-packages:
       - libfuse-dev
       - libpam0g-dev
