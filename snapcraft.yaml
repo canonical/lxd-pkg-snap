@@ -650,6 +650,8 @@ parts:
       git cherry-pick 960f13679b6a842f9be78c223ac47da924629401  # cluster/hearbeat: Adds new RaftID field to heartbeat Members struct
       git cherry-pick 468a9e0631faabf40ca3729a72d5fc8bee3cbd1d  # lxd/cluster/membership: Fix new DB server id
       git cherry-pick 85bd3518fd9f66ef896bdc73fb9f26140e5f9b93  # daemon: Checks for non-empty members list from heartbeat
+      git cherry-pick 13ca2644366054e238b2e5ba9755a9742ac01774  # Workaround watchFunc kicking heartbeat a bit too early
+      git cherry-pick 9e15e5fb9cad6c187bdb7e68228c9eda0f38ceed  # tests: Always pass -f to stop
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
