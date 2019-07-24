@@ -481,7 +481,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-3.1.1
+    source-tag: lxcfs-3.1.2
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -510,8 +510,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick b3aa7f1a115626f263f019ff6d8ef54f0132f025  # bindings: ensure that opts is non NULL
 
       set +ex
       snapcraftctl build
