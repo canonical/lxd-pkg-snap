@@ -469,6 +469,9 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 9c579205669cce54944e2c4f115e69ef18475bbe  # pidfds: don't print a scary warning on ENOSYS
+      git cherry-pick 3dd7829433f63b2ec1323a1f237efa7d67ea6e2b  # network: restore ability to move nl80211 devices
+
       set +ex
       snapcraftctl build
       set -ex
