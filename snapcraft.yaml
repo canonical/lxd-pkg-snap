@@ -473,6 +473,8 @@ parts:
       git cherry-pick 9c579205669cce54944e2c4f115e69ef18475bbe  # pidfds: don't print a scary warning on ENOSYS
       git cherry-pick 3dd7829433f63b2ec1323a1f237efa7d67ea6e2b  # network: restore ability to move nl80211 devices
       git cherry-pick b31d62b847a3ee013613795094cce4acc12345ef  # cgroups: initialize cpuset properly
+      git cherry-pick e4103cf63f3e24667680544303e7c7230b3d508c  # lxccontainer: do_lxcapi_detach_interface to support detaching wlan devices
+      git cherry-pick 7c3d3976fa4036fe5c260ca3a68376360e98e260  # utils: Fix wrong integer of a function parameter.
 
       set +ex
       snapcraftctl build
