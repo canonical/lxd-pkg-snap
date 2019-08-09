@@ -144,7 +144,7 @@ parts:
       - libco
       - raft
       - sqlite
-    source: https://github.com/CanonicalLTD/dqlite
+    source: https://github.com/canonical/dqlite
     source-type: git
     plugin: autotools
     stage-packages:
@@ -158,7 +158,7 @@ parts:
       - lib/*/libuv*
 
   libco:
-    source: https://github.com/freeekanayaka/libco
+    source: https://github.com/canonical/libco
     source-type: git
     plugin: make
     artifacts:
@@ -272,7 +272,7 @@ parts:
       - share/openvswitch/
 
   raft:
-    source: https://github.com/CanonicalLtd/raft
+    source: https://github.com/canonical/raft
     source-type: git
     plugin: autotools
     organize:
@@ -281,7 +281,7 @@ parts:
       - lib/libraft*so*
 
   sqlite:
-    source: https://github.com/CanonicalLTD/sqlite
+    source: https://github.com/canonical/sqlite
     source-type: git
     plugin: autotools
     configflags:
@@ -596,7 +596,7 @@ parts:
       set -ex
 
       # Setup for our shared libraries
-      sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/CanonicalLtd/go-dqlite/internal/bindings/constants.go
+      sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/canonical/go-dqlite/internal/bindings/constants.go
       sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       # Git cherry-picks
