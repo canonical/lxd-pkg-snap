@@ -605,6 +605,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
+      git cherry-pick 9d133505928ed0fcf7852b3c7ee2b4a9834c3e05  # lxd: Check RemoveAll() error properly
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
