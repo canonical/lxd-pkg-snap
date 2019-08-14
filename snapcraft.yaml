@@ -606,6 +606,19 @@ parts:
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
       git cherry-pick 9d133505928ed0fcf7852b3c7ee2b4a9834c3e05  # lxd: Check RemoveAll() error properly
+      git cherry-pick ff953a38091634cbc9f01a209f3dd1916fa9d4d8  # tests: Fix CEPH RBD leakage
+      git cherry-pick 8aaa305d5491e5f72681acad4a4ea7ac38f7b4fb  # lxd: Use unix.MS_LAZYTIME
+      git cherry-pick b4c5337d9b2f5cd76c8e19980a43b8e917bc43bc  # lxd: Remove MS_LAZYTIME definition
+      git cherry-pick f43b20f9f5fb6df15d21d2fbdc496d17254e0f5d  # lxd/storage/lvm: Log actual error
+      git cherry-pick 6bb85e867e0154e71a5053e3e8ee8e8461032bd3  # doc/server: Fix defaults for rbac
+      git cherry-pick 59553e0cfe5671d4b991b48296bba28efdb9a4d5  # doc/server: Add missing key namespaces
+      git cherry-pick 8f6cc18c59e83fb68182c4c44f0dd8d455833567  # doc/server: Add scope column
+      git cherry-pick 813c11a4cd056b36333a43ab9ba8cf633e082b9b  # lxd/storage: Fix bad UsedBy check
+      git cherry-pick cac95d8390634ecdec6e16f2d0fdb70e3a979a1d  # device/device/utils/network: Add support for MTU inheriting from parent on bridged devices
+      git cherry-pick 260d67aea25ff685ee7de2c209c6103f4df2ae05  # test: Adds test for bridged MTU parent inheritance
+      git cherry-pick d16984298655457c3660cd1e24e78313d2918e2f  # test: Adds test for macvlan MTU parent inheritance
+      git cherry-pick 9a9412faaadafbf8fcf675a3fb264d05f904b0c1  # doc: Updates NIC MTU descriptions
+      git cherry-pick 546b28f095f3f48aa8ed1ebd9041b160eecfd52d  # test: Adds test for ipvlan MTU parent inheritance
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
