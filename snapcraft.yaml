@@ -615,6 +615,7 @@ parts:
       git cherry-pick e0116cb139099e8cfe4af86e3e30570976310311  # container/lxc: Modifies deviceStop and deviceRemove to ignore validation errors
       git cherry-pick ec6b1c50d48983e0267cec90bb6370ea5e4bb3d3  # lxc: Don't show header in CSV output
       git cherry-pick 663addee10bf92440a23711c80045cbadde84d9f  # lxc/copy: Really always strip volatile.last_state.power
+      git cherry-pick 0401bc9f2cda04ff2523bb8f72a91cd0f99ddca8  # lxd/backup: Call tar with --numeric-owner
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
