@@ -165,13 +165,6 @@ parts:
       - libco.h
       - libco.pc
       - libco.so
-    override-build: |-
-      set -ex
-
-      sed "s/^prefix=\/usr/prefix=\//g" -i libco.pc
-
-      set +ex
-      snapcraftctl build
     organize:
       libco.so: lib/
       libco.h: include/
