@@ -164,13 +164,13 @@ parts:
     artifacts:
       - libco.h
       - libco.pc
-      - libco.so*
+      - libco.so.0.1.0
     organize:
-      libco.so*: lib/
+      libco.so.0.1.0: lib/
       libco.h: include/
       libco.pc: lib/pkgconfig/
     prime:
-      - lib/libco.so*
+      - lib/libco.so.0.1.0
 
   libseccomp:
     source: https://github.com/seccomp/libseccomp
