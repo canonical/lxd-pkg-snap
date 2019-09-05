@@ -223,7 +223,7 @@ parts:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.0.2
+    source-tag: v1.0.4
     plugin: make
     build-packages:
       - bmake
@@ -232,7 +232,7 @@ parts:
     override-build: |-
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
