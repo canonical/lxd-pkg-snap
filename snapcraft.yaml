@@ -232,7 +232,8 @@ parts:
     override-build: |-
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      # Supposedly supports x86_64, aarch64 and ppc64le but only x86_64 builds
+      [ "$(uname -m)" != "x86_64" ] && exit 0
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
