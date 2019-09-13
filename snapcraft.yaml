@@ -593,6 +593,12 @@ parts:
       git config user.name "LXD snap builder"
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
+      git cherry-pick 0aaac84a42f6af11d2c0d70ea378f0bf25d254b7  # lxd/cluster/upgrade: Prevents crash if heartbeat occurs before dqlite init
+      git cherry-pick 485eaa7246e815411ca7016c8dcb1e79cc341ff1  # lxd/networks: Allow ipv6.dhcp=true with ipv6.firewall=false
+      git cherry-pick 4375c825b08d568e9a8ba4c0f8abab31cb509a17  # lxd/storage/dir: Don't hide error message
+      git cherry-pick fa1eccce8e7c9e1520978e648b2b460e9b253894  # lxd: Require "ip" be installed
+      git cherry-pick 9914ef9f03263a885b3e8e96916c019a16285357  # lxd/containers: Tigthen directory ownership
+      git cherry-pick b01f47f39c723b3c724a1d1b973edb5adcc5b6d4  # shared: Use Lchown when copying symlinks
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
