@@ -599,6 +599,8 @@ parts:
       git cherry-pick fa1eccce8e7c9e1520978e648b2b460e9b253894  # lxd: Require "ip" be installed
       git cherry-pick 9914ef9f03263a885b3e8e96916c019a16285357  # lxd/containers: Tigthen directory ownership
       git cherry-pick b01f47f39c723b3c724a1d1b973edb5adcc5b6d4  # shared: Use Lchown when copying symlinks
+      git cherry-pick 5253892f7241356bd2f8ab58bedbd0767b9b82a2  # shared/api: Make some NVIDIA fields omitempty
+      git cherry-pick b40089ed83d765f4812e9d7409d8c6377ada9ce4  # lxd/resources: Implement NVIDIA device fallback
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
