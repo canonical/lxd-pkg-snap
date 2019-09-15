@@ -601,6 +601,10 @@ parts:
       git cherry-pick b01f47f39c723b3c724a1d1b973edb5adcc5b6d4  # shared: Use Lchown when copying symlinks
       git cherry-pick 5253892f7241356bd2f8ab58bedbd0767b9b82a2  # shared/api: Make some NVIDIA fields omitempty
       git cherry-pick b40089ed83d765f4812e9d7409d8c6377ada9ce4  # lxd/resources: Implement NVIDIA device fallback
+      git cherry-pick fc3feba953b01976d251cff328769040ebc4ae53  # lxd/config: Allow modifying cluster.https_address
+      git cherry-pick 56dfd0cd04039ed4d629bf52aaa478a07cdecf97  # lxd/networks: Allows limited ipv4 config with fan
+      git cherry-pick ffe4997711e2f8903fa8f7d00354beed6ec3482a  # lxd/init: Properly handle ceph/cephfs
+      git cherry-pick 8991da5bc6a0f4ee17106a7ca86a7dd766f86a63  # lxd/storage/cephfs: Fix querying volume on cluster
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
