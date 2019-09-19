@@ -605,6 +605,14 @@ parts:
       git cherry-pick 56dfd0cd04039ed4d629bf52aaa478a07cdecf97  # lxd/networks: Allows limited ipv4 config with fan
       git cherry-pick ffe4997711e2f8903fa8f7d00354beed6ec3482a  # lxd/init: Properly handle ceph/cephfs
       git cherry-pick 8991da5bc6a0f4ee17106a7ca86a7dd766f86a63  # lxd/storage/cephfs: Fix querying volume on cluster
+      git cherry-pick 689cca71b6245c5a7457375dbbe196cfbaadfb2e  # Band aid for https://github.com/canonical/dqlite/issues/163
+      git cherry-pick b82739c0d0766ebd37cfeffe5ce423a498dc3e06  # lxd/storage/lvm: Properly return error messages
+      git cherry-pick 65c1a89c3f7ebe96a3519ed4016ddca5583f8f3c  # lxd/networks: Properly return error messages
+      git cherry-pick b110447b28d7a03061c9cfeb585a523ca87d6669  # lxd/storage/btrfs: Properly return error messages
+      git cherry-pick f50161eaf2f3c9d07cff596d7eb8fbe69c9c60af  # lxd/patches: Properly return error messages
+      git cherry-pick 2b1c1b0893eee2e21c8f129a99e3a004275f8a54  # lxd/device/disk: Properly return error messages
+      git cherry-pick 4b010313d41341ca3f1c8c6519c17de59a4d67d3  # lxd/storage: Consistent error messages
+      git cherry-pick feeac587264b8a326476b14068b650fab14e630b  # lxc/exec: Fix usage for --cwd
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
