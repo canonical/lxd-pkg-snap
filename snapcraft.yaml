@@ -16,10 +16,10 @@ description: |-
  alternative to virtual machines.
 
  Supported configuration options (snap set lxd [<key>=<value>...]):
+   - ceph.builtin: Use snap-specific ceph configuration [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
    - daemon.debug: Increases logging to debug level [default=false]
    - daemon.group: Group of users that can interact with LXD [default=lxd]
-   - ceph.builtin: Use snap-specific ceph configuration [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
 
