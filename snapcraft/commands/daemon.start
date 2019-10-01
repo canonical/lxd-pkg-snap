@@ -339,7 +339,11 @@ else
         exec 3<&- || true
 
         export LD_LIBRARY_PATH="${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
-        lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+        if [ "${lxcfs_loadavg:-"false"}" = "true" ]; then
+            lxcfs -l "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+        else
+            lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+        fi
     )
 fi
 
