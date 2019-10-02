@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.17"
+version: "3.18"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -554,7 +554,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.17
+    source-tag: lxd-3.18
     after:
       - lxc
       - dqlite
@@ -594,26 +594,6 @@ parts:
       git config user.name "LXD snap builder"
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
-      git cherry-pick 0aaac84a42f6af11d2c0d70ea378f0bf25d254b7  # lxd/cluster/upgrade: Prevents crash if heartbeat occurs before dqlite init
-      git cherry-pick 485eaa7246e815411ca7016c8dcb1e79cc341ff1  # lxd/networks: Allow ipv6.dhcp=true with ipv6.firewall=false
-      git cherry-pick 4375c825b08d568e9a8ba4c0f8abab31cb509a17  # lxd/storage/dir: Don't hide error message
-      git cherry-pick fa1eccce8e7c9e1520978e648b2b460e9b253894  # lxd: Require "ip" be installed
-      git cherry-pick 9914ef9f03263a885b3e8e96916c019a16285357  # lxd/containers: Tigthen directory ownership
-      git cherry-pick b01f47f39c723b3c724a1d1b973edb5adcc5b6d4  # shared: Use Lchown when copying symlinks
-      git cherry-pick 5253892f7241356bd2f8ab58bedbd0767b9b82a2  # shared/api: Make some NVIDIA fields omitempty
-      git cherry-pick b40089ed83d765f4812e9d7409d8c6377ada9ce4  # lxd/resources: Implement NVIDIA device fallback
-      git cherry-pick fc3feba953b01976d251cff328769040ebc4ae53  # lxd/config: Allow modifying cluster.https_address
-      git cherry-pick 56dfd0cd04039ed4d629bf52aaa478a07cdecf97  # lxd/networks: Allows limited ipv4 config with fan
-      git cherry-pick ffe4997711e2f8903fa8f7d00354beed6ec3482a  # lxd/init: Properly handle ceph/cephfs
-      git cherry-pick 8991da5bc6a0f4ee17106a7ca86a7dd766f86a63  # lxd/storage/cephfs: Fix querying volume on cluster
-      git cherry-pick 689cca71b6245c5a7457375dbbe196cfbaadfb2e  # Band aid for https://github.com/canonical/dqlite/issues/163
-      git cherry-pick b82739c0d0766ebd37cfeffe5ce423a498dc3e06  # lxd/storage/lvm: Properly return error messages
-      git cherry-pick 65c1a89c3f7ebe96a3519ed4016ddca5583f8f3c  # lxd/networks: Properly return error messages
-      git cherry-pick b110447b28d7a03061c9cfeb585a523ca87d6669  # lxd/storage/btrfs: Properly return error messages
-      git cherry-pick f50161eaf2f3c9d07cff596d7eb8fbe69c9c60af  # lxd/patches: Properly return error messages
-      git cherry-pick 2b1c1b0893eee2e21c8f129a99e3a004275f8a54  # lxd/device/disk: Properly return error messages
-      git cherry-pick 4b010313d41341ca3f1c8c6519c17de59a4d67d3  # lxd/storage: Consistent error messages
-      git cherry-pick feeac587264b8a326476b14068b650fab14e630b  # lxc/exec: Fix usage for --cwd
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
