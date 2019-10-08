@@ -175,6 +175,11 @@ parts:
       usr/lib/: lib/
     prime:
       - lib/libseccomp*so*
+    override-build: |-
+      snapcraftctl build
+
+      set -ex
+      cp include/seccomp-syscalls.h "${SNAPCRAFT_PART_INSTALL}/include/"
 
   lvm:
     source: snapcraft/empty
