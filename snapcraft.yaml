@@ -594,6 +594,25 @@ parts:
       git config user.name "LXD snap builder"
 
       git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
+      git cherry-pick e2f18530b7bd634386ca7b039d4b083bec15edd4  # lxd/device/disk: Apply limits through post hook
+      git cherry-pick 5221d43df530131f2c6e06369cdda8122f10eee1  # lxd/main_migratedumpsuccess: Use fast connection
+      git cherry-pick d64888338f82547220f3b9524d0968600cf1fbe7  # lxd/main_sql: Use fast connection
+      git cherry-pick 68da729c3ae989616db1751d2adeacceb27a9de1  # lxd/daemon: Allow internal queries during startup
+      git cherry-pick a05563b8ad929137ccdc046573520e804352faaf  # test: Adds host-side MTU veth checks
+      git cherry-pick ca60fe5de03ac9d1bb9d47f7f516151f06ad259d  # lxd/device/disk: Improvements in disk limits
+      git cherry-pick 2a1d40ba25915c18baf839aeb0bd784a11de1255  # lxd: Fix backup expiry
+      git cherry-pick 1e9ae9c234ef76f93dcb3da691104d7bdb5e6b09  # lxd: Fix backup expiry check
+      git cherry-pick 00d060491c9745d52afb31b7a86427106d7e4ae8  # lxd: Fix container restore with projects in Ceph
+      git cherry-pick 07a2ab7215d62459be98180a4561b077a0023506  # test: Add container restore with projects
+      git cherry-pick 3e07561990b233e816311bfe36c424db8ad19873  # doc: Add commit structure to contributing.md
+      git cherry-pick 52e0b4d19e0fd7ffe38dbc86d55a9ec989547897  # lxd/cluster: Process upgrade notifications on all members
+      git cherry-pick 5026fd2b0b49f31a8360e77137f81a7570d556f6  # lxd/cluster: Relax upgrade notification target
+      git cherry-pick 3fc077345762837a430a84740a1fed0109d41dd4  # lxd/db: Export GetNodeID
+      git cherry-pick 7010eb2f19a58fda9accb7e59ade1cc6f18ee320  # lxd/daemon: Skip heartbeat processing during startup
+      git cherry-pick 3d217085e614f5c74ae043c8b55bee85b18f262c  # lxd/db: Backward compat code for Nodes()
+      git cherry-pick ff87139a5e1c34ae08fc5ca02c41d26d19dc21e2  # lxd/daemon: Set gateway.Cluster during WaitUpgradeNotification
+      git cherry-pick 9eda4e5446d23644cd1f4243f8108a4baf3bdda2  # lxd/device/nic: Pass --concurrent to ebtables
+      git cherry-pick e29155d15f7036d332b031592f354c3d40fc9b61  # tests: Update ebtables calls
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
