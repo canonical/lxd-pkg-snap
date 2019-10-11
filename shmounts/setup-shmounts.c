@@ -362,6 +362,10 @@ int main() {
 				continue;
 			}
 
+			if (strcmp("/var/snap/lxd/common/lxd/storage-pools/", mountentry->mnt_dir) == 0) {
+				continue;
+			}
+
 			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/shmounts/storage-pools/%s", mountentry->mnt_dir + 39) < 0) {
 				fprintf(stderr, "Failed to assemble mount path '%s': %s\n", path, strerror(errno));
 				continue;
@@ -398,6 +402,10 @@ int main() {
 
 		while ((mountentry = getmntent(mounts)) != NULL) {
 			if (strncmp("/var/snap/lxd/common/shmounts/storage-pools/", mountentry->mnt_dir, 44) != 0) {
+				continue;
+			}
+
+			if (strcmp("/var/snap/lxd/common/shmounts/storage-pools/", mountentry->mnt_dir) == 0) {
 				continue;
 			}
 
