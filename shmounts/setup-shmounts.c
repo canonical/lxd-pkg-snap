@@ -354,6 +354,9 @@ int main() {
 			return -1;
 		}
 
+		// Try to undo MS_SHARED parent (not always present so ignore error)
+		mount("none", "/var/snap/lxd/common/lxd/storage-pools/", NULL, MS_REC|MS_PRIVATE, NULL);
+
 		while ((mountentry = getmntent(mounts)) != NULL) {
 			if (strncmp("/var/snap/lxd/common/lxd/storage-pools/", mountentry->mnt_dir, 39) != 0) {
 				continue;
