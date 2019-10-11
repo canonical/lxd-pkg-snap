@@ -209,16 +209,19 @@ int main() {
 	// Get a reference to current mtnns
 	nsfd_current = open("/proc/self/ns/mnt", O_RDONLY);
 	if (nsfd_current < 0) {
+		fprintf(stderr, "Failed to open the current mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
 	// Attach to PID1 mntns
 	nsfd_host = open("/proc/1/ns/mnt", O_RDONLY);
 	if (nsfd_host < 0) {
+		fprintf(stderr, "Failed to open the host mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
 	if (setns(nsfd_host, CLONE_NEWNS) < 0) {
+		fprintf(stderr, "Failed to attach to the host mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
@@ -233,16 +236,19 @@ int main() {
 	// Run setup if needed
 	if (setup) {
 		if (setup_ns() < 0) {
+			fprintf(stderr, "Failed to setup the shmounts namespace: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Attach to the new hidden mntns
 		nsfd_shmounts = open("/var/snap/lxd/common/ns/shmounts", O_RDONLY);
 		if (nsfd_shmounts < 0) {
+			fprintf(stderr, "Failed to open the shmounts mntns: %s\n", strerror(errno));
 			return -1;
 		}
 
 		if (setns(nsfd_shmounts, CLONE_NEWNS) < 0) {
+			fprintf(stderr, "Failed to attach to the shmounts mntns: %s\n", strerror(errno));
 			return -1;
 		}
 
@@ -257,10 +263,12 @@ int main() {
 	// Create temporary mountpoint
 	if (run_media) {
 		if (mkdir("/run/media/.lxd-shmounts", 0700) < 0 && errno != EEXIST) {
+			fprintf(stderr, "Failed to create /run/media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	} else {
 		if (mkdir("/media/.lxd-shmounts", 0700) < 0 && errno != EEXIST) {
+			fprintf(stderr, "Failed to create /media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	}
@@ -268,36 +276,43 @@ int main() {
 	// Bind-mount onto temporary mountpoint
 	if (run_media) {
 		if (mount("/var/snap/lxd/common/shmounts", "/run/media/.lxd-shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
+			fprintf(stderr, "Failed to bind-mount /var/snap/lxd/common/shmounts to /run/media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	} else {
 		if (mount("/var/snap/lxd/common/shmounts", "/media/.lxd-shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
+			fprintf(stderr, "Failed to bind-mount /var/snap/lxd/common/shmounts to /media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	}
 
 	// Attach to the snapd mntns
 	if (setns(nsfd_current, CLONE_NEWNS) < 0) {
+		fprintf(stderr, "Failed to attach to the current mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
 	// Bind-mount onto final destination
 	if (mount("/media/.lxd-shmounts", "/var/snap/lxd/common/shmounts", NULL, MS_BIND|MS_REC, NULL) < 0) {
+		fprintf(stderr, "Failed to bind-mount /media/.lxd-shmounts to /var/snap/lxd/common/shmounts: %s\n", strerror(errno));
 		return -1;
 	}
 
 	// Mark temporary mountpoint private
 	if (mount("none", "/media/.lxd-shmounts", NULL, MS_REC|MS_PRIVATE, NULL) < 0) {
+		fprintf(stderr, "Failed to mark /media/.lxd-shmounts as private: %s\n", strerror(errno));
 		return -1;
 	}
 
 	// Get rid of the temporary mountpoint from snapd mntns
 	if (umount2("/media/.lxd-shmounts", MNT_DETACH) < 0) {
+		fprintf(stderr, "Failed to unmount /media/.lxd-shmounts: %s\n", strerror(errno));
 		return -1;
 	}
 
 	// Attach to the snapd mntns
 	if (setns(nsfd_host, CLONE_NEWNS) < 0) {
+		fprintf(stderr, "Failed to attach to the host mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
@@ -313,10 +328,12 @@ int main() {
 	// Remove the temporary mountpoint
 	if (run_media) {
 		if (rmdir("/run//media/.lxd-shmounts") < 0 && errno != ENOENT) {
+			fprintf(stderr, "Failed to remove /run/media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	} else {
 		if (rmdir("/media/.lxd-shmounts") < 0 && errno != ENOENT) {
+			fprintf(stderr, "Failed to remove /media/.lxd-shmounts: %s\n", strerror(errno));
 			return -1;
 		}
 	}
@@ -326,12 +343,14 @@ int main() {
 	if (nsfd_old >= 0) {
 		// Attach to old ns
 		if (setns(nsfd_old, CLONE_NEWNS) < 0) {
+			fprintf(stderr, "Failed to attach to the old mntns: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Move all the mounts we care about to shmounts
 		mounts = setmntent("/proc/mounts", "r");
 		if (mounts == NULL) {
+			fprintf(stderr, "Failed to parse /proc/mounts: %s\n", strerror(errno));
 			return -1;
 		}
 
@@ -341,30 +360,36 @@ int main() {
 			}
 
 			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/shmounts/storage-pools/%s", mountentry->mnt_dir + 39) < 0) {
+				fprintf(stderr, "Failed to assemble mount path '%s': %s\n", path, strerror(errno));
 				return -1;
 			}
 
 			if (mkdir_p(path, 0700) < 0) {
+				fprintf(stderr, "Failed to create mount path '%s': %s\n", path, strerror(errno));
 				return -1;
 			}
 
 			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_MOVE, NULL) < 0) {
+				fprintf(stderr, "Failed to move mount '%s' to '%s: %s\n", mountentry->mnt_dir, path, strerror(errno));
 				return -1;
 			}
 		}
 
 		if (endmntent(mounts) < 0) {
+			fprintf(stderr, "Failed endmntent call: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Attach to current ns
 		if (setns(nsfd_current, CLONE_NEWNS) < 0) {
+			fprintf(stderr, "Failed to attach to the current mntns: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Move all the mounts into place
 		mounts = setmntent("/proc/mounts", "r");
 		if (mounts == NULL) {
+			fprintf(stderr, "Failed to parse /proc/mounts: %s\n", strerror(errno));
 			return -1;
 		}
 
@@ -374,33 +399,40 @@ int main() {
 			}
 
 			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/lxd/storage-pools/%s", mountentry->mnt_dir + 44) < 0) {
+				fprintf(stderr, "Failed to assemble mount path '%s': %s\n", path, strerror(errno));
 				return -1;
 			}
 
 			if (mkdir_p(path, 0700) < 0) {
+				fprintf(stderr, "Failed to create mount path '%s': %s\n", path, strerror(errno));
 				return -1;
 			}
 
 			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_BIND, NULL) < 0) {
+				fprintf(stderr, "Failed to bind-mount '%s' onto '%s: %s\n", mountentry->mnt_dir, path, strerror(errno));
 				return -1;
 			}
 
 			if (umount2(mountentry->mnt_dir, MNT_DETACH) < 0) {
+				fprintf(stderr, "Failed to umount '%s': %s\n", mountentry->mnt_dir, strerror(errno));
 				return -1;
 			}
 		}
 
 		if (endmntent(mounts) < 0) {
+			fprintf(stderr, "Failed endmntent call: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Attach back to host ns
 		if (setns(nsfd_host, CLONE_NEWNS) < 0) {
+			fprintf(stderr, "Failed to setns back to hostns: %s\n", strerror(errno));
 			return -1;
 		}
 
 		// Get rid of the mount, we're done here
 		if (umount2("/var/snap/lxd/common/ns/mntns", MNT_DETACH) < 0) {
+			fprintf(stderr, "Failed to unmount old mntns: %s\n", strerror(errno));
 			return -1;
 		}
 	}
@@ -408,11 +440,13 @@ int main() {
 	// Save our current mntns
 	fd = open("/var/snap/lxd/common/ns/mntns", O_CREAT | O_RDWR);
 	if (fd < 0) {
+		fprintf(stderr, "Failed to create new mntns mountpoint: %s\n", strerror(errno));
 		return -1;
 	}
 	close(fd);
 
 	if (mount("/run/snapd/ns/lxd.mnt", "/var/snap/lxd/common/ns/mntns", NULL, MS_BIND, NULL) < 0) {
+		fprintf(stderr, "Failed to mount new mntns: %s\n", strerror(errno));
 		return -1;
 	}
 
