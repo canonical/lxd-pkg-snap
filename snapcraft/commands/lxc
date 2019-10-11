@@ -14,13 +14,19 @@ if [ "${pid}" -gt 0 ] 2>/dev/null; then
     exit 1
 fi
 
+# Guess the real home directory
+REAL_HOME="${HOME}"
+if [ "${USER:-}" = "root" ] && [ -e "/root" ]; then
+    REAL_HOME="/root"
+elif [ -n "${USER:-}" ] && [ -e "/home/${USER}" ]; then
+    REAL_HOME="/home/${USER}"
+fi
+
 # Migrate data if needed
-if [ -n "${HOME:-}" ] && [ ! -d "${HOME}/.config/lxc" ]; then
+if [ ! -d "${HOME}/.config/lxc" ]; then
     mkdir -p "${HOME}/.config"
-    if [ -n "${USER:-}" ] && [ -d "/home/${USER}/.config/lxc" ]; then
-        cp -r "/home/${USER}/.config/lxc" "${HOME}/.config/lxc" || true
-    elif [ "${USER:-}" = "root" ] && [ -d "/root/.config/lxc" ]; then
-        cp -r "/root/.config/lxc" "${HOME}/.config/lxc" || true
+    if [ -d "${REAL_HOME}/.config/lxc" ]; then
+        cp -r "${REAL_HOME}/.config/lxc" "${HOME}/.config/lxc" || true
     fi
 fi
 
@@ -29,7 +35,13 @@ export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
 if [ "${EDITOR:-}" != "nano" ]; then
     export EDITOR=vim.tiny
-    export VIMINIT="source ${SNAP}/etc/vimrc"
+    if [ -e "${HOME}/.vimrc" ]; then
+        export VIMINIT="source ${HOME}/.vimrc"
+    elif [ -e "/etc/vim/vimrc.tiny" ]; then
+        export VIMINIT="source /etc/vim/vimrc.tiny"
+    else
+        export VIMINIT="source ${SNAP}/etc/vimrc"
+    fi
 fi
 export VISUAL=${EDITOR:-}
 
