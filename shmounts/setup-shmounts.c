@@ -364,17 +364,17 @@ int main() {
 
 			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/shmounts/storage-pools/%s", mountentry->mnt_dir + 39) < 0) {
 				fprintf(stderr, "Failed to assemble mount path '%s': %s\n", path, strerror(errno));
-				return -1;
+				continue;
 			}
 
 			if (mkdir_p(path, 0700) < 0) {
 				fprintf(stderr, "Failed to create mount path '%s': %s\n", path, strerror(errno));
-				return -1;
+				continue;
 			}
 
 			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_MOVE, NULL) < 0) {
 				fprintf(stderr, "Failed to move mount '%s' to '%s: %s\n", mountentry->mnt_dir, path, strerror(errno));
-				return -1;
+				continue;
 			}
 		}
 
@@ -403,22 +403,22 @@ int main() {
 
 			if (snprintf(path, PATH_MAX, "/var/snap/lxd/common/lxd/storage-pools/%s", mountentry->mnt_dir + 44) < 0) {
 				fprintf(stderr, "Failed to assemble mount path '%s': %s\n", path, strerror(errno));
-				return -1;
+				continue;
 			}
 
 			if (mkdir_p(path, 0700) < 0) {
 				fprintf(stderr, "Failed to create mount path '%s': %s\n", path, strerror(errno));
-				return -1;
+				continue;
 			}
 
 			if (mount(mountentry->mnt_dir, path, "", MS_REC|MS_BIND, NULL) < 0) {
 				fprintf(stderr, "Failed to bind-mount '%s' onto '%s: %s\n", mountentry->mnt_dir, path, strerror(errno));
-				return -1;
+				continue;
 			}
 
 			if (umount2(mountentry->mnt_dir, MNT_DETACH) < 0) {
 				fprintf(stderr, "Failed to umount '%s': %s\n", mountentry->mnt_dir, strerror(errno));
-				return -1;
+				continue;
 			}
 		}
 
