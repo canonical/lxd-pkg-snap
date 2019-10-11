@@ -32,6 +32,19 @@ echo "==> Loading snap configuration"
 # shellcheck disable=SC1090
 . "${SNAP_COMMON}/config"
 
+# Create the main directory
+if [ ! -d "${SNAP_COMMON}/lxd" ]; then
+    echo "==> Creating ${SNAP_COMMON}/lxd"
+    mkdir -p "${SNAP_COMMON}/lxd"
+    chmod 0711 "${SNAP_COMMON}/lxd"
+fi
+
+if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
+    echo "==> Creating ${SNAP_COMMON}/lxd/logs"
+    mkdir -p "${SNAP_COMMON}/lxd/logs"
+    chmod 0700 "${SNAP_COMMON}/lxd/logs"
+fi
+
 # Setup mntns symlink
 if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     echo "==> Setting up mntns symlink ($(readlink /proc/self/ns/mnt))"
@@ -348,17 +361,6 @@ else
 fi
 
 # LXD
-## Create the main directory
-if [ ! -d "${SNAP_COMMON}/lxd" ]; then
-    mkdir -p "${SNAP_COMMON}/lxd"
-    chmod 0711 "${SNAP_COMMON}/lxd"
-fi
-
-if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
-    mkdir -p "${SNAP_COMMON}/lxd/logs"
-    chmod 0700 "${SNAP_COMMON}/lxd/logs"
-fi
-
 ## Check for existing LXDs
 for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
     grep -q "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
