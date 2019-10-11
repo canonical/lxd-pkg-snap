@@ -52,6 +52,20 @@ if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     ln -s /proc/$$/root "${SNAP_COMMON}/mntns"
 fi
 
+# Setup rshared propagation on mount holding paths
+for path in "${SNAP_COMMON}/lxd/storage-pools" "${SNAP_COMMON}/lxd/devices"; do
+    if ! grep -q "/ ${path}" /proc/self/mountinfo && ! grep -q "${path} ${path}" /proc/self/mountinfo; then
+        echo "==> Setting up mount propagation on ${path}"
+        if [ ! -e "${path}" ]; then
+            mkdir -p "${path}"
+            chmod 0711 "${path}"
+        fi
+
+        mount -o bind "${path}" "${path}"
+        mount --make-rshared "${path}"
+    fi
+done
+
 # Setup shmounts
 if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
     echo "==> Setting up persistent shmounts path"
