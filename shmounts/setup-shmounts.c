@@ -393,6 +393,9 @@ int main() {
 			return -1;
 		}
 
+		// Try to make the path MS_SHARED again
+		mount("none", "/var/snap/lxd/common/lxd/storage-pools/", NULL, MS_REC|MS_SHARED, NULL);
+
 		// Move all the mounts into place
 		mounts = setmntent("/proc/mounts", "r");
 		if (mounts == NULL) {
