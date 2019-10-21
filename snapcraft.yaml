@@ -613,6 +613,13 @@ parts:
       git cherry-pick ff87139a5e1c34ae08fc5ca02c41d26d19dc21e2  # lxd/daemon: Set gateway.Cluster during WaitUpgradeNotification
       git cherry-pick 9eda4e5446d23644cd1f4243f8108a4baf3bdda2  # lxd/device/nic: Pass --concurrent to ebtables
       git cherry-pick e29155d15f7036d332b031592f354c3d40fc9b61  # tests: Update ebtables calls
+      git cherry-pick 13c4bf70fad13b970f82b5054a7729ad5d60ae28  # fix debugging.md rendering
+      git cherry-pick 34dc242bee815daf687953da3cccf332534266db  # lxd/sys: Enforce directory permissions
+      git cherry-pick c993b36cd3d682c2f55225c2c606e885d9d98769  # lxd/daemon: Bump NOFILE to max on startup
+      git cherry-pick 525235e2609a8d0605b0c03709559771c8cffcb3  # lxd/cluster: Tweak joining error messages
+      git cherry-pick 530dc5e54a2a2cad98c515f19cb04806f5b305eb  # lxd/cluster: Fix already-clustered test
+      git cherry-pick 9b3a8998daa65d79d5aa261dfa3983856d48112b  # lxc/storage/volume: Fix panic when invalid snapshot rename argument supplied
+      git cherry-pick df86dc05542417eb39d389db66548180b60ed150  # Makefile: Switch to tsenart/deadcode
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
