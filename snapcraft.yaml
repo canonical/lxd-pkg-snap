@@ -176,6 +176,22 @@ parts:
     prime:
       - lib/libseccomp*so*
 
+  logrotate:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - logrotate
+      - libpopt0
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+      usr/sbin/: bin/
+    stage:
+      - bin/logrotate
+    prime:
+      - bin/logrotate
+      - lib/*/libpopt*so*
+
   lvm:
     source: snapcraft/empty
     plugin: nil
