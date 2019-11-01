@@ -329,6 +329,19 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
 
+  xz:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - xz-utils
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+      usr/sbin/: bin/
+    prime:
+      - bin/xz
+      - lib/*/liblzma*so*
+
   zfs-0-6:
     source: https://github.com/zfsonlinux/zfs
     source-type: git
