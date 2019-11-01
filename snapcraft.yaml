@@ -309,7 +309,7 @@ parts:
       - vim-tiny
     organize:
       usr/bin/: bin/
-      usr/share/vim/vim74/debian.vim: etc/vimrc
+      usr/share/vim/vim*/debian.vim: etc/vimrc
     prime:
       - bin/vim.tiny
       - etc/vimrc
