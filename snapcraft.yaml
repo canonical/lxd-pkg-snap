@@ -318,6 +318,17 @@ parts:
       - bin/sqlite3
       - lib/libsqlite3*so*
 
+  squashfs-tools-ng:
+    source: https://github.com/AgentD/squashfs-tools-ng
+    source-type: git
+    plugin: autotools
+    build-packages:
+      - liblzma-dev
+    prime:
+      - bin/sqfs2tar
+      - bin/tar2sqfs
+      - lib/libsquashfs.so*
+
   vim:
     source: snapcraft/empty
     plugin: nil
