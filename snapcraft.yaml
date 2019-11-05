@@ -356,6 +356,24 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
 
+  xtables:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - ebtables
+      - iptables
+      - xtables-addons-common
+    organize:
+      usr/lib/*/xtables/*: lib/xtables/
+      lib/ebtables/*: lib/
+      sbin/: bin/
+    prime:
+      - bin/ebtables
+      - etc/ethertypes
+      - etc/protocols
+      - lib/libebt*
+      - lib/xtables/*
+
   xz:
     source: snapcraft/empty
     plugin: nil
@@ -616,14 +634,11 @@ parts:
     stage-packages:
       - acl
       - dnsmasq-base
-      - ebtables
-      - iptables
       - netbase
       - pigz
       - rsync
       - squashfs-tools
       - xdelta3
-      - xtables-addons-common
     plugin: go
     go-buildtags:
       - libsqlite3
@@ -690,21 +705,15 @@ parts:
       usr/lib/: lib/
       usr/sbin/: bin/
       sbin/: bin/
-      lib/ebtables: lib/
     prime:
       - bin/dnsmasq
-      - bin/ebtables
       - bin/pigz
       - bin/rsync
       - bin/setfacl
       - bin/unsquashfs
       - bin/xdelta3
-      - lib/libebt*
-      - lib/xtables/*
 
       - etc/bash_completion.d/snap.lxd.lxc
-      - etc/ethertypes
-      - etc/protocols
 
       - bin/lxc
       - bin/lxd
