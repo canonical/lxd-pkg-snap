@@ -725,14 +725,21 @@ parts:
     after:
       - btrfs
       - ceph
+      - dqlite
+      - libco
+      - libseccomp
+      - logrotate
       - lvm
       - nano
       - nvidia-container
       - openvswitch
+      - raft
       - sqlite
-      - dqlite
+      - squashfs-tools-ng
       - vim
       - xfs
+      - xtables
+      - xz
       - zfs-0-6
       - zfs-0-7
       - zfs-0-8
@@ -743,7 +750,6 @@ parts:
       - lxd-migrate
       - shmounts
       - snap-query
-      - wrappers
     plugin: nil
     override-prime: |
       set -x
