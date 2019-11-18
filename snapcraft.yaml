@@ -286,6 +286,66 @@ parts:
       - bin/uuidgen
       - share/openvswitch/
 
+  qemu:
+    after:
+      - libseccomp
+    source: https://git.qemu.org/git/qemu.git
+    source-type: git
+    plugin: autotools
+    configflags:
+      - --disable-docs
+      - --disable-slirp
+      - --disable-user
+      - --enable-attr
+      - --enable-cap-ng
+      - --enable-kvm
+      - --enable-linux-aio
+      - --enable-pie
+      - --enable-seccomp
+      - --enable-system
+      - --enable-tools
+      - --enable-vhost-crypto
+      - --enable-vhost-kernel
+      - --enable-vhost-net
+      - --enable-vhost-scsi
+      - --enable-vhost-user
+      - --enable-vhost-vsock
+      - --enable-virtfs
+      - --enable-vnc
+      - --target-list=x86_64-softmmu
+    build-packages:
+      - bison
+      - flex
+      - pkg-config
+      - libcap-ng-dev
+      - libglib2.0-dev
+      - libpixman-1-dev
+      - libaio-dev
+    stage-packages:
+      - genisoimage
+      - libmagic1
+      - libpixman-1-0
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+
+      set -ex
+      sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
+
+      set +ex
+      snapcraftctl build
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/genisoimage
+      - bin/mkisofs
+      - bin/qemu-system-x86_64*
+      - bin/qemu-img*
+      - lib/*/libmagic*so*
+      - lib/*/libpixman*so*
+      - share/qemu/efi-virtio.rom
+      - share/qemu/kvmvapic.bin
+
   raft:
     source: https://github.com/canonical/raft
     source-type: git
