@@ -337,14 +337,14 @@ parts:
       usr/bin/: bin/
       usr/lib/: lib/
     prime:
-      - bin/genisoimage
-      - bin/mkisofs
+      - bin/genisoimage*
+      - bin/mkisofs*
       - bin/qemu-system-x86_64*
       - bin/qemu-img*
       - lib/*/libmagic*so*
       - lib/*/libpixman*so*
-      - share/qemu/efi-virtio.rom
-      - share/qemu/kvmvapic.bin
+      - share/qemu/efi-virtio.rom*
+      - share/qemu/kvmvapic.bin*
 
   raft:
     source: https://github.com/canonical/raft
