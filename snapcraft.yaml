@@ -379,6 +379,38 @@ parts:
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
 
+  qemu-ovmf-secureboot:
+    after:
+      - edk2
+      - qemu
+    source: https://github.com/puiterwijk/qemu-ovmf-secureboot
+    source-type: git
+    plugin: nil
+    build-packages:
+      - xorriso
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+
+      set -ex
+      rm -Rf iso-root vfat-root shell.iso
+      mkdir -p iso-root vfat-root/efi/boot
+      cp ../../edk2/build/Build/OvmfX64/RELEASE_GCC49/X64/Shell.efi vfat-root/efi/boot/bootx64.efi
+      cp ../../edk2/build/Build/OvmfX64/RELEASE_GCC49/X64/EnrollDefaultKeys.efi vfat-root/
+      "${SNAPCRAFT_STAGE}/bin/qemu-img" convert --image-opts driver=vvfat,floppy=on,fat-type=12,label=UEFI_SHELL,dir=vfat-root iso-root/shell.img
+      xorriso --as mkisofs -input-charset ASCII -J -rational-rock -e shell.img -no-emul-boot -o shell.iso iso-root/
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
+      python3 ovmf-vars-generator \
+        --qemu-binary "${SNAPCRAFT_STAGE}/bin/qemu-system-x86_64" \
+        --print-output --disable-smm --skip-testing \
+        --oem-string "$(cat ${SNAPCRAFT_PROJECT_DIR}/snapcraft/etc/ubuntu-sb.crt)" \
+        --ovmf-binary "${SNAPCRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
+        --ovmf-template-vars "${SNAPCRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
+        --uefi-shell-iso shell.iso \
+        "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
+    prime:
+      - share/qemu/*
+
   raft:
     source: https://github.com/canonical/raft
     source-type: git
