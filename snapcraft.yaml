@@ -158,6 +158,39 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
 
+  edk2:
+    after:
+      - qemu
+    source: https://github.com/tianocore/edk2
+    source-type: git
+    plugin: nil
+    build-packages:
+      - acpica-tools
+      - nasm
+      - uuid-dev
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+
+      # Run in a bash sub-shell as edksetup.sh requires it
+      set -ex
+      (
+      cat << EOF
+          . ./edksetup.sh
+          make -C BaseTools ARCH=X64
+          build -a X64 -t GCC49 -b RELEASE -p OvmfPkg/OvmfPkgX64.dsc \
+            -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
+            -DSECURE_BOOT_ENABLE=TRUE \
+            -DFD_SIZE_2MB \
+            -DTPM2_ENABLE=TRUE
+      EOF
+      ) | bash -e
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
+      cp Build/*/*/FV/OVMF_CODE.fd "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
+      cp Build/*/*/FV/OVMF_VARS.fd "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
+    prime:
+      - share/qemu/*
+
   libco:
     source: https://github.com/canonical/libco
     source-type: git
