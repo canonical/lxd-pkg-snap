@@ -784,6 +784,9 @@ parts:
       snapcraftctl build
       set -ex
 
+      # Build the agent (special build tags)
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent github.com/lxc/lxd/lxd-agent
+
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       echo 'export PATH="${PATH}:/snap/bin:/var/lib/snapd/snap/bin"' > ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
@@ -805,6 +808,7 @@ parts:
 
       - bin/lxc
       - bin/lxd
+      - bin/lxd-agent
       - bin/lxd-benchmark
 
   lxd-migrate:
