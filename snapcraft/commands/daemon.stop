@@ -70,13 +70,26 @@ fi
 ## LXD
 echo "=> Stopping LXD (with container shutdown)"
 
-LXD="lxd"
-if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
-    LXD="${SNAP_COMMON}/lxd.debug"
-fi
-
 echo host-shutdown > "${SNAP_COMMON}/state"
-"${LXD}" shutdown || true
+PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
+if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
+    kill -30 "${PID}"
+
+    DEAD=0
+    # shellcheck disable=SC2034
+    for i in $(seq 540); do
+        if ! kill -0 "${PID}" 2>/dev/null; then
+            DEAD=1
+            break
+        fi
+        sleep 1
+    done
+
+    if [ "${DEAD}" = "0" ]; then
+        echo "==> Forcefully killing LXD after 9 minutes wait"
+        kill -9 "${PID}"
+    fi
+fi
 
 ## OpenVswitch
 if [ -e "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" ]; then
