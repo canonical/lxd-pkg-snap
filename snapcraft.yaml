@@ -734,6 +734,7 @@ parts:
       git cherry-pick 26098589643d83c72bb915a06da9603d913eab06  # lxd/networks: Forward config updates
       git cherry-pick 41bffa597fd03bd884ae8d4e8eec28bcf9eca285  # lxd/images: Fix image pruning with projects
       git cherry-pick 6a94f9138562102626680363fcc000c4b702e2d0  # lxd/storage/zfs: Fix pool import
+      git cherry-pick c14d02abe3565fc41f82cd04920d3f5f6fee06be  # lxd/daemon: Don't block on RBAC
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
