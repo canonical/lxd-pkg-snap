@@ -659,7 +659,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
       git cherry-pick e2f18530b7bd634386ca7b039d4b083bec15edd4  # lxd/device/disk: Apply limits through post hook
       git cherry-pick 5221d43df530131f2c6e06369cdda8122f10eee1  # lxd/main_migratedumpsuccess: Use fast connection
       git cherry-pick d64888338f82547220f3b9524d0968600cf1fbe7  # lxd/main_sql: Use fast connection

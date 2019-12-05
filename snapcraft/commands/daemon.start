@@ -305,7 +305,7 @@ elif [ "${shiftfs_enable:-"auto"}" = "false" ]; then
 fi
 
 if [ "${shiftfs_enable:-"auto"}" = "false" ]; then
-    export LXD_SHIFTFS=false
+    export LXD_SHIFTFS_DISABLE=true
 fi
 
 # LXC
