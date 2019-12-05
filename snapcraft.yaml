@@ -800,8 +800,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git am ${SNAPCRAFT_PROJECT_DIR}/patches/0001-lxd-Add-temporary-variable-to-disable-shiftfs.patch
-
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
