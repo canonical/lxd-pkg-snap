@@ -771,6 +771,7 @@ parts:
       - sqlite
     build-packages:
       - libacl1-dev
+      - libudev-dev
       - pkg-config
     stage-packages:
       - acl
