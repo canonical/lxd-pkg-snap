@@ -424,6 +424,8 @@ parts:
               -e "/charserial1/d" \
               -e "s/ide-cd/scsi-cd/" \
               -e "s/'-device',$/'-device', 'virtio-scsi-pci,id=scsi', '-device',/"
+      elif [ "$(uname -m)" = "x86_64" ]; then
+          cp -f "${SNAPCRAFT_STAGE}/share/qemu/kvmvapic.bin" .
       fi
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
