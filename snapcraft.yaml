@@ -362,6 +362,7 @@ parts:
       - --enable-vhost-vsock
       - --enable-virtfs
       - --enable-vnc
+      - --firmwarepath=/snap/lxd/current/share/qemu/
     build-packages:
       - bison
       - flex
