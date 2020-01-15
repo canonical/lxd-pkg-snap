@@ -1,5 +1,5 @@
 name: lxd
-base: core
+base: core18
 version: git
 grade: devel
 summary: LXD - the container lightervisor
