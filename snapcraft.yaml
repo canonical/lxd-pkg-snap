@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.18"
+version: "3.19"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -782,7 +782,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.18
+    source-tag: lxd-3.19
     after:
       - lxc
       - dqlite
@@ -818,82 +818,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick e2f18530b7bd634386ca7b039d4b083bec15edd4  # lxd/device/disk: Apply limits through post hook
-      git cherry-pick 5221d43df530131f2c6e06369cdda8122f10eee1  # lxd/main_migratedumpsuccess: Use fast connection
-      git cherry-pick d64888338f82547220f3b9524d0968600cf1fbe7  # lxd/main_sql: Use fast connection
-      git cherry-pick 68da729c3ae989616db1751d2adeacceb27a9de1  # lxd/daemon: Allow internal queries during startup
-      git cherry-pick a05563b8ad929137ccdc046573520e804352faaf  # test: Adds host-side MTU veth checks
-      git cherry-pick ca60fe5de03ac9d1bb9d47f7f516151f06ad259d  # lxd/device/disk: Improvements in disk limits
-      git cherry-pick 2a1d40ba25915c18baf839aeb0bd784a11de1255  # lxd: Fix backup expiry
-      git cherry-pick 1e9ae9c234ef76f93dcb3da691104d7bdb5e6b09  # lxd: Fix backup expiry check
-      git cherry-pick 00d060491c9745d52afb31b7a86427106d7e4ae8  # lxd: Fix container restore with projects in Ceph
-      git cherry-pick 07a2ab7215d62459be98180a4561b077a0023506  # test: Add container restore with projects
-      git cherry-pick 3e07561990b233e816311bfe36c424db8ad19873  # doc: Add commit structure to contributing.md
-      git cherry-pick 52e0b4d19e0fd7ffe38dbc86d55a9ec989547897  # lxd/cluster: Process upgrade notifications on all members
-      git cherry-pick 5026fd2b0b49f31a8360e77137f81a7570d556f6  # lxd/cluster: Relax upgrade notification target
-      git cherry-pick 3fc077345762837a430a84740a1fed0109d41dd4  # lxd/db: Export GetNodeID
-      git cherry-pick 7010eb2f19a58fda9accb7e59ade1cc6f18ee320  # lxd/daemon: Skip heartbeat processing during startup
-      git cherry-pick 3d217085e614f5c74ae043c8b55bee85b18f262c  # lxd/db: Backward compat code for Nodes()
-      git cherry-pick ff87139a5e1c34ae08fc5ca02c41d26d19dc21e2  # lxd/daemon: Set gateway.Cluster during WaitUpgradeNotification
-      git cherry-pick 9eda4e5446d23644cd1f4243f8108a4baf3bdda2  # lxd/device/nic: Pass --concurrent to ebtables
-      git cherry-pick e29155d15f7036d332b031592f354c3d40fc9b61  # tests: Update ebtables calls
-      git cherry-pick 13c4bf70fad13b970f82b5054a7729ad5d60ae28  # fix debugging.md rendering
-      git cherry-pick 34dc242bee815daf687953da3cccf332534266db  # lxd/sys: Enforce directory permissions
-      git cherry-pick c993b36cd3d682c2f55225c2c606e885d9d98769  # lxd/daemon: Bump NOFILE to max on startup
-      git cherry-pick 525235e2609a8d0605b0c03709559771c8cffcb3  # lxd/cluster: Tweak joining error messages
-      git cherry-pick 530dc5e54a2a2cad98c515f19cb04806f5b305eb  # lxd/cluster: Fix already-clustered test
-      git cherry-pick 9b3a8998daa65d79d5aa261dfa3983856d48112b  # lxc/storage/volume: Fix panic when invalid snapshot rename argument supplied
-      git cherry-pick df86dc05542417eb39d389db66548180b60ed150  # Makefile: Switch to tsenart/deadcode
-      git cherry-pick de2bf1faa5c1186113ffb0c9064fa3e01afdf2b7  # lxd/include: Don't include missing file
-      git cherry-pick c4e1f0f9a4a333c293447f7021c4f05c24fd590a  # Add step to trigger reread on loopback device when resizing BTRFS storage pool.
-      git cherry-pick a649f33d16927c261bf5003d60db0a0c36e36b8b  # seccomp: protect against syscall supervision override
-      git cherry-pick c0201c6cb97ba33713375b23ec56f3da79ccddf8  # client/lxd/storage/volumes: Fixes bug where migration errors were ignored
-      git cherry-pick 316e1f0847b2ca3b7dd5774f5cd3929db39cd449  # lxc/storage/volume: Adds volume snapshot rename check for same parent volume
-      git cherry-pick cc2aa806307cb700606d0786208d60ccea7cfd3f  # lxd/storage/quota: Fix bad typing
-      git cherry-pick 6de77ab73b4f1243a224f50099aea8c9f88400be  # lxd/containers: Return disk usage when stopped
-      git cherry-pick d76e3ff4c3d1ca0fa2d5d8618a7b5aede198f239  # lxc/config: Handle config/profile in examples
-      git cherry-pick 473fb518b10a0e76ecedfcc1d71d9746dc81cb07  # client: Ignore unresolvable addresses
-      git cherry-pick ce0941213ff55ff5381b6f98e0ac1848fb612c4b  # lxd/networks: Nicer error on misisng IPv6
-      git cherry-pick 55677a60c25ce9e920dd02743d72a0d850484ad8  # lxd/device/nic/bridged: Allow MAC filtering on unmanaged bridges
-      git cherry-pick a1614f24bbfd2e20e96fabfa0090b3e426c3e13f  # doc: fix link to security.md from README.md
-      git cherry-pick 5fc3fcc0d769201c16985eba5755d2c1b7a366b0  # doc: use HTTPS links for criu and #lxcontainers (they have STS preload)
-      git cherry-pick 46f59d366984f9593c9e2456402cf363e934d753  # lxd/devlxd: Fixes event socket close on client disconnect during wait
-      git cherry-pick 7a337d9c02384fe1dd452ef9fb9e09095a879b47  # lxd/events/events: Adds context to event listener Wait() function
-      git cherry-pick e8036c0e019bd577c65d37bf968f1258f8262ebb  # lxd/events: Fixes event socket close on client disconnect during wait
-      git cherry-pick 48af12669ba2ee5b91819e099e143baad3221dc4  # lxd/migrate: Close control web socket on disconnect()
-      git cherry-pick 48883732f6c0bec8a10f5143e7bac5d33a7de787  # lxd/migrate/storage/volunes: Always close web socket after migration
-      git cherry-pick db5b8bbe74d2d1976fb817e3a097fcbe5b60e93d  # lxd/containers: Push MAAS entry after dev creation
-      git cherry-pick bbcd863dd6d09310dd861fc597af1dbd9cdfff4b  # lxd/resources/storage: Improve cdrom handling
-      git cherry-pick 7bb8667755b75c70ff78eea42d84b2355cc7d6ac  # Bring Go current in Travis
-      git cherry-pick f7dc93dc26fe0072c22f37fb9485ca041f9c1392  # lxd/devices/nic: Handle recent ebtables
-      git cherry-pick 2f09cb029f8dfce5bd45325ab3b9e549dd2aadc0  # lxd/container: Fix apply_quota
-      git cherry-pick 6647f4185a08a6b3f24e6a9122183e6853ede980  # lxd/storage/lvm: Fix version parsing
-      git cherry-pick d3e1893e2aa030d9c39c66defd9ff8e5421918c1  # lxc/init: Properly handle errors with --empty
-      git cherry-pick 4aaaed70e2e81b1d8dfbaabf4186a576ba9a9c6c  # lxd/operations: Fix remote Wait
-      git cherry-pick b7838e4c81eda1ecbaa23d9d24ee99061c1e832c  # lxc/query: Fix handling of ?project=
-      git cherry-pick fbf60fe7adda57adb3b11619e1613eef03b64fe4  # lxd/db: Cover all combinations of instance filters
-      git cherry-pick 93c12f57bbd2f0bc9c0175d22eff8d353304d992  # lxd/db: Re-generate DB code
-      git cherry-pick 383c2ba86cb726f19d49637bfc312e2d2c87ca8f  # lxc/move: Fixes instance snapshot rename validation and crash
-      git cherry-pick 03c42aaaabf173b7eea7a371a71795bcefea30f6  # lxd/operations: Support nil state
-      git cherry-pick 1212321a20284c6bce1529dc2fd03191a08c1957  # lxd/device/nic: Fix race in vlan creation
-      git cherry-pick aa63c8164029348466c479d3305e53c7e1697804  # lxd/device/nic: Fix handling of shared vlans
-      git cherry-pick b218cc5fd0dbcaeda011606273de12cb4e7b2d98  # Makefile: Have default build static lxd-p2c
-      git cherry-pick 1810dc02bf5e68e031200337132b07bd4852d048  # lxc/image: Truncate image files down to size
-      git cherry-pick 9fa99bcb5d646dc8ee315e4f0642b1ca4e526273  # lxd/images: Truncate image files down to size
-      git cherry-pick f64b60bb3fb2692b5c3210daa220e21bc397b661  # lxd/device/nic/ipvlan: removes unused optional "host_name" config field.
-      git cherry-pick cc24425828bdaa51ca6b93eaeed5aa624e23c418  # shared/simplestreams: Support disk-kvm.img
-      git cherry-pick 8d20dd379ef380b104da89746fdc836ce92a637f  # client/lxd: log websocket URL
-      git cherry-pick 2ede91be708c8deb4e8601a006885c97cc4e488b  # client/lxd/events: Fixes /events connect bug
-      git cherry-pick d082fd4b2ffd426c10a405370e6bb137b8c50ab3  # scripts/bash: Refresh list of commands
-      git cherry-pick 2ec85e4f9b9ec95556ee050ee5be93f82d7faaad  # lxd/storage/zfs: Fix migration on zfs 0.6
-      git cherry-pick 2b34663ebefc9c48170e25df0ceea3d00ddfc68a  # Use the node ID from the nodes ID table, not the raft one
-      git cherry-pick ad3856d180836a3f10b7b0a7943953bd76b8adbc  # lxd/patches: Fix database roles
-      git cherry-pick e7a0a723c0806a94e2d8dd81d4267c45ff248ab5  # lxd/networks: Merge clsuter config on create
-      git cherry-pick 26098589643d83c72bb915a06da9603d913eab06  # lxd/networks: Forward config updates
-      git cherry-pick 41bffa597fd03bd884ae8d4e8eec28bcf9eca285  # lxd/images: Fix image pruning with projects
-      git cherry-pick 6a94f9138562102626680363fcc000c4b702e2d0  # lxd/storage/zfs: Fix pool import
-      git cherry-pick c14d02abe3565fc41f82cd04920d3f5f6fee06be  # lxd/daemon: Don't block on RBAC
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
