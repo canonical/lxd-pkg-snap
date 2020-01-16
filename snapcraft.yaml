@@ -118,6 +118,7 @@ parts:
       - bin/python2*
       - bin/rbd
       - lib/python2.7
+      - lib/*/libpython2.7.so*
       - -lib/python2.7/sitecustomize.py
       - lib/*/ceph
       - lib/*/libboost_iostreams.so.*
@@ -132,6 +133,7 @@ parts:
       - lib/*/libicuuc.so.*
       - lib/*/libnspr4.so
       - lib/*/libnss3.so
+      - lib/*/libibverbs.so*
       - lib/*/nss/libsoftokn3.so
       - lib/*/nss/libfreeblpriv3.so
       - lib/*/libnssutil3.so
