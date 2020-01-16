@@ -127,6 +127,7 @@ parts:
       - lib/*/libboost_regex.so.*
       - lib/*/libboost_system.so.*
       - lib/*/libboost_thread.so.*
+      - lib/*/libcephfs*
       - lib/*/libdb-5.3.so
       - lib/*/libicudata.so.*
       - lib/*/libicui18n.so.*
@@ -142,6 +143,7 @@ parts:
       - lib/*/librados.so.*
       - lib/*/librbd.so.*
       - lib/*/libsmime3.so
+      - lib/*/libsnappy*
 
   dqlite:
     after:
