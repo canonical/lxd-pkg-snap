@@ -119,6 +119,7 @@ parts:
       - bin/rbd
       - lib/python2.7
       - -lib/python2.7/sitecustomize.py
+      - lib/*/ceph
       - lib/*/libboost_iostreams.so.*
       - lib/*/libboost_program_options.so.*
       - lib/*/libboost_random.so.*
