@@ -531,6 +531,7 @@ parts:
       - lib/libebt*
       - lib/*/libxtables*
       - lib/xtables/*
+      - lib/*/xtables/*
 
   xz:
     source: snapcraft/empty
