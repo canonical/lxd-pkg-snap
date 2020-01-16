@@ -520,18 +520,15 @@ parts:
       - iptables
       - xtables-addons-common
     organize:
-      lib/ebtables/*: lib/
       usr/lib/*/xtables/*: lib/xtables/
-      usr/lib/: lib/
+      lib/ebtables/*: lib/
       sbin/: bin/
     prime:
       - bin/ebtables
       - etc/ethertypes
       - etc/protocols
       - lib/libebt*
-      - lib/*/libxtables*
       - lib/xtables/*
-      - lib/*/xtables/*
 
   xz:
     source: snapcraft/empty
