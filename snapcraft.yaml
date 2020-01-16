@@ -451,6 +451,10 @@ parts:
     source: https://github.com/canonical/raft
     source-type: git
     plugin: autotools
+    stage-packages:
+      - libuv1
+    build-packages:
+      - libuv1-dev
     organize:
       usr/lib/: lib/
     prime:
