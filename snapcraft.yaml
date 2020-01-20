@@ -819,6 +819,63 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 54159ecc9bc523ad087ae7b29dfbcd660d8cdbd9  # lxd/container: Improves error messages in instanceValidDevices
+      git cherry-pick db64e3bdbee07808d734ef8ce02ff85465625ba4  # lxd/container: instance.ValidDevices usage
+      git cherry-pick 6432867e3d09c80a409023d8d81ef78096634ee2  # lxd/container/lxc: instance.ValidDevices usage
+      git cherry-pick a085847c141db8330418f40eb749a5a8d65043db  # lxd/device/config/devices: Improves error messages
+      git cherry-pick a28827139be5d7d2ac9f6513d9f02747a85d3eb1  # lxd/device/disk: Adds support for VM disk devices
+      git cherry-pick 65238f9388f0f25e4d25da17b21d33d60ad4d98e  # lxd/instance/instance/interface: Comment ending consistency
+      git cherry-pick 2f765d04ed7cd97e509e1e7117e940307352fe08  # lxd/instance/qemu/vm/qemu: Fixes driver index loop bug
+      git cherry-pick 1772ce40f39bc0af48a8577dad00b5c9dee9cd8a  # lxd/instance/instance/utils: Introduces constant to indicate profile validation in instance name
+      git cherry-pick 5fa9a6b0b21129d18749342298bdc81c6daa650c  # lxd/profiles: Switches to use instance.ProfileValidationName during profile validation
+      git cherry-pick 0796e5a9bbb65bfc92d223c0366970ae85f732e2  # lxd/device/disk: Updates Stop device to understand VM disks
+      git cherry-pick 83304a8a7d29feb1a128b193c86cc4e6f850732c  # lxd/storage/drivers/driver/common: Removes generic vfs functions as not common to all driver types
+      git cherry-pick 53a9d95a71101dcff2d4e989ac8375646d4fa4aa  # lxd/storage/drivers/generic/vfs: Moves generic VFS drivers into standalone file
+      git cherry-pick 42e9d56040bb7695b6457ba710f01b8fe7c07b3a  # lxd/storage/drivers: Updates usage of generic VFS functions
+      git cherry-pick ba732d69ae2a10339ac453b53dcf6d90666b53aa  # lxd/instance: Moves vm qemu pkg into instance/drivers pkg
+      git cherry-pick a65f2adbe3499d66b973cf08031245639b8162bc  # lxd/instance/drivers/container/lxc: Adds placeholder for future lxc implementation
+      git cherry-pick 1b14fda15482701562d86c3ca860bc0ce9e0e974  # lxd/instance/drivers/load: Adds instance load functions
+      git cherry-pick c0cc1473bb70d91a160687ccfb9e76c9d4c84796  # lxd/container: Removes unused functions
+      git cherry-pick 17564e4dfebe8698b3f06da327b81ada7d234b9f  # lxd/db/containers: Renames ContainerToArgs to InstanceToArgs
+      git cherry-pick 74d2b772154cf977fc9db2d0a04ee366fe6b5cec  # lxd/container: db.InstanceToArgs usage
+      git cherry-pick 4dc40512c50580ccce9da64b8b5c5f2f27a65d9b  # lxd/profiles/utils: db.InstanceToArgs usage
+      git cherry-pick f858c49d82f092559b2241ca6ca2d4d2f1131ef7  # lxd/profiles/utils: Updates use of containerLXCInstantiate
+      git cherry-pick b6c80d117af42537bd70f126a683510aed6403a9  # lxd/container/lxc: Push containerLXC load functions into instance/drivers package
+      git cherry-pick 4670444fe9b1e73721d2ad17e0caedd511065bcd  # lxd/container/lxc: containerLXCInstantiate usage
+      git cherry-pick 60934a72436ddbec145a2c9ca162534a20927271  # lxd/container/lxc: Makes containerLXCInstantiate compatiable with generic instance load functions
+      git cherry-pick dc35aa4ac8c5efaef71fa0d4b60f1efd4c1742d0  # lxd/containers: instance.Load usage
+      git cherry-pick 29887077f1a64a1eb6ee786ce9ad70cd5a7d224b  # lxd/containers/post: instance.Load usage
+      git cherry-pick 53ecc06b8895164c4110a932a784e88b2bd92286  # lxd/instance/drivers/vm/qemu: Unexport and rename load functions
+      git cherry-pick ea5b6e470d0099a5fdc56a80aac55067080d76f6  # lxd/instance/instance/utils: Load function comments
+      git cherry-pick 21f349edf95a0357e1745c30345e1716c5fe3a27  # lxd/instance/instance/utils: Adds Create instance function placeholder
+      git cherry-pick d40be7fe4352419cf1ff010134c3a72cd16b4344  # lxd/instance/instance/utils: db.InstanceToArgs usage
+      git cherry-pick 56e9ca5341bc9a6737c99b8b6e12027baa0bc1a5  # lxd/instance/drivers/vm/qemu: Unexports qemu implementation
+      git cherry-pick dd208c34185c680ab9baa48ad5747be926470582  # lxd/exec: Pass full req through
+      git cherry-pick 86c70c80d5f6a0665087c54dd7552361efc77f33  # lxd/exec: Forward control messages
+      git cherry-pick 565dcb3abd5f26178e3ed5547676d8898718c411  # lxd/containers: Fix error handling on stop
+      git cherry-pick 19f3e9b0559f2d37c0e400c334ae061c7793fb0e  # lxd/vm: Fix stop race condition
+      git cherry-pick 7d5e22c0cf34f230413c107a751683814f09c63e  # lxd/vm: Add locking for stop and shutdown
+      git cherry-pick b19d206ba6a986093aff8ae22caab9dc9b50ce2c  # lxd/vm: Don't crash on vm-initiated reboots
+      git cherry-pick bc8b2f20f1054fac6f37ef55ff094221e9195f30  # lxd/storage: Remove legacy volume.size check
+      git cherry-pick 10db34f69f9cb75c512f59320b90b28b10efe6a4  # lxc/init: Consider image type for instance type
+      git cherry-pick da481b3e7d2f1b1fd8b407a8bb2b666abe750d38  # i18n: Update translation templates
+      git cherry-pick 6e8bae55c62d8cbc85aa9490c8e123d5850cca09  # tests: Update volume.size tests
+      git cherry-pick c24f0951524502947a383fc9f7cdb164c2c9b787  # lxd/vm: Store qemu log
+      git cherry-pick ee3a0d4b14d646b925ed3519c58b9145338e5653  # [Makefiles] Whitelist ldflags in libcap pkgconfig
+      git cherry-pick 2801b88e6706a7049abad4063d7ca2d4bdda8c9e  # lxd/vm: Fix incorrect bootindex
+      git cherry-pick 6de68015d72290c92aa6abd78a42f8646603dae7  # lxd/vm: Implement snapshot restore
+      git cherry-pick 0b8057e551faa27c029a0f104c2f0dd78eb9e819  # lxd/instance: Move LoadAllInternal
+      git cherry-pick b231670f59e04d23d30d848e94ee0f1a44e63dd1  # lxd/vm: Implement Snapshots
+      git cherry-pick db1887a12e220c3e3b54cd927d91a1cf32df6b37  # lxd/storage/drivers/utils: Updates ensureVolumeBlockFile to use minimum block boundary size of 8192 bytes
+      git cherry-pick 9ab9c9cc28e30b3358a5e0fc00f6530b5883cdef  # lxd/storage/drivers/driver/lvm/utils: Avoid repetition of 512 bytes in roundedSizeBytesString
+      git cherry-pick 35cefe4c1dc811c9dfdf42771b7cc12b918499bb  # doc: Corrects lvm striping options
+      git cherry-pick 1ec4c0d4668d7baaa9efbc7e29e68cb68239ff3f  # lxd/instance: Renames driver files for consistency
+      git cherry-pick 7e2fb712273ffdc7c8ffd1e2252b3ba92c09a4f8  # lxd/instance: Comment clarification
+      git cherry-pick 641045749556335c355fc385c7f0a47f5ca7f1fc  # lxd-agent: Fixes bug when agent not seen as started if LXD restarted
+      git cherry-pick 818c376d3d13b1f410ae033a12d978b485036862  # lxd/device/device/utils/network: Adds host MTU support for VM tap devices
+      git cherry-pick 4ab5de8a5a443c70df8bd3ec0033974459a4f94f  # lxd/device/nic/bridged: Makes VM host side TAP interface name prefixed with "tap"
+      git cherry-pick 3a18c539e6716dd0977b7b112e1ce42982ccbaef  # lxd/instance/drivers/qemu: Switch to template pkg to generate qemu conf
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
