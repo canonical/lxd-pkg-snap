@@ -875,6 +875,28 @@ parts:
       git cherry-pick 818c376d3d13b1f410ae033a12d978b485036862  # lxd/device/device/utils/network: Adds host MTU support for VM tap devices
       git cherry-pick 4ab5de8a5a443c70df8bd3ec0033974459a4f94f  # lxd/device/nic/bridged: Makes VM host side TAP interface name prefixed with "tap"
       git cherry-pick 3a18c539e6716dd0977b7b112e1ce42982ccbaef  # lxd/instance/drivers/qemu: Switch to template pkg to generate qemu conf
+      git cherry-pick 9fbd01aee9042c2114e5ed81604ab6d81e21b7d5  # doc/api-extensions: Fix syntax
+      git cherry-pick 44f6dfe0a43ef89d4b6f457bc4006dceded89796  # api: vm_boot_priority
+      git cherry-pick 2e8f4bb22d7023ef79f9a3319c1781584c208230  # lxd/vm: Add boot.priority
+      git cherry-pick 273de74a5048c7f8f9bdb2a0cbe5e6d55de090b9  # lxd/container/logs: Makes log file retrieval project aware
+      git cherry-pick 2115bb6456a9bc1b5b1db4c7b5e251461bd2744f  # lxd/container/lxc: Adds devName skipping for startCommon
+      git cherry-pick 088246c4a70dc0e956d5c3ca50a0774be487c4ca  # lxd/device/config/device/runconfig: Adds DevName to MountEntryItem
+      git cherry-pick 03874f8833c757f584526abf93c24b2a28015110  # lxd/device/disk: Adds DevName to MountEntryItem
+      git cherry-pick 1670a1abd30908ee82c48d0a6cc006f6e122ec56  # lxd/device: Adds devName property to network interface run config
+      git cherry-pick 1ff1c82b40ebdeaba531514259b6fa682bfe311d  # lxd/instance/drivers/driver/qemu: Adds support for Disk and NIC device boot.priority setting
+      git cherry-pick 26fd1746c61ce4666f7aec0273d42f8e3207f8ce  # lxd/container/exec: Removes duplication of env map now its being stored back into post data
+      git cherry-pick 7fb89f1bc752a979973962ed0cae45b40bdddbb9  # Revert "lxd/exec: Forward control messages"
+      git cherry-pick e9bb84db87136e1722a3d696e7a4b968bf4ea04b  # lxd/instance/drivers/driver/qemu/cmd: Makes qemu cmd struct qemu specific
+      git cherry-pick 86c50dbd7e070201adc2ef1f7ca9b9019f3cdd5b  # lxd/instance/drivers/driver/qemu: Simplifies Exec with revert
+      git cherry-pick 0cf0a786f2431777edb4428732a45b54066e62a0  # lxd/container/exec: Cleaned up logging
+      git cherry-pick ca5bc517dfa07be2d2838e06ad58e15f77b2701e  # lxd/container/exec: Switches to use instance command for resizing window
+      git cherry-pick b2fffbc4639bfd49611a4abf4584c6e0a26d55f7  # lxd/container/lxc/exec/cmd: Adds WindowResize
+      git cherry-pick 9cdf7e0ffde1e893a3dafe6882f41d77d2cc423f  # lxd/instance/instance/exec/cmd: Adds WindowResize function to signature
+      git cherry-pick d66eb0555a1e575a61688526a1769fde8d8fe135  # lxd/instance/drivers/driver/qemu: Reworks command control
+      git cherry-pick ded68c37f12531bc26572fd861bd73e988e792a5  # lxd/instance/drivers/driver/qemu/cmd: Adds WindowResize support
+      git cherry-pick 124a100bd0c6513812418c1d07e5d7b278c9af10  # lxd/instance/drivers/driver/qemu: Sets PID to 0 for VM commands
+      git cherry-pick e34e02a62192af2fc1954147fb2dca3ccc70b306  # lxd/instance/drivers/driver/qemu: comment on forwardControlCommand
+      git cherry-pick d45e3707d3d550b34e772a4e00af2c0f585d94a8  # lxd/device/nic/p2p: Adds VM support
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
