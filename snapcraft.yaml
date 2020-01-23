@@ -910,6 +910,9 @@ parts:
       git cherry-pick 254921475b1d9837cb1ea20e756131df1c2285b7  # lxd/device/nic/macvlan: Clean up valid fields
       git cherry-pick 860005ce080d1bf0167d36a7f462242103d32fa3  # lxd/device/nic/macvlan: Adds VM support and improves revert
       git cherry-pick 9fc15f83510188df9dfc0031c2d72d262d8b4730  # lxd/instance/drivers/driver/qemu: Adds macvtap support
+      git cherry-pick 8e080e82f5b215c43cdc9892c59af776b111a933  # lxd/instance/drivers/driver/qemu/templates: Moves templates to separate file
+      git cherry-pick 1a52a71e551957d5432d22a1f27d471787149409  # lxd/instance/drivers/driver/qemu: Updates template usage
+      git cherry-pick 4b668a92723290a84256630fea0d7276ff58a179  # lxd/storage/drivers/driver/dir: Adds HostPath support
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
