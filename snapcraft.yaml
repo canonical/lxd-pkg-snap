@@ -897,6 +897,19 @@ parts:
       git cherry-pick 124a100bd0c6513812418c1d07e5d7b278c9af10  # lxd/instance/drivers/driver/qemu: Sets PID to 0 for VM commands
       git cherry-pick e34e02a62192af2fc1954147fb2dca3ccc70b306  # lxd/instance/drivers/driver/qemu: comment on forwardControlCommand
       git cherry-pick d45e3707d3d550b34e772a4e00af2c0f585d94a8  # lxd/device/nic/p2p: Adds VM support
+      git cherry-pick 634c1c96f6b80bffe6e9eed5617a143690fbca66  # Close http transports since they might keep connections around
+      git cherry-pick 5f34765f9118f5e36689267b6d66d82195e178b5  # lxd/daemon: Ignore SIGHUP
+      git cherry-pick 7b03a1ed45b64990293ec93f8c5dc5926efe5d79  # lxd/instance/drivers/driver/qemu: Switch to unsafe async I/O mode on ZFS pools backed by loop files
+      git cherry-pick 5ec5ddc4874de101eaf4488ee97ceb39d8396cee  # lxd/storage: Improves pool init failure messages
+      git cherry-pick 66a5e060b08f0a51cf9b5a06d6f45ec04879e5a0  # lxd/storage/drivers: Indicates DirectIO support for most storage drivers
+      git cherry-pick bc52a49606925c0b2c8ec00606539ef3390ba170  # lxd/storage/drivers/driver/types: Adds DirectIO indicator to driver info struct
+      git cherry-pick e4d8327d518da490165797cb39eb579a9e7d691e  # shared/version/version: Quotes malformed version string in error message
+      git cherry-pick f1050af45eddcca053d98292447297263054a474  # lxd/storage/drivers/driver/zfs: Adds DirectIO detection based on version
+      git cherry-pick b2024c7911d8179f457b3cf4d72ee0027ba74a1b  # lxd/instance/drivers/driver/qemu: Unmounts volume on start failure if needed
+      git cherry-pick 2e4484146b2d6ad039439f4e648dc50fe6c3079b  # lxd/device: Relaxes requirement for name property when not using containers
+      git cherry-pick 254921475b1d9837cb1ea20e756131df1c2285b7  # lxd/device/nic/macvlan: Clean up valid fields
+      git cherry-pick 860005ce080d1bf0167d36a7f462242103d32fa3  # lxd/device/nic/macvlan: Adds VM support and improves revert
+      git cherry-pick 9fc15f83510188df9dfc0031c2d72d262d8b4730  # lxd/instance/drivers/driver/qemu: Adds macvtap support
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
