@@ -913,6 +913,8 @@ parts:
       git cherry-pick 8e080e82f5b215c43cdc9892c59af776b111a933  # lxd/instance/drivers/driver/qemu/templates: Moves templates to separate file
       git cherry-pick 1a52a71e551957d5432d22a1f27d471787149409  # lxd/instance/drivers/driver/qemu: Updates template usage
       git cherry-pick 4b668a92723290a84256630fea0d7276ff58a179  # lxd/storage/drivers/driver/dir: Adds HostPath support
+      git cherry-pick 341b8679fa73f0d35f949d7599058244aecfc398  # storage: Fix xfs_growfs command for older versions
+      git cherry-pick 9a19da5dbc6e0cd6d00688751624efa614e78e3c  # shared/simplestreams: Fix architecture filtering
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
