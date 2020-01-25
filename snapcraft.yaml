@@ -916,6 +916,7 @@ parts:
       git cherry-pick 341b8679fa73f0d35f949d7599058244aecfc398  # storage: Fix xfs_growfs command for older versions
       git cherry-pick 9a19da5dbc6e0cd6d00688751624efa614e78e3c  # shared/simplestreams: Fix architecture filtering
       git cherry-pick 7b0b77b217e5315f3f4d48b7f88af199e0ef3347  # lxd/patches: Reset ZFS mountpoint/canmount
+      git cherry-pick 433f0ca1c15174a28cd18492802ae7073142d124  # shared/simplestreams: Fix inconsistent sorting
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
