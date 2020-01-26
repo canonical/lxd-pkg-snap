@@ -917,8 +917,11 @@ parts:
       git cherry-pick 9a19da5dbc6e0cd6d00688751624efa614e78e3c  # shared/simplestreams: Fix architecture filtering
       git cherry-pick 7b0b77b217e5315f3f4d48b7f88af199e0ef3347  # lxd/patches: Reset ZFS mountpoint/canmount
       git cherry-pick 433f0ca1c15174a28cd18492802ae7073142d124  # shared/simplestreams: Fix inconsistent sorting
-      git cherry-pick 6e9206df71680cffe416cbf13279cedde241a7aa  # lxc/config: Tweak argument processing
       git cherry-pick 008309aa61b367284306a01957dfb707f4d7356b  # lxd/instances: Don't rquire type on copy
+      git cherry-pick 6e9206df71680cffe416cbf13279cedde241a7aa  # lxc/config: Tweak argument processing
+      git cherry-pick 96c3963c40b761170c20287dff8fdff595b09a69  # lxd/vm: Prevent attaching directory as disk
+      git cherry-pick 963beaea2312f10c1f3473a73d371c9c3aa0b5e8  # lxd/storage/zfs: Ignore bookmarks
+      git cherry-pick 2876dbdec35dc4b0b3e24bd82cba6b62a6c3f9a8  # lxd/storage/btrfs: Skip missing quota
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
