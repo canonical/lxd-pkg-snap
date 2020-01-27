@@ -465,6 +465,15 @@ if [ "${RET}" -gt "0" ]; then
     exit 1
 fi
 
+## Process preseed if present
+if [ -e "${SNAP_COMMON}/init.yaml" ]; then
+    set -e
+    echo "==> Running LXD preseed file"
+    ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
+    mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
+    set +e
+fi
+
 ## Wait for the daemon to die
 echo "=> LXD is ready"
 wait "$PID"
