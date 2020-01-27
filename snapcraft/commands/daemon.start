@@ -55,7 +55,7 @@ fi
 
 # Setup rshared propagation on mount holding paths
 for path in "${SNAP_COMMON}/lxd/storage-pools" "${SNAP_COMMON}/lxd/devices"; do
-    if ! grep -q "/ ${path}" /proc/self/mountinfo && ! grep -q "${path} ${path}" /proc/self/mountinfo; then
+    if ! cut -d' ' -f5 /proc/self/mountinfo | grep -q "${path}"; then
         echo "==> Setting up mount propagation on ${path}"
         if [ ! -e "${path}" ]; then
             mkdir -p "${path}"
