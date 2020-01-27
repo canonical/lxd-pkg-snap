@@ -922,6 +922,11 @@ parts:
       git cherry-pick 96c3963c40b761170c20287dff8fdff595b09a69  # lxd/vm: Prevent attaching directory as disk
       git cherry-pick 963beaea2312f10c1f3473a73d371c9c3aa0b5e8  # lxd/storage/zfs: Ignore bookmarks
       git cherry-pick 2876dbdec35dc4b0b3e24bd82cba6b62a6c3f9a8  # lxd/storage/btrfs: Skip missing quota
+      git cherry-pick 829ed1db659480ab1fe55a132bc564b3024b00cb  # doc/instance: Clarifies disk path not available for VMs
+      git cherry-pick b869287f958d4d53f1685a5f85a5d490dee98843  # lxd/instance/drivers/qmp/monitor: Prevent crashes with races closing closed channel
+      git cherry-pick a618982604575187f1a592783bfa5002fbbef817  # lxd/instance/drivers/driver/qemu: Improve clean up on start failure
+      git cherry-pick 432ac48f1cd0d2d8052b86774eba3396cb6c0aa5  # lxd/storage/backend/lxd: Only detect volume.block.filesystem changes on block backed pool FS volumes
+      git cherry-pick 20c6e596b4db9db6affcba441c8d943f947d9ffe  # lxd/migration/migration/volumes: Adds support for pre-bidirectional negotiation targets
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
