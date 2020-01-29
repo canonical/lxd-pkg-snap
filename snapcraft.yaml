@@ -20,6 +20,7 @@ description: |-
    - criu.enable: Enable experimental live-migration support [default=false]
    - daemon.debug: Increases logging to debug level [default=false]
    - daemon.group: Group of users that can interact with LXD [default=lxd]
+   - daemon.preseed: A YAML configuration to feed `lxd init` on initial start
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
