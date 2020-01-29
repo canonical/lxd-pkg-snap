@@ -51,6 +51,12 @@ lxcfs_loadavg=$(get_bool "$(snapctl get lxcfs.loadavg)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
 
+# Special-handling of daemon.preseed
+daemon_preseed=$(snapctl get daemon.preseed)
+if [ -n "${daemon_preseed}" ]; then
+    echo "${daemon_preseed}" > "${SNAP_COMMON}/init.yaml"
+fi
+
 # Generate the config
 config="${SNAP_COMMON}/config"
 
