@@ -59,11 +59,13 @@ fi
 if [ "${reason}" = "snap removal" ]; then
     # FIXME: Cleanup our bash completion workaround
     #        This should be handled by snapd directly (LP: #1590767)
-    if [ -e /var/lib/snapd/hostfs/etc/bash_completion.d/lxc ] && \
-            readlink -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc | grep -q /snap/lxd; then
-        echo "==> Removing bash completion hook"
-        rm -f /var/lib/snapd/hostfs/etc/bash_completion.d/lxc
-    fi
+    for path in /usr/share/bash-completion/completions/ /etc/bash_completion.d/; do
+        if [ -e "/var/lib/snapd/hostfs/${path}/lxc" ] && \
+            readlink -f /var/lib/snapd/hostfs/${path}/lxc | grep -q /snap/lxd; then
+            echo "==> Removing bash completion hook"
+            rm -f "/var/lib/snapd/hostfs/${path}/lxc"
+        fi
+    done
 fi
 
 # Shutdown the daemons
