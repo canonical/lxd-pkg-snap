@@ -832,6 +832,10 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick eb874f31d73838a0d9bef232c8b50a6b1db90bd7  # lxd/migrate/container: Fixes migrate refresh final sync snapshot bug
+      git cherry-pick 1907ba7fc4ad4285db46f7eee0f87e6d19fdd762  # lxd/migration/migration/volumes: Comment on Data property of VolumeSourceArgs
+      git cherry-pick 5ea2c8e876d8840418143d20cc4eea058382e853  # lxd/storage/drivers/driver/zfs/volumes: Explain use of volSrcArgs.Data for migration
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
