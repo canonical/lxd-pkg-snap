@@ -835,6 +835,9 @@ parts:
       git cherry-pick eb874f31d73838a0d9bef232c8b50a6b1db90bd7  # lxd/migrate/container: Fixes migrate refresh final sync snapshot bug
       git cherry-pick 1907ba7fc4ad4285db46f7eee0f87e6d19fdd762  # lxd/migration/migration/volumes: Comment on Data property of VolumeSourceArgs
       git cherry-pick 5ea2c8e876d8840418143d20cc4eea058382e853  # lxd/storage/drivers/driver/zfs/volumes: Explain use of volSrcArgs.Data for migration
+      git cherry-pick 4e34b0870004466260ba4abecdf3ed75f27e8932  # lxd/instances: Fix URLs to use /1.0/instances
+      git cherry-pick 22d5807dc21ea3ef7c288b056881cda7c5b29dee  # seccomp: make device number checking more robust
+      git cherry-pick a611ee439dc84923c9be135622cb2a74b854d915  # Define MS_LAZYTIME for compatibility with old glibc
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
