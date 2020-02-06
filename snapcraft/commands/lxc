@@ -37,8 +37,6 @@ if [ "${EDITOR:-}" != "nano" ]; then
     export EDITOR=vim.tiny
     if [ -e "${HOME}/.vimrc" ]; then
         export VIMINIT="source ${HOME}/.vimrc"
-    elif [ -e "/etc/vim/vimrc.tiny" ]; then
-        export VIMINIT="source /etc/vim/vimrc.tiny"
     else
         export VIMINIT="source ${SNAP}/etc/vimrc"
     fi

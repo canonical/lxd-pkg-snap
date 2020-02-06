@@ -134,7 +134,7 @@ for entry in hostid hostname hosts nsswitch.conf os-release passwd group localti
 done
 
 ## And the bits we need from the core snap
-for entry in alternatives apparmor apparmor.d vim; do
+for entry in alternatives apparmor apparmor.d; do
     ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
 done
 
