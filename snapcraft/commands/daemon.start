@@ -135,7 +135,7 @@ done
 
 ## And the bits we need from the core snap
 for entry in alternatives apparmor apparmor.d; do
-    ln -s "/snap/core/current/etc/${entry}" "/etc/${entry}"
+    ln -s "/snap/core18/current/etc/${entry}" "/etc/${entry}"
 done
 
 ## And those we directly ship in the snap
