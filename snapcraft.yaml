@@ -838,6 +838,74 @@ parts:
       git cherry-pick 4e34b0870004466260ba4abecdf3ed75f27e8932  # lxd/instances: Fix URLs to use /1.0/instances
       git cherry-pick 22d5807dc21ea3ef7c288b056881cda7c5b29dee  # seccomp: make device number checking more robust
       git cherry-pick a611ee439dc84923c9be135622cb2a74b854d915  # Define MS_LAZYTIME for compatibility with old glibc
+      git cherry-pick 36f9705d1c5c924cdc01a7040b8820345786a974  # lxd/instance/drivers/load: Pass copy of device config to device.Validate
+      git cherry-pick a400a42274c91b3e2a13fb1307982b9b36960877  # lxd/device/nic/bridged: Updates use of network pkg functions
+      git cherry-pick 38f8ce141faea40309c3cafa1d0262432c45e290  # lxd/device/nic/bridged: Uses network.LoadByName to access n.HasDHCPvX() helpers
+      git cherry-pick 0deb9d24beb625a367e58db9a48babb73828526d  # lxd/device: networkRandomDevName usage
+      git cherry-pick 3e9ec05d8a2a778f4c5f771c7a8dec5c6162a66e  # lxd/network/network/load: Adds LoadByName function
+      git cherry-pick e739ff2cb6a17b1b81df82c4aeb2a3aea662c2e3  # lxd/network: Adds network type in network pkg
+      git cherry-pick 637f93d5e7979ede443bf5e5c854fb99b0c9872b  # lxd/network/network/utils: Moves network utils from main pkg
+      git cherry-pick 6ed3aa5ccd55698bc03b773bee84de18ad7c6a30  # lxd/instance/instance/utils: Removes NetworkUpdateStatic function link
+      git cherry-pick 1ec4503eead1d132fd3ee1cc7e233d8662af9c82  # lxd/instance/instance/utils: Adds more instance load functions
+      git cherry-pick 37c2271a5b84ba3be0cbc3d738508d5d7bb9304d  # lxd/container: Removes instance load functions moved to instance pkg
+      git cherry-pick 850c9f6d68fb1c4501e2b4cd48bec1f2691205e4  # container/lxc: network.UpdateDNSMasqStatic usage
+      git cherry-pick 6aa858d9ffe79cbbcf3570f99e28b199076d030b  # lxd: instance.LoadNodeAll usage
+      git cherry-pick 920fa7fc187599fd840a25aa591dd49be8cc4d6a  # lxd: instance.LoadByProject usage
+      git cherry-pick ad099613c8cf874add47b3d86b164d7b462b1b1f  # lxd: instance.LoadByProjectAndName usage
+      git cherry-pick b842dd3219971aeca36412e37f2b22d9f3f280a5  # lxd/device/device/utils/network: Updates network package usage
+      git cherry-pick 0be1b04407f330088c2c2cc7fa01d6b61053e330  # lxd/device/device/utils/network: Unexports some non-shared functions
+      git cherry-pick bae719581e5b615ebed99dcf633481fc017d46a3  # lxd/network/utils: Removes network utils functions used by network type
+      git cherry-pick 85427d165c169bde9c3213159418227c2e4a1ed1  # lxd/networks/config: Removes networkFillAuto function
+      git cherry-pick 2c21a3f13bdbe85e848dbe9f342773827a8d0eb5  # lxd/networks: Removes network type and networkLoadByName function
+      git cherry-pick 765c23ed262975ab90cd8733b375d4964eb38b99  # lxd/device: networkCreateVlanDeviceIfNeeded and networkRandomDevName usage
+      git cherry-pick d47c793e91c1ca9ccecd80a1183257130707cbfc  # lxd: network package usage
+      git cherry-pick 3a3f172b84b7ed092075a29473d9eaa35319259f  # test: static analysis of network pkg
+      git cherry-pick 0d2b8bf075c4dc36ec7a5886e718a79c7a4a47c4  # lxd/instance/drivers/driver/qemu: network.GetLeaseAddresses usage
+      git cherry-pick 061de0afda0b5bae0763ff0989cb67089d7b7ae3  # lxd/instance/instance/utils: Removes linked function NetworkGetLeaseAddresses var
+      git cherry-pick f4391662ee6f0f98a232e8773f7f58b34dedbc43  # lxd/network/network/utils: Adds GetMACSlice and GetLeaseAddresses functions
+      git cherry-pick 6a19b2518fe1283b6596057661c5d888f6a506dc  # lxd/networks: Removes networkGetLeaseAddresses functions
+      git cherry-pick aa1a4f8af327068b73f302d3e2b2cdfeb770c5cb  # lxd/networks/utils: Removes networkGetMacSlice function
+      git cherry-pick cc8a972c13fee8a31779d85509bdf050dd185aab  # lxd/vm: Use vhost_net
+      git cherry-pick ca3b9e093d9e3ed8785cd1ea248d5368de874c78  # lxd/vm: Enable block discard
+      git cherry-pick 4f81d3d51b537e51c7d90f15a6448864ac2db6ce  # shared/archive: Fix out of space logic
+      git cherry-pick 9a6e76b28f8dfc35a0441fbaf17658a6782310b6  # lxd/vm: Set Documentation in systemd units
+      git cherry-pick 662ac365c8fe9ec9045be3b47ee3805bff6440b0  # lxd/vm: Silence writeback warning for config drive
+      git cherry-pick 210fc7a6a70a1551a39878eac68658c9cfd2d40e  # lxd/device/nic/bridged: Load br_netfilter kernel module when using IPv6 filtering
+      git cherry-pick e7f143c75e67cd0940521022e9cd7aeaa7704db9  # lxd: Device name quoting in device errors
+      git cherry-pick 7c452f02f43136c0873f4fe3f3af88142e097c58  # lxd/networks: Uses HasDHCPv6 function and updates comment
+      git cherry-pick fd8d446feb1e2e9e8841adc7e1e1bc0c2deacdc3  # lxd/network: Adds DHCP range parsing functions
+      git cherry-pick 1e2e379e88b9074da0ceed12a600a6ee4a5d0203  # lxd/device/nic/bridged: Updates to use network type DHCP ranges functions and types
+
+      git cherry-pick a5f9e9c68656df5aa136e31c53c4473d4eb9eab2  # lxd/storage/zfs: Fix argument ordering
+      git cherry-pick a10be101fa4d9a0aedc9a24116d16df32c6f4457  # unix hotplug: skip devices without associated devpath or major/minor
+      git cherry-pick ec4110f4ece5647f0968778a22baeec796aed38c  # lxd: Switches to simpler conn.WriteMessage function
+      git cherry-pick 675b4eb73d5e6983e85430621bd6136ba839297e  # lxd/storage/drivers: Add MountedRoot to Info
+      git cherry-pick 5df837ce25b7edf2a04631d303924ace10c43a41  # lxd/storage: Honor MountedRoot in pool actions
+      git cherry-pick 8cff1bbf8c9198bba49fead300d3c4cfff388b86  # lxd/networks: Consider IPv6 neighborhood entries
+      git cherry-pick 1c45025c28e824b19fd07f17513392d61fea1f83  # lxd: Uses gorilla WriteJSON where possible
+      git cherry-pick a80b73ea94b32672a26daebad3cd59fccbef5bcc  # lxd/storage/drivers: Set MountedRoot option
+      git cherry-pick 37b4d1576fe7fc68a1052da7d9ebebe7921800e7  # lxd/main_checkfeature: add explicit _exit() even if it's not needed
+      git cherry-pick 445de54e319348b938cbe0d343ff092ad8c94226  # lxd/main_checkfeature: s/exit()/_exit()/g
+      git cherry-pick 9e89729860828215070a03529c7bffcdd8683567  # cgo: export wait_for_pid() helper
+      git cherry-pick 2df51307cf58fc7a046579ea693f13d9543baa73  # lxd/main_checkfeature: close listener
+      git cherry-pick db5cb1f1db01c0986681f70de34a0c82f43a96f7  # lxd/main_checkfeature: don't depend on kcmp header
+      git cherry-pick 9b99e45b6f8e28678d21f6fb2f8392856bfe171b  # lxd/device: Async CEPH unmap
+      git cherry-pick bd28effdb629aafc1a667b5980fd6f13b583eeea  # lxd/storage/drivers/driver/lvm: Uses d.thinpoolName() rather than d.config["lvm.thinpool_name"]
+      git cherry-pick 4d97547265cb124b72e1a92aece3eb7da853020a  # lxd/patches: setupStorageDriver usage
+      git cherry-pick 816d3f875714a495c91ab1cde6a36e2885ac1077  # lxd/storage: Renames SetupStorageDriver to setupStorageDriver for consistency
+      git cherry-pick 5f2468b5cb72e07ce2c689db1d81ebd5026e2217  # lxd/storage/drivers/driver/zfs: Adds zfs kernel module load fail detection
+      git cherry-pick 7deb9534fd3d4c50a968cdb659ec8c52c19352be  # lxd/daemon: setupStorageDriver usage
+      git cherry-pick 5009b2fc77ef0a39b3f895f3d117a4b62a7c9ae0  # lxd/daemon: Comment consistency
+      git cherry-pick d01d09942dfcb8e20e2dd3796f8b4789eadf54e6  # lxd/storage/drivers/driver/lvm: Makes lvm.vg_name required for mounting
+      git cherry-pick 112be17b0df238d4919a07f8fbb4d21191b0eb89  # lxd/db/cluster/update: Adds updateFromV23 for ensuring lvm.vg_name key is set
+      git cherry-pick 2463ccea11ff21c8b2bb9d02a3750eda6c364840  # lxd/db/cluster/update: Superfluous trailing whitespace
+      git cherry-pick d10dd39459732167a4f542430e1dd629b2108877  # lxd/db/cluster/schema: v24 update
+      git cherry-pick ecde4cc3a3b1da1471e38c934d837d9779c20162  # lxd/device/config/devices: Adds NICType function on Device type
+      git cherry-pick bd6aca8614e1634a80b0aa1ebea5502cfffa8141  # lxd: Device.NICType usage
+      git cherry-pick c114e9f9d7e91b9bb84d8afc1ba2f2aacadf730f  # lxd-agent/exec: Logs signal forwarding as info rather than error
+      git cherry-pick a083c21781f6e93474c2cb9ae4757175b1586fd1  # lxd/container/exec: Only log finished mirror websocket when go routine exits
+      git cherry-pick 78b4b396c8413e4b6e6c32317611d0fead72d09b  # lxd/instance/drivers/driver/qemu: Fix go routine leak and hanging lxc clients
+      git cherry-pick 419671c2bf389b43d2f7d756ea738691cdf308cb  # shared: Upper case first character of some debug messages
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
