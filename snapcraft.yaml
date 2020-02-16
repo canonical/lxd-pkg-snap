@@ -832,6 +832,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 28bd81abed046fe8d885788508ebcf0e1a27dde7  # lxc-to-lxd: golint fix
+      git cherry-pick 2179980dad438ea3a28df02c51f5f61577722acd  # lxd/cluster: golint fixes
+      git cherry-pick 6048bd6401b73739c8166374061f9f6e4473efe6  # lxd/migration: golint fixes
+      git cherry-pick 97861dc143b5d11e47a10a7e72e10a2e800274e6  # shared/containerwriter: golint fixes
+      git cherry-pick 310eaccad987b89b77a13bd2a4ef01b2de21c027  # shared/generate: golint fixes
+      git cherry-pick 2d6302c7a4c05d6aac1d838387d1c5872f8362c0  # shared/netutils: golint fixes
+      git cherry-pick df83f891505f1005e6e1ece2e3ad401ffc9a653e  # tests: Update golint list
+      git cherry-pick 32ce171885f40b2ecfaf1c4449c89ea0f33c9bb3  # shared: Fix HostPathFollow for stdin/stdout
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
