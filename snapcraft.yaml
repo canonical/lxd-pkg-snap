@@ -90,7 +90,9 @@ apps:
 
 hooks:
   configure:
-    plugs: [network]
+    plugs:
+      - network
+      - system-observe
 
 parts:
   # Dependencies
