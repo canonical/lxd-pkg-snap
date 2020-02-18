@@ -842,6 +842,19 @@ parts:
       git cherry-pick 2d6302c7a4c05d6aac1d838387d1c5872f8362c0  # shared/netutils: golint fixes
       git cherry-pick df83f891505f1005e6e1ece2e3ad401ffc9a653e  # tests: Update golint list
       git cherry-pick 32ce171885f40b2ecfaf1c4449c89ea0f33c9bb3  # shared: Fix HostPathFollow for stdin/stdout
+      git cherry-pick 969f706234d3709b67f18f7692aacbc4f23eb546  # Allow build with GNU Make 4.3
+      git cherry-pick e30163e0e6811abadcb6e5d05648eca50204384c  # add mips architectures
+      git cherry-pick 18b4df801a55d4089c10e989410fe7efe5e8eb5c  # doc: tweak markdown format
+      git cherry-pick e996772fe72671a3638bd327e49cd14dc3a103df  # lxd/vm: Use -sandbox
+      git cherry-pick 30efac7aa3ec0cab71d710ed01b1cc12aab316bc  # add riscv architecture definitions
+      git cherry-pick 1f2331f0b806a247e737426723c534a3c5bbe1fa  # rv->riscv
+      git cherry-pick b8222f8622d4aa8befae5059505f952e70464902  # correct mips names (le->el), no aliases required
+      git cherry-pick 8daad23611b3d975dcaea437e220d845a3102eba  # lxd/storage/backend/lxd: Adds logging for CreateInstanceFromBackup post hook
+      git cherry-pick a1cfabade4c26cd16d98440aee28067ecfe61b55  # lxd/storage/backend/lxd: Refuse to create storage pool if dir exists on disk
+      git cherry-pick 48f8b2b24a7fe658810efd7b9a13ce72ffa69255  # as the kernel only reports mips/mips64, specify 32 and 64bit arch and el as aliases
+      git cherry-pick a0cd67a96cf786f62989836991f9d15f12f78196  # lxd/main/import: Adds --project flag support to lxd import
+      git cherry-pick e67fbeae5ca7c536e23775087f6de2e3365d62f4  # lxd/api/internal: Updates error messages in internalImport
+      git cherry-pick 2803e499ea4a15a20f304498446b662543f5d8d1  # shared/util: Fix relative paths in HostPathFollow
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
