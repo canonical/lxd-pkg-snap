@@ -855,6 +855,19 @@ parts:
       git cherry-pick a0cd67a96cf786f62989836991f9d15f12f78196  # lxd/main/import: Adds --project flag support to lxd import
       git cherry-pick e67fbeae5ca7c536e23775087f6de2e3365d62f4  # lxd/api/internal: Updates error messages in internalImport
       git cherry-pick 2803e499ea4a15a20f304498446b662543f5d8d1  # shared/util: Fix relative paths in HostPathFollow
+      git cherry-pick dd7d235c34a70ccd3f9b0ee8398ef7307c0cf835  # lxd/api/internal: Removes duplicate storage package import
+      git cherry-pick f39e73886ee7041a2b16ee5d2a163849f4c70ff9  # lxd/storage: Adds InstanceImportingFilePath function
+      git cherry-pick 4ba728f88f35acd577e987aa53a173347880e55c  # lxd/api/internal: storagePools.InstanceImportingFilePath usage
+      git cherry-pick 43212d0af542ebdb44c5875ac647b58cacb5fbae  # lxd/container/lxc: storagePools.InstanceImportingFilePath usage
+      git cherry-pick ab5a48118a95f3f243100bc7ff42219d9757442a  # lxd/api: projectParam comments
+      git cherry-pick a545792ab4ee03341a600bbab3b06b06ba2ddc2a  # lxd/api/internal: Uses StoragePoolNodeVolumeGetTypeByProject for project support
+      git cherry-pick b15100d983766081850ff67763d276f93d0bb12b  # lxd/images: Removes hardcoded default project arg for ImageGet in autoUpdateImage
+      git cherry-pick 07de45c970fe2f4cb4c7dbde61b80344d995fa56  # lxd/images: Golint and comments
+      git cherry-pick 0984671bcbb4250200e26b552bda9845d0b48396  # lxd/instances: Pick correct default type from URL
+      git cherry-pick 2df1e5b750b90042474b6a1a505d74e5c594eb43  # lxd/db: Set ceph.user.name if missing
+      git cherry-pick e2aab9a60ceee3347c9af802cdbf9068af876161  # lxd/vm: Fix disk files and snap
+      git cherry-pick 6588cccbbfc1dbe0e6cf27b0c9d32d08e06f72b4  # lxd/db: Fix ceph username in patch
+      git cherry-pick 86227552140a3db0e8be61d9d27166d20b85fa84  # lxd/db: Revert 3da5aea1 fix, since in turn testify reverted the change
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
