@@ -469,6 +469,7 @@ parts:
   sqlite:
     source: https://github.com/canonical/sqlite
     source-type: git
+    source-tag: version-3.30.1+replication4
     plugin: autotools
     configflags:
       - --enable-replication
