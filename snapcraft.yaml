@@ -869,6 +869,7 @@ parts:
       git cherry-pick e2aab9a60ceee3347c9af802cdbf9068af876161  # lxd/vm: Fix disk files and snap
       git cherry-pick 6588cccbbfc1dbe0e6cf27b0c9d32d08e06f72b4  # lxd/db: Fix ceph username in patch
       git cherry-pick 86227552140a3db0e8be61d9d27166d20b85fa84  # lxd/db: Revert 3da5aea1 fix, since in turn testify reverted the change
+      git cherry-pick 8501c5e56782aae8ff1af2451788325f1d378fd5  # lxd/logging: Handle projects in log expiry
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
