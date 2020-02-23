@@ -870,6 +870,13 @@ parts:
       git cherry-pick 6588cccbbfc1dbe0e6cf27b0c9d32d08e06f72b4  # lxd/db: Fix ceph username in patch
       git cherry-pick 86227552140a3db0e8be61d9d27166d20b85fa84  # lxd/db: Revert 3da5aea1 fix, since in turn testify reverted the change
       git cherry-pick 8501c5e56782aae8ff1af2451788325f1d378fd5  # lxd/logging: Handle projects in log expiry
+      git cherry-pick 835bd66260e8447e4c421faaac06ed46d8af5cac  # lxd/vm: Fix snapshots
+      git cherry-pick 41bda77336dda1f3956a81af032fa9a96e43424a  # lxd/storage/ceph: Fix leftover rbd
+      git cherry-pick fe9545f438c923b34e6d0f73f3d00dcfce93646c  # lxd/storage/ceph: Fix zombie handling
+      git cherry-pick 6d36812fdd4f017b39bf4d9fc7a20f9161af9332  # tests: Check UUIDs while running
+      git cherry-pick 1b0e259a61aa282308d0f5c791ec5f6af760bc6b  # Increase timeout of standalone SQL statements
+      git cherry-pick 987e4e964c20fb8a94a0e777facde81442228b4f  # lxd/storage/ceph: Improve error reporting on map
+      git cherry-pick be4226c61980f94db8361225decdd4af2fabf2ae  # lxd/containers: Have findIdmap look at projects
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
