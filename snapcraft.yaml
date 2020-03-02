@@ -407,7 +407,6 @@ parts:
       - lib/*/libmagic*so*
       - lib/*/libpixman*so*
       - share/qemu/efi-virtio.rom*
-      - share/qemu/keymaps/
       - share/qemu/kvmvapic.bin*
       - share/qemu/slof.bin*
 
