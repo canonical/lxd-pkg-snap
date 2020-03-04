@@ -350,6 +350,7 @@ parts:
       - libseccomp
     source: https://git.qemu.org/git/qemu.git
     source-type: git
+    source-tag: v4.2.0
     plugin: autotools
     configflags:
       - --disable-docs
