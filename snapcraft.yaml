@@ -171,6 +171,7 @@ parts:
       - qemu
     source: https://github.com/tianocore/edk2
     source-type: git
+    source-tag: edk2-stable202002
     plugin: nil
     build-packages:
       - acpica-tools
