@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.21"
+version: "3.22"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -800,7 +800,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.21
+    source-tag: lxd-3.22
     after:
       - lxc
       - dqlite
@@ -836,49 +836,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 28bd81abed046fe8d885788508ebcf0e1a27dde7  # lxc-to-lxd: golint fix
-      git cherry-pick 2179980dad438ea3a28df02c51f5f61577722acd  # lxd/cluster: golint fixes
-      git cherry-pick 6048bd6401b73739c8166374061f9f6e4473efe6  # lxd/migration: golint fixes
-      git cherry-pick 97861dc143b5d11e47a10a7e72e10a2e800274e6  # shared/containerwriter: golint fixes
-      git cherry-pick 310eaccad987b89b77a13bd2a4ef01b2de21c027  # shared/generate: golint fixes
-      git cherry-pick 2d6302c7a4c05d6aac1d838387d1c5872f8362c0  # shared/netutils: golint fixes
-      git cherry-pick df83f891505f1005e6e1ece2e3ad401ffc9a653e  # tests: Update golint list
-      git cherry-pick 32ce171885f40b2ecfaf1c4449c89ea0f33c9bb3  # shared: Fix HostPathFollow for stdin/stdout
-      git cherry-pick 969f706234d3709b67f18f7692aacbc4f23eb546  # Allow build with GNU Make 4.3
-      git cherry-pick e30163e0e6811abadcb6e5d05648eca50204384c  # add mips architectures
-      git cherry-pick 18b4df801a55d4089c10e989410fe7efe5e8eb5c  # doc: tweak markdown format
-      git cherry-pick e996772fe72671a3638bd327e49cd14dc3a103df  # lxd/vm: Use -sandbox
-      git cherry-pick 30efac7aa3ec0cab71d710ed01b1cc12aab316bc  # add riscv architecture definitions
-      git cherry-pick 1f2331f0b806a247e737426723c534a3c5bbe1fa  # rv->riscv
-      git cherry-pick b8222f8622d4aa8befae5059505f952e70464902  # correct mips names (le->el), no aliases required
-      git cherry-pick 8daad23611b3d975dcaea437e220d845a3102eba  # lxd/storage/backend/lxd: Adds logging for CreateInstanceFromBackup post hook
-      git cherry-pick a1cfabade4c26cd16d98440aee28067ecfe61b55  # lxd/storage/backend/lxd: Refuse to create storage pool if dir exists on disk
-      git cherry-pick 48f8b2b24a7fe658810efd7b9a13ce72ffa69255  # as the kernel only reports mips/mips64, specify 32 and 64bit arch and el as aliases
-      git cherry-pick a0cd67a96cf786f62989836991f9d15f12f78196  # lxd/main/import: Adds --project flag support to lxd import
-      git cherry-pick e67fbeae5ca7c536e23775087f6de2e3365d62f4  # lxd/api/internal: Updates error messages in internalImport
-      git cherry-pick 2803e499ea4a15a20f304498446b662543f5d8d1  # shared/util: Fix relative paths in HostPathFollow
-      git cherry-pick dd7d235c34a70ccd3f9b0ee8398ef7307c0cf835  # lxd/api/internal: Removes duplicate storage package import
-      git cherry-pick f39e73886ee7041a2b16ee5d2a163849f4c70ff9  # lxd/storage: Adds InstanceImportingFilePath function
-      git cherry-pick 4ba728f88f35acd577e987aa53a173347880e55c  # lxd/api/internal: storagePools.InstanceImportingFilePath usage
-      git cherry-pick 43212d0af542ebdb44c5875ac647b58cacb5fbae  # lxd/container/lxc: storagePools.InstanceImportingFilePath usage
-      git cherry-pick ab5a48118a95f3f243100bc7ff42219d9757442a  # lxd/api: projectParam comments
-      git cherry-pick a545792ab4ee03341a600bbab3b06b06ba2ddc2a  # lxd/api/internal: Uses StoragePoolNodeVolumeGetTypeByProject for project support
-      git cherry-pick b15100d983766081850ff67763d276f93d0bb12b  # lxd/images: Removes hardcoded default project arg for ImageGet in autoUpdateImage
-      git cherry-pick 07de45c970fe2f4cb4c7dbde61b80344d995fa56  # lxd/images: Golint and comments
-      git cherry-pick 0984671bcbb4250200e26b552bda9845d0b48396  # lxd/instances: Pick correct default type from URL
-      git cherry-pick 2df1e5b750b90042474b6a1a505d74e5c594eb43  # lxd/db: Set ceph.user.name if missing
-      git cherry-pick e2aab9a60ceee3347c9af802cdbf9068af876161  # lxd/vm: Fix disk files and snap
-      git cherry-pick 6588cccbbfc1dbe0e6cf27b0c9d32d08e06f72b4  # lxd/db: Fix ceph username in patch
-      git cherry-pick 86227552140a3db0e8be61d9d27166d20b85fa84  # lxd/db: Revert 3da5aea1 fix, since in turn testify reverted the change
-      git cherry-pick 8501c5e56782aae8ff1af2451788325f1d378fd5  # lxd/logging: Handle projects in log expiry
-      git cherry-pick 835bd66260e8447e4c421faaac06ed46d8af5cac  # lxd/vm: Fix snapshots
-      git cherry-pick 41bda77336dda1f3956a81af032fa9a96e43424a  # lxd/storage/ceph: Fix leftover rbd
-      git cherry-pick fe9545f438c923b34e6d0f73f3d00dcfce93646c  # lxd/storage/ceph: Fix zombie handling
-      git cherry-pick 6d36812fdd4f017b39bf4d9fc7a20f9161af9332  # tests: Check UUIDs while running
-      git cherry-pick 1b0e259a61aa282308d0f5c791ec5f6af760bc6b  # Increase timeout of standalone SQL statements
-      git cherry-pick 987e4e964c20fb8a94a0e777facde81442228b4f  # lxd/storage/ceph: Improve error reporting on map
-      git cherry-pick be4226c61980f94db8361225decdd4af2fabf2ae  # lxd/containers: Have findIdmap look at projects
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
