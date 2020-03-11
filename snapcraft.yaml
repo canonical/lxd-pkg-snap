@@ -226,6 +226,28 @@ parts:
     prime:
       - lib/libco*so*
 
+  libmnl:
+    source: https://git.netfilter.org/libmnl
+    source-type: git
+    source-tag: libmnl-1.0.4
+    plugin: autotools
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/libmnl*so*
+
+  libnftnl:
+    after:
+      - libmnl
+    source: https://git.netfilter.org/libnftnl
+    source-type: git
+    source-tag: libnftnl-1.1.5
+    plugin: autotools
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/libnftnl*so*
+
   libseccomp:
     source: https://github.com/seccomp/libseccomp
     source-type: git
@@ -293,6 +315,23 @@ parts:
     prime:
       - bin/nano
       - etc/nanorc
+
+  nftables:
+    after:
+      - libmnl
+      - libnftnl
+    source: https://git.netfilter.org/nftables
+    source-type: git
+    source-tag: v0.9.3
+    plugin: autotools
+    build-packages:
+      - libreadline-dev
+    organize:
+      sbin/: bin/
+      usr/lib/: lib/
+    prime:
+      - bin/nft
+      - lib/libnftables*so*
 
   nvidia-container:
     after:
