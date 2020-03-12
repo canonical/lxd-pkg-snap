@@ -883,6 +883,23 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick f36fa5adedb5d25f03084ba65ff27c1a422db553  # lxd/storage/zfs: Fix usage calculation
+      git cherry-pick eff54f16959624321aa54e2956ba2d995f6b39ea  # Add go 1.14.x check
+      git cherry-pick fec5c7bcd5a9ad0bf7fbaf22fceb28e48a4e43a6  # lxd: Cleanup error messages
+      git cherry-pick f6ff00ab439fac0aa5a3776560d2bcb19d875cb2  # lxd: Rename container files to instance
+      git cherry-pick 4122277a790fc63699576b6a7c7f0dae69ad9061  # tests: Update for rename
+      git cherry-pick ea5c923fb02ec0cec85fa523493e5c2efb4d56ef  # production-setup: add net.core.bpf_jit_limit and kernel.keys.maxbytes
+      git cherry-pick 8f7f45b72373cc9cf4a75b7a30fad442529af704  # doc/instances: Adds missing host_name key on routed nic device
+      git cherry-pick a1418065d0ae9e2737ac83fac9527c910d3ad90d  # lxd/util/fs: Fixes go vet conversion from int64 to string yields a string of one rune error
+      git cherry-pick ff30db5cc23ff39fe96ca551a56a94f629043ca9  # lxd/device/disk: Only unmounts non-root volumes attached
+      git cherry-pick f7e95d13fd57d4cd87b8fd0100c8d9e35ee1342c  # lxd/daemon: Adds comment to AllowAuthenticated
+      git cherry-pick 75008b746cfaf8471db9fe4ce595e2bd6d366048  # lxd/firewall: Don't create zombies
+      git cherry-pick 146e6a80542fc4623af13f47126f036d7a940e7a  # driver_qemu: delete vm id from vmConsole
+      git cherry-pick a95bf4d5671dd91bd74280f1d0a60a4bb76f5a27  # ExecReaderToChannel: Prevent endless loops
+      git cherry-pick 4775cb0aed7c8551ceb3858e1a0432ea04968a22  # lxd/firewall/nft: Flush chain on delete
+      git cherry-pick e3d94b0c656164f56766f1f245d7a8bcad530812  # lxd/firewall/nft: Handle json errors
+      git cherry-pick 5e74bfa79ef58755f83a93e5678a11a49c25ee6e  # lxd/firewall/nft: Refuse to run on old kernels
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
