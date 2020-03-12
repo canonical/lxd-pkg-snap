@@ -324,13 +324,19 @@ parts:
     source-type: git
     source-tag: v0.9.3
     plugin: autotools
+    configflags:
+      - --with-json
     build-packages:
+      - libjansson-dev
       - libreadline-dev
+    stage-packages:
+      - libjansson4
     organize:
       sbin/: bin/
       usr/lib/: lib/
     prime:
       - bin/nft
+      - lib/*/libjansson*so*
       - lib/libnftables*so*
 
   nvidia-container:
