@@ -22,6 +22,7 @@ description: |-
    - daemon.group: Group of users that can interact with LXD [default=lxd]
    - daemon.preseed: A YAML configuration to feed `lxd init` on initial start
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
+   - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
 
