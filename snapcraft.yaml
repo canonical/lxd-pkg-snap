@@ -799,6 +799,12 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 9f3f61c699b219a251620100013b8cd957e657cf  # proc_cpuview: add minimal support for unified cgroup layout
+      git cherry-pick 4d9174fc420c1829b78428b7b707d05252275918  # proc_fuse: fix meminfo with unified cgroup layout
+      git cherry-pick 515f1ddfecc3c6654dca5d2e765b7bbc7fc419b8  # configure: add -Wvla and -std=gnu11
+      git cherry-pick 26676de81e3acb5fe30f26224414896192b1f9d3  # tree-wide: add missing O_CLOEXEC
+      git cherry-pick a054d9da902b73d5bca0bebc8aa0262099a6dcc8  # bindings: handle current working directory on upgrade
+
       set +ex
       snapcraftctl build
       set -ex
