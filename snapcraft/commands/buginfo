@@ -43,7 +43,7 @@ if lxc info >/dev/null 2>&1; then
     echo '```'
     echo ""
 
-    echo "## Containers"
+    echo "## Instances"
     echo '```'
     lxc list
     echo '```'
@@ -64,6 +64,18 @@ if lxc info >/dev/null 2>&1; then
     echo "## Networks"
     echo '```'
     lxc network list
+    echo '```'
+    echo ""
+
+    echo "## Projects"
+    echo '```'
+    lxc project list
+    echo '```'
+    echo ""
+
+    echo "## Profiles"
+    echo '```'
+    lxc profile list
     echo '```'
     echo ""
 
@@ -99,5 +111,5 @@ echo ""
 
 echo "# Systemd log (last 50 lines)"
 echo '```'
-chroot /var/lib/snapd/hostfs journalctl -u snap.lxd.daemon -n50
+chroot /var/lib/snapd/hostfs journalctl -u snap.lxd.daemon -n50 | cat
 echo '```'
