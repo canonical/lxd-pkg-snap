@@ -48,6 +48,7 @@ criu_enable=$(get_bool "$(snapctl get criu.enable)")
 daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
 daemon_group=$(snapctl get daemon.group)
 lxcfs_loadavg=$(get_bool "$(snapctl get lxcfs.loadavg)")
+lxcfs_cfs=$(get_bool "$(snapctl get lxcfs.cfs)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
 
@@ -67,6 +68,7 @@ config="${SNAP_COMMON}/config"
     echo "daemon_debug=${daemon_debug:-"false"}"
     echo "daemon_group=${daemon_group:-"lxd"}"
     echo "lxcfs_loadavg=${lxcfs_loadavg:-"false"}"
+    echo "lxcfs_cfs=${lxcfs_cfs:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
     echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
 } > "${config}"
