@@ -912,6 +912,16 @@ parts:
       git cherry-pick 4775cb0aed7c8551ceb3858e1a0432ea04968a22  # lxd/firewall/nft: Flush chain on delete
       git cherry-pick e3d94b0c656164f56766f1f245d7a8bcad530812  # lxd/firewall/nft: Handle json errors
       git cherry-pick 5e74bfa79ef58755f83a93e5678a11a49c25ee6e  # lxd/firewall/nft: Refuse to run on old kernels
+      git cherry-pick 3f7441e7a34a92cad426941a82a7778248dfc590  # shared/util/linux: Updates ExecReaderToChannel to accept a finisher chan as struct{}
+      git cherry-pick 03a71e64dd2dee8ab39cbcb25816a2d2e5238207  # lxd-agent/exec: Updates usage of ExecReaderToChannel channel definitions
+      git cherry-pick ad51d1488bed7e3911901eb8942a95cf4e14b58b  # shared/network: Removes logging internal state of websocket in WebsocketRecvStream
+      git cherry-pick 7e4468edad2977201ea0fc8ce41bb48a31b7a512  # shared/netutils/network/linux: Updates WebsocketExecMirror to use struct{} exited indicator channel
+      git cherry-pick ef63dd9af90281e2c484376ab619ced1ee37b8fd  # lxd/instance/exec: Fixes VM read loop when agent not started
+      git cherry-pick a473c9ef2adf6aba315ff646de4820e236472baa  # lxd/instance: Fix expiry check
+      git cherry-pick aa53faf5e5d5e4eed9730280b0f535e82b3653d7  # lxd: Add "instance" string where necessary
+      git cherry-pick 11efd72785318a04b57266517d761978cc375c13  # lxd/instances/snapshot: Fix expiration in profiles
+      git cherry-pick fb49848f30ca8a45fcc8c0d7305e161f0576eab2  # lxd/images: Fix source type handling
+      git cherry-pick 04766ccf97b55f182e1a47e580b5a6be4c7d2270  # lxc/export: Make API call more correct
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
