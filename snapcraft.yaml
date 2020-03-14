@@ -811,6 +811,7 @@ parts:
       git cherry-pick 4c7d6a9fb741547d869450249c6c05e2e121f4cc  # usage: Fix cfs help
       git cherry-pick a5b2a4c9c0a6ef4113699f00192145706ea83012  # usage: Fix lxcfs description
       git cherry-pick caac037df6905dd11e1e22e63231365a5b577f5e  # proc_fuse: port to uint64_t
+      git cherry-pick 0553c566e0fe0633bbc6042b5b9264b54777e297  # tree-wide: use {u}int64_t types
 
       set +ex
       snapcraftctl build
