@@ -808,6 +808,9 @@ parts:
       git cherry-pick 0d8944383942a820c57ddd81561a827a3f5e6526  # tree-wide: mark lxcfs fuse ops
       git cherry-pick c6415887d952019b5ff6af0a5c38aa1786b7442d  # bindings: make constructor failures non-fatal
       git cherry-pick 287555b8a583cad06af60673ef5a6a3d3cf6ba5c  # liblxcfs: handle broken upgrade gracefully
+      git cherry-pick 4c7d6a9fb741547d869450249c6c05e2e121f4cc  # usage: Fix cfs help
+      git cherry-pick a5b2a4c9c0a6ef4113699f00192145706ea83012  # usage: Fix lxcfs description
+      git cherry-pick caac037df6905dd11e1e22e63231365a5b577f5e  # proc_fuse: port to uint64_t
 
       set +ex
       snapcraftctl build
