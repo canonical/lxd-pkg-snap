@@ -818,6 +818,13 @@ parts:
       git cherry-pick 426e9c07d1385e2d8880433f8cc491e62adb40cf  # test_sigusr2: improve tests
       git cherry-pick 4490b76729ab5a98ddeae6d5ef97c1f2f877919d  # bindings: introduce set_signal_handler
       git cherry-pick 7aabcdb9f038fad3a5ed84ab49f37f3e1964c45d  # cgroup_fuse: fix cgroupfs virtualization needed on non-cgns systems
+      git cherry-pick 39fc7fdc741ad02d91c8a52c96bf2b615bca567b  # tree-wide: memory utils improvements
+      git cherry-pick 50525d33c9bae23c1d358d450a05b266ba9fcd40  # tree-wide: fix dot_or_empty()
+      git cherry-pick 374da637dd061f0dae0a1c4ec2674d8b95dc4a11  # cgroups: remove unused function
+      git cherry-pick 244ad9d5a5ba1a011514c1a5f913968b10614d6d  # utils: shut up compiler
+      git cherry-pick d2aad21743f425134cd5287042e66a44a2055f3a  # proc_loadvg: fixes
+      git cherry-pick 27ef2271ebf3886a2a0254a4d02108c47bca78e2  # proc_cpuview: fix compiler warning
+      git cherry-pick 1f28336d591058adbbc751d2777fd9c665d83089  # tree-wide: add and use must_make_path_relative()
 
       set +ex
       snapcraftctl build
