@@ -812,6 +812,12 @@ parts:
       git cherry-pick a5b2a4c9c0a6ef4113699f00192145706ea83012  # usage: Fix lxcfs description
       git cherry-pick caac037df6905dd11e1e22e63231365a5b577f5e  # proc_fuse: port to uint64_t
       git cherry-pick 0553c566e0fe0633bbc6042b5b9264b54777e297  # tree-wide: use {u}int64_t types
+      git cherry-pick 763635ef9cbfb6dff40579b962b4a640551ad365  # bindings: allow users to switch between virtualization and non-virtualization mode
+      git cherry-pick 60847265800bcca906256e426cbaaabadd8f214d  # test_proc: add SIGUSR2 virtualization switch tests
+      git cherry-pick 9cb500bc13a05d48e3ba1e6e0694ccb177a30379  # proc_fuse: remove unused variable
+      git cherry-pick 426e9c07d1385e2d8880433f8cc491e62adb40cf  # test_sigusr2: improve tests
+      git cherry-pick 4490b76729ab5a98ddeae6d5ef97c1f2f877919d  # bindings: introduce set_signal_handler
+      git cherry-pick 7aabcdb9f038fad3a5ed84ab49f37f3e1964c45d  # cgroup_fuse: fix cgroupfs virtualization needed on non-cgns systems
 
       set +ex
       snapcraftctl build
