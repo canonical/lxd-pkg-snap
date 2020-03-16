@@ -878,6 +878,7 @@ parts:
     stage-packages:
       - acl
       - dnsmasq-base
+      - gdisk
       - netbase
       - pigz
       - rsync
@@ -956,6 +957,7 @@ parts:
       - bin/pigz
       - bin/rsync
       - bin/setfacl
+      - bin/sgdisk
       - bin/unsquashfs
       - bin/xdelta3
 
