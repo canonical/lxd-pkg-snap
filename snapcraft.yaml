@@ -935,6 +935,7 @@ parts:
       git cherry-pick a473c9ef2adf6aba315ff646de4820e236472baa  # lxd/instance: Fix expiry check
       git cherry-pick aa53faf5e5d5e4eed9730280b0f535e82b3653d7  # lxd: Add "instance" string where necessary
       git cherry-pick 11efd72785318a04b57266517d761978cc375c13  # lxd/instances/snapshot: Fix expiration in profiles
+      git cherry-pick 1f7f2fb41ac237f4631121c40a27e4049a73c3aa  # lxd/images: Allow virtual-machine and instance as source
       git cherry-pick fb49848f30ca8a45fcc8c0d7305e161f0576eab2  # lxd/images: Fix source type handling
       git cherry-pick 04766ccf97b55f182e1a47e580b5a6be4c7d2270  # lxc/export: Make API call more correct
       git cherry-pick 7b99d26e118625757cead61f984125b50cdf304b  # lxd/storage/drivers/driver/btrfs/volumes: Dont activate quotas if not used
