@@ -825,6 +825,17 @@ parts:
       git cherry-pick d2aad21743f425134cd5287042e66a44a2055f3a  # proc_loadvg: fixes
       git cherry-pick 27ef2271ebf3886a2a0254a4d02108c47bca78e2  # proc_cpuview: fix compiler warning
       git cherry-pick 1f28336d591058adbbc751d2777fd9c665d83089  # tree-wide: add and use must_make_path_relative()
+      git cherry-pick 765ef33e3a10435a90b01d0758244830f7ad1ca3  # tree-wide: remove is_relative() and use must_make_path_relative()
+      git cherry-pick 041b603a2106e324c5aae46a18ef49274cc48066  # cgroup_fuse: rework is_child_cgroup()
+      git cherry-pick 84723af5437cd800c6883314599dca19ae67af6a  # cgroup_fuse: rework cgfs_get_key()
+      git cherry-pick dd7ed5968dbffe147a70ab48122107e2c482f795  # cgroup_fuse: rework cgfs_create()
+      git cherry-pick 42334f56e18c8033dfd98d57afccf4bcb5d06931  # cgroup_fuse: rework cgfs_remove()
+      git cherry-pick 91c31da81bab7b7c23379cdd7828e54cf6ad5ce4  # cgroup_fuse: rework cgfs_chmod_file()
+      git cherry-pick 008275221a32caf48e74625872410f91052d87c6  # cgroup_fuse: rework cgfs_chown_file()
+      git cherry-pick 07c0576b8b90a9d0bcd23ea7244c9210a9beaa3e  # cgroup_fuse: rework open_pids_file()
+      git cherry-pick 4571aee70b99da742749a943b12e1a8c5c0e00a8  # cgroup_fuse: rework cgfs_set_value()
+      git cherry-pick fae86f767995af00f85327f00c6254d185fa7dd7  # cgroup_fuse: rework cgfs_iterate_cgroup()
+      git cherry-pick 51a82f84b74dc697e49fe1e9c5687af12a32da02  # cgroup_utils: remove dot_or_empty()
 
       set +ex
       snapcraftctl build
