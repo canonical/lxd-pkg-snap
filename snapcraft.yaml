@@ -952,6 +952,13 @@ parts:
       git cherry-pick 7b99d26e118625757cead61f984125b50cdf304b  # lxd/storage/drivers/driver/btrfs/volumes: Dont activate quotas if not used
       git cherry-pick 71047e1d8703c0990455bed00ca81542f72ee99f  # lxd/storage/drivers/driver/ceph/volumes: Adds VM block resize support
       git cherry-pick 7f76b0110674a7207f7f5cf5e9316e327278fcd8  # lxd/storage/ceph: Fix ext4 shrinking
+      git cherry-pick fcdbf51434d60ea5e1004fe3fd21cc5fc006a165  # lxc/remote: Use helpers
+      git cherry-pick 0664bf002a3f613623b339fca4ce8ae537f8e11a  # lxc/remote: Validate remote name
+      git cherry-pick 8362d06213fc4e9a38331250e23481b47ca16c5b  # doc: Update requirements
+      git cherry-pick 5799bff7a7f7106250d89543ea7e85308e20b0df  # lxd/init: Don't offer dir as a remote backend
+      git cherry-pick 4e70b760ba890b252009d903588025868ac6ed0a  # lxc/config: Fix behaviour of instance snapshot expiry
+      git cherry-pick 55f09230efd264f5b1887788322b91a31a0edaaf  # lxd/storage/drivers/driver/lvm/volumes: Fixes LVM VM snapshot list
+      git cherry-pick 9e52800732921bdbb64210f20858b6e934283354  # lxd/cluster: Ignore CEPH custom volumes on removal
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
