@@ -937,6 +937,7 @@ parts:
       git cherry-pick 11efd72785318a04b57266517d761978cc375c13  # lxd/instances/snapshot: Fix expiration in profiles
       git cherry-pick fb49848f30ca8a45fcc8c0d7305e161f0576eab2  # lxd/images: Fix source type handling
       git cherry-pick 04766ccf97b55f182e1a47e580b5a6be4c7d2270  # lxc/export: Make API call more correct
+      git cherry-pick 7b99d26e118625757cead61f984125b50cdf304b  # lxd/storage/drivers/driver/btrfs/volumes: Dont activate quotas if not used
       git cherry-pick 71047e1d8703c0990455bed00ca81542f72ee99f  # lxd/storage/drivers/driver/ceph/volumes: Adds VM block resize support
       git cherry-pick 7f76b0110674a7207f7f5cf5e9316e327278fcd8  # lxd/storage/ceph: Fix ext4 shrinking
 
