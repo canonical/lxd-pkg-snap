@@ -836,6 +836,8 @@ parts:
       git cherry-pick 4571aee70b99da742749a943b12e1a8c5c0e00a8  # cgroup_fuse: rework cgfs_set_value()
       git cherry-pick fae86f767995af00f85327f00c6254d185fa7dd7  # cgroup_fuse: rework cgfs_iterate_cgroup()
       git cherry-pick 51a82f84b74dc697e49fe1e9c5687af12a32da02  # cgroup_utils: remove dot_or_empty()
+      git cherry-pick 70287ad52baab55a78ff5aa0529f67ea667f0f94  # tests: Silence build output
+      git cherry-pick 87fa839b2bdaea612b8bde180e1330f6694f8f9f  # cgroup_fuse: actually make asz check mean something
 
       set +ex
       snapcraftctl build
