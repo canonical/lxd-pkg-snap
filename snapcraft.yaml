@@ -770,7 +770,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.0
+    source-tag: lxcfs-4.0.1
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -799,45 +799,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 9f3f61c699b219a251620100013b8cd957e657cf  # proc_cpuview: add minimal support for unified cgroup layout
-      git cherry-pick 4d9174fc420c1829b78428b7b707d05252275918  # proc_fuse: fix meminfo with unified cgroup layout
-      git cherry-pick 515f1ddfecc3c6654dca5d2e765b7bbc7fc419b8  # configure: add -Wvla and -std=gnu11
-      git cherry-pick 26676de81e3acb5fe30f26224414896192b1f9d3  # tree-wide: add missing O_CLOEXEC
-      git cherry-pick a054d9da902b73d5bca0bebc8aa0262099a6dcc8  # bindings: handle current working directory on upgrade
-      git cherry-pick 0d8944383942a820c57ddd81561a827a3f5e6526  # tree-wide: mark lxcfs fuse ops
-      git cherry-pick c6415887d952019b5ff6af0a5c38aa1786b7442d  # bindings: make constructor failures non-fatal
-      git cherry-pick 287555b8a583cad06af60673ef5a6a3d3cf6ba5c  # liblxcfs: handle broken upgrade gracefully
-      git cherry-pick 4c7d6a9fb741547d869450249c6c05e2e121f4cc  # usage: Fix cfs help
-      git cherry-pick a5b2a4c9c0a6ef4113699f00192145706ea83012  # usage: Fix lxcfs description
-      git cherry-pick caac037df6905dd11e1e22e63231365a5b577f5e  # proc_fuse: port to uint64_t
-      git cherry-pick 0553c566e0fe0633bbc6042b5b9264b54777e297  # tree-wide: use {u}int64_t types
-      git cherry-pick 763635ef9cbfb6dff40579b962b4a640551ad365  # bindings: allow users to switch between virtualization and non-virtualization mode
-      git cherry-pick 60847265800bcca906256e426cbaaabadd8f214d  # test_proc: add SIGUSR2 virtualization switch tests
-      git cherry-pick 9cb500bc13a05d48e3ba1e6e0694ccb177a30379  # proc_fuse: remove unused variable
-      git cherry-pick 426e9c07d1385e2d8880433f8cc491e62adb40cf  # test_sigusr2: improve tests
-      git cherry-pick 4490b76729ab5a98ddeae6d5ef97c1f2f877919d  # bindings: introduce set_signal_handler
-      git cherry-pick 7aabcdb9f038fad3a5ed84ab49f37f3e1964c45d  # cgroup_fuse: fix cgroupfs virtualization needed on non-cgns systems
-      git cherry-pick 39fc7fdc741ad02d91c8a52c96bf2b615bca567b  # tree-wide: memory utils improvements
-      git cherry-pick 50525d33c9bae23c1d358d450a05b266ba9fcd40  # tree-wide: fix dot_or_empty()
-      git cherry-pick 374da637dd061f0dae0a1c4ec2674d8b95dc4a11  # cgroups: remove unused function
-      git cherry-pick 244ad9d5a5ba1a011514c1a5f913968b10614d6d  # utils: shut up compiler
-      git cherry-pick d2aad21743f425134cd5287042e66a44a2055f3a  # proc_loadvg: fixes
-      git cherry-pick 27ef2271ebf3886a2a0254a4d02108c47bca78e2  # proc_cpuview: fix compiler warning
-      git cherry-pick 1f28336d591058adbbc751d2777fd9c665d83089  # tree-wide: add and use must_make_path_relative()
-      git cherry-pick 765ef33e3a10435a90b01d0758244830f7ad1ca3  # tree-wide: remove is_relative() and use must_make_path_relative()
-      git cherry-pick 041b603a2106e324c5aae46a18ef49274cc48066  # cgroup_fuse: rework is_child_cgroup()
-      git cherry-pick 84723af5437cd800c6883314599dca19ae67af6a  # cgroup_fuse: rework cgfs_get_key()
-      git cherry-pick dd7ed5968dbffe147a70ab48122107e2c482f795  # cgroup_fuse: rework cgfs_create()
-      git cherry-pick 42334f56e18c8033dfd98d57afccf4bcb5d06931  # cgroup_fuse: rework cgfs_remove()
-      git cherry-pick 91c31da81bab7b7c23379cdd7828e54cf6ad5ce4  # cgroup_fuse: rework cgfs_chmod_file()
-      git cherry-pick 008275221a32caf48e74625872410f91052d87c6  # cgroup_fuse: rework cgfs_chown_file()
-      git cherry-pick 07c0576b8b90a9d0bcd23ea7244c9210a9beaa3e  # cgroup_fuse: rework open_pids_file()
-      git cherry-pick 4571aee70b99da742749a943b12e1a8c5c0e00a8  # cgroup_fuse: rework cgfs_set_value()
-      git cherry-pick fae86f767995af00f85327f00c6254d185fa7dd7  # cgroup_fuse: rework cgfs_iterate_cgroup()
-      git cherry-pick 51a82f84b74dc697e49fe1e9c5687af12a32da02  # cgroup_utils: remove dot_or_empty()
-      git cherry-pick 70287ad52baab55a78ff5aa0529f67ea667f0f94  # tests: Silence build output
-      git cherry-pick 87fa839b2bdaea612b8bde180e1330f6694f8f9f  # cgroup_fuse: actually make asz check mean something
 
       set +ex
       snapcraftctl build
