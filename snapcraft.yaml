@@ -800,6 +800,10 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 433f73372d877d3fa6b5cc6e56175bd5eea95d93  # proc_fuse: improve /proc/meminfo
+      git cherry-pick 2384f2a8ceae61bb2022490e8e4cf7f6a0913056  # proc_fuse: memory virtualization improvements
+      git cherry-pick 4bf37888a626d4cce8e44a75d6f73625ae2176b8  # proc_fuse: improve /proc/uptime virtualization
+
       set +ex
       snapcraftctl build
       set -ex
