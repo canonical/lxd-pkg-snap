@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.22"
+version: "3.23"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -847,7 +847,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.22
+    source-tag: lxd-3.23
     after:
       - lxc
       - dqlite
@@ -884,49 +884,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick f36fa5adedb5d25f03084ba65ff27c1a422db553  # lxd/storage/zfs: Fix usage calculation
-      git cherry-pick eff54f16959624321aa54e2956ba2d995f6b39ea  # Add go 1.14.x check
-      git cherry-pick fec5c7bcd5a9ad0bf7fbaf22fceb28e48a4e43a6  # lxd: Cleanup error messages
-      git cherry-pick f6ff00ab439fac0aa5a3776560d2bcb19d875cb2  # lxd: Rename container files to instance
-      git cherry-pick 4122277a790fc63699576b6a7c7f0dae69ad9061  # tests: Update for rename
-      git cherry-pick ea5c923fb02ec0cec85fa523493e5c2efb4d56ef  # production-setup: add net.core.bpf_jit_limit and kernel.keys.maxbytes
-      git cherry-pick 8f7f45b72373cc9cf4a75b7a30fad442529af704  # doc/instances: Adds missing host_name key on routed nic device
-      git cherry-pick a1418065d0ae9e2737ac83fac9527c910d3ad90d  # lxd/util/fs: Fixes go vet conversion from int64 to string yields a string of one rune error
-      git cherry-pick ff30db5cc23ff39fe96ca551a56a94f629043ca9  # lxd/device/disk: Only unmounts non-root volumes attached
-      git cherry-pick f7e95d13fd57d4cd87b8fd0100c8d9e35ee1342c  # lxd/daemon: Adds comment to AllowAuthenticated
-      git cherry-pick 75008b746cfaf8471db9fe4ce595e2bd6d366048  # lxd/firewall: Don't create zombies
-      git cherry-pick 146e6a80542fc4623af13f47126f036d7a940e7a  # driver_qemu: delete vm id from vmConsole
-      git cherry-pick a95bf4d5671dd91bd74280f1d0a60a4bb76f5a27  # ExecReaderToChannel: Prevent endless loops
-      git cherry-pick 4775cb0aed7c8551ceb3858e1a0432ea04968a22  # lxd/firewall/nft: Flush chain on delete
-      git cherry-pick e3d94b0c656164f56766f1f245d7a8bcad530812  # lxd/firewall/nft: Handle json errors
-      git cherry-pick 5e74bfa79ef58755f83a93e5678a11a49c25ee6e  # lxd/firewall/nft: Refuse to run on old kernels
-      git cherry-pick 3f7441e7a34a92cad426941a82a7778248dfc590  # shared/util/linux: Updates ExecReaderToChannel to accept a finisher chan as struct{}
-      git cherry-pick 03a71e64dd2dee8ab39cbcb25816a2d2e5238207  # lxd-agent/exec: Updates usage of ExecReaderToChannel channel definitions
-      git cherry-pick ad51d1488bed7e3911901eb8942a95cf4e14b58b  # shared/network: Removes logging internal state of websocket in WebsocketRecvStream
-      git cherry-pick 7e4468edad2977201ea0fc8ce41bb48a31b7a512  # shared/netutils/network/linux: Updates WebsocketExecMirror to use struct{} exited indicator channel
-      git cherry-pick ef63dd9af90281e2c484376ab619ced1ee37b8fd  # lxd/instance/exec: Fixes VM read loop when agent not started
-      git cherry-pick a473c9ef2adf6aba315ff646de4820e236472baa  # lxd/instance: Fix expiry check
-      git cherry-pick aa53faf5e5d5e4eed9730280b0f535e82b3653d7  # lxd: Add "instance" string where necessary
-      git cherry-pick 11efd72785318a04b57266517d761978cc375c13  # lxd/instances/snapshot: Fix expiration in profiles
-      git cherry-pick 1f7f2fb41ac237f4631121c40a27e4049a73c3aa  # lxd/images: Allow virtual-machine and instance as source
-      git cherry-pick fb49848f30ca8a45fcc8c0d7305e161f0576eab2  # lxd/images: Fix source type handling
-      git cherry-pick 04766ccf97b55f182e1a47e580b5a6be4c7d2270  # lxc/export: Make API call more correct
-      git cherry-pick 7b99d26e118625757cead61f984125b50cdf304b  # lxd/storage/drivers/driver/btrfs/volumes: Dont activate quotas if not used
-      git cherry-pick 71047e1d8703c0990455bed00ca81542f72ee99f  # lxd/storage/drivers/driver/ceph/volumes: Adds VM block resize support
-      git cherry-pick 7f76b0110674a7207f7f5cf5e9316e327278fcd8  # lxd/storage/ceph: Fix ext4 shrinking
-      git cherry-pick fcdbf51434d60ea5e1004fe3fd21cc5fc006a165  # lxc/remote: Use helpers
-      git cherry-pick 0664bf002a3f613623b339fca4ce8ae537f8e11a  # lxc/remote: Validate remote name
-      git cherry-pick 8362d06213fc4e9a38331250e23481b47ca16c5b  # doc: Update requirements
-      git cherry-pick 5799bff7a7f7106250d89543ea7e85308e20b0df  # lxd/init: Don't offer dir as a remote backend
-      git cherry-pick 4e70b760ba890b252009d903588025868ac6ed0a  # lxc/config: Fix behaviour of instance snapshot expiry
-      git cherry-pick 55f09230efd264f5b1887788322b91a31a0edaaf  # lxd/storage/drivers/driver/lvm/volumes: Fixes LVM VM snapshot list
-      git cherry-pick 9e52800732921bdbb64210f20858b6e934283354  # lxd/cluster: Ignore CEPH custom volumes on removal
-      git cherry-pick 80cd41e8f65359a7dbc4a7bb2b2955c4beec16fd  # doc/networks: describe how to notify systemd-resolved of lxd nameserver
-      git cherry-pick fa89288a986fad8f049f2ec81d1925f6ea8bd27e  # lxd/storage/utils: Add missing comments
-      git cherry-pick 926d96d5f8ee41be2c2f14353a0effb81c3282c5  # lxd/storage/utils: Add forceRemoveAll
-      git cherry-pick d2500dcb9f1e09478a44ad335d833a61df6a2b52  # lxd/storage/dir: Use forceRemoveAll
-      git cherry-pick 4c406d5b477937b6e25e3a324e8c5d17e7e6ffaa  # lxd/sys: Don't fail chmod on unresolvable symlinks
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
