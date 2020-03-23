@@ -253,6 +253,8 @@ parts:
     source: https://github.com/seccomp/libseccomp
     source-type: git
     plugin: autotools
+    build-packages:
+      - gperf
     organize:
       usr/lib/: lib/
     prime:
