@@ -894,6 +894,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 1698da3234bb17a8fbe5f2bf5fa306a6a31b0f3e  # lxd/etag: Quote generated etag values
+      git cherry-pick 02c91e4e39b0fd7a0d5f3df6af898d77bc5e08f3  # lxd/apparmor: Apparently the order matters
+      git cherry-pick 1114eb11905240aec07ba0673046418fd77b1882  # lxd/storage/drivers/btrfs: Fix quota
+      git cherry-pick e47e30c5d6cc44703c118d2141e23263af7d2200  # lxd/storage/drivers/btrfs: Don't destroy qgroups
+      git cherry-pick bf8cdc9b72637cf522686d848da94bfbeb776bb9  # lxd/instance/drivers: Fix lxd-agent running order
+      git cherry-pick 5b825943029669aa9bbad0d8c2f7abe03304fe35  # lxd/storage/zfs: Fix deleted VM images restoration
+      git cherry-pick b863b4dbb5042fae7e907f6852be31c5b63ffc81  # lxd/storage/backend/lxd/patches: Ignores snapshots when retrieving list of custom volumes to be renamed
+      git cherry-pick c2d8cc63aee70c188955dbefa32191463c03769a  # lxd/containers: Emit lifecycle event on user shutdown
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
