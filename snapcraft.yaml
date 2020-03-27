@@ -759,7 +759,6 @@ parts:
       git cherry-pick 039f2a91115f8032f6e01c37aaa8aad1672228b6  # tree-wide: harden mount option parsing
       git cherry-pick 53209ca485365cd87e0a20d50d2267b5902d5f7a  # dir: use cleanup macro in dir_mount()
       git cherry-pick d06e1513bd565b0650f94430822d2828631c7201  # dir: improve dir backend
-      git cherry-pick d8d38da1cc567ba12f9006342c2686e77c96488b  # cgroups: fix attaching to the unified cgroup
 
       set +ex
       snapcraftctl build
