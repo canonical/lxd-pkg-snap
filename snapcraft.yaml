@@ -759,6 +759,15 @@ parts:
       git cherry-pick 039f2a91115f8032f6e01c37aaa8aad1672228b6  # tree-wide: harden mount option parsing
       git cherry-pick 53209ca485365cd87e0a20d50d2267b5902d5f7a  # dir: use cleanup macro in dir_mount()
       git cherry-pick d06e1513bd565b0650f94430822d2828631c7201  # dir: improve dir backend
+      git cherry-pick d8d38da1cc567ba12f9006342c2686e77c96488b  # cgroups: fix attaching to the unified cgroup
+      git cherry-pick 8dca61dec4ad34a5037d619ccb51869be11438a4  # conf: rework and fix leak in userns_exec_1()
+      git cherry-pick c82fb6b3c72d8eec0d553a5a345d06d146203c0a  # commands: log actual errno when lxc_cmd_get_cgroup2_fd() fails
+      git cherry-pick 17b12f319bbe98e5fe561b18e55890ded111f14b  # cgroups: move pointer dereference after check
+      git cherry-pick 2bc38e68ee68d3b773739a2497705bc5f592596f  # cgroups: rework __cg_unified_attach()
+      git cherry-pick 54b4c137267b1c44ddfc0c50dc3adcd999e4c494  # attach: use close_prot_errno_disarm()
+      git cherry-pick 04435b805c7af7f99a247d2891c05f29b3cbcacc  # cgroups: remove unused variable
+      git cherry-pick 5c70927b936c3c95754251c3c8279ece7f50cf5a  # cgroups: fix unified cgroup attach
+      git cherry-pick 3e9a732621d35354719d71435039fe7730878d81  # fixup i/o handler return values
 
       set +ex
       snapcraftctl build
