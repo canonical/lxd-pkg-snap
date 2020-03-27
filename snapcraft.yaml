@@ -918,12 +918,6 @@ parts:
       git cherry-pick 45fcfc2cab4cc8d7d1f1d13cec357853baa98517  # cgroup/init: close controllers file
       git cherry-pick 80dc70e1b0c70110ed2fa1e23963c4b9233f6353  # doc/networks: Add missing maas.subnet.ipv4/maas.subnet.ipv6
       git cherry-pick 4aa13d7d1d5ef2581243c62f7b52b252cd85998b  # scripts/bash: Add maas.subnet.ipv4/maas.subnet/ipv6 to network
-      git cherry-pick 3abd67f125176fd8f534fc87fa824bcaf090a0ee  # lxd/device/nic/bridged: Allow security.ipv6_filtering to be used on networks without IPv6
-      git cherry-pick 51ef3f11f4f002e0e2d5859cd107470510977152  # lxd/firewall/drivers/drivers/xtables: Adds FilterIPv6All support
-      git cherry-pick df83becce3c9140b1fd1b2b375914e49febac2d8  # lxd/firewall: Dont use compact function arg definitions
-      git cherry-pick 0a883f17f22ce02fd2eb5fa44be87fecee285f70  # lxd/firewall/drivers/drivers/nftables: Adds FilterIPv6All support
-      git cherry-pick 68c5fd3b001106efcd4b6537acbc072c61d2d4ad  # lxd/network/network/utils: Adds support for bridged NIC network property when rebuilding dnsmasq static config
-      git cherry-pick 6ab761802b405dcf4006ade9d0e6ccd402f4298c  # lxd/network/network/utils: Comment consistency
       git cherry-pick 9aaabe29ba78cd9a1abce810788b9693c00db07f  # lxc: Fix for current cobra
 
       # Download any new dependencies
