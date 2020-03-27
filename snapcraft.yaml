@@ -768,6 +768,9 @@ parts:
       git cherry-pick 04435b805c7af7f99a247d2891c05f29b3cbcacc  # cgroups: remove unused variable
       git cherry-pick 5c70927b936c3c95754251c3c8279ece7f50cf5a  # cgroups: fix unified cgroup attach
       git cherry-pick 3e9a732621d35354719d71435039fe7730878d81  # fixup i/o handler return values
+      git cherry-pick 38d12ae68eabe88db671f869cd8d6e7c6490bcbd  # Revert "cgroups: fix unified cgroup attach"
+      git cherry-pick f95c658c1ca801c642c4fa09eddf34266dd2cb0f  # conf: introduce and use userns_exec_minimal()
+      git cherry-pick 2f1a5e772a72abc0827b7dccdd9ecdb5e7a5c2ec  # conf: simplify userns_exec_minimal()
 
       set +ex
       snapcraftctl build
