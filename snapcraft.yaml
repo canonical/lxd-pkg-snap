@@ -771,6 +771,12 @@ parts:
       git cherry-pick 38d12ae68eabe88db671f869cd8d6e7c6490bcbd  # Revert "cgroups: fix unified cgroup attach"
       git cherry-pick f95c658c1ca801c642c4fa09eddf34266dd2cb0f  # conf: introduce and use userns_exec_minimal()
       git cherry-pick 2f1a5e772a72abc0827b7dccdd9ecdb5e7a5c2ec  # conf: simplify userns_exec_minimal()
+      git cherry-pick cafffc3d2b0a2569cd59fce8acd88c6009fa9831  # cgroups: use hidden directory for attaching cgroup
+      git cherry-pick 7457a8b87104964e14d5769b9cbe7c1cebd2cd70  # cgroups: please compilers
+      git cherry-pick e5da28dd00a945c34c102ed77744efba2faeb359  # monitor process exited by signal SIGKILL, clean cgroup resource by third party
+      git cherry-pick 16a3be601f88d72c359762630b17e3404d35df41  # cgroups: move check for valid monitor process up
+      git cherry-pick 9b157781882418a33c469857813955810304382b  # cgroups: better helper naming
+      git cherry-pick d45c0d96583ed792eddb20f65636457ff858f1eb  # tree-wide: s/recursive_destroy/lxc_rm_rf/g
 
       set +ex
       snapcraftctl build
