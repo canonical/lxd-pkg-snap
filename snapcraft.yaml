@@ -777,6 +777,11 @@ parts:
       git cherry-pick 16a3be601f88d72c359762630b17e3404d35df41  # cgroups: move check for valid monitor process up
       git cherry-pick 9b157781882418a33c469857813955810304382b  # cgroups: better helper naming
       git cherry-pick d45c0d96583ed792eddb20f65636457ff858f1eb  # tree-wide: s/recursive_destroy/lxc_rm_rf/g
+      git cherry-pick a1a847dbc3f15ad2e0096ad4072901b93ebb70c9  # verify cgroup controller name
+      git cherry-pick 2f232c5311cc5c84b1d8e71d24047041e464f131  # cgroups: handle older kernels (e.g. v4.9)
+      git cherry-pick 73e7bdfcdc106bbbc55b1d3f55a83b9251c9a0a1  # start: log error when failing to create cgroup
+      git cherry-pick 7e6deea34170c0ce2d8d98b5da1bbb311fc0212a  # cgroups: send two attach fds
+      git cherry-pick 179e2bf8e052b383eb495793c97f4eb6c43fa625  # cgroups: send two fds to attach to unified cgroup
 
       set +ex
       snapcraftctl build
