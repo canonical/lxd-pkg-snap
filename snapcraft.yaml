@@ -1,6 +1,6 @@
 name: lxd
 base: core
-version: "3.23"
+version: "4.0.0"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -878,7 +878,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-3.23
+    source-tag: lxd-4.0.0
     after:
       - lxc
       - dqlite
@@ -915,21 +915,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 1698da3234bb17a8fbe5f2bf5fa306a6a31b0f3e  # lxd/etag: Quote generated etag values
-      git cherry-pick 02c91e4e39b0fd7a0d5f3df6af898d77bc5e08f3  # lxd/apparmor: Apparently the order matters
-      git cherry-pick 1114eb11905240aec07ba0673046418fd77b1882  # lxd/storage/drivers/btrfs: Fix quota
-      git cherry-pick e47e30c5d6cc44703c118d2141e23263af7d2200  # lxd/storage/drivers/btrfs: Don't destroy qgroups
-      git cherry-pick bf8cdc9b72637cf522686d848da94bfbeb776bb9  # lxd/instance/drivers: Fix lxd-agent running order
-      git cherry-pick 5b825943029669aa9bbad0d8c2f7abe03304fe35  # lxd/storage/zfs: Fix deleted VM images restoration
-      git cherry-pick b863b4dbb5042fae7e907f6852be31c5b63ffc81  # lxd/storage/backend/lxd/patches: Ignores snapshots when retrieving list of custom volumes to be renamed
-      git cherry-pick c2d8cc63aee70c188955dbefa32191463c03769a  # lxd/containers: Emit lifecycle event on user shutdown
-      git cherry-pick 186fc13bdd5d2ac16564c64eda53e374304f4154  # lxd/instance/exec: Adds protection against clients reconnecting after exec has started
-      git cherry-pick 538b83d4795ae01ad61ccdc06dbe81b766e56112  # lxd/cluster: Tweak errors
-      git cherry-pick 45fcfc2cab4cc8d7d1f1d13cec357853baa98517  # cgroup/init: close controllers file
-      git cherry-pick 80dc70e1b0c70110ed2fa1e23963c4b9233f6353  # doc/networks: Add missing maas.subnet.ipv4/maas.subnet.ipv6
-      git cherry-pick 4aa13d7d1d5ef2581243c62f7b52b252cd85998b  # scripts/bash: Add maas.subnet.ipv4/maas.subnet/ipv6 to network
-      git cherry-pick 9aaabe29ba78cd9a1abce810788b9693c00db07f  # lxc: Fix for current cobra
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
