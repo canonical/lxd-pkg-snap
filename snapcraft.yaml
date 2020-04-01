@@ -916,6 +916,17 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 62be5451130a7bb0073a6617373ee11878c923d1  # doc/instances: Fix escaping
+      git cherry-pick 4e1ecc846a238d6ebae63c38010abb5ff2dd1cb1  # lxc/network: Updates network detach checks to use bridged network property
+      git cherry-pick 7b26c661a4b4bec3c71d835ddc0435a88969eb33  # lxd/network/network/utils: Updates network setting detection in IsInUse
+      git cherry-pick 6b1a72d5deae8bd03408943d91d4cfd36e5820a7  # lxd/instance/drivers/driver/qemu: Adds host_name info to RenderState when lxd-agent is running
+      git cherry-pick 2346cf4fa8e88429c0fc8049b7e90fed8599f0d0  # lxd/networks: Fix clustered configs
+      git cherry-pick 1041bbfec9164995c10455e514296ae352cf63e9  # shared/api: Move NUMANode to thread
+      git cherry-pick c958fce21906ff0c14cb31680e8458068b26f411  # lxd/resources: Set NUMANode on a per-thread basis
+      git cherry-pick 936213778b65b80ba56c45af6088ece125cf5569  # lxc/info: Update for NUMANode on thread
+      git cherry-pick efbbf3e7f9113afc138686d0ca2f1aa8994dbe56  # i18n: Update translation templates
+      git cherry-pick 32cffcf08f42e4d6d71c870922f84a04bd5f073b  # api: resources_cpu_threads_numa
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
