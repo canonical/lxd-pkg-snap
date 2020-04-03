@@ -916,16 +916,52 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git cherry-pick 62be5451130a7bb0073a6617373ee11878c923d1  # doc/instances: Fix escaping
-      git cherry-pick 4e1ecc846a238d6ebae63c38010abb5ff2dd1cb1  # lxc/network: Updates network detach checks to use bridged network property
-      git cherry-pick 7b26c661a4b4bec3c71d835ddc0435a88969eb33  # lxd/network/network/utils: Updates network setting detection in IsInUse
-      git cherry-pick 6b1a72d5deae8bd03408943d91d4cfd36e5820a7  # lxd/instance/drivers/driver/qemu: Adds host_name info to RenderState when lxd-agent is running
-      git cherry-pick 2346cf4fa8e88429c0fc8049b7e90fed8599f0d0  # lxd/networks: Fix clustered configs
-      git cherry-pick 1041bbfec9164995c10455e514296ae352cf63e9  # shared/api: Move NUMANode to thread
-      git cherry-pick c958fce21906ff0c14cb31680e8458068b26f411  # lxd/resources: Set NUMANode on a per-thread basis
-      git cherry-pick 936213778b65b80ba56c45af6088ece125cf5569  # lxc/info: Update for NUMANode on thread
-      git cherry-pick efbbf3e7f9113afc138686d0ca2f1aa8994dbe56  # i18n: Update translation templates
-      git cherry-pick 32cffcf08f42e4d6d71c870922f84a04bd5f073b  # api: resources_cpu_threads_numa
+      git cherry-pick 5cfe923ada3ab4f9622b64a074f3a8453ca0d90e  # doc/instances: Fix escaping
+      git cherry-pick 512923873772c898f6694001573c49f124a6184e  # lxc/network: Updates network detach checks to use bridged network property
+      git cherry-pick 1715a92070cfcdd246786c69bce2ea84c8ca8473  # lxd/network/network/utils: Updates network setting detection in IsInUse
+      git cherry-pick 8444a05bf1b260d8268c17483f9d52cf9b6e0f99  # lxd/instance/drivers/driver/qemu: Adds host_name info to RenderState when lxd-agent is running
+      git cherry-pick 8134401b3d4a1c79359e4fffca2cbe8e7e66c39e  # lxd/networks: Fix clustered configs
+      git cherry-pick d272d542c29ae182cdef2a986a39079b34695733  # shared/api: Move NUMANode to thread
+      git cherry-pick 6a57923cd49991ee2bf606fc1c2b9c752fc675c8  # lxd/resources: Set NUMANode on a per-thread basis
+      git cherry-pick f5e02d90812b10e7f45f6df6b39533935c12642a  # lxc/info: Update for NUMANode on thread
+      git cherry-pick 45cc03ea6c0da862da68aae0a66d4442de5009d5  # i18n: Update translation templates
+      git cherry-pick ae6a75d3e5dcb0635514a16628a47ae9dc5b32a9  # api: resources_cpu_threads_numa
+      git cherry-pick c2af847ab0de385e484fbf0ddf8b97be9d452f87  # api: resources_cpu_core_die
+      git cherry-pick ed6c20896c4b7b5322c366570d89e78669a55713  # lxd/resources: Parse and report die_id
+      git cherry-pick b57df6e064414670be7c1a8c1eabc0792e7ad307  # lxd/storage/drivers/driver/lvm/volumes: Mount xfs snapshot with nouuid option
+      git cherry-pick 469c8e2e8ac7aa58240b8403597993edf9d306ec  # lxd/storage/drivers/driver/ceph/volumes: Adds mounting logging
+      git cherry-pick 3abf2905b3d5caa08a50011bfe1258a07946779c  # lxd/instance/drivers/driver/lxc: Updates Render() to accept options arguments
+      git cherry-pick c87e5562819d15637e42e4344aa4b9d04bb7bef6  # lxd/instance/drivers/driver/qemu: Updates Render() to accept options arguments
+      git cherry-pick e2461801dd32fe7d740142f113c146e012d12e97  # lxd/instance/instance/interface: Updates Render() to accept options arguments
+      git cherry-pick 09789a1d56144f8cf8dec20724cbef7fe8710b33  # lxd/storage/drivers/utils: Zeros btrfs transaction log in regenerateFilesystemBTRFSUUID
+      git cherry-pick d334502e7ed019a7c622c9bdfc0f9ab082220f45  # lxd/storage/utils: Removes unused functions and constants
+      git cherry-pick bc095baf66390bc228c0b42c6b65067e7a289066  # lxd/storage/utils: Adds RenderSnapshotUsage function
+      git cherry-pick a3a800b3bd29dc76cbb47e545ddaeb65a956b388  # lxd/instance/snapshot: Adds storagePools.RenderSnapshotUsage to Render() in containerSnapshotsGet and snapshotGet
+      git cherry-pick 4038e1c5a2f0ce2515e0337196f064cfad3c288f  # lxd/instance/drivers/driver/lxc: Use storagePools.RenderSnapshotUsage in RenderFull()
+      git cherry-pick 30eaf0662e5749df4867ba0fac7614e72ac8c6c3  # lxd/instance/drivers/driver/qemu: Use storagePools.RenderSnapshotUsage in RenderFull()
+      git cherry-pick 22ce6bf50974c3bd330dc10bd8b5728f2e67b356  # lxd/instance/instance/utils: Removes unused WriteBackupFile
+      git cherry-pick a96521882fe9a715880c65070e6ec6676649f1e2  # lxd/storage/drivers/utils: Changes regenerateFilesystemUUID to use expanded arg definitions
+      git cherry-pick 455a9c20ebbb209861bd4e6e8365d76648f202b5  # lxd/storage/drivers/driver/ceph/utils: Changes generateUUID to not map device
+      git cherry-pick 4ba1c572b4a92d948765f9275a4ff5b52f41fa0b  # lxd/storage/drivers/driver/ceph/volumes: d.generateUUID updated signature usage
+      git cherry-pick 46f882d0a47264c68e9e04ab72120a94661e4296  # lxd/storage/drivers/driver/ceph/volumes: Adds BTRFS UUID regeneration to MountVolumeSnapshot
+      git cherry-pick 0ef5809c1e2de63cbfb3aea16565e188fd4b6eb9  # lxd/storage/drivers/driver/zfs/volumes: Comment clarification
+      git cherry-pick 933d2f64aeb731ef2b2413c90269e08d57036efc  # lxd/storage/drivers/volume: Adds support for setting custom mount path
+      git cherry-pick 9307542260d8fb2d616cdc0cec4513f92dd65c39  # lxd/storage/drivers/driver/btrfs/volumes: Create temporary snapshot in BackupVolume()
+      git cherry-pick 155172d876f5e7d1bd4e359dbed78f1f3bf83dfc  # lxd/storage/drivers/driver/btrfs/volumes: Renames container vars to instance
+      git cherry-pick 87ee11e5a113c5f3346603412573b33469a9bce2  # lxd/storage/drivers/driver/btrfs/volumes: Consistent quoting of error message variables
+      git cherry-pick 6856816d57a4f202dba1b3533c734856b1f40741  # lxd/instance/drivers: Removes storagePools.RenderSnapshotUsage from RenderFull()
+      git cherry-pick 7ceef4cd878d38569b83f7a0d9359254c57c40aa  # lxd/storage/drivers/driver/zfs/volumes: Create temporary snapshot in BackupVolume()
+      git cherry-pick 04c3bb3d772c97a983d26fb4f5d563b39a71b6f2  # lxd/storage/backend/lxd: Checks for existance of volume before deleting
+      git cherry-pick afa655c70b79fb477d9ac95d3298ce580bb2b105  # lxd/instance: Switches to revert package for instanceCreateAsSnapshot
+      git cherry-pick 4565bd7ba12d89e3cafa1598cae7b9f716bb16a0  # lxd/storage/backend/lxd: Comment tweak
+      git cherry-pick e8a2d9a128fa94a4338d66f9555cc741c99eb713  # lxd/storage/drivers/driver/ceph/volumes: Tweaks HasVolume detection
+      git cherry-pick bc3648811493ec86292b9f4b36cddcbccdeddd63  # shared/subprocess/proc: Fixes race in process stopping
+      git cherry-pick ab29450c102924530e8735505ed884fd4518cdb1  # lxd/main_activateifneeded: s/container/instance/
+      git cherry-pick a5603e0e592c9d59e0f66e192258e7b2cee71411  # lxd/main_activateifneeded: Retrieve all instances
+      git cherry-pick 91dd675adb86379dfb0128126ec37ce1b9c991ea  # lxd/main_activateifneeded: Check for scheduled instance snapshots
+      git cherry-pick 2ea3f209f731bdd3eed8e3b13b8206a1dd899821  # lxd/main_activateifneeded: Check for scheduled volume snapshots
+      git cherry-pick a07f73c901dda8276dc15f5b2002f24b3d987948  # test/suites/basic: Update activateifneeded tests
+      git cherry-pick 6179284bb2b988c3368f8a209f9e751e647f72a3  # lxd/main_activateifneeded: Use defer statement to close db
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
