@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+# Re-exec outside of apparmor confinement
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
+fi
+
+# Unmount potential LXD paths.
+for path in /var/snap/lxd/common/ns/shmounts /var/snap/lxd/common/ns/mntns /var/snap/lxd/common/ns; do
+    if mountpoint -q "${path}"; then
+        umount -l "${path}" || true
+    fi
+done
+
+exit 0
