@@ -379,11 +379,14 @@ else
         else
             lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
         fi
+
+        # Wait for PID file
+        sleep 1
     )
 fi
 
-PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
-if [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
+PID=$(cat "${SNAP_COMMON}/lxcfs.pid" || true)
+if [ -n "${PID}" ] && [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
     echo "==> Cleaning up existing LXCFS namespace"
 
     cut -d' ' -f5 "/proc/${PID}/mountinfo" | while read -r line; do
