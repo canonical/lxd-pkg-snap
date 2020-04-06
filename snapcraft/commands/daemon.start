@@ -368,6 +368,7 @@ else
         # Close socket activation fd
         exec 3<&- || true
 
+        # Spawn lxcfs
         export LD_LIBRARY_PATH="${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}"
         lxcfs_args=
         [ "${lxcfs_loadavg:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} --enable-loadavg"
@@ -377,6 +378,22 @@ else
             lxcfs ${lxcfs_args} "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
         else
             lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
+        fi
+
+        # Cleanup lxcfs namespace once setup
+        sleep 1
+
+        PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
+        if [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
+            cut -d' ' -f5 "/proc/${PID}/mountinfo" | while read -r line; do
+                if echo "${line}" | grep -q "^${SNAP_COMMON}/shmounts/storage-pools/"; then
+                    nsenter -t "${PID}" -m umount -l "${line}" || true
+                fi
+
+                if echo "${line}" | grep -q "^${SNAP_COMMON}/lxd/storage-pools/"; then
+                    nsenter -t "${PID}" -m umount -l "${line}" || true
+                fi
+            done
         fi
     )
 fi
