@@ -94,6 +94,10 @@ hooks:
     plugs:
       - network
       - system-observe
+  remove:
+    plugs:
+      - lxd-support
+      - system-observe
 
 parts:
   # Dependencies
