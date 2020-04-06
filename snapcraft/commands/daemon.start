@@ -379,23 +379,22 @@ else
         else
             lxcfs "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
         fi
-
-        # Cleanup lxcfs namespace once setup
-        sleep 1
-
-        PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
-        if [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
-            cut -d' ' -f5 "/proc/${PID}/mountinfo" | while read -r line; do
-                if echo "${line}" | grep -q "^${SNAP_COMMON}/shmounts/storage-pools/"; then
-                    nsenter -t "${PID}" -m umount -l "${line}" || true
-                fi
-
-                if echo "${line}" | grep -q "^${SNAP_COMMON}/lxd/storage-pools/"; then
-                    nsenter -t "${PID}" -m umount -l "${line}" || true
-                fi
-            done
-        fi
     )
+fi
+
+PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
+if [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
+    echo "==> Cleaning up existing LXCFS namespace"
+
+    cut -d' ' -f5 "/proc/${PID}/mountinfo" | while read -r line; do
+        if echo "${line}" | grep -q "^${SNAP_COMMON}/shmounts/storage-pools/"; then
+            nsenter -t "${PID}" -m umount -l "${line}" || true
+        fi
+
+        if echo "${line}" | grep -q "^${SNAP_COMMON}/lxd/storage-pools/"; then
+            nsenter -t "${PID}" -m umount -l "${line}" || true
+        fi
+    done
 fi
 
 # LXD
