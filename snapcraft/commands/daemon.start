@@ -9,7 +9,7 @@ fi
 echo "=> Preparing the system (${SNAP_REVISION})"
 export HOME="/tmp/"
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
-export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu*/))"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
 export LXD_LXC_HOOK="${SNAP_CURRENT}/lxc/hooks/"
