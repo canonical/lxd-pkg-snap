@@ -932,6 +932,39 @@ parts:
       git cherry-pick 2ea3f209f731bdd3eed8e3b13b8206a1dd899821  # lxd/main_activateifneeded: Check for scheduled volume snapshots
       git cherry-pick a07f73c901dda8276dc15f5b2002f24b3d987948  # test/suites/basic: Update activateifneeded tests
       git cherry-pick 6179284bb2b988c3368f8a209f9e751e647f72a3  # lxd/main_activateifneeded: Use defer statement to close db
+      git cherry-pick 1fc005cb9760773fdce8affcef9b57184f14eeeb  # lxd/storage/btrfs: Workaround permission issue
+      git cherry-pick cc73f15896d2739a14a8ad7935ad57f88b655776  # lxd/cluster: add RemoveRaftNode() to force removing a raft node
+      git cherry-pick 4f6e5ee63ad2dd36e38ee20d41a3c4c2b75b19b4  # api: Add "DELETE /internal/cluster/raft/<address>" endpoint
+      git cherry-pick 7f812cb28185ec622209c20e0b1f9b50b4b8bd86  # Increase timeout when calling dqlite.Client.Add() to join the cluster
+      git cherry-pick 4d840609b29f64ce06dd8f552eeb8849ce9a701e  # lxd/storage/drivers/driver/zfs/volumes: Comment
+      git cherry-pick 9c8986babe3a2420ed4132bed730a5e87dc3f7c0  # lxd/storage/drivers/driver/lvm/volumes: Always return -1/ErrNotSupported for snapshot usage
+      git cherry-pick 63a9baaac5dbb30d4050ed5c036b5afbe4f3bdea  # lxd/storage/drivers/driver/dir/volumes: Always return -1/ErrNotSupported for snapshot usage
+      git cherry-pick 5013b4f1ddc5dc86300a6207aac8f05c41a33bfb  # lxd/storage/drivers/driver/zfs/volumes: Always used 'used' property for ZFS snapshot usage
+      git cherry-pick 5c1bc935943669ece42e6bbbfc867f39bf89e645  # lxd/storage/drivers/driver/cephfs/volumes: Always return -1/ErrNotSupported for snapshot usage
+      git cherry-pick 2d4f665b777c0d299d1873284ca9979cfcbae48c  # lxd/storage/drivers/driver/btrfs/volumes: Return -1/ErrNotSupported when no quota available
+      git cherry-pick 3f8d71985c7bb37f95b68e157e6da6b60f49a1a5  # lxd/instance: Fix typo in comment
+      git cherry-pick bc17dc7fc4d15c812451b6698cc0283eb252100a  # lxc/action: Fix typo in help message
+      git cherry-pick a2b9f3eda9fdae6ddabb88b5b6df6867c090a0d8  # i18n: Update translation templates
+      git cherry-pick 8abc4b0b028bf620b2b56b74093ea474cbf789d5  # lxd: Add "lxd cluster remove-raft-node" recovery command
+      git cherry-pick 5c6244d40ea564982fc2082f9249cb6178df0fbe  # doc: Add paragraph about "lxd cluster remove-raft-node"
+      git cherry-pick 3042b8b6cd4bc3af33dabdb8771fe44acab44fa4  # test: Add test exercising "lxd cluster remove-raft-node"
+      git cherry-pick b167cc5dc764357eebeac60eae296de2281b8cee  # lxd/storage/lvm: Always call vgchange on mount
+      git cherry-pick 54f2bb5c84cc35d84a0a677f50e297dcee660003  # lxd/patches: Fix snapshot migration
+      git cherry-pick ff991057707c4a9bf5f5ad1ab097e3c7174c884f  # tests: Fix btrfs storage usage
+      git cherry-pick ee7b27afb6dc668a1b6683c1fa8a8c4bd5c9ac2d  # lxd/storage/drivers/volume: Only chmod if needed in EnsureMountPath
+      git cherry-pick 3ec824d20e6ecf1f25e714e3a2cdbed13fa6e952  # lxd/storage/drivers/volume: Removes unnecessary variable
+      git cherry-pick dd1b18423cb0694282f34cd2c717b0bacf7258ef  # lxd/storage/drivers/driver/zfs/volumes: Ensure volumes created from copy have correct perms
+      git cherry-pick 8d6e9c94395e39a0f35cbe7ac245154f27d0d3b8  # lxd/storage/drivers: Call EnsureMountPath() in MountVolume()
+      git cherry-pick b055ef53289cdf2774ca3914f3d5200204fbf55d  # lxd/storage/drivers: Call EnsureMountPath() in MountVolumeSnapshot()
+      git cherry-pick 36021bc6f5b48670027e4c54f91f364c86880bf3  # lxd/storage/drivers/driver/btrfs/volumes: Adds revert to CreateVolume
+      git cherry-pick dfd277cf4fd0528e1d596991f03b0e0e47ac5b63  # lxd/storage/drivers/driver/btrfs/volumes: Comment in CreateVolumeFromCopy
+      git cherry-pick 3306cc1726698751a0c72d799225ea701793c628  # lxd/storage/drivers/driver/lvm/utils: EnsureMountPath after copying thin volume
+      git cherry-pick 5fbe61f47facf8b5034bbffd12e42700ae1e0d87  # lxd/storage/drivers/driver/cephfs/volumes: typo
+      git cherry-pick 7c052d4e6c2e3957cfa5db1888d7f9421280d63d  # lxd/storage/drivers/driver/cephfs/volumes: Calls vol.EnsureMountPath after filling
+      git cherry-pick 778859592b32ef5568e346a5b40153041c62b508  # lxd/storage/drivers/driver/ceph/volumes: Calls EnsureMountPath to fix perms after copying volume
+      git cherry-pick df4d639b574c2e510a935b011d3d1ceba17226c8  # lxd/storage/drivers/driver/lvm/volumes: Fixes temporary snapshot volume cleanup for VMs
+      git cherry-pick f91905090dc379d71a1d1642b085c6ff8f6be1e9  # lxd/storagr/drivers/driver/ceph/volumes: Adds support for snapshot usage reporting
+      git cherry-pick 70d22d2effe8b21ca43033cb6ee6b365442227e9  # lxd/storage/drivers/driver/lvm/volumes: Clarifies comments on LVM volume usage reporting
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
