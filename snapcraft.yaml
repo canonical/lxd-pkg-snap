@@ -714,7 +714,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.0
+    source-tag: lxc-4.0.1
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -752,36 +752,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 1ef2b5f476695bb38b887c579d70c2523a585b67  # lxc_init: move main() down
-      git cherry-pick ca65b1306845ca26302c0926f9a1c3f86db87610  # lxc_init: add missing O_CLOEXEC
-      git cherry-pick f3151f06ae086532cbd71a08186032d1635047ba  # [lxc.service] Starts after remote-fs.target to allow containers relying on remote FS to work
-      git cherry-pick 039f2a91115f8032f6e01c37aaa8aad1672228b6  # tree-wide: harden mount option parsing
-      git cherry-pick 53209ca485365cd87e0a20d50d2267b5902d5f7a  # dir: use cleanup macro in dir_mount()
-      git cherry-pick d06e1513bd565b0650f94430822d2828631c7201  # dir: improve dir backend
-      git cherry-pick d8d38da1cc567ba12f9006342c2686e77c96488b  # cgroups: fix attaching to the unified cgroup
-      git cherry-pick 8dca61dec4ad34a5037d619ccb51869be11438a4  # conf: rework and fix leak in userns_exec_1()
-      git cherry-pick c82fb6b3c72d8eec0d553a5a345d06d146203c0a  # commands: log actual errno when lxc_cmd_get_cgroup2_fd() fails
-      git cherry-pick 17b12f319bbe98e5fe561b18e55890ded111f14b  # cgroups: move pointer dereference after check
-      git cherry-pick 2bc38e68ee68d3b773739a2497705bc5f592596f  # cgroups: rework __cg_unified_attach()
-      git cherry-pick 54b4c137267b1c44ddfc0c50dc3adcd999e4c494  # attach: use close_prot_errno_disarm()
-      git cherry-pick 04435b805c7af7f99a247d2891c05f29b3cbcacc  # cgroups: remove unused variable
-      git cherry-pick 5c70927b936c3c95754251c3c8279ece7f50cf5a  # cgroups: fix unified cgroup attach
-      git cherry-pick 3e9a732621d35354719d71435039fe7730878d81  # fixup i/o handler return values
-      git cherry-pick 38d12ae68eabe88db671f869cd8d6e7c6490bcbd  # Revert "cgroups: fix unified cgroup attach"
-      git cherry-pick f95c658c1ca801c642c4fa09eddf34266dd2cb0f  # conf: introduce and use userns_exec_minimal()
-      git cherry-pick 2f1a5e772a72abc0827b7dccdd9ecdb5e7a5c2ec  # conf: simplify userns_exec_minimal()
-      git cherry-pick cafffc3d2b0a2569cd59fce8acd88c6009fa9831  # cgroups: use hidden directory for attaching cgroup
-      git cherry-pick 7457a8b87104964e14d5769b9cbe7c1cebd2cd70  # cgroups: please compilers
-      git cherry-pick e5da28dd00a945c34c102ed77744efba2faeb359  # monitor process exited by signal SIGKILL, clean cgroup resource by third party
-      git cherry-pick 16a3be601f88d72c359762630b17e3404d35df41  # cgroups: move check for valid monitor process up
-      git cherry-pick 9b157781882418a33c469857813955810304382b  # cgroups: better helper naming
-      git cherry-pick d45c0d96583ed792eddb20f65636457ff858f1eb  # tree-wide: s/recursive_destroy/lxc_rm_rf/g
-      git cherry-pick a1a847dbc3f15ad2e0096ad4072901b93ebb70c9  # verify cgroup controller name
-      git cherry-pick 2f232c5311cc5c84b1d8e71d24047041e464f131  # cgroups: handle older kernels (e.g. v4.9)
-      git cherry-pick 73e7bdfcdc106bbbc55b1d3f55a83b9251c9a0a1  # start: log error when failing to create cgroup
-      git cherry-pick 7e6deea34170c0ce2d8d98b5da1bbb311fc0212a  # cgroups: send two attach fds
-      git cherry-pick 179e2bf8e052b383eb495793c97f4eb6c43fa625  # cgroups: send two fds to attach to unified cgroup
 
       set +ex
       snapcraftctl build
