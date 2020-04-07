@@ -765,7 +765,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.1
+    source-tag: lxcfs-4.0.2
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -794,12 +794,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 433f73372d877d3fa6b5cc6e56175bd5eea95d93  # proc_fuse: improve /proc/meminfo
-      git cherry-pick 2384f2a8ceae61bb2022490e8e4cf7f6a0913056  # proc_fuse: memory virtualization improvements
-      git cherry-pick 4bf37888a626d4cce8e44a75d6f73625ae2176b8  # proc_fuse: improve /proc/uptime virtualization
-      git cherry-pick 12826e996dd89cf66c0072b76108ae9b3bcbcd5c  # tree-wide: add and use syscall_numbers.h
-      git cherry-pick 5012622acbcfb2c5cae45a8a3b923facaeeacd2d  # proc_fuse: fix swap calculations
 
       set +ex
       snapcraftctl build
