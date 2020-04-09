@@ -753,6 +753,13 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 850c0659ce5a172b484c535b9d49ceae5bdc8a79  # start: ensure all file descriptors are closed during exec
+      git cherry-pick 468797a31fed887e35ea4fba92282ee8f8a7ac86  # syscall_numbers: handle riscv
+      git cherry-pick e8bb9e4f940b18eea080df2954be244111ca2a40  # lxc_user_nic: simplify group retrieval
+      git cherry-pick 571694003ecacaf0a5f84d9efed49a0d15599573  # lxc_user_nic: continue when we failed to find a group
+      git cherry-pick eb8d7c09f797e176c1b89b2a9e093041693ba810  # cgroups: whitespace fixes
+      git cherry-pick c2e3e9a4b427f8e0e462ed8b6236c318ec238ec7  # seccomp: newer kernels require the buffer to be zeroed
+
       set +ex
       snapcraftctl build
       set -ex
