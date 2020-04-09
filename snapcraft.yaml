@@ -459,7 +459,7 @@ parts:
       - bin/virtfs-proxy-helper*
       - lib/*/libmagic*so*
       - lib/*/libpixman*so*
-      - share/qemu/keymaps
+      - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
       - share/qemu/slof.bin*
