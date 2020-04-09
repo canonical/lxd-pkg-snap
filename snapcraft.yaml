@@ -991,6 +991,14 @@ parts:
       git cherry-pick 2bc975ff965247b823806f8e084d656679be2fdc  # doc/networks: Adds note about firewalld and DHCP/DNS
       git cherry-pick f47f4819dc432d3645565d3fd92efaee8a67b584  # lxd/device/nic/routed: Improves validation of sysctl settings when using vlan option
       git cherry-pick 64712ff5b844e65bb5d3bb78c56dbff1d69403db  # lxd/device/nic/routed: Corrects misleading error message when setting sysctls
+      git cherry-pick d545c9c43fbd33d57aacf5ca3ed04d40baeb24b1  # lxd/storage/drivers/generic/vfs: Log when creating snapshots
+      git cherry-pick 124f4fd5a161d4a5aaed387d5ed47f6b873a4c9e  # lxd/storage/drivers/driver/zfs/volumes: Fix migrating VM block volumes in MigrateVolume
+      git cherry-pick 2a0ab36d21f17ad166b560b8da0310e5a7baed08  # lxd/storage/memorypipe: Adds context support for cancellation
+      git cherry-pick 83e90431e87743b72a9a596e84f491ab0fccf061  # lxd/storage/backend/lxd: memorypipe cancellation usage
+      git cherry-pick 73169f8dce62d2b86550994bf8f56d13ff780da4  # lxd/device/nic/sriov: Updates networkGetVirtFuncInfo to use json output from ip tool
+      git cherry-pick 12da91215a4d8ef4cdeb29fa336e133e72c1385d  # doc: Add missing os_api extension
+      git cherry-pick 9c7004a31b0604f959d0b30836bcfaf787449de0  # lxd/storage/drivers/driver/dir/utils: Removes default project quota
+      git cherry-pick a93766595ed89bd727b9fcf6db6461eb515fb384  # forkexec: mark fd cloexec so the attaching process doesn't inherit it
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
