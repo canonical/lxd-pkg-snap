@@ -966,6 +966,17 @@ parts:
       git cherry-pick df4d639b574c2e510a935b011d3d1ceba17226c8  # lxd/storage/drivers/driver/lvm/volumes: Fixes temporary snapshot volume cleanup for VMs
       git cherry-pick f91905090dc379d71a1d1642b085c6ff8f6be1e9  # lxd/storagr/drivers/driver/ceph/volumes: Adds support for snapshot usage reporting
       git cherry-pick 70d22d2effe8b21ca43033cb6ee6b365442227e9  # lxd/storage/drivers/driver/lvm/volumes: Clarifies comments on LVM volume usage reporting
+      git cherry-pick 8cb62997cdf9260e2e31d3cdc748f34f3a6ce169  # shared/osarch: Coding style
+      git cherry-pick 1088fee4d2f04e452f9459dfb33eda0d44f45f93  # shared/osarch: Don't fail on missing os-release
+      git cherry-pick 8e84e1e5f0a146c7d947dfa4ec39522ca9683dad  # shared/api: Add OS information
+      git cherry-pick d3a96b9d78b1c6e0b418302440de1e18702ec25e  # lxd/api: Add OS information
+      git cherry-pick e5bfdff5fc7f492d84035498beaa11abc432a6ac  # api: Add api_os
+      git cherry-pick 466a11902c365e971ee6ff33d13ce340756c341b  # lxc: Use natural string sorting
+      git cherry-pick 894b806c8452f8b9682a7565e70ff756128e819c  # lxc: Group snapshot and parent
+      git cherry-pick 086e13ec844f202822f451626d5033cf80908864  # lxd/main: Move forkzfs mntns to cgo
+      git cherry-pick 2bc975ff965247b823806f8e084d656679be2fdc  # doc/networks: Adds note about firewalld and DHCP/DNS
+      git cherry-pick f47f4819dc432d3645565d3fd92efaee8a67b584  # lxd/device/nic/routed: Improves validation of sysctl settings when using vlan option
+      git cherry-pick 64712ff5b844e65bb5d3bb78c56dbff1d69403db  # lxd/device/nic/routed: Corrects misleading error message when setting sysctls
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
