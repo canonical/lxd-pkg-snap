@@ -814,6 +814,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 233818fd4487a73ebdf202ca959307d627d443a6  # Fix #387. Include `:` in matching of lines in /proc/meminfo
+
       set +ex
       snapcraftctl build
       set -ex
