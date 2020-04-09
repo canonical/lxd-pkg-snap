@@ -766,6 +766,11 @@ parts:
       git cherry-pick 571694003ecacaf0a5f84d9efed49a0d15599573  # lxc_user_nic: continue when we failed to find a group
       git cherry-pick eb8d7c09f797e176c1b89b2a9e093041693ba810  # cgroups: whitespace fixes
       git cherry-pick c2e3e9a4b427f8e0e462ed8b6236c318ec238ec7  # seccomp: newer kernels require the buffer to be zeroed
+      git cherry-pick b2722ecbc4c83bf1ee143b9610e38c2aa8f179cf  # network: Make it possible to set the mode of IPVLAN to L2
+      git cherry-pick 53cffd7537ba0e1631cd6499c3ebe4cf711c2f55  # src/lxc/network: ipvlan comment and code style tweak
+      git cherry-pick 3b7f02fa67f3183bc8db4fdd051f5388d3f03685  # conf: tweak get_minimal_idmap()
+      git cherry-pick 37fcb9bc3e080c73e16f94231ff373f82928b70d  # conf: use macros all around in lxc_map_ids()
+      git cherry-pick 2a4fed96b0cbde95bd0453c6988bdd4534a1f30b  # conf: move_ptr() in all cases in mapped_hostid_add()
 
       set +ex
       snapcraftctl build
