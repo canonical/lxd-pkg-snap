@@ -1001,6 +1001,9 @@ parts:
       git cherry-pick 12da91215a4d8ef4cdeb29fa336e133e72c1385d  # doc: Add missing os_api extension
       git cherry-pick 9c7004a31b0604f959d0b30836bcfaf787449de0  # lxd/storage/drivers/driver/dir/utils: Removes default project quota
       git cherry-pick a93766595ed89bd727b9fcf6db6461eb515fb384  # forkexec: mark fd cloexec so the attaching process doesn't inherit it
+      git cherry-pick 5979425c767845b0fa47914081737eadb47cbf22  # forkexec: close all inherited fds
+      git cherry-pick 29daac466d08ae1bd1c043d4c000be145a8463a8  # forkexec: log unexpected fds
+      git cherry-pick 71a17e4c7625d4205e131669655a805dc4028fcc  # lxd/daemon: Ignore .zfs in volumes
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
