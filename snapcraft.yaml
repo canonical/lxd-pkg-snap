@@ -1,5 +1,5 @@
 name: lxd
-base: core
+base: core18
 version: "4.0.0"
 grade: stable
 summary: LXD - the container lightervisor
