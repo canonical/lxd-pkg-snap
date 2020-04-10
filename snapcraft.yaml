@@ -876,6 +876,7 @@ parts:
       - acl
       - dnsmasq-base
       - gdisk
+      - iw
       - netbase
       - pigz
       - rsync
@@ -1023,6 +1024,7 @@ parts:
       sbin/: bin/
     prime:
       - bin/dnsmasq
+      - bin/iw
       - bin/pigz
       - bin/rsync
       - bin/setfacl
