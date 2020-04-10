@@ -263,6 +263,12 @@ func (d *lxdDaemon) uninstall() error {
 		return err
 	}
 
+	// In 10s, kill "lxd-containers.service" as it tends to get stuck
+	defer func() {
+		time.Sleep(10 * time.Second)
+		shared.RunCommand("systemctl", "kill", "lxd-containers.service")
+	}()
+
 	// Remove LXD itself
 	_, err := shared.RunCommand("apt-get", "remove", "--purge", "--yes", "lxd", "lxd-client")
 	if err != nil {
