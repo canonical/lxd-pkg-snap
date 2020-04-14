@@ -1008,6 +1008,10 @@ parts:
       git cherry-pick 5979425c767845b0fa47914081737eadb47cbf22  # forkexec: close all inherited fds
       git cherry-pick 29daac466d08ae1bd1c043d4c000be145a8463a8  # forkexec: log unexpected fds
       git cherry-pick 71a17e4c7625d4205e131669655a805dc4028fcc  # lxd/daemon: Ignore .zfs in volumes
+      git cherry-pick 0dc6960c2a05521930bf5a44d5c564d01f04b931  # lxd/network: Push MTU over DHCP
+      git cherry-pick 5c6682e3a2b6c317ea34033aa98bb2738b5e505d  # shared/api: Drop invalid Managed key in NetworksPost
+      git cherry-pick af68fed8921e4931541e287ac65c570a2cc8fc02  # lxd: Drop invalid use of Managed property
+      git cherry-pick 75129c47357b423565c47d8959e96c3b785e56b9  # lxd/devices/disk: Prevent recursive & readonly
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
