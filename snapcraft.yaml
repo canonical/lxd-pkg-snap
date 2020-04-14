@@ -1012,6 +1012,13 @@ parts:
       git cherry-pick 5c6682e3a2b6c317ea34033aa98bb2738b5e505d  # shared/api: Drop invalid Managed key in NetworksPost
       git cherry-pick af68fed8921e4931541e287ac65c570a2cc8fc02  # lxd: Drop invalid use of Managed property
       git cherry-pick 75129c47357b423565c47d8959e96c3b785e56b9  # lxd/devices/disk: Prevent recursive & readonly
+      git cherry-pick f3b9a093782a39db48d9928ea71348562fbb2462  # lxc/instance/drivers: Set new name before renaming backups
+      git cherry-pick f9c5623a4b8deb538e553d99fbec5f61de24f11f  # test: Extend backup rename
+      git cherry-pick 334364fde5b6157cf4e52451e0f7880cf9eb5ab5  # lxd/instance/drivers: Add revert steps when renaming instance
+      git cherry-pick 91c1368053ac46875f1f0f1278dfcc4668d718e9  # lxd/instance/drivers/driver/qemu: Allow up to 8 NIC devices
+      git cherry-pick f06ebe108381e8612b53c916adc5ad63ab3e8ff8  # lxd/instance/drivers/driver/qemu/templates: Note that lxd_ disk device name prefix should not be changed
+      git cherry-pick 7fe3e69f5d1504160fcc343b646b447f614473ce  # doc/instances: Clarify config conditions
+      git cherry-pick 96f532b28f3b8a1aa6b6b0d3de0b28281082e2c8  # doc/index: Clarify bind-mount in FAQ
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
