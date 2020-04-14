@@ -772,6 +772,10 @@ parts:
       git cherry-pick 37fcb9bc3e080c73e16f94231ff373f82928b70d  # conf: use macros all around in lxc_map_ids()
       git cherry-pick 2a4fed96b0cbde95bd0453c6988bdd4534a1f30b  # conf: move_ptr() in all cases in mapped_hostid_add()
       git cherry-pick 43ff9c68629763d62791bfab918f0afd92e5e9fe  # lxc-update-config: Fix bad handling of lxc.logfile
+      git cherry-pick ec84b86e7d38b5f07ff16c4645ba66c852396c15  # tests/no-new-privs: Don't mess with /etc/lxc
+      git cherry-pick 16ccd6eb26191c9c14a108bf3ed9ad9435466575  # cgroups: ignore legacy limits on pure cgroup2 systems
+      git cherry-pick a77232344790fe51105cd37e2169c5a07517ae4d  # Fix lxc-oci template with loop backingstore
+      git cherry-pick 4a2484801de943ae85206bf870293e2322549257  # cgroup: fix wrong use of cgfd_con in cgroup_exit
 
       set +ex
       snapcraftctl build
