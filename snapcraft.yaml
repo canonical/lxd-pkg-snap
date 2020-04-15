@@ -820,6 +820,9 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick 233818fd4487a73ebdf202ca959307d627d443a6  # Fix #387. Include `:` in matching of lines in /proc/meminfo
+      git cherry-pick 95bb84eee89b60bbb602fcfb4cb6235cbc19a1c4  # relax init pid store locking a bit
+      git cherry-pick 4b8b5ca8caec55ee90fa0c195f1f19e63cf3a5aa  # travis: enable coverity integration
+      git cherry-pick 4b71d5a1266caf96a9741abe471c35b29f3d8865  # memory_utils: make it easier for Coverity
 
       set +ex
       snapcraftctl build
