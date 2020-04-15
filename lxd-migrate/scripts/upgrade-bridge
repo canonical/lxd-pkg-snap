@@ -34,8 +34,8 @@ fi
 
 # Clear deprecated settings
 echo "Unsetting deprecated profile options"
-lxc profile unset default user.network_mode --force-local
-lxc profile unset default environment.http_proxy --force-local
+lxc profile unset default user.network_mode --force-local || true
+lxc profile unset default environment.http_proxy --force-local || true
 
 # Done for unconfigured bridges
 if [ "${USE_LXD_BRIDGE}" != "true" ] || [ -z "${LXD_BRIDGE}" ]; then
