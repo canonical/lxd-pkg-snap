@@ -1042,6 +1042,16 @@ parts:
       git cherry-pick f06ebe108381e8612b53c916adc5ad63ab3e8ff8  # lxd/instance/drivers/driver/qemu/templates: Note that lxd_ disk device name prefix should not be changed
       git cherry-pick 7fe3e69f5d1504160fcc343b646b447f614473ce  # doc/instances: Clarify config conditions
       git cherry-pick 96f532b28f3b8a1aa6b6b0d3de0b28281082e2c8  # doc/index: Clarify bind-mount in FAQ
+      git cherry-pick 7ac20106b88e526493964f76475b05873770b51e  # lxd/instances: Better use userRequested on Update
+      git cherry-pick 2a8a1d3fd29495cd7f761257143a5fbf7cdf3f14  # lxd/device/nic/routed: Fix sysctl command suggestion when using vlans
+      git cherry-pick 349d31994b928940b74d316895df13d9e37ef06d  # lxd/device/nic/ipvlan: Improve validation of sysctl settings when vlan setting used
+      git cherry-pick a706ce58b38005aee61f6fcf9c2e619a7189a8e8  # test/clustering: increase timing to detect offline node
+      git cherry-pick e653d6e127a3178c62581e8fa339a7102a2b390f  # shared/version/api: Add resources_system API extension
+      git cherry-pick f8688ad8e518acdd06779f7344e75f524b5f25e8  # doc/api-extensions: Add resources_system
+      git cherry-pick bda3c129f69d8ae7887c0f96a8257e8cc50a389d  # shared/api/resource: Add system resources
+      git cherry-pick 0c4e95126a6f0fc4e5daa738047f9a011ce3ecad  # lxd/resources: Add new system resources
+      git cherry-pick 6e6110d3970701f58b4f6a43dcd2490e070e0cab  # lxd/resources: Retrieve system information
+      git cherry-pick 0e378fe06f9333ef74ec5a97375a0844e46cbbf0  # shared/util: Never look into the snap
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
