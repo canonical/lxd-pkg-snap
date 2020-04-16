@@ -414,6 +414,7 @@ parts:
       - --enable-kvm
       - --enable-linux-aio
       - --enable-pie
+      - --enable-rbd
       - --enable-seccomp
       - --enable-system
       - --enable-tools
@@ -434,6 +435,7 @@ parts:
       - libglib2.0-dev
       - libpixman-1-dev
       - libaio-dev
+      - librbd-dev
     stage-packages:
       - genisoimage
       - libmagic1
