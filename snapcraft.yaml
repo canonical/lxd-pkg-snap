@@ -723,7 +723,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.1
+    source-tag: lxc-4.0.2
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -761,43 +761,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 850c0659ce5a172b484c535b9d49ceae5bdc8a79  # start: ensure all file descriptors are closed during exec
-      git cherry-pick 468797a31fed887e35ea4fba92282ee8f8a7ac86  # syscall_numbers: handle riscv
-      git cherry-pick e8bb9e4f940b18eea080df2954be244111ca2a40  # lxc_user_nic: simplify group retrieval
-      git cherry-pick 571694003ecacaf0a5f84d9efed49a0d15599573  # lxc_user_nic: continue when we failed to find a group
-      git cherry-pick eb8d7c09f797e176c1b89b2a9e093041693ba810  # cgroups: whitespace fixes
-      git cherry-pick c2e3e9a4b427f8e0e462ed8b6236c318ec238ec7  # seccomp: newer kernels require the buffer to be zeroed
-      git cherry-pick b2722ecbc4c83bf1ee143b9610e38c2aa8f179cf  # network: Make it possible to set the mode of IPVLAN to L2
-      git cherry-pick 53cffd7537ba0e1631cd6499c3ebe4cf711c2f55  # src/lxc/network: ipvlan comment and code style tweak
-      git cherry-pick 3b7f02fa67f3183bc8db4fdd051f5388d3f03685  # conf: tweak get_minimal_idmap()
-      git cherry-pick 37fcb9bc3e080c73e16f94231ff373f82928b70d  # conf: use macros all around in lxc_map_ids()
-      git cherry-pick 2a4fed96b0cbde95bd0453c6988bdd4534a1f30b  # conf: move_ptr() in all cases in mapped_hostid_add()
-      git cherry-pick 43ff9c68629763d62791bfab918f0afd92e5e9fe  # lxc-update-config: Fix bad handling of lxc.logfile
-      git cherry-pick ec84b86e7d38b5f07ff16c4645ba66c852396c15  # tests/no-new-privs: Don't mess with /etc/lxc
-      git cherry-pick 16ccd6eb26191c9c14a108bf3ed9ad9435466575  # cgroups: ignore legacy limits on pure cgroup2 systems
-      git cherry-pick a77232344790fe51105cd37e2169c5a07517ae4d  # Fix lxc-oci template with loop backingstore
-      git cherry-pick 4a2484801de943ae85206bf870293e2322549257  # cgroup: fix wrong use of cgfd_con in cgroup_exit
-      git cherry-pick 3769a87ba2dccea477401d4e83472cd29fbde49f  # travis: add back coverity
-      git cherry-pick c7c55c1a21b9e1b189a72dee6b70c785ea21a94d  # memory_utils: directly NULL ptr in free_disarm()
-      git cherry-pick 6810da44843cb3e92117c49bce0c2fb8b6f6cc2e  # conf: fix tty cleanup
-      git cherry-pick 86652cfb15effefd809b03782f3e547e78870cf1  # cgroups: do not pass NULL pointer
-      git cherry-pick a4ccd3a7524e62adc25793d2e2b0277b9de2abeb  # uuid: close fd
-      git cherry-pick bc15baacf5f52b788ec0b398b860824310c30e7f  # cgroups: fix cgroup2 devices
-      git cherry-pick 9c0e2551770143a4ff8863e647cec995d6ccb682  # rexec: avoid double-close
-      git cherry-pick 6a40ccf59100f3ed29c6132cdc67c3eba06e5915  # cgroups: use correct NULL pointer check
-      git cherry-pick e052e6d006c43ceea51d014398b2f61b5b178a05  # conf: don't double free in get_minimal_idmap()
-      git cherry-pick c89533f402c21dd62d2bb584571a2c73f4e60425  # criu: make explicit that we're ignoring rmdir() return value
-      git cherry-pick a1232a5727e9e0c7b16e4beb4033182150cc2682  # zfs: fix resource leak
-      git cherry-pick 00d87eb12f759e120af00ce394282845393d41d9  # commands: add additional check to lxc_cmd_sock_get_state()
-      git cherry-pick dfa49f0d04effe25bd245a47f4ec4a3c40b3ac63  # network: log warning on network deconfiguration failures
-      git cherry-pick 10b15ed006d1e69fb424aadb5e28402d162b4852  # log: restore non-local value
-      git cherry-pick 264d40e507cf4fc94afad4363f56ac28850d26db  # attach: move check for valid config earlier
-      git cherry-pick 82057b132cfb9982fabd90a496426adaf07d7e04  # rexec: free argv array on failure
-      git cherry-pick f576850defad8dab9ef4c46ba323c74a54dfbf0d  # conf: correctly cleanup memory in get_minimal_idmap()
-      git cherry-pick da23a3c5eb4f74684b6ff5e9862c7e774916b1f0  # log: set GNU_SOURCE as it might help coverity along
-      git cherry-pick 04a7c46e1fff45dd5f4d9040742c67523cade491  # travis: coverity gets confused about the %m printf extension in glibc
-      git cherry-pick f2f25719b74a409f85ae787111c864ef7c0a4bca  # cgroups: fix cgroup limit braino
 
       set +ex
       snapcraftctl build
