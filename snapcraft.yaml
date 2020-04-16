@@ -1052,6 +1052,7 @@ parts:
       git cherry-pick 0c4e95126a6f0fc4e5daa738047f9a011ce3ecad  # lxd/resources: Add new system resources
       git cherry-pick 6e6110d3970701f58b4f6a43dcd2490e070e0cab  # lxd/resources: Retrieve system information
       git cherry-pick 0e378fe06f9333ef74ec5a97375a0844e46cbbf0  # shared/util: Never look into the snap
+      git cherry-pick b9d6e770fce87c0c9aab178b208348aee8ebf11b  # lxd/resources: serial/uuid may not be accessible
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
