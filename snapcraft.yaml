@@ -808,6 +808,15 @@ parts:
       git cherry-pick 95bb84eee89b60bbb602fcfb4cb6235cbc19a1c4  # relax init pid store locking a bit
       git cherry-pick 4b8b5ca8caec55ee90fa0c195f1f19e63cf3a5aa  # travis: enable coverity integration
       git cherry-pick 4b71d5a1266caf96a9741abe471c35b29f3d8865  # memory_utils: make it easier for Coverity
+      git cherry-pick 94fc26af47c1de24768f473fedc6f02ef6914a21  # .travis: fix coverity
+      git cherry-pick a8ad500437917885236e206e688624fb2f92a1e6  # cgroup_fuse: do not double-close
+      git cherry-pick ef8c42d029cdb7f09f95bf4f59413dd620084f7d  # lxcfs: remove fl.* prefix
+      git cherry-pick d564273ac91165cc5d6b535f6984fc2196174457  # cgroup_fuse: s/clone/lxcfs_clone/g
+      git cherry-pick d32206c42e5359fe1a52476129fd14e95ed6afc8  # bindings: do not falsely return
+      git cherry-pick c9fe304e032e0cd73350a4cb232995a0cd45336d  # cgroup_fuse: be cautios when dereferencing d->controller
+      git cherry-pick 3a04b82f59a24a9c058820654a032e4ec49c7fed  # lxcfs: don't cause a uaf
+      git cherry-pick f801eaa366e0c619b96c4d2bb35d8fca4b2c3e17  # utils: fix recv_creds()
+      git cherry-pick d918234b8b5fa18a1dbf48d935abc439c540ab9b  # bindings: use zalloc()
 
       set +ex
       snapcraftctl build
