@@ -822,6 +822,7 @@ parts:
       git cherry-pick 65fc6502da9ea09265ee051212153e178ef51491  # cgroups: more cgroup2 fun
       git cherry-pick d526dfd8bb0137ea77f6b8d12bdf58f99e8d4abc  # tests: correctly skip readdir test
       git cherry-pick 7fc864a1ceff836f37649440b90615be5711a895  # cgroups: please Coverity
+      git cherry-pick d24c05b5eee7ba11474e77fd120372d857362f27  # cgroups: simplify cgroup_walkup_to_root()
 
       set +ex
       snapcraftctl build
