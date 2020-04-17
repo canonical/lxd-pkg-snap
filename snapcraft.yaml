@@ -819,6 +819,9 @@ parts:
       git cherry-pick 3a04b82f59a24a9c058820654a032e4ec49c7fed  # lxcfs: don't cause a uaf
       git cherry-pick f801eaa366e0c619b96c4d2bb35d8fca4b2c3e17  # utils: fix recv_creds()
       git cherry-pick d918234b8b5fa18a1dbf48d935abc439c540ab9b  # bindings: use zalloc()
+      git cherry-pick 65fc6502da9ea09265ee051212153e178ef51491  # cgroups: more cgroup2 fun
+      git cherry-pick d526dfd8bb0137ea77f6b8d12bdf58f99e8d4abc  # tests: correctly skip readdir test
+      git cherry-pick 7fc864a1ceff836f37649440b90615be5711a895  # cgroups: please Coverity
 
       set +ex
       snapcraftctl build
