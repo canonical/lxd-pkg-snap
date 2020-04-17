@@ -776,7 +776,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.2
+    source-tag: lxcfs-4.0.3
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -805,24 +805,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 233818fd4487a73ebdf202ca959307d627d443a6  # Fix #387. Include `:` in matching of lines in /proc/meminfo
-      git cherry-pick 95bb84eee89b60bbb602fcfb4cb6235cbc19a1c4  # relax init pid store locking a bit
-      git cherry-pick 4b8b5ca8caec55ee90fa0c195f1f19e63cf3a5aa  # travis: enable coverity integration
-      git cherry-pick 4b71d5a1266caf96a9741abe471c35b29f3d8865  # memory_utils: make it easier for Coverity
-      git cherry-pick 94fc26af47c1de24768f473fedc6f02ef6914a21  # .travis: fix coverity
-      git cherry-pick a8ad500437917885236e206e688624fb2f92a1e6  # cgroup_fuse: do not double-close
-      git cherry-pick ef8c42d029cdb7f09f95bf4f59413dd620084f7d  # lxcfs: remove fl.* prefix
-      git cherry-pick d564273ac91165cc5d6b535f6984fc2196174457  # cgroup_fuse: s/clone/lxcfs_clone/g
-      git cherry-pick d32206c42e5359fe1a52476129fd14e95ed6afc8  # bindings: do not falsely return
-      git cherry-pick c9fe304e032e0cd73350a4cb232995a0cd45336d  # cgroup_fuse: be cautios when dereferencing d->controller
-      git cherry-pick 3a04b82f59a24a9c058820654a032e4ec49c7fed  # lxcfs: don't cause a uaf
-      git cherry-pick f801eaa366e0c619b96c4d2bb35d8fca4b2c3e17  # utils: fix recv_creds()
-      git cherry-pick d918234b8b5fa18a1dbf48d935abc439c540ab9b  # bindings: use zalloc()
-      git cherry-pick 65fc6502da9ea09265ee051212153e178ef51491  # cgroups: more cgroup2 fun
-      git cherry-pick d526dfd8bb0137ea77f6b8d12bdf58f99e8d4abc  # tests: correctly skip readdir test
-      git cherry-pick 7fc864a1ceff836f37649440b90615be5711a895  # cgroups: please Coverity
-      git cherry-pick d24c05b5eee7ba11474e77fd120372d857362f27  # cgroups: simplify cgroup_walkup_to_root()
 
       set +ex
       snapcraftctl build
