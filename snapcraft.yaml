@@ -1021,6 +1021,13 @@ parts:
       git cherry-pick aaa42e5c7624556258c0af18334b68dca0ef7c76  # Update networks.md
       git cherry-pick 37929d2c3dcda62e510d42b08a0952013e755c6b  # doc/networks: Fix typo
       git cherry-pick d473cd99c4b29421b9553a6e70e9883075e48bc1  # i18n: Update translations from weblate
+      git cherry-pick 37ea59f73bb617c7b0312f08c48673c3dff18f07  # Update networks.md
+      git cherry-pick 82558fc5e2d485bf9a95c6a3229aad05d15326da  # lxd/storage/ceph: Suppport alternate conf syntax
+      git cherry-pick 3b50daffd21827ee153fd009bdee381d07bccf58  # lxd/init: Try to bind LXD network address when running interactively
+      git cherry-pick 4cdc78e03f89fd1aa2d96461b42828a76039e449  # lxd/instance/drivers/driver/qemu/templates: Use static PCIe address prefix for 9p devices
+      git cherry-pick bada6015907c7dd499b1b726cae18016aa8d30a4  # lxd/instance/drivers/drivers/qemu: Adds support for 9p disk device PCIe indexes
+      git cherry-pick dde0c0a4e5ef6c22ba4ef3a155f890c3ec9825c1  # lxd/device/nic/bridged: Dont load br_netfilter
+      git cherry-pick e351f944527ecf5ffc9c0a1152bf9fea1b15db9c  # doc/instances: Fix swapped description
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
