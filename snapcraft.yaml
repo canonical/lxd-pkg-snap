@@ -1,5 +1,7 @@
 name: lxd
 base: core18
+assumes:
+  - snapd2.39
 version: "4.0.0"
 grade: stable
 summary: LXD - the container lightervisor
