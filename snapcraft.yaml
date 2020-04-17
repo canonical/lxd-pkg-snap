@@ -1027,6 +1027,12 @@ parts:
       git cherry-pick 6e6110d3970701f58b4f6a43dcd2490e070e0cab  # lxd/resources: Retrieve system information
       git cherry-pick 0e378fe06f9333ef74ec5a97375a0844e46cbbf0  # shared/util: Never look into the snap
       git cherry-pick b9d6e770fce87c0c9aab178b208348aee8ebf11b  # lxd/resources: serial/uuid may not be accessible
+      git cherry-pick 91644bd59698d18d1ae69cbe9cb866a5faa2708c  # doc/instances: Fixes default ceph.cluster_name value
+      git cherry-pick 6179f8f207ba32d63fbb568646c8833f9a7e3fab  # lxd/device/disk: Adds support to use ceph: prefix for disk source for VMs
+      git cherry-pick 5e0775d694f349c0ae1f860f5c592a39b038085d  # firewalld & lxd : how to let Firewalld control the LXD's iptables rules this is related to https://github.com/lxc/lxd/pull/7195 but this a bit more generic
+      git cherry-pick aaa42e5c7624556258c0af18334b68dca0ef7c76  # Update networks.md
+      git cherry-pick 37929d2c3dcda62e510d42b08a0952013e755c6b  # doc/networks: Fix typo
+      git cherry-pick d473cd99c4b29421b9553a6e70e9883075e48bc1  # i18n: Update translations from weblate
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
