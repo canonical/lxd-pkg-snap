@@ -859,6 +859,7 @@ parts:
       - pkg-config
     stage-packages:
       - acl
+      - attr
       - dnsmasq-base
       - gdisk
       - iw
@@ -912,6 +913,8 @@ parts:
       sbin/: bin/
     prime:
       - bin/dnsmasq
+      - bin/getfattr
+      - bin/setfattr
       - bin/iw
       - bin/pigz
       - bin/rsync
