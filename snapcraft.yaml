@@ -1030,6 +1030,23 @@ parts:
       git cherry-pick bada6015907c7dd499b1b726cae18016aa8d30a4  # lxd/instance/drivers/drivers/qemu: Adds support for 9p disk device PCIe indexes
       git cherry-pick dde0c0a4e5ef6c22ba4ef3a155f890c3ec9825c1  # lxd/device/nic/bridged: Dont load br_netfilter
       git cherry-pick e351f944527ecf5ffc9c0a1152bf9fea1b15db9c  # doc/instances: Fix swapped description
+      git cherry-pick 861d4fde71361fbb8555de0e0538d7f84e11c7f0  # index.md: add PATH env variable to sudo command example
+      git cherry-pick 85a9120ca8591e20123335b1055308dc7fcf7d92  # shared/simplestreams: Fix VM image preference
+      git cherry-pick b442c4b9bfe3498999fe151d78a10ff7e61e50e1  # lxd/devoce/device/utils/disk: Comment on diskCephfsOptions
+      git cherry-pick 8d50cd907c145e7342189f2fadf5cfa3290ac6a6  # lxd/device/disk: Adds cephfs support for VMs
+      git cherry-pick 9c7ff589234a599ad292cd6f316e5b58bd6cd728  # lxd/device/proxy: Check for br_netfilter enabled and log warning if not
+      git cherry-pick 7a940a85843983d92fa6b726bb80b53657423ab8  # lxd/firewall/drivers/driver/xtables: Adds MASQUERADE hairpin proxy NAT rule
+      git cherry-pick 2b1af35957c28df4f1d118c5996502bba4a10aa2  # lxd/firewall/drivers/drivers/xtables: comments
+      git cherry-pick bebde266c6c85e155591af9bbb263264cf04cf78  # lxd/device/proxy: Sets bridge port hairpin mode on when br_netfilter loaded
+      git cherry-pick ae310bac7b09cc8ebdeb0e891c6d96dca6bbd5fc  # lxd/firewall/drivers/drivers/xtables: Renames toDest to connectDest
+      git cherry-pick ac9830d2944c5b9b412756b731bf741b29bb8519  # lxd/firewall/drivers/drivers/nftables: Renames toDest to connectDest
+      git cherry-pick fbdcd2f5e3508bdc3e5a0eef75edbf6320c055bf  # lxd/init: Improve error messages when failing to bind an address
+      git cherry-pick 506fd394fd555f8eb8b22a141a7e876529d8ced4  # lxd/firewall/drivers/drivers/nftables: Adds MASQUERADE hairpin proxy NAT rule
+      git cherry-pick e9ea2b5280354bb51f2bf283d5e5a59c095ca3b6  # test/suites/container/devices/proxy: Updates tests for checking hairpin rule
+      git cherry-pick bf75f45cefc7da0eed7203a46d9712f72c9b0bbc  # lxd/instance/drivers/driver/qemu: Wait for onStop when restarting
+      git cherry-pick 04cb365a33961ed193517a4905cbe36cc41b6958  # lxd/instance/drivers/driver/qemu: Makes onStop unexported
+      git cherry-pick e26f24826aba78d53a3a9eb56abfbd9521ab2e00  # lxd/instance/drivers/driver/qemu: Comment
+      git cherry-pick 015f77208c88f645e23fbaa06558681f102c8349  # lxd/instance/lxc: Don't crash in setNetworkPriority
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
