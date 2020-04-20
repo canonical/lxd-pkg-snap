@@ -863,6 +863,7 @@ parts:
       - gdisk
       - iw
       - netbase
+      - pciutils
       - pigz
       - rsync
       - squashfs-tools
@@ -906,6 +907,7 @@ parts:
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
+      usr/share/misc/: share/misc/
       usr/sbin/: bin/
       sbin/: bin/
     prime:
@@ -919,6 +921,8 @@ parts:
       - bin/xdelta3
 
       - etc/bash_completion.d/snap.lxd.lxc
+
+      - share/misc
 
       - bin/lxc
       - bin/lxd
