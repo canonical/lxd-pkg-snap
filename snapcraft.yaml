@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.0.0"
+version: "4.0.1"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -858,7 +858,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.0.0
+    source-tag: lxd-4.0.1
     after:
       - lxc
       - dqlite
@@ -900,160 +900,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 5cfe923ada3ab4f9622b64a074f3a8453ca0d90e  # doc/instances: Fix escaping
-      git cherry-pick 512923873772c898f6694001573c49f124a6184e  # lxc/network: Updates network detach checks to use bridged network property
-      git cherry-pick 1715a92070cfcdd246786c69bce2ea84c8ca8473  # lxd/network/network/utils: Updates network setting detection in IsInUse
-      git cherry-pick 8444a05bf1b260d8268c17483f9d52cf9b6e0f99  # lxd/instance/drivers/driver/qemu: Adds host_name info to RenderState when lxd-agent is running
-      git cherry-pick 8134401b3d4a1c79359e4fffca2cbe8e7e66c39e  # lxd/networks: Fix clustered configs
-      git cherry-pick d272d542c29ae182cdef2a986a39079b34695733  # shared/api: Move NUMANode to thread
-      git cherry-pick 6a57923cd49991ee2bf606fc1c2b9c752fc675c8  # lxd/resources: Set NUMANode on a per-thread basis
-      git cherry-pick f5e02d90812b10e7f45f6df6b39533935c12642a  # lxc/info: Update for NUMANode on thread
-      git cherry-pick 45cc03ea6c0da862da68aae0a66d4442de5009d5  # i18n: Update translation templates
-      git cherry-pick ae6a75d3e5dcb0635514a16628a47ae9dc5b32a9  # api: resources_cpu_threads_numa
-      git cherry-pick c2af847ab0de385e484fbf0ddf8b97be9d452f87  # api: resources_cpu_core_die
-      git cherry-pick ed6c20896c4b7b5322c366570d89e78669a55713  # lxd/resources: Parse and report die_id
-      git cherry-pick b57df6e064414670be7c1a8c1eabc0792e7ad307  # lxd/storage/drivers/driver/lvm/volumes: Mount xfs snapshot with nouuid option
-      git cherry-pick 469c8e2e8ac7aa58240b8403597993edf9d306ec  # lxd/storage/drivers/driver/ceph/volumes: Adds mounting logging
-      git cherry-pick 3abf2905b3d5caa08a50011bfe1258a07946779c  # lxd/instance/drivers/driver/lxc: Updates Render() to accept options arguments
-      git cherry-pick c87e5562819d15637e42e4344aa4b9d04bb7bef6  # lxd/instance/drivers/driver/qemu: Updates Render() to accept options arguments
-      git cherry-pick e2461801dd32fe7d740142f113c146e012d12e97  # lxd/instance/instance/interface: Updates Render() to accept options arguments
-      git cherry-pick 09789a1d56144f8cf8dec20724cbef7fe8710b33  # lxd/storage/drivers/utils: Zeros btrfs transaction log in regenerateFilesystemBTRFSUUID
-      git cherry-pick d334502e7ed019a7c622c9bdfc0f9ab082220f45  # lxd/storage/utils: Removes unused functions and constants
-      git cherry-pick bc095baf66390bc228c0b42c6b65067e7a289066  # lxd/storage/utils: Adds RenderSnapshotUsage function
-      git cherry-pick a3a800b3bd29dc76cbb47e545ddaeb65a956b388  # lxd/instance/snapshot: Adds storagePools.RenderSnapshotUsage to Render() in containerSnapshotsGet and snapshotGet
-      git cherry-pick 4038e1c5a2f0ce2515e0337196f064cfad3c288f  # lxd/instance/drivers/driver/lxc: Use storagePools.RenderSnapshotUsage in RenderFull()
-      git cherry-pick 30eaf0662e5749df4867ba0fac7614e72ac8c6c3  # lxd/instance/drivers/driver/qemu: Use storagePools.RenderSnapshotUsage in RenderFull()
-      git cherry-pick 22ce6bf50974c3bd330dc10bd8b5728f2e67b356  # lxd/instance/instance/utils: Removes unused WriteBackupFile
-      git cherry-pick a96521882fe9a715880c65070e6ec6676649f1e2  # lxd/storage/drivers/utils: Changes regenerateFilesystemUUID to use expanded arg definitions
-      git cherry-pick 455a9c20ebbb209861bd4e6e8365d76648f202b5  # lxd/storage/drivers/driver/ceph/utils: Changes generateUUID to not map device
-      git cherry-pick 4ba1c572b4a92d948765f9275a4ff5b52f41fa0b  # lxd/storage/drivers/driver/ceph/volumes: d.generateUUID updated signature usage
-      git cherry-pick 46f882d0a47264c68e9e04ab72120a94661e4296  # lxd/storage/drivers/driver/ceph/volumes: Adds BTRFS UUID regeneration to MountVolumeSnapshot
-      git cherry-pick 0ef5809c1e2de63cbfb3aea16565e188fd4b6eb9  # lxd/storage/drivers/driver/zfs/volumes: Comment clarification
-      git cherry-pick 933d2f64aeb731ef2b2413c90269e08d57036efc  # lxd/storage/drivers/volume: Adds support for setting custom mount path
-      git cherry-pick 9307542260d8fb2d616cdc0cec4513f92dd65c39  # lxd/storage/drivers/driver/btrfs/volumes: Create temporary snapshot in BackupVolume()
-      git cherry-pick 155172d876f5e7d1bd4e359dbed78f1f3bf83dfc  # lxd/storage/drivers/driver/btrfs/volumes: Renames container vars to instance
-      git cherry-pick 87ee11e5a113c5f3346603412573b33469a9bce2  # lxd/storage/drivers/driver/btrfs/volumes: Consistent quoting of error message variables
-      git cherry-pick 6856816d57a4f202dba1b3533c734856b1f40741  # lxd/instance/drivers: Removes storagePools.RenderSnapshotUsage from RenderFull()
-      git cherry-pick 7ceef4cd878d38569b83f7a0d9359254c57c40aa  # lxd/storage/drivers/driver/zfs/volumes: Create temporary snapshot in BackupVolume()
-      git cherry-pick 04c3bb3d772c97a983d26fb4f5d563b39a71b6f2  # lxd/storage/backend/lxd: Checks for existance of volume before deleting
-      git cherry-pick afa655c70b79fb477d9ac95d3298ce580bb2b105  # lxd/instance: Switches to revert package for instanceCreateAsSnapshot
-      git cherry-pick 4565bd7ba12d89e3cafa1598cae7b9f716bb16a0  # lxd/storage/backend/lxd: Comment tweak
-      git cherry-pick e8a2d9a128fa94a4338d66f9555cc741c99eb713  # lxd/storage/drivers/driver/ceph/volumes: Tweaks HasVolume detection
-      git cherry-pick bc3648811493ec86292b9f4b36cddcbccdeddd63  # shared/subprocess/proc: Fixes race in process stopping
-      git cherry-pick ab29450c102924530e8735505ed884fd4518cdb1  # lxd/main_activateifneeded: s/container/instance/
-      git cherry-pick a5603e0e592c9d59e0f66e192258e7b2cee71411  # lxd/main_activateifneeded: Retrieve all instances
-      git cherry-pick 91dd675adb86379dfb0128126ec37ce1b9c991ea  # lxd/main_activateifneeded: Check for scheduled instance snapshots
-      git cherry-pick 2ea3f209f731bdd3eed8e3b13b8206a1dd899821  # lxd/main_activateifneeded: Check for scheduled volume snapshots
-      git cherry-pick a07f73c901dda8276dc15f5b2002f24b3d987948  # test/suites/basic: Update activateifneeded tests
-      git cherry-pick 6179284bb2b988c3368f8a209f9e751e647f72a3  # lxd/main_activateifneeded: Use defer statement to close db
-      git cherry-pick 1fc005cb9760773fdce8affcef9b57184f14eeeb  # lxd/storage/btrfs: Workaround permission issue
-      git cherry-pick cc73f15896d2739a14a8ad7935ad57f88b655776  # lxd/cluster: add RemoveRaftNode() to force removing a raft node
-      git cherry-pick 4f6e5ee63ad2dd36e38ee20d41a3c4c2b75b19b4  # api: Add "DELETE /internal/cluster/raft/<address>" endpoint
-      git cherry-pick 7f812cb28185ec622209c20e0b1f9b50b4b8bd86  # Increase timeout when calling dqlite.Client.Add() to join the cluster
-      git cherry-pick 4d840609b29f64ce06dd8f552eeb8849ce9a701e  # lxd/storage/drivers/driver/zfs/volumes: Comment
-      git cherry-pick 9c8986babe3a2420ed4132bed730a5e87dc3f7c0  # lxd/storage/drivers/driver/lvm/volumes: Always return -1/ErrNotSupported for snapshot usage
-      git cherry-pick 63a9baaac5dbb30d4050ed5c036b5afbe4f3bdea  # lxd/storage/drivers/driver/dir/volumes: Always return -1/ErrNotSupported for snapshot usage
-      git cherry-pick 5013b4f1ddc5dc86300a6207aac8f05c41a33bfb  # lxd/storage/drivers/driver/zfs/volumes: Always used 'used' property for ZFS snapshot usage
-      git cherry-pick 5c1bc935943669ece42e6bbbfc867f39bf89e645  # lxd/storage/drivers/driver/cephfs/volumes: Always return -1/ErrNotSupported for snapshot usage
-      git cherry-pick 2d4f665b777c0d299d1873284ca9979cfcbae48c  # lxd/storage/drivers/driver/btrfs/volumes: Return -1/ErrNotSupported when no quota available
-      git cherry-pick 3f8d71985c7bb37f95b68e157e6da6b60f49a1a5  # lxd/instance: Fix typo in comment
-      git cherry-pick bc17dc7fc4d15c812451b6698cc0283eb252100a  # lxc/action: Fix typo in help message
-      git cherry-pick a2b9f3eda9fdae6ddabb88b5b6df6867c090a0d8  # i18n: Update translation templates
-      git cherry-pick 8abc4b0b028bf620b2b56b74093ea474cbf789d5  # lxd: Add "lxd cluster remove-raft-node" recovery command
-      git cherry-pick 5c6244d40ea564982fc2082f9249cb6178df0fbe  # doc: Add paragraph about "lxd cluster remove-raft-node"
-      git cherry-pick 3042b8b6cd4bc3af33dabdb8771fe44acab44fa4  # test: Add test exercising "lxd cluster remove-raft-node"
-      git cherry-pick b167cc5dc764357eebeac60eae296de2281b8cee  # lxd/storage/lvm: Always call vgchange on mount
-      git cherry-pick 54f2bb5c84cc35d84a0a677f50e297dcee660003  # lxd/patches: Fix snapshot migration
-      git cherry-pick ff991057707c4a9bf5f5ad1ab097e3c7174c884f  # tests: Fix btrfs storage usage
-      git cherry-pick ee7b27afb6dc668a1b6683c1fa8a8c4bd5c9ac2d  # lxd/storage/drivers/volume: Only chmod if needed in EnsureMountPath
-      git cherry-pick 3ec824d20e6ecf1f25e714e3a2cdbed13fa6e952  # lxd/storage/drivers/volume: Removes unnecessary variable
-      git cherry-pick dd1b18423cb0694282f34cd2c717b0bacf7258ef  # lxd/storage/drivers/driver/zfs/volumes: Ensure volumes created from copy have correct perms
-      git cherry-pick 8d6e9c94395e39a0f35cbe7ac245154f27d0d3b8  # lxd/storage/drivers: Call EnsureMountPath() in MountVolume()
-      git cherry-pick b055ef53289cdf2774ca3914f3d5200204fbf55d  # lxd/storage/drivers: Call EnsureMountPath() in MountVolumeSnapshot()
-      git cherry-pick 36021bc6f5b48670027e4c54f91f364c86880bf3  # lxd/storage/drivers/driver/btrfs/volumes: Adds revert to CreateVolume
-      git cherry-pick dfd277cf4fd0528e1d596991f03b0e0e47ac5b63  # lxd/storage/drivers/driver/btrfs/volumes: Comment in CreateVolumeFromCopy
-      git cherry-pick 3306cc1726698751a0c72d799225ea701793c628  # lxd/storage/drivers/driver/lvm/utils: EnsureMountPath after copying thin volume
-      git cherry-pick 5fbe61f47facf8b5034bbffd12e42700ae1e0d87  # lxd/storage/drivers/driver/cephfs/volumes: typo
-      git cherry-pick 7c052d4e6c2e3957cfa5db1888d7f9421280d63d  # lxd/storage/drivers/driver/cephfs/volumes: Calls vol.EnsureMountPath after filling
-      git cherry-pick 778859592b32ef5568e346a5b40153041c62b508  # lxd/storage/drivers/driver/ceph/volumes: Calls EnsureMountPath to fix perms after copying volume
-      git cherry-pick df4d639b574c2e510a935b011d3d1ceba17226c8  # lxd/storage/drivers/driver/lvm/volumes: Fixes temporary snapshot volume cleanup for VMs
-      git cherry-pick f91905090dc379d71a1d1642b085c6ff8f6be1e9  # lxd/storagr/drivers/driver/ceph/volumes: Adds support for snapshot usage reporting
-      git cherry-pick 70d22d2effe8b21ca43033cb6ee6b365442227e9  # lxd/storage/drivers/driver/lvm/volumes: Clarifies comments on LVM volume usage reporting
-      git cherry-pick 8cb62997cdf9260e2e31d3cdc748f34f3a6ce169  # shared/osarch: Coding style
-      git cherry-pick 1088fee4d2f04e452f9459dfb33eda0d44f45f93  # shared/osarch: Don't fail on missing os-release
-      git cherry-pick 8e84e1e5f0a146c7d947dfa4ec39522ca9683dad  # shared/api: Add OS information
-      git cherry-pick d3a96b9d78b1c6e0b418302440de1e18702ec25e  # lxd/api: Add OS information
-      git cherry-pick e5bfdff5fc7f492d84035498beaa11abc432a6ac  # api: Add api_os
-      git cherry-pick 466a11902c365e971ee6ff33d13ce340756c341b  # lxc: Use natural string sorting
-      git cherry-pick 894b806c8452f8b9682a7565e70ff756128e819c  # lxc: Group snapshot and parent
-      git cherry-pick 086e13ec844f202822f451626d5033cf80908864  # lxd/main: Move forkzfs mntns to cgo
-      git cherry-pick 2bc975ff965247b823806f8e084d656679be2fdc  # doc/networks: Adds note about firewalld and DHCP/DNS
-      git cherry-pick f47f4819dc432d3645565d3fd92efaee8a67b584  # lxd/device/nic/routed: Improves validation of sysctl settings when using vlan option
-      git cherry-pick 64712ff5b844e65bb5d3bb78c56dbff1d69403db  # lxd/device/nic/routed: Corrects misleading error message when setting sysctls
-      git cherry-pick d545c9c43fbd33d57aacf5ca3ed04d40baeb24b1  # lxd/storage/drivers/generic/vfs: Log when creating snapshots
-      git cherry-pick 124f4fd5a161d4a5aaed387d5ed47f6b873a4c9e  # lxd/storage/drivers/driver/zfs/volumes: Fix migrating VM block volumes in MigrateVolume
-      git cherry-pick 2a0ab36d21f17ad166b560b8da0310e5a7baed08  # lxd/storage/memorypipe: Adds context support for cancellation
-      git cherry-pick 83e90431e87743b72a9a596e84f491ab0fccf061  # lxd/storage/backend/lxd: memorypipe cancellation usage
-      git cherry-pick 73169f8dce62d2b86550994bf8f56d13ff780da4  # lxd/device/nic/sriov: Updates networkGetVirtFuncInfo to use json output from ip tool
-      git cherry-pick 12da91215a4d8ef4cdeb29fa336e133e72c1385d  # doc: Add missing os_api extension
-      git cherry-pick 9c7004a31b0604f959d0b30836bcfaf787449de0  # lxd/storage/drivers/driver/dir/utils: Removes default project quota
-      git cherry-pick a93766595ed89bd727b9fcf6db6461eb515fb384  # forkexec: mark fd cloexec so the attaching process doesn't inherit it
-      git cherry-pick 5979425c767845b0fa47914081737eadb47cbf22  # forkexec: close all inherited fds
-      git cherry-pick 29daac466d08ae1bd1c043d4c000be145a8463a8  # forkexec: log unexpected fds
-      git cherry-pick 71a17e4c7625d4205e131669655a805dc4028fcc  # lxd/daemon: Ignore .zfs in volumes
-      git cherry-pick 0dc6960c2a05521930bf5a44d5c564d01f04b931  # lxd/network: Push MTU over DHCP
-      git cherry-pick 5c6682e3a2b6c317ea34033aa98bb2738b5e505d  # shared/api: Drop invalid Managed key in NetworksPost
-      git cherry-pick af68fed8921e4931541e287ac65c570a2cc8fc02  # lxd: Drop invalid use of Managed property
-      git cherry-pick 75129c47357b423565c47d8959e96c3b785e56b9  # lxd/devices/disk: Prevent recursive & readonly
-      git cherry-pick f3b9a093782a39db48d9928ea71348562fbb2462  # lxc/instance/drivers: Set new name before renaming backups
-      git cherry-pick f9c5623a4b8deb538e553d99fbec5f61de24f11f  # test: Extend backup rename
-      git cherry-pick 334364fde5b6157cf4e52451e0f7880cf9eb5ab5  # lxd/instance/drivers: Add revert steps when renaming instance
-      git cherry-pick 91c1368053ac46875f1f0f1278dfcc4668d718e9  # lxd/instance/drivers/driver/qemu: Allow up to 8 NIC devices
-      git cherry-pick f06ebe108381e8612b53c916adc5ad63ab3e8ff8  # lxd/instance/drivers/driver/qemu/templates: Note that lxd_ disk device name prefix should not be changed
-      git cherry-pick 7fe3e69f5d1504160fcc343b646b447f614473ce  # doc/instances: Clarify config conditions
-      git cherry-pick 96f532b28f3b8a1aa6b6b0d3de0b28281082e2c8  # doc/index: Clarify bind-mount in FAQ
-      git cherry-pick 7ac20106b88e526493964f76475b05873770b51e  # lxd/instances: Better use userRequested on Update
-      git cherry-pick 2a8a1d3fd29495cd7f761257143a5fbf7cdf3f14  # lxd/device/nic/routed: Fix sysctl command suggestion when using vlans
-      git cherry-pick 349d31994b928940b74d316895df13d9e37ef06d  # lxd/device/nic/ipvlan: Improve validation of sysctl settings when vlan setting used
-      git cherry-pick a706ce58b38005aee61f6fcf9c2e619a7189a8e8  # test/clustering: increase timing to detect offline node
-      git cherry-pick e653d6e127a3178c62581e8fa339a7102a2b390f  # shared/version/api: Add resources_system API extension
-      git cherry-pick f8688ad8e518acdd06779f7344e75f524b5f25e8  # doc/api-extensions: Add resources_system
-      git cherry-pick bda3c129f69d8ae7887c0f96a8257e8cc50a389d  # shared/api/resource: Add system resources
-      git cherry-pick 0c4e95126a6f0fc4e5daa738047f9a011ce3ecad  # lxd/resources: Add new system resources
-      git cherry-pick 6e6110d3970701f58b4f6a43dcd2490e070e0cab  # lxd/resources: Retrieve system information
-      git cherry-pick 0e378fe06f9333ef74ec5a97375a0844e46cbbf0  # shared/util: Never look into the snap
-      git cherry-pick b9d6e770fce87c0c9aab178b208348aee8ebf11b  # lxd/resources: serial/uuid may not be accessible
-      git cherry-pick 91644bd59698d18d1ae69cbe9cb866a5faa2708c  # doc/instances: Fixes default ceph.cluster_name value
-      git cherry-pick 6179f8f207ba32d63fbb568646c8833f9a7e3fab  # lxd/device/disk: Adds support to use ceph: prefix for disk source for VMs
-      git cherry-pick 5e0775d694f349c0ae1f860f5c592a39b038085d  # firewalld & lxd : how to let Firewalld control the LXD's iptables rules this is related to https://github.com/lxc/lxd/pull/7195 but this a bit more generic
-      git cherry-pick aaa42e5c7624556258c0af18334b68dca0ef7c76  # Update networks.md
-      git cherry-pick 37929d2c3dcda62e510d42b08a0952013e755c6b  # doc/networks: Fix typo
-      git cherry-pick d473cd99c4b29421b9553a6e70e9883075e48bc1  # i18n: Update translations from weblate
-      git cherry-pick 37ea59f73bb617c7b0312f08c48673c3dff18f07  # Update networks.md
-      git cherry-pick 82558fc5e2d485bf9a95c6a3229aad05d15326da  # lxd/storage/ceph: Suppport alternate conf syntax
-      git cherry-pick 3b50daffd21827ee153fd009bdee381d07bccf58  # lxd/init: Try to bind LXD network address when running interactively
-      git cherry-pick 4cdc78e03f89fd1aa2d96461b42828a76039e449  # lxd/instance/drivers/driver/qemu/templates: Use static PCIe address prefix for 9p devices
-      git cherry-pick bada6015907c7dd499b1b726cae18016aa8d30a4  # lxd/instance/drivers/drivers/qemu: Adds support for 9p disk device PCIe indexes
-      git cherry-pick dde0c0a4e5ef6c22ba4ef3a155f890c3ec9825c1  # lxd/device/nic/bridged: Dont load br_netfilter
-      git cherry-pick e351f944527ecf5ffc9c0a1152bf9fea1b15db9c  # doc/instances: Fix swapped description
-      git cherry-pick 861d4fde71361fbb8555de0e0538d7f84e11c7f0  # index.md: add PATH env variable to sudo command example
-      git cherry-pick 85a9120ca8591e20123335b1055308dc7fcf7d92  # shared/simplestreams: Fix VM image preference
-      git cherry-pick b442c4b9bfe3498999fe151d78a10ff7e61e50e1  # lxd/devoce/device/utils/disk: Comment on diskCephfsOptions
-      git cherry-pick 8d50cd907c145e7342189f2fadf5cfa3290ac6a6  # lxd/device/disk: Adds cephfs support for VMs
-      git cherry-pick 9c7ff589234a599ad292cd6f316e5b58bd6cd728  # lxd/device/proxy: Check for br_netfilter enabled and log warning if not
-      git cherry-pick 7a940a85843983d92fa6b726bb80b53657423ab8  # lxd/firewall/drivers/driver/xtables: Adds MASQUERADE hairpin proxy NAT rule
-      git cherry-pick 2b1af35957c28df4f1d118c5996502bba4a10aa2  # lxd/firewall/drivers/drivers/xtables: comments
-      git cherry-pick bebde266c6c85e155591af9bbb263264cf04cf78  # lxd/device/proxy: Sets bridge port hairpin mode on when br_netfilter loaded
-      git cherry-pick ae310bac7b09cc8ebdeb0e891c6d96dca6bbd5fc  # lxd/firewall/drivers/drivers/xtables: Renames toDest to connectDest
-      git cherry-pick ac9830d2944c5b9b412756b731bf741b29bb8519  # lxd/firewall/drivers/drivers/nftables: Renames toDest to connectDest
-      git cherry-pick fbdcd2f5e3508bdc3e5a0eef75edbf6320c055bf  # lxd/init: Improve error messages when failing to bind an address
-      git cherry-pick 506fd394fd555f8eb8b22a141a7e876529d8ced4  # lxd/firewall/drivers/drivers/nftables: Adds MASQUERADE hairpin proxy NAT rule
-      git cherry-pick e9ea2b5280354bb51f2bf283d5e5a59c095ca3b6  # test/suites/container/devices/proxy: Updates tests for checking hairpin rule
-      git cherry-pick bf75f45cefc7da0eed7203a46d9712f72c9b0bbc  # lxd/instance/drivers/driver/qemu: Wait for onStop when restarting
-      git cherry-pick 04cb365a33961ed193517a4905cbe36cc41b6958  # lxd/instance/drivers/driver/qemu: Makes onStop unexported
-      git cherry-pick e26f24826aba78d53a3a9eb56abfbd9521ab2e00  # lxd/instance/drivers/driver/qemu: Comment
-      git cherry-pick 015f77208c88f645e23fbaa06558681f102c8349  # lxd/instance/lxc: Don't crash in setNetworkPriority
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
