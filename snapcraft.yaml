@@ -86,6 +86,11 @@ apps:
     plugs:
       - lxd-support
       - system-observe
+  lxc-to-lxd:
+    command: commands/lxc-to-lxd
+    plugs:
+      - lxd-support
+      - system-observe
   migrate:
     command: commands/lxd-migrate
     plugs:
@@ -875,6 +880,7 @@ parts:
     go-importpath: github.com/lxc/lxd
     go-packages:
       - github.com/lxc/lxd/lxc
+      - github.com/lxc/lxd/lxc-to-lxd
       - github.com/lxc/lxd/lxd
       - github.com/lxc/lxd/lxd-benchmark
     override-build: |
@@ -928,6 +934,7 @@ parts:
       - share/misc
 
       - bin/lxc
+      - bin/lxc-to-lxd
       - bin/lxd
       - bin/lxd-agent
       - bin/lxd-benchmark
