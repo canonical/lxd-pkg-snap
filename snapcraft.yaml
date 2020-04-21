@@ -878,6 +878,7 @@ parts:
       - pigz
       - rsync
       - squashfs-tools
+      - usbutils
       - xdelta3
     plugin: go
     go-buildtags:
@@ -1074,6 +1075,7 @@ parts:
       usr/bin/: bin/
       usr/lib/: lib/
       usr/share/misc/: share/misc/
+      var/lib/usbutils/usb.ids: share/misc/
       usr/sbin/: bin/
       sbin/: bin/
     prime:

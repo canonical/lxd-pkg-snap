@@ -167,6 +167,7 @@ echo "==> Preparing a clean copy of /usr/share/misc"
 umount -l /usr/share/misc >/dev/null 2>&1 || true
 mount -t tmpfs tmpfs /usr/share/misc -o mode=0755,nosuid,nodev
 ln -s "${SNAP_COMMON}/share/misc/pci.ids" /usr/share/misc/
+ln -s "${SNAP_COMMON}/share/misc/usb.ids" /usr/share/misc/
 
 # Setup host access
 ## Make /var/lib/snapd/hostfs more useful to us
