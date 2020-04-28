@@ -955,6 +955,7 @@ parts:
       git cherry-pick 5084a520c7bdd086788ff7ae3d9fb2c5ff929a5a  # client: Add ExportImage to ImageServer
       git cherry-pick 856e60d9ba0d8f2dd09460dd1d619a6cb206259d  # client: Add push mode for image copy
       git cherry-pick 791e5993e64da3f3112c1ca877a8a19d1c66c00c  # client: Add GetOperationWaitSecret
+      git cherry-pick a5a57156823156d018eba9e701c59da1cb46d74e  # Resolve both core.https_address and cluster.https_address when comparing IPs
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
