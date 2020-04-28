@@ -164,8 +164,8 @@ parts:
       - bin/xfs_*
       - bin/mkfs.xfs
 
-  zfs-0.6:
-    source: https://github.com/zfsonlinux/zfs
+  zfs-0-6:
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.6.5.11
     plugin: autotools
@@ -198,8 +198,8 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
-  zfs-0.7:
-    source: https://github.com/zfsonlinux/zfs
+  zfs-0-7:
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.7.13
     plugin: autotools
@@ -228,8 +228,8 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
-  zfs-0.8:
-    source: https://github.com/zfsonlinux/zfs
+  zfs-0-8:
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.8.4
     plugin: autotools
