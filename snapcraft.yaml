@@ -626,7 +626,7 @@ parts:
       - lib/*/liblzma*so*
 
   zfs-0-6:
-    source: https://github.com/zfsonlinux/zfs
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.6.5.11
     plugin: autotools
@@ -661,7 +661,7 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-0-7:
-    source: https://github.com/zfsonlinux/zfs
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.7.13
     plugin: autotools
@@ -692,7 +692,7 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-0-8:
-    source: https://github.com/zfsonlinux/zfs
+    source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.8.3
     plugin: autotools
