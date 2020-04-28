@@ -906,6 +906,54 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick fe7e8253a2e314c6474d1378df6a7ef49c41e6b0  # lxd-agent: Support systemd-notify
+      git cherry-pick 8bd0a5078aa94eb55712a47492adc48894ca13e6  # lxd/qemu: Switch default unit type to notify
+      git cherry-pick b719cf6220373f8d730bdd04be456afbcfe39ccf  # lxd/storage/backend/lxd: Updates CreateInstanceFromImage to use reverter
+      git cherry-pick 028e18400b8cbcbec645ac8579a29f20f7c2f8f0  # lxd/storage/drivers/errors: Adds ErrCannotBeShrunk error
+      git cherry-pick 41cf2a4c8b99fbcc0df5a33299893cb765590bc3  # lxd/storage/drivers/utils: Updates to shrinkFileSystem ErrCannotBeShrunk error
+      git cherry-pick 929fd6f68e2d7ed0aad3debc47c07c6c488f8179  # lxd/storage/backend/lxd: Updates CreateInstanceFromImage to detect ErrCannotBeShrunk
+      git cherry-pick 9624ad69e3ba2c1c8ba14a288a0eee970484d119  # lxd/storage/drivers: Returns ErrCannotBeShrunk when block volume cannot be shrunk
+      git cherry-pick f864ce5effb67f1ed9852c29291ca2a5f6a24519  # lxd/device/proxy: Dont allow proxy_protocol to be set when in nat mode
+      git cherry-pick 643f1296c05473f401e2c4e4d5745eb502f8ed1c  # lxd/device/proxy: Dont wrap lines
+      git cherry-pick 7f22d930ec4a8d3c60e400b098df66e692234ef9  # lxd/device/proxy: Improves validation
+      git cherry-pick ba88444e7d0635f37122c7ec0dc1032d06b4afc1  # test/suites/container/devices/proxy: Updates tests with new validation rules
+      git cherry-pick cdf47d40b2f684150e22bbea47a6ab91b670b4ce  # lxd: Updates snapshotProtobufToInstanceArgs to support instance type
+      git cherry-pick 7f2f18e83051a88ac61151bcd4c2be082bc1ddec  # lxd/qemu: Match basic NUMA layout
+      git cherry-pick 953c075d2b619deeb21fca85697a1b23de0f45d0  # lxd/storage/drivers/driver/zfs/volumes: Delete volume on error in CreateVolumeFromCopy
+      git cherry-pick c209482eb7c76566fe522e439f23efafb0c0956f  # lxd-agent/main/agent: Adds comment about reason for systemd-notify usage
+      git cherry-pick 0ec712d6e995ca59b9769e3f0a2ea8e2325e1100  # lxd/cgroup: Fix memory controller detection
+      git cherry-pick b14ace4af2e0209efa7abdd8ed0e5444ca574be5  # lxd/migration/migrate/proto: Fix alignment
+      git cherry-pick da955ef426a676fc45c1dc3851231114c3bf7dea  # lxd/migration: Adds volumeSize field to MigrationHeader
+      git cherry-pick 8e00069f36e6253a4651764ca5168d83427004c8  # lxd/migrate: Adds VolumeSize to MigrationSinkArgs
+      git cherry-pick 59f89a4a49f7ff3c68ca23b8b755328226918715  # lxd/migration/migration/volumes: Adds VolumeSize to VolumeTargetArgs
+      git cherry-pick ace13c37405cd0e23e4cfcd43870ad63bf9cbcda  # lxd/migrate/instance: Use VolumeSize from offer header in Do()
+      git cherry-pick 12468feff4d67d593a18a44263244fafe3690906  # lxd/storage/backend/lxd: Use VolumeSize from migration header in CreateInstanceFromMigration
+      git cherry-pick 1511db3593ba3ad14cb74fdbc2e2fee42093c277  # lxd/storage/drivers: Exports BlockDevSizeBytes function
+      git cherry-pick cbbece54ddf40b458b53c0d50fb4f44a38f52b8e  # lxd/storage/utils: Adds InstanceDiskBlockSize
+      git cherry-pick 7d9d5625670d015b15099ac90de57c44e38a762c  # lxd/migrate/instance: Populate offerHeader.VolumeSize for VMs
+      git cherry-pick 5237d512c91cea230e2f5c8d74384bcee306ecba  # lxd/storage/backend/lxd: Adds VM volume size hint to CreateInstanceFromCopy
+      git cherry-pick 053321c6f9f078f4b4edcb3e9d7b938be43308ac  # lxd/device/utils: Do not add the Ceph mon port if already present in /etc/ceph config file
+      git cherry-pick e2777010e5042d19e3c2e7a89570ca4e04d18022  # lxd/instance/qemu: Add comment on cpuTopology
+      git cherry-pick 9e363b3a410779d7e0c01bbad29d6d64bfad68d0  # lxd/storage/ceph: Support port in URL
+      git cherry-pick fbb6ff13313308d43444ec5e1d6deb9ca419c59e  # lxd/storage/drivers/utils: Makes minBlockBoundary available to other functions
+      git cherry-pick f9983eee16735cbf4397f52d7e61d917f912ffbe  # lxd/storage/drivers/driver/zfs/utils: Updates createVolume to use minBlockBoundary
+      git cherry-pick 3becb34ab08249c46754f1bede0b6ab98b19555b  # lxd/storage/drivers/driver/zfs/volumes: Updates SetVolumeQuota to use minBlockBoundary
+      git cherry-pick 851fcd487056c4e28702277fbe483dd008213573  # lxd/storage/drivers/zfs/volumes: Updates CreateVolume to allow regeneration of deleted image volumes
+      git cherry-pick 55a2f160de02e336ed026cd2c07868b14852ede8  # lxd/storage/drivers/driver/zfs/volumes: Dont revert on rename success
+      git cherry-pick fb1b8a6136296f027a7a97f74fba444c439af729  # lxd/daemon: Remove duplicated logic
+      git cherry-pick 018226a6c4183a07bc17fd0a072de615b80cd3e1  # lxd/instance/qemu: Announce LXD in SMBIOS
+      git cherry-pick 6a209bae87959c8c58dbe28e3f3c0775843bc32a  # share/usbid: Don't print error when missing
+      git cherry-pick 6cb0cef36e186e130baef46f40f7b65dd126b968  # lxd/init: Auto-detect and use Ubuntu ZFS setup
+      git cherry-pick 0b619bebb0bdf8f5b79c7aea52d48f52a770f4ce  # lxc/config: Add --expanded to get
+      git cherry-pick e89c82d9c45ae95f97f406bab6e08d11a99b22d2  # client/interfaces: Add Mode to ImageCopyArgs
+      git cherry-pick 2a7a528044ec228d515b63a35ecd84447515e3ad  # shared/api/image: Add ImageExportPost
+      git cherry-pick e47fea3944356914476eddc2f35f42537401c932  # client/lxd_images: Set fingerprint and secret headers
+      git cherry-pick a909c0e4473a805caa9567c6e997bf33ef02bfc1  # i18n: Update translation templates
+      git cherry-pick 7919869be9caf3863f4bc59e98a70846163e93c8  # client: Add relay mode for image copy
+      git cherry-pick 5084a520c7bdd086788ff7ae3d9fb2c5ff929a5a  # client: Add ExportImage to ImageServer
+      git cherry-pick 856e60d9ba0d8f2dd09460dd1d619a6cb206259d  # client: Add push mode for image copy
+      git cherry-pick 791e5993e64da3f3112c1ca877a8a19d1c66c00c  # client: Add GetOperationWaitSecret
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
