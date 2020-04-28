@@ -769,6 +769,9 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick d51d0df41ef0f85a127daf84468189655499a6e3  # apparmor: Allow boot_id
+      git cherry-pick 3a4031f03696e339c9d6d4cc16af2e771ae7e45f  # src/lxc/network: Fixes netlink attribute type 1 has an invalid length message
+
       set +ex
       snapcraftctl build
       set -ex
