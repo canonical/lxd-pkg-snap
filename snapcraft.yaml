@@ -254,7 +254,7 @@ parts:
       - libmnl
     source: https://git.netfilter.org/libnftnl
     source-type: git
-    source-tag: libnftnl-1.1.5
+    source-tag: libnftnl-1.1.6
     plugin: autotools
     organize:
       usr/lib/: lib/
@@ -337,7 +337,7 @@ parts:
       - libnftnl
     source: https://git.netfilter.org/nftables
     source-type: git
-    source-tag: v0.9.3
+    source-tag: v0.9.4
     plugin: autotools
     configflags:
       - --with-json
