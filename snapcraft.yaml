@@ -814,6 +814,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 7dddc7f335ec5644663112d346ecbd7fe5882163  # proc_fuse: silence error when we find no memlimit
+
       set +ex
       snapcraftctl build
       set -ex
