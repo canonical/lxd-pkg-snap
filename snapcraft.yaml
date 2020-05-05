@@ -772,6 +772,14 @@ parts:
 
       git cherry-pick d51d0df41ef0f85a127daf84468189655499a6e3  # apparmor: Allow boot_id
       git cherry-pick 3a4031f03696e339c9d6d4cc16af2e771ae7e45f  # src/lxc/network: Fixes netlink attribute type 1 has an invalid length message
+      git cherry-pick ba9eab74b8e7c9bcafadb83809f5f07c21318e2d  # cgroups: ignore cgroup2 limits on non-cgroup2 layouts
+      git cherry-pick 6001872d082dffce5e328049788c7f1ae0864789  # common.conf: add cgroup2 default device limits
+      git cherry-pick 8cce8b5930d3718b11217561bda78dcaa84dfdee  # cgroups: premount cgroups on cgroup2-only systems
+      git cherry-pick 0343423e578ef608d6a5c2518de0d7bcbac5887b  # conf: introduce userns_exec_mapped_root()
+      git cherry-pick 0baff7b7f54824d8f829a8d7a82b3423db03d305  # conf: support console setup on containers without rootfs
+      git cherry-pick 63910a22283059853f0c799f6dcdc369c83518a0  # terminal: remove unneeded if condition
+      git cherry-pick c91e492a17a1b24bb77f8089db7c98ca6619fa40  # gcc: add -Warray-bounds, -Wrestrict, -Wreturn-local-addr, -Wstringop-overflow
+      git cherry-pick 52d2862cf6965596a2c0eb6bd3c8d9a2e66e9bb2  # compiler: support new access attributes
 
       set +ex
       snapcraftctl build
