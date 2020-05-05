@@ -956,7 +956,192 @@ parts:
       git cherry-pick 5084a520c7bdd086788ff7ae3d9fb2c5ff929a5a  # client: Add ExportImage to ImageServer
       git cherry-pick 856e60d9ba0d8f2dd09460dd1d619a6cb206259d  # client: Add push mode for image copy
       git cherry-pick 791e5993e64da3f3112c1ca877a8a19d1c66c00c  # client: Add GetOperationWaitSecret
-      git cherry-pick a5a57156823156d018eba9e701c59da1cb46d74e  # Resolve both core.https_address and cluster.https_address when comparing IPs
+      git cherry-pick 3f51ef6c79c603fcd73ee816891bc2a5776d5869  # Resolve both core.https_address and cluster.https_address when comparing IPs
+      git cherry-pick 24cc2554642d17485e24ebc9b9dbf4e0a865e5e9  # lxd/storage/drivers/generic/vfs: Skip missing files during export
+      git cherry-pick 0b2852fb1fe9f06afbeb9a9c5280745176cd50a4  # lxd/images: Fixes hang in export when invalid --compression argument passed
+      git cherry-pick ca5f8217bb5f7985cca257173d8392bf7d5c061f  # lxd/storage/drivers/driver/btrfs/volumes: CreateVolumeFromCopy only use expanded volume size when source is image
+      git cherry-pick b6e6bfd6e888476d367a806d58a9d531521db41a  # lxd/storage/drivers/driver/ceph/volumes: Allow cached volume regeneration in CreateVolume
+      git cherry-pick fe02656d19505d45dbe125a49ac82b6e134db816  # lxd/storage/drivers/driver/ceph/utils: Uses defaultBlockSize rather than hardcoded 10GB
+      git cherry-pick 44d99824f508e66b48c44d893bc9ae2ea145346a  # lxd/storage/drivers/driver/ceph/volumes: Adds getVolumeSize function
+      git cherry-pick aebd0e192e6721e1caf31898434e10943e53ce8e  # lxd/storage/drivers/driver/ceph/volumes: Removes unnecessary mount/unmount
+      git cherry-pick e7e5f7a9d3f73e97db3ca523a01560c14b0a0274  # lxd/storage/drivers/driver/zfs/volumes: Clarify clone comments
+      git cherry-pick 790ee77e0cb3c46eecff5e63d3ccd374b4cf9a91  # lxd/storage/drivers/driver/ceph/volumes: Dont wrap lines
+      git cherry-pick 00a6c7770b01b5cd73bb79bcdc53c05922d9142c  # lxd/storage/drivers/driver/ceph/volumes: Dont use clone mode when creating volume from cached image when it is disabled
+      git cherry-pick 3413284bcb0a5c9d42a8570ec2fbd8db4f0d1be2  # lxd/storage/utils: VolumeDBCreate comment formatting
+      git cherry-pick 44dcac77ab507c95991d12a087b93c759eac8d5c  # lxd/storage/drivers/driver/lvm/volumes: CreateVolumeFromCopy only set volume size from expanded config when source is image
+      git cherry-pick 0d5f9a324a958a481374669ab751127c17270840  # lxd/storage/drivers/driver/zfs/volumes: CreateVolumeFromCopy only set volume size from expanded config when source is image
+      git cherry-pick 813a797f427121e219039aea2f1fc34f4381c030  # lxc/storage/drivers/driver/ceph/utils: Reworks parseParent to return a Volume struct
+      git cherry-pick 71453ec8c58a8cf7e6317e770362e034d1089364  # lxd/storage/drivers/driver/ceph/utils: Adds tests for parseParent
+      git cherry-pick a0b5406938fec12aa81148c7d7b37e52b3a38ea7  # lxd/storage/drivers/driver/ceph/utils: Adds cephVolumeTypeZombieImage constant
+      git cherry-pick 5755802b5290b84606ea119122fa544913d6aaa4  # lxd/storage/drivers/driver/ceph/utils: Updates rbdCreateVolume to accept string size
+      git cherry-pick d25bec8b4fc179048f98dc2ffd8d076dd7ec1647  # lxd/storage/drivers/driver/ceph/utils: Pass volume config in rbdMarkVolumeDeleted
+      git cherry-pick 0b2e09873d28edfd7385434e751331d2ec51d628  # lxd/storage/drivers/driver/ceph/utils: Pass volume config in rbdRenameVolume
+      git cherry-pick 26760bc9245ae479fcf6dcd912d6d5bc3bc0cc83  # lxd/storage/drivers/driver/ceph/utils: Replaces getRBDSize with volumeSize
+      git cherry-pick 83b4105ba62b14a843c3585df771d2d7735f5a8c  # lxd/storage/drivers/driver/ceph/utils: Dont wrap lines
+      git cherry-pick 094a858ee02c8a90eba98b4f52109cef1ef3c7b3  # lxd/storage/drivers/driver/ceph/utils: Updates usage of d.parseParent in deleteVolume
+      git cherry-pick dd2148057c11136abf7a4dd0e3dadbdf76cef480  # lxd/storage/drivers/driver/ceph/utils: Updates RBD naming logic in getRBDVolumeName
+      git cherry-pick e61c85c359aedfef5e2d2b57a98d8eb6578b3d6c  # lxd/storage/drivers/driver/ceph/volumes: Ensures CreateVolumeFromCopy correctly sizes new volume
+      git cherry-pick 9c7f23b7f17b48629f64c2197325b785ec7d1c71  # lxd/storage/drivers/driver/ceph/volumes: If volume doesnt exist in DeleteVolume do nothing
+      git cherry-pick 94ba5ce73d7fc621d6f2c8838f0b37587450c09b  # lxd/storage/drivers/driver/ceph/utils: Dont wrap lines
+      git cherry-pick ff88d4f18c60348db4ff591a408b7d8ad630da5f  # lxd/db: Rename CertificatesGet to GetCertificates
+      git cherry-pick cdfa8f3f3738a7c44b3498ef96d28460fa932dce  # lxd/db: Rename CertificateGet to GetCertificate
+      git cherry-pick 27c1097010705d1724d3135433812ecf30d3242c  # lxd/db: Rename CertSave to CreateCertificate
+      git cherry-pick 7a1842670c0aab0c0cca93b6ec5c364a539520c5  # lxd/db: Rename CertDelete to DeleteCertificate
+      git cherry-pick 418ccb6b95d13ac846bfe428aefb01b7449cab37  # lxd/db: Rename CertUpdate to UpdateCertificate
+      git cherry-pick 97c7d51626a9046e85fc4a8f5dac45643fb62f65  # lxd/db: Drop unused ConfigValueSet
+      git cherry-pick d6e56f9327e97d85fa68d7ebd9c572de59fec5c3  # lxd/instances/post: Fix revert in createFromBackup
+      git cherry-pick e92790bc480eedd3a8726da33f6e6d68e83851e7  # lxd/storage/drivers/volume: Adds allowUnsafeResize bool to Volume struct
+      git cherry-pick eee1abaac859b552988f0577ddac13656b5790ee  # lxd/storage/backend/lxd: Adds cannot shrink error handling in CreateInstanceFromBackup
+      git cherry-pick 50d79f98605fbfe33505c215ccb724e9eba05b93  # lxd/storage/drivers/generic/vfs: Sets block volume size to file size of volume in tarball in genericVFSBackupUnpack
+      git cherry-pick e1e805880dbaaecd367fe8e876dae14a1984e79f  # lxd/storage/drivers/driver/btrfs/volumes: No need to move GPT header if no filler used in CreateVolume
+      git cherry-pick a6d5a56c6e7c172ebb2439840c6ac13db0f34e65  # lxd/storage/drivers/driver/btrfs/volumes: Skip GPT header move in SetVolumeQuota when allowUnsafeResize is enabled
+      git cherry-pick a1dd144e05899f98fb09d51a07da218bffa2c5d6  # lxd/storage/drivers/driver/dir/volumes: Skip GPT header move in SetVolumeQuota when allowUnsafeResize is enabled
+      git cherry-pick 1744f91cb52d9ea1dc1b339d9ee29b1f97d5315d  # lxd/storage/drivers/driver/lvm/volumes: Allow unsafe shrinking when allowUnsafeResize is enabled
+      git cherry-pick cedfc8b7646e994352d3c9b1f1929c94bd351960  # lxd/storage/drivers/driver/zfs/volumes: Allow unsafe shrinking when allowUnsafeResize is enabled
+      git cherry-pick 19c7dadb6a04413307026a07d9f42a088a64a027  # lxd/storage/drivers/driver/ceph/volumes: Allow unsafe shrinking when allowUnsafeResize is enabled
+      git cherry-pick afb9172f3af2b806a2bd5ed4951110fa885df4aa  # lxd/db: Rename InstanceNames to GetInstanceNames
+      git cherry-pick 99125274126b335670e5cb55554427fada6433c6  # lxd/db: Rename ContainerNodeAddress to GetNodeAddressOfInstance
+      git cherry-pick 81a83fdd13e68c4862f6926e07d4dab95c8b4c15  # lxd/db: Rename ContainersListByNodeAddress to GetInstanceNamesByNodeAddress
+      git cherry-pick 31eeab8418c7a8611468110ba227370107964960  # lxd/db: Rename ContainersByNodeName to GetInstanceToNodeMap
+      git cherry-pick 612f9712b0db9e0b1251011a5983260b28d0023a  # lxd/db: Rename ContainerNodeMove to UpdateInstanceNode
+      git cherry-pick b36d3064ad6365e904afc7503c1b24cfbaf4c843  # lxd/db: Rename ContainerNodeProjectList to GetLocalInstancesInProject
+      git cherry-pick b6025db0459dcd6ad933dd8c78995eea693bd03c  # lxd/db: Rename ContainerConfigInsert to CreateInstanceConfig
+      git cherry-pick ab78f59ee65358ce7c41280794ffcfdccee6b5c3  # lxd/db: Rename ContainerConfigUpdate to UpdateInstanceConfig
+      git cherry-pick 676bb32f99e81b8c7a0c91193c66f982924bcc46  # lxd/db: Rename InstanceRemove to RemoveInstance
+      git cherry-pick 386d7704d3260189e95a62aebf0ae850dc43c9ca  # lxd/db: Rename ContainerProjectAndName to GetInstanceProjectAndName
+      git cherry-pick 70412decda9d41e2b1d01f52f447acd492734903  # lxd/db: Rename ContainerConfigClear to DeleteInstanceConfig
+      git cherry-pick 8c04295d8c2599003dee6f0a52b7e072389e3ea1  # lxd/db: Rename ContainerConfigGet to GetInstanceConfig
+      git cherry-pick d58aab6e44e7e34c5e7f0351b0d38225f6addc2f  # lxd/db: Rename ContainerConfigRemove to DeleteInstanceConfigKey
+      git cherry-pick 1a01b07b4f49c5f24d19be49c00f5de4d1632270  # lxd/db: Rename ContainerSetStateful to UpdateInstanceStatefulFlag
+      git cherry-pick ac04592170fb79c55b1db04e2f496821fee106de  # lxd/db: Rename ContainerProfilesInsert to AddProfilesToInstance
+      git cherry-pick a9807280f9f4d86b70a615f9d42a59f8eaeaf8e7  # lxd/db: Drop unused ContainerProfiles
+      git cherry-pick e6055551c8845a2d50aa90327ae0ababcd6e4a55  # lxd/db: Drop unused ContainerConfig
+      git cherry-pick 64cbd2619a5ef624ebb655f8d971be9829c04427  # lxd/db: Remove unused ContainersNodeList
+      git cherry-pick 06cdc378ba9fd40e0a82f3f7fcf355985a06d7af  # lxd/db: Rename ContainersResetState to ResetInstancesPowerState
+      git cherry-pick 26c4f8b11be08e8fddd36b99aae28adf89f440c3  # lxd/db: Rename ContainerSetState to UpdateInstancePowerState
+      git cherry-pick 93ee2f3e6606c3ca1f6f5b83ed1a2487ae974a39  # lxd/db: Rename ContainerUpdate to UpdateInstance
+      git cherry-pick 4c0e6b31e6a308bca4557517cf8a79a2f5d24298  # lxd/db: Rename InstanceSnapshotCreationUpdate to UpdateInstanceSnapshotCreationDate
+      git cherry-pick bf68759d3602878bce7b3690d7f4e07714fb49ff  # lxd/db: Rename ContainerLastUsedUpdate to UpdateInstanceLastUsedDate
+      git cherry-pick 0e234b997795ce560f084a9dd4096ec4a9685274  # lxd/db: Rename ContainerGetSnapshots to GetInstanceSnapshotsNames
+      git cherry-pick 31dc9e244a11db0b1d1974a3a7edc0e3186d799b  # lxd/db: Rename ContainerNextSnapshot to GetNextInstanceSnapshotIndex
+      git cherry-pick 6d9f6c377ff9b066878296cdddc83692c0c9ef61  # lxd/db: Rename InstancePool to GetInstancePool
+      git cherry-pick fff7f6b7788bfe77dcf46deacb3287be9a7ebbe0  # lxd/db: Rename ContainerBackupID to getInstanceBackupID
+      git cherry-pick dd4706117adee09129a546c615c34ea3094310de  # Rename ContainerGetBackup to GetInstanceBackup
+      git cherry-pick 9fa3b01f22477b3f8335dd46e9dcf9046feecf21  # lxd/db: Rename InstanceCreateBackup to CreateInstanceBackup
+      git cherry-pick fdb6b57e97b6f37eec7ef50dabbb3fed229c4423  # lxd/db: Rename InstanceBackupRemove to DeleteInstanceBackup
+      git cherry-pick bc906acd9cb6ef730a8864a7931c7cede118810b  # lxd/db: ContainerBackupRename to RenameInstanceBackup
+      git cherry-pick a272ee7c075a631d5a48c5c828e21e7035275f4e  # lxd/db: Rename ContainerBackupsGetExpired to GetExpiredInstanceBackups
+      git cherry-pick 85184bd7050b70ed0022635d7c2aee90a1828b50  # lxd/storage/drivers/utils: Updates roundVolumeBlockFileSizeBytes and ensureVolumeBlockFile to take size as bytes
+      git cherry-pick ed02d2b7298d59813922cb4b27650a4eb279dc5a  # lxd/storage/drivers/generic/vfs: Updates genericVFSResizeBlockFile to accept size as bytes
+      git cherry-pick 2f2a62d923136d2fd720055e4cef13d5e774258b  # lxd/storage/drivers/driver/btrfs/utils: Adds volumeSize function
+      git cherry-pick 173e7a0225ab1dcaeadcd3f199a1dca6f7870adc  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolume to use volumeSize()
+      git cherry-pick 2e3c5a23b4ed3124b8ba529b65bea0a707feb919  # lxd/storage/drivers/driver/btrfs/volumes: Updates SetVolumeQuota to be byte oriented internally
+      git cherry-pick 0093df46cf44d1a6ebaf0904b1cfa5f3c174ef4d  # lxd/storage/drivers/driver/ceph/utils: Updates volumeSize comment for consistency
+      git cherry-pick 93357cd7225bccfd85e3f90753901f4e9a907c56  # lxd/storage/drivers/driver/ceph/volumes: Updates CreateVolumeFromCopy to use volumeSize()
+      git cherry-pick 5092b76d49178dcac5b2cc14000ffa961f439d51  # lxd/storage/drivers/driver/ceph/volumes: Updates SetVolumeQuota to be byte oriented internally
+      git cherry-pick 1a7887ec52592477c48c6eefedaa44671d52fef9  # lxd/storage/drivers/driver/dir/utils: Adds volumeSize function
+      git cherry-pick da6bc47fc0039621bffc01c43aa419dfebe7250e  # lxd/storage/drivers/driver/dir/volumes: Updates CreateVolume to use volumeSize
+      git cherry-pick b14165a3b5beca1aa7b2d65b28fe33ee292105bd  # lxd/storage/drivers/driver/dir/volumes: Updates SetVolumeQuota to be byte oriented internally
+      git cherry-pick f9c06471aa4ce7e0149a1053af48e9cf77ea61c7  # lxd/storage/drivers/driver/lvm/utils: Updates copyThinpoolVolume to use volumeSize()
+      git cherry-pick 3158c186620b3ce8417821a8a8b8b48f1c58e979  # lxd/storage/drivers/driver/lvm/volumes: Updates SetVolumeQuota variables and comments
+      git cherry-pick 5c074fdb7a92471902b7027a51ac4866b11d290b  # lxd/storage/drivers/driver/zfs/utils: Adds volumeSize function
+      git cherry-pick 9899586adad1b27c5d98de49e94524dcba6f9fd2  # lxd/storage/drivers/driver/zfs/volumes: Updates CreateVolume to use volumeSize()
+      git cherry-pick 089ced64214211c4d3e0069ed218ea5d41978570  # lxd/storage/drivers/driver/zfs/volumes: Updates CreateVolumeFromCopy to use volumeSize()
+      git cherry-pick 4a8dd0008ad762d3d1b4829471ea8b996ef7b427  # lxd/storage/drivers/driver/zfs/volumes: Updates SetVolumeQuota to be byte oriented internally
+      git cherry-pick 02fff5f11c52b162e5add3f78f972b6bc4d0cf7d  # lxd/db: Rename DevicesAdd to AddDevicesToEntity
+      git cherry-pick 2d854bd21eb30a24885dc2e3252b4817190941d8  # lxd/storage/backend/lxd: Detect cached image filesystem changes for VM images too
+      git cherry-pick e6f4abcaf8704c9a02c4a8285f7916cb2c2ce0c7  # lxd/db: Remove unused Devices
+      git cherry-pick 5ca738f3df65d697dcba37dfdda6cf84d9da3c2c  # lxd/db: Rename ImagesGetLocal to GetLocalImages
+      git cherry-pick c205e8d28848a1a47acda29ef694188829b6b49f  # lxd/db: Rename ImagesGet to GetImages
+      git cherry-pick 006cec454574f881e5d6fb50736fb7afee504aaf  # lxd/db: Rename ImagesGetExpired to GetExpiredImages
+      git cherry-pick 9433020dc3bc47f5f8e1074ec74b5f651511c2a9  # lxd/db: Rename ImageSourceInsert to CreateImageSource
+      git cherry-pick 630266b241b2b0c37e5004f9b6f616f2e6aa2b6d  # lxd/db: Rename ImageSourceGet to GetImageSource
+      git cherry-pick 072fb7b9c41880dd2e06e615b23af4a9f1e13462  # lxd/db: Rename ImageGetFromAnyProject to GetImageFromAnyProject
+      git cherry-pick e536b8d6ff3ae7e46188aeda98f9910ea9cc2b8f  # lxd/db: Rename ImageLocate to LocateImage
+      git cherry-pick bd78e0587667c17e204ead1356ff095b751f0497  # lxd/db: Rename ImageDelete to DeleteImage
+      git cherry-pick 97b32f828b30074d04ff1703c69d25e12280db6d  # lxd/db: Rename ImageAliasesGet GetImageAliases
+      git cherry-pick 8d03d1e521e588dcae76d10ac5e0133d2f4abb4a  # lxd/db: Rename ImageAliasGet to GetImageAlaias
+      git cherry-pick 23aa5bab8e1280ed1ff83f5d7920e2e39c71853a  # lxd/db: Rename ImageAliasRename to RenameImageAlias
+      git cherry-pick c1cbf7e064219ccaaf8f934edce2b0c08048fc5f  # lxd/db: Rename ImageAliasDelete to DeleteImageAlias
+      git cherry-pick 19ac7af2fb2c5acdd113f86b500a5da85f485adf  # lxd/db: Rename ImageAliasesMove to MoveImageAlias
+      git cherry-pick dba67de2ea722f476fe20516653264b8a12271df  # lxd/db: Rename ImageAliasAdd to CreateImageAlias
+      git cherry-pick f50947061640cbaf650de57acc939360c4e1f7ca  # lxd/db: Rename ImageAliasUpdate to UpdateImageAlias
+      git cherry-pick af59967ef8ee1cfeb94e44a01243d1c005e11937  # lxd/db: Rename ImageCopyDefaultProfiles to CopyDefaultImageProfiles
+      git cherry-pick 06f8038e67663931941ff7d68b7d7d88d6aed342  # lxd/db: Rename ImageLastAccessUpdate to UpdateImageLastUseDate
+      git cherry-pick 86cefde06c49bbee7a383a8be6fc2d2352a86aeb  # lxd/db: Rename ImageLastAccessInit to InitImageLastUseDate
+      git cherry-pick 87f4261f752f38b67b1758cf7d58ff07f6b322bc  # lxd/db: Rename ImageUpdate to UpdateImage
+      git cherry-pick ca633a1a22bcd6237bc37a99e3e0ab673649d673  # lxd/db: Rename ImageInsert to CreateImage
+      git cherry-pick 546fce76dfe3725072f7c26b9b39e24da249d966  # lxd/db: Rename ImageGetPools to GetPoolsWithImage
+      git cherry-pick 0fcdf9a1a833504c951e0c0151456ac69ffa6f28  # lxd/db: Rename ImageGetPoolNamesFromIDs to GetPoolNamesFromIDs
+      git cherry-pick d6a41915201f42a91904d7ce373798881504c053  # lxd/db: Rename ImageUploadedAt to UpdateImageUploadDate
+      git cherry-pick 7ca2beb84c7fac245d54ccde42583fd6b9a93120  # lxd/db: Rename ImagesGetOnCurrentNode to GetImagesOnLocalNode
+      git cherry-pick a06b6c1989fbf6a994e8a5d72cd2b97d740f887e  # lxd/db: Rename ImagesGetByNodeID to GetImagesOnNode
+      git cherry-pick dd72ad1f519243e39fd72307a55d87b2defef43d  # lxd/db: Replace ImageGetNodesWithImage with GetNodesWithImage
+      git cherry-pick c7d29c6866cee3a72e2f3ea2a9fa7125fac589af  # lxd/db: Rename ImageGetNodesWithoutImage to GetNodesWithoutImage
+      git cherry-pick 8d00c8ba9ac543aaf9d79aab8c2194570b36ea88  # lxc/image: Actually refresh multiple images
+      git cherry-pick 2628132ea2c536ad1bbdd5e9a349c54a9122c29c  # lxd/resources: Use permanent MAC when available
+      git cherry-pick 19b3ac1df13a49e7d14318157cf8d68a5ea65df5  # lxd/qemu: Restrict NUMA layout to x86_64
+      git cherry-pick 9ade049f6e2eab90b896b8bc3b142ebfafc484e0  # Consider all nodes when looking for the leader, not only voters
+      git cherry-pick a585ab72234de81b432e74bc7ec57bff4d930882  # Only attempt to transfer leadership if we are not standalone
+      git cherry-pick f99103978ba416cb7e24225d21c654ed6cf3e234  # lxd/db: Rename NetworksNodeConfig to GetNetworksLocalConfig
+      git cherry-pick c80e52d4ec81bc7d51f66483db9ba8e91eaab4d4  # lxd/db: Rename NetworkIDsNotPending to GetNonPendingNetworkIDs
+      git cherry-pick 3274b3c2d1f113ac69111658b3deedeb08b80d04  # lxd/db: Rename NetworkID to GetNetworkID
+      git cherry-pick 6176be5b331cb74fcc2b88596fb282906940423e  # lxd/db: Rename NetworkConfigAdd to CreateNetworkConfig
+      git cherry-pick e38269844af4b3af46774ad73bdefa14f8312eec  # lxd/db: Rename Networks to GetNetworks
+      git cherry-pick 1c2cb74f2ff21294bd9638ce02449b2bd68f7b90  # lxd/db: Rename NetworksNotPending to GetNonPendingNetworks
+      git cherry-pick c140027c7010a0a5f439c33915bed8137eee0512  # lxd/db: Rename NetworksNotPending to GetNonNetworks
+      git cherry-pick 3213d8bf6863381d41c2d00769a1b036d9d43c53  # lxd/db: Rename NetworkGetInterface to GetNetworkWithInterface
+      git cherry-pick 5a33a6331f24a6a85d86fd5d1e4f1f6bb84a1c01  # lxd/db: Rename NetworkConfig to getNetworkConfig
+      git cherry-pick bc462a5d898496cd4fe3596a725eb66f024e45bc  # lxd/db: Rename NetworkCreate to CreateNetwork
+      git cherry-pick 87bcda10cb23dcfe496d8819cee75eb167e87ed9  # lxd/db: Rename NetworkUpdate to UpdateNetwork
+      git cherry-pick d80958c242303f836b7720a815ef9ff6db0c2be7  # lxd/db: Rename NetworkConfigClear to clearNetworkConfig
+      git cherry-pick 4eb0f964dc69346884f074805e9c491d86044897  # lxd/db: Rename NetworkDelete to DeleteNetwork
+      git cherry-pick 13776f1ac048299395e3acd7bc9ee3d35a33eeb5  # lxd/db: Rename NetworkRename to RenameNetwork
+      git cherry-pick 7305407b6b7949bc9f7f095c87b12a9f0549ddbc  # lxd/db: Rename NetworkNodeConfigKeys to NodeSpecificNetworkNodeConfig
+      git cherry-pick aeba82796b4d1f5c05bed48c9ed4c45524ad2124  # lxd/db: Rename ImageGet to GetImage
+      git cherry-pick 4842c532e0cf07bc25617dc5fa8a64e5c705bdbe  # lxd/db: Rename ImageAssociateNode to AddImageToLocalNode
+      git cherry-pick eacaa4c12c62c644c9fe5044e7cefc6562198495  # lxd/daemon: Detect nodev and improve errors
+      git cherry-pick eb1461291cec267fce1950a2672f1d5e10f9e472  # lxd/db: Rename NodeByAddress to GetNodeByAddress
+      git cherry-pick 673bbb2b7f61781c1ebef041324cb8da62115476  # lxd/db: Rename NodePendingByAddress to GetPendingNodeByAddress
+      git cherry-pick c26e4297fc722ed70e6fc8a870b50309cc485ae3  # lxd/db: Rename NodeByName to GetNodeByName
+      git cherry-pick 1c0618e7406b46b02683927811bb65759669a140  # lxd/db: Rename NodeName to GetLocalNodeName
+      git cherry-pick 082ac40c88388b19e272aa5949b8a0d29ee9b2a6  # lxd/db: Rename NodeAddress to GetLocalNodeAddress
+      git cherry-pick 5c831d3d77efe1a06d364176bad0319294ed0fc8  # lxd/db: Rename Nodes to GetNodes
+      git cherry-pick 94a0ec4671e6ab3450d81523834fe9134e031c7e  # lxd/db: Rename NodesCount to GetNodesCount
+      git cherry-pick 8756ab609ba06abf62ec4e18496f57eadc37c2b0  # lxd/db: Rename NodeRename to RenameNode
+      git cherry-pick 77d1087a83c1c77b40532e6ee08c9ba45de4f8f6  # lxd/db: Rename NodeAdd to CreateNode
+      git cherry-pick 9004af5d182ef553092df4841bee573a0982379f  # lxd/db: Rename NodeAddWithArch to CreateNodeWithArch
+      git cherry-pick 213e430488c6503a30c5f10a7063583c06c1d5ad  # lxd/db: Rename NodePending to SetNodePendingFlag
+      git cherry-pick ae5bce006c8e11cfef16051fe88dbe662607f12f  # lxd/db: Rename NodeUpdate to UpdateNode
+      git cherry-pick 5871c17ab325a0fb9a0c1d22e5aae4ac1a4f0fcc  # lxd/db: Rename NodeAddRole to CreateNodeRole
+      git cherry-pick ebd6abc3c0efa267b8dec3ab66636dd777b78be9  # lxd/db: Rename NodeRemoveRole to RemoveNodeRole
+      git cherry-pick 79c952b500df51f4bfbfb5a8db5674efed46c344  # lxd/db: Rename NodeUpdateRoles to UpdateNodeRoles
+      git cherry-pick dfdf87c1aa527f9a4e747da378eed82ff9339658  # lxd/db: Rename NodeRemove to RemoveNode
+      git cherry-pick c16432ecb87559059f1419641441a6a984074ddd  # lxd/db: Rename NodeHeartbeat to SetNodeHeartbeat
+      git cherry-pick bc1b9e5921fa2ab160387c47e2c4613119c12037  # lxd/db: Rename NodeOfflineThreshold to GetNodeOfflineThreshold
+      git cherry-pick 3c4752134a02ee270054e5f37f847aea015e1c13  # lxd/db: Rename NodeClear to ClearNode
+      git cherry-pick 427ac9ecd7709122a05c46f836fa420260f07248  # lxd/db: Rename NodeWithLeastContainers to GetNodeWithLeastInstances
+      git cherry-pick 7771150929da15f9462d26ae33ccf82efd51b1bb  # lxd/db: Rename NodeUpdateVersion to SetNodeVersion
+      git cherry-pick d6e4a5f2018819ea2c5db9f93b5db5cfdda5cfa1  # lxd/db: Rename Operations to GetLocalOperations
+      git cherry-pick aac55c05ee7414e32d0b3feaf36dea0cc2e845d2  # lxd/db: Rename OperationsUUIDs to GetLocalOperationsUUIDs
+      git cherry-pick f2ae1acc3e54442ab46eb0c37d9d876e9d392634  # lxd/db: Rename OperationNodes to GetNodesWithRunningOperations
+      git cherry-pick b4d4108ca770923cfdb4a5fc29880d07908f2353  # lxd/db: Rename OperationByUUID to GetOperationByUUID
+      git cherry-pick a4a4c8a705a568b7d2b188b9ca32e393d270fd12  # lxd/db: Rename OperationAdd to CreateOperation
+      git cherry-pick 005c2715191262fd5ce0d08a9eb115a9263a7ded  # lxd/db: Rename OperationRemove to RemoveOperation
+      git cherry-pick e669128cd057f51dadbeced7781d9e4873f24003  # lxd/db: Rename OperationFlush to removeNodeOperations
+      git cherry-pick 97448ef145a3ee3221fc936e445443c11d290ecf  # lxd/db: Rename Patches to GetAppliedPatches
+      git cherry-pick e8cf703b0743caa1af584bd32f718fcf44905357  # lxd/db: Rename PatchesMarkApplied to MarkPatchAsApplied
+      git cherry-pick 4a8e810d8ee0f3a66a7b0e58238bfba33dd80936  # lxd/db: Rename Profiles to GetProfileNames
+      git cherry-pick 1bc900e36b0cda90c1e78ccff2fd38b98e64f19e  # lxd/db: Rename ProfileGet to GetProfile
+      git cherry-pick 28e5d258ff9207608c17e694521ee55fa495445e  # lxd/db: Rename ProfilesGet to GetProfiles
+      git cherry-pick 88dd2da55a8de6f167fb9cd0670994219934a6cb  # lxd/db: Drop ProfileConfig
+      git cherry-pick 2c3e9c2ab0f85a985d8ccb973096f5e46de27960  # lxd/db: Rename ProfileDescriptionUpdate to UpdateProfileDescription
+      git cherry-pick 8b349148b2e0ed155c3e76d44e44432a5f1754bf  # lxd/db: Rename ProfileConfigClear to ClearProfileConfig
+      git cherry-pick d474a27600b33c05f19f4452b1bb64f896f1c0d5  # lxd/db: Rename ProfileConfigAdd to CreateProfileConfig
+      git cherry-pick 57044959e7c4d17ce000a9e8ed19972d6a60bd77  # lxd/db: Rename ProfileContainersGet to GetInstancesWithProfile
+      git cherry-pick f58545ac039c8cca4fb7b1a267a5d96105693277  # lxd/db: Rename ProfileCleanupLeftover to RemoveUnreferencedProfiles
+      git cherry-pick 94a68627ac27e15b25fc1a91f3ae3e59a853e5ec  # lxd/db: Rename ProfilesExpandConfig to ExpandInstanceConfig
+      git cherry-pick 016d7ca2abcc58179d8697e96d382fa5231afa2f  # lxd/db: Rename ProfilesExpandDevices to ExpandInstanceDevices
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
