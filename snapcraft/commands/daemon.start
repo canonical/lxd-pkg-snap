@@ -128,7 +128,7 @@ mount -t tmpfs tmpfs /etc -o mode=0755
 ldconfig
 
 ## Pass the bits we need from the host
-for entry in hostid hostname hosts nsswitch.conf os-release passwd group localtime resolv.conf resolvconf timezone writable; do
+for entry in hostid hostname hosts nsswitch.conf os-release passwd group localtime pki resolv.conf resolvconf timezone writable; do
     [ -e "/var/lib/snapd/hostfs/etc/${entry}" ] || [ -L "/var/lib/snapd/hostfs/etc/${entry}" ] || continue
     ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
