@@ -448,7 +448,7 @@ parts:
       - libmagic1
       - libpixman-1-0
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
       set -ex
       # Mangle the configure a bit
@@ -473,6 +473,7 @@ parts:
       - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
+      - share/qemu/s390-*.img*
       - share/qemu/slof.bin*
       - share/qemu/vgabios-*.bin*
 
