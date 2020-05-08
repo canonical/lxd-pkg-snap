@@ -729,6 +729,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
+    source-branch: stable-4.0
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -779,6 +780,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
+    source-branch: stable-4.0
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -816,7 +818,6 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.14
     source-type: git
     plugin: nil
     build-packages:
@@ -855,6 +856,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
+    source-branch: stable-4.0
     after:
       - lxc
       - dqlite
