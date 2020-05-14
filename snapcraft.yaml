@@ -837,6 +837,7 @@ parts:
       git cherry-pick 7dddc7f335ec5644663112d346ecbd7fe5882163  # proc_fuse: silence error when we find no memlimit
       git cherry-pick 2e7b4138eae5b1cb4c4b6d2c87b45c5425f0c693  # sysfs: cpuinfo: show cgroup cpuset value
       git cherry-pick 10f4d9fb7b28a59a0f4e1104bf2e788cf6726c5b  # sysfs_fuse: remove logically dead code
+      git cherry-pick 4179492059341d56eaf39dfd9ba132015fbe2076  # Fix https://github.com/lxc/lxcfs/issues/404
 
       set +ex
       snapcraftctl build
