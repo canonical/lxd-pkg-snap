@@ -780,6 +780,17 @@ parts:
       git cherry-pick 63910a22283059853f0c799f6dcdc369c83518a0  # terminal: remove unneeded if condition
       git cherry-pick c91e492a17a1b24bb77f8089db7c98ca6619fa40  # gcc: add -Warray-bounds, -Wrestrict, -Wreturn-local-addr, -Wstringop-overflow
       git cherry-pick 52d2862cf6965596a2c0eb6bd3c8d9a2e66e9bb2  # compiler: support new access attributes
+      git cherry-pick b467fc359118eafa0df761ab55d5ebe78ba4fb75  # tree-wide: this is all rather TODO than FIXME
+      git cherry-pick 1cbdec6a1b89132cda4f4c5bd329124c6076b7e5  # yum: remove unused module
+      git cherry-pick ab398a1bb9fe21c1049537e20b7ed6bb5cf843a5  # tools/lxc-ls: shutup lgtm
+      git cherry-pick 7821133aab5113d629f4cb25e70b124c84903142  # tools/lxc-ls: shut up lgtm more
+      git cherry-pick cf52a093d1b9b3b05cde8b43360bd3991b5196de  # confile: fix order independence of network keys
+      git cherry-pick ea2a67a6b0c4995fa102021602ea6db93fd4bed8  # lxccontainer: small cleanup to lxc_check_inherited() calls
+      git cherry-pick dd2f1aad65c19798bbd7c3de73c60b8ba48216d4  # start: remove unused lxc_zero_handler()
+      git cherry-pick 3f96727b459cf032330d42f94b892e1b8c3de707  # lxccontainer: use close_prot_errno_disarm() on state_socket_pair
+      git cherry-pick 755d1e1fecca4e841a9906b4b851f8da8ca31f4f  # start: fix container reboot
+      git cherry-pick e758df857049176d9c1c132cdde096ce3b554ec5  # start: cleanup file descriptor inheritance
+      git cherry-pick 3f924551c9963040e8048e7c7cdb06b9f1768d3e  # log: cleanup syslog handling
 
       set +ex
       snapcraftctl build
