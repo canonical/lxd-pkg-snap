@@ -888,10 +888,6 @@ parts:
     override-build: |
       set -ex
 
-      # Setup for our shared libraries
-      sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/canonical/go-dqlite/internal/bindings/server.go
-      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
-
       # Git cherry-picks
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
@@ -900,6 +896,10 @@ parts:
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
+
+      # Setup for our shared libraries
+      sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/canonical/go-dqlite/internal/bindings/server.go
+      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       # Run the standard build
       set +ex
