@@ -908,7 +908,7 @@ parts:
       - squashfs-tools
       - usbutils
       - xdelta3
-    plugin: go
+    plugin: nogetgo
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd
