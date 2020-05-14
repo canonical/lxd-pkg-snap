@@ -1162,6 +1162,145 @@ parts:
       git cherry-pick f58545ac039c8cca4fb7b1a267a5d96105693277  # lxd/db: Rename ProfileCleanupLeftover to RemoveUnreferencedProfiles
       git cherry-pick 94a68627ac27e15b25fc1a91f3ae3e59a853e5ec  # lxd/db: Rename ProfilesExpandConfig to ExpandInstanceConfig
       git cherry-pick 016d7ca2abcc58179d8697e96d382fa5231afa2f  # lxd/db: Rename ProfilesExpandDevices to ExpandInstanceDevices
+      git cherry-pick 6ce8cc2ca34e8d1f254617acc983b47a85cc1946  # lxd/storage/drivers/generic/vfs: Dont require access to block device when excluding root image file from rsync in genericVFSMigrateVolume
+      git cherry-pick c95e911885ae8fd15e4f5f7367ad61a5b1d918cb  # lxd/storage/drivers/driver/zfs/volumes: Updates MigrateVolume to avoid need to premount snapshot volume
+      git cherry-pick 7e93628d0bad6058b9dbc7691e75120bbb8d0956  # test/suites/storage/volume/attach: Adds test for custom volume root perm persistence
+      git cherry-pick 98e5c60726fd73af133b4d2587ca3071f9deea91  # lxd/storage/drivers: Fixes custom volume root mount perm issue for BTRFS and DIR
+      git cherry-pick d5aa593094ffe15afcaad3f3a3bde5071ddbe647  # lxc/storage/drivers/volume: Removes keepDevice from Volume
+      git cherry-pick a5d3bd681c77b33ca0a8969092c81c5ef41871c3  # lxd/storage/drivers/driver/ceph/volumes: Removes keepDevice usage
+      git cherry-pick ed24e047b63f986bb203be89870567d69d2a96ea  # lxc/storage/drivers/driver/ceph/volumes: Mount changes
+      git cherry-pick 916bda3a5bf2e17d9da0ab7e056947268690f381  # lxd/storage/drivers/driver/ceph/volumes: UnmountVolume modifications
+      git cherry-pick dd5f9de1c1c8691e1baf935f8affebc82ae57dd6  # lxd/storage/drivers/driver/ceph/volumes: Esnure permission on volume root set in CreateVolume
+      git cherry-pick 7a54a07eb008306556a567ce0fc03ab318fcc4e8  # lxd/resources: Skip NVME multipath entries
+      git cherry-pick ad78db8ed794ac8979a473a568bd1ce96a202bd6  # lxd/db: Rename ProjectNames to GetProjectNames
+      git cherry-pick a30111ef2e6b406bae264af17677ed924f99177c  # lxd/db: Rename ProjectMap to GetProjectIDsToNames
+      git cherry-pick 6c6f3021b06df966e75cfa96a4e69c58fc719cbd  # lxd/db: Rename ProjectUpdate to UpdateProject
+      git cherry-pick d3bee615f3b9d2119b9009a4baa02bd48c7c2c21  # lxd/db: Rename ProjectLaunchWithoutImages to InitProjectWithoutImages
+      git cherry-pick e58648802173ca0c6a2600cd2d6da0207521b0b2  # lxd/db: Rename RaftNodes to GetRaftNodes
+      git cherry-pick 1c6c0810437f4b570fa2b1bd00d92bb19c7369b9  # lxd/db: Rename RaftNodeAddresses to GetRaftNodeAddresses
+      git cherry-pick 0d6389e7b8d5053f2ab198841b0020c5350c0ca5  # lxd/db: Rename RaftNodeAddress to GetRaftNodeAddress
+      git cherry-pick 68fdc9c19df111ed3d9ca6dd93c05a51c17157d5  # lxd/db: Rename RaftNodeFirst to CreateFirstRaftNode
+      git cherry-pick 852b2d9e20a279d96689b23154f1fae15dbc138f  # lxd/db: Rename RaftNodeAdd to CreateRaftNode
+      git cherry-pick 3649175b7c5715bffedc070dd5bc0fe879d322f2  # lxd/db: Rename RaftNodeDelete to RemoveRaftNode
+      git cherry-pick 18768e0711ed82a8403ebaa780e489329d71178f  # lxd/db: Rename RaftNodesReplace to ReplaceRaftNodes
+      git cherry-pick 8d06c007f41066e5709f2970ee64605eabd15611  # lxd/db: Rename InstanceSnapshotConfigUpdate to UpdateInstanceSnapshotConfig
+      git cherry-pick 69f33e9aee68944e10aa2d30f9d1683cbb4cedd9  # lxd/db: Rename InstanceSnapshotID to GetInstanceSnapshotID
+      git cherry-pick a6f24ee1d724e1114ca18690cddaf248a7bbddc1  # lxd/db: Rename StoragePoolsNodeConfig to GetStoragePoolsLocalConfig
+      git cherry-pick dbcece0ff6264f31bf245e0dae449eb6c420ee62  # lxd/db: Rename StoragePoolID to GetStoragePoolID
+      git cherry-pick 52ad5bf4aaf774316932ffd268cace3917d20d0f  # lxd/db: Rename StoragePoolDriver to GetStoragePoolDriver
+      git cherry-pick d3be8c83b8ce0380f107d3793c4b9053e011a2e8  # lxd/db: Rename StoragePoolIDsNotPending to GetNonPendingStoragePoolsNamesToIDs
+      git cherry-pick 019b9e8d9c0b2c3750f472eb98ab859ef3f7e602  # lxd/db: Rename StoragePoolNodeJoin to UpdateStoragePoolAfterNodeJoin
+      git cherry-pick 2b406424c4acffe733b1f24e4a114db00874dc13  # lxd/db: Rename StoragePoolConfigAdd to CreateStoragePoolConfig
+      git cherry-pick f74ec9a8f9ef88973ae2532ef84017a22671fe3b  # lxd/db: Rename StoragePoolNodeConfigs to GetStoragePoolNodeConfigs
+      git cherry-pick fa0ff5c0c8e392d784ba5259f22b09ce17d1aab4  # lxd/db: Rename StoragePools to GetStoragePoolNames
+      git cherry-pick 4b8c393ad51fc923ebe46e4bd4d185409797b10c  # lxd/db: Rename StoragePoolsNotPending to GetNonPendingStoragePoolNames
+      git cherry-pick 7ae7dc6dc648626c7c52c89ff29d2b67cf698371  # lxd/db: Rename StoragePoolsGetDrivers to GetStoragePoolDrivers
+      git cherry-pick 36567ec07f13e1f37e9e9ccd678d03947a3f66e3  # lxd/db: Rename StoragePoolGetID to GetStoragePoolID
+      git cherry-pick a1434a32d04dfaf55feb30bc716775a1079f4578  # lxd/db: Rename StoragePoolGet to GetStoragePool
+      git cherry-pick ddfccad5540409ca1d470968aeb6ff5c1ae49753  # lxd/db: Rename StoragePoolConfigGet to getStoragePoolConfig
+      git cherry-pick 511e8c1a039bdff1fd7a90f3e633e51a5bdf7e9f  # lxd/db: Rename StoragePoolCreate to CreateStoragePool
+      git cherry-pick fdf77ad30ddfb0ba2d901095c5186679b8321a62  # lxd/db: Rename StoragePoolUpdate to UpdateStoragePool
+      git cherry-pick 27877ca5b079e2d8d1573cd0ab103b7c8b9baa5a  # lxd/db: Rename StoragePoolConfigClear to clearStoragePoolConfig
+      git cherry-pick a9b5bf7b5d90fb7bb5221af64972509e69085370  # lxd/db: Rename StoragePoolDelete to RemoveStoragePool
+      git cherry-pick ef75245c32c0f91c74141bf2dd63fa0e2ee4ef58  # lxd/db: Rename StoragePoolVolumesGetNames to GetStoragePoolVolumesNames
+      git cherry-pick 2a7fa91f40b7f5595e50319ef728f42018fa5683  # lxd/db: Rename StoragePoolVolumesGetAllByType to GetStoragePoolVolumesWithType
+      git cherry-pick 36f9cd3fa64af6db167ed3073e46c3eaf59bfba6  # lxd/db: Rename StoragePoolVolumesGet to GetStoragePoolVolumes
+      git cherry-pick 9a0277068adaa6258e15b4f4ece60af5a3d48db4  # lxd/db: Rename StoragePoolNodeVolumesGet to GetLocalStoragePoolVolumes
+      git cherry-pick 90c6e4f48a1d6af3b8ffc7d3cd912e2b26855514  # lxd/db: Rename StoragePoolVolumeSnapshotsGetType to GetLocalStoragePoolVolumeSnapshotsWithType
+      git cherry-pick b8ccdbc2f836d4063b7c7b6f64f8b080a1d17751  # lxd/db: Rename StoragePoolNodeVolumesGetType to GetLocalStoragePoolVolumesWithType
+      git cherry-pick b3fa34d24e1011a202580c61e70efa8e747a711b  # lxd/db: Rename StoragePoolNodeVolumeGetTypeByProject to GetLocalStoragePoolVolume
+      git cherry-pick fda3445616182601b15f51d4e4eb56c5ea2c1e58  # lxd/db: Rename StoragePoolVolumeUpdateByProject to UpdateStoragePoolVolume
+      git cherry-pick d85eb2d9d94fcd37332855cec168a4ae4fdb0258  # lxd/db: Rename StoragePoolVolumeDelete to RemoveStoragePoolVolume
+      git cherry-pick cc9ce7dd14ddbc75f73c40d39f09f0d3cc69195e  # lxd/db: Rename StoragePoolVolumeRename to RenameStoragePoolVolume
+      git cherry-pick 74d71610f27ce46c65bf438402bf79bb98eb2d32  # lxd/db: Rename StoragePoolVolumeCreate to CreateStoragePoolVolume
+      git cherry-pick 197bc5ba8a9a9ffe33eae18d2509b15c412fc07d  # lxd/db: Rename StoragePoolNodeVolumeGetTypeIDByProject to GetStoragePoolNodeVolumeID
+      git cherry-pick 45737c89f896ea50bab92ac9a72d0df3e3666e9c  # lxd/db: Rename StoragePoolInsertZfsDriver to FillMissingStoragePoolDriver
+      git cherry-pick 64673338d338f88f015ac41c94c50dcf2aec35ee  # lxd/storage/zfs: Use TryUnmount
+      git cherry-pick 8b487333cd414ebdfc2e359707ca101c44360771  # ethtool: add ethtoolGset() helper
+      git cherry-pick ef649866fa9fae02776b02171e9afef9dc1435a0  # Support two-phase creation of a storage pool on single-node cluster
+      git cherry-pick d781ff2771fbe7331b6e56c332c5ca92b0202b52  # lxd/storage/drivers/driver/btrfs/utils: Adds setSubvolumeReadonlyProperty function
+      git cherry-pick a22e324d5246ee5e45fe0060a6876be69a29ef94  # lxd/storag/drivers/driver/btrfs/volumes: Removes readonly argument from snapshotSubvolume
+      git cherry-pick e09585308ddd5f35530602ec0a8622287180a281  # lxd/storage/drivers/driver/btrfs: d.setSubvolumeReadonlyProperty and d.snapshotSubvolume usage
+      git cherry-pick 841a5b1e81b51f94213954d6acafb70d06891b09  # lxd/db: Rename StoragePoolVolumeGetType to GetStoragePoolVolume
+      git cherry-pick aef32ccd67a0239d9a6979b174a65a1003489b2a  # lxd/db: Rename StoragePoolVolumeSnapshotCreate to CreateStorageVolumeSnapshot
+      git cherry-pick 514e18bed513fbc6a615d1370cabe79bbefc9510  # lxd/db: Rename StoragePoolVolumeSnapshotUpdateByProject to UpdateStoragePoolVolumeSnapshot
+      git cherry-pick 6f791fccf950b78f5e7ee5e6a8224106cbbca319  # lxd/db: Rename StorageVolumeSnapshotExpiryGet to GetStorageVolumeSnapshotExpiry
+      git cherry-pick 823caa953f920ed38f15a97a9eb0fb3dcd6abb4d  # lxd/db: Rename StorageVolumeSnapshotsGetExpired to GetExpiredStorageVolumeSnapshots
+      git cherry-pick 7ad732839bf2e5c8d2b0de7494ce8d7515dfcf7f  # resources/ethtool: implement ETHTOOL_GLINKSETTINGS
+      git cherry-pick 88fafe88d8002a3b730526fc1404fc3bbe1fac7a  # lxd/storage/drivers/driver/btrfs/utils: Adds getSubvolumesMetaData function
+      git cherry-pick 56291540e972be89054c0986cef096ea18105c91  # lxd/storage/drivers/driver/btrfs/volumes: Maintain subvolume readonly state in snapshot
+      git cherry-pick 26ecd6668597649adbc18dd29af6f0ce1df3ca85  # lxd/storage/driversr/driver/btrfs/utils: Allow ro subvolumes to be deleted in deleteSubvolume
+      git cherry-pick 1e89555148b5a77a90e20574093c619e1b635446  # lxd/storag/drivers/driver/btrfs/volumes: Updates MigrateVolume to send subvolumes
+      git cherry-pick 4fb8206d2b330f600c6d39a4e0e7ade0d66819a9  # lxd/storage/drivers/driver/btrfs/volumes: Fail backup when cleanup fails in BackupVolume
+      git cherry-pick 27362662e7efdc84d03b039aa20e02aad33cb912  # lxd/storage/drivers/driver/btrfs/volumes: Better naming of variables in unpackVolume
+      git cherry-pick c8798bc3221a1de4e5ea1bd7a5d85719c5a7de27  # lxd/migration/migrate/proto: Adds BTRFS Features to offer header
+      git cherry-pick 6a35d0aafbf35685e713bc9bf2dc26f21e699d9e  # lxd/migration/utils: Adds GetBtrfsFeaturesSlice function
+      git cherry-pick e2a2824f7bd565160cd4d2a36d732c5a95e90534  # lxd/migration/migration/volumes: Adds BTRFS feature support to TypesToHeader
+      git cherry-pick 8c716cb07d691ee286b3b1e7080bd93f97fc66d5  # lxd/migration/migration/volumes: Adds BTRFS feature support to MatchTypes
+      git cherry-pick c3344c0de3b773a64f8d880c4facb7444f03493c  # lxd/storage/drivers/driver/btrfs: Adds BTRFS features to MigrationTypes
+      git cherry-pick 654610c065ecd9b094e022c9774ad9c7ac2beae4  # lxd/storage/memorypipe: Dont make ioutil.ReadAll panic on cancel
+      git cherry-pick ccd98296ffcac857de66cb44cd75ed4145adf177  # lxd/storage/drivers/driver/btrfs/utils: Kill btrfs send on error in sendSubvolume
+      git cherry-pick e4f0b4ae6dd691362f092a98141d32af62006019  # lxd/storage/drivers/driver/btrfs/utils: Support subvolumes in receiveSubvolume
+      git cherry-pick 2fe07939f48c8f9d6d750f1a52f283008f23f3c8  # lxd/storage/drivers/driver/btrfs/utils: Adds metadataHeader function
+      git cherry-pick 459c25d0160935690c958c45a5780afc2df07cdf  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolumeFromMigration to receive subvolumes
+      git cherry-pick e72b9c52010024d4fb33aa17d0852f47e1e118b4  # lxd/db: Rename StorageVolumeNodeAddresses to GetStorageVolumeNodeAddresses
+      git cherry-pick 398dfdc1d3b98c3bc80913f43bd5b8b8a2881381  # lxd/db: Rename StorageVolumeDescriptionGet to GetStorageVolumeDescription
+      git cherry-pick dce53695ccc9245e0a7ed26e39a2b71f677fa211  # lxd/db: Rename StorageVolumeNextSnapshot to GetNextStorageVolumeSnapshotIndex
+      git cherry-pick dc6f6d346ff54ec2038282e2011d1948eda25b01  # lxd/db: Rename StorageVolumeCleanupImages to RemoveStorageVolumeImages
+      git cherry-pick 40470677b7f2d613f65ef4e478b358bc78432df9  # lxd/db: Rename StorageVolumeMoveToLVMThinPoolNameKey to UpgradeStorageVolumConfigToLVMThinPoolNameKey
+      git cherry-pick 0089e147759198852ca2f41e35c9df16a08cc8b3  # lxd/db: Update naming pattern for generated database code
+      git cherry-pick 277dfbb639b804598f920bf6eb205d815809c8b2  # client/lxd_images: Fix backward compatibility
+      git cherry-pick c723c6fc348d393cad2795afde385066fbd9eaa7  # lxd/storage/btrfs: Fix migration from snapshot
+      git cherry-pick d52cc5110905d7259bca58d4aa83aa2adc8b3ad5  # shared/generate/db: Fix generation of Exists method
+      git cherry-pick 9d34e90bd776594f9cac0bc39a41b76eabc8a416  # lxd/db: Make generated code stable across "make update-schema" runs
+      git cherry-pick e891cc12dc4bf9c0424a586638d91e852d6e5387  # lxd/db: Leverage code-generation for certificates
+      git cherry-pick 03ea36a0080dfbb49f20f2f87a3e0aa6b68c4f13  # shared: Rewrite OpenPty without cgo
+      git cherry-pick 0150e8b46220f2b8b69803a4395433f819998fa1  # openpty: use O_CLOEXEC directly
+      git cherry-pick 729bd8ef2148f677042c2c585867737a3b7d145d  # openpty: use fchown()
+      git cherry-pick 5bf67a02296fd458c19be9562dc4ba6f1c4a8c8c  # openpty: first unlock the master, then get a slave fd
+      git cherry-pick c7393244a3d15e25fd6bf585e1f4bc74aa8b0c95  # openpty: use TIOCGPTPEER if available
+      git cherry-pick b6109aa632937bf6fbd4cda391384f7c7ad117d8  # lxd/storage/drivers/driver/lvm/utils: Adds lvmSnapshotSeparator constant and updates lvmFullVolumeName to use it
+      git cherry-pick 7fdb1646acc95bff6909853ce3861fd50e20100f  # lxd/storage/drivers/driver/lvm/utils: Adds lvmEscapedHyphen and updates lvmFullVolumeName usage
+      git cherry-pick 429929493b498939ed24b638f05a6556dba5676b  # lxd/storage/drivers/driver/lvm/utils: Adds parseLogicalVolumeSnapshot function
+      git cherry-pick 900e2e78c2844b691db3fa6e38869b5c3c21b8df  # lxd/storage/drivers/driver/lvm/utils: Adds tests for parseLogicalVolumeSnapshot
+      git cherry-pick 59535a4ede543fa9001246b643b1e17cf7b00727  # lxd/storage/drivers/driver/lvm/volumes: Updates VolumeSnapshots to use parseLogicalVolumeSnapshot
+      git cherry-pick 6c4402317ff61231a30effa01248fa8bc1b55b90  # test: Adds tests for snapshot naming conflicts
+      git cherry-pick 8589fb13ec889dcd0516e959adf0a6946ff58245  # lxd/firewall/drivers: Fix nft syntax
+      git cherry-pick fbd444486e761449f2404d1a739baf4acea4b2d1  # lxc/project: Fix remote handling
+      git cherry-pick 994fb65295c6c0c9474b0473b64efa5144f21514  # tests: Fix bad project switch call
+      git cherry-pick 56fd8a3f19f0f58d953f6d5368cd966e51e8ea4f  # lxd/seccomp: Fix profile conflict between projects
+      git cherry-pick b2a2dea6bc279110714ba6cae3b346c7713281be  # lxd/storage/drivers/driver/lvm/utils: Adds activateVolume and deactivateVolume functions
+      git cherry-pick edafebb19761b0d02ebb486df5ef2dcbbe5b6c57  # lxd/storage/drivers/driver/lvm/utils: Set --setactivationskip on in createLogicalVolume
+      git cherry-pick 2efc334c07c31cca21b3de9695fd1e115e4fe712  # lxd/storage/drivers/driver/lvm/utils: Set --setactivationskip on in createLogicalVolumeSnapshot
+      git cherry-pick 9f558f192c6a4f87cff8f918976c2fb8156711fb  # lxd/storage/drivers/driver/lvm/utils: Activate volume in copyThinpoolVolume when regeneration FS UUID
+      git cherry-pick f9531f5c1e5461d37ba7fb25ea1394fe8a180212  # lxd/storage/drivers/driver/lvm: Dont activate all volumes on pool mount
+      git cherry-pick 57f6ce03895cb21d8320309bba35b3bc54e36491  # lxd/storage/drivers/driver/lvm/volumes: Activate volume before generic copy in CreateVolumeFromCopy
+      git cherry-pick 6607fc014b9ffc6a5383324023b30e4a27f7e090  # lxd/storage/drivers/driver/lvm/volumes: Activate volume in SetVolumeQuota
+      git cherry-pick 5fd85249976928cc5bcebb6cc611e04c1aa37c97  # lxd/storage/drivers/driver/lvm/volumes: Activate volume in MountVolume
+      git cherry-pick 96baa85aba2c779b5dfefa626139a9c6afba461b  # lxd/storage/drivers/driver/lvm/volumes: Deactivate volume in UnmountVolume
+      git cherry-pick 759b823424ab482f67adca72d4b955e20f731590  # lxd/storage/drivers/driver/lvm/volumes: Acticate volume before generic migrate in MigrateVolume
+      git cherry-pick 9eccce0bde1567a6177298bc311a172915d2956f  # lxd/storage/drivers/driver/lvm/volumes: Activate volume in MountVolumeSnapshot
+      git cherry-pick c9785396fc012d82e596c2200123070f7a727079  # lxd/storage/drivers/driver/lvm/volumes: Deactivate volume in UnmountVolumeSnapshot
+      git cherry-pick 9b8ab8f6b6ae60856c9f8e1082af623ebca0c1b2  # lxd/storage/drivers/driver/lvm/volumes: Activate volume before FS UUID regen in RestoreVolume
+      git cherry-pick 6d80d94702a17404d6f72d0be2025d593c07959a  # openpty: fix TIOCGPTPEER usage
+      git cherry-pick 41b8ab87f338728706ed6bbd6a221630aad274c5  # Make network address bind error fatal when clustered
+      git cherry-pick 6b0c296afc6b36429c2f859281b44052fb3ddaa1  # lxd/storage/drivers/driver/btrfs/utils: Renames metadatHeader to restorationHeader
+      git cherry-pick 1f741421c5e80d82693e308761fac608996e65f1  # lxd/storage/drivers/driver/btrfs/volumes: d.restorationHeader usage
+      git cherry-pick 175a91a1269d002d635c13791468f1f6ee564b43  # lxd/storage/drivers/driver/btrfs/volumes: Clarifies comments in MigrateVolume
+      git cherry-pick 508f517560baa643e37703f28aad781d003cd802  # lxd/storage/drivers/driver/btrfs/volumes: Adds safety net against failed matching of subvolumes
+      git cherry-pick 76ac4e98c07d01c77eaafbd2b53ed6689224c7d5  # lxd/storage/drivers/driver/btrfs/utils: Fix deleteSubvolume to support recursive delete with intermediate ro subvols
+      git cherry-pick 1893442e198545da024e49b4ed217b7cb603b307  # lxd/storage/drivers/utils: Mark BTRFSSubVolumeMakeRo and BTRFSSubVolumeMakeRw deprecated
+      git cherry-pick d65c91aff323e7f07ea0fe0d133dc3bd6f43129a  # lxd/storage/drivers/driver/btrfs/volumes: Updates RestoreVolume to restore subvolume ro property
+      git cherry-pick 83f7eb10171ddf5f3e96daa7bf09ede50ff72ecc  # test: Adds BTRFS subvolume tests
+      git cherry-pick 0d86d6bfc8106ef7c21e2f12a3bc412fed96845b  # lxd/storage/memorypipe: Fixes issue with partial reads losing data
+      git cherry-pick a266b5e12f50ac73f8785fccad48a99298195243  # lxd/storage/drivers/driver/btrfs/volumes: Restores subvolumes ro property in CreateVolumeFromCopy
+      git cherry-pick 185e451d1bfd44b35289585cbf6086ac8b0b79c1  # lxd/storage/drivers/driver/btrfs/utils: Adds marshal tags to BTRFSSubVolume and BTRFSMetaDataHeader
+      git cherry-pick 22510f79f6d69dfa761c1c99487b7f67827d7065  # lxd/device/nic/bridged: Updates github.com/mdlayher/netx/eui64
+      git cherry-pick 67ef19dc0b6a5451d5a7b778db0b1958204377a3  # fix IPVLAN docs
+      git cherry-pick c566ce2ce63980a5068f2994b6a52a8c8c9ba96f  # lxd/cluster: Don't run a connection proxy when connecting with the Go dqlite client
+      git cherry-pick d02ef4fc5ca5130b8af3c375c6c19bdd2dab9cd9  # lxd/cluster: Extract dqlite network proxy logic to standalone function and support cancellation
+      git cherry-pick 2cee08c798299d7715808f717a7800eb478de61f  # lxd/cluster: Use dqliteProxy in raftDial
+      git cherry-pick 1c3d66645bcbe5146d3e52d6f039472cf392e8c6  # lxd/cluster: Use ReadClose() to gracefully stop the dqlite proxy
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
