@@ -895,6 +895,8 @@ parts:
       - libacl1-dev
       - libudev-dev
       - pkg-config
+    build-snaps:
+      - go
     stage-packages:
       - acl
       - attr
@@ -908,15 +910,7 @@ parts:
       - squashfs-tools
       - usbutils
       - xdelta3
-    plugin: go
-    go-buildtags:
-      - libsqlite3
-    go-importpath: github.com/lxc/lxd
-    go-packages:
-      - github.com/lxc/lxd/lxc
-      - github.com/lxc/lxd/lxc-to-lxd
-      - github.com/lxc/lxd/lxd
-      - github.com/lxc/lxd/lxd-benchmark
+    plugin: nil
     override-build: |
       set -ex
 
@@ -1310,6 +1304,12 @@ parts:
       set +ex
       snapcraftctl build
       set -ex
+
+      # Build the normal commands
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxc
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxc-to-lxd
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxd
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxd-benchmark
 
       # Build the agent (special build tags)
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent github.com/lxc/lxd/lxd-agent
