@@ -791,6 +791,24 @@ parts:
       git cherry-pick 755d1e1fecca4e841a9906b4b851f8da8ca31f4f  # start: fix container reboot
       git cherry-pick e758df857049176d9c1c132cdde096ce3b554ec5  # start: cleanup file descriptor inheritance
       git cherry-pick 3f924551c9963040e8048e7c7cdb06b9f1768d3e  # log: cleanup syslog handling
+      git cherry-pick de4d585ee420862b9a927f04f80d9fbe5ca71de8  # console: only create detached mount when a console is requested
+      git cherry-pick 5524656d86fd78be693dbd0f2cd278ed8b8da42c  # syscall_numbers: handle ia64 syscall numbers correctly
+      git cherry-pick ef301301c68ad432cfd6beb82fd2da1fdeb78983  # syscall_numbers: add clone3()
+      git cherry-pick 6aefab38c133edd2d4c6721ebf6312cac544ccdc  # process_utils: introduce new process_utils.{c,h}
+      git cherry-pick a62eb3aa12b57fa83a5335eb9769d37d46e7444d  # process_utils: add clone3() support
+      git cherry-pick c3d189153f5534db211defe25bf3c3256e6c564f  # mainloop: add lxc_mainloop_add_handler_events
+      git cherry-pick 64df0b2f366c80318910981af9c007b06f3a29f9  # cgfsng: deduplicate freeze code
+      git cherry-pick aabc94ba075d87dfcb593ea965803e38b850f3e1  # cgfsng: use EPOLLPRI when polling cgroup.events
+      git cherry-pick 3e7477c80d48ab43421d504da01a2d2f6d7cbe62  # process_utils: make lxc use clone3() whenever possible
+      git cherry-pick 4384dbb97541f3b4a134bebed7122dc3f572af43  # improve LXC_CMD_GET_CGROUP compatibility
+      git cherry-pick 11bd22d1e7b65dc618d3211d2d9e9842378adb0f  # network: restore old behavior
+      git cherry-pick 9ce7cbea1d4954e62be4ffe46526e30e1670d5f4  # network: fix {mac,ip,v}lan device creation
+      git cherry-pick 11e7f7f41eb517196bce1995ecfbe446cd342288  # bionic: s/lxc_raw_execveat()/execveat()/g
+      git cherry-pick a82035c72f46a51230194b6ca6e0acf7f48ef8a3  # network: use __instantiate_ns_common() in instantiate_ns_phys() too
+      git cherry-pick 00e125db3ec97048671e7883547933c2861dfe18  # lxc-usernsexec: dumb down from error to warning message
+      git cherry-pick 0ea3f2d11073ec89b5c25e338d16131dd530b848  # lxc-usernsexec: don't fail on setgroups()
+      git cherry-pick 6a803ce290b87333abadc2a6e038d6f9c760cc91  # travis: Restrict coverity to gcc on bionic on amd64
+      git cherry-pick b0ec3dc02a605ced446c5a02d87534cb9fdd42ee  # cgroups: be less alarming when creating cgroups
 
       set +ex
       snapcraftctl build
