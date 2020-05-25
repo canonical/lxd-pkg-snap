@@ -359,7 +359,7 @@ parts:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.0.6
+    source-tag: v1.1.1
     plugin: make
     build-packages:
       - bmake
