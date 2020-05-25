@@ -1315,6 +1315,100 @@ parts:
       git cherry-pick d02ef4fc5ca5130b8af3c375c6c19bdd2dab9cd9  # lxd/cluster: Extract dqlite network proxy logic to standalone function and support cancellation
       git cherry-pick 2cee08c798299d7715808f717a7800eb478de61f  # lxd/cluster: Use dqliteProxy in raftDial
       git cherry-pick 1c3d66645bcbe5146d3e52d6f039472cf392e8c6  # lxd/cluster: Use ReadClose() to gracefully stop the dqlite proxy
+      git cherry-pick 9a118172110ea3410fa88ff6318ccd884d76132e  # lxd/device/device/utils/generic: Removes deviceNameEncode and deviceNameDecode
+      git cherry-pick 80b461765c67f3b8291fecd058b3c5fd0a3188bb  # lxd/storage/drivers/utils: Adds PathNameEncode and PathNameDecode
+      git cherry-pick 489ad422c64cf09648d667234276eef55f6fc799  # lxd/device/device: PathNameEncode and PathNameDecode usage
+      git cherry-pick 1996d7da7c8408081fb15cf72c60d7273e4e60dd  # lxd/storage/drivers/driver/types: Adds OptimizedBackupHeader field to Info
+      git cherry-pick e778911a76a537ea93d0b06765dd2469e7ba7baf  # lxd/backup/backup: Adds OptimizedHeader field to Info struct
+      git cherry-pick f9a9e4cf910bfd2bfa8e20525bdbe1719b6d0d08  # lxd/backup: Updates backupWriteIndex to populate the OptimizedHeader field
+      git cherry-pick 896dab2585d4cd1444dac0db9edfd4af70a68bfe  # lxd/storage/drivers/driver/btrfs: Sets OptimizedBackupHeader to true in Info struct response
+      git cherry-pick 2887d732c9eb54a7fdac1325556955b6de99995a  # lxd/storage/drivers/driver/btrfs/utils: Adds warning to BTRFSSubVolume and BTRFSMetaDataHeader about shared usage
+      git cherry-pick 8fd4ff95f382380b4a4c56aa915484174c3d67b0  # lxd/storage/drivers/driver/btrfs/volumes: Updates BackupVolume to add subvolumes to optimized backup file
+      git cherry-pick 9adaa376d1e66e073927b131eec7911e4ee0ff1e  # lxd/storage/drivers/interface: Update CreateVolumeFromBackup to pass srcBackup backup.Info
+      git cherry-pick 8f9266756e6fd9aa3d1914ac4400044add06fd00  # lxd/storage/backend/lxd: Pass srcBackup in CreateInstanceFromBackup
+      git cherry-pick 5e84337fddfab6c7e6749d6c0ff99f91c17426e1  # lxd/storage/drivers: CreateVolumeFromBackup srcBackup backup.Info usage
+      git cherry-pick ce7004386ce1c3190c6de9b8592aeec583c6b9f7  # lxd/backup/backup: Updates GetInfo to set optimizedHeaderFalse false if not present in yaml file
+      git cherry-pick f3f60a942ceddda71f8a6aee39e8854fd66dfe25  # lxd/storage/drivers/driver/btrfs/utils: Adds loadOptimizedBackupHeader
+      git cherry-pick 38ddc41173c0e13f8fabf02df8c2d47609907fb3  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolumeFromBackup to restore subvolumes using optimized header file
+      git cherry-pick 929030eee45210bf3e689ea1198f9d336d116139  # lxd/storage/drivers/driver/btrfs/volumes: Simplifies parent volume logic in BackupVolume
+      git cherry-pick 224e92bb2845be2db92d6c63bc33b76aa6c4cadd  # lxd/storage/drivers/driver/btrfs/volumes: Simplifies parent volume logic for MigrateVolume
+      git cherry-pick be0a1f594c5213069a3065f5a9c6fdea2af713f1  # test: Adds BTRFS backup subvolume tests
+      git cherry-pick d98601fefa43b196b727ac0794c421344dfa0892  # lxd/storage/drivers/driver/btrfs/utils: Removes receiveSubvolume
+      git cherry-pick 17ff1aa57f3c087012ab46660d365e7f274a90f4  # lxd/storage/drivers/driver/btrfs/utils: Adds receiveSubVolume function
+      git cherry-pick a69b46b45744361fd4913c0e71f212a16e58a03e  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolumeFromMigration to use receiveSubVolume
+      git cherry-pick 734f55de6bbd69eed9d3149a45a860d1262ef3b5  # lxd/resources/memory: Fix memory calculation
+      git cherry-pick 7461e1d5de7152c3554b586f1a2cc02934ca70f1  # lxd: Improve logging of shutdown errors
+      git cherry-pick 3451e9c52c5761aa8911bb74b59d3a6f0cad94aa  # lxd/instances/post: Delete restored instance on backup post hook failure
+      git cherry-pick 15924306492ceafecf09ee2f9d641789ad2f720c  # Fix 'how to mount home directory' shiftfs FAQ
+      git cherry-pick 0bf4dd949d5fb1c89a1d1bc502a534bfcfe96d19  # shared: build fs_{32,64}bit.go on mips*
+      git cherry-pick 360cf3fbe0f1b61ae44a7c2b1a4ed6af7bea9c7e  # lxd/util: build fs_{32,64}bit.go on mips*
+      git cherry-pick 3550b5bbba961b8a19667f54a5991ca013f0c275  # lxd/rsync: Adds optional rsync arguments to LocalCopy
+      git cherry-pick 463a8326f22592b7d1d0bfd1a74e357d8770b0ae  # lxd/storage/utils: Fixes ImageUnpack to not erase generated rootfs block file when doing rsync
+      git cherry-pick 259ab769bd66a6a914857d7a0de4f9b69f52624c  # ethtool: don't report -1 for speed in ethtoolLink()
+      git cherry-pick bd80a3a41f902915648e6692bfbae7e3b6657d2f  # lxd/storage/quota/projectquota: Fixes leaking file handles in quota_set_path and quota_get_path
+      git cherry-pick 39a42519a56c7076ae0941ee54d580dfc3acc8fb  # lxd/storage/quota/projectquota: Adds inherit argument to quota_set_path
+      git cherry-pick 5c787e4019839edaa33215c8b495a3d480a1a938  # lxd/storage/quota/projectquota: Updates SetProject to recursively set project and support non-directory files
+      git cherry-pick 4e62699cb6faf88fd700fe06a3db4d8ba7ee07b9  # lxd/storage/drivers/driver/dir/utils: Updates deleteQuota to use DeleteProject
+      git cherry-pick 6e6b22dd532ed077be8a531c3c90451fe067205f  # lxd/storage/drivers/driver/dir/volumes: Adds quota revert in CreateVolumeFromBackup post hook
+      git cherry-pick 0712476d51b00157ccb5215c6cffdf6e533beba8  # Always skip offline servers when rebalancing
+      git cherry-pick ee1f2b2657c4c68c321c38e9d4c02b7fe7a7510d  # When demoting a voter to spare, transition to stand-by first
+      git cherry-pick 4b2bc5228e37b3a619bba7799116c4832b3f0201  # test/clustering: Make sure that a killed voter can't dsirupt current leader
+      git cherry-pick e057c39a66b53fd5ee41aa187c967ded266ec393  # lxd/cluster: Use a dedicated channel to stop the dqlite proxy
+      git cherry-pick c5e2f0994af19f4dc5790b66989fd54063c10ff8  # lxd: Call Deamon.Kill() also when receiving signals (so db transactions won't be retried)
+      git cherry-pick 156061ab9945b8f20a453f677cf7c94fa9792363  # lxd/db: Add Cluster.Kill() method to prevent retrying upon shutdown
+      git cherry-pick 059d794d486985e07dd65b4e5fbdd79558e866b2  # lxd/firewall/drivers/driver/nftables/templates: Fixes proxy nat rule dynamic family
+      git cherry-pick 1722669e2220455012a491a0dfd1db255b8839db  # shared/util_linux.go: cast Rdev uint64 for mips
+      git cherry-pick e413690861bb565a27e7ee6eb882dfdbfe8c0bf5  # lxd/storage/quota/projectquota.go: cast Rdev uint64 for mips
+      git cherry-pick fd31f104a2d06cb7e57bb57e4075e26851765c9d  # lxd/device/device_utils_unix.go: cast Rdev uint64 for mips
+      git cherry-pick b14905437596b6804494198711bdd7adbba68e74  # lxd/device/gpu.go: cast Rdev uint64 for mips
+      git cherry-pick b3ae2e62e62c4ad3915940d871d4b1b0cedbb27e  # shared: Reimplement GetPollRevents without cgo
+      git cherry-pick 98c2e827473258cafae55f27dbf1892bf752b634  # lxd-agent: Build statically
+      git cherry-pick b1dd78b479a1c4e9115d7baece2d270876443c37  # Drop gccgo
+      git cherry-pick 809cf9873bd744cd56306c66dce2fbc8f05d4002  # lxd-p2c: Drop cgo
+      git cherry-pick e4adfead824c6b6b8ef2c9e3d9978adee844497a  # shared/ucred: Cleanup package
+      git cherry-pick 0c911309e797f9794f584389f3847a69381d8335  # lxd/api: Don't strip double slashes
+      git cherry-pick 6d34e568a2fa7aaee2cdf35bb8998c01bfbb1297  # lxd/operations: Improve error message when database insertion fails
+      git cherry-pick a44124199d920ee4144dbda6c89ce5009888d36a  # lxd/db: Change UpdateCertificate to RenameCertificate (only renaming supported)
+      git cherry-pick 25fe7fadd793fb0116a8aa871e21bdd126362c6a  # lxd/db: Rename containers.go to instances.go
+      git cherry-pick 0641516a4f459287651efa2c507565764e118da6  # shared/generate/db: Statement for deleting references (config and devices)
+      git cherry-pick 3391e565786e70aedaa5812525e622f803a25ca2  # lxd/db: Generate delete stements for profile config and devices
+      git cherry-pick 8973925f1251c1f2dc7eda794b4719c4101ca62b  # shared/generate/db: update statement: take ID instead of natural key
+      git cherry-pick 2e78b35d5dc735b07a06e874973ae92f1cdd6f31  # shared/generate/db: Handle config and devices in Update method
+      git cherry-pick accec69530208e71aa71b22cedb2832f0f2ef527  # lxd/db: Generate Update method for profiles
+      git cherry-pick 0b310ecbb2f31bbb82859bbaf1a6d2a8d6e30a1c  # lxd: Plug new UpdateProfile() db method into doProfileUpdate
+      git cherry-pick f5a33c91b6772e151dc0d147c1b7e70b0680657e  # lxd: Plug new UpdateProfile() db method into updatePoolPropertyForAllObjects
+      git cherry-pick 9f37d0d7344467604ac3e7b5d49cdaf02e6a19fc  # lxd/db: Generate delete statements for instance config, devices and profiles
+      git cherry-pick 6201cda9e0affdf3c63b7fd0865d4d5c6c69ce92  # lxd/db: Generate UpdateInstance method
+      git cherry-pick e2b511158308527a5dcdd794249d59384929e6da  # lxd/instance: Plug the new UpdateInstance method and replace legacy logic
+      git cherry-pick 0f40da6d51a8067410f105510202dd28f349dafc  # lxd/db: Drop AddDevicesToEntity
+      git cherry-pick f981523b492c86ab26e6c20e8afeeac6dd870368  # lxd/storage/drivers/driver/common: Logging quoting consistency
+      git cherry-pick 9cd1e7e79c9c7cdcbd9188408d53f724397b9844  # lxd/storage/drivers: Adds storage_lvm_skipactivation patch
+      git cherry-pick ffad1b7c7dfa8f081485e0c0f7adcbc13d6a6466  # test: Drive-by fix for flaky clustering rebalance test
+      git cherry-pick f159aedc0b866d383e2c53a8c8262f00be6ac75c  # Recommend to increase the value of aio-max-nr for production use
+      git cherry-pick 188e205f70c6415cdf3858deabea6ee260780629  # lxd/firewall/firewall/interface: Change definition of Compat() to return compat issue error
+      git cherry-pick aa93938e93e98205ff4ccf611deb244a221b5d53  # lxd/firewall/drivers/driver/nftables: Updates Compat() to return compat issues as error
+      git cherry-pick 7e3a0b1e4a2ea782552fb05e5f307be8cde71341  # lxd/firewall/drivers/drivers/xtables: Updates Compat() to return compat issues as error
+      git cherry-pick c59acde239c783c813f9e845e56ed67cc7b41fc6  # shared/simplestreams: Support uefi1.img
+      git cherry-pick 0d93baae2ad4ea0e6c2c9c8d4dd5db10a6c778ae  # lxd/firewall/firewall/load: Updates driver detection to warn when falling back to non-compatible xtables
+      git cherry-pick b9bcb2287a46857e8a85b972c39b0578709b9771  # lxd/storage/pools: Improves delete pool error info
+      git cherry-pick 5d14d8a32accdd26b4e694ff8f55d99bdf4e8da1  # instance_exec: don't panic
+      git cherry-pick 454dd68969f7207894c916e3a336347282feb3f1  # lxd/qemu: Handle quoted raw.qemu
+      git cherry-pick a53f417d3f5a81639facc02ff6daf8c4eaee6150  # lxd/main_forkproxy: Reduce logging
+      git cherry-pick 8e6794c1506e8403f485fa0fb52f2b7fbaf359cf  # lxd/networks: Warn on small IPv6 subnets
+      git cherry-pick 4be70b85014718f01905c31f065a16f24aed3f2d  # lxd/network: Force DHCP custom gateway
+      git cherry-pick 1924160cd1d7842fb5014016e32dcc47a53e299e  # lxc/list: Add disk and memory columns
+      git cherry-pick ad45ea38a1042d908741d7b073144b7bba08bfec  # i18n: Update translation template
+      git cherry-pick d187c0d95efc6491e2441b504bfe5f0f5f08684b  # lxd/storage/drivers: Make sure tar reader context is cancelled before defer
+      git cherry-pick e6eec5cf075d15e37acc11ccd585b9f0f19c28bc  # lxc/list: Fix test
+      git cherry-pick f304bdb789e112419258431b1770a6764514ed6b  # shared/archive: Wraps cancelFunc to wait until unpacker process has finished in CompressedTarReader
+      git cherry-pick 4fc0c00ea6e1802e021cbc3b474284092c8028a3  # lxd/cluster: Transfer leadership before adjusting roles, not after
+      git cherry-pick f807ca0537c67163a1a86a79a7618ad23352ca78  # lxd/cluster: Add time skew detection
+      git cherry-pick ac6b20b8ef264a3a356c50787b6969c291d5c7f2  # test: Wait a few more seconds for the rebalance to happen
+      git cherry-pick 22f6648ae9f7b1d97a9eb74390f4e7d5664244d2  # lxd/daemon.go: Don't try to rebalance after shutdown sequence has started
+      git cherry-pick f8dc64943ce0add0c59d9b88158c388f5fd54bea  # lxd/cluster: Don't try to rebalance a standalone node
+      git cherry-pick afa3b906e78238ec92136cad5748f5848e61280a  # lxc/ucred: Simplify logic
+      git cherry-pick 53a998a3238a4255662152e7b5041d7f75b3e0c6  # lxd/qemu: Cleanup arch checks
+      git cherry-pick 3a762d8fbc645854ab857356bb181c88c0fecab2  # lxd/qemu: Add s390x support
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
