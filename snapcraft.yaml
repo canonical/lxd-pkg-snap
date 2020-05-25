@@ -909,7 +909,7 @@ parts:
       set -ex
 
       # Build the agent (special build tags)
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent github.com/lxc/lxd/lxd-agent
+      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
