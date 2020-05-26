@@ -806,6 +806,7 @@ parts:
       git cherry-pick 323a156937cfc9b08e2bb7a43b2600d3b9cd3960  # lxc-usernsexec: dumb down from error to warning message
       git cherry-pick b8025217f72d32cd2a02d772527761edb8a8384d  # lxc-usernsexec: don't fail on setgroups()
       git cherry-pick 0c9e185c962513661f5b26222770074946efcf25  # travis: Restrict coverity to gcc on bionic on amd64
+      git cherry-pick a7974fd02d1412630502b18f472fd0f4ed67920e  # lxd/storage/lvm: Correct bad VG name in patch
 
       set +ex
       snapcraftctl build
