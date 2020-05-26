@@ -806,7 +806,6 @@ parts:
       git cherry-pick 323a156937cfc9b08e2bb7a43b2600d3b9cd3960  # lxc-usernsexec: dumb down from error to warning message
       git cherry-pick b8025217f72d32cd2a02d772527761edb8a8384d  # lxc-usernsexec: don't fail on setgroups()
       git cherry-pick 0c9e185c962513661f5b26222770074946efcf25  # travis: Restrict coverity to gcc on bionic on amd64
-      git cherry-pick a7974fd02d1412630502b18f472fd0f4ed67920e  # lxd/storage/lvm: Correct bad VG name in patch
 
       set +ex
       snapcraftctl build
@@ -1086,6 +1085,7 @@ parts:
       git cherry-pick 763d5248ca26cbf3414f06772300ab63aa837814  # lxc/ucred: Simplify logic
       git cherry-pick 114877d68e6fa1b2e846266314ffc7d283d0ce6b  # lxd/qemu: Cleanup arch checks
       git cherry-pick 8f4f540c60d26efcb3a6d6a1d4d3bf3419a96f1c  # lxd/qemu: Add s390x support
+      git cherry-pick a7974fd02d1412630502b18f472fd0f4ed67920e  # lxd/storage/lvm: Correct bad VG name in patch
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
