@@ -1407,6 +1407,7 @@ parts:
       git cherry-pick afa3b906e78238ec92136cad5748f5848e61280a  # lxc/ucred: Simplify logic
       git cherry-pick 53a998a3238a4255662152e7b5041d7f75b3e0c6  # lxd/qemu: Cleanup arch checks
       git cherry-pick 3a762d8fbc645854ab857356bb181c88c0fecab2  # lxd/qemu: Add s390x support
+      git cherry-pick 72e4c54e395b00af4b371bdc773dc82a465a38ea  # lxd/storage/lvm: Correct bad VG name in patch
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
