@@ -1085,7 +1085,124 @@ parts:
       git cherry-pick 763d5248ca26cbf3414f06772300ab63aa837814  # lxc/ucred: Simplify logic
       git cherry-pick 114877d68e6fa1b2e846266314ffc7d283d0ce6b  # lxd/qemu: Cleanup arch checks
       git cherry-pick 8f4f540c60d26efcb3a6d6a1d4d3bf3419a96f1c  # lxd/qemu: Add s390x support
+      git cherry-pick 6a703c35391b81cdf57da9575a5e1bcfb9947056  # lxd/api: Fail /internal/ready requests made after shutdown has started
+      git cherry-pick c3a15195b235909dc37cb51b8102acc3038ccc3e  # forkfile: port to using pidfds
+      git cherry-pick 7458bef3f7a0109b6188663c2eb833cf738d9c53  # forkmount: port to using pidfds
+      git cherry-pick ff45fc4dc30e2143b3062dffa4f5925203aaae22  # forkproxy: port to using pidfds
+      git cherry-pick 96f76e593f2f3f505d29aeaa7ef1d3402db4794d  # syscall_numbers: update
+      git cherry-pick 43549a5f9db7af859dc6e96996712b1a880d71cf  # forknet: port to pidfds
+      git cherry-pick 019b077076ab66ca6eafb5a3e7dc0f2e5dfd0483  # forkuevent: port to pidfds
+      git cherry-pick 6e2c41542a015f5072d131c3fc5c1f032e3c17f4  # forksyscall: port to pidfds
+      git cherry-pick 7471b9625bf3516ecd419037b7f33f3314b0361c  # daemon: record "pidfd" extension
       git cherry-pick a7974fd02d1412630502b18f472fd0f4ed67920e  # lxd/storage/lvm: Correct bad VG name in patch
+      git cherry-pick 9d254746706cb80d8b5794f7953067ea06cca272  # shared/subprocess: Better handle slow systems
+      git cherry-pick 5a22992888a512f47497730e2525cc1e93e98160  # tests: Don't assume bridge MTU can be forced up
+      git cherry-pick b0c696af0aa844e64b23f50758538849ac1dbd0d  # lxd/db: Use query.SelectString helper in GetLocalImages()
+      git cherry-pick cfadcced45d5a6b4d900f00d7b922b959b5aaa40  # lxd/db: Use query.SelectString helper in GetImagesFingerprints()
+      git cherry-pick 04224c88b1300816a9513ea0225eff030437e4c2  # shared/generate/db: Support int64 fields
+      git cherry-pick 31b497b0daae425ef3ef607568340630ac68a789  # lxd/db: Initial code generation for images (without references)
+      git cherry-pick cd5d8b0bc0d24294bca6c045fcb4c8b05859dc0d  # lxd/db: Use the generated GetImages code to implement GetExpiredImages
+      git cherry-pick 0078c4ad6408fef5857aabc8985b032d4a15b363  # lxd/db: Use query.SelectObjects helper in GetImageSource
+      git cherry-pick 58b655e721d463dd619b84cbdba4edffdfdadb7c  # lxd/db: Use query.SelectStrings helper in ImageSourceGetCachedFingerprint
+      git cherry-pick 68293cd3a755251aee182fb853d332ecc3ef3554  # lxd/db: Use query.Count helper in ImageExists
+      git cherry-pick 999a788c871b7360f8c3a52409553e0216872e30  # lxd/db: Use query.Count helper in ImageIsReferencedByOtherProjects
+      git cherry-pick 9dec4bf566fb841c0043d5f599dbdd3577da3e62  # lxd/db: Use query.UpsertObject helper in CreateImageSource
+      git cherry-pick 475610ed23804d615209b590b347b2c5afa9cf84  # lxd/db: Use auto-generated GetImages() to implement GetImage()
+      git cherry-pick 2e11f7707e459375b79b8ff8bab92b81d2941942  # lxd/cluster: Drive-by fix for flaky rebalance test
+      git cherry-pick feb6ba6b53f81671ca72c97757b2ae27b4658f3c  # lxd/db: Use auto-generated GetImages to implement GetImageFromAnyProject
+      git cherry-pick 6b57a2174e27bab9e4434d79a839c037095993d5  # lxd/db: Usage query.DeleteObject to implement DeleteImage
+      git cherry-pick 1ba3e7997a0da8d2b31e1ba48060861aadea3784  # lxd/db: Use query.SelectStrings to implement GetImageAliases
+      git cherry-pick f74fee1df98e59e52e056957fe3015c531b896bd  # lxd/db: Use a single transaction in GetImageAlias
+      git cherry-pick d62ae0ce018923819117402e3e77f80904854b56  # lxd/db: Use a single transaction in DeleteImageAlias
+      git cherry-pick fb72bb217e97be8dcd303f1d1631e3f0a83619f9  # lxd/db: Use single transaction in CreateImageAlias
+      git cherry-pick 7fb385295224462536b56a546580d713f0db15a4  # lxd/db: Usage single transaction in CreateImage
+      git cherry-pick aace94197eb29b8358e0a6a1b86d8a3c9b069050  # lxd/db: Use query.SelectIntegers helper in GetPoolsWithImage
+      git cherry-pick 59bfa055ef46351e82e41c7638bd647d0cb28010  # lxd/db: Use a single transaction in GetPoolNamesFromIDs
+      git cherry-pick 738f4610244fe911b820fe50de300b7f64067a39  # lxd/db: Use explicit transaction in GetInstanceProjectAndName
+      git cherry-pick 26a42430f58a8b6f4f622ca8f5aa56dd5c870255  # lxd/db: Drop unused DeleteInstanceConfig
+      git cherry-pick 90dc83a9c2365a110c472cfc9cd25c789aef0eb2  # fork*: add "--" to not misinterpret negative integers as flags
+      git cherry-pick a8bfcae8e585f46c17231428e62d65f780adf628  # lxd/storage/utils: Removes unused name arg from VolumeFillDefault
+      git cherry-pick 7832dbcfb169d12aa65f0cdb4bd3902da20a8644  # lxd/instance/drivers: storagePools.VolumeFillDefault usage
+      git cherry-pick 987968f54a06b6fcfbe4bb894a6e2fd3e6d3c173  # lxd/patches: driver.VolumeFillDefault usage
+      git cherry-pick feb360f7d653ff02743443d1607ec1eb4215250a  # lxd/storage/utils: VolumeFillDefault usage
+      git cherry-pick d2e75f18121f17909b070c6e738bf5d891082d22  # lxd/storage/utils: Updates VolumeValidateConfig to require volume type
+      git cherry-pick 974979cdc5ba6edaf40a67b085426242a7f2c837  # lxd/storage/utils: Adds VolumeDBTypeToType function
+      git cherry-pick 58ff71e5e2b53b2ff75362f0e00fbc99dfa10f0d  # lxd/storage/utils: Updates VolumeDBCreate to pass volume type
+      git cherry-pick da07c97c13a5ea70f1b3bf29ba607dbf0dc2da97  # lxd/storage/drivers/utils: Updates ensureVolumeBlockFile to reject unsafe volume shrinking
+      git cherry-pick db44b7f1132098c11f0a3f2004ef8303d52497ee  # lxd/storage/drivers/geneirc/vfs: Removes genericVFSResizeBlockFile
+      git cherry-pick 0c731f5982f541cd3e8deffa96e979cedbee1bbd  # lxd/storage/drivers: ensureVolumeBlockFile usage
+      git cherry-pick 00bfc41a03cb95f356349b8a12308774b07868e4  # lxd/storage/drivers/volume: Adds SetQuota function
+      git cherry-pick ee933b7cbd1127ad3ac4e5fe96898da032313ef3  # lxd/storage/drivers/volume: Adds config functions
+      git cherry-pick f943f047e881435d711feab1aa12c9c931bad4b3  # lxd/storage/drivers/driver/lvm/utils: Removes functions moved into Volume struct
+      git cherry-pick b900e88b4b2328077a5aa199071e42d8efe7f79f  # lxd/storage/drivers/driver/lvm/utils: Usage of volume config functions
+      git cherry-pick b5cd5af6fa02a0c117cf26cf74d4f68dc4c456a2  # lxd/storage/drivers/driver/lvm/volumes: Volume config function usage
+      git cherry-pick ee5b8b4871e885d232764850734ea771d670dcc3  # lxd/storage/drivers: Replace volumeSize() with vol.ConfigSize()
+      git cherry-pick e20b071c44a28187e3096810c2de867f1ac7ce59  # forknet: add missing "--" to forknet invocation on detach
+      git cherry-pick cab94c851407bad20b14c6506f54165d2e51f5d1  # process_utils: remove a bunch of unused functions
+      git cherry-pick 666853963fafdd06050e1c7ee6aaa7755c7c8d73  # lxd: Make use of ExitCode
+      git cherry-pick ca8c175dca9b695c80948c85aef7942673ad88f9  # share/subprocess: Reduce sleep back to 5
+      git cherry-pick 4f82acaeb38498725c998bd9ac1acd9959885c63  # lxd/instances/lxc: Fix calls to forknet
+      git cherry-pick 5cfc51497a5b6cc797922fc5ab5b672fa751f3cf  # forkmount: prevent interpreting negative numbers as flags
+      git cherry-pick 813785f1204f85fcedfb6123fd8a444bd26f6b5b  # shared/subprocess: Ensure monitor routine exits
+      git cherry-pick f369612e66efe1dd002edec3fc4ee17503125b8f  # shared/subprocess: Properly reset state
+      git cherry-pick f861c17d172ba615ac3933d70a1f59c41841c50b  # tests: Fix btrfs test on non-shiftfs
+      git cherry-pick b99470f18932fc77df1b09053c9c96bc4c5e793a  # tests: Old kernels don't let you rmdir btrfs
+      git cherry-pick 0017346306c917cfc93035dc6382a917d17ed437  # shared/subprocess: Fix Stop handling
+      git cherry-pick d1ed6fe67dfb40f522df6b0652f78ceb5b28488f  # lxd/storage/utils: Updates ImageUnpack to detect too small volume for qcow2 image and increase size before unpack
+      git cherry-pick c60177b10f1521232d7efc73479860938f8d1fb8  # lxd/storage/utils: Adds checks to ImageUnpack before enlarging volume
+      git cherry-pick 9fd0edfae8c320bc23fdd0a0fed4f4f997b094fa  # lxd/storage/drivers/driver/types: Updates VolumeFiller Fill function to take a Volume
+      git cherry-pick 101e186a9725a40ee1d88f4f9c4bcaacfbad5758  # lxd/storage: Updates volume filler usage to supply Volume rather than mount path
+      git cherry-pick 0d5084afdeeb4ff2d8fca83302f9dd7eff4bc3ab  # lxd/storage/drivers/volume: Adds ConfigSizeFromSource function
+      git cherry-pick 7132585c6ed1d668782ff6503abe54a0daa65223  # lxd/storage/drivers/driver/lvm/utils: Updates copyThinpoolVolume to only use vol.config["size"] for resizing
+      git cherry-pick ca3bf3683af41c7526657a29d205b0e2a113ad46  # lxd/storage/drivers/driver/lvm/utils: Updates Volume type in createLogicalVolumeSnapshot definition
+      git cherry-pick e53a007cb6b37f84736a6e29746a1e957256cddd  # lxd/storage/drivers/driver/common: Adds runFiller function
+      git cherry-pick 96eccef556e370dfe0349e2e15423711e7a5bcff  # lxd/storage/backend/lxd: Updates imageFiller to return volume size
+      git cherry-pick 399b495ff78f936d065cada6860d01bdd83f33fd  # lxd/storage/backend/lxd: Updates CreateInstanceFromImage to load image vol DB record
+      git cherry-pick 23b5fc333908c39a50449424cd83facd701fcc6b  # lxd/storage/backend/lxd: Updates EnsureImage to record volatile.rootfs.size for block images
+      git cherry-pick 18e94164d9df28171d1052ca6219f25e608fca21  # lxd/storage/drivers/driver/types: Updates VolumeFiller definition to store size
+      git cherry-pick 0a77fe2a88c8ed41809d1c07e97f9773e51ecd9e  # lxd/storage/utils: Validates volatile.rootfs.size key for image volumes in validateVolumeCommonRules
+      git cherry-pick 51866ab1b931dacce20496597a0e9e442029b13b  # lxd/storage/utils: Updates ImageUnpack to return image virtual size
+      git cherry-pick 2d864791be3f86d697e5f67b5cddd656583aa1fc  # lxd/storage/drivers/driver/btrfs/volumes: d.runFiller usage
+      git cherry-pick d587d7bacd5f000dd51e356469ab9b42c864000f  # lxd/storage/drivers/driver/ceph/volumes: d.runFiller usage
+      git cherry-pick d508e3920ad36f01ef33aa63ff225767338b74ba  # lxd/storage/drivers/driver/cephfs/volumes: d.runFiller usage
+      git cherry-pick 69f533fff398fd76c402ab0eee455c41c23b3cad  # lxd/storage/drivers/driver/dir/volumes: d.runFiller usage
+      git cherry-pick e2d4c1aad4cfbdaffd3b9c4f3fd7a0486f2525c6  # lxd/storage/drivers/driver/lvm/volumes: d.runFiller usage
+      git cherry-pick bbf5a94938e42ba58e26419022d2cbb53feea1fa  # lxd/storage/drivers/driver/zfs/volumes: d.runFiller usage
+      git cherry-pick 4c99ca70a20031ce4dbb9e6d3cb0b421973816b0  # lxd/storage/drivers/volume: Adds SetConfigSize function
+      git cherry-pick df841ce3353732bff3f4db3956cd67c3438df039  # lxd/storage/backend/lxd: Updates CreateInstanceFromImage to use vol.ConfigSizeFromSource to dervice volume size
+      git cherry-pick 647fd4290f443293bd9d0ddc3712d1381ce4256c  # lxd/storage/drivers: Updates CreateVolumeFromCopy to only use vol.config["size"] for resizing
+      git cherry-pick e7e50897e285921da7559d85e72d83b1e4719bab  # lxd: Reduce number of transactions in containerPostClusteringMigrate
+      git cherry-pick 1968db8fe5528d5c06ced1ba3d3d29d1ec289768  # lxd/db: Use query.SelectStrings helper in LegacyContainersList
+      git cherry-pick 364e4b28a77146e1b823714ce7c3950f948c0843  # lxd/db: Rename dbDeviceTypeToString to deviceTypeToString
+      git cherry-pick 2d87129f08eb083b3dd6a39b301de7652e875748  # lxd/db: Group ClusterTx image methods together
+      git cherry-pick 815803313c42f2df652b5c86fc669c44fe11a5d4  # lxd/db: Rename ImageSourceGetCachedFingerprint to GetCachedImageSourceFingerprint
+      git cherry-pick 32aef5e312cc63b5425f53b9f47d4d7343e939f7  # lxd/storage/drivers/utils: ensureVolumeBlockFile comment clarification
+      git cherry-pick 2d02ced95747119517b4eda914feec8531b259ea  # lxd/storage/drivers/utils: Renames BlockDevSizeBytes to BlockDiskSizeBytes
+      git cherry-pick 02ed4130dd8c9153d5325c347fb21ffd9c6de504  # lxd/storage/utils: drivers.BlockDiskSizeBytes usage
+      git cherry-pick 42a9e24d51ae12ef6491028045696e1196d63f37  # lxd/storage/utils: Simplifies InstanceDiskBlockSize with drivers.BlockDiskSizeBytes usage
+      git cherry-pick 3b82eaa828c6a0b4bb0ee404c3faa7ed37fe2e5b  # lxd/storage/drivers/generic/vfs: Simplifies genericVFSBackupVolume with drivers.BlockDiskSizeBytes usage
+      git cherry-pick 64774a62300d5eee2f89e55b0ddaae43caffc4e3  # lxd/storage/backend/lxd: Whitespace in CreateInstanceFromBackup
+      git cherry-pick 7a9d0aa87a97838d37fca160767d45833a4ce19b  # lxd/storage/drivers/driver/ceph/volumes: BlockDiskSizeBytes usage in SetQuota
+      git cherry-pick 74e4e2c82b455eb9e129419dd0e8eacf37292d95  # lxd/storage/drivers: Updates dir and btrfs to support filler volume enlargement
+      git cherry-pick f7d4c77149cee70e7a44bcf20240989906f94d3b  # lxd/db: Group ClusterTx instance methods together
+      git cherry-pick fde2fc0186aa54cb8a90e02fc202501dfdb5d09b  # lxd/db: Rename AddProfilesToInstance to addProfilesToInstance
+      git cherry-pick 97529641ad6873a3946ee99b8b6ff80b0a351109  # lxd/db: Move instance backup methods to backups.go
+      git cherry-pick d0c948d949bf5b6dd4ae0584cff40e5dd5b20331  # lxd/db: Rename InstanceBackupArgs to InstanceBackup
+      git cherry-pick 25925027c1f6a9384da90376d65846788697b8c5  # lxd/db: Remove unused profile functions
+      git cherry-pick eb4711d505b7500e6b06ded344ddea8f37f76e60  # lxd/db: Move storage volumes methods to storage_volumes.go
+      git cherry-pick 1bac7968219e6ecb2423b36ad5671fd90da587fc  # lxd/storage/drivers/volume/test: Adds tests for Volume.ConfigSizeFromSource()
+      git cherry-pick f446474082e1dd32272fb16b2754f4fbd24920c4  # forkuevent: fix slice allocation
+      git cherry-pick f673b791bf96b3e81366f6fb365a5026b2763906  # lxd/images: Set CreatedAt on publish
+      git cherry-pick 5b5d38b5481f5b6dcfa95ef7e1834c86b6e30640  # unix-hotplug: fix uevent injection
+      git cherry-pick c91e018f4f873993b02b69ed03a3bcb57ff65976  # lxd: New command line option to trace SQL statements
+      git cherry-pick c64465ccabf2f406cd23f6a030f94c5eb3688cb9  # lxd/firewall/drivers/drivers/xtables: Updates iptablesInUse to kill process once first rule found
+      git cherry-pick 550717c80a979339b547c25785fe9049b2ef8c97  # lxd/backup: Fixes hang in backupCreate when invalid compression argument supplied
+      git cherry-pick deef1786e9d93037c366bf24de5ffc82f467bd20  # lxd/storage/utils: Removes duplicated qemu-img call in ImageUnpack
+      git cherry-pick b29fb09d3aa123374d4f1dd4a68263d090294609  # lxd/storage/utils: Switch to qemu-img dd mode in ImageUnpack
+      git cherry-pick ba6635a6980738f5ba1415ea19121f4519418611  # lxd/storage/drivers/utils: Exports MinBlockBoundary
+      git cherry-pick 23ef563b75a2d8dbe61ff2d460d8ae4ce72da820  # lxd/storage/drivers: MinBlockBoundary usage
+      git cherry-pick 8f0d53be88303cc56155827e1159ed4cfd383062  # lxd/resources: Handle missing cache size/type
+      git cherry-pick ba13dea98924e7334f20ef0f10fed22f04b59c42  # Update documentation with backup compression
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
