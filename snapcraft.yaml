@@ -861,6 +861,11 @@ parts:
       git cherry-pick 10f4d9fb7b28a59a0f4e1104bf2e788cf6726c5b  # sysfs_fuse: remove logically dead code
       git cherry-pick 4179492059341d56eaf39dfd9ba132015fbe2076  # Fix https://github.com/lxc/lxcfs/issues/404
       git cherry-pick 1fdb0df9d21a5073f5d6c3012763429d5bfad404  # coverity: Use build custom build script
+      git cherry-pick d1ecd2ea9ffead09852621f689af99499ac69de9  # bindings: fix init pid hashing
+      git cherry-pick fde6b415e6015118ad74c772f53612df9dbae05e  # bindings: make opts pointer const
+      git cherry-pick a506a056ca643dd0aab6c0b1037f19dc762b528e  # bindings: use brackets to make logic clearer
+      git cherry-pick 1c8082f22c671ec8eefad097c4530356416eaf7c  # bindings: cleanup cache locking
+      git cherry-pick 6146b6d4025e460ee6c62d537555696256a72399  # bindings: cleanup init pid verification
 
       set +ex
       snapcraftctl build
