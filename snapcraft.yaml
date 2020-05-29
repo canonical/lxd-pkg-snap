@@ -875,7 +875,7 @@ parts:
       - squashfs-tools
       - usbutils
       - xdelta3
-    plugin: nogetgo
+    plugin: go
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd
@@ -901,9 +901,14 @@ parts:
       sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       # Run the standard build
-      set +ex
-      snapcraftctl build
-      set -ex
+      mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin
+      cd ${SNAPCRAFT_PART_INSTALL}/bin
+      export CGO_LDFLAGS="-L $SNAPCRAFT_STAGE/lib"
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxc
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxc-to-lxd
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxd
+      go build -tags=libsqlite3 github.com/lxc/lxd/lxd-benchmark
+      cd ${SNAPCRAFT_PART_SRC}
 
       # Build the agent (special build tags)
       CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
