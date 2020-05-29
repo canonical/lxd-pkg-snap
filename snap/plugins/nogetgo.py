@@ -140,7 +140,12 @@ class GoPlugin(snapcraft.BasePlugin):
     def __init__(self, name: str, options, project: "Project") -> None:
         super().__init__(name, options, project)
 
-        self._setup_base_tools(options.go_channel, project.info.get_build_base())
+        if hasattr(project, "_get_build_base"):
+            base = project._get_build_base()
+        else:
+            base = project.info.base
+
+        self._setup_base_tools(options.go_channel, base)
         self._is_classic = project.info.confinement == "classic"
 
         self._install_bin_dir = os.path.join(self.installdir, "bin")
