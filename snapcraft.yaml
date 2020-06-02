@@ -813,6 +813,7 @@ parts:
       git cherry-pick 202e017e59cf395d88da37544ee2ef5e3d84c3a0  # cgroups: be less alarming when creating cgroups
       git cherry-pick 53fbc128f3b4758173d1aa63ead91e3e85bd68cd  # commands: make limiting cgroup callbacks unreachable
       git cherry-pick c5acbe98bc4f35599dd27db753e8c73cca21906c  # api_extensions: add "pidfd"
+      git cherry-pick bfbd606e6f1cf33bb04ae10bbfadfa10907b9284  # Add test of lxc-usernsexec
 
       set +ex
       snapcraftctl build
