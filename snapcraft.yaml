@@ -1538,6 +1538,10 @@ parts:
       git cherry-pick 5a927cb3c4928a960a2be77bb9df48f3a853d782  # lxd/storage/drivers: MinBlockBoundary usage
       git cherry-pick 874d35a2f471afa9461c5e264433b1ea01c1bdef  # lxd/resources: Handle missing cache size/type
       git cherry-pick 069dac9eaaba63ea634282530f50cd1316507eda  # Update documentation with backup compression
+      git cherry-pick 46b5913716999a52fdbbc3644e5254d58fedbe70  # lxd/rbac: New notification API
+      git cherry-pick 253cef6fe40ff6f4dde0a64b9ca46504fcbf0044  # lxd/firewall/nft: Enhance support detection
+      git cherry-pick ae5a52ba3ca68257e07b1867ca30fe0149224d78  # Fix regression in GetImageFromAnyProject
+      git cherry-pick c7b408f816197ce0dc0fc5b688606dea51bb91c0  # doc/security: Adds notes about IPv6 router advertisement security
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
