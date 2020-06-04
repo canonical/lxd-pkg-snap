@@ -25,7 +25,7 @@ index d249a1cca7..35d785df91 100644
    // If System UUID is found from SMBIOS Table, use DUID-UUID type.
    //
 -  if ((PcdGet8 (PcdDhcp6UidType) == Dhcp6DuidTypeUuid) && !EFI_ERROR (NetLibGetSystemGuid (&Uuid)) && !CompareGuid (&Uuid, &gZeroGuid)) {
-+  if (false && (PcdGet8 (PcdDhcp6UidType) == Dhcp6DuidTypeUuid) && !EFI_ERROR (NetLibGetSystemGuid (&Uuid)) && !CompareGuid (&Uuid, &gZeroGuid)) {
++  if (0 && (PcdGet8 (PcdDhcp6UidType) == Dhcp6DuidTypeUuid) && !EFI_ERROR (NetLibGetSystemGuid (&Uuid)) && !CompareGuid (&Uuid, &gZeroGuid)) {
      //
      //
      //  The format of DUID-UUID:
