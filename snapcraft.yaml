@@ -1223,8 +1223,26 @@ parts:
       git cherry-pick ba13dea98924e7334f20ef0f10fed22f04b59c42  # Update documentation with backup compression
       git cherry-pick 61559861b2c2d211dd13192d3ca0a84654bd0daa  # lxd/rbac: New notification API
       git cherry-pick 2f468ffc6d136329e762f44b5f6753b28dd4f39c  # lxd/firewall/nft: Enhance support detection
+      git cherry-pick 6debf6f1257d4a6a33afe055a6dd73a133b1effc  # lxd/device/device/utils/network: Adds networkValidVLAN and networkValidVLANList functions
+      git cherry-pick 0f6ef16e38286eeb72014a4bf1b3f5bba33f1bf7  # lxd/device/nic: Changes nicValidationRules to properly validation vlan
+      git cherry-pick fef2fb73ec8f80fdaeed8f1ff66c2a5529c9d214  # lxd/device/nic/bridged: Adds revert for veth pair cleanup on error
+      git cherry-pick 42e0331ef2a2b306844f1debb6a3a344c3b6a531  # lxd/firewall/drivers/drivers/xtables: Drops tagged vlan frames when using IP filtering
+      git cherry-pick 9330eebb5b5bf1757997ad67a0104c5b6776bea6  # lxd/firewall/drivers/drivers/nftables: Drops tagged vlan frames when using IP filtering
       git cherry-pick 6f6965bb9a8afbe6ef7a6155dbfd1d087a3793ae  # Fix regression in GetImageFromAnyProject
       git cherry-pick e3d998fe351951d2e8dfead0be23bac2b6513b0b  # doc/security: Adds notes about IPv6 router advertisement security
+      git cherry-pick c8f2731714810b90bb0d76729acde799a81563da  # lxd/network/network/utils: Improve comments on ovs switch attach/detach
+      git cherry-pick 39f9ef666866e2b9191f47fe99453b1f57d2be5e  # lxd/network/network/utils: Improves arg name in network attach/detach functions
+      git cherry-pick 6ddca589e98c205865f746c993e1cfc1a826d03c  # lxd/device/bic/bridged: Fixes openvswitch port leak when device is stopped
+      git cherry-pick 59ccc7ca5463727c6b5684855c4a3d73a2f22bac  # lxd/network/utils: Adds IsNativeBridge function
+      git cherry-pick a6d92324db52ddf9541c06a29b7db4a418cae8cf  # lxd/device/device/utils/network: Allow VLAN ID 0 in networkValidVLAN
+      git cherry-pick 7029429c943eca979de229a234ea12ed8916d2b0  # lxd/maas: Fix support for multiple subnets
+      git cherry-pick c7eda13f2ae63f382cb3009d07d3e2c416adadf8  # lxd/maas: Support projects
+      git cherry-pick f8215ac577d055826008f7a56e4c296f7ab2dbc6  # lxd/dnsmasq: Add project suffix
+      git cherry-pick 936451038458d258775d67ff7bb2e8cf8defc0ef  # Remove incorrect statement about supported network devices with virtual machines According documentation supported types with virtual machines are physical, bridged, macvlan, p2p, sriov
+      git cherry-pick 3af43f2522e3c5004c96ce2e2a860863ea456a6d  # lxd/rbac: Fix auth for non-RBAC trusted clients
+      git cherry-pick c1204ccc79bf66cced1830bb4290f9b04e518263  # global: Add riscv64 to build tags
+      git cherry-pick 010983a63fe62a4d09c751dfe2be62aff0762ff2  # Stop using Driver.SetContextTimeout() which is a no-op
+      git cherry-pick 43509f017d4875b3ea45cf961e7d3af086692125  # use the coreos fork of boltdb since the original is archived/abandoned
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
