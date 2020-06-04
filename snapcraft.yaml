@@ -816,6 +816,8 @@ parts:
       git cherry-pick 53fbc128f3b4758173d1aa63ead91e3e85bd68cd  # commands: make limiting cgroup callbacks unreachable
       git cherry-pick c5acbe98bc4f35599dd27db753e8c73cca21906c  # api_extensions: add "pidfd"
       git cherry-pick bfbd606e6f1cf33bb04ae10bbfadfa10907b9284  # Add test of lxc-usernsexec
+      git cherry-pick e0344cfa43b3ae96e2ce029de2819561fb9a6313  # lxc-test-usernsexec: If user is root, then create and use non-root user.
+      git cherry-pick 9d81b99a14cb95f649cdf39986f7bf74ef313f11  # .gitignore: Ignores COPYING file created by make
 
       set +ex
       snapcraftctl build
