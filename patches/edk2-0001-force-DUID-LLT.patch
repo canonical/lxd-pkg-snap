@@ -1,0 +1,13 @@
+diff --git a/NetworkPkg/Dhcp6Dxe/Dhcp6Utility.c b/NetworkPkg/Dhcp6Dxe/Dhcp6Utility.c
+index d249a1cca7..35d785df91 100644
+--- a/NetworkPkg/Dhcp6Dxe/Dhcp6Utility.c
++++ b/NetworkPkg/Dhcp6Dxe/Dhcp6Utility.c
+@@ -58,7 +58,7 @@ Dhcp6GenerateClientId (
+   //
+   // If System UUID is found from SMBIOS Table, use DUID-UUID type.
+   //
+-  if ((PcdGet8 (PcdDhcp6UidType) == Dhcp6DuidTypeUuid) && !EFI_ERROR (NetLibGetSystemGuid (&Uuid)) && !CompareGuid (&Uuid, &gZeroGuid)) {
++  if (false && (PcdGet8 (PcdDhcp6UidType) == Dhcp6DuidTypeUuid) && !EFI_ERROR (NetLibGetSystemGuid (&Uuid)) && !CompareGuid (&Uuid, &gZeroGuid)) {
+     //
+     //
+     //  The format of DUID-UUID:
