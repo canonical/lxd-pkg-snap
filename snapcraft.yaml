@@ -926,6 +926,7 @@ parts:
       git cherry-pick a506a056ca643dd0aab6c0b1037f19dc762b528e  # bindings: use brackets to make logic clearer
       git cherry-pick 1c8082f22c671ec8eefad097c4530356416eaf7c  # bindings: cleanup cache locking
       git cherry-pick 6146b6d4025e460ee6c62d537555696256a72399  # bindings: cleanup init pid verification
+      git cherry-pick 19f42b8b2fa97da4c8fa2fd76f296d1edb4edfb5  # cpuview: fix /proc/stat virtualization
 
       set +ex
       snapcraftctl build
