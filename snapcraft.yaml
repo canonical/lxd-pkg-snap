@@ -876,6 +876,24 @@ parts:
       git cherry-pick 1c8082f22c671ec8eefad097c4530356416eaf7c  # bindings: cleanup cache locking
       git cherry-pick 6146b6d4025e460ee6c62d537555696256a72399  # bindings: cleanup init pid verification
       git cherry-pick 19f42b8b2fa97da4c8fa2fd76f296d1edb4edfb5  # cpuview: fix /proc/stat virtualization
+      git cherry-pick c88c43045fa3fc8a731469c246376d5eafdeb6c8  # bindings: s/get_init_pid_for_task()/scm_init_pid()/g
+      git cherry-pick df1e90eac5590ac096687da0fb8ae588f90e6bdc  # proc_loadavg: don't leak getline() memory in calc_pid()
+      git cherry-pick fd24d322de4221080e11360b45364bfda893c232  # proc_loadavg: ensure pointer is NULL when passing to calc_pid()
+      git cherry-pick 75cc86c8f1eab1a8a8d422a08457def58c546830  # proc_loadavg: don't leak getline() memory
+      git cherry-pick d5953e5a759af8761b67c55b8be317f4768cbf60  # proc_loadavg: replace malloc() with asprintf() in calc_pid()
+      git cherry-pick d3e56c513245b3ecc801a2d8844af1b7bc86c7b8  # macro: use ISO C compatible __typeof__
+      git cherry-pick 1b2133070933aa4c652844f8a9420b929898ccc0  # proc_loadavg(): use strdup() in calc_pid()
+      git cherry-pick d3d394ee3ac8ad66cea9b24f38ccc14f3f387d51  # proc_loadavg: simplify calc_pid()
+      git cherry-pick bd4ce4fe4281e9fed7dd4c2c5f017cecc0992391  # bindings: wipe initpid cache on library reload
+      git cherry-pick 0c525b491572fa5b7123a4142722cf89b93b91b1  # bindings: avoid dynamic stack allocations in clone()
+      git cherry-pick e1aca77d7e01ff33c09bbfb5c725da24c249a941  # lxcfs: free opts on lxcfs binary exit
+      git cherry-pick 92cd86392dc40620d2e712d66d7f9de007d357ce  # proc_fuse: use zalloc()
+      git cherry-pick 96c6a953f38db97f4eb14b41a908693ba6423b65  # proc_loadavg: use must_* alloc helpers
+      git cherry-pick bff5ce333f1d9610d9301a3100601307e64a2775  # proc_loadavg: remove dummy variable
+      git cherry-pick cbe164f428cb07a03dd0508b68947f18c9a8a243  # proc_loadavg: avoid needless memory allocation
+      git cherry-pick a7ec61a422951c9784032aa4481424bb4c2ec8e8  # proc_fuse: move get_reaper_busy() down
+      git cherry-pick 03a51c6341df69e1c00088714a902d7a26f4a03f  # proc_fuse: cleanup proc_uptime_read() a little
+      git cherry-pick a30d91ccf9bba1e2f4e0d528c7fa2c7cf41330f1  # utils: don't leak fds in in_same_namespace()
 
       set +ex
       snapcraftctl build
