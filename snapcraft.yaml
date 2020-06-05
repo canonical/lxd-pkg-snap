@@ -981,6 +981,17 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick fb9e4c3fc573107278bad724aaf8f168ef843fdb  # lxd/instance/drivers/driver/lxc: Adds debug logging to deviceStop
+      git cherry-pick b0407c961fe6ef5b1a04139e6658fcf8dc80b470  # lxd/instance/drivers/driver/lxc: Adds driver revert on failed start in startCommon
+      git cherry-pick f72c68444e584f4595a74b9fe68ba170b3f2ad9f  # lxd/instance/drivers/driver/qemu: Adds debug logging to deviceStop
+      git cherry-pick a21768c3bfed2de2059172d213ab3485a9cb453d  # lxd/instance/drivers/driver/qemu: Simplifies failed start device cleanup in Start
+      git cherry-pick 5b0d31def1f58548d9f9132a68f3873607e72e45  # lxd/storage/drivers/driver/ceph/utils: Removes getRBDFilesystem
+      git cherry-pick ab27482230a78e22eafc50430c4e2b4842c07985  # lxd/storage/drivers/driver/ceph: Replaces use of d.getRBDFilesystem with vol.ConfigBlockFilesystem
+      git cherry-pick 1feb5a4425deb56d7412a266991207b06255cef4  # lxd/storage/drivers/volume: Adds ConfigBlockMountOptions function
+      git cherry-pick a62e37a42dbca378a1d2006157f753828318157f  # lxd/storage/drivers/driver/ceph/utils: Removes getRBDMountOptions in place of vol.ConfigBlockMountOptions()
+      git cherry-pick 50d504dac969eb089efddce9c659961b399b5e84  # lxd/storage/drivers/driver/lvm/utils: Removes volumeMountOptions in place of vol.ConfigBlockMountOptions()
+      git cherry-pick e94d5c7ab8a1921a0e1161891cd7d5149298bd29  # lxd/storage/drivers: Replaces driver specific mount options resolution with vol.ConfigBlockMountOptions()
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
