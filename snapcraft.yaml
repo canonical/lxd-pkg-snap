@@ -991,6 +991,11 @@ parts:
       git cherry-pick a62e37a42dbca378a1d2006157f753828318157f  # lxd/storage/drivers/driver/ceph/utils: Removes getRBDMountOptions in place of vol.ConfigBlockMountOptions()
       git cherry-pick 50d504dac969eb089efddce9c659961b399b5e84  # lxd/storage/drivers/driver/lvm/utils: Removes volumeMountOptions in place of vol.ConfigBlockMountOptions()
       git cherry-pick e94d5c7ab8a1921a0e1161891cd7d5149298bd29  # lxd/storage/drivers: Replaces driver specific mount options resolution with vol.ConfigBlockMountOptions()
+      git cherry-pick 0491202b4b02d16cc336d9495e07f79375d1a528  # lxd/rbac: Don't close body when missing
+      git cherry-pick 5139e3ca54d1a880ecc8fbebd090665c3835e1b3  # doc/storage: Cover host/disk/loop setups
+      git cherry-pick 8a891692007848771d54b865e63978541a9b9718  # lxd/init: Tweak default loop sizing
+      git cherry-pick 02cf2eee9267cbdfe60a720c46f08316657e1a01  # lxd/vm: Rename some functions
+      git cherry-pick 0c606c071072ff706fd886bb9761198677e803bc  # client: Expand snap path in ConnectLXDUnix
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
