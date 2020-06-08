@@ -996,6 +996,7 @@ parts:
       git cherry-pick 8a891692007848771d54b865e63978541a9b9718  # lxd/init: Tweak default loop sizing
       git cherry-pick 02cf2eee9267cbdfe60a720c46f08316657e1a01  # lxd/vm: Rename some functions
       git cherry-pick 0c606c071072ff706fd886bb9761198677e803bc  # client: Expand snap path in ConnectLXDUnix
+      git cherry-pick af09a3f77da9fb611610acbbc03b38688eb1a5ba  # client: Fix ConnectLXDUnix regression
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
