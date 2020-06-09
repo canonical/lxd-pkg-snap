@@ -421,6 +421,7 @@ parts:
       - --enable-pie
       - --enable-rbd
       - --enable-seccomp
+      - --enable-spice
       - --enable-system
       - --enable-tools
       - --enable-vhost-crypto
@@ -435,16 +436,24 @@ parts:
     build-packages:
       - bison
       - flex
-      - pkg-config
+      - libaio-dev
       - libcap-ng-dev
       - libglib2.0-dev
       - libpixman-1-dev
-      - libaio-dev
       - librbd-dev
+      - libspice-server-dev
+      - pkg-config
     stage-packages:
       - genisoimage
+      - libgstreamer1.0-0
+      - libgstreamer-plugins-base1.0-0
+      - libjpeg-turbo8
       - libmagic1
+      - libopus0
+      - liborc-0.4-0
       - libpixman-1-0
+      - libsasl2-2
+      - libspice-server1
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
@@ -466,8 +475,16 @@ parts:
       - bin/qemu-system-*
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
+      - lib/*/libgstapp-*so*
+      - lib/*/libgstreamer-*so*
+      - lib/*/libgstbase-*so*
+      - lib/*/libjpeg*so*
       - lib/*/libmagic*so*
+      - lib/*/libopus*so*
+      - lib/*/liborc*so*
       - lib/*/libpixman*so*
+      - lib/*/libsasl2*so*
+      - lib/*/libspice-server*so*
       - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
