@@ -444,10 +444,10 @@ parts:
       - bison
       - flex
       - pkg-config
+      - libaio-dev
       - libcap-ng-dev
       - libglib2.0-dev
       - libpixman-1-dev
-      - libaio-dev
       - librbd-dev
     stage-packages:
       - genisoimage
