@@ -410,9 +410,47 @@ parts:
       - bin/uuidgen
       - share/openvswitch/
 
+  spice-protocol:
+    source: https://gitlab.freedesktop.org/spice/spice-protocol
+    source-type: git
+    plugin: meson
+    prime: []
+
+  spice-server:
+    after:
+      - spice-protocol
+    source: https://gitlab.freedesktop.org/spice/spice
+    source-type: git
+    plugin: meson
+    meson-parameters:
+      - --prefix=/
+      - -Dgstreamer=no
+      - -Dmanual=false
+      - -Dlz4=false
+      - -Dsasl=false
+      - -Dopus=disabled
+      - -Dsmartcard=disabled
+      - -Dtests=false
+    build-packages:
+      - libjpeg-turbo8-dev
+      - python3-pyparsing
+      - python3-six
+    stage-packages:
+      - libjpeg-turbo8
+      - libpixman-1-0
+    organize:
+      sbin/: bin/
+      usr/local/lib/: lib/
+    prime:
+      - lib/*/libjpeg*so*
+      - lib/*/libspice-server*so*
+      - lib/*/libpixman*so*
+
   qemu:
     after:
       - libseccomp
+      - spice-protocol
+      - spice-server
     source: https://git.qemu.org/git/qemu.git
     source-type: git
     source-tag: v5.0.0
@@ -428,6 +466,7 @@ parts:
       - --enable-pie
       - --enable-rbd
       - --enable-seccomp
+      - --enable-spice
       - --enable-system
       - --enable-tools
       - --enable-vhost-crypto
