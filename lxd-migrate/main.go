@@ -35,6 +35,10 @@ func run() error {
 		return fmt.Errorf("Data migration is only supported on Ubuntu at this time.")
 	}
 
+	// Unset the snap variables to avoid triggering wrong logic
+	os.Unsetenv("SNAP_NAME")
+	os.Unsetenv("SNAP")
+
 	// Validate that nothing depends on the current LXD
 	err := packagesRemovable([]string{"lxd", "lxd-client"})
 	if err != nil {
