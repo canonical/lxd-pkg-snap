@@ -441,6 +441,7 @@ parts:
       - libpixman-1-0
     organize:
       sbin/: bin/
+      usr/lib: lib/
       usr/local/lib/: lib/
     prime:
       - lib/*/libjpeg*so*
