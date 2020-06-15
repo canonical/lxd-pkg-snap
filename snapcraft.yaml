@@ -862,6 +862,17 @@ parts:
       git cherry-pick bfbd606e6f1cf33bb04ae10bbfadfa10907b9284  # Add test of lxc-usernsexec
       git cherry-pick e0344cfa43b3ae96e2ce029de2819561fb9a6313  # lxc-test-usernsexec: If user is root, then create and use non-root user.
       git cherry-pick 9d81b99a14cb95f649cdf39986f7bf74ef313f11  # .gitignore: Ignores COPYING file created by make
+      git cherry-pick b4c9fc149e14090cb47da21a97095e34837018ee  # macro: Adds UINT_TO_PTR and PTR_TO_USHORT helpers
+      git cherry-pick f36a519af927f5bf381e1a32a4698b16a0aba722  # network: Adds check for bridge link interface existence in instantiate_veth
+      git cherry-pick ebd26a19721482631e57cc985c5fec0ccee50185  # network: Updates netlink_open handling in lxc_ipvlan_create
+      git cherry-pick 5d2ce0b6dbe9642fb80553550ca942c73fd0307e  # network: Removes unused ip_proxy_args
+      git cherry-pick 1bb0804961b7bf1bd23ee6aec1c295a19805f12c  # cgroups: initialize lxc.pivot cpuset
+      git cherry-pick 18adfa20e072556a3df252da92ac5fd1ecb42347  # conf: remove faulty flags
+      git cherry-pick d3d1c6e112691440bf0cd9c3c0d8acdd92840540  # conf: always use target_fd in userns_exec_mapped_root()
+      git cherry-pick dd6ed3b07b22a36c3ab8834a4d151800b8def8d1  # conf: add some more logging to userns_exec_mapped_root()
+      git cherry-pick a993d4f1ad0469f174a56598dad1b8c9a05e4e62  # conf: kill old chown_mapped_root()
+      git cherry-pick 2989eb15e8984da912826d47d6bcb81f1c18358d  # lxccontainer: remove pointless string duplication
+      git cherry-pick e84f3ab7f70e0ca712ea3e537a81488531dee2f7  # containertests: fix null pointer defereference
 
       set +ex
       snapcraftctl build
