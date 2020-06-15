@@ -905,6 +905,25 @@ parts:
       git cherry-pick a7ec61a422951c9784032aa4481424bb4c2ec8e8  # proc_fuse: move get_reaper_busy() down
       git cherry-pick 03a51c6341df69e1c00088714a902d7a26f4a03f  # proc_fuse: cleanup proc_uptime_read() a little
       git cherry-pick a30d91ccf9bba1e2f4e0d528c7fa2c7cf41330f1  # utils: don't leak fds in in_same_namespace()
+      git cherry-pick 5e3ca4d305c70607f6018b0ea75626a03377dfda  # proc_fuse: improve swap calculation a little
+      git cherry-pick 4b754ca6b770f7e74e9993cb24e03c735396aa6f  # proc_fuse: don't cause invalid swap values
+      git cherry-pick 8fe0082efc24b651b8ccfee9f3a8b9c2e23d0518  # proc_fuse: cap swap to global values
+      git cherry-pick 8d609d80a6ae80a3a9b90ffc4a6f1911d9a0e3dd  # proc_cpuview: tweak cpuacct.percpu_usage fallback
+      git cherry-pick 37f75e5775669eb73ece706d4c85d5bec43eafb1  # proc_fuse: more swap tweaks
+      git cherry-pick 7f3c85f75c518230f600bb2452c9d0e45be8c104  # proc_cpuview: cleanup new_proc_stat_node()
+      git cherry-pick 2820f6a135ab3711737b4c57e650659992cd5f1d  # proc_cpuview: use more descriptive labels in add_proc_stat_node()
+      git cherry-pick 73be370813e95863972a987b20f8e915afbf25d0  # proc_cpuview: reduce variable scope in cpuview_free_head()
+      git cherry-pick d582b91a1c10f57e6ffacee8d2ffea9d4400da2a  # proc_cpuview: cleanup add_proc_stat_node()
+      git cherry-pick 39243bb92d14c24b48e1215c287a272e28fcf984  # proc_cpuview: use correct comment style
+      git cherry-pick e76740ef34ff35d9b60e37c8e842d56022cb77a9  # proc_cpuview: clean up expand_proc_stat_node()
+      git cherry-pick a25bf140a76b882a1f819a934b2d9939e167511d  # proc_cpuview: clean up prune_proc_stat_list()
+      git cherry-pick d3a4e743edf6008027fe0311ac22eddcc931fb41  # proc_cpuview: clean up find_or_create_proc_stat_node()
+      git cherry-pick 6e48e6792802066ee326d8d30f30e4a0e508d952  # proc_cpuview: cleanup add_cpu_usage()
+      git cherry-pick a407f7976ec5b18f745cc8ea2506696b671557d9  # proc_cpuview: cleanup read_cpu_cfs_param()
+      git cherry-pick 7128a36e0ad7a4d253ca47db12e993fc528a7545  # proc_cpuview: fix exact_cpu_count()
+      git cherry-pick 8935c30ed176f1e38751dbd3af5528b0bee2162d  # proc_cpuview: fix max_cpu_count()
+      git cherry-pick f2adcbe9fa0d75b80777c95078bdb82d4118f317  # proc_cpuview: cleanup cpuview_proc_stat()
+      git cherry-pick 5f44974ac86f738b99a52de064fc69448498ac41  # proc_cpuview: cleanup cpuview_init_head()
 
       set +ex
       snapcraftctl build
