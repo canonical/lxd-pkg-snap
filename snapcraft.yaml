@@ -565,7 +565,7 @@ parts:
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
-    source-tag: v0.8
+    source-tag: v1.0.0
     plugin: autotools
     build-packages:
       - liblzma-dev
