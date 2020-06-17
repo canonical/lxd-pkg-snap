@@ -1113,6 +1113,12 @@ parts:
       git cherry-pick 33eb77f92810df43126359773d97a5b082690e17  # lxd/projects: Properly clear empty keys
       git cherry-pick 698c63a0434a40251fb0d0ff5bca49d1fdcdd1bc  # lxd/db: Add missing feature to default project
       git cherry-pick e03b568c88b96247325c65b57fbe5368debfc5b6  # lxd/instance/drivers/driver/qemu: Pass-through GPU VGA mode status from host
+      git cherry-pick 9679d8cd094f93be09fed09608b9b87f2f1548b1  # lxd/storage/drivers/driver/zfs/volumes: Remove snapshot when migrating as main volume
+      git cherry-pick 7eccacb73fa8a0b6ac1d3237d61abec8b8e4eb3d  # lxd/cluster/heartbeat: Fix race in HeartbeatNode
+      git cherry-pick bfa1777bca49e42ab6208af3e21096818a196246  # lxc/console: Split Console to own function
+      git cherry-pick 1797bdd7b52392942c789f4d4d4a90279af8a7a0  # lxc/start: Allow direct console attach
+      git cherry-pick d6a8dcd728b618cca893b47157f671b89595c412  # i18n: Update translation templates
+      git cherry-pick 476842edecf769aeb99a3711c49ccca0dd73cf9a  # lxd/instance/drivers/driver/qemu: Only enable GPU vga mode on x86_64 systems
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
