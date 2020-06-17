@@ -1640,6 +1640,91 @@ parts:
       git cherry-pick 253cef6fe40ff6f4dde0a64b9ca46504fcbf0044  # lxd/firewall/nft: Enhance support detection
       git cherry-pick ae5a52ba3ca68257e07b1867ca30fe0149224d78  # Fix regression in GetImageFromAnyProject
       git cherry-pick c7b408f816197ce0dc0fc5b688606dea51bb91c0  # doc/security: Adds notes about IPv6 router advertisement security
+      git cherry-pick ff1f801850b4de456e3e938d78115de89b520fde  # lxd/device/nic: Changes nicValidationRules to properly validation vlan
+      git cherry-pick 2835ee6bfacc45814e8defd5fc9b48658c3996bf  # lxd/device/nic/bridged: Adds revert for veth pair cleanup on error
+      git cherry-pick 306fefb1d631e515f59abb385692cb1a5e1be1b7  # lxd/firewall/drivers/drivers/xtables: Drops tagged vlan frames when using IP filtering
+      git cherry-pick 1a7d92625e487d3f377182032551bb8aa488035e  # lxd/firewall/drivers/drivers/nftables: Drops tagged vlan frames when using IP filtering
+      git cherry-pick 88e564226fa244eb6393f333bf8de504a6a7ef8f  # lxd/network/network/utils: Improve comments on ovs switch attach/detach
+      git cherry-pick ae2f69f5e45f9394efff8291e7e5e9f722407419  # lxd/network/network/utils: Improves arg name in network attach/detach functions
+      git cherry-pick e783121c0c6032137b84132a9d5af84e0dd1e677  # lxd/device/bic/bridged: Fixes openvswitch port leak when device is stopped
+      git cherry-pick cff5ba2c997b67be72c3db50ed1292df576a52e0  # lxd/network/utils: Adds IsNativeBridge function
+      git cherry-pick 1abb2bc759c001f29a33d7c721a441beecc4e272  # lxd/maas: Fix support for multiple subnets
+      git cherry-pick ce36d614efb2600de69007a7695d2cf7c721417d  # lxd/maas: Support projects
+      git cherry-pick 5b7675cb71d1d4516ba3b135d54a63fa3dc4a1ec  # lxd/dnsmasq: Add project suffix
+      git cherry-pick e201239a2fe10bd83f34357c4fc40bf452b957d1  # Remove incorrect statement about supported network devices with virtual machines According documentation supported types with virtual machines are physical, bridged, macvlan, p2p, sriov
+      git cherry-pick 04522de5f44d0d3873fa6698e29f03c416a34aa4  # lxd/rbac: Fix auth for non-RBAC trusted clients
+      git cherry-pick a0cdcfc54c93385345f1ec9b3a29267b5345d6a5  # global: Add riscv64 to build tags
+      git cherry-pick fbc1c3aa9beac821071cfdef619c6b4c92497562  # Stop using Driver.SetContextTimeout() which is a no-op
+      git cherry-pick 7568c6eca8e9bc56c9abeb6948d967bd7d27d6a2  # use the coreos fork of boltdb since the original is archived/abandoned
+      git cherry-pick 6314ebb6dd77f4add64236ab78c40378155f3abe  # lxd/device/device/utils/network: Adds networkValidVLAN and networkValidVLANList functions
+      git cherry-pick 978e08e7beab4159f677260b1b607ec72202bde7  # lxd/device/device/utils/network: Allow VLAN ID 0 in networkValidVLAN
+      git cherry-pick 4c4d4e1bf63da9ae8044b2e23679a02cb46f39aa  # lxd/instance/drivers/driver/lxc: Adds debug logging to deviceStop
+      git cherry-pick 24d94c87dd9e2ab99d087fbd20fcdf1a9e288829  # lxd/instance/drivers/driver/lxc: Adds driver revert on failed start in startCommon
+      git cherry-pick d54908de19d5277830733f6c5fa97e2d6918ccf8  # lxd/instance/drivers/driver/qemu: Adds debug logging to deviceStop
+      git cherry-pick 30fd7cd1e9f830701550f1015ec7be25179ae934  # lxd/instance/drivers/driver/qemu: Simplifies failed start device cleanup in Start
+      git cherry-pick 48f03ef150cfbc2ab7ababde64758fe3cbdadf05  # lxd/storage/drivers/driver/ceph/utils: Removes getRBDFilesystem
+      git cherry-pick 1a9e8de97962fe5a4a955e15ff77b54bf0a49ef6  # lxd/storage/drivers/driver/ceph: Replaces use of d.getRBDFilesystem with vol.ConfigBlockFilesystem
+      git cherry-pick 75a29f7884e65c1c4c556aa11fd0b4f71b2d6cac  # lxd/storage/drivers/volume: Adds ConfigBlockMountOptions function
+      git cherry-pick 5681bc0ab8cecd88bd2248c6b8422df02433d72b  # lxd/storage/drivers/driver/ceph/utils: Removes getRBDMountOptions in place of vol.ConfigBlockMountOptions()
+      git cherry-pick 35d15f25e7b8a2d2d4894c7b49aed1e7750b936f  # lxd/storage/drivers/driver/lvm/utils: Removes volumeMountOptions in place of vol.ConfigBlockMountOptions()
+      git cherry-pick a96215cf1b21ba1b7df88eb71c6efa05d13b12cf  # lxd/storage/drivers: Replaces driver specific mount options resolution with vol.ConfigBlockMountOptions()
+      git cherry-pick 1ae05ee5227b951e314bc6fd5a369b90ed76e0ae  # shared/api: Extend NetworkState for bridge/bond
+      git cherry-pick cc72853999e795dc38457a186b2fa2334a43075d  # lxd/rbac: Don't close body when missing
+      git cherry-pick 180c611d2045e434c19a8782c07fb07564ea98f0  # doc/storage: Cover host/disk/loop setups
+      git cherry-pick aa9a4b9a660af9fde79f5e8ad63a355d2c860885  # lxd/init: Tweak default loop sizing
+      git cherry-pick 8110ff3431ec59d5d79964aa3e76bbf04025e962  # lxd/vm: Rename some functions
+      git cherry-pick abdaf89b9b52786b77b2f905b874afffb2f1b55c  # client: Expand snap path in ConnectLXDUnix
+      git cherry-pick 5a762a54ecc17180fad519d3dafcb4e553ba50d2  # client: Fix ConnectLXDUnix regression
+      git cherry-pick 2fdfeeb35f6712610b708761010e6a5dd4d7bd2c  # lxd/vm: Fix PCIe slot for physical/sriov nic
+      git cherry-pick 0ea5bcff63968de3666cc9e781517fd5ee630d4e  # lxd/vm: Add virtio-vga card
+      git cherry-pick 6a425e66c7e95b345be7dd4d76dfdee117dd5a1f  # lxd/vm: Add spice channel
+      git cherry-pick 9f7a5c7bfbc557b5b618428834e8ea220318020e  # lxd/instance/drivers/driver/qemu: Integrates built in GPU device PCI range with future passthrough GPU devices
+      git cherry-pick 335ef67dff4bd0f810c399e89258bae30e27ae3d  # lxd/instance/drivers/driver/qemu/templates: Updates built in GPU device to use GPU address range prefix
+      git cherry-pick 88b8dc9f03e3c8324339d87b535d589a0d9fa5c3  # lxd/vm: Move to separate devices
+      git cherry-pick ad619ebdb8bb2a284297fb1b59c2b965e82a08f2  # lxd/vm: Remove tiny wrapper functions
+      git cherry-pick 13e3be288f91f1126d0fe0e1c769292e965e642f  # lxd/vm: Per-architecture bus type
+      git cherry-pick 3e03c62f65595288f2d3853f718e5c33df9c5fbe  # add type to specify the instance type on creation Signed-off-by: Salem Yaslem <s@sy.sa>
+      git cherry-pick af747cf64f0bb829d83478ee1b0ec76820d2b29c  # lxd/vm: Centralize port generation
+      git cherry-pick 391309ac854c99df914488f9694af819ed727110  # lxd/device: Sort nic devices ahead of others
+      git cherry-pick cd3e6421b95d5b5a3fb07fa8cfa65f1f078a9d4e  # lxd/device/device/utils/generic: Adds PCI management functions for overriding driver
+      git cherry-pick 95164c6bdbf39aa19dd251315658c13f0a008d58  # lxd/device/device/utils/network: Removes network specific PCI bind/unbind functions
+      git cherry-pick f66b8c1348580d89d9fde8e1d2a932f9983c0353  # lxd/device/nic/physical: Updates to use generic PCI management functions
+      git cherry-pick 8bb588494080f1f9077360ebbbdcb303117af423  # lxd/device/nic/sriov: Updates to use generic PCI management functions
+      git cherry-pick 91807787950b79b6e1bec06ec8bb91ea40aa451a  # lxd/vm: Separate template keys in global/local
+      git cherry-pick adcc822fbe6a992b0d659e00619ae1c6622b670a  # lxd/vm: Use virtio-gpu-pci on non-x86
+      git cherry-pick 1311f3759b9ed110763dbbbe9522b3c2faa70f50  # lxd/vm: Rename qemuVGA to qemuGPU
+      git cherry-pick 3acfee2365025df1db563dd569244eb168c8d395  # lxd/vm: Add virtio-input keyboard/mouse
+      git cherry-pick 5c3da0230dbc3616b1978eea36f60939344b3ebb  # lxd/vm: Move bus allocator to own file
+      git cherry-pick 6ca8cc0a63f4a3405fe26c58c1509f17d48ffa17  # lxc/volume: Fix typo in help message
+      git cherry-pick 52a49e68140b5879166a84d156a336867ccedf66  # lxc/snapshot: Allow using snapshot delimiter
+      git cherry-pick e89e90a2a3ed1655952dbb5ff6dc24c9302899f9  # doc/instances: Updates GPU device docs to show VM support
+      git cherry-pick 5ac38666b246d5d468dbb6809c1aa5ab82b2c38a  # lxd/device/gpu: Updates validation for VM support
+      git cherry-pick 46bca5374f0d482fd6ff56b48e24947db6d9425e  # lxd/device/config/device/runconfig: Adds GPU field to RunConfig
+      git cherry-pick e5ba00c7aa94c92a0ff4c0c0f215bd3f91e2f8b7  # lxd/device/device/utils/generic: pciDeviceDriverOverride only check for driver binding if specified
+      git cherry-pick 868f0b6401df9a4027dfdbcf83358d0e866b89dd  # lxd/device/gpu: Adds VM GPU passthrough support
+      git cherry-pick d31c31d66044da41c8808070990a700b748601e1  # lxd/instance/drivers/driver/qemu/templates: Consistent naming and casing for net dev templates
+      git cherry-pick 788a9718b1f2e1720622a5948a540c7bc67895c7  # lxd/instance/drivers/driver/qemu: Consistent net dev naming usage
+      git cherry-pick bdd4ca59be7ecb23c68e18c9ce28f65fa3f44b61  # lxd/instance/drivers/driver/qemu/templates: Adds qemuGPUDevPhysical template
+      git cherry-pick 4433582e16de723014727a3a8f89f572be7a3ce2  # lxd/instance/drivers/driver/qemu: Adds GPU passthrough support
+      git cherry-pick c57c1811f256b312056a706dc477bf9929bd61c3  # lxd/instance/drivers/driver/qemu/bus: Adds comments, clarifies var names, and constants for defined multi-function groups
+      git cherry-pick d1616448e66abbeee8eea23dba13d14e7b2c0c95  # lxd/instance/drivers/driver/qemu: Switches to multi-function group constants and adds comments
+      git cherry-pick cf65bb0a25218d081c256b05d3b86af5246fda77  # lxd/instance/drivers/qmp/monitor: Allow serial char device name to be passed in
+      git cherry-pick a1a08a942397143489d60c7fa83bf7ecf71ae3e5  # lxd/instance/drivers/driver/qemu: Defines qemuSerialChardevName to share with qemu and qmp
+      git cherry-pick d8043170636e891e60a4ad68aa9f1daa11c20293  # lxd/instance/drivers/driver/qemu: qemuSerialChardevName usage
+      git cherry-pick fe5acff0573369298789584c1e2b2fe76df19114  # lxd/instance/drivers/driver/qemu/templates: Add serial chardev name injection
+      git cherry-pick b5de6258f9dbaac002207a3ce3eb5ed3df90d3bd  # lxd/storage/quota/projectquota: Only set quota on directories and regular files
+      git cherry-pick 1234dff89f61ff087cd8f921725e76468fc263a4  # lxd/db: Automatically strip ?project=default
+      git cherry-pick d8c1957200bcd415f1de60906262670e5cf068e3  # lxc/action: Properly handle --all with remotes
+      git cherry-pick 61c24fe61d52483feb2e4d9023198f6a36d1ed04  # lxd/projects: Properly clear empty keys
+      git cherry-pick fc2d0347c2c3bfae3b44c6cef053ff565899b7b9  # lxd/db: Add missing feature to default project
+      git cherry-pick 1cb5fdbf89ff41db427d744da313a6433d8681d0  # lxd/instance/drivers/driver/qemu: Pass-through GPU VGA mode status from host
+      git cherry-pick 4118a80aa54d9926a62fa2a2837f44ecabadca41  # i18n: Update translation templates
+      git cherry-pick 9235d9f4569440d4c1277cce97f43e052592af57  # lxd/storage/drivers/driver/zfs/volumes: Remove snapshot when migrating as main volume
+      git cherry-pick ac0dafca47c1d7db3a662ff48bf3a2cc37e2fe1f  # lxd/cluster/heartbeat: Fix race in HeartbeatNode
+      git cherry-pick d5fba659854293418ab48c6581bfd0ebf3655924  # lxc/console: Split Console to own function
+      git cherry-pick f0caa2f4b11e045bd3497fd32adb7e7ddb891c24  # lxc/start: Allow direct console attach
+      git cherry-pick 621ebe3e7431233ba7a5731cbb53ab6a241e9af6  # i18n: Update translation templates
+      git cherry-pick 299577bc3c24bbbd81d4282ba417a0eb0646ad79  # lxd/instance/drivers/driver/qemu: Only enable GPU vga mode on x86_64 systems
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
