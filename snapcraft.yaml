@@ -873,6 +873,14 @@ parts:
       git cherry-pick a993d4f1ad0469f174a56598dad1b8c9a05e4e62  # conf: kill old chown_mapped_root()
       git cherry-pick 2989eb15e8984da912826d47d6bcb81f1c18358d  # lxccontainer: remove pointless string duplication
       git cherry-pick e84f3ab7f70e0ca712ea3e537a81488531dee2f7  # containertests: fix null pointer defereference
+      git cherry-pick 148e709eda800b650837b59ec851a4e8620ef4e8  # tree-wide: use "ptmx" and "pts" as terminal terms
+      git cherry-pick 2e5e77c522dfd19c60fd773e8e2401d1d60a1ef6  # tree-wide: wipe references to questionable apis from our public logs
+      git cherry-pick 8254704dab55f531e2cc6714e3a9a45f90931a5a  # tree-wide: use "primary" in networking code
+      git cherry-pick 51eccacbcfb2334895e07aecdebc7196da6efe14  # network: Rename primary to master
+      git cherry-pick 1478a2fcbcc166198221cd9926b10b2d85be7604  # openpty: adapt variable naming
+      git cherry-pick b15eb500ce92e071c4ca2a31e539cb3b7ae28d98  # CODING_STYLE: adapt code example
+      git cherry-pick 0332ef2c17374545fb349031cc20d406bdc45f63  # doc: update terminology
+      git cherry-pick 04e0ad4e95e4bc2e48904869347650131f05c1ce  # test: update terminology
 
       set +ex
       snapcraftctl build
