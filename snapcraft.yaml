@@ -1684,6 +1684,30 @@ parts:
       git cherry-pick f0caa2f4b11e045bd3497fd32adb7e7ddb891c24  # lxc/start: Allow direct console attach
       git cherry-pick 621ebe3e7431233ba7a5731cbb53ab6a241e9af6  # i18n: Update translation templates
       git cherry-pick 299577bc3c24bbbd81d4282ba417a0eb0646ad79  # lxd/instance/drivers/driver/qemu: Only enable GPU vga mode on x86_64 systems
+      git cherry-pick d0c46e7e52fe94727710c8df42c6dc88c6393616  # lxd/resources: Fix golint warning
+      git cherry-pick 4502ab7db814cfb0aafc7cb901b9e5008fc93f0a  # doc/api-extensions: Fix escaping
+      git cherry-pick f384294e89d5877d93f70ee93661b9560c6e6917  # api: resource_cpu_isolated
+      git cherry-pick e1ce4de264e070a5b412d32cf1e3db3f7375a7ba  # lxd/resources: Add Isolated property
+      git cherry-pick 9f1dd22f8206526628adcb0b9d92197955f9b7ee  # lxd/resources: Don't use shared
+      git cherry-pick e1b4a1d5998a411e79e08c1bf456b293b3935807  # lxd/devices: Use resources for cpuset parsing
+      git cherry-pick a277ab92949eff67aeee417e0e8bde1f6e225692  # lxc: Don't over-escape URLs
+      git cherry-pick 502b5f23b8dc97afa80025b350001855e6c7a436  # lxd: Don't over-escape URLs
+      git cherry-pick e2a3a0f631e1291eb1aa8be89d106e7b8de8e156  # lxd/db/storage: Rework UsedBy for pools
+      git cherry-pick 2ef436ce15ccc8be8ef9dc2173694d7e27a29c9e  # lxd/instance/drivers/driver/qemu: Adds trans=virtio to 9p mounts
+      git cherry-pick 78c20f259a9b510e1bb19b239901f5de4e1fb0b1  # lxc/action: Also add --console to restart
+      git cherry-pick f81cfc289a6cfd9dbfd17774a39bb036b60038af  # lxd/resources/net: More flexible PCI detection
+      git cherry-pick ecf302d56da389d36f34a40dad5263c6e3d29e5a  # lxc/query: Add path check
+      git cherry-pick b9ee9d7ca7b4167326445f6991438fb236f050d8  # i18n: Update translation templates
+      git cherry-pick 094d682f63f7f8be02b6925a5226428d0cb49f65  # tests: Fix bad lxc query call
+      git cherry-pick 3964471f3fba70cd4c0cd0111a7ae3dcee033957  # lxd/storage-pools: Tweak UsedBy URLs
+      git cherry-pick ee95b148ad4a8bfdbef138b1ee8d80b05208a46e  # lxd/db: Tweak joins
+      git cherry-pick a2dc59deb5ff5e7f866a4cfb2ac46ceacea7feb1  # lxd/db: Fix UsedBy on projects
+      git cherry-pick 7e4b9f786cdc0a02e7c273e537b8cadae939ee8a  # lxd/storage_volumes: Fix UsedBy
+      git cherry-pick c697cd4b00cd8cb91ebc20a7a761f1b1f931f897  # api: usedby_consistency
+      git cherry-pick c72b8261ba30e3ba3e8a5af65f33226e2bf5007e  # lxd-agent/main/agent: Fix 9p mount when relative target path is supplied
+      git cherry-pick 2a28531a2cd2578623e199ff5ea8d9200c7fb0e3  # test: Updates udhcpd args to ensure process quits one lease acquired
+      git cherry-pick 4a9658c44c97704d384498363153207b20352ccb  # util_linux: update terminology
+      git cherry-pick 1d7e8aa4bc5c3651f2b06fcfecf4b9b11153a1a0  # lxd/networks: Reports profiles in UsedBy
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
