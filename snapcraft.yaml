@@ -1124,6 +1124,11 @@ parts:
       git cherry-pick 8b775614f39f1f9a16c4351271992f94d77f90fd  # lxd/db: Make GetStoragePool() return an error if the pool is pending
       git cherry-pick fc97dd031455d388bbd162172e0cc91ec892af00  # lxd/db: Rename StoragePoolCreatePending to CreatePendingStoragePool
       git cherry-pick 7599ff5834c4e0fedb3870a35ff457d342b2d1d8  # lxd/firewall: Filter unwanted ethernet frame types when IP filtering is enabled
+      git cherry-pick 1182a8a87ed7b2b135939b39a6d7a46aad36da96  # lxd/storage/drivers: Bump VM fs size to 100MB
+      git cherry-pick 64f7dab6944ac1d144edc794809c76a8e2a544bf  # lxd/db: Fix UsedBy for profiles on storage pools
+      git cherry-pick 4352efdad4a40afa0005fe9916147a4dd1fe3566  # lxd/storage: Use Truncate to create/grow VM files
+      git cherry-pick cf0a8fbccd441902431628427f877ac39eabbdc1  # lxd/db: Consider personalities in GetNodeWithLeastInstances
+      git cherry-pick 8bc058e036b09460f224fc4b74c2ceae9ee5d9a6  # lxd/db: Avoid test failure in arch matching
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
