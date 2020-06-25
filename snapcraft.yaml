@@ -881,6 +881,9 @@ parts:
       git cherry-pick b15eb500ce92e071c4ca2a31e539cb3b7ae28d98  # CODING_STYLE: adapt code example
       git cherry-pick 0332ef2c17374545fb349031cc20d406bdc45f63  # doc: update terminology
       git cherry-pick 04e0ad4e95e4bc2e48904869347650131f05c1ce  # test: update terminology
+      git cherry-pick a94c4a6dfb92e282d6d547d91876d8e5a5b9c4ec  # lxccontainer: fix non-blocking container stop
+      git cherry-pick e72336a52c9af6bd0d00bee877246fce530dc61c  # lxc-net: Set broadcast
+      git cherry-pick 53838b018d53b65eb91e1fa40ef35ea9c2df3661  # commands: don't flood logs
 
       set +ex
       snapcraftctl build
