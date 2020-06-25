@@ -1713,6 +1713,28 @@ parts:
       git cherry-pick 2a28531a2cd2578623e199ff5ea8d9200c7fb0e3  # test: Updates udhcpd args to ensure process quits one lease acquired
       git cherry-pick 4a9658c44c97704d384498363153207b20352ccb  # util_linux: update terminology
       git cherry-pick 1d7e8aa4bc5c3651f2b06fcfecf4b9b11153a1a0  # lxd/networks: Reports profiles in UsedBy
+      git cherry-pick 95112d03a23f8116045157ba2ed475dcf9f77460  # lxd: Fix snapshot index retrieval
+      git cherry-pick 9468e3ae14573c491229f1d5bf78ae21a62d2548  # lxd/backups: Use backups dir for unpack
+      git cherry-pick 0e4aba5dc740b291b60cea40c015c37c106ab3da  # lxd/vm: Add udev rule fallback
+      git cherry-pick 2ec9d73356041fcf58bfb3547be19893996fab58  # lxd/images: Set arch names when downloading
+      git cherry-pick 06da24ea3867b4d87f0f67b6811543899a62bb35  # lxd: More flexible compression algorithms
+      git cherry-pick 8248a17df1f12b27a989f134d53288507d1927a5  # tests: Add test for compression options
+      git cherry-pick dea03f7030df06068a8e750046f647d85f9b4180  # doc/rest-api: Rename rootfs to root
+      git cherry-pick 7f3bf790e5a4bc173c45227c1c8a30dc6c70351f  # doc/rest-api: Fix instance PATCH example
+      git cherry-pick 01058562df8a43a21b15c31be3ecbde40f6d4784  # lxd: Fix building with clang
+      git cherry-pick bdc97233557c2a656cefc47f05e8539e798a435b  # lxd/db: Add missing criteria for querying a specific public image
+      git cherry-pick cc31234707d990d3700c6474f69565acd866f431  # lxd/db: Add the Errored storage state when rendering the Status field
+      git cherry-pick 18fd75d907b2b7baeb07ce3e856b2c4eb2c94fe5  # lxd/cluster: If raft node 1 gets remove during recovery, add it back
+      git cherry-pick b21433ed15189b95cb72d8a2f06e3a90712ba6f3  # lxd/db: Make GetNework() return an error if the network is pending
+      git cherry-pick 24bbcde2e3f77ac3205a470c986856338d727d78  # lxd/db: Rename NetworkCreatePending to CreatePendingNetwork
+      git cherry-pick 6d9733ba8400e79a7a99b074d37b96363f245cf8  # lxd/db: Make GetStoragePool() return an error if the pool is pending
+      git cherry-pick f42b55983b990a721a9018a53c63dbd4ebab4801  # lxd/db: Rename StoragePoolCreatePending to CreatePendingStoragePool
+      git cherry-pick 68576a8adc7457e5801adb0c93e08cf30ef57230  # lxd/firewall: Filter unwanted ethernet frame types when IP filtering is enabled
+      git cherry-pick 1ce0fd8e4cda7999b2eb01559f077974aa89fa0e  # lxd/storage/drivers: Bump VM fs size to 100MB
+      git cherry-pick 437ac5b722fae1897533f63f388e05d85403b2d4  # lxd/db: Fix UsedBy for profiles on storage pools
+      git cherry-pick 6ee3abfdab39acb79f920b29cc3fbebe7372deac  # lxd/storage: Use Truncate to create/grow VM files
+      git cherry-pick 076371a0719f5998cbb1a9fed15a5133d1ae87fb  # lxd/db: Consider personalities in GetNodeWithLeastInstances
+      git cherry-pick f905276cbad7ec945fa40e15c45dc90c638eea49  # lxd/db: Avoid test failure in arch matching
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
