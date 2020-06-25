@@ -927,6 +927,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick a6ab8435849cb71b8c8eff6ceeb24cae06fb3e77  # proc_fuse: provide host values when kernel does not support swap accounting
+
       set +ex
       snapcraftctl build
       set -ex
