@@ -1129,6 +1129,13 @@ parts:
       git cherry-pick 4352efdad4a40afa0005fe9916147a4dd1fe3566  # lxd/storage: Use Truncate to create/grow VM files
       git cherry-pick cf0a8fbccd441902431628427f877ac39eabbdc1  # lxd/db: Consider personalities in GetNodeWithLeastInstances
       git cherry-pick 8bc058e036b09460f224fc4b74c2ceae9ee5d9a6  # lxd/db: Avoid test failure in arch matching
+      git cherry-pick 83cbe4880b3578be47e7c29da2b4ca0b1039136d  # lxd/storage: Better handle broken volumes
+      git cherry-pick f895b0c937a27d27ac82cfd34492f4b0d0b09054  # client: Handle unknown image sizes
+      git cherry-pick 6575b2dd9b9ec386b1ab12943fee513870f9dffe  # lxd/response: Stream multi-part responses
+      git cherry-pick 7ea6e47995bac2a0a16f07180d85be50362083cc  # lxd/device/disk: Fixes cloud-init errors for VMs
+      git cherry-pick 7a63face42c056f026305590fd7a2077edf17b41  # lxc/action: Show usage on missing target
+      git cherry-pick 2c070cb76f534ef0505088b79edc441abe13636b  # lxd/storage: Rely on UsedBy for deletion error
+      git cherry-pick d1778322a98e895c100dba20ba0fcb5523c29736  # lxd/instances/qemu: Use images dir during compression
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
