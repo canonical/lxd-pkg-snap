@@ -1066,6 +1066,13 @@ parts:
       git cherry-pick 7a63face42c056f026305590fd7a2077edf17b41  # lxc/action: Show usage on missing target
       git cherry-pick 2c070cb76f534ef0505088b79edc441abe13636b  # lxd/storage: Rely on UsedBy for deletion error
       git cherry-pick d1778322a98e895c100dba20ba0fcb5523c29736  # lxd/instances/qemu: Use images dir during compression
+      git cherry-pick 0b303506ced1643bdb45db024fb0c92de0cec682  # lxd/storage/drivers: Rename fs to filesystem
+      git cherry-pick 0b17e0fb6b8bb717df4cc6c9f83f359ed0c0251a  # shared/api: Add ContentType to storage volume structs
+      git cherry-pick 496ceeb966d88a3b2ac0d7191d35f7a3280dd9a5  # client: Support custom block volumes
+      git cherry-pick 571caeb86d7b4aabee84ebc1fb83e610b4e07031  # lxd/util: Detect hugetlbfs mount point
+      git cherry-pick aa1130d3cb8ceae1d20a733fe475763d500d0226  # lxd/cluster: Always check for dqlite protocol version mismatches
+      git cherry-pick 37fa0d026640df6074fd1973f3d169d55f8d7ab9  # lxd/cluster: Don't run unncessary HEAD probe upon dqlite connections
+      git cherry-pick 53394604dd7a00133f1a80044906ef31429cf05f  # forksyscall: use nsids for shiftfs syscall intercepts
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
