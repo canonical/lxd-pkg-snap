@@ -945,6 +945,21 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 9354c691d1fd6b7572221e20dbc4b9db04db4528  # lxd/storage: Better handle broken volumes
+      git cherry-pick 8d6d7a5bea7ceeec1238a8425cd48f8b80fb0cca  # client: Handle unknown image sizes
+      git cherry-pick 561cacfc9f1566b83eeaa7ed21594d34735efdbe  # lxd/response: Stream multi-part responses
+      git cherry-pick 32d81d5d7cd46cf49ffc9a2cbf552fa6528a7fe3  # lxd/device/disk: Fixes cloud-init errors for VMs
+      git cherry-pick 7f1455ceb34d860acf4417c037906e37fd2bcfbd  # lxc/action: Show usage on missing target
+      git cherry-pick 4dbe476d73eecf9923bda3fc16c88b4e3ae55f2c  # lxd/storage: Rely on UsedBy for deletion error
+      git cherry-pick e846784945aa5c2c2138ef7610ff638ad760d3e6  # lxd/instances/qemu: Use images dir during compression
+      git cherry-pick db714475b24a03ce396493c3bac7be721fa87dc3  # lxd/storage/drivers: Rename fs to filesystem
+      git cherry-pick a11e96096f80b78fa3c694e4968ae40cc0547cc4  # shared/api: Add ContentType to storage volume structs
+      git cherry-pick ee87e41054bd6d6da8b1b1b848a3933bb8caa236  # client: Support custom block volumes
+      git cherry-pick 15042ffed0cc5052e78b5fb57fc5495e7df773b4  # lxd/util: Detect hugetlbfs mount point
+      git cherry-pick b14c85d235d821a1bc81153e32d3e5a7e48791a0  # lxd/cluster: Always check for dqlite protocol version mismatches
+      git cherry-pick bae0119c3fb8d245ac3066f672afdf96fb2ce287  # lxd/cluster: Don't run unncessary HEAD probe upon dqlite connections
+      git cherry-pick 1a62ad65e355058ad2c79d05da7a599b00520057  # forksyscall: use nsids for shiftfs syscall intercepts
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
