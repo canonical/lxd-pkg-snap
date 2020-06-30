@@ -1073,6 +1073,9 @@ parts:
       git cherry-pick aa1130d3cb8ceae1d20a733fe475763d500d0226  # lxd/cluster: Always check for dqlite protocol version mismatches
       git cherry-pick 37fa0d026640df6074fd1973f3d169d55f8d7ab9  # lxd/cluster: Don't run unncessary HEAD probe upon dqlite connections
       git cherry-pick 53394604dd7a00133f1a80044906ef31429cf05f  # forksyscall: use nsids for shiftfs syscall intercepts
+      git cherry-pick 59f0885fd05d7cd3e4edbb88096536cd5d1218d8  # lxd/db: Drop ClusterRoleDatabase records from the database
+      git cherry-pick 9a8adafa2356c69a3272278bdd557412d9012d7e  # lxd/cluster: Fetch database role information directly from raft
+      git cherry-pick 7f28fe06cf7888589e8d4fdaa65d537490c45438  # lxd/storage: Fix regression in truncate handling
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
