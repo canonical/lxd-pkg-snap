@@ -1076,6 +1076,7 @@ parts:
       git cherry-pick 59f0885fd05d7cd3e4edbb88096536cd5d1218d8  # lxd/db: Drop ClusterRoleDatabase records from the database
       git cherry-pick 9a8adafa2356c69a3272278bdd557412d9012d7e  # lxd/cluster: Fetch database role information directly from raft
       git cherry-pick 7f28fe06cf7888589e8d4fdaa65d537490c45438  # lxd/storage: Fix regression in truncate handling
+      git cherry-pick c7310469e7ee1b85e74196354c70d4ffa632060c  # lxd/cluster: Only look up raft_nodes for resolving the address of node 1
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
