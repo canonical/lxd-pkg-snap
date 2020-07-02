@@ -465,6 +465,7 @@ parts:
       - --enable-cap-ng
       - --enable-kvm
       - --enable-linux-aio
+      - --enable-numa
       - --enable-pie
       - --enable-rbd
       - --enable-seccomp
@@ -487,11 +488,13 @@ parts:
       - libaio-dev
       - libcap-ng-dev
       - libglib2.0-dev
+      - libnuma-dev
       - libpixman-1-dev
       - librbd-dev
     stage-packages:
       - genisoimage
       - libmagic1
+      - libnuma1
       - libpixman-1-0
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
@@ -515,6 +518,7 @@ parts:
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
       - lib/*/libmagic*so*
+      - lib/*/libnuma*so*
       - lib/*/libpixman*so*
       - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
