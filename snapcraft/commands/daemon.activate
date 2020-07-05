@@ -30,15 +30,6 @@ echo "==> Loading snap configuration"
 # shellcheck disable=SC1090
 . "${SNAP_COMMON}/config"
 
-# Wait for appliance configuration
-MODEL="$(chroot /var/lib/snapd/hostfs/ snap model --assertion | grep "^model: " | cut -d' ' -f2)"
-if echo "${MODEL}" | grep -q "^lxd-core"; then
-    while :; do
-        [ "$(chroot /var/lib/snapd/hostfs/ snap managed)" = "true" ] && break
-        sleep 5
-    done
-fi
-
 # Detect missing socket activation support
 echo "==> Checking for socket activation support"
 if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.socket; then
@@ -48,6 +39,14 @@ if ! chroot /var/lib/snapd/hostfs/ systemctl is-active -q snap.lxd.daemon.unix.s
         chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon
         exit 0
     fi
+fi
+
+# Start LXD if running as an appliance
+SNAP_MODEL="$(chroot /var/lib/snapd/hostfs/ snap model --assertion | grep "^model: " | cut -d' ' -f2)"
+if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+    echo "==> LXD appliance detected, starting LXD"
+    chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon --no-block
+    exit 0
 fi
 
 # FIXME: Setup the "lxd" user
@@ -76,13 +75,6 @@ if getent group "${daemon_group}" >/dev/null 2>&1; then
         echo "==> Setting LXD socket ownership"
         chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
     fi
-fi
-
-# Start LXD if running as an appliance
-if echo "${MODEL}" | grep -q "^lxd-core"; then
-    echo "==> LXD appliance detected, starting LXD"
-    chroot /var/lib/snapd/hostfs/ systemctl start snap.lxd.daemon
-    exit 0
 fi
 
 # Check if LXD ever started
