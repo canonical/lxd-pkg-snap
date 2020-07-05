@@ -454,6 +454,12 @@ if [ "${daemon_debug:-"false"}" = "true" ]; then
     CMD="${CMD} --debug"
 fi
 
+# Check if this is the first time LXD is started.
+FIRSTRUN="false"
+if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
+    FIRSTRUN="true"
+fi
+
 # We deal with errors ourselves from this point on
 set +e
 
@@ -499,11 +505,30 @@ if [ "${RET}" -gt "0" ]; then
 fi
 
 ## Process preseed if present
-if [ ! -e "${SNAP_COMMON}/init.yaml.applied" ] && [ -e "${SNAP_COMMON}/init.yaml" ]; then
+if [ "${FIRSTRUN}" = "true" ]; then
     set -e
-    echo "==> Running LXD preseed file"
-    ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
-    mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
+    echo "=> First LXD execution on this system"
+    MODEL="$(chroot /var/lib/snapd/hostfs/ snap model --assertion | grep "^model: " | cut -d' ' -f2)"
+
+    if [ -e "${SNAP_COMMON}/init.yaml" ]; then
+        echo "==> Running LXD preseed file"
+        ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
+        mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
+    elif echo "${MODEL}" | grep -q "^lxd-core"; then
+        echo "==> Initializing LXD appliance"
+
+        # Network (default gateway)
+        NIC="$(ip -4 route get 1.1.1.1 | grep " dev " | cut -d' ' -f5)"
+        lxc --force-local --quiet profile device add default eth0 nic nictype=macvlan parent="${NIC}" name=eth0
+
+        # Storage (80% of free space)
+        AVAIL="$(($(df --output=avail "${SNAP_COMMON}" | tail -1)*1024*80/100))"
+        lxc --force-local --quiet storage create local btrfs size="${AVAIL}"
+        lxc --force-local --quiet profile device add default root disk pool=local path=/
+
+        # Network access
+        lxc --force-local --quiet config set core.https_address :8443
+    fi
     set +e
 fi
 
