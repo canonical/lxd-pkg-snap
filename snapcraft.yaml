@@ -968,7 +968,6 @@ parts:
       git cherry-pick 716912a697250b081dff855e662952c31f42a4a6  # lxd-p2c: Filter out security.selinux
       git cherry-pick 5e7dc62615e2e432b04093bef533f351c43c1fae  # lxc-to-lxd: Filter out security.selinux
       git cherry-pick 869c6c34c7d5666383a9d1b92df69717f5346a56  # lxc/launch: Add --console
-      git cherry-pick 0c987f66b6f1cb7b59709365aa2f20bb8c3421d1  # instance: introduce container_syscall_filtering_allow_deny extension
       git cherry-pick 67369b7aa425df8095b45a5e6f0b5d1f69d806fe  # tests: remove trailing comma
       git cherry-pick 59c41805bfb09e2c17ab213f62b38c5bd6026d96  # lxd/instance/drivers: Provide instance-data file
       git cherry-pick 890cc71c8a2552085942970e1644b096aa52d65e  # lxd-agent: Support /dev/lxd
