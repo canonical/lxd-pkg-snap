@@ -977,6 +977,7 @@ parts:
       git cherry-pick 2bd27b5f669626fd0b256ba8d9e46a35cd45582e  # lxd/qemu: Use memory backend ram/file
       git cherry-pick 5b6260e941973d3931fa707f63fb040160f22044  # lxc/image: Fix dir handling on snap
       git cherry-pick d936307ba65213b48812be7bb1586dba17367fdc  # lxd/qemu: Fix crash on non-pinned VM
+      git cherry-pick 3815da132d09c75302ea8d7535615dd12857a220  # lxc/image: Fix more dir handling on snap
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
