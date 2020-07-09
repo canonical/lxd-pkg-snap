@@ -984,6 +984,16 @@ parts:
       git cherry-pick 5b6260e941973d3931fa707f63fb040160f22044  # lxc/image: Fix dir handling on snap
       git cherry-pick d936307ba65213b48812be7bb1586dba17367fdc  # lxd/qemu: Fix crash on non-pinned VM
       git cherry-pick 3815da132d09c75302ea8d7535615dd12857a220  # lxc/image: Fix more dir handling on snap
+      git cherry-pick 2dae58f6c01b5dc56c0efdb0a2edf64441f0eff2  # terminals: update terminology again
+      git cherry-pick e6d872e105e2907ebde5dbeffbb3c049fbdf888f  # doc/instances: Improves proxy docs
+      git cherry-pick 8c62fcd457017fd94946c369af4cc21425d6a2a6  # lxc/main_alias: Handle leading arguments
+      git cherry-pick c12c39f68aa2237e37ed8a0947d604f32b595823  # lxd/storage: Fix block volume migration
+      git cherry-pick ae27e4fce620fb734f408596611f8ffe3a5a3cba  # lxd/rbac: Always allow internal cluster traffic
+      git cherry-pick cfa04bf114f1dbdc29d16f881086eaa0a0e5dfbb  # units: handle multiplication integer overflow
+      git cherry-pick 0776b35fde2094a5bd1d3b5d9390811eae260566  # lxd/rsync: Untangle from daemon package
+      git cherry-pick f1088b8e3baa15dfa01c162f8af15c08e14e78e6  # lxd/qemu: Don't use file.locking with rbd
+      git cherry-pick ddfda244d3c5f6205fb06f30a1f7af0da7d8df45  # lxd/storage/zfs: Use autotrim when available
+      git cherry-pick c495f3ecf068142ea97f2177444e0c2a49dbb000  # lxd: Add clustering_fix_raft_address_zero patch to fix node with "0" as address
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
