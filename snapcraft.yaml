@@ -1013,6 +1013,7 @@ parts:
       git cherry-pick f47fdba1981e830a2f759cf697208a5f3883360b  # lxd/qemu: Don't use file.locking with rbd
       git cherry-pick 9ce118603f3f8c8439279efada25e6c13ec10e6a  # lxd/storage/zfs: Use autotrim when available
       git cherry-pick c7100c75b7c3b656e37d7bf25e38173efe86d57c  # lxd: Add clustering_fix_raft_address_zero patch to fix node with "0" as address
+      git cherry-pick a14f61a5e2fec16010d840d35f0d4a0ae87690fd  # Revert "lxd/storage: Fix block volume migration"
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
