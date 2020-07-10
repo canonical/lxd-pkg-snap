@@ -144,6 +144,25 @@ if [ "${ceph_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/rbd"
 fi
 
+if [ "${lvm_external:-"false"}" = "true" ]; then
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvm"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/vgs"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvs"
+
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/pvcreate"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/pvremove"
+
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/vgcreate"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/vgchange"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/vgremove"
+
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvcreate"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvchange"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvextend"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvrename"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvremove"
+fi
+
 # Setup a functional /etc
 echo "==> Preparing a clean copy of /etc"
 
