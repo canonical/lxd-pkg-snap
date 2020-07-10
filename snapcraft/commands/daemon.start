@@ -533,7 +533,7 @@ if [ "${FIRSTRUN}" = "true" ]; then
 
         # Storage (80% of free space)
         AVAIL="$(($(df --output=avail "${SNAP_COMMON}" | tail -1)*1024*80/100))"
-        lxc --force-local --quiet storage create local btrfs size="${AVAIL}"
+        lxc --force-local --quiet storage create local zfs size="${AVAIL}"
         lxc --force-local --quiet profile device add default root disk pool=local path=/
 
         # Network access
