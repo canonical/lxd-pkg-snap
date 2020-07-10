@@ -590,7 +590,7 @@ parts:
     configflags:
       - --enable-replication
     build-packages:
-      - tclsh
+      - tcl
     override-build: |-
       set -ex
 
