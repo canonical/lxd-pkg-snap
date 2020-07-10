@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chroot "/var/lib/snapd/hostfs/" "$(basename ${0})" "$@"
