@@ -1,2 +1,18 @@
 #!/bin/sh
-exec chroot "/var/lib/snapd/hostfs/" "$(basename ${0})" "$@"
+if [ "$(id -u)" = "0" ]; then
+    exec chroot "/var/lib/snapd/hostfs/" "$(basename ${0})" "$@"
+fi
+
+# Look for binaries in / and /usr
+PREFIX="/var/lib/snapd/hostfs"
+export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu*/))"
+export PATH="${PREFIX}/usr/sbin:${PREFIX}/usr/bin:${PREFIX}/sbin:${PREFIX}/bin"
+
+export LD_LIBRARY_PATH=""
+for i in /lib /lib64 "/lib/${ARCH}" /usr/lib "/usr/lib/${ARCH}" /usr/lib64 /usr/local/lib "/usr/local/lib/${ARCH}" /usr/local/lib64; do
+    [ ! -e "/var/lib/snapd/hostfs/$i" ] && continue
+    export LD_LIBRARY_PATH="${PREFIX}/$i:${PREFIX}/$i/pulseaudio:${LD_LIBRARY_PATH}"
+done
+
+exec "$(basename ${0})" "$@"

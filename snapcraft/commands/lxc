@@ -47,6 +47,9 @@ export VISUAL=${EDITOR:-}
 LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
+# Add extra binaries to path
+export PATH="/run/bin:${PATH}"
+
 LXC="lxc"
 if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
     LXC="${SNAP_COMMON}/lxc.debug"
