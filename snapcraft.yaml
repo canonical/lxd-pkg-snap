@@ -17,13 +17,15 @@ description: |-
  LXD containers are lightweight, secure by default and a great
  alternative to virtual machines.
 
+
  Supported configuration options (snap set lxd [<key>=<value>...]):
-   - ceph.builtin: Use snap-specific ceph configuration [default=false]
+
+   - ceph.builtin: Use snap-specific Ceph configuration [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
-   - daemon.debug: Increases logging to debug level [default=false]
-   - daemon.group: Group of users that can interact with LXD [default=lxd]
-   - daemon.preseed: A YAML configuration to feed `lxd init` on initial start
-   - daemon.syslog: Whether to send LXD log events to syslog [default=false]
+   - daemon.debug: Increase logging to debug level [default=false]
+   - daemon.group: Set group of users that can interact with LXD [default=lxd]
+   - daemon.preseed: Pass a YAML configuration to `lxd init` on initial start
+   - daemon.syslog: Send LXD log events to syslog [default=false]
    - lxcfs.pidfd: Start per-container process tracking [default=false]
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
