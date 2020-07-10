@@ -44,6 +44,7 @@ fi
 
 # Get the current config
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
+ceph_external=$(get_bool "$(snapctl get ceph.external)")
 criu_enable=$(get_bool "$(snapctl get criu.enable)")
 daemon_debug=$(get_bool "$(snapctl get daemon.debug)")
 daemon_group=$(snapctl get daemon.group)
@@ -66,6 +67,7 @@ config="${SNAP_COMMON}/config"
 {
     echo "# This file is auto-generated, do NOT manually edit"
     echo "ceph_builtin=${ceph_builtin:-"false"}"
+    echo "ceph_external=${ceph_external:-"false"}"
     echo "criu_enable=${criu_enable:-"false"}"
     echo "daemon_debug=${daemon_debug:-"false"}"
     echo "daemon_group=${daemon_group:-"lxd"}"

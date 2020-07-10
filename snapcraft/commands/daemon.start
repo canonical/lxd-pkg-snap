@@ -128,6 +128,15 @@ for entry in NetworkManager resolvconf netconfig snapd snapd.socket snapd-snap.s
     ln -s "/var/lib/snapd/hostfs/run/${entry}" "/run/${entry}"
 done
 
+# Setup an additional bin directory
+echo "==> Preparing /run/bin"
+mkdir -p "/run/bin"
+export PATH="/run/bin:${PATH}"
+if [ "${ceph_external:-"false"}" = "true" ]; then
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/ceph"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/rbd"
+fi
+
 # Setup a functional /etc
 echo "==> Preparing a clean copy of /etc"
 
