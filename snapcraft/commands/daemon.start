@@ -132,6 +132,13 @@ done
 echo "==> Preparing /run/bin"
 mkdir -p "/run/bin"
 export PATH="/run/bin:${PATH}"
+if [ -x "/var/lib/snapd/hostfs/usr/bin/spicy" ]; then
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/spicy"
+fi
+if [ -x "/var/lib/snapd/hostfs/usr/bin/remote-viewer" ]; then
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/remote-viewer"
+fi
+
 if [ "${ceph_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/ceph"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/rbd"
