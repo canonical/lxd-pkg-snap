@@ -1,10 +1,10 @@
 #!/bin/sh
 CMD="$(basename ${0})"
-if [ "$(id -u)" != "0" ]; then
-    echo "run_host only works as root"
-    exit 1
-fi
-
 unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-exec chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
+
+if [ "$(id -u)" = "0" ]; then
+    exec chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
+fi
+
+exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
