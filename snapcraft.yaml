@@ -825,6 +825,85 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 3a7f78f9203ab7b01211419476eb469fdacfeb9e  # get the right path in get_cgroup command
+      git cherry-pick 65b53096c90b494eb68d17659973cecc276ef789  # lxc: support CLONE_INTO_CGROUP
+      git cherry-pick 0e609c17896c135a882a405c4f33fa9a10051837  # start: initialize cgroup_fd
+      git cherry-pick 8eb14fa00c8cf316886fd3ffd7b2f24636fb25d1  # start: use __aligned_u64
+      git cherry-pick 3e0175ef7c3fc1b478aca4227ed6f486a8fd104a  # attach: set no_new_privs flag after LSM label
+      git cherry-pick 2e8b5275531d1c3cb820d4fae169ec7af4f3ae22  # templates/lxc-download.in: fix wrong if condition (use the result of the gpg command, not the result when executing the result of the gpg command)
+      git cherry-pick 0404298b33fb3c35dd094d93aca087c976420b6a  # templates/lxc-download.in: make shellcheck happy
+      git cherry-pick 04f72d91687fc3c0917b07019c6d8e6abfd50c2d  # templates/lxc-download.in: use GPG option --receive-keys instead of --recv-keys
+      git cherry-pick c27f081bd11d125a7b6bc32495d64bfc9b457041  # cgroups: update terminology
+      git cherry-pick 59410099422f775ee5eb9a41c8f6baec9e7e71c6  # cgroups: update terminology II
+      git cherry-pick 4bc51378189aa626f585a7b3db93d5c45bc88cf4  # seccomp: support allowlist/denylist in profiles
+      git cherry-pick f3783d061302cbe9ef320a0ea1e72f6bbfc2b4f5  # cgroups: use empty {} to initialize struct
+      git cherry-pick 00a476d2668ed13df0b28d3d80a50a37fd874a09  # cgroup2_devices: fix access rule parsing
+      git cherry-pick f19295e886360b2169c3eac2bd6fe5863b613e31  # api-extensions: add seccomp_allow_deny_syntax extension
+      git cherry-pick 3b5796aa9525aeec547a7ef2196f3681adc172ad  # cgroups: fix bpf device program generation
+      git cherry-pick af5c95175e2242019d187156de4ecfb49c863351  # cgroups: handle empty bpf log buffer
+      git cherry-pick 2be8b3653664c40a55c357733946dcee2b8c3dfc  # tree-wide: s/ptmx/ptx/g
+      git cherry-pick eed7e91793782a1444994e2de305f1eedc60b4ec  # tree-wide: s/pts/pty/g
+      git cherry-pick ed6bc5f9c2c7ec45032e540f93bfa5b4d725022a  # openpty: fix faulty rename
+      git cherry-pick 40d5ef1e1267505a7eca673cfaa49af301337906  # openpty: improve implementation and handling of platforms without it
+      git cherry-pick 90c94e7925411e35ef2cbe099ad72f06450d9f5e  # checkconfig: Show LXC version in output.
+      git cherry-pick f518238a759bd55c9a01472251dc7c791759d735  # autotools: include COPYING file
+      git cherry-pick 4b37c92c7e80272c764a472662b4e74ab86210fd  # Improve efficiency of lxc_ifname_alnum_case_sensitive
+      git cherry-pick 525f5e4c1904fa265c2548f3985cc100bef52fc7  # network: remove unused variable
+      git cherry-pick 0c3978618b525f13d9b1e1d1bfb4324669171462  # compiler: add and use __hidden visbility
+      git cherry-pick 931eca75a308a0f58cbefc98ad08bdad1ce15090  # string_utils: make all helpers hidden
+      git cherry-pick 09b5e84b9c4d07de3082336c71582f6085d44add  # af_unix: hide unnecessary symbols
+      git cherry-pick 60fd6174db0d3f32a10215741686b9e45931c1d3  # attach: hide unnecessary symbols
+      git cherry-pick fe880ab271ae30436d41cb5c704c557f6d946774  # caps: hide unnecessary symbols
+      git cherry-pick 16c032c57c3860523048e242249279cb4fbea273  # commands: hide unnecessary symbols
+      git cherry-pick e0f15d2511d96bf28b63561922f4d7a4369d48c7  # commands_utils: hide unnecessary symbols
+      git cherry-pick a841643962a81ccf73db2a956f26136a5e8c7c65  # conf: hide unnecessary symbols
+      git cherry-pick a8450455ca65105b548f172ed90aaf7fd4275b07  # Makefile.am: Fix typo
+      git cherry-pick 32d8c541dcdf6e7434a1eeae25aebf0c1d96ce50  # start: check correct flags when receiving network devices
+      git cherry-pick af13c333d68ec64815859da918e4bd9581e920a9  # lxc-ls: bugfixes
+      git cherry-pick 1659da351fee140ba16bbd2510ae8c0eb540358d  # confile: hide unnecessary symbols
+      git cherry-pick 5dc06b559854ffd23382b9eab8774457e7ef1b2d  # confile_utils: hide unnecessary symbols
+      git cherry-pick 7950a11eb947d98c96c4dfe4c6cd20f62c82033c  # criu: hide unnecessary symbols
+      git cherry-pick f2d998c07e308d0c7f728ac0573822f74c98a11a  # error: hide unnecessary symbols
+      git cherry-pick 0711e7989431c5a3aa9f7cdedbcc8e404f49a3f2  # file_utils: hide unnecessary symbols
+      git cherry-pick 12b47815cfc148ae727c4ba86842cbbc1dbfb0b6  # initutils: hide unnecessary symbols
+      git cherry-pick 7cf9ab575f6198f69ea76a6335a9876143bbd462  # log: hide unnecessary symbols
+      git cherry-pick 4f6b5266b7b9ff6d32ed1dd56f68259e933667bf  # lxclock: hide unnecessary symbols
+      git cherry-pick 66e8f7a88cee3772e411761ebc8f037e387630bd  # lxcseccomp: hide unnecessary symbols
+      git cherry-pick 2b1c12c5a9b26efb85821a4e9c45c0e46591f437  # mainloop: hide unnecessary symbols
+      git cherry-pick 50b98b68bf3dfe0cb37e0c53e4cac9e0563dff13  # monitor: hide unnecessary symbols
+      git cherry-pick 6d95db4c6cfd03e15a2063bae8544bc03e2c610d  # namespace: hide unnecessary symbols
+      git cherry-pick 0144cea21b339fd7fed7d3a72fde1886234fdded  # network: hide unnecessary symbols
+      git cherry-pick 64bcba9fd71f99aab67efe6f9ea6ac9ac1ae1d1e  # parse: hide unnecessary symbols
+      git cherry-pick 56155ad0f8a3f82973bde56dd0d948419b321379  # process_utils: hide unnecessary symbols
+      git cherry-pick 95b83e4794245c08701cf2dfcc6d1bd14c91c345  # rexec: hide unnecessary symbols
+      git cherry-pick 3819280b96bf2eb136f6dd9760cf21b2da7793db  # ringbuf: hide unnecessary symbols
+      git cherry-pick 2e17f1e8550a26e2274aace7adc314b842b2a8d4  # start: hide unnecessary symbols
+      git cherry-pick c864bf0463f39d72b999af8c49502f150e48b0a5  # state: hide unnecessary symbols
+      git cherry-pick 0e35ab8824fe7ef8b46ad3af9cfa170696ceeea2  # sync: hide unnecessary symbols
+      git cherry-pick 3d565ecc2eb7fe521d533d32cf08c264cef09e44  # terminal: hide unnecessary symbols
+      git cherry-pick 6b7386e51c920e6dab1fa2f48f28c091fa066ff9  # utils: hide unnecessary symbols
+      git cherry-pick 297b04e2823a76fa1b8d3cb660e3ed5297bbf943  # uuid: hide unnecessary symbols
+      git cherry-pick 528c2bd8d04d17657e97a8398258b3f743f06a72  # cgroups: hide unnecessary symbols
+      git cherry-pick 4f704b76c3a1769d1b4cabf804b0fd6db35755da  # lsm: hide unnecessary symbols
+      git cherry-pick 169fec00e696d8f239bcb9bd9657e96421d0eef2  # arguments: hide unnecessary symbols
+      git cherry-pick 04c5582a5943220e0acb359f2ecb2bc8e1c464a6  # storage: hide unnecessary symbols
+      git cherry-pick f15b126e048dcf198d464174d4dfc7fac5e2b3d1  # tree-wide: hide further unnecessary symbols
+      git cherry-pick 5e9c49533529a580b3651dfbbf1339bff5ae4425  # start: simplify gotos
+      git cherry-pick 551301fff6ca4a93d1165e6333dd9c91881cc343  # apparmor: Allow ro remount of boot_id
+      git cherry-pick befb6f0d1d049dbe960175179c7bb49166967f4a  # syscalls: add fsopen()
+      git cherry-pick 30850a5d481cd69d1731af7421c1068c6bca8e5c  # syscalls: add fspick()
+      git cherry-pick 2b12bdbf3063f9bb917c9ba764b77683670520dc  # syscalls: add fsconfig()
+      git cherry-pick 747ea18991ebfb6e6f366d3381863970919342d1  # syscalls: add fsmount()
+      git cherry-pick 827eb586da95f052493c5fa20d040d9bcd84ab2d  # mount_utils: add mount utils
+      git cherry-pick 20d81c40215e60b948b09189108c72683f0b8a87  # mount_utils: add mount_filesystem() helper
+      git cherry-pick 2e24c98bb56d5d457c5e5a6d9b3c572d138da6c5  # attach: use new mount api
+      git cherry-pick aafef73a0f499cb8806206e7c46c1a879daead4f  # log: don't break logging by hiding symbols
+      git cherry-pick 42463040f676e7d7dc8c6e28641b946cbc56cf83  # Makefile: fix Makefile
+      git cherry-pick 15d82dfe4f7900be54e06b6ca0a79321ee2a9b34  # selinux: remove security_context_t usage as it's deprecated
+      git cherry-pick 72ab7aad78600aed7f111fd9ff1732b9b80ee434  # seccomp: remove seccomp fd from event loop after task exited
+      git cherry-pick 46e2e322e5230ae1f3675c04d1246d3c3f2bb1ce  # seccomp: add missing header
+      git cherry-pick 8bf37e96e687efdeaced817463af377fc34676ba  # syscall: don't fail if __NR_signalfd is not defined
+
       set +ex
       snapcraftctl build
       set -ex
