@@ -25,10 +25,10 @@ get_bool() {
 }
 
 verify_int () {
-    value=$(echo "${1:-}")
+    value="${1:-}"
 
     # Verify if the value is a positive integer
-    if $(echo "${value}" | grep -Eq '^[0-9]+$'); then
+    if echo "${value}" | grep -Eq '^[0-9]+$'; then
         echo "${value}"
         return
     fi
