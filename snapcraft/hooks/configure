@@ -56,6 +56,9 @@ lxcfs_cfs=$(get_bool "$(snapctl get lxcfs.cfs)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
 
+# Convert existing shiftfs=auto to shiftfs=false
+[ "${shiftfs_enable:-"false"}" = "auto" ] && shiftfs_enable="false"
+
 # Special-handling of daemon.preseed
 daemon_preseed=$(snapctl get daemon.preseed)
 if [ -n "${daemon_preseed}" ]; then
@@ -78,7 +81,7 @@ config="${SNAP_COMMON}/config"
     echo "lxcfs_pidfd=${lxcfs_pidfd:-"false"}"
     echo "lxcfs_cfs=${lxcfs_cfs:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
-    echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
+    echo "shiftfs_enable=${shiftfs_enable:-"true"}"
 } > "${config}"
 
 exit 0
