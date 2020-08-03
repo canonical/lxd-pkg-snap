@@ -961,6 +961,34 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick d4dac5d5a0314fb9c29db90548acb9479bff0f4d  # lxc/move: Allow --target with cluster destination
+      git cherry-pick 60307841faaeeeadadea828b3790a8b25d77ca08  # i18n: Update translation templates
+      git cherry-pick f93c3b48d5a9f60d89e2863a4e776741c9bad44d  # lxd/networks: Validate network config before starting networks on startup
+      git cherry-pick bee6a7abf5fd20f7073012736a319d8dfbfcbfdc  # lxd/network/driver/common: Call init() in update() to consistency apply new internal state
+      git cherry-pick aa1095c56ad3dab0dec2ddfb1417a13ee210e1ce  # lxd/device/device/utils/network: Removes networkDHCPValidIP
+      git cherry-pick 4b22de6bd2ce9aef5e3b803ff45a0b4812a74cc0  # lxd/dnsmasq/dhcpalloc: Adds static DHCP allocation package for dnsmasq
+      git cherry-pick 7eda2360ac4370f959af6edcafbb4b73172f72d1  # lxd/dnsmasq: Renames DHCPStaticIPs to DHCPStaticAllocation
+      git cherry-pick 9de084c9f95eae3c8502acfa7fd7a1a9ca79c93b  # lxd/dnsmasq: Renames DHCPAllocatedIPs to DHCPAllAllocations
+      git cherry-pick 57b2e75643d97828f9c04e47667b76c2b4c6013c  # lxd/network/network/utils: Removes GetIP
+      git cherry-pick b6e2fcc2187ca14d8178a33da7d5c54778c86635  # lxd/network/network/utils: dhcpalloc.GetIP usage
+      git cherry-pick 38ff10301fb48a857ad18680501646e3c2d0c50d  # lxd/network/network/utils: dnsmasq.DHCPStaticAllocation usage
+      git cherry-pick 51e6ae0e6699f25c1072cda611ed5f124142648e  # lxd/network/network/interface: Changes of functions to accomodate dhcpalloc package
+      git cherry-pick 17f2efe9e90c96bbd15408f64177f7cf937cd488  # lxd/network/driver/common: Implements default no-op function for non-dhcp enabled networks
+      git cherry-pick 719fa628a9405677ea05c30a5d28cbff49cd13c2  # lxd/network/driver/common: dhcpalloc.DHCPRange usage
+      git cherry-pick 9e1ebdd7f31a9b6c987fd00997b13067e400bdef  # lxd/network/driver/bridge: dhcpalloc package function usage
+      git cherry-pick 16f7eb6fd10a0a8ba46ae69b6e3e0a84c6214dfb  # lxd/network/driver/bridge: DHCPv4Subnet and DHCPv6Subnet implementations
+      git cherry-pick 97a5f954ffa35fc26a2a51bb8cb315399df5f67f  # lxd/device/nic/bridged: Comment correction
+      git cherry-pick a278c2b9c1419830a36d78b962ad5ca22783fd64  # lxd/device/nic/bridged: n.DHCPv4Subnet and n.DHCPv6Subnet usage
+      git cherry-pick b3dc129a07ccd2656030d66d851160600b1ddbd0  # lxd/device/nic/bridged: dnsmasq.DHCPStaticAllocation usage
+      git cherry-pick 28aa611ab6ebbb4168930630aaad9b8c29a58941  # lxd/device/nic/bridged: dhcpalloc.DHCPValidIP usage
+      git cherry-pick 0349e1d7fd615502e533bb14bdab8b851f656946  # lxd/device/nic/bridged: Switches static DHCP allocation for IP filtering to dnsmasq/dhcpalloc
+      git cherry-pick a29c38430ad6e20eec5138730d8ff76f90bce5f3  # lxd/main_activateifneeded: Clarify 'No DB' debug statements
+      git cherry-pick a83d9c97fb9fbb6045a4bc48773968bb0f6628fa  # lxd/cluster: Fix failure domain updates
+      git cherry-pick 9644ba8a40e02cec1adb2cacea67be10922e9797  # tests: Fix failure domain test
+      git cherry-pick b5dd17a1f4c4763e32cd8b9a7043438dff0c163c  # doc: s/container/instance/g
+      git cherry-pick ca0ca07f7faa65619df477d87a7aedf2272b2aea  # doc/backup: Add note about the snap mntns
+      git cherry-pick e88d0ea6392fb059a31faedc47c0d3fd77b5deaa  # lxd/apparmor: Don't fail on missing apparmor
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
