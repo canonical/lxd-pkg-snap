@@ -1059,6 +1059,53 @@ parts:
       git cherry-pick b5dd17a1f4c4763e32cd8b9a7043438dff0c163c  # doc: s/container/instance/g
       git cherry-pick ca0ca07f7faa65619df477d87a7aedf2272b2aea  # doc/backup: Add note about the snap mntns
       git cherry-pick e88d0ea6392fb059a31faedc47c0d3fd77b5deaa  # lxd/apparmor: Don't fail on missing apparmor
+      git cherry-pick a573f047f39f03f45a8a1af62716cf69e3e18c35  # shared/validate: Makes IsUint32 non-optional
+      git cherry-pick faa11bdadb31ce900e453a2a6fb55230584ac88f  # lxd: Wraps validate.IsUint32 in validate.Optional
+      git cherry-pick 5b1320ad82804759b223c20ab45a31dbe4ba9c86  # shared/instance: Wraps validate.IsUint32 in validate.Optional
+      git cherry-pick f6bbb88c5ce216d22dba32e01996be10169b0171  # shared/validate: Makes IsUint8 non-optional
+      git cherry-pick a96a34a715b27c69df173ac2d3738c81d75dbea5  # lxd/network/driver/bridge: Wraps validate.IsUint8 in validate.Optional
+      git cherry-pick 0a2316a0b4d3d8530504f87d3714278efa96e28f  # shared/validate: Makes IsPriority non-optional
+      git cherry-pick de8ae02f9189b234816aa98d6e08d33f07853f14  # shared/instance: Wraps validate.IsPriority in validate.Optional
+      git cherry-pick 52ce0d90f816f0bee4b99ed993b9dc4e1772b60c  # shared/validate: Makes IsBool non-optional
+      git cherry-pick c7b46cd66149b0cb4d8e6091fff8bcb3b33eea7b  # lxd: Wraps validate.IsBool in validate.Optional
+      git cherry-pick 9c934239621ef9fc921a45e38768533fc03b573e  # shared/instance: Wraps validate.IsBool in validate.Optional
+      git cherry-pick 377e61db55761f763a3589883cb7ac4fb51596f1  # shared/validate: Makes IsSize non-optional
+      git cherry-pick ab374f269c961531ca6a722b4374b4a07de6301d  # lxd: Wraps validate.IsSize in validate.Optional
+      git cherry-pick d1adf48d8ff7760048bcfdf933c8d0b59cb7d0af  # shared/instance: Wraps validate.IsSize in validate.Optional
+      git cherry-pick 8176f505dec5950f196d3024615c1d30ba4792bf  # shared/validate: Makes IsNetworkAddress non-optional
+      git cherry-pick 4b9bc47c7c5f4a2a7ebed30a58ed20260118507a  # lxd: Wraps validate.IsNetworkAddress in validate.Optional
+      git cherry-pick ad0ab8ef7566506bcda34a44faccb5705997eaa2  # shared/validate: Makes IsNetworkV4 non-optional
+      git cherry-pick 3e56783e8b79e7d1e899b5abb04dd8e066976476  # lxd/network/driver/bridge: Wraps validate.IsNetworkV4 in shared.Optional
+      git cherry-pick d0c933c0c2d44f1e554b227a46da3a1921c57168  # shared/validate: Makes IsNetworkAddressV4 non-optional
+      git cherry-pick 081b4978f0ecd07bcec3dacad6a6560aadbee502  # lxd/device/nic: Wraps validate.IsNetworkAddressV4 in validate.Optional
+      git cherry-pick 80a844dcc933e2158d6aa2811b318fde0a8c142b  # lxd/device/nic/ipvlan: Wraps validate.IsNetworkAddressV4 in validate.Optional
+      git cherry-pick b0627a1ed6fb4e903d56a327cfe6863990f1a293  # lxd/device/nic/ipvlan: Fixes incorrect IPv4 address check in IPv6 context
+      git cherry-pick c2222650f985d46f91301f52b380357d28c9df18  # lxd/network/driver/bridge: Wraps validate.IsNetworkAddressV4 in validate.Optional
+      git cherry-pick 89d24cc7cfadd0d13b0bbc714456eb293b62ccf0  # shared/validate: Makes IsNetworkAddressCIDRV4 non-optional
+      git cherry-pick 9d7cbcfb1bae3ce034c137a9f9874944d1eb4b52  # lxd: Wraps validate.IsNetworkAddressCIDRV4 in validate.Optional
+      git cherry-pick e42294f120d937cc5c8561f522cb64c1309976d9  # shared/validate: Makes IsDeviceID non-optional
+      git cherry-pick d4db2fcf21b10c70b481ecbb2bbe7a3ee6fde88a  # lxd/device: Wraps validate.IsDeviceID in validate.Optional
+      git cherry-pick bfcc6f46c80de99ff5f1cc3234d8075231a80ad8  # shared/validate: Makes IsNetworkV6 non-optional
+      git cherry-pick d4b7ba6670e405332e180cba9e173c6fd16b34ba  # shared/validate: Makes IsNetworkAddressCIDRV6 non-optional
+      git cherry-pick 700814bca20f130120c0d38df7e0e989146b6a7b  # lxd: Wraps validate.IsNetworkAddressCIDRV6 in validate.Optional
+      git cherry-pick 21105454d80ea8e3ddf39c3a685e95ff945ed474  # shared/validate: Makes IsNetworkAddressV6 non-optional
+      git cherry-pick 71598156852bc60ea0a5b83466af1b84bf2112ed  # lxd: Wraps validate.IsNetworkAddressV6 in validate.Optional
+      git cherry-pick 6b04417d5ee3dcc45e685f3a6723a5cecb3bec44  # lxd/device/nic/ipvlan: validate.IsNetworkAddressVX tweaks
+      git cherry-pick 017d47ba0f00ed2bf3d69bdd4d385620547d27fb  # lxd/device/nic/routed: Wraps validate.IsNetworkAddressV4List in validate.Optional
+      git cherry-pick e7bd928659883102ef3737cd46f3e6420a2ecc5f  # lxd: Wraps validate.IsNetworkV4List and validate.IsNetworkV6List in validate.Optional
+      git cherry-pick 26d5de4e76875cd3ed79f75ee5cb32135683d384  # shared/validate: Tweaks IsNetworkVLAN error message ordering
+      git cherry-pick e5b5e98ff36bc8807e6009c22420794cc12a972d  # shared/validate: comment spacing
+      git cherry-pick f6b0234c2b2c91538c7a5bd03039561411bc61b3  # daemon: check whether shiftfs is useable
+      git cherry-pick e7a9a0c7c1b1ca3d50926ff1b41b1330d10669a3  # lxd/network/network/utils: Renames ValidNetworkName to validInterfaceName
+      git cherry-pick 03b627dac9e19680182736d24e2f73cddaa3debc  # lxd/network/network/utils: Adds validVirtualNetworkName
+      git cherry-pick bcd32986275e3a0f4d442754c5da077488106a66  # lxd/network/network/interfaces: Adds ValidateName
+      git cherry-pick a901bf418a999a8243633d597d0d8982faad5bf6  # lxd/network/driver/bridge: Implements ValidateName
+      git cherry-pick 2cadfdc8f910461bb3a4f04a3c4a0ffff57a3c3d  # lxd/network/driver/macvlan: Implements ValidateName
+      git cherry-pick 0ca49ed49ffde73fc192d99266f0ef6a4b7b5bfb  # lxd/network/driver/sriov: Implements ValidateName
+      git cherry-pick d0122c8c61ea9cd8443d34bcc48b8d8ebed839bc  # lxd/network/network/load: Adds ValidateName helper function
+      git cherry-pick 4abd2013b40e9bd56084784ab48756145a418ef6  # lxd/main/init/interactive: Switches to network.ValidateName for bridge validation
+      git cherry-pick 6479adf8651d1dbd1047fef1317d8a2a4c84a9f6  # lxd/networks: Switches to network.ValidateName
+      git cherry-pick 0aaa8307e8ab2e223fbfa345a7943065b6d85545  # lxd/storage/utils: Simplifies error message from ValidName
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
