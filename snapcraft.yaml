@@ -408,7 +408,7 @@ parts:
       - sqlite3
       - xdelta3
       - xtables-addons-common
-    plugin: nogetgo
+    plugin: go
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd
