@@ -16,8 +16,8 @@ description: |-
 
  Supported configuration options (snap set lxd [<key>=<value>...]):
    - criu.enable: Enable experimental live-migration support [default=false]
-   - daemon.debug: Increases logging to debug level [default=false]
-   - daemon.group: Group of users that can interact with LXD [default=lxd]
+   - daemon.debug: Increase logging to debug level [default=false]
+   - daemon.group: Set group of users that can interact with LXD [default=lxd]
 
 confinement: strict
 
