@@ -325,17 +325,11 @@ int main() {
 		umount2("/media/.lxd-shmounts", MNT_DETACH);
 	}
 
-	// Remove the temporary mountpoint
+	// Attempt to remove the temporary mountpoint
 	if (run_media) {
-		if (rmdir("/run//media/.lxd-shmounts") < 0 && errno != ENOENT) {
-			fprintf(stderr, "Failed to remove /run/media/.lxd-shmounts: %s\n", strerror(errno));
-			return -1;
-		}
+		rmdir("/run/media/.lxd-shmounts")
 	} else {
-		if (rmdir("/media/.lxd-shmounts") < 0 && errno != ENOENT) {
-			fprintf(stderr, "Failed to remove /media/.lxd-shmounts: %s\n", strerror(errno));
-			return -1;
-		}
+		rmdir("/media/.lxd-shmounts")
 	}
 
 	// Attempt to attach to previous LXD mntns
