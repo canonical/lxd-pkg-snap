@@ -327,9 +327,9 @@ int main() {
 
 	// Attempt to remove the temporary mountpoint
 	if (run_media) {
-		rmdir("/run/media/.lxd-shmounts")
+		rmdir("/run/media/.lxd-shmounts");
 	} else {
-		rmdir("/media/.lxd-shmounts")
+		rmdir("/media/.lxd-shmounts");
 	}
 
 	// Attempt to attach to previous LXD mntns
