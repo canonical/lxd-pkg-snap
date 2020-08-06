@@ -354,11 +354,14 @@ if [ "${criu_enable:-"false"}" = "true" ]; then
 fi
 
 # Setup shiftfs
-if [ "${shiftfs_enable:-"false"}" = "false" ]; then
-    echo "==> Disabling shiftfs on this system"
+if [ "${shiftfs_enable:-"auto"}" = "auto" ]; then
+    echo "==> Disabling shiftfs on this kernel (auto)"
+    shiftfs_enable="false"
+elif [ "${shiftfs_enable:-"auto"}" = "false" ]; then
+    echo "==> Disabling shiftfs at user request"
 fi
 
-if [ "${shiftfs_enable:-"false"}" = "false" ]; then
+if [ "${shiftfs_enable:-"auto"}" = "false" ]; then
     export LXD_SHIFTFS_DISABLE=true
 fi
 
