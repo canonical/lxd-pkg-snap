@@ -1,6 +1,7 @@
 #!/bin/sh -e
 # Work from the snap
 export PATH=/snap/bin/:${PATH}
+export LANG=C.UTF-8
 
 # Functions
 maskcidr() {
