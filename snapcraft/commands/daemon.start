@@ -89,11 +89,11 @@ if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
 
     if ! mountpoint -q "${SNAP_COMMON}/lxd/shmounts"; then
         echo "====> Making LXD shmounts use the persistent path"
-        mkdir -p "${SNAP_COMMON}/shmounts/containers"
+        mkdir -p "${SNAP_COMMON}/shmounts/instances"
         if [ ! -L "${SNAP_COMMON}/lxd/shmounts" ]; then
             mkdir -p "${SNAP_COMMON}/lxd/"
             rm -rf "${SNAP_COMMON}/lxd/shmounts"
-            ln -s "${SNAP_COMMON}/shmounts/containers" "${SNAP_COMMON}/lxd/shmounts"
+            ln -s "${SNAP_COMMON}/shmounts/instances" "${SNAP_COMMON}/lxd/shmounts"
         fi
     fi
 
