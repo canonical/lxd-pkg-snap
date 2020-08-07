@@ -100,8 +100,10 @@ if ! mountpoint -q "${SNAP_COMMON}/shmounts"; then
         if [ ! -L "${SNAP_COMMON}/lxd/shmounts" ]; then
             mkdir -p "${SNAP_COMMON}/lxd/"
             rm -rf "${SNAP_COMMON}/lxd/shmounts"
-            ln -s "${SNAP_COMMON}/shmounts/instances" "${SNAP_COMMON}/lxd/shmounts"
+        else
+            rm "${SNAP_COMMON}/lxd/shmounts"
         fi
+        ln -s "${SNAP_COMMON}/shmounts/instances" "${SNAP_COMMON}/lxd/shmounts"
     fi
 
     if ! mountpoint -q "${SNAP_COMMON}/var/lib/lxcfs"; then
