@@ -1027,6 +1027,58 @@ parts:
       git cherry-pick 4abd2013b40e9bd56084784ab48756145a418ef6  # lxd/main/init/interactive: Switches to network.ValidateName for bridge validation
       git cherry-pick 6479adf8651d1dbd1047fef1317d8a2a4c84a9f6  # lxd/networks: Switches to network.ValidateName
       git cherry-pick 0aaa8307e8ab2e223fbfa345a7943065b6d85545  # lxd/storage/utils: Simplifies error message from ValidName
+      git cherry-pick 20f252e907a7efec64a87fd4276c7860c2d0be4c  # doc/networks: Fixes typo in bridge docs
+      git cherry-pick 3263e271e165959f2fc359664d0c9308cc563128  # lxd/cluster/config: Fix import ordering of external package
+      git cherry-pick 7a9c38d637434badaee4b986afbbeecc4e876f4c  # lxd/network/openvswitch: Name functions consistently using ObjectAction format
+      git cherry-pick 4aef987962f04cad9429743f19c5a0bd2ce36a73  # lxd/network/driver/bridge: OVS function naming usage
+      git cherry-pick 7697eec7df583467ad1112b37cf577254e2544b6  # lxd/network/network/utils: OVS function naming usage
+      git cherry-pick 596e8ad5a3dd75378cfb9ec76ad461eb4a06bcfe  # lxd/device/nic/bridged: OVS function naming usage
+      git cherry-pick 81f6c3e67ea624a6f9dfab383e8c90517bbaa91c  # lxd/storage/locking: Moves package to lxd/locking
+      git cherry-pick 5630989206e2e18dc2b33d1da1fcc7606e2217ed  # lxd/locking: Renames variables to make them generic
+      git cherry-pick 0fa1c760732ac7d944132e9c404013423267ad3c  # lxd/storage/drivers/utils: Adds OperationLockName function
+      git cherry-pick c8985c93a89c8f0a260b1786b2fdcfac471da74b  # lxd/network/network/interface: Adds ID() function
+      git cherry-pick d86495310896b6572f319eb26505d895365facf9  # lxd/network/driver/common: Implements ID() function
+      git cherry-pick 5bee3de5687db7ede611e99bf8683670f378b1ff  # lxd/storage: locking.Lock usage with OperationLockName wrapper
+      git cherry-pick 9473b796c6a60d12ac6f27905872f086f002e550  # lxd/resources: Fix total memory for per NUMA node
+      git cherry-pick aabee98c0d811d0221f7ad2ed30ade7845bdf323  # lxd: enable safe native container terminal allocation
+      git cherry-pick c978a20c2432314bed0caedac2680432aa17ffd5  # lxd/rsync: Don't pass --bwlimit when no limits set
+      git cherry-pick a32272e33376a801165b7bacd56beac40156fc9d  # exec: fix OpenPtyInDevpts()
+      git cherry-pick b2b4662c10bdf4dbbcb3ca89536b48d1e4fad98b  # test/suites/storage: LVM size tweaks
+      git cherry-pick 3a8a36e20b05d0241758c1c7018ba8525f8ee47b  # lxd/instance/drivers/driver/lxc: Adds nil check in getLxcState
+      git cherry-pick 2127e290031c4f180310d4a10ac884deccbb9f67  # client/operations: Fixes race conditions
+      git cherry-pick 29513f39289183836d278897072b057eaa4d4560  # lxd/operations: Fixes race conditions
+      git cherry-pick 0a6069afb730108851f44728bc9d9963d36d0773  # client: More races fixed
+      git cherry-pick bfeb5176d0db94f6cafc53a4d9f506a329a67060  # Makefile: Adds race target for enabling race detector
+      git cherry-pick 35640baf87ad7ef9c566b939a6e03798c2f00c27  # Makefile: Correctly builds lxd-p2c and lxd-agent in debug and nocache targets
+      git cherry-pick dccd1afa7c89c173d610afcc94375cb3a57788a0  # client/operations: Race fix
+      git cherry-pick 1deea91f2518789f6d000dd377f4a4588d4de257  # lxd/db: Adds mutex to fix races
+      git cherry-pick c9b85e0bdf78c73676df49b532b56a5ad8d79c23  # lxd/operations: Fixes races
+      git cherry-pick 5b8305ba6cc1a75dd0ba7bbbf93dc5895e0362ff  # shared/validate: Adds IsURLSegmentSafe function
+      git cherry-pick b468279eff50513bba721f625f6442b71d125d68  # lxd/network/driver/common: Adds common ValidateName function
+      git cherry-pick b7b46e00bc0de74b3df261dd9c63ddfe0c4e0e23  # lxd/network/driver/bridge: Changes ValidateName to use common validation too
+      git cherry-pick c92f86a06ec835011c0d2ad909ff23f2e527fc82  # lxd/network/driver: Removes ValidateName from sriov and macvlan
+      git cherry-pick b062cebb6e6f97306e6303c430fbd0f091e065c2  # lxd/network/network/load: Adds field name context to name validation errors
+      git cherry-pick 315a628d489ffd7e338ba13eb7e5e9cacbd9f988  # lxd/network/network/utils: Removes validVirtualNetworkName
+      git cherry-pick 58c6f4c04332b2cea517f3495a0a64306a21361a  # lxd/networks: Returns network context on network startup failure
+      git cherry-pick 0f69cfdf8c20ba8e28836136aa156da77e2507fd  # shared/validate: Adds Required() and makes Optional() accept multiple validators
+      git cherry-pick a059598f46665a38e89369052c74a9c128a61ee4  # lxd/network/driver/bridge: Don't allow stable volatile MAC with fan network
+      git cherry-pick 0a111a8ae198e5d74b0551eeb54c028a7be51bca  # lxd/network/driver/bridge: Don't allow hwaddr to be set in fan mode
+      git cherry-pick 23713ab015959c5d086f35d52f7c26dc086a0f29  # seccomp: update comment about blocking the new mount api
+      git cherry-pick 506eee2592fdf030445eff0e7ad322d7ad778afb  # syscall_numbers: fix pidfd_open() definition
+      git cherry-pick cf8dccf1b3e5a5b81b098082710157ffd5219cde  # lxd_seccomp: add SECCOMP_IOCTL_NOTIF_ADDFD definitions and types
+      git cherry-pick ecf089657ef32cec48bbce837179bc7a44a04d9f  # checkfeature: check for seccomp notify fd injection feature
+      git cherry-pick df81cc6b016130b5460b5d1f25bb08124e7e90e8  # syscall_numbers: add pidfd_getfd()
+      git cherry-pick 783e46f330720af0fe738068225b34bb5a6e4e50  # syscall_numbers: add bpf()
+      git cherry-pick bf9fdfa6a42604a5fe8a837c36ef71a0741f390d  # seccomp: report helpful errors when determining support for features
+      git cherry-pick 05950aa0dde9bab095ac43b780d15e23bb46b257  # seccomp: handle liblxc sending the notify fd as part of the seccomp message
+      git cherry-pick 1082d798304f60582b436e61bfeeaba22af8ae90  # syscall_numbers: add close_range()
+      git cherry-pick aec1e32b477732293805e7959d9d84fec9e2ec24  # exec: switch to close_range() syscall
+      git cherry-pick 818d0fcccc2b6238d10898516124c49552e61e38  # process_utils: remove faulty license
+      git cherry-pick 4bae288846ed859d96e01c8629b2703895a37fba  # lxd/apparmor/dnsmasq: Add binary for nesting
+      git cherry-pick aa36d5e1b5ddb740635240504b8c562f637883c9  # lxd/storage/drivers/ceph: Fix volume deletion
+      git cherry-pick 4dc02e4a02ba8311a49a97d67bff17a957879a39  # lxd/instance/drivers/driver/qemu: Fix race in onStop getting operation
+      git cherry-pick 852c622d8b69fa7dd1880376eba39509f0cd54b1  # lxd/db: Fix premature failure when listing cluster volumes
+      git cherry-pick e1cc49897a5957f9ebea35a05401e17b8a801a1f  # lxd/db/storage_volumes: Add comments regarding behaviour
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
