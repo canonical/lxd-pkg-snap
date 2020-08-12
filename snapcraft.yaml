@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.0.2"
+version: "4.0.3"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -914,7 +914,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.0.2
+    source-tag: lxd-4.0.3
     after:
       - lxc
       - dqlite
@@ -952,66 +952,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 9354c691d1fd6b7572221e20dbc4b9db04db4528  # lxd/storage: Better handle broken volumes
-      git cherry-pick 8d6d7a5bea7ceeec1238a8425cd48f8b80fb0cca  # client: Handle unknown image sizes
-      git cherry-pick 561cacfc9f1566b83eeaa7ed21594d34735efdbe  # lxd/response: Stream multi-part responses
-      git cherry-pick 32d81d5d7cd46cf49ffc9a2cbf552fa6528a7fe3  # lxd/device/disk: Fixes cloud-init errors for VMs
-      git cherry-pick 7f1455ceb34d860acf4417c037906e37fd2bcfbd  # lxc/action: Show usage on missing target
-      git cherry-pick 4dbe476d73eecf9923bda3fc16c88b4e3ae55f2c  # lxd/storage: Rely on UsedBy for deletion error
-      git cherry-pick e846784945aa5c2c2138ef7610ff638ad760d3e6  # lxd/instances/qemu: Use images dir during compression
-      git cherry-pick db714475b24a03ce396493c3bac7be721fa87dc3  # lxd/storage/drivers: Rename fs to filesystem
-      git cherry-pick a11e96096f80b78fa3c694e4968ae40cc0547cc4  # shared/api: Add ContentType to storage volume structs
-      git cherry-pick ee87e41054bd6d6da8b1b1b848a3933bb8caa236  # client: Support custom block volumes
-      git cherry-pick 15042ffed0cc5052e78b5fb57fc5495e7df773b4  # lxd/util: Detect hugetlbfs mount point
-      git cherry-pick b14c85d235d821a1bc81153e32d3e5a7e48791a0  # lxd/cluster: Always check for dqlite protocol version mismatches
-      git cherry-pick bae0119c3fb8d245ac3066f672afdf96fb2ce287  # lxd/cluster: Don't run unncessary HEAD probe upon dqlite connections
-      git cherry-pick 1a62ad65e355058ad2c79d05da7a599b00520057  # forksyscall: use nsids for shiftfs syscall intercepts
-      git cherry-pick 5fa8b2db174d5379a930a6db32c131bb0a44cb15  # lxd/db: Drop ClusterRoleDatabase records from the database
-      git cherry-pick c03713e3806d463c710bdd9cd4695800ad8a5918  # lxd/cluster: Fetch database role information directly from raft
-      git cherry-pick 1cd1b499ef732ac9e9a8708b845d1ec7193d2b5f  # lxd/storage: Fix regression in truncate handling
-      git cherry-pick 5ba69308e27b19be776a95f7d649a7d5a319c942  # lxd/cluster: Only look up raft_nodes for resolving the address of node 1
-      git cherry-pick 29a3a6d53abfadbb720a83da9f9db26f6809cfea  # lxd/cluster: Leverage RolesChanges.Handover() to choose handover target
-      git cherry-pick 341c8a067f14b27f49036d7e592ad992938b66d0  # lxd: Increase timeout of go unit tests when ran from Emacs
-      git cherry-pick 8da0064441de51b8fe8ee3e978828028489b920c  # lxd/cluster: Skip unncessary loading of nodes from database in Rebalance()
-      git cherry-pick 521642efdd022c504cc918e1cd25f685ed4393d1  # lxd/cluster: Leverage RolesChanges.Adjust() to choose rebalance target
-      git cherry-pick 5df39365223881126b7f96f90ff6e662941b99af  # lxd/cluster: Increase time budget of client.Assign() when assigning voter role
-      git cherry-pick b65164aac1e27cf31c4e5e118eca30d72c8a843d  # lxd/cluster: When demoting to Spare only transition to StandBy if Voter
-      git cherry-pick 453ff24a323294b927e8851f8ac2683cc233c9c7  # lxd/project: Add more name checks
-      git cherry-pick f50f8bd5e0f17111649f8f15b9eec3f841bb0533  # doc/server: Cover listen + authentication
-      git cherry-pick 713bf2f1464438cef9ebc912881b99da9c87749b  # lxd/qemu: Don't do file lock on custom volumes
-      git cherry-pick 049e5715f2b059e13102fbec76b60663cb19b45b  # shared/api: Add FailureDomain field to ClusterMemberPut
-      git cherry-pick a6c84158bb45f81cfc099d18ba6a3978d03b9493  # client: Check clustering_failure_domains extension when updating a member
-      git cherry-pick 0bfb5cc3753d4252a0ca5e41fbc5cf24195f700e  # instance: update terminology I
-      git cherry-pick 6a00a60d3e72508a0c20c7b809bd90931cd30b6e  # lxd/network: Validate ipv4/ipv6 routes
-      git cherry-pick 0ba55fa5e345e4e91814e2e931c4569fe5021429  # lxd/proxy: Fix govet
-      git cherry-pick 04ff3ab07e9002918701dac0f2980e3b91a704f3  # lxd/rsync: Add AtLeast
-      git cherry-pick 4ff94a59581a83ee50e7a407042ffb0190ec5090  # lxd/rsync: Filter out security.selinux
-      git cherry-pick 126b81d065b438f134e4869c243fbc64c49476f2  # lxd-p2c: Filter out security.selinux
-      git cherry-pick c46ce40497111a935eb14b42f6e0a1e09f34f5bf  # lxc-to-lxd: Filter out security.selinux
-      git cherry-pick 7745d7f13a2ab514d34dbb3c516ea73cc02f67a3  # lxc/launch: Add --console
-      git cherry-pick b65bdea3628a700a4ed416a0cc17aae675be6604  # instance: introduce container_syscall_filtering_allow_deny extension
-      git cherry-pick db35e5f5d9f145d81f5f537b340f2361bfe250bf  # tests: remove trailing comma
-      git cherry-pick 6a4c6776d7400cb51c780e962276d5c7bac6c5b0  # lxd/instance/drivers: Provide instance-data file
-      git cherry-pick e8ce1b0e432b5ae43e2a4b3a186629f21284f26f  # lxd-agent: Support /dev/lxd
-      git cherry-pick 40233e7c531b5fc61056594ffda7882d947d15e4  # lxd/instance/drivers: Allow updating running VMs
-      git cherry-pick c19eab690961eee988661339c38abf1ca31f21b1  # tests: Fix bad ipv6.routes value
-      git cherry-pick 20d3a62668a189927452a73f16a83255885e25dc  # lxc/instance/drivers/qemu: Support ephemeral VMs
-      git cherry-pick 3f1f1bdf58f478b8a0f87c5254268fe2327c21a3  # lxd/qemu: Use memory backend ram/file
-      git cherry-pick 422256f0e30fc73bdd3a93494d627d99fd94a18b  # lxc/image: Fix dir handling on snap
-      git cherry-pick 37871a24ed3ffee975e497fff5a58159a78744c5  # lxd/qemu: Fix crash on non-pinned VM
-      git cherry-pick f3ffd6ce333d672f3b7e2791e61c33a16516635a  # lxc/image: Fix more dir handling on snap
-      git cherry-pick 935d2c3470959e82f4272079d80b6bc7ed75ccbb  # terminals: update terminology again
-      git cherry-pick 0807785bb4d7b2552416620591b52123513a0ac5  # doc/instances: Improves proxy docs
-      git cherry-pick 1b528af8c3fcd0b91fe859100e60415ce90edf5f  # lxc/main_alias: Handle leading arguments
-      git cherry-pick 0cd4a4433ed38a276707740befbc720f807ee705  # lxd/storage: Fix block volume migration
-      git cherry-pick 3c2ffed06e248203fad876a174a0be1b3f68fd0a  # lxd/rbac: Always allow internal cluster traffic
-      git cherry-pick 3df7bb434297bf135dd19694794891fe0f2d1a92  # units: handle multiplication integer overflow
-      git cherry-pick d5bce39f254c049538844da6bdf5c7b37dec18c4  # lxd/rsync: Untangle from daemon package
-      git cherry-pick f47fdba1981e830a2f759cf697208a5f3883360b  # lxd/qemu: Don't use file.locking with rbd
-      git cherry-pick 9ce118603f3f8c8439279efada25e6c13ec10e6a  # lxd/storage/zfs: Use autotrim when available
-      git cherry-pick c7100c75b7c3b656e37d7bf25e38173efe86d57c  # lxd: Add clustering_fix_raft_address_zero patch to fix node with "0" as address
-      git cherry-pick a14f61a5e2fec16010d840d35f0d4a0ae87690fd  # Revert "lxd/storage: Fix block volume migration"
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
