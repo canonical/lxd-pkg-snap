@@ -6,7 +6,7 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-echo "=> Preparing the system"
+echo "=> Preparing the system (${SNAP_REVISION})"
 export HOME="/tmp/"
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu/))"
