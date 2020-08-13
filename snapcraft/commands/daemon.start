@@ -165,10 +165,22 @@ fi
 
 # Escape resource limits
 echo "==> Escaping the systemd cgroups"
-for ctr in /sys/fs/cgroup/*; do
-    [ -e "${ctr}/cgroup.procs" ] || continue
-    echo "$$" > "${ctr}/cgroup.procs"
-done
+if [ -e "/sys/fs/cgroup/cgroup.procs" ]; then
+    echo "====> Detected cgroup V2"
+    echo "$$" > "/sys/fs/cgroup/cgroup.procs"
+else
+    echo "====> Detected cgroup V1"
+    for ctr in /sys/fs/cgroup/*; do
+        [ -e "${ctr}/cgroup.procs" ] || continue
+        echo "$$" > "${ctr}/cgroup.procs"
+    done
+
+    # Fix common cgroup issues
+    if [ -e /sys/fs/cgroup/cpuset/cgroup.clone_children ]; then
+        # Attempt to enable clone_children behavior (ignore failures)
+        echo 1 > /sys/fs/cgroup/cpuset/cgroup.clone_children 2>/dev/null || true
+    fi
+fi
 
 # Update system limits
 if [ "$(stat -c '%u' /proc)" = 0 ]; then
