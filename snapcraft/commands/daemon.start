@@ -45,6 +45,13 @@ if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     ln -s /proc/$$/root "${SNAP_COMMON}/mntns"
 fi
 
+# Fix /dev/pts
+if [ "$(grep "devpts /dev/pts " /proc/self/mountinfo)" = "2" ]; then
+    echo "==> Setting up /dev/pts"
+    umount -l /dev/ptmx
+    umount -l /dev/pts
+fi
+
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
 mountpoint -q /bin/kmod || mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
