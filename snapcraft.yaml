@@ -460,7 +460,7 @@ parts:
       - spice-server
     source: https://git.qemu.org/git/qemu.git
     source-type: git
-    source-tag: v5.0.0
+    source-tag: v5.1.0
     plugin: autotools
     configflags:
       - --disable-docs
