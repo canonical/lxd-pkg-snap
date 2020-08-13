@@ -27,6 +27,17 @@ echo "==> Loading snap configuration"
 # shellcheck disable=SC1090
 . "${SNAP_COMMON}/config"
 
+# Create the main directory
+if [ ! -d "${SNAP_COMMON}/lxd" ]; then
+    mkdir -p "${SNAP_COMMON}/lxd"
+    chmod 0711 "${SNAP_COMMON}/lxd"
+fi
+
+if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
+    mkdir -p "${SNAP_COMMON}/lxd/logs"
+    chmod 0700 "${SNAP_COMMON}/lxd/logs"
+fi
+
 # Setup mntns symlink
 if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
     echo "==> Setting up mntns symlink ($(readlink /proc/self/ns/mnt))"
@@ -261,17 +272,6 @@ if [ -x "${SNAP}/bin/lxd-bridge" ]; then
 fi
 
 # LXD
-## Create the main directory
-if [ ! -d "${SNAP_COMMON}/lxd" ]; then
-    mkdir -p "${SNAP_COMMON}/lxd"
-    chmod 0711 "${SNAP_COMMON}/lxd"
-fi
-
-if [ ! -d "${SNAP_COMMON}/lxd/logs" ]; then
-    mkdir -p "${SNAP_COMMON}/lxd/logs"
-    chmod 0700 "${SNAP_COMMON}/lxd/logs"
-fi
-
 ## Check for existing LXDs
 pid=$(ss -nlpx src "${LXD_DIR}/unix.socket" 2>/dev/null | grep unix.socket | sed -e "s/.*pid=//" -e "s/,.*//g")
 if [ "${pid}" -gt 0 ] 2>/dev/null; then
