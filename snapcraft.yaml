@@ -1,5 +1,5 @@
 name: lxd
-version: 2.0.11
+version: 2.0.12
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -390,7 +390,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-2.0.11
+    source-tag: lxd-2.0.12
     after:
       - go
       - lxc
@@ -422,7 +422,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-      git cherry-pick 1836149d1998b035baa2c0d39404f167040e1ccc  # lxd/init: Fix bad handling of dir backend
 
       git am ../../../patches/0001-Add-support-for-lxd-bridge-configuration-snap.patch
       cp lxd-bridge/lxd-bridge $SNAPCRAFT_PART_INSTALL/bin/
