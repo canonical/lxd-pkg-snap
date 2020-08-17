@@ -819,14 +819,13 @@ parts:
       - pkg-config
     plugin: autotools
     configflags:
-      - --disable-selinux
-      - --disable-tests
-      - --disable-examples
-      - --disable-doc
-      - --disable-tools
       - --disable-api-docs
       - --disable-bash
+      - --disable-doc
+      - --disable-examples
       - --disable-memfd-rexec
+      - --disable-tests
+      - --disable-tools
       - --enable-apparmor
       - --enable-seccomp
       - --enable-selinux
