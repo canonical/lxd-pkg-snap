@@ -470,9 +470,19 @@ parts:
     source-type: git
     plugin: autotools
     configflags:
+      - --disable-bochs
+      - --disable-cloop
+      - --disable-dmg
       - --disable-docs
+      - --disable-guest-agent
+      - --disable-parallels
+      - --disable-qed
+      - --disable-sheepdog
       - --disable-slirp
       - --disable-user
+      - --disable-vdi
+      - --disable-vnc
+      - --disable-xen
       - --enable-attr
       - --enable-cap-ng
       - --enable-kvm
@@ -483,6 +493,7 @@ parts:
       - --enable-seccomp
       - --enable-spice
       - --enable-system
+      - --enable-tcg
       - --enable-tools
       - --enable-vhost-crypto
       - --enable-vhost-kernel
@@ -491,7 +502,6 @@ parts:
       - --enable-vhost-user
       - --enable-vhost-vsock
       - --enable-virtfs
-      - --enable-vnc
       - --firmwarepath=/snap/lxd/current/share/qemu/
     build-packages:
       - bison
