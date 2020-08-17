@@ -173,6 +173,7 @@ parts:
       - sqlite
     source: https://github.com/canonical/dqlite
     source-type: git
+    source-depth: 1
     plugin: autotools
     stage-packages:
       - libuv1
@@ -190,6 +191,7 @@ parts:
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: edk2-stable202005
+    source-depth: 1
     plugin: nil
     build-packages:
       - acpica-tools
@@ -245,6 +247,7 @@ parts:
   libco:
     source: https://github.com/canonical/libco
     source-type: git
+    source-depth: 1
     plugin: make
     organize:
       usr/lib/: lib/
@@ -277,6 +280,7 @@ parts:
     source: https://github.com/seccomp/libseccomp
     source-type: git
     source-tag: v2.5.0
+    source-depth: 1
     plugin: autotools
     build-packages:
       - gperf
@@ -373,6 +377,7 @@ parts:
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
     source-tag: v1.2.0
+    source-depth: 1
     plugin: make
     build-packages:
       - bmake
@@ -420,6 +425,7 @@ parts:
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
+    source-depth: 1
     plugin: meson
     prime: []
 
@@ -428,6 +434,7 @@ parts:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
     source-type: git
+    source-depth: 1
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -539,6 +546,7 @@ parts:
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
     source-type: git
+    source-depth: 1
     plugin: nil
     build-packages:
       - xorriso
@@ -579,6 +587,7 @@ parts:
   raft:
     source: https://github.com/canonical/raft
     source-type: git
+    source-depth: 1
     plugin: autotools
     stage-packages:
       - libuv1
@@ -592,6 +601,7 @@ parts:
   sqlite:
     source: https://github.com/canonical/sqlite
     source-type: git
+    source-depth: 1
     plugin: autotools
     configflags:
       - --enable-replication
@@ -616,6 +626,7 @@ parts:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
     source-tag: v1.0.1
+    source-depth: 1
     plugin: autotools
     build-packages:
       - liblzma-dev
@@ -721,6 +732,7 @@ parts:
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.7.13
+    source-depth: 1
     plugin: autotools
     configflags:
       - --with-config=user
@@ -752,6 +764,7 @@ parts:
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.8.4
+    source-depth: 1
     plugin: autotools
     configflags:
       - --with-config=user
@@ -877,6 +890,7 @@ parts:
     source: https://github.com/checkpoint-restore/criu
     source-tag: v3.14
     source-type: git
+    source-depth: 1
     plugin: nil
     build-packages:
       - asciidoc
