@@ -466,9 +466,8 @@ parts:
       - libseccomp
       - spice-protocol
       - spice-server
-    source: https://git.qemu.org/git/qemu.git
+    source: IRRELEVANT
     source-type: git
-    source-tag: v5.1.0
     plugin: autotools
     configflags:
       - --disable-docs
@@ -509,6 +508,9 @@ parts:
       - libmagic1
       - libnuma1
       - libpixman-1-0
+    override-pull: |-
+      set -ex
+      git clone https://git.qemu.org/git/qemu.git . -b v5.1.0 --depth 1
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
