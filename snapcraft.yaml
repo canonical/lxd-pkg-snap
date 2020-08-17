@@ -186,8 +186,6 @@ parts:
       - lib/*/libuv*
 
   edk2:
-    after:
-      - qemu
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: edk2-stable202005
