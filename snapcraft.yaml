@@ -166,6 +166,45 @@ parts:
       - lib/*/libsmime3.so
       - lib/*/libsnappy*
 
+  criu:
+    source: https://github.com/checkpoint-restore/criu
+    source-tag: v3.14
+    source-type: git
+    source-depth: 1
+    plugin: nil
+    build-packages:
+      - asciidoc
+      - libcap-dev
+      - libnet1-dev
+      - libnl-3-dev
+      - libprotobuf-c-dev
+      - libprotobuf-dev
+      - protobuf-c-compiler
+      - protobuf-compiler
+      - python
+      - xmlto
+    stage-packages:
+      - libnet1
+      - libprotobuf-c1
+    override-build: |
+      set -ex
+
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armv7l" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      make
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
+      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
+    organize:
+      usr/lib/: lib/
+    prime:
+      - criu/*
+      - lib/*/libnet*
+      - lib/*/libproto*
+
   dqlite:
     after:
       - libco
@@ -894,45 +933,6 @@ parts:
       set -ex
 
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
-
-  criu:
-    source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.14
-    source-type: git
-    source-depth: 1
-    plugin: nil
-    build-packages:
-      - asciidoc
-      - libcap-dev
-      - libnet1-dev
-      - libnl-3-dev
-      - libprotobuf-c-dev
-      - libprotobuf-dev
-      - protobuf-c-compiler
-      - protobuf-compiler
-      - python
-      - xmlto
-    stage-packages:
-      - libnet1
-      - libprotobuf-c1
-    override-build: |
-      set -ex
-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      make
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
-      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
-    organize:
-      usr/lib/: lib/
-    prime:
-      - criu/*
-      - lib/*/libnet*
-      - lib/*/libproto*
 
   lxd:
     source: https://github.com/lxc/lxd
