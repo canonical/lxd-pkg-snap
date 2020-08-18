@@ -441,16 +441,16 @@ parts:
       - lib/libnvidia-container.so*
 
   openvswitch:
-    source: snapcraft/empty
-    plugin: nil
+    source: https://github.com/openvswitch/ovs
+    source-type: git
+    source-tag: v2.14.0
+    source-depth: 1
+    plugin: autotools
     stage-packages:
-      - openvswitch-switch
       - uuid-runtime
     organize:
+      sbin/: bin/
       usr/bin/: bin/
-      usr/lib/openvswitch-switch/: bin/
-      usr/sbin/: bin/
-      usr/share/: share/
     prime:
       - bin/ovs-appctl
       - bin/ovs-vsctl
