@@ -460,6 +460,19 @@ parts:
       - bin/uuidgen
       - share/openvswitch/
 
+  ovn:
+    after:
+      - openvswitch
+    source: https://github.com/ovn-org/ovn
+    source-type: git
+    source-tag: v20.06.1
+    source-depth: 1
+    configflags:
+      - --with-ovs-source=../../openvswitch/build/
+    plugin: autotools
+    prime:
+      - bin/ovn-nbctl
+
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
@@ -1080,6 +1093,7 @@ parts:
       - nano
       - nvidia-container
       - openvswitch
+      - ovn
       - raft
       - sqlite
       - squashfs-tools-ng
