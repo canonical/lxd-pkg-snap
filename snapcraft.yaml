@@ -586,6 +586,7 @@ parts:
       set +ex
       snapcraftctl build
     organize:
+      libexec/: bin/
       usr/bin/: bin/
       usr/lib/: lib/
     prime:
