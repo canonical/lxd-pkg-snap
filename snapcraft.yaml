@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.4"
+version: "4.5"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -940,7 +940,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.4
+    source-tag: lxd-4.5
     after:
       - lxc
       - dqlite
@@ -978,133 +978,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick d4dac5d5a0314fb9c29db90548acb9479bff0f4d  # lxc/move: Allow --target with cluster destination
-      git cherry-pick 60307841faaeeeadadea828b3790a8b25d77ca08  # i18n: Update translation templates
-      git cherry-pick f93c3b48d5a9f60d89e2863a4e776741c9bad44d  # lxd/networks: Validate network config before starting networks on startup
-      git cherry-pick bee6a7abf5fd20f7073012736a319d8dfbfcbfdc  # lxd/network/driver/common: Call init() in update() to consistency apply new internal state
-      git cherry-pick aa1095c56ad3dab0dec2ddfb1417a13ee210e1ce  # lxd/device/device/utils/network: Removes networkDHCPValidIP
-      git cherry-pick 4b22de6bd2ce9aef5e3b803ff45a0b4812a74cc0  # lxd/dnsmasq/dhcpalloc: Adds static DHCP allocation package for dnsmasq
-      git cherry-pick 7eda2360ac4370f959af6edcafbb4b73172f72d1  # lxd/dnsmasq: Renames DHCPStaticIPs to DHCPStaticAllocation
-      git cherry-pick 9de084c9f95eae3c8502acfa7fd7a1a9ca79c93b  # lxd/dnsmasq: Renames DHCPAllocatedIPs to DHCPAllAllocations
-      git cherry-pick 57b2e75643d97828f9c04e47667b76c2b4c6013c  # lxd/network/network/utils: Removes GetIP
-      git cherry-pick b6e2fcc2187ca14d8178a33da7d5c54778c86635  # lxd/network/network/utils: dhcpalloc.GetIP usage
-      git cherry-pick 38ff10301fb48a857ad18680501646e3c2d0c50d  # lxd/network/network/utils: dnsmasq.DHCPStaticAllocation usage
-      git cherry-pick 51e6ae0e6699f25c1072cda611ed5f124142648e  # lxd/network/network/interface: Changes of functions to accomodate dhcpalloc package
-      git cherry-pick 17f2efe9e90c96bbd15408f64177f7cf937cd488  # lxd/network/driver/common: Implements default no-op function for non-dhcp enabled networks
-      git cherry-pick 719fa628a9405677ea05c30a5d28cbff49cd13c2  # lxd/network/driver/common: dhcpalloc.DHCPRange usage
-      git cherry-pick 9e1ebdd7f31a9b6c987fd00997b13067e400bdef  # lxd/network/driver/bridge: dhcpalloc package function usage
-      git cherry-pick 16f7eb6fd10a0a8ba46ae69b6e3e0a84c6214dfb  # lxd/network/driver/bridge: DHCPv4Subnet and DHCPv6Subnet implementations
-      git cherry-pick 97a5f954ffa35fc26a2a51bb8cb315399df5f67f  # lxd/device/nic/bridged: Comment correction
-      git cherry-pick a278c2b9c1419830a36d78b962ad5ca22783fd64  # lxd/device/nic/bridged: n.DHCPv4Subnet and n.DHCPv6Subnet usage
-      git cherry-pick b3dc129a07ccd2656030d66d851160600b1ddbd0  # lxd/device/nic/bridged: dnsmasq.DHCPStaticAllocation usage
-      git cherry-pick 28aa611ab6ebbb4168930630aaad9b8c29a58941  # lxd/device/nic/bridged: dhcpalloc.DHCPValidIP usage
-      git cherry-pick 0349e1d7fd615502e533bb14bdab8b851f656946  # lxd/device/nic/bridged: Switches static DHCP allocation for IP filtering to dnsmasq/dhcpalloc
-      git cherry-pick a29c38430ad6e20eec5138730d8ff76f90bce5f3  # lxd/main_activateifneeded: Clarify 'No DB' debug statements
-      git cherry-pick a83d9c97fb9fbb6045a4bc48773968bb0f6628fa  # lxd/cluster: Fix failure domain updates
-      git cherry-pick 9644ba8a40e02cec1adb2cacea67be10922e9797  # tests: Fix failure domain test
-      git cherry-pick b5dd17a1f4c4763e32cd8b9a7043438dff0c163c  # doc: s/container/instance/g
-      git cherry-pick ca0ca07f7faa65619df477d87a7aedf2272b2aea  # doc/backup: Add note about the snap mntns
-      git cherry-pick e88d0ea6392fb059a31faedc47c0d3fd77b5deaa  # lxd/apparmor: Don't fail on missing apparmor
-      git cherry-pick a573f047f39f03f45a8a1af62716cf69e3e18c35  # shared/validate: Makes IsUint32 non-optional
-      git cherry-pick faa11bdadb31ce900e453a2a6fb55230584ac88f  # lxd: Wraps validate.IsUint32 in validate.Optional
-      git cherry-pick 5b1320ad82804759b223c20ab45a31dbe4ba9c86  # shared/instance: Wraps validate.IsUint32 in validate.Optional
-      git cherry-pick f6bbb88c5ce216d22dba32e01996be10169b0171  # shared/validate: Makes IsUint8 non-optional
-      git cherry-pick a96a34a715b27c69df173ac2d3738c81d75dbea5  # lxd/network/driver/bridge: Wraps validate.IsUint8 in validate.Optional
-      git cherry-pick 0a2316a0b4d3d8530504f87d3714278efa96e28f  # shared/validate: Makes IsPriority non-optional
-      git cherry-pick de8ae02f9189b234816aa98d6e08d33f07853f14  # shared/instance: Wraps validate.IsPriority in validate.Optional
-      git cherry-pick 52ce0d90f816f0bee4b99ed993b9dc4e1772b60c  # shared/validate: Makes IsBool non-optional
-      git cherry-pick c7b46cd66149b0cb4d8e6091fff8bcb3b33eea7b  # lxd: Wraps validate.IsBool in validate.Optional
-      git cherry-pick 9c934239621ef9fc921a45e38768533fc03b573e  # shared/instance: Wraps validate.IsBool in validate.Optional
-      git cherry-pick 377e61db55761f763a3589883cb7ac4fb51596f1  # shared/validate: Makes IsSize non-optional
-      git cherry-pick ab374f269c961531ca6a722b4374b4a07de6301d  # lxd: Wraps validate.IsSize in validate.Optional
-      git cherry-pick d1adf48d8ff7760048bcfdf933c8d0b59cb7d0af  # shared/instance: Wraps validate.IsSize in validate.Optional
-      git cherry-pick 8176f505dec5950f196d3024615c1d30ba4792bf  # shared/validate: Makes IsNetworkAddress non-optional
-      git cherry-pick 4b9bc47c7c5f4a2a7ebed30a58ed20260118507a  # lxd: Wraps validate.IsNetworkAddress in validate.Optional
-      git cherry-pick ad0ab8ef7566506bcda34a44faccb5705997eaa2  # shared/validate: Makes IsNetworkV4 non-optional
-      git cherry-pick 3e56783e8b79e7d1e899b5abb04dd8e066976476  # lxd/network/driver/bridge: Wraps validate.IsNetworkV4 in shared.Optional
-      git cherry-pick d0c933c0c2d44f1e554b227a46da3a1921c57168  # shared/validate: Makes IsNetworkAddressV4 non-optional
-      git cherry-pick 081b4978f0ecd07bcec3dacad6a6560aadbee502  # lxd/device/nic: Wraps validate.IsNetworkAddressV4 in validate.Optional
-      git cherry-pick 80a844dcc933e2158d6aa2811b318fde0a8c142b  # lxd/device/nic/ipvlan: Wraps validate.IsNetworkAddressV4 in validate.Optional
-      git cherry-pick b0627a1ed6fb4e903d56a327cfe6863990f1a293  # lxd/device/nic/ipvlan: Fixes incorrect IPv4 address check in IPv6 context
-      git cherry-pick c2222650f985d46f91301f52b380357d28c9df18  # lxd/network/driver/bridge: Wraps validate.IsNetworkAddressV4 in validate.Optional
-      git cherry-pick 89d24cc7cfadd0d13b0bbc714456eb293b62ccf0  # shared/validate: Makes IsNetworkAddressCIDRV4 non-optional
-      git cherry-pick 9d7cbcfb1bae3ce034c137a9f9874944d1eb4b52  # lxd: Wraps validate.IsNetworkAddressCIDRV4 in validate.Optional
-      git cherry-pick e42294f120d937cc5c8561f522cb64c1309976d9  # shared/validate: Makes IsDeviceID non-optional
-      git cherry-pick d4db2fcf21b10c70b481ecbb2bbe7a3ee6fde88a  # lxd/device: Wraps validate.IsDeviceID in validate.Optional
-      git cherry-pick bfcc6f46c80de99ff5f1cc3234d8075231a80ad8  # shared/validate: Makes IsNetworkV6 non-optional
-      git cherry-pick d4b7ba6670e405332e180cba9e173c6fd16b34ba  # shared/validate: Makes IsNetworkAddressCIDRV6 non-optional
-      git cherry-pick 700814bca20f130120c0d38df7e0e989146b6a7b  # lxd: Wraps validate.IsNetworkAddressCIDRV6 in validate.Optional
-      git cherry-pick 21105454d80ea8e3ddf39c3a685e95ff945ed474  # shared/validate: Makes IsNetworkAddressV6 non-optional
-      git cherry-pick 71598156852bc60ea0a5b83466af1b84bf2112ed  # lxd: Wraps validate.IsNetworkAddressV6 in validate.Optional
-      git cherry-pick 6b04417d5ee3dcc45e685f3a6723a5cecb3bec44  # lxd/device/nic/ipvlan: validate.IsNetworkAddressVX tweaks
-      git cherry-pick 017d47ba0f00ed2bf3d69bdd4d385620547d27fb  # lxd/device/nic/routed: Wraps validate.IsNetworkAddressV4List in validate.Optional
-      git cherry-pick e7bd928659883102ef3737cd46f3e6420a2ecc5f  # lxd: Wraps validate.IsNetworkV4List and validate.IsNetworkV6List in validate.Optional
-      git cherry-pick 26d5de4e76875cd3ed79f75ee5cb32135683d384  # shared/validate: Tweaks IsNetworkVLAN error message ordering
-      git cherry-pick e5b5e98ff36bc8807e6009c22420794cc12a972d  # shared/validate: comment spacing
-      git cherry-pick f6b0234c2b2c91538c7a5bd03039561411bc61b3  # daemon: check whether shiftfs is useable
-      git cherry-pick e7a9a0c7c1b1ca3d50926ff1b41b1330d10669a3  # lxd/network/network/utils: Renames ValidNetworkName to validInterfaceName
-      git cherry-pick 03b627dac9e19680182736d24e2f73cddaa3debc  # lxd/network/network/utils: Adds validVirtualNetworkName
-      git cherry-pick bcd32986275e3a0f4d442754c5da077488106a66  # lxd/network/network/interfaces: Adds ValidateName
-      git cherry-pick a901bf418a999a8243633d597d0d8982faad5bf6  # lxd/network/driver/bridge: Implements ValidateName
-      git cherry-pick 2cadfdc8f910461bb3a4f04a3c4a0ffff57a3c3d  # lxd/network/driver/macvlan: Implements ValidateName
-      git cherry-pick 0ca49ed49ffde73fc192d99266f0ef6a4b7b5bfb  # lxd/network/driver/sriov: Implements ValidateName
-      git cherry-pick d0122c8c61ea9cd8443d34bcc48b8d8ebed839bc  # lxd/network/network/load: Adds ValidateName helper function
-      git cherry-pick 4abd2013b40e9bd56084784ab48756145a418ef6  # lxd/main/init/interactive: Switches to network.ValidateName for bridge validation
-      git cherry-pick 6479adf8651d1dbd1047fef1317d8a2a4c84a9f6  # lxd/networks: Switches to network.ValidateName
-      git cherry-pick 0aaa8307e8ab2e223fbfa345a7943065b6d85545  # lxd/storage/utils: Simplifies error message from ValidName
-      git cherry-pick 20f252e907a7efec64a87fd4276c7860c2d0be4c  # doc/networks: Fixes typo in bridge docs
-      git cherry-pick 3263e271e165959f2fc359664d0c9308cc563128  # lxd/cluster/config: Fix import ordering of external package
-      git cherry-pick 7a9c38d637434badaee4b986afbbeecc4e876f4c  # lxd/network/openvswitch: Name functions consistently using ObjectAction format
-      git cherry-pick 4aef987962f04cad9429743f19c5a0bd2ce36a73  # lxd/network/driver/bridge: OVS function naming usage
-      git cherry-pick 7697eec7df583467ad1112b37cf577254e2544b6  # lxd/network/network/utils: OVS function naming usage
-      git cherry-pick 596e8ad5a3dd75378cfb9ec76ad461eb4a06bcfe  # lxd/device/nic/bridged: OVS function naming usage
-      git cherry-pick 81f6c3e67ea624a6f9dfab383e8c90517bbaa91c  # lxd/storage/locking: Moves package to lxd/locking
-      git cherry-pick 5630989206e2e18dc2b33d1da1fcc7606e2217ed  # lxd/locking: Renames variables to make them generic
-      git cherry-pick 0fa1c760732ac7d944132e9c404013423267ad3c  # lxd/storage/drivers/utils: Adds OperationLockName function
-      git cherry-pick c8985c93a89c8f0a260b1786b2fdcfac471da74b  # lxd/network/network/interface: Adds ID() function
-      git cherry-pick d86495310896b6572f319eb26505d895365facf9  # lxd/network/driver/common: Implements ID() function
-      git cherry-pick 5bee3de5687db7ede611e99bf8683670f378b1ff  # lxd/storage: locking.Lock usage with OperationLockName wrapper
-      git cherry-pick 9473b796c6a60d12ac6f27905872f086f002e550  # lxd/resources: Fix total memory for per NUMA node
-      git cherry-pick aabee98c0d811d0221f7ad2ed30ade7845bdf323  # lxd: enable safe native container terminal allocation
-      git cherry-pick c978a20c2432314bed0caedac2680432aa17ffd5  # lxd/rsync: Don't pass --bwlimit when no limits set
-      git cherry-pick a32272e33376a801165b7bacd56beac40156fc9d  # exec: fix OpenPtyInDevpts()
-      git cherry-pick b2b4662c10bdf4dbbcb3ca89536b48d1e4fad98b  # test/suites/storage: LVM size tweaks
-      git cherry-pick 3a8a36e20b05d0241758c1c7018ba8525f8ee47b  # lxd/instance/drivers/driver/lxc: Adds nil check in getLxcState
-      git cherry-pick 2127e290031c4f180310d4a10ac884deccbb9f67  # client/operations: Fixes race conditions
-      git cherry-pick 29513f39289183836d278897072b057eaa4d4560  # lxd/operations: Fixes race conditions
-      git cherry-pick 0a6069afb730108851f44728bc9d9963d36d0773  # client: More races fixed
-      git cherry-pick bfeb5176d0db94f6cafc53a4d9f506a329a67060  # Makefile: Adds race target for enabling race detector
-      git cherry-pick 35640baf87ad7ef9c566b939a6e03798c2f00c27  # Makefile: Correctly builds lxd-p2c and lxd-agent in debug and nocache targets
-      git cherry-pick dccd1afa7c89c173d610afcc94375cb3a57788a0  # client/operations: Race fix
-      git cherry-pick 1deea91f2518789f6d000dd377f4a4588d4de257  # lxd/db: Adds mutex to fix races
-      git cherry-pick c9b85e0bdf78c73676df49b532b56a5ad8d79c23  # lxd/operations: Fixes races
-      git cherry-pick 5b8305ba6cc1a75dd0ba7bbbf93dc5895e0362ff  # shared/validate: Adds IsURLSegmentSafe function
-      git cherry-pick b468279eff50513bba721f625f6442b71d125d68  # lxd/network/driver/common: Adds common ValidateName function
-      git cherry-pick b7b46e00bc0de74b3df261dd9c63ddfe0c4e0e23  # lxd/network/driver/bridge: Changes ValidateName to use common validation too
-      git cherry-pick c92f86a06ec835011c0d2ad909ff23f2e527fc82  # lxd/network/driver: Removes ValidateName from sriov and macvlan
-      git cherry-pick b062cebb6e6f97306e6303c430fbd0f091e065c2  # lxd/network/network/load: Adds field name context to name validation errors
-      git cherry-pick 315a628d489ffd7e338ba13eb7e5e9cacbd9f988  # lxd/network/network/utils: Removes validVirtualNetworkName
-      git cherry-pick 58c6f4c04332b2cea517f3495a0a64306a21361a  # lxd/networks: Returns network context on network startup failure
-      git cherry-pick 0f69cfdf8c20ba8e28836136aa156da77e2507fd  # shared/validate: Adds Required() and makes Optional() accept multiple validators
-      git cherry-pick a059598f46665a38e89369052c74a9c128a61ee4  # lxd/network/driver/bridge: Don't allow stable volatile MAC with fan network
-      git cherry-pick 0a111a8ae198e5d74b0551eeb54c028a7be51bca  # lxd/network/driver/bridge: Don't allow hwaddr to be set in fan mode
-      git cherry-pick 23713ab015959c5d086f35d52f7c26dc086a0f29  # seccomp: update comment about blocking the new mount api
-      git cherry-pick 506eee2592fdf030445eff0e7ad322d7ad778afb  # syscall_numbers: fix pidfd_open() definition
-      git cherry-pick cf8dccf1b3e5a5b81b098082710157ffd5219cde  # lxd_seccomp: add SECCOMP_IOCTL_NOTIF_ADDFD definitions and types
-      git cherry-pick ecf089657ef32cec48bbce837179bc7a44a04d9f  # checkfeature: check for seccomp notify fd injection feature
-      git cherry-pick df81cc6b016130b5460b5d1f25bb08124e7e90e8  # syscall_numbers: add pidfd_getfd()
-      git cherry-pick 783e46f330720af0fe738068225b34bb5a6e4e50  # syscall_numbers: add bpf()
-      git cherry-pick bf9fdfa6a42604a5fe8a837c36ef71a0741f390d  # seccomp: report helpful errors when determining support for features
-      git cherry-pick 05950aa0dde9bab095ac43b780d15e23bb46b257  # seccomp: handle liblxc sending the notify fd as part of the seccomp message
-      git cherry-pick 1082d798304f60582b436e61bfeeaba22af8ae90  # syscall_numbers: add close_range()
-      git cherry-pick aec1e32b477732293805e7959d9d84fec9e2ec24  # exec: switch to close_range() syscall
-      git cherry-pick 818d0fcccc2b6238d10898516124c49552e61e38  # process_utils: remove faulty license
-      git cherry-pick 4bae288846ed859d96e01c8629b2703895a37fba  # lxd/apparmor/dnsmasq: Add binary for nesting
-      git cherry-pick aa36d5e1b5ddb740635240504b8c562f637883c9  # lxd/storage/drivers/ceph: Fix volume deletion
-      git cherry-pick 4dc02e4a02ba8311a49a97d67bff17a957879a39  # lxd/instance/drivers/driver/qemu: Fix race in onStop getting operation
-      git cherry-pick 852c622d8b69fa7dd1880376eba39509f0cd54b1  # lxd/db: Fix premature failure when listing cluster volumes
-      git cherry-pick e1cc49897a5957f9ebea35a05401e17b8a801a1f  # lxd/db/storage_volumes: Add comments regarding behaviour
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
