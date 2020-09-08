@@ -1000,7 +1000,6 @@ parts:
       git cherry-pick fd75c703f8fee82529b7c41d1de4be0a6923b09a  # lxd/db/cluster: Fix node id nil values
       git cherry-pick 8b0d54686d9979ee50f45fafa88b0a6258a256f7  # lxd/storage/volumes: Only apply config changes when restoring snapshot if non-nil config is supplied
       git cherry-pick 602ecadd3c7a1286bf2d1245394f06824c712394  # lxd/network/driver/bridge: Exclude /32 underlay addresses from overlay address generation
-      git cherry-pick 9807ba8fa2bb45e171d3a1b583f79fd5944ce2de  # lxd/network/driver/ovn: Removes unnecessary dnsmasq logic in deleteParentPortBridge
       git cherry-pick 1e793a8c9f2728d6d695bf372e04d13b96f435b7  # lxd/device/device/utils/network: Removes networkRandomDevName
       git cherry-pick 9a2348ae4283109bf0c128136914f50146de5cf9  # lxd/network/network/utils: Adds RandomDevName function
       git cherry-pick 1371927f2c9db61d5a880115eaa9e047417ccf0d  # lxd/device: network.RandomDevName usage
