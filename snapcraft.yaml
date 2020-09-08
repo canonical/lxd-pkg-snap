@@ -993,6 +993,24 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 4a25da23b978d2eacb145d710a9682cc12b74f88  # shared/log15: Fix due to recent unix change
+      git cherry-pick 223908ca169dd8354fee5b27fef2bb4a91dda56c  # Handle signals in non-interactive sessions.
+      git cherry-pick 0756bd0da7ce2bae6c90317ed8cc97c4f57c4685  # Fix hang when control is not provided in non-interactive mode.
+      git cherry-pick 024e87531934c3125f5a28eaa1d1cf5390debc09  # lxd/db/cluster: Fix incorrect storage volume node IDs
+      git cherry-pick fd75c703f8fee82529b7c41d1de4be0a6923b09a  # lxd/db/cluster: Fix node id nil values
+      git cherry-pick 8b0d54686d9979ee50f45fafa88b0a6258a256f7  # lxd/storage/volumes: Only apply config changes when restoring snapshot if non-nil config is supplied
+      git cherry-pick 602ecadd3c7a1286bf2d1245394f06824c712394  # lxd/network/driver/bridge: Exclude /32 underlay addresses from overlay address generation
+      git cherry-pick 9807ba8fa2bb45e171d3a1b583f79fd5944ce2de  # lxd/network/driver/ovn: Removes unnecessary dnsmasq logic in deleteParentPortBridge
+      git cherry-pick 1e793a8c9f2728d6d695bf372e04d13b96f435b7  # lxd/device/device/utils/network: Removes networkRandomDevName
+      git cherry-pick 9a2348ae4283109bf0c128136914f50146de5cf9  # lxd/network/network/utils: Adds RandomDevName function
+      git cherry-pick 1371927f2c9db61d5a880115eaa9e047417ccf0d  # lxd/device: network.RandomDevName usage
+      git cherry-pick b212605957e14def26aeb9da35f5318bae257d27  # lxd/network: Adds Description function
+      git cherry-pick cada30dcb200ab19d0d02a28d0327b4dee6bde62  # doc/api: Removes underscore escaping when used inside backticks
+      git cherry-pick b43d403fbe9865a3e635797121b8216bcecc2716  # lxd/instance/drivers: Fixes crash when removing device that cant be loaded
+      git cherry-pick 9536ed080bc571c78e240f4099d3ab98aa2f7551  # lxc/storage_volume: Fix usage string
+      git cherry-pick 801888ec1099bcb53b8c3220ff6de8f61ef2e8f3  # po: Update translations
+      git cherry-pick 30615ded7ed09501388b14c52e52855dc9173786  # lxd/drivers/qemu: Use gic-version=max on aarch64
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
