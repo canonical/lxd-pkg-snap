@@ -227,7 +227,7 @@ parts:
   edk2:
     source: https://github.com/tianocore/edk2
     source-type: git
-    source-tag: edk2-stable202005
+    source-tag: edk2-stable202008
     source-depth: 1
     plugin: nil
     build-packages:
