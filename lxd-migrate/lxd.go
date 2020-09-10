@@ -264,11 +264,18 @@ func (d *lxdDaemon) uninstall() error {
 	}
 
 	// Actively kill the old systemd units in case they get stuck during removal
-	defer func() {
-		for i := 0; i < 10; i++ {
-			time.Sleep(10 * time.Second)
-			shared.RunCommand("systemctl", "kill", "-s", "SIGKILL", "lxd-containers.service")
-			shared.RunCommand("systemctl", "kill", "-s", "SIGKILL", "lxd.service")
+	chDone := make(chan struct{}, 1)
+	defer close(chDone)
+
+	go func() {
+		for {
+			select {
+			case <-chDone:
+				return
+			case <-time.After(10 * time.Second):
+				shared.RunCommand("systemctl", "kill", "-s", "SIGKILL", "lxd-containers.service")
+				shared.RunCommand("systemctl", "kill", "-s", "SIGKILL", "lxd.service")
+			}
 		}
 	}()
 
