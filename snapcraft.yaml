@@ -208,7 +208,6 @@ parts:
   dqlite:
     after:
       - raft
-      - sqlite
     source: https://github.com/canonical/dqlite
     source-type: git
     source-depth: 1
@@ -653,30 +652,6 @@ parts:
     prime:
       - lib/libraft*so*
 
-  sqlite:
-    source: https://github.com/canonical/sqlite
-    source-type: git
-    source-depth: 1
-    plugin: autotools
-    configflags:
-      - --enable-replication
-    build-packages:
-      - tcl
-    override-build: |-
-      set -ex
-
-      git log -1 --format=format:%ci%n | sed -e 's/ [-+].*$//;s/ /T/;s/^/D /' > manifest
-      git log -1 --format=format:%H > manifest.uuid
-      cp /usr/share/misc/config.guess .
-      cp /usr/share/misc/config.sub .
-      autoreconf -f -i
-
-      set +ex
-      snapcraftctl build
-    prime:
-      - bin/sqlite3
-      - lib/libsqlite3*so*
-
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
@@ -944,9 +919,9 @@ parts:
     after:
       - lxc
       - dqlite
-      - sqlite
     build-packages:
       - libacl1-dev
+      - libsqlite3-dev
       - libudev-dev
       - pkg-config
     stage-packages:
@@ -985,7 +960,6 @@ parts:
 
       # Setup for our shared libraries
       sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/canonical/go-dqlite/internal/bindings/server.go
-      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       # Run the standard build
       set +ex
@@ -1020,6 +994,8 @@ parts:
 
       - etc/bash_completion.d/snap.lxd.lxc
 
+      - lib/*/libsqlite3*
+
       - share/misc
 
       - bin/lxc
@@ -1032,16 +1008,12 @@ parts:
     source: lxd-migrate/
     after:
       - lxd
-      - sqlite
     plugin: go
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
     override-build: |
       set -ex
-
-      # Setup for our shared libraries
-      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
 
       set +ex
       snapcraftctl build
@@ -1080,7 +1052,6 @@ parts:
       - openvswitch
       - ovn
       - raft
-      - sqlite
       - squashfs-tools-ng
       - vim
       - xfs
@@ -1106,7 +1077,6 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/bin/snap*
       strip -s ${SNAPCRAFT_PRIME}/lib/liblxc*
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
-      strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
       for zfs in zfs-0.6 zfs-0.7 zfs-0.8; do
           [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
