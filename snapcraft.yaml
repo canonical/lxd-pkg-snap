@@ -168,7 +168,6 @@ parts:
 
   dqlite:
     after:
-      - libco
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
@@ -242,16 +241,6 @@ parts:
 
     prime:
       - share/qemu/*
-
-  libco:
-    source: https://github.com/canonical/libco
-    source-type: git
-    source-depth: 1
-    plugin: make
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libco*so*
 
   libmnl:
     source: https://git.netfilter.org/libmnl
@@ -1073,7 +1062,6 @@ parts:
       - btrfs
       - ceph
       - dqlite
-      - libco
       - libseccomp
       - logrotate
       - lvm
