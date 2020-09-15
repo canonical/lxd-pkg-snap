@@ -45,37 +45,37 @@ if lxc info >/dev/null 2>&1; then
 
     echo "## Instances"
     echo '```'
-    lxc list
+    lxc list --format=yaml
     echo '```'
     echo ""
 
     echo "## Images"
     echo '```'
-    lxc image list
+    lxc image list --format=yaml
     echo '```'
     echo ""
 
     echo "## Storage pools"
     echo '```'
-    lxc storage list
+    lxc storage list --format=yaml
     echo '```'
     echo ""
 
     echo "## Networks"
     echo '```'
-    lxc network list
+    lxc network list --format=yaml
     echo '```'
     echo ""
 
     echo "## Projects"
     echo '```'
-    lxc project list
+    lxc project list --format=yaml
     echo '```'
     echo ""
 
     echo "## Profiles"
     echo '```'
-    lxc profile list
+    lxc profile list --format=yaml
     echo '```'
     echo ""
 
@@ -88,7 +88,7 @@ if lxc info >/dev/null 2>&1; then
     if lxc cluster list >/dev/null 2>&1; then
         echo "## Cluster"
         echo '```'
-        lxc cluster list
+        lxc cluster list --format=yaml
         echo '```'
         echo ""
     fi
