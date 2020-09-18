@@ -1024,6 +1024,21 @@ parts:
       git cherry-pick b66d417b088ec9149fed0ca1d1818d69ef77f28c  # shared/instancewriter/instance/tar/writer: Handle nil idmapSet and log shifting errors in WriteFile
       git cherry-pick 50373fef4298d343ef64d8375c2706347f77b7de  # lxc: Better handle arguments
       git cherry-pick 810d202cb66600cbca592caa868abefdfcd0033f  # lxc: Unbundle sortorder
+      git cherry-pick d6fcd2c85110d47e7417418f5dfef203104b34e7  # lxd/util/sys: Fixes GetExecPath when lxd binary has been removed/changed
+      git cherry-pick f35ceaff556fa9429ae1cf0ad5e20fcb9393b0c5  # lxd/db/images: Error message uppercase first letter
+      git cherry-pick 029858e0f860f11a93d08b512025523879f192b5  # lxd/instance: Adds instanceImageTransfer and updates instanceCreateFromImage to use it
+      git cherry-pick 2e3da369ca3c69169522fc0066c19c26ff41bd70  # lxd/daemon/images: Error quoting
+      git cherry-pick cad588b83240af54e3844014ec0be7dd0c4c0e25  # lxd/daemon/image: Adds logic to download image from another cluster node into ImageDownload
+      git cherry-pick 7cfee8d9d881c9c437b276c143109870f4496d97  # lxd/db/images/test: Fixes tests for LocateImage
+      git cherry-pick 5065750e81307048287013a28db718be1cabd82f  # test/suites/clustering: Adds test for image transfer between cluster nodes
+      git cherry-pick e135461684a73b360eb3e8ee80d2129e53ef3e5d  # bash-completion: use "list --format=csv" consistently
+      git cherry-pick b5af91dfea753718bb033d3c4fb6e8c58d25ee0a  # bash-completion: use regex grouping for `lxc start`
+      git cherry-pick 9c7be047c76b6a6565db55ffc546fc5193e31131  # lxd/instance/qemu: Fix mem device naming
+      git cherry-pick 48d3c7083efb0948902ac2ebba34504296031bc1  # proxy bind= should accept host|instance as the doc says
+      git cherry-pick 8e45c7649625d15c5fa1bc32835c9167618157af  # Valid proxy type= values are all lower case so fix doc
+      git cherry-pick b5f3fb4365ddfccd8c3159dfd62cff6c691435f4  # s/descriptros/descriptors/
+      git cherry-pick ac51668c673b6957712564fcfcc03e79bee14752  # Revert "lxd/network/driver/bridge: Exclude /32 underlay addresses from overlay address generation"
+      git cherry-pick 158d5a7a4d31b809cf994c08c948d2348e82005a  # lxd/network/driver/bridge: Skip lo interface when generating fan overlay address in addressForSubnet
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
