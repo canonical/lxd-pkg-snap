@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.5"
+version: "4.6"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -942,7 +942,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.5
+    source-tag: lxd-4.6
     after:
       - lxc
       - dqlite
@@ -980,65 +980,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 4a25da23b978d2eacb145d710a9682cc12b74f88  # shared/log15: Fix due to recent unix change
-      git cherry-pick 223908ca169dd8354fee5b27fef2bb4a91dda56c  # Handle signals in non-interactive sessions.
-      git cherry-pick 0756bd0da7ce2bae6c90317ed8cc97c4f57c4685  # Fix hang when control is not provided in non-interactive mode.
-      git cherry-pick 024e87531934c3125f5a28eaa1d1cf5390debc09  # lxd/db/cluster: Fix incorrect storage volume node IDs
-      git cherry-pick fd75c703f8fee82529b7c41d1de4be0a6923b09a  # lxd/db/cluster: Fix node id nil values
-      git cherry-pick 8b0d54686d9979ee50f45fafa88b0a6258a256f7  # lxd/storage/volumes: Only apply config changes when restoring snapshot if non-nil config is supplied
-      git cherry-pick 602ecadd3c7a1286bf2d1245394f06824c712394  # lxd/network/driver/bridge: Exclude /32 underlay addresses from overlay address generation
-      git cherry-pick 1e793a8c9f2728d6d695bf372e04d13b96f435b7  # lxd/device/device/utils/network: Removes networkRandomDevName
-      git cherry-pick 9a2348ae4283109bf0c128136914f50146de5cf9  # lxd/network/network/utils: Adds RandomDevName function
-      git cherry-pick 1371927f2c9db61d5a880115eaa9e047417ccf0d  # lxd/device: network.RandomDevName usage
-      git cherry-pick b212605957e14def26aeb9da35f5318bae257d27  # lxd/network: Adds Description function
-      git cherry-pick cada30dcb200ab19d0d02a28d0327b4dee6bde62  # doc/api: Removes underscore escaping when used inside backticks
-      git cherry-pick b43d403fbe9865a3e635797121b8216bcecc2716  # lxd/instance/drivers: Fixes crash when removing device that cant be loaded
-      git cherry-pick 9536ed080bc571c78e240f4099d3ab98aa2f7551  # lxc/storage_volume: Fix usage string
-      git cherry-pick 801888ec1099bcb53b8c3220ff6de8f61ef2e8f3  # po: Update translations
-      git cherry-pick 30615ded7ed09501388b14c52e52855dc9173786  # lxd/drivers/qemu: Use gic-version=max on aarch64
-      git cherry-pick 571f8d60ff099673facf7f99916b79ba29d11e72  # seccomp: fix compilation on kernels without proper bpf.h
-      git cherry-pick baa484ad0d7dc5d95e37e4eadbe82f89700291e3  # lxc/config: Update wording for profile/config
-      git cherry-pick 0c5654039abba595e6f7da86be8dc13ee8b45505  # i18n: Update translation templates
-      git cherry-pick ec14e2a492e59be8a6425398f7421dd82bb2712f  # lxc/export: Support writing to stdout
-      git cherry-pick b7c98a532b326b3ead755875afbff9fe316ca377  # Drop custom SQLite and libco
-      git cherry-pick cbb45c93212db3d2897e7c33e8d6e3e91f65b41d  # validate: Consider + as unsafe in URL
-      git cherry-pick 34d341eb0f7f54d005d43660be190085d3a63245  # lxd/instance/snapshots: Restrict naming
-      git cherry-pick 512f9e63b8011e856a8504aae9b01ae90376446f  # db: Handle NULL storage_volume description column in patch 34
-      git cherry-pick 5f925f00a4c9f967bdefd809cae5f7afb7aade84  # lxd/storage/drivers/utils: Corrects argument order of mkfs in makeFSType for wider compatibility
-      git cherry-pick 0fb2a6e6fd2ce991d002d3296195566d1aafe200  # shift_linux: tweak ACL handling
-      git cherry-pick 2a7aef537e32e39074552b9ccceeb2e0a67a9ccd  # tar_write: switch to PAXRecords to preserve ACLs too
-      git cherry-pick 805914bbb428bb63828a9d1fffef061bb4fa7a0d  # shift_linux: handle ACL unshifting correctly
-      git cherry-pick 017b1426d0604758320f1e2c90ade886ec82f68f  # shift_linux: handle capability unshifting correctly
-      git cherry-pick ce39f894c057d270760bb4ef81dbc40f06532506  # shift_linux: converty to CBytes not to CString
-      git cherry-pick 086845d82a0c328f682fdb9656773d0245871d30  # lxc/utils: Add usage function
-      git cherry-pick c2c07d018da97328a7bcfea61f6345d127a1d774  # lxc: Drop command name from translation
-      git cherry-pick 0e8a905ce16e009d9eade49910b46dde2a28be5b  # shared/subprocess: Set err on non-zero
-      git cherry-pick 18a8825baac51658498695332369133a7a702e5b  # lxd/instances/qemu: Use subprocess
-      git cherry-pick 8163a8283d46138217f182c26526c81179f0b3e9  # lxd/instance: Add DevPaths
-      git cherry-pick 00cf5819bad338bed8d802b61aadcd41031a4b3a  # lxd/apparmor: Fix unload/delete
-      git cherry-pick 584a2117fc46112b7e8d30cd6b4fc418d4daff96  # lxd/apparmor/instance: Sort context
-      git cherry-pick 6d0aab7f40a4dd506e64d6f950fe423e9ca4eddf  # lxd/apparmor: Prepare for qemu
-      git cherry-pick d67a7eb0e233148cf12d17138f786e0df41a226f  # lxd/instance/drivers/driver/qemu: Switch to threads locking mode and writeback cache mode for BTRFS
-      git cherry-pick 2012aab0046ad5367f521626647819c0ff0b3ef9  # shared/idmap/shift/linux: Handle nil IdmapSet in UnshiftACL and UnshiftCaps
-      git cherry-pick b66d417b088ec9149fed0ca1d1818d69ef77f28c  # shared/instancewriter/instance/tar/writer: Handle nil idmapSet and log shifting errors in WriteFile
-      git cherry-pick 50373fef4298d343ef64d8375c2706347f77b7de  # lxc: Better handle arguments
-      git cherry-pick 810d202cb66600cbca592caa868abefdfcd0033f  # lxc: Unbundle sortorder
-      git cherry-pick d6fcd2c85110d47e7417418f5dfef203104b34e7  # lxd/util/sys: Fixes GetExecPath when lxd binary has been removed/changed
-      git cherry-pick f35ceaff556fa9429ae1cf0ad5e20fcb9393b0c5  # lxd/db/images: Error message uppercase first letter
-      git cherry-pick 029858e0f860f11a93d08b512025523879f192b5  # lxd/instance: Adds instanceImageTransfer and updates instanceCreateFromImage to use it
-      git cherry-pick 2e3da369ca3c69169522fc0066c19c26ff41bd70  # lxd/daemon/images: Error quoting
-      git cherry-pick cad588b83240af54e3844014ec0be7dd0c4c0e25  # lxd/daemon/image: Adds logic to download image from another cluster node into ImageDownload
-      git cherry-pick 7cfee8d9d881c9c437b276c143109870f4496d97  # lxd/db/images/test: Fixes tests for LocateImage
-      git cherry-pick 5065750e81307048287013a28db718be1cabd82f  # test/suites/clustering: Adds test for image transfer between cluster nodes
-      git cherry-pick e135461684a73b360eb3e8ee80d2129e53ef3e5d  # bash-completion: use "list --format=csv" consistently
-      git cherry-pick b5af91dfea753718bb033d3c4fb6e8c58d25ee0a  # bash-completion: use regex grouping for `lxc start`
-      git cherry-pick 9c7be047c76b6a6565db55ffc546fc5193e31131  # lxd/instance/qemu: Fix mem device naming
-      git cherry-pick 48d3c7083efb0948902ac2ebba34504296031bc1  # proxy bind= should accept host|instance as the doc says
-      git cherry-pick 8e45c7649625d15c5fa1bc32835c9167618157af  # Valid proxy type= values are all lower case so fix doc
-      git cherry-pick b5f3fb4365ddfccd8c3159dfd62cff6c691435f4  # s/descriptros/descriptors/
-      git cherry-pick ac51668c673b6957712564fcfcc03e79bee14752  # Revert "lxd/network/driver/bridge: Exclude /32 underlay addresses from overlay address generation"
-      git cherry-pick 158d5a7a4d31b809cf994c08c948d2348e82005a  # lxd/network/driver/bridge: Skip lo interface when generating fan overlay address in addressForSubnet
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
