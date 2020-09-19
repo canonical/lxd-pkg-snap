@@ -981,6 +981,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick e3b3aa1a51857af55eafa4f4ca091a2c009deaff  # lxd/apparmor: Allow unix sockets binding
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
