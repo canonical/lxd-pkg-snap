@@ -982,6 +982,35 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick e3b3aa1a51857af55eafa4f4ca091a2c009deaff  # lxd/apparmor: Allow unix sockets binding
+      git cherry-pick f2f4cc35348c285248b561c735ddb044ea2d6fc3  # doc/server: Fix escaping
+      git cherry-pick 4279a2c1e7e70f55b94da9cdff8604233402aca2  # doc/server: Sort config keys
+      git cherry-pick e036ffc0f0da58b431905ab85d0b36b7de42c050  # lxd/network/driver/ovn: Improve error message when parent 'network' option not specified
+      git cherry-pick cbcd0da2fa9b5fdc43d114c97138d45e7f8a91c5  # lxd/network/network/interface: Adds Type interface and moves non-DB depedent functions into it
+      git cherry-pick 4454e4c9a3fd5c9b04dacfdad6b4d2b6fa811410  # lxd/network/network/load: Adds LoadByType function and removes ValidateNameAndProject function
+      git cherry-pick 335ba9bdb20c22f0b278a2b3a05bfa15772bc652  # lxd/main/init/interactive: netType.ValidateName usage
+      git cherry-pick ceb500dd55671f4ec71fdb5cbdae82f5b3daa03d  # lxd/networks: Switch to network type validation in networksPost
+      git cherry-pick e5f92170652d5e9349732da43b5a4be23997e190  # lxd/networks: Use ValidateName function on loaded DB network in networkPost
+      git cherry-pick 77b5b0bded45befed01c10891a81c50e9498e1a3  # lxd/network/network/interface: Exports FillConfig
+      git cherry-pick 2b77135298ef1f7cd6938171b24af452a473a040  # lxd/network/network/load: Removes FillConfig function
+      git cherry-pick b7e848b5b22851f05c0a405858bfa5636fefb65e  # lxd/networks: netType.FillConfig usage
+      git cherry-pick e3e07697081285cf4350a03012231071aad95483  # lxd/network/driver/common: Exports FillConfig
+      git cherry-pick 2f642388b57522921a7317d36b671e69b98e3ea0  # lxd/network/driver/bridge: FillConfig usage
+      git cherry-pick 7f3b012ba2e67be527e890a64814f5a25f064c84  # lxd/network/driver/ovn: FillConfig usage
+      git cherry-pick a1a80fd6e884fc1fe2a629932745ec1ed68a74e6  # lxd/network/driver/common: Removes common Type() and netType
+      git cherry-pick adadc6640b27bc7c0947b5435307f430d7487d01  # lxd/network: Adds Type() to each driver
+      git cherry-pick 861ae0d937cb927b0a1a2911a837a228583485dd  # lxd/db/errors: Updates ErrAlreadyDefined text to be generic
+      git cherry-pick 7a06fbc31b0a7a226a6fcf6c32c734a9b4891c07  # lxd/network/network/interface: Adds DBType function
+      git cherry-pick cb5a4da6a6bd2ab19ce3369aeca8c2c75be0c8a1  # lxd/network/driver: Implements DBType()
+      git cherry-pick a8c46bcfb5690b4b147290fda2e7e4bd690d3261  # lxd/network/driver: Adds NodeSpecificConfig Info var
+      git cherry-pick d0ae93e802f66b9e7df9c53cd2a87f562b6d95a9  # lxd/networks: netType.DBType usage in networksPost
+      git cherry-pick c1da0f64ee2bfa0e1b921ee86b6c4e5973e14e52  # lxd/networks: Create pending network node entries when network driver doesn't support per node config in networksPost
+      git cherry-pick 23f7b060e67e6ff36d2f078aeb664d4df6fcb54c  # lxd/networks: Comments in networksPostCluster
+      git cherry-pick ea611ba00aefe90264aecf9a165e956d6a625b71  # lxd/networks: Comments in networkGet
+      git cherry-pick df23ec594d2c743657b702634b8f3f63a935f96a  # lxd/networks: Start parent networks before dependents in networkStartup
+      git cherry-pick 042d779d41f51423e07e7189c3ba56aa136a7b52  # lxd: Ensure all use of db.InstanceFilter defines instance type
+      git cherry-pick 22c0a441c199d2605a50cdb4f9e7cdda9bd694af  # lxd/project/permissions: Fixes AllowInstanceCreation tests
+      git cherry-pick a20bd59a851374262598d8f35678895484b8ce68  # lxd/project/permissions: Error quoting
+      git cherry-pick f96a2cd91a908df865c9a6546e7c97cc7307aab3  # api: Add projects_networks
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
