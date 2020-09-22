@@ -1030,6 +1030,7 @@ parts:
       git cherry-pick 8db55cde37fa40df1b8dfb04329615a60018fd19  # lxd/network: Only adding pseudo pending node records when in cluster in networksPost
       git cherry-pick 2f303a439a951f5486045cf8fddfd890d2ebce33  # lxd/project/permissions: Typo
       git cherry-pick df1a8dd966d4908066442d2d097c102556f1c42f  # lxd/db/cluster/open: Adds features.networks to default project on new database
+      git cherry-pick bd1ea0d78544fd9bf75bebefea8a5149e74fea67  # lxd/storage/cephfs: Fix quota on new volumes
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
