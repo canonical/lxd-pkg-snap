@@ -1011,6 +1011,25 @@ parts:
       git cherry-pick 22c0a441c199d2605a50cdb4f9e7cdda9bd694af  # lxd/project/permissions: Fixes AllowInstanceCreation tests
       git cherry-pick a20bd59a851374262598d8f35678895484b8ce68  # lxd/project/permissions: Error quoting
       git cherry-pick f96a2cd91a908df865c9a6546e7c97cc7307aab3  # api: Add projects_networks
+      git cherry-pick 79d6534ce4e95ef29bce11b5888dbb21246ebf09  # doc/storage: no need to escape underscore in bash examples
+      git cherry-pick cbad2635672f8d91e0f09a2ae7c000e7c3c0bb27  # seccomp: fix bpf support detection
+      git cherry-pick d387805be00fc51b03478e9a35948c029945ffaf  # seccomp: improve bpf support detection
+      git cherry-pick 6a43c6dcc11ed81d42a91f352ff70cc1d8216206  # shared/validate: Use ParseUint in IsNetworkMTU
+      git cherry-pick cefdfacababb21e9a4768b58103a4c3684685091  # lxd/device/device/utils/network: Change argument for NetworkSetDevMTU to uint32
+      git cherry-pick b61d96bf5ca63e8699dad37747b889c90e85cbc4  # lxd/device/device/utils/network: NetworkSetDevMTU usage
+      git cherry-pick 13cda6c28fcdfa075937cbd30f6518f594b3101c  # lxd/network/network/utils: Changes GetDevMTU to return uint32
+      git cherry-pick 7376a8b6158877b9c74ae35aadabe067031b4bf1  # lxd/network/openvswitch/ovs: Adds OVNEncapIP function
+      git cherry-pick 2f43a2aa00c15f4af7ada85be3a29d21a42db635  # lxd/network/driver/ovn: Removes ovnGeneveTunnelMTU constant
+      git cherry-pick b477c2ad2f469e5b924b280a214eca137f32f6e1  # lxd/network/network/utils/ovn: Removes OVNInstanceDeviceMTU function
+      git cherry-pick fb736aa95fda2ed776214fa246b61f6925a6027e  # lxd/network/driver/ovn: Updates getBridgeMTU() to not depend on ovnGeneveTunnelMTU
+      git cherry-pick 92ece4e18217153b0fc6916ce84ad8b310947541  # lxd/network/driver/ovn: Adds getOptimalBridgeMTU and getUnderlayInfo functions
+      git cherry-pick 06e202eebb81507929ec4db9cc6f11e2f84b3d33  # lxd/network/driver/ovn: Updates setup to generate an optimal bridge.mtu setting if not specified manually
+      git cherry-pick 61d1746d413cea4407390aa1a7ef16a6ee7cc6e1  # lxd/device/nic/ovn: Read mtu directly from parent network config bridge.mtu setting
+      git cherry-pick 602317cfa68ffc3c9ad0dd8153632c7b9c5e56bd  # doc/projects: Sort config keys
+      git cherry-pick 4d80efb2f88ce568e93091259131b083c675eb95  # lxd/networks: Enforces manage-networks RBAC permission for managing networks
+      git cherry-pick 8db55cde37fa40df1b8dfb04329615a60018fd19  # lxd/network: Only adding pseudo pending node records when in cluster in networksPost
+      git cherry-pick 2f303a439a951f5486045cf8fddfd890d2ebce33  # lxd/project/permissions: Typo
+      git cherry-pick df1a8dd966d4908066442d2d097c102556f1c42f  # lxd/db/cluster/open: Adds features.networks to default project on new database
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
