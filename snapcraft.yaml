@@ -1031,6 +1031,21 @@ parts:
       git cherry-pick 2f303a439a951f5486045cf8fddfd890d2ebce33  # lxd/project/permissions: Typo
       git cherry-pick df1a8dd966d4908066442d2d097c102556f1c42f  # lxd/db/cluster/open: Adds features.networks to default project on new database
       git cherry-pick bd1ea0d78544fd9bf75bebefea8a5149e74fea67  # lxd/storage/cephfs: Fix quota on new volumes
+      git cherry-pick f14f82f79f89c26000e95a6af9027e6c707ba9d7  # lxd/networks: Allow network deletion in projects
+      git cherry-pick 6dff7c78a8cde9e3540d01cbf560b935c60419f8  # lxc/remote: Add project selection logic
+      git cherry-pick f003ec836f340df2a96e203c03cb5971177cafa2  # i18n: Update translation templates
+      git cherry-pick 8ca190120f9461048bb38537a7ba1f1883e11a41  # lxd/network: Removes client side default network type when creating network
+      git cherry-pick c896c22ae8c97cfb93ebf4112b6e6ecaa291bd48  # lxd/networks: Default to ovn network type when creating non-default network project
+      git cherry-pick 5386ff7c0b1f404e106977cb0521f151419d0d2d  # lxd/network: Removes client side default network type when creating network
+      git cherry-pick 1856656f4f1b4d9f4f649664cb1ce5c6b0e94f38  # lxd/networks: Default to ovn network type when creating non-default network project
+      git cherry-pick 48e033f6de2045dbf215e86d4faf187330d5d70e  # api: Adds projects_networks_restricted_uplinks extension
+      git cherry-pick 42d501a30b97e77ee25e8387a7ca9760f6dff6f4  # doc/projects: Adds restricted.networks.uplinks
+      git cherry-pick add26556ad9db02195bb715ade62e9abba9db837  # lxd/networks: Updates doNetworkUpdate to use n.Validate so that project is available to validator
+      git cherry-pick 52a22db7d5b61e2474c69680dc2b1119ec0f064e  # lxd/network/network/load: Removes unused Validate
+      git cherry-pick ef5ca1af5dc14c21d1df3af384542024fc99705f  # lxd/network/network/load: Renames project arg to projectName for clarity
+      git cherry-pick 0b488101c87434b136e632d2d93c9ed2a7db49bf  # lxd/api/project: Adds restricted.networks.uplinks to validation
+      git cherry-pick 6a618fa0e47989284f7ae7e569810821865d5576  # lxd/network/driver/ovn: Adds allowedUplinkNetworks function
+      git cherry-pick cf73098ffb397fddf971eb38a957ed5066c6176f  # lxd/network/driver/ovn: Enforce project restricted.networks.uplinks setting
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
