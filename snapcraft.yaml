@@ -1044,6 +1044,8 @@ parts:
       git cherry-pick 0b488101c87434b136e632d2d93c9ed2a7db49bf  # lxd/api/project: Adds restricted.networks.uplinks to validation
       git cherry-pick 6a618fa0e47989284f7ae7e569810821865d5576  # lxd/network/driver/ovn: Adds allowedUplinkNetworks function
       git cherry-pick cf73098ffb397fddf971eb38a957ed5066c6176f  # lxd/network/driver/ovn: Enforce project restricted.networks.uplinks setting
+      git cherry-pick 1eb7e98b1d1a78c51b608bf787df70f9a2c7d1a8  # lxd/instances: Fix ceph cluster target move
+      git cherry-pick 0e3c4e47b12e7b6f6be27dd7c0fd56c9a879a1f3  # lxd/cgroup: Fix memory.swappiness detection
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
