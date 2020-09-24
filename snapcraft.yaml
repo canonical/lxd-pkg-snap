@@ -1046,6 +1046,9 @@ parts:
       git cherry-pick cf73098ffb397fddf971eb38a957ed5066c6176f  # lxd/network/driver/ovn: Enforce project restricted.networks.uplinks setting
       git cherry-pick 1eb7e98b1d1a78c51b608bf787df70f9a2c7d1a8  # lxd/instances: Fix ceph cluster target move
       git cherry-pick 0e3c4e47b12e7b6f6be27dd7c0fd56c9a879a1f3  # lxd/cgroup: Fix memory.swappiness detection
+      git cherry-pick d0e58fa8cc9cea7c7e1f6b2119ef607d72e3d83f  # lxd/db: Adds boolean support to doDbQueryScan
+      git cherry-pick 3d2cc67697b656a544800b08a604fa6e60d3f127  # lxd/rbac: Avoid tight retry loop
+      git cherry-pick 228860dc44aeb45ab6c66e7c5e2d77db2639938e  # lxd/rbac: Directly handle re-tries on 504
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
