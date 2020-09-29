@@ -1049,6 +1049,8 @@ parts:
       git cherry-pick d0e58fa8cc9cea7c7e1f6b2119ef607d72e3d83f  # lxd/db: Adds boolean support to doDbQueryScan
       git cherry-pick 3d2cc67697b656a544800b08a604fa6e60d3f127  # lxd/rbac: Avoid tight retry loop
       git cherry-pick 228860dc44aeb45ab6c66e7c5e2d77db2639938e  # lxd/rbac: Directly handle re-tries on 504
+      git cherry-pick 42164f6dce4c5ee8da0c886257ebc131e97d28f9  # lxd/cluster: Changing "no heartbeat" language in membership.go "no heartbeat since <countup>" changed to "no heartbeat for <countup>"
+      git cherry-pick 2fc5e6a4a6afeba16c69e80b2d0d1a8adbaff4f7  # lxc: Always use HostPathFollow
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
