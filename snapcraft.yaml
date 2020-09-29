@@ -1052,6 +1052,7 @@ parts:
       git cherry-pick 42164f6dce4c5ee8da0c886257ebc131e97d28f9  # lxd/cluster: Changing "no heartbeat" language in membership.go "no heartbeat since <countup>" changed to "no heartbeat for <countup>"
       git cherry-pick f84333e000a695e0049825dff95e247e3b04db03  # lxc: Always use HostPathFollow
       git cherry-pick 1d2c94e8243400f399cdfec8d513264d55948c90  # lxd/api: Restrict access to daemon config
+      git cherry-pick d44832f3aee87c28ba2fb777300d05bd90942d00  # lxd/storage: Allow ceph/cephfs for images/backups
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
