@@ -1068,6 +1068,8 @@ parts:
       git cherry-pick 0766ad84953fba91decadf04dbcfe96b1f4ad4b3  # lxd/network/openvswitch/ovn: Fix spelling of OVNIPv6AddressModeDHCPStateful and OVNIPv6AddressModeDHCPStateless values
       git cherry-pick 6aa321fb73571d9e2e43cfa345e6fa368b454a57  # lxd/network/driver/ovn: Adds support for ipv6.dhcp.stateful
       git cherry-pick 0d2cf135a5d60c5fa6623baa8b080197d0bb552e  # doc/networks: Documents ipv6.dhcp.stateful option for OVN networks
+      git cherry-pick 7d4c992dcb0dc5a20268bf57c13c88dc8e9e4df0  # shared/api: Not all disks have a device path
+      git cherry-pick b8e81ae1080fed777f8c64bc3a0de740da1dd70e  # lxd/resources: Ignore rbd devices
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
