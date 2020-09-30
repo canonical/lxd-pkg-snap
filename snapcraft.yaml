@@ -1053,6 +1053,21 @@ parts:
       git cherry-pick f84333e000a695e0049825dff95e247e3b04db03  # lxc: Always use HostPathFollow
       git cherry-pick 1d2c94e8243400f399cdfec8d513264d55948c90  # lxd/api: Restrict access to daemon config
       git cherry-pick d44832f3aee87c28ba2fb777300d05bd90942d00  # lxd/storage: Allow ceph/cephfs for images/backups
+      git cherry-pick ae4618cf9461a9e1def2fdf9196cc55f8cb3e841  # lxd/instance/drivers/qmp/monitor: Adds GetBalloonSizeBytes and SetBalloonSizeBytes
+      git cherry-pick ce1351754831492749d31fb382c0f4e7f7bdff40  # lxd/instance/drivers/driver/qemu: Adds live shrinking of memory
+      git cherry-pick 0b51318323d9dd230985bdb8487db38150de059b  # lxd/devices/config/devices/utils: Adds doc block for deviceEquals and deviceEqualsDiffKeys
+      git cherry-pick 34005f4ff208b3bf3ae6a09652b71f89db47cfc4  # lxd/device/config/devices: Comment clean up
+      git cherry-pick b95615216eb2fb8f700d1adb8a23c53c926fb4cc  # lxd/device/config/devices: Improves comments and variable naming in Update
+      git cherry-pick 829ba4388584383f6a7f5371ac9b508b1f35245c  # lxd/device/config/devices: Fixes bug in Update where allChangedKeys only contains changed keys from last device
+      git cherry-pick 26e5c27f1f116bcf75f5ac44d1218aa08d21e685  # lxd/instance/drivers/driver/lxc: Whitespace
+      git cherry-pick b56bc946fc61d99a20a8c139b51ca6e3983e3c34  # lxd/device/config/devices: Handles nil updateFields function in Update
+      git cherry-pick 6697599975c1199c226c00b68c7e3e278ea49c66  # lxd/instance/drivers/driver/qemu: Removes logic duplication in live update
+      git cherry-pick 0bf336b3ecdafa531ee3c25c1018fe7dcfb6d4e5  # doc/networks: Simplifies OVN single node setup instructions
+      git cherry-pick de431347e046b65c443d8bff35d9e87e808f9cfd  # lxd/device/nic/ovn: Improves error message in Start
+      git cherry-pick a46531236c841f9fd01ca3161e1adc6f0763b887  # lxd/network/driver/ovn: Implements DHCPv4Subnet and DHCPv6Subnet to allow static IPs to be set
+      git cherry-pick 0766ad84953fba91decadf04dbcfe96b1f4ad4b3  # lxd/network/openvswitch/ovn: Fix spelling of OVNIPv6AddressModeDHCPStateful and OVNIPv6AddressModeDHCPStateless values
+      git cherry-pick 6aa321fb73571d9e2e43cfa345e6fa368b454a57  # lxd/network/driver/ovn: Adds support for ipv6.dhcp.stateful
+      git cherry-pick 0d2cf135a5d60c5fa6623baa8b080197d0bb552e  # doc/networks: Documents ipv6.dhcp.stateful option for OVN networks
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
