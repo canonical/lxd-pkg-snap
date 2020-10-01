@@ -1070,6 +1070,24 @@ parts:
       git cherry-pick 0d2cf135a5d60c5fa6623baa8b080197d0bb552e  # doc/networks: Documents ipv6.dhcp.stateful option for OVN networks
       git cherry-pick 7d4c992dcb0dc5a20268bf57c13c88dc8e9e4df0  # shared/api: Not all disks have a device path
       git cherry-pick b8e81ae1080fed777f8c64bc3a0de740da1dd70e  # lxd/resources: Ignore rbd devices
+      git cherry-pick 1582df0ba263b46e951a17658e54aa3e116a1eb5  # lxd/device/device/interface: Adds NICState interface for getting NIC state
+      git cherry-pick d20e4d219057ca357b56257061de3e1cc6046a81  # lxd/device/nic/bridged: Implements NICState interface by adding State function
+      git cherry-pick 6b8e0926e4b0f54d0bb03ffb4e89961fd3ac5abd  # lxd/instance/drivers/driver/qemu: Refactors RenderState to support multiple NIC types in the future
+      git cherry-pick 12e8ea647ff42d71960ba60e37dc59c8cdbddb09  # lxd/network/openvswitch/ovn: Adds LogicalSwitchPortDynamicIPs function
+      git cherry-pick fd4135f6c6b9a5bd2e339f8d41c35f55469e082f  # lxd/network/openvswitch/ovn: Updates LogicalSwitchPortSetDNS to use LogicalSwitchPortDynamicIPs
+      git cherry-pick e0e4ea8a1326b0746b6085742b38e15e923e5219  # lxd/network/driver/ovn: Adds instanceDevicePortDynamicIPs function
+      git cherry-pick 3c02b3e001c90996562eda94f6dccc5f02054f72  # lxd/network/network/utils/ovn: Adds OVNInstanceDevicePortDynamicIPs function
+      git cherry-pick d87da1a87b4d41b0ddad1b9b0b85b7b5793c84b7  # lxd/device/nic/ovn: Implements NICState interface by adding State function
+      git cherry-pick 124aad5233ee89720edd6c137500d8c81a300508  # lxd/instance/drivers/qmp/monitor: Renames GetMemoryBalloonSizeBytes
+      git cherry-pick 6f9663cc9d33bd27376c28155830eca3707b3072  # lxd/instance/drivers/qmp/monitor: Renames SetMemoryBalloonSizeBytes
+      git cherry-pick 6ced837edcae82aee518f31af32c13fd06d36d88  # lxd/instance/drivers/qmp/monitor: Adds GetMemorySizeBytes function
+      git cherry-pick 6c6cd366eeb1f5e0c3a6106f15975f8de6408f14  # lxd/instance/drivers/driver/qemu: Adds qemuDefaultMemSize constant
+      git cherry-pick 0fff52b0db79b385b0ecfceb4cab9dd1110a30b5  # lxd/instance/drivers/driver/qemu: Updates updateMemoryLimit to allow memory resize back to boot time size
+      git cherry-pick c2ea7cef7d6cee39ad87acec8024f408f172202f  # lxd/instance/drivers/driver/qemu: Updates IsRunning to not check for BROKEN state
+      git cherry-pick 5ad910fcdfcb63e2daab337d1fefa0ede0a6f6ff  # lxd/instance/drivers/driver/qemu: Updates statusCode() to detect if monitor failure with running VM
+      git cherry-pick 4950044cd42f5425c746da494b7e59bfd32833b8  # lxd/apparmor: Allow access to zoneinfo files
+      git cherry-pick e821b245948d6257515a586390de3b1e9c0ec603  # lxd/apparmor: Add /etc/localtime to the list
+      git cherry-pick 426a43f47025b9205ec36c1bf3931d09d40a681f  # lxd/project: Always allow cloud-init:config drives
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
