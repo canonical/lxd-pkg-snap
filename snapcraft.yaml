@@ -744,8 +744,14 @@ parts:
       usr/lib/: lib/
       usr/sbin/: bin/
     prime:
+      - bin/lzma
       - bin/xz
       - lib/*/liblzma*so*
+    override-build: |
+      snapcraftctl build
+
+      # Include the lzma symlink
+      ln -s xz "${SNAPCRAFT_PART_INSTALL}/usr/bin/lzma"
 
   zfs-0-6:
     source: https://github.com/openzfs/zfs
