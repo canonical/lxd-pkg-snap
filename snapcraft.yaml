@@ -1094,6 +1094,46 @@ parts:
       git cherry-pick 4950044cd42f5425c746da494b7e59bfd32833b8  # lxd/apparmor: Allow access to zoneinfo files
       git cherry-pick e821b245948d6257515a586390de3b1e9c0ec603  # lxd/apparmor: Add /etc/localtime to the list
       git cherry-pick 426a43f47025b9205ec36c1bf3931d09d40a681f  # lxd/project: Always allow cloud-init:config drives
+      git cherry-pick 20fe25b9c45a7798bd57224b7ed15260f1e1de07  # doc/image-handling: Cover publishing
+      git cherry-pick f2d44ce18a71e22abb38fa65f822f329ab38c5f0  # lxd/network/network/utils: Adds GetNeighbourIPs function
+      git cherry-pick b80a0d7ca2e05e4a68b8844f509256b639d21f0f  # lxd/network/network/utils: Updates GetLeaseAddresses to return only net.IP list
+      git cherry-pick 6d5808d5da257ad6ddd9e115ca66bf3cefd0cb1f  # lxd/device/nic/bridged: Updates State() to return partial data
+      git cherry-pick 98193b9ee0b79a2e3dc2312384964993eb5d7245  # refuse empty passwords
+      git cherry-pick a2280ad171bceac0cc2fa02e68e810553f854223  # doc/index: Add libsqlite3-dev back to dependencies
+      git cherry-pick 406d531d63b89ed48b5fcbd1067c8ab2d9619457  # lxd/firewall/drivers/driver/nftables: Updates nft parser to handle nft sets with composite `type` field
+      git cherry-pick 84299fc473794c1b77a182f0f8f26ec2f856c5b5  # shared/validate/validate: Increases max MTU to 16384 to support super jumbo packets
+      git cherry-pick 0142c545185608c3f58218456fe31dd1ef981d5c  # lxd/apparmor/forkproxy: Fix bad profile name
+      git cherry-pick f14db6a7f16b7ab98fba00171cbe91773562aa9e  # lxd/apparmor/forkproxy: Allow writing to log path
+      git cherry-pick 43ec7184b1987399b37459618ff68d4a8f6dce8f  # lxc: Better handle copy/move between projects
+      git cherry-pick d02107da5e37a6e4c397d71290e083b31f2773a3  # lxd/apparmor: Fix version parsing
+      git cherry-pick 1fddf116b6e4222b69c7d834e59c26d7b88d7763  # lxd/dnsmasq: Switch to Parse for version parsing
+      git cherry-pick 5aa6687a7c5c0b916dc80de68c885001df4b0723  # lxd/firewall/drivers: Fix to Parse for version parsing
+      git cherry-pick a52eacc49d82b14d4740916f9bcdd7099a95c321  # lxd/rsync: Switch to Parse for version parsing
+      git cherry-pick 6054fce9d34e9916003233ffa5be748b246476b1  # shared/version: Make patch optional
+      git cherry-pick 27fbdd30a059a98051180ac7cee574548a05125b  # lxd/networks: Log error in doNetworksCreate after failed create if cleanup fails too
+      git cherry-pick 4a50691e278f8bf9219669072ce27f83fc677bcd  # lxd/network/driver: Improve missing parent network error message
+      git cherry-pick 36c2637c3259268e62dcec5c66dacb2630d31f08  # lxd/network/driver/ovn: Moves uplink type agnostic parent port allocation logic into allocateParentPortIPs()
+      git cherry-pick b30f975a6838367a1e117b27583666781d8903f1  # lxd/network/driver/ovn: Better error messages
+      git cherry-pick fdc703d3e3e83fea3c89da0c849b018ca7976da9  # lxd/network/driver/ovn: Moves parent port lock into deleteParentPort
+      git cherry-pick 2d4c4be6b06d519a89f09ef1fd88405da094c412  # lxd/network/driver/ovn: Moves parent port lock into startParentPort
+      git cherry-pick 8e821a1af8fdd708cd353b11d4daeb2933be836c  # lxd/network/driver/ovn: deleteParentPortBridge comments
+      git cherry-pick e8f50946eeed770926ef7648d730943bf23b8406  # lxd/network/driver/ovn: Don't setup SNAT if no external uplink IPs
+      git cherry-pick 02cb55fc11e0d597d67a094858ccf9e478bb1988  # lxd/network/driver/ovn: Makes setting up external router port and switch conditional on having external IPs
+      git cherry-pick 3099041494bec4a42bb53e75c5a85f30e50718f6  # lxd/network/driver/ovn: Removes old comment
+      git cherry-pick e9fc96df5e28540c5a213e5895134d7589c26c9a  # lxd/network/driver/ovn: Fix sentence in startParentPortBridge error
+      git cherry-pick 137fcbb8b0813eba045c8f2972b2df465a9b9735  # lxd/network/driver/ovn: Fixes error message in setupParentPortBridge
+      git cherry-pick df0a848f3d9c889b7bd72e1401c850a1584a711a  # lxd/network/network/utils: Moves bridge related functions into own file
+      git cherry-pick 13c0ff58e3af4dfdf9f29711cfd88d06ccbe507f  # static_analysis: exclude vendored headers from spell checking
+      git cherry-pick 7bcd3040b7f60d25e4ee539d5db8728ab24a71df  # static_analysis: exclude .git
+      git cherry-pick a96425de70e276aa3f6041443329f2bc6e2f50b8  # shift_linux: vendor posix_acl_xattr.h
+      git cherry-pick 1e4ed6c1e814180627181272395427f8407868ae  # seccomp: vendor bpf headers
+      git cherry-pick efffd128341001511c5b3bbeb82af6178c71fd3d  # shares/validate: Whitespace
+      git cherry-pick 896679be6effa830345a836920db173bd3935210  # lxd/network/openvswitch/ovn: Updates RecursiveDNSServer to be list of IPs
+      git cherry-pick c775eceac72df08927c5f6799e9b88244b19ea9f  # lxd/network/driver/ovn: Updates allocateParentPortIPs to detect the parent network IP address and DNS settings
+      git cherry-pick 6c99bdfd32f4cce8b6cb3032eda69113ee8b0b92  # lxd/network/driver/ovn: Updates n.allocateParentPortIPs usage
+      git cherry-pick 11a0289883dbeb856344a803535cafb169e8edb3  # lxd/network/driver/ovn: Updates setup IPv6 RDNSS setting
+      git cherry-pick f69844954acb125f4adeb3cfc04fc03f8696eede  # lxd/apparmor/forkproxy: Socket path fixes
+      git cherry-pick fa9f3d3f4352d9c570e0ae97e41e2319297286d0  # lxd/images: Fix crash when no "info" struct
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
