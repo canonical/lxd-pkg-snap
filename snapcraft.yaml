@@ -1134,6 +1134,32 @@ parts:
       git cherry-pick 11a0289883dbeb856344a803535cafb169e8edb3  # lxd/network/driver/ovn: Updates setup IPv6 RDNSS setting
       git cherry-pick f69844954acb125f4adeb3cfc04fc03f8696eede  # lxd/apparmor/forkproxy: Socket path fixes
       git cherry-pick fa9f3d3f4352d9c570e0ae97e41e2319297286d0  # lxd/images: Fix crash when no "info" struct
+      git cherry-pick 34e6e177bc7a030e0a6c7feffc80f3b5f4c9726d  # doc/networks: Clarifies use of ovn ranges settings in bridge network
+      git cherry-pick b54fcc2b8a66ec7c7dfda636032f4b8feb9a2f01  # lxd/util/net: Updates SysctlSet to support setting multiple keys
+      git cherry-pick 71c486cc26b6c0c6a3c4288a7f17b885289728c1  # shared/validate: Adds IsNetworkAddressList function
+      git cherry-pick 45deebb09bd0b07d7b0e157ebd2e2376a0ee6360  # lxd/network/network/utils: Adds VLANInterfaceCreate function
+      git cherry-pick 3a952caf2fe6f08bc582c4c2edd66b70afc788b5  # lxd/device/device/utils/network: network.VLANInterfaceCreate usage
+      git cherry-pick 41d8ce418e47b9351cb91035e33264fd700f44de  # lxd/device/device/utils/network: Removes NetworkRemoveInterface function
+      git cherry-pick f1095f2aab2be57c38c92148c590d856ce34625a  # lxd/network/network/utils: Adds InterfaceRemove and InterfaceExists functions
+      git cherry-pick 303efe453356cbf12da8330af0236a2ca68b930e  # lxd/network/network/utils: InterfaceExists usage
+      git cherry-pick 711a78253320bb408bb9ad89c460f6b31eb71334  # lxd/device/device/utils/network: network.InterfaceRemove usage
+      git cherry-pick 0b09e17d6e7a98a231bc583c1caa290d6cac8de4  # lxd/device/nic: network.InterfaceRemove usage
+      git cherry-pick 65083422c8e854790daaa25becf058da5e65019b  # lxd/network/driver/bridge: InterfaceExists usage
+      git cherry-pick f8ec913b5cff15574669ebea5cf87c9bc968bc6e  # lxd/network/driver/ovn: InterfaceExists usage
+      git cherry-pick 33e379ff4e37e616bac47d4a79cae018856c304f  # lxd/network/network/utils: Adds InterfaceSetMTU function
+      git cherry-pick c4e1d106e02dc26f1192943c176ce9e03d2d8eda  # lxd/device: network.InterfaceSetMTU usage
+      git cherry-pick 2cdb6592c05de9126aff31e445f94d72734bf9b6  # lxd/network/driver/ovn: Inherit MTU from uplink bridge for OVS bridge and connecting veth pair
+      git cherry-pick 327c2b02debe5cfe4f70ceb349a9c70b252e0743  # lxd/network/driver/ovn: Remove dependency on sysctl command and use util.SysctlSet instead
+      git cherry-pick 76307995c04a1e77ec6397f545dd641bce006b25  # lxd/network/driver: Improves comments
+      git cherry-pick 18402cc5a314da7790d7d1ec8e3e735aa5c04b27  # doc/networks: Adds docs for physical network type
+      git cherry-pick a5a8edbb9c26bcdf95e014a61c53d7597cbb2cf7  # lxd/db/networks: Adds physical network type constant
+      git cherry-pick f9d08044fa8d1ad66ba821dc1a5a2db70344e125  # lxd/network/driver/physical: Adds physical driver
+      git cherry-pick 197f134b7d5d82f4d2b5cf77985432387a71ca62  # lxd/network/driver/ovn: Adds support for physical network as uplink
+      git cherry-pick 2db259acd604381ea549eb478511ae512dd352c3  # lxd/network/driver/physical: Change checkParentUse to return a bool if in use
+      git cherry-pick 0e946c3876c80f8d1888e5d549023e1f0d14ad37  # lxd/network/driver/ovn: Changes uplink network in use check to look at LXD DB
+      git cherry-pick 0b80500596841ea92b559217ea9a08d26befca65  # lxd/network/driver/ovn: Handle uplink network changing
+      git cherry-pick 741b3bbd4a2384b42c093c80e1a97eeb9c519d45  # lxd/network/driver/ovn: Comment clarity
+      git cherry-pick 1bc0be3e9a61d3cc8511a5c2ebcfc5ff5118514c  # lxd/storage/pools: Gives clear error message when trying to create duplicate storage pool in single node
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
