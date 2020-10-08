@@ -7,6 +7,7 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 export LXD_DIR="${SNAP_COMMON}/lxd/"
+PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
 
 # FIXME: Detect stop reason
 #        This should be exposed by snapd directly
@@ -40,16 +41,30 @@ fi
 # Handle refreshes
 if [ "${reason}" = "snap refresh" ]; then
     echo "=> Stopping LXD"
-    if [ -e "${SNAP_COMMON}/lxd.pid" ]; then
-        PID=$(cat "${SNAP_COMMON}/lxd.pid")
-        /bin/kill "$PID"
-        COUNT=0
-        while [ "$COUNT" != "30" ]; do
+    if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
+        if ! kill "${PID}"; then
+            echo "==> Failed to signal LXD to exit"
+        fi
+
+        DEAD=0
+        # shellcheck disable=SC2034
+        for i in $(seq 320); do
+            if ! kill -0 "${PID}" 2>/dev/null; then
+                DEAD=1
+                echo "==> Stopped LXD"
+                break
+            fi
             sleep 1
-            COUNT=$((COUNT+1))
-            ps "$PID" >/dev/null 2>&1 || break
         done
-        ps "$PID" >/dev/null 2>&1 && /bin/kill -9 "$PID"
+
+        if [ "${DEAD}" = "0" ]; then
+            echo "==> Forcefully stopping LXD after 5 minutes wait"
+            if kill -9 "${PID}" 2>/dev/null; then
+                echo "==> Stopped LXD"
+            else
+                echo "==> Failed to stop LXD"
+            fi
+        fi
     fi
 
     exit 0
@@ -73,7 +88,6 @@ fi
 echo "=> Stopping LXD (with container shutdown)"
 
 echo host-shutdown > "${SNAP_COMMON}/state"
-PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
 if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
     if ! kill -30 "${PID}"; then
         echo "==> Failed to signal LXD to shutdown"
