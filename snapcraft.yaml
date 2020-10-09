@@ -528,6 +528,7 @@ parts:
       - --enable-attr
       - --enable-cap-ng
       - --enable-kvm
+      - --enable-libusb
       - --enable-linux-aio
       - --enable-numa
       - --enable-pie
@@ -555,11 +556,13 @@ parts:
       - libnuma-dev
       - libpixman-1-dev
       - librbd-dev
+      - libusb-1.0-0-dev
     stage-packages:
       - genisoimage
       - libmagic1
       - libnuma1
       - libpixman-1-0
+      - libusb-1.0-0
     override-pull: |-
       set -ex
       git clone https://git.qemu.org/git/qemu.git . -b v5.1.0 --depth 1
@@ -588,6 +591,7 @@ parts:
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
+      - lib/*/libusb-1.0*so*
       - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
