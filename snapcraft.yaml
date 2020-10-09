@@ -1160,6 +1160,30 @@ parts:
       git cherry-pick 0b80500596841ea92b559217ea9a08d26befca65  # lxd/network/driver/ovn: Handle uplink network changing
       git cherry-pick 741b3bbd4a2384b42c093c80e1a97eeb9c519d45  # lxd/network/driver/ovn: Comment clarity
       git cherry-pick 1bc0be3e9a61d3cc8511a5c2ebcfc5ff5118514c  # lxd/storage/pools: Gives clear error message when trying to create duplicate storage pool in single node
+      git cherry-pick 811a47db881650b7b7d37f6a4a42261ee2f28fba  # lxd/events: Validate type
+      git cherry-pick bdef9858b684a6e4a976fd1491668d209d310cd8  # lxd/events: Prevent logging access to non-admin
+      git cherry-pick 218d76f7b5d515019717a4a645984d59ad1baaa2  # lxd/daemon: Clean shutdown on SIGPWR/SIGTERM
+      git cherry-pick 33b7ecc2c230462ce42014bcb7a82c6e0887c09d  # lxd/operations: Don't directly trigger shutdown
+      git cherry-pick 78d493705ae9d05f834d2688da69f5d8afa721f3  # lxd: Prevent internal cluster migration of instances with backups
+      git cherry-pick 87e44ddcf8dfaa843b7375601aba550182217020  # lxd/instance/drivers: Enable USB for VMs
+      git cherry-pick a6c11f1114c67cb1c18a2c9ba83a5feeb92e5820  # lxd/instance/drivers: Add USB controller to QEMU config
+      git cherry-pick 9165a2c1baacd875522cab545fbe70257a18b371  # lxd/apparmor: Fix devPaths in QEMU profile
+      git cherry-pick 2ced9982bf876a50f51610492ca58d7ed1e763ef  # db: Retry transient errors for longer
+      git cherry-pick e91ffb1cb08fe0dd18c672fa080e674e201347c9  # db: Always retry driver.ErrBusy, regardless of the error message
+      git cherry-pick 060a76cef6aefc2e7903359b1d1f195226b3b57e  # db: Retry failed rollbacks if they are due to transient errors
+      git cherry-pick 0ebd1b7a7833aa14856217c9267544303787d0dc  # db: Explicitly rollback leftover transactions when a new one can't be started
+      git cherry-pick 0f11efe3724975136eebb8ea1a071fc74c5cf462  # db: Retry to begin a new transaction after an explicit rollback attempt
+      git cherry-pick f5d8caf7988e3d6e6fd0a772540d696c92e2bc7d  # lxd/operations: Fix timeout
+      git cherry-pick 3a6bf54b1ac3dc9156f267a7694aa4eb3f9b896c  # lxd/daemon: Allow more operations during shutdown
+      git cherry-pick 985e7cafd3e9afbe94b4781c736a84f957099c9d  # lxd/include: Relocate ifndef for NEWCGROUP
+      git cherry-pick e4c1a7902e71d40e896374bc5752880052dd0dc6  # doc: Remove stray \_ escapes in security.md
+      git cherry-pick 11450c0a9c9c428a7f27f4cc90da05e78b5828a2  # lxc-to-lxd: Handle snap better
+      git cherry-pick a4808d30eec836729125ca6378f076a34e46a842  # lxd/events: Handle default permissiosn in projects
+      git cherry-pick 23694b750d164369ece64c402f36a76358d2d957  # lxd/dnsmasq: Adds 100ms sleep to successful Kill() to allow sockets to be released by OS
+      git cherry-pick 57f1dc94a63d5faf175b096f280269adcca51786  # lxd/instance/drivers/driver/qemu: Restores ability to resize VM disks
+      git cherry-pick 68dde3234a2e89118806ee57f60e8f4cd04ef997  # lxd/device/disk: Adds comment about VM instances depending on CanHotPlug fields for stopped disk resize
+      git cherry-pick f9e475d788dd3ace373713795bf3cb567de85b53  # lxd/instance/qemu: Fix bad event name
+      git cherry-pick e035cf76c534740d806556dbb7df0b6532a14274  # lxd/storage: Check base image is available locally
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
