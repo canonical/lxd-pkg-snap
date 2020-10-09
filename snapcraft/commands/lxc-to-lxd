@@ -15,4 +15,4 @@ fi
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
-exec nsenter -t 1 -m "${SNAP_CURRENT}/bin/lxc-to-lxd" "$@"
+exec "${SNAP_CURRENT}/bin/lxc-to-lxd" "$@"
