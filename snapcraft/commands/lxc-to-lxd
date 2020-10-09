@@ -6,6 +6,12 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+# Check that we're root
+if [ "$(id -u)" != "0" ]; then
+    echo "error: This tool must be run as root."
+    exit 1
+fi
+
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
