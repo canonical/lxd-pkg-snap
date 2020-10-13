@@ -472,7 +472,6 @@ parts:
     source-type: git
     plugin: autotools
     configflags:
-      - --prefix=/
       - --disable-bochs
       - --disable-cloop
       - --disable-dmg
@@ -524,7 +523,7 @@ parts:
       - libpixman-1-0
     override-pull: |-
       set -ex
-      git clone https://git.qemu.org/git/qemu.git . --depth 1
+      git clone https://git.qemu.org/git/qemu.git . -b v5.1.0 --depth 1
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
