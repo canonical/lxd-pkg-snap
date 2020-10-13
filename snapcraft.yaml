@@ -541,6 +541,7 @@ parts:
       - --enable-cap-ng
       - --enable-kvm
       - --enable-libusb
+      - --enable-usb-redir
       - --enable-linux-aio
       - --enable-numa
       - --enable-pie
@@ -568,6 +569,7 @@ parts:
       - libnuma-dev
       - libpixman-1-dev
       - librbd-dev
+      - libusbredirhost-dev
     stage-packages:
       - genisoimage
       - libmagic1
@@ -603,6 +605,7 @@ parts:
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
+      - lib/*/libusbredir*so*
       - share/qemu/keymaps*
       - share/qemu/efi-virtio.rom*
       - share/qemu/kvmvapic.bin*
