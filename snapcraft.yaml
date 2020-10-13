@@ -523,7 +523,7 @@ parts:
       - libpixman-1-0
     override-pull: |-
       set -ex
-      git clone https://git.qemu.org/git/qemu.git . -b v5.1.0
+      git clone https://github.com/qemu/qemu . -b v5.1.0
       git cherry-pick 202d69a715a4b1824dcd7ec1683d027ed2bae6d3  # usb-host: workaround libusb bug
       git cherry-pick 4969e697c15ac536d5c0700381d5d026ef7f0588  # usb-host: restrict workaround to new libusb versions
     override-build: |-
