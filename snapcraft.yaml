@@ -472,6 +472,7 @@ parts:
     source-type: git
     plugin: autotools
     configflags:
+      - --prefix=/
       - --disable-bochs
       - --disable-cloop
       - --disable-dmg
