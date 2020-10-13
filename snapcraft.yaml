@@ -575,6 +575,8 @@ parts:
       - libmagic1
       - libnuma1
       - libpixman-1-0
+      - libusbredirhost1
+      - libusbredirparser1
     override-pull: |-
       set -ex
       git clone https://github.com/qemu/qemu . -b v5.1.0
