@@ -843,7 +843,7 @@ parts:
   zfs-0-8:
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.8.4
+    source-tag: zfs-0.8.5
     source-depth: 1
     plugin: autotools
     configflags:
