@@ -1007,6 +1007,22 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick f7fd7215344bb0d5d31d04307a0ba5d17e9bf0fc  # lxd/device/usb: Fix check for required USB device
+      git cherry-pick b76ffcd374cf5577892fff39a13fa56e33ee117f  # seccomp: switch back to pread()
+      git cherry-pick 1dd4a0b1705fcf55f581ff0dcfceb5ec24979098  # nsexec: simplify userns attach
+      git cherry-pick d57813b900c4a9ae3b55b22fb87baf18e1780f2b  # forksyscall: preserve root and cwd fds for shifted mount emulation
+      git cherry-pick 709d0de3c5810761fe11e8374e7cdf04ba150ab6  # lxc/init.go: remove for-loop in create()
+      git cherry-pick c470380fd10673ee00dd9bf1e28371bf4e3fb2bb  # lxd/device/nic/ovn: Improved error messages
+      git cherry-pick 1666e7465339f83f126960324849268e495a4c71  # lxd/network/driver/ovn: Generates static EUI64 IPv6 address for instance switch ports in instanceDevicePortAdd
+      git cherry-pick 85e45368bd5b530fb2277e19101ae1c8165bfa15  # lxd/network/openvswitch/ovn: Adds LogicalSwitchPortGetDNS to return switch port DNS info
+      git cherry-pick e8446e9a378c47580d8d22f43675fda8ddd4f248  # lxd/network/openvswitch/ovn: Updates LogicalSwitchPortDeleteDNS to only accept DNS UUID rather than port name
+      git cherry-pick f5e3e45b66b1e96430017c586ab70b47b7798e66  # lxd/network/openvswitch/ovn: Updates LogicalSwitchPortSetDNS to return the DNS UUID record ID
+      git cherry-pick d4fa12705775b6eeb9e06482f5d9b6eb36c5c192  # lxc/network/driver/ovn: Adds validateExternalSubnet function
+      git cherry-pick 9a1db6c4a79565dc5f592ac86b3b5b207521ba67  # lxd/network/driver/ovn: Updates Validate to ensure ipv4.address and ipv6.address are allowed external subnets
+      git cherry-pick 3cef49a5091b65c2c7a7b169eec014c2452abaa1  # lxd/network/driver/ovn: Adds support for publishing instance port IPs to uplink network
+      git cherry-pick 1323904e2648e55bc2fc69b4622be536ac9a6a90  # revert/revert.go: remove a for-loop from Clone()
+      git cherry-pick 686ecb7b357184e1b05db0c96a9417f0714435de  # doc/networks: Adds ipv4.nat and ipv6.nat to ovn network
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
