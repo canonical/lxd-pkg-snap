@@ -8,9 +8,7 @@ fi
 
 # Unmount potential LXD paths.
 for path in /var/snap/lxd/common/ns/shmounts /var/snap/lxd/common/ns/mntns /var/snap/lxd/common/ns; do
-    if mountpoint -q "${path}"; then
-        umount -l "${path}" || true
-    fi
+    nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
 
 exit 0
