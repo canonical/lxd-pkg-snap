@@ -1022,6 +1022,30 @@ parts:
       git cherry-pick 3cef49a5091b65c2c7a7b169eec014c2452abaa1  # lxd/network/driver/ovn: Adds support for publishing instance port IPs to uplink network
       git cherry-pick 1323904e2648e55bc2fc69b4622be536ac9a6a90  # revert/revert.go: remove a for-loop from Clone()
       git cherry-pick 686ecb7b357184e1b05db0c96a9417f0714435de  # doc/networks: Adds ipv4.nat and ipv6.nat to ovn network
+      git cherry-pick 4d4fb034f61025b41845e191073ada05bf5ac856  # lxc/copy.go: Remove unneeded for-loop in c.Run()
+      git cherry-pick 9ba0b5a029cbf659553ff5be801afe542a97e645  # lxd/db/networks: Fix NULL description
+      git cherry-pick 0e5c2730002452dbc53a11c3dab6e681cd19d3df  # lxd/network/driver/ovn: Allows "none" as value for ipv4.address and ipv6.address
+      git cherry-pick 9d4ceec468a1fc0d1a81597cddba19793f97951b  # lxd/network/driver/ovn: Re-run validation of auto generated address used in FillConfig
+      git cherry-pick f3da8b57c47423616e6490c89fb820be6c5dd651  # lxd/network/driver/ovn: Modify setup() to support optional IP addresses
+      git cherry-pick 78f3c3e7973932ae216bdb7d90ef0267021ed2a8  # lxd/network/driver/ovn: Updates instanceDevicePortAdd to support optional IP addresses
+      git cherry-pick 71caae866af04c142dbb48cc19a4d7a126e3657a  # lxd/network/driver/ovn: Only call Validate in FillConfig if state is set
+      git cherry-pick f6add9084341a88c0847398eb4db5610e7e5f1bd  # lxd/db/projects: Adds GetProject function
+      git cherry-pick fa2da560919d515ecd24a2aebc40b4a213c34fea  # lxd/network/driver/ovn: Converts instance port functions to exported
+      git cherry-pick d5351219834cbb9bb12faba3cf653f0751765898  # lxd/network/driver/ovn: Removes ipv4.routes.external and ipv6.routes.external
+      git cherry-pick e1668b6f4f92365854ad48eb4ee243186c87fa15  # lxc/network/driver/ovn: Adds projectRestrictedSubnets and uplinkRoutes functions
+      git cherry-pick bbfce066807e2491abe1bd281cccc0ac6c8f7b26  # lxd/network/driver/ovn: Simplifies Validate by using separate data loader functions
+      git cherry-pick d84254815bcb4e822fad4ef67f6a2c84a4c5a76e  # lxd/network/driver/ovn: Passes project into allowedUplinkNetworks
+      git cherry-pick bfd7ac77861bdc804e742948aa0c7c12b38946c2  # lxd/network/driver/ovn: Passes project into validateUplinkNetwork
+      git cherry-pick 44e6104b2a3acccb81bbc4a6c2c8f5eca43da058  # lxd/network/driver/ovn: Load project in setup() to pass to n.validateUplinkNetwork()
+      git cherry-pick 3efb1adc6d469353639768c632549ca846b65d38  # lxd/network/driver/ovn: Adds InstanceDevicePortValidateExternalRoutes function
+      git cherry-pick 131a644a8507295a9c25882e88a48ba952e125bf  # lxd/network/network/utils/ovn: Remvoes unused functions
+      git cherry-pick 08415e9d128c15abf020089325ba5c090ceb0e7d  # lxd/device/nic/ovn: Adds ovnNet interface and use OVN instance port functions directly from network
+      git cherry-pick b9b1964381a0851d00c552fac3519dd02daf28ad  # lxd/device/nic/ovn: Removes validation of external routes against network's external routes
+      git cherry-pick 78d4ec8e820ad4f41f42887565b2f112442f3fff  # lxd/device/nic/ovn: Validate NICs external routes using d.network.InstanceDevicePortValidateExternalRoutes
+      git cherry-pick 4a2a968c0e4e330d00d2c65d434bf9101f883c43  # doc/networks: Removes ipv4.routes.external and ipv6.routes.external from ovn network
+      git cherry-pick 3ee8867b4053a187e587939a11dad878c60be1b4  # lxd/patches: Adds patch for removing ipv4.routes.external and ipv6.routes.external from ovn networks
+      git cherry-pick c046d94b22d37c6ba35422be759abf218d2ba33f  # api: Adds network_ovn_external_routes_remove extension
+      git cherry-pick 913bdb4fe654fc2c566eea11855fe96ebd6b95f1  # lxd/network/driver/ovn: Fix project restricted subnets check in validateExternalSubnet
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
