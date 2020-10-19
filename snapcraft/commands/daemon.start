@@ -232,19 +232,6 @@ for entry in dev proc sys; do
     mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
 done
 
-# FIXME: Setup bash completion on the host
-#        This should be handled by snapd directly (LP: #1590767)
-for path in /usr/share/bash-completion/completions/ /etc/bash_completion.d/; do
-    if [ -w "/var/lib/snapd/hostfs/${path}" ]; then
-        if [ ! -e "/var/lib/snapd/hostfs/${path}/lxc" ]; then
-            echo "==> Setting up bash completion"
-            rm -f "/var/lib/snapd/hostfs/${path}/lxc"
-            ln -s "${SNAP_CURRENT}/etc/bash_completion.d/snap.lxd.lxc" \
-                "/var/lib/snapd/hostfs/${path}/lxc" || true
-        fi
-    fi
-done
-
 # FIXME: Setup the "lxd" user
 if ! getent passwd lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" user"
