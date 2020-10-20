@@ -1104,6 +1104,9 @@ parts:
       git cherry-pick 0c905fa7ee62fc4c6a4fdf0bfa64449d9445cb7c  # lxd/network/driver/bridge: Sets ipv4.nat=true when adding a new fan network with fan.underlay_subnet=auto
       git cherry-pick 1ab08b9de91ede69ae939bacb97d7eb24fb48c7c  # lxd/patches: Adds patchNetworkFANEnableNAT to set ipv4.nat=true for fan networks missing the setting
       git cherry-pick da33768610bbf27d4369806b4fdcad34336a152c  # doc/networks: Clarifies comment defaults for bridge ipv4.nat when not specified during creation
+      git cherry-pick 524c519eefe8a87b6152e152f04e1755fc0d1fcf  # lxd/seccomp: Fix go vet
+      git cherry-pick a4f287312fb03f3b3d58201fa9e7ec568d5e7176  # lxd/instance: Add Architecture to common
+      git cherry-pick fce5ee2821b109a013c91fe8b2a64c6b89c92d72  # lxd/devices: Disable USB on s390x
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
