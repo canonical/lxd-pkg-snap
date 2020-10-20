@@ -1092,6 +1092,18 @@ parts:
       git cherry-pick 3ee8867b4053a187e587939a11dad878c60be1b4  # lxd/patches: Adds patch for removing ipv4.routes.external and ipv6.routes.external from ovn networks
       git cherry-pick c046d94b22d37c6ba35422be759abf218d2ba33f  # api: Adds network_ovn_external_routes_remove extension
       git cherry-pick 913bdb4fe654fc2c566eea11855fe96ebd6b95f1  # lxd/network/driver/ovn: Fix project restricted subnets check in validateExternalSubnet
+      git cherry-pick ef2dfa8748815befa7f6705798c23d7445cb4691  # lxd/images: Fixes ineffectual assign warning
+      git cherry-pick a4e89992943eb88dd8d1d1c010b332f626738170  # lxd/resources/usb: Fixes ineffectual assign warning
+      git cherry-pick 9aa5cfd3840415368d71064868391a570976c8fb  # lxd/storage/drivers/driver/lvm/volumes: Fixes ineffectual assign warning
+      git cherry-pick 0364002a9db6bfa9707710b7b64a5ca0a93514a5  # lxd/instance: Use project aware inst.LogPath() function when clearing log dir in instanceCreateInternal
+      git cherry-pick c029aab2ca63ea6a83f6f73be8d0e8b7a827a525  # lxd/instance/drivers/driver/lxc: Project aware rename of log path in Rename()
+      git cherry-pick feb558885cbedfbbf55911a5cba96d0890720b74  # lxd/instance/drivers/driver/qemu: Project aware rename of log path in Rename()
+      git cherry-pick fa7f5e39b6ad4cd27b6e0dd38a3d79d9c147c293  # lxd/instance/drivers/driver/lxc: Makes collectCRIULogFile project log path aware
+      git cherry-pick 645ce23fa728eb3922df5466361e6ae0b344c5c4  # lxd/instance/logs: Makes containerLogsGet project aware
+      git cherry-pick 78afd4d6cc3922df13570f863ed7056eb8b71953  # lxd/main/init/interactive: Clarifies question about using an existing empty disk
+      git cherry-pick 0c905fa7ee62fc4c6a4fdf0bfa64449d9445cb7c  # lxd/network/driver/bridge: Sets ipv4.nat=true when adding a new fan network with fan.underlay_subnet=auto
+      git cherry-pick 1ab08b9de91ede69ae939bacb97d7eb24fb48c7c  # lxd/patches: Adds patchNetworkFANEnableNAT to set ipv4.nat=true for fan networks missing the setting
+      git cherry-pick da33768610bbf27d4369806b4fdcad34336a152c  # doc/networks: Clarifies comment defaults for bridge ipv4.nat when not specified during creation
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
