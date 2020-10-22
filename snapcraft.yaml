@@ -1107,6 +1107,44 @@ parts:
       git cherry-pick 524c519eefe8a87b6152e152f04e1755fc0d1fcf  # lxd/seccomp: Fix go vet
       git cherry-pick a4f287312fb03f3b3d58201fa9e7ec568d5e7176  # lxd/instance: Add Architecture to common
       git cherry-pick fce5ee2821b109a013c91fe8b2a64c6b89c92d72  # lxd/devices: Disable USB on s390x
+      git cherry-pick 95d2afa5f5ba37e635a8236f5f8775c438fd6da8  # add new "restarted" event to reboot section of onStop in both lxc and qemu
+      git cherry-pick 027ed7dbad97446eec5c9d93c6754bd8635f7c2c  # tests: Fix missing clustering cleanup
+      git cherry-pick 39e66f7095c313d45cde5c770304f23ec7e034ed  # lxd/storage/zfs: Properly recurse delete volumes
+      git cherry-pick a4bc53da158f25e442f6c165c78ca3bf77494ef8  # tests: Fix cleanup in backup
+      git cherry-pick 6b3d569c493e7cc5e0367fb45d4f6a54c60fe636  # lxd/storage/backend/lxd: b.driver.UnmountVolume usage
+      git cherry-pick 4c1aa33f61f9a4bb6bc757629d6f99c3eea61b92  # lxd/instance/drivers/driver/lxc: Moves log rotate and mount before devices start in startCommon
+      git cherry-pick 65ee12cf2442b95f998e32b3221bee15706cb6b1  # lxd/storage/drivers/interface: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 9eb284da66d53e7a73188a6c9c3d66b314df94cb  # lxf/storage/drivers/volume: v.driver.UnmountVolume usage
+      git cherry-pick ab34fe525fd394e4b3934970b8f949aedfafd863  # lxd/storage/drivers/volume: Adds keepBlockDev arg to UnmountTask
+      git cherry-pick 54472ad66be90990d8a23dfe07c3256ec873dd98  # lxd/storage/drivers/utils: Passes true for keepBlockDev arg to UnmounTask in shrinkFileSystem
+      git cherry-pick d1144f577bd22587693ebf1c1c6754c15882d863  # lxd/storage/drivers/generic/vfs: d.UnmountVolume usage
+      git cherry-pick ed358c62fc7cdcfa6cbb6ed03f1858cfe6553a48  # lxd/storage/drivers/drivers/mock: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 0abd8e94fbc22b5a1d5f9a2e899960da90d8ec81  # lxd/storage/drivers/driver/btrfs/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 7d150e4898b4137af5d49776b653d15db8322f4a  # lxd/storage/drivers/driver/dir/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 0049a9745be5ad1b72e6bd24bc3aeb8c1218c451  # lxd/storage/drivers/driver/cephfs/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 010ec64e97dd9e3d60d99cbe2f21d34277c624a3  # lxd/storage/drivers/driver/lvm/volumes: UnmountVolume usage
+      git cherry-pick 530655d6eb70a61fc6914e84b1431d819f1bebd6  # lxd/storage/drivers/driver/lvm/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 8ce875a18270d485c04c834009adb137094c02ab  # lxd/storage/drivers/driver/lvm/volumes: UnmountTask usage
+      git cherry-pick a351f11164005d251914628d1439ec60ab08a8fe  # lxd/storage/drivers/driver/ceph/volumes: d.UnmountVolume usage
+      git cherry-pick d6d0f9bf1faa4776b561c36779f3289d43c028b1  # lxd/storage/drivers/driver/ceph/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick 7ef06a6ca186224f8b8b80ec27f1947c40cccf67  # lxd/storage/drivers/driver/zfs/volumes: Adds keepBlockDev arg to UnmountVolume
+      git cherry-pick f74fd527955beb54259d7f5657af687fc4dc29c4  # lxd/storage/drivers/driver/zfs/volumes: d.UnmountVolume usage
+      git cherry-pick 4ceaec7ff5af56fc55cbe1da22933135de87b4f7  # lxd/device/config/devices/sort: Sort disks between nics and other types of devices
+      git cherry-pick 609f06fd717f1e95e8ebab48d566b37afd89c169  # lxd/device/config/devices/sort: Comment improvement
+      git cherry-pick dd2481399200358fb5df64bfa2ed520fc0ee8cba  # lxd/instance/drivers: Device lifecycle logging improvements
+      git cherry-pick d6f5532fd5265a364573b7ffe8ecda3751364fb5  # lxd/instance/drivers: Stop devices in reverse order to how they were started
+      git cherry-pick adad7b2a415b0487deb5604745caaed12343fbd1  # lxd/instance/drivers/driver/lxc: Only use postStartHooks var where actually needed
+      git cherry-pick ed7c6ce40c21cdf8dcb37a697a986c50fecbfcdf  # lxd/instance/drivers/driver/qemu: Adds log rotation to Start
+      git cherry-pick da09d9fec580938778af2daaa199e88cec0303ee  # lxd/storage/zfs: Fix argument ordering
+      git cherry-pick d520357207a0bb535f78212b25372aaf6478c9c5  # lxd/cluster/connect: Renames project arg to projectName in ConnectIfInstanceIsRemote
+      git cherry-pick a5a1f424b9cdba09d91fd86532cdde51d896b253  # lxd/cluster/connect: Adds projectName arg to ConnectIfVolumeIsRemote
+      git cherry-pick 845d371084edd548435fb26bc8cfa293b8b06705  # lxd/response: Adds projectName argument to forwardedResponseIfVolumeIsRemote
+      git cherry-pick ca3badc5dc32930ab754615b4eae6763b2f6149b  # lxd/storage/volumes: forwardedResponseIfVolumeIsRemote projectName argument usage
+      git cherry-pick d1b92fe24513fef9698c2c25d8a1459d2b658e88  # lxd/db/storage/volumes: Corrects mispelled argument name in GetStorageVolumeNodeAddresses
+      git cherry-pick 20d1f8c00596b8aa84bfc50a00757be78807718f  # lxc/move: Bypass security.protection.delete
+      git cherry-pick ea00225c7a415ecded801bd6a4cd9e68dd29f72e  # lxd/device: Fix typo
+      git cherry-pick 914c3d86d7a5266ac726f3ddd2ea8860af449572  # doc/instances: usb and gpu are available in VMs
+      git cherry-pick c415a8f533390a595369687fbedf4b27a555cc4d  # doc/instances: Add missing header in usb device
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
