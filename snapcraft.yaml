@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.0.3"
+version: "4.0.4"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -870,7 +870,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.4
+    source-tag: lxc-4.0.5
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -920,7 +920,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.5
+    source-tag: lxcfs-4.0.6
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -959,7 +959,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.0.3
+    source-tag: lxd-4.0.4
     after:
       - lxc
       - dqlite
