@@ -1145,6 +1145,7 @@ parts:
       git cherry-pick ea00225c7a415ecded801bd6a4cd9e68dd29f72e  # lxd/device: Fix typo
       git cherry-pick 914c3d86d7a5266ac726f3ddd2ea8860af449572  # doc/instances: usb and gpu are available in VMs
       git cherry-pick c415a8f533390a595369687fbedf4b27a555cc4d  # doc/instances: Add missing header in usb device
+      git cherry-pick 156dc7b463a88fdbb952a4e46e11a74dc5a563b5  # scripts/bash: Fix snap handling
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
