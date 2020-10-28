@@ -31,7 +31,7 @@ echo ""
 
 echo "# Detailed snap information"
 echo '```'
-chroot /var/lib/snapd/hostfs snap info lxd
+nsenter -t 1 -m snap info lxd
 echo '```'
 echo ""
 
@@ -111,5 +111,5 @@ echo ""
 
 echo "# Systemd log (last 50 lines)"
 echo '```'
-chroot /var/lib/snapd/hostfs journalctl -u snap.lxd.daemon -n50 | cat
+nsenter -t 1 -m journalctl -u snap.lxd.daemon -n50 | cat
 echo '```'

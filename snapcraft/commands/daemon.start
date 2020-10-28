@@ -21,12 +21,12 @@ export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 
 # Detect model
-SNAP_MODEL="$(chroot /var/lib/snapd/hostfs/ snap model --assertion | grep "^model: " | cut -d' ' -f2)"
+SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
 
 # Wait for appliance configuration
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     while :; do
-        [ "$(chroot /var/lib/snapd/hostfs/ snap managed)" = "true" ] && break
+        [ "$(nsenter -t 1 -m snap managed)" = "true" ] && break
         sleep 5
     done
 fi
@@ -215,7 +215,7 @@ if [ -L /etc/resolv.conf ] && [ ! -e /etc/resolv.conf ]; then
     echo "====> Unusual /etc/resolv.conf detected, using workaround"
     rm -f /etc/resolv.conf
     # shellcheck disable=SC2094
-    chroot /var/lib/snapd/hostfs/ cat /etc/resolv.conf > /etc/resolv.conf || true
+    nsenter -t 1 -m cat /etc/resolv.conf > /etc/resolv.conf || true
 fi
 
 # Setup a functional /usr/share/misc
@@ -236,9 +236,9 @@ done
 if ! getent passwd lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" user"
     if grep -q "^passwd.*extrausers" /etc/nsswitch.conf; then
-        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false --extrausers lxd || true
+        nsenter -t 1 -m useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false --extrausers lxd || true
     else
-        chroot /var/lib/snapd/hostfs/ useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false lxd || true
+        nsenter -t 1 -m useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false lxd || true
     fi
 fi
 
@@ -246,9 +246,9 @@ fi
 if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
     if grep -q "^group.*extrausers" /etc/nsswitch.conf; then
-        chroot /var/lib/snapd/hostfs/ groupadd --system --extrausers lxd || true
+        nsenter -t 1 -m groupadd --system --extrausers lxd || true
     else
-        chroot /var/lib/snapd/hostfs/ groupadd --system lxd || true
+        nsenter -t 1 -m groupadd --system lxd || true
     fi
 fi
 
@@ -284,7 +284,7 @@ logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status"
 if [ -e /sys/module/zfs/version ]; then
     VERSION=$(cat /sys/module/zfs/version)
 else
-    VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs 2>/dev/null || true)
+    VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
 
 if echo "${VERSION}" | grep -q ^0.8; then

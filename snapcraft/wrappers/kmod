@@ -17,7 +17,7 @@ fi
 for i in "/bin/${NAME}" "/sbin/${NAME}" "/usr/bin/${NAME}" "/usr/sbin/${NAME}"; do
     [ ! -e "/var/lib/snapd/hostfs/${i}" ] && continue
 
-    exec chroot "/var/lib/snapd/hostfs/" "${i}" "$@"
+    exec nsenter -t 1 -m "${i}" "$@"
 done
 
 echo "Unable to find ${NAME}" 1>&2
