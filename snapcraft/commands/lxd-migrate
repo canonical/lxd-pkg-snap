@@ -13,7 +13,7 @@ export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 if [ -e /sys/module/zfs/version ]; then
     VERSION=$(cat /sys/module/zfs/version)
 else
-    VERSION=$(chroot /var/lib/snapd/hostfs/ modinfo -F version zfs 2>/dev/null || true)
+    VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
 
 if echo "${VERSION}" | grep -q ^0.8; then
