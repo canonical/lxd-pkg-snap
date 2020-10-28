@@ -4,7 +4,7 @@ unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 if [ "$(id -u)" = "0" ]; then
-    exec chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
+    exec nsenter -t 1 -m "${CMD}" "$@"
 fi
 
 exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
