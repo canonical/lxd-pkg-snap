@@ -1145,7 +1145,73 @@ parts:
       git cherry-pick ea00225c7a415ecded801bd6a4cd9e68dd29f72e  # lxd/device: Fix typo
       git cherry-pick 914c3d86d7a5266ac726f3ddd2ea8860af449572  # doc/instances: usb and gpu are available in VMs
       git cherry-pick c415a8f533390a595369687fbedf4b27a555cc4d  # doc/instances: Add missing header in usb device
+      git cherry-pick 11239b22efea6000b56396335373ca94a0f2db83  # extract restart logic to new instance interface function of lxc and qemu
       git cherry-pick 156dc7b463a88fdbb952a4e46e11a74dc5a563b5  # scripts/bash: Fix snap handling
+      git cherry-pick 75dc684814f9c741b98d69f16400dd0618e6b6c9  # extract common restart code to driver_common.go
+      git cherry-pick d5fe43aa567c9684bedffc051478f17ee8b11d5d  # lxd/storage: Rename RunningSnapshotFreeze to RunningCopyFreeze
+      git cherry-pick 1cb7475c22a02f5317641c746c87430b0d561551  # lxd/storage: Ensure source is frozen during copy
+      git cherry-pick 74c1e881df63a4d211e674e790459925a321ac5e  # lxd/instance/drivers: Write out updated backup.yaml after rename
+      git cherry-pick 7bad0cbaecdefef16e2c636a5d1a77aa49e54924  # lxd: Switch to new candid URL
+      git cherry-pick 7b5aae3986c7e364e62e12064c73ba439503ddd9  # lxd/storage/zfs: No need to remove dashes from UUID
+      git cherry-pick f3c4805b2267aa6e8af890499ee8c72673522b77  # shared: Drop GroupId and UserId
+      git cherry-pick 30e814b42b0a19355c2bad3a2e971c7bf44c5f5b  # lxd: Port to os/user
+      git cherry-pick a38f4092d40c68c77a704353776bf7edce98edd2  # lxd/daemon: Log protocol
+      git cherry-pick 1694cfd678f4eadeddda4831f3103a1d3aaed439  # lxd/daemon: Pass writer to Authenticate
+      git cherry-pick e5a01555ba6d1e25ce859be84a5b9b9d4a88b8ff  # lxd/daemon: Record username on unix queries
+      git cherry-pick 6b4533a92cfe6eacabe6a1393270b7d7949d2b2c  # lxd/storage: Lock during the whole image replace
+      git cherry-pick e2ed4b00072118b13f4ab2dc9673ac69c18af2c1  # lxd/db/errors: Adds ErrNoClusterMember var used to indicate no cluster member has been found for a resource
+      git cherry-pick 25eb7e726d94121abad60e90d7dfa42fc76b8e48  # lxd/db/storage/volumes: Modifies GetStorageVolumeNodeAddresses to detect volumes that are not bound to a single node
+      git cherry-pick ac9d65a3f1eb93024530e8c710a2450003000973  # lxd/db/storage/volumes: Removes StorageVolumeIsAvailable
+      git cherry-pick fff00ee9d867d7c388f4aec9d74cf8136b466192  # lxd/response: Updates forwardedResponseIfVolumeIsRemote to accept poolName rather than poolID
+      git cherry-pick fe04a209bbdecf590f94d491c37f6614006cc212  # lxd/storage/volumes: forwardedResponseIfVolumeIsRemote usage
+      git cherry-pick 607630cf470aff60ee95b78d3b22d7383873550d  # lxd/storage/volumes/backup: forwardedResponseIfVolumeIsRemote usage
+      git cherry-pick 0d94c859885e53c1b03058a9b2d7ded87aef80bb  # lxd/storage/volumes/snapshot: forwardedResponseIfVolumeIsRemote usage
+      git cherry-pick f606b247d9144d19e4a16c5ad2ec7014767cb863  # lxd: Replace use of tx.GetProject with cluster.GetProject
+      git cherry-pick 9c4d339af73fd45b79a0c594a3b41177a441c69a  # lxd/project/project: Adds StorageVolumeProjectFromRecord function
+      git cherry-pick fbf1a0c1aca7d080172812733a08befaccc31e54  # lxd/db/instances: Renames and reworks instanceListExpanded to InstanceList
+      git cherry-pick 4c729d0f88acbd742e7f9c14f7f9a72f9fab6a66  # lxd/db/instances/export/test: Removes unused file
+      git cherry-pick 9dce81cbd89512143ccb83deeb3922f5005c3f41  # lxd/db/instances/test: Renames TestInstanceListExpanded to TestInstanceList
+      git cherry-pick dc7f2cfb50b558da72f2ba759dd23c8355f175cf  # lxd/patches: driver.VolumeTypeNameToDBType usage
+      git cherry-pick 6e3e9b14edf59a125f3889514c67df1d30b94e88  # lxd/profiles/utils: Comment on doProfileUpdateContainer for clarity
+      git cherry-pick 2920b69f391b4a193e7d0c8d4ea33ee2ab1d305e  # lxd/response: cluster.ConnectIfVolumeIsRemote usage
+      git cherry-pick b3284ca34542837847463df0070591186c3d9d74  # lxd/storage/drivers/driver/types: Adds VolumeMultiNode field to Info
+      git cherry-pick 61ac546ee2abe5bbfe6d0069f5fe41f18a9deb09  # lxd/storage/drivers/driver/cephfs: Adds VolumeMultiNode=true to Info struct
+      git cherry-pick 33f34cdc55698c90c69f1d94aa18ae064499f667  # lxd/storage/utils: Renames VolumeTypeNameToType to VolumeTypeNameToDBType
+      git cherry-pick fc7bc96c2bfd2e1de6eaa91a6542d7b858ef15de  # lxd/storage: VolumeTypeNameToDBType usage
+      git cherry-pick 7315b50e0b2502798d851ff9899962f33ff816b4  # lxd/storage/utils: Adds VolumeDBTypeToTypeName function
+      git cherry-pick 7d5a1aff5a1ee5cf63b9b0000f2258c6f678bba4  # lxd/storage/utils: Comment consistency
+      git cherry-pick 349aabda6a432c7c08ff744c037fab6092214837  # lxd/storage/utils: Renames and reworks VolumeUsedByRunningInstancesWithProfilesGet to VolumeUsedByInstances
+      git cherry-pick 5b6b84b908a27de748bd802d8365e2d881301863  # lxd/storage/utils: Adds VolumeUsedByExclusiveRemoteInstancesWithProfiles function
+      git cherry-pick ad47be2d19aff0236b8abae510397731d7eb3b4e  # lxd/cluster/connect: Reworks ConnectIfVolumeIsRemote to use storagePools.VolumeUsedByExclusiveRemoteInstancesWithProfiles
+      git cherry-pick 3131dcf05b8bfa137c0b93e8402866e7767b2bfb  # lxd/device/disk: storagePools.VolumeUsedByExclusiveRemoteInstancesWithProfiles usage
+      git cherry-pick 0330cfdfc7622411257d2956bb7ec0acaf0f6639  # lxd/storage/volumes: storagePools.VolumeTypeNameToDBType usage
+      git cherry-pick 36807f0daec9bbccf85537e46ef640bb25fb7e38  # lxd/storage/volumes: Updates storagePoolVolumeTypePost to use updated storagePools.VolumeUsedByInstances
+      git cherry-pick a08291abaddfa475676fc07dc4723b9dab121e34  # lxd/storage/backend/lxd: Updates UpdateCustomVolume to check for online resize support when resizing
+      git cherry-pick 605a5ef44934e031a3ca7491de1103d20aed30a6  # lxd/storage/backend/lxd: Updates RestoreCustomVolume with VolumeUsedByInstances
+      git cherry-pick c96d60cb8cdae1375c88158b0b402b7822965aa7  # lxd/storage/utils: Removes VolumeUsedByInstancesGet function as not properly project compliant
+      git cherry-pick 25c858090be9eb0d243b398de7d4bf32e793abd1  # lxd/storage/volumes/utils: Replaces storagePools.VolumeUsedByInstancesGet usage with storagePools.VolumeUsedByInstances in storagePoolVolumeUsedByGet
+      git cherry-pick 2cb2667ba968aa39d02e270bbd2b21f6af9ee4dc  # lxd/device/disk: Replace storagePools.VolumeUsedByInstancesGet usage with storagePools.VolumeUsedByInstances in storagePoolVolumeAttachShift
+      git cherry-pick e9d1f56acc02b8e363a83ec29c9390a82b64e20b  # lxd/endpoints: Update error string in test
+      git cherry-pick 8fb15e5905c30f8f32339e4867b61a4a77a6dc18  # shared/simplestreams: Record variant
+      git cherry-pick 01b5156e9f1b5c60987d144933ae3546b71d0f4c  # shared/simplestreams: Fix sorting of images
+      git cherry-pick 4c1e883f9dbb88e9e4850ae9c98e5a23839d3f74  # lxd/project/project: Updates StorageVolumeProjectFromRecord to not return error (as never populated)
+      git cherry-pick 94a12db197d93e724177c6e883aa2c8c4d77d66b  # lxd/project/project: Adds NetworkProjectFromRecord function
+      git cherry-pick 6377d807ae68da75ea446040b03eabd3bae9419e  # lxd/storage/utils: project.StorageVolumeProjectFromRecord usage
+      git cherry-pick 7b5459b6b2e27efec8c2db41dc9323bfcdabcd5c  # lxd/network/driver/ovn: Adds NIC external route overlap validation of other OVN external network subnets and OVN NIC external routes
+      git cherry-pick 915e8f4e3790f581a87cfb9eed9d6556be26c1bb  # lxd/device/nic/ovn: Updates ovnNet interface's InstanceDevicePortValidateExternalRoutes to add instance argument
+      git cherry-pick adf25c88f888242b9e4b5f0b63da8ffde1dbba74  # lxd/device/nic/ovn: d.network.InstanceDevicePortValidateExternalRoutes usage
+      git cherry-pick d735de0a151eda78d7f73b157f91789ad38d396e  # lxd/instance/qmp: Merge Go routines
+      git cherry-pick 365d4e97556e10d7997502dbaeb5de78bc4a4d90  # shared/cancel: Close chDone on failure
+      git cherry-pick 5dbef17cb415de8e3ef5acb3349ae4b77e61ceb9  # lxd: Only close doneCh on success
+      git cherry-pick cfedcd1035cfc272bee1f099ad1ed6b420ff6e9b  # i18n: Update translations from weblate
+      git cherry-pick f899806b77a562de10764e8f52afb0ac1d6d52fd  # lxd/network/driver/ovn: Adds ovnProjectNetworksWithUplink function
+      git cherry-pick c6d6045b8f43cf749666eefe99e6c4fa0d36d2e9  # lxd/network/driver/ovn: Updates ovnNetworkExternalSubnets to allow optional filtering of our own network's subnets
+      git cherry-pick 7872cdf100bfb56814b20357c8d869da194d6db3  # lxd/network/driver/ovn: Updates ovnNICExternalRoutes to optionally filter our own NIC's external routes
+      git cherry-pick f412f79828a7f4eda4a2644695d06d2ffdf6ee44  # lxd/network/driver/ovn: Updates InstanceDevicePortValidateExternalRoutes to use new functions and signatures
+      git cherry-pick 32caf54ea296696580b2f43e50a9c76a1b94356f  # lxd/network/driver/ovn: Updates Validate to check external subnets dont overlap with other OVN networks or NICs sharing our uplink
+      git cherry-pick e73ed20b8d9640347332a81ade7387a149204004  # lxd/network/openvswitch/ovn: Return ErrOVNNoPortIPs in LogicalSwitchPortSetDNS when no port IPs found
+      git cherry-pick 30943207705f4424c01106cad890d2d7656e208f  # lxd/network/driver/ovn: Retry LogicalSwitchPortSetDNS up to 5 times to avoid missing dynamic IP allocation by OVN
+      git cherry-pick 0814fd4d1145147f09314b64bd9b9740acb3be79  # exec: make sure to only use TIOCGPTPEER if available
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
