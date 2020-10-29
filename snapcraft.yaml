@@ -650,7 +650,7 @@ parts:
       - bin/qemu-system-*
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
-      - bin/virtiofsd
+      - bin/virtiofsd*
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
