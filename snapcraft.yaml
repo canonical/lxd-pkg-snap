@@ -1212,6 +1212,22 @@ parts:
       git cherry-pick e73ed20b8d9640347332a81ade7387a149204004  # lxd/network/openvswitch/ovn: Return ErrOVNNoPortIPs in LogicalSwitchPortSetDNS when no port IPs found
       git cherry-pick 30943207705f4424c01106cad890d2d7656e208f  # lxd/network/driver/ovn: Retry LogicalSwitchPortSetDNS up to 5 times to avoid missing dynamic IP allocation by OVN
       git cherry-pick 0814fd4d1145147f09314b64bd9b9740acb3be79  # exec: make sure to only use TIOCGPTPEER if available
+      git cherry-pick 17b83109a740028b0ab4fc325ddbbb251524bc8a  # lxd/instance/drivers: Change memory backend
+      git cherry-pick fc6dc39d37724124134cbfcf37fb9376674c4945  # lxd/instance/drivers: Add virtio-fs config drive template
+      git cherry-pick 88cae156edae481939b1e8f4d68586db625a9755  # lxd/instance/drivers: Handle virtio-fs config drive
+      git cherry-pick ef11fa888de44df1976b56fc878dc8a6b3237764  # lxd/instance/drivers: Add system unit file for virtio-fs config drive
+      git cherry-pick 119e52b407df63a249d74d777cd1ca9d33b68bbf  # lxd/device/disk: Support virtio-fs
+      git cherry-pick 1ffeceee869599c4005e8113a283f06695353cda  # lxd/device/disk: Handle alternative virtfs-proxy-helper location
+      git cherry-pick c2161afb913fe581daf055b1aa5c35baf73c5d9a  # lxd-agent: Prefer virtio-fs over 9p
+      git cherry-pick db04ac666b7ecef2ef0a2d8b3bccded8004f4fbd  # lxd/instances: Fix virtiofsd for config drive
+      git cherry-pick 6d6aa4316fab5a127073cbbdfb9a807aa7007853  # lxd/instance/drivers: Issue warning if virtiofsd is missing
+      git cherry-pick 5254f369911c7d12042e070ece5ce3c1104c13b3  # lxd/device: Issue warning if virtiofsd is missing
+      git cherry-pick 0281f7f66e460c5ad93c228e8fc2ec3910bf93ab  # lxd/instance/drivers: Fix lxd-agent systemd unit conditions
+      git cherry-pick 4d5751993136a31ede7196a831a5037d05f3217b  # lxd/storage: Only freeze if not frozen
+      git cherry-pick 55a9969fa48d094bcafdea04dc0a5adee3532eb2  # lxd/device/sriov: Harden calls to ip link vf
+      git cherry-pick 902c64ca87f97d03e6b0648fb729c3530910273f  # lxd/qmp: Ensure checkbuffer is called
+      git cherry-pick 9ec01f2daad31649135557aa9dd443c25a0609b6  # lxd/network/driver/ovn: Adds support for using uplink bridge using bridge.driver=openvswitch
+      git cherry-pick df7fface1c16a688d9c86d3ca4dfd1e2e5c803ff  # lxd/virtiofs: Fix handling of config drive
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
