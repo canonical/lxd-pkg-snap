@@ -950,6 +950,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherrypick 8a0e1fd9d0c8866af5947ab2acee0c28e8827573   # meminfo: show host swap values when no limit or equal limits are set
+
       set +ex
       snapcraftctl build
       set -ex
