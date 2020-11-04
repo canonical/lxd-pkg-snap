@@ -583,6 +583,7 @@ parts:
       [ "${QEMUARCH}" = "ppc64le" ] && QEMUARCH="ppc64"
       sed -i "s/^unset target_list$/target_list=\"${QEMUARCH}-softmmu\"/" configure
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
+      sed -i "s#https://git.qemu.org/git#https://github.com/qemu#g" .gitmodules
 
       set +ex
       snapcraftctl build
