@@ -1233,6 +1233,134 @@ parts:
       git cherry-pick 902c64ca87f97d03e6b0648fb729c3530910273f  # lxd/qmp: Ensure checkbuffer is called
       git cherry-pick 9ec01f2daad31649135557aa9dd443c25a0609b6  # lxd/network/driver/ovn: Adds support for using uplink bridge using bridge.driver=openvswitch
       git cherry-pick df7fface1c16a688d9c86d3ca4dfd1e2e5c803ff  # lxd/virtiofs: Fix handling of config drive
+      git cherry-pick 157af1a6652763c135eec33ce156af906bb2737a  # lxd/storage/lvm: Properly make lvm.thinpool_name node-specific
+      git cherry-pick a15e4c882fc7062d356bce3e1b1c1b2670615605  # lxd/instance/drivers/driver/qemu: Call MountInstanceSnapshot when mounting vm snapshots
+      git cherry-pick 1e181437d555bd7d6a4f08c12c0aed49e116d52c  # lxd/instance/drivers/driver/qemu: Ensure consistent mount state when restoring snapshot irrespective of whether instance was running
+      git cherry-pick cd3ab409ad33b76d593d0424c248800ff1afade5  # lxd/instance/drivers/driver/lxc: Ensure consistent mount state when restoring snapshot irrespective of whether instance was running
+      git cherry-pick 605fde5b6c60ff9632b1366837c8b861a6aa0ffa  # lxd/storage/drivers/volume: Comment clarification
+      git cherry-pick b3722f12994d808452d956cfd78202fadcb33df2  # lxd/storage/drivers/driver/zfs/volumes: Only resurrect deleted image volume if same size in CreateVolume
+      git cherry-pick 924b9fc31021cedd271fc15f3a0b4d46215a1bc3  # lxd/storage/drivers/driver/zfs/volumes: Improved logging
+      git cherry-pick d370e429db38d4db92a33224bbad08dc0e7154e7  # lxd/storage/drivers/driver/zfs/volumes: Return ErrNotSupported in SetVolumeQuota when trying to resize an image block volume
+      git cherry-pick 8afa0fc95cdac23653bedd553bae97244bf8d3e8  # lxd/storage/drivers/driver/ceph/volumes: Only resurrect deleted image volume if same size in CreateVolume
+      git cherry-pick c7ad798e1f1441339ae715aa3537ee52eef6cb57  # lxd/storage/drivers/driver/ceph/volumes: Improves logging in CreateVolume
+      git cherry-pick 4cf513bcb212a82b7b43475eb906c19417ae0c31  # lxd/storage/drivers/driver/ceph/volumes: Don't allow image volume size in SetVolumeQuota
+      git cherry-pick 7b5c5a279068d34a3cbe8b127191149249da3882  # lxd/storage/backend/lxd: Adds size to logging in SetInstanceQuota
+      git cherry-pick 10af1ca62014f48f4af4a249b2fa6edde9ef7739  # lxd/storage/backend/lxd: Update EnsureImage to resize/regenerate optimized image volumes if existing volume is different size than pool's volume.size setting
+      git cherry-pick d9dc62c020e35e3f3516862439fec4cde0f45bef  # lxd/storage/backend/lxd: Updates CreateInstanceFromImage to detect ErrCannotBeShrunk and create one-off non-optimized volume for instance
+      git cherry-pick 64c27532b260f731d7c310f00e92c42b51dda68d  # lxd/storage/drivers/driver/ceph/utils: Updates getRBDMappedDevPath to allow control of mapping
+      git cherry-pick c91a1c229d755f524612ac62e4b983a9a79006f9  # lxd/storage/drivers/driver/ceph/utils: d.rbdUnmapVolumeSnapshot on one line
+      git cherry-pick 8d234d026f225dd334ddc784c18d10d33f3e9451  # lxd/storage/drivers/driver/ceph/volumes: d.getRBDMappedDevPath usage
+      git cherry-pick 4f3914f5c24f875d85159cb5400b6df188ac2dbe  # lxd/storage/utils: Makes InstanceDiskBlockSize snapshot aware
+      git cherry-pick ecc5eaf01b69b7c6820d18084b1749b65b9143b1  # lxd/storage/drivers/driver/ceph/volumes: Removes extraneous comment
+      git cherry-pick 0e4259eedf5ba695216fccb9daec9280a7235f01  # lxd/storage/drivers/driver/ceph/volumes: Activate volume before genericVFSMigrateVolume in MigrateVolume
+      git cherry-pick cb5ccb62e7580d2650e1df74ddbcdf8cc4973da3  # lxd/storage/pool/interface: Adds MountInfo struct
+      git cherry-pick 3554be54339f5ec5da9c92d8d06048a912929a87  # lxd/storage/pool/interface: Return MountInfo from MountInstance and MountInstanceSnapshot
+      git cherry-pick c0d6a62830cd840071d775349faa469289f9f723  # lxd/storage/backend/lxd: Populate MountInfo with OurMount and DiskPath in MountInstance
+      git cherry-pick fabb2d320976714bfd7212c226c8b0dfe60db1a0  # lxd/storage/backend/lxd: Unexports getInstanceDisk
+      git cherry-pick 731a45c1942f8d163d4d8c774f5d59533c44544d  # lxd/storage/backend/lxd: Populates OurMount and DiskPath in MountInstanceSnapshot
+      git cherry-pick 18144b71d6359a890a74b06cef685141e08fc315  # lxd/storage/utils: Updates InstanceDiskBlockSize to use MountInfo
+      git cherry-pick f5b5678124d04fa713a2f26eb310ce0fa5f50131  # lxd/storage/backend/mock: Interface changes
+      git cherry-pick 6cd5ab3a7c6accca56c6e2a96ef67334a1b387a7  # lxd/instance: Updates instanceCreateAsSnapshot to use MountInfo
+      git cherry-pick c475a6383717fe128a4082283d23f345ec496046  # lxd/patches: Updates to use MountInfo
+      git cherry-pick d6f759536621cf12d3fc71425488f8ce03232bf3  # lxd/instance/drivers/driver/lxc: Updates mount to return MountInfo and usage
+      git cherry-pick 22ab4daf0cc41e6a3d5d03682c4b3a04da7a9207  # lxd/instance/drivers/driver/qemu: Updates mount to return MountInfo and usage
+      git cherry-pick 636a47adca757604df269feb350e6d66fcded3a8  # lxd/storage/drivers/generic/vfs: Adds genericVolumeDiskFile constant for excluding generic disk block files
+      git cherry-pick 50bd0f1deaf3ac05b6bd5b2a6b217ff1499486f6  # lxd/storage/drivers/generic/vfs: Avoid using d.GetVolumeDiskPath in genericVFSMigrateVolume
+      git cherry-pick f04ad212ce28862580a5729909802f0ca9f5ee28  # lxd/storage/drivers/generic/vfs: Use genericVolumeDiskFile in genericVFSGetVolumeDiskPath
+      git cherry-pick fd3e9cb7dfd73aec2957c078353ad7b239ebabb5  # lxd/storage/drivers/driver/ceph/utils: Add logging to rbdMapVolume and rbdUnmapVolume
+      git cherry-pick 39c9ac4062d6425bcbaf508dc91f44ff2b67a9e9  # lxd/storage/drivers/driver/ceph/utils: Updates getRBDMappedDevPath to support snapshots
+      git cherry-pick a28ec871fbb941a89fa526571b218bb98330cdd6  # lxd/storage/drivers/driver/ceph/volumes: Updates MountVolume to return ourMount for block volumes
+      git cherry-pick 8ee0ebbbde5da12a6d3dc46cc64144454240247e  # lxd/storage/drivers/driver/ceph/volumes: Updates UnmountVolumeSnapshot to handle block volumes
+      git cherry-pick e117c9f3eecdec9d1d04ee889ec51d66c9143b5e  # lxd/storage/drivers/driver/ceph/volumes: Renames RBDDevPath to devPath
+      git cherry-pick eb99aae132343179d4909cd59d3541fbbff5b4bd  # lxd/storage/utils: Improves logging and uses size value from vol.ConfigSizeFromSource in ImageUnpack
+      git cherry-pick 3268680868c19a47d5dc00dac3845a8b96cd7c35  # lxd/storage/backend/lxd: Improves logging in CreateInstanceFromImage
+      git cherry-pick e8732c252e55d3b344dc0676babafd243489378b  # lxd/storage/backend/lxd: Improves logging and uses imgVol.ConfigSizeFromSource in EnsureImage
+      git cherry-pick c87dc5f9bb093cffad04f74369368456843285a4  # doc/instances: Rephrase limits.memory.swap
+      git cherry-pick 3afd3a4d89a1f169d2deec406def1657ce92d770  # doc/instances: Typo fix
+      git cherry-pick 52d1d3e35b49cca05023814f2bd6f3b09c5384a2  # lxd/storage: Use same defaults as "lxd init"
+      git cherry-pick d51a6ee7a0803351b85185eaaf9ef7d822600127  # lxd/instance/drivers/driver/qemu: Converts all supplied memory byte values to mebibytes for comparison
+      git cherry-pick a2b128ba369a101127cf2e3e0967b17a70ea8c7f  # lxd/rbac: Fix URL encoding
+      git cherry-pick 79aca195c917f1ba851c9a4ae0b490e4d6e6de11  # lxd/cgroup: Fix V2 detection/handling
+      git cherry-pick dbc0f7e77725bb5483936abfe881efde73b76144  # lxd/cgroup: Add file read/writer
+      git cherry-pick 398434be712d5189518ead429866f40fdaf8fa2b  # lxd/cgroup: Fix controller detection
+      git cherry-pick 733ea65ecaa5e10819f0237f10fe32e78ffae8ae  # lxd/cgroup: Add cpuset functions
+      git cherry-pick 7b8bb2b4b111ba1f4535773d5914b6ba77fc1dbb  # lxd/cgroup: Fix warning wording
+      git cherry-pick d24179fe17196d1c60af7ef167e514b35f794ac9  # lxd/devices: Drop old workaround
+      git cherry-pick 219e24cb175f5aa431b53088fec016932159f642  # lxd/devices: Port to cgroup package
+      git cherry-pick 0611dc5f459959da0e30cd5291afa5bb591c9f7e  # lxd/instance: Replace CGroupGet/CGroupSet
+      git cherry-pick 87de3f9c8c1451901bd7c56b29c653bee53b277a  # lxd/devices: Update to use cgroup abstraction
+      git cherry-pick d4dd3902cde9424fb1300f19e65b37273b2f5a21  # lxd/cgroup: Implement proper typing
+      git cherry-pick a550e880f7cc7cf48b3088fb3fbd8a1e6ddffc63  # lxd/cgroup: Change ParseCPU to return int64
+      git cherry-pick 85f7224a6e35c3c05797772a34551d78b10f71af  # lxd/instance/lxc: Update for cgroup function changes
+      git cherry-pick ba676860e9d65cd214e96f6b9522a7bebb727e7a  # lxd/cgroup: Improve naming
+      git cherry-pick 9146ab9e4fc4673e605c73341a68f13186f02178  # lxd/instance: Update for new naming
+      git cherry-pick 655d2103a1017b14764a2bc921e6a5e73bfbb138  # lxd/cgroup: Add V2 for GetBlkioWeight and SetBlkioWeight
+      git cherry-pick 99c7ee7d93d9a5b86d3b0274e05a395489f0bc42  # lxd/device: Move disk priority back to lxc
+      git cherry-pick 8157172d08a0f5df64cf7b152b063f830112164c  # lxd/cgroup: Fix get blkio weight
+      git cherry-pick c5ff11e5f5b219f4ed9a66e491e9545874c02d30  # lxd/cgroup: Add abstraction for SetBlkioLimit
+      git cherry-pick 963c4d25aaba6b650b6cc32ae015ff732ea7fa02  # lxd/device: Port disk limits to abstraction
+      git cherry-pick 1cb4bb18b2257dd3bc7e731def934feb148d87c2  # lxd/db/storage/volumes: Adds workaround for old remote volume schema in GetStorageVolumeNodeAddresses
+      git cherry-pick f151a8be2f78d3d4e82d5849111fe0a49e0c9e96  # lxd/db/storage/volumes: Renames GetStorageVolumeNodeAddresses to GetStorageVolumeNodes
+      git cherry-pick 29b3a0efacfa8fc6a3004963dfc58466dc9889f2  # lxd/cluster/connect: Updates ConnectIfVolumeIsRemote to use tx.GetStorageVolumeNodes
+      git cherry-pick eae87f41435c75945346ee9a15c60ffe46cf7dc1  # lxd/db/storage/volumes/test: Updates test for TestGetStorageVolumeNodes
+      git cherry-pick 506ed58663c79d30b4db625bb4dede35d2219a7c  # lxd/storage/utils: Updates VolumeUsedByInstances to accept an api.StorageVolume arg
+      git cherry-pick cebec009e5de30872149d878f5acff07aff71aa7  # lxd/storage/utils: Updates VolumeUsedByExclusiveRemoteInstancesWithProfiles to use an api.StorageVolume arg
+      git cherry-pick 7dc60c523a33f2588f65af769524d4cb97bb58a2  # lxd/storage/volumes/utils: Updates storagePoolVolumeUsedByGet to accept an api.StorageVolume arg
+      git cherry-pick 7e617573334c5048f2e7577d5e50480287db7767  # lxd/cluster/connect: Updates ConnectIfVolumeIsRemote to use VolumeUsedByExclusiveRemoteInstancesWithProfiles with vol arg
+      git cherry-pick b836b85b55f334dd4498120e802e2a34897a8158  # lxd/device/disk: Updates validateConfig to use storagePools.VolumeUsedByExclusiveRemoteInstancesWithProfiles with vol arg
+      git cherry-pick a06c535ec50283c1d4773aea09aeac4bedef0254  # lxd/device/disk: Updates storagePoolVolumeAttachShift to use storagePools.VolumeUsedByInstances with vol arg
+      git cherry-pick 8ef94947a217aea6b616e3e56bd873505842890d  # lxd/storage/backend/lxd: Updates UpdateCustomVolume to use VolumeUsedByInstances with vol arg
+      git cherry-pick f5b59296cc343b29aac33fb74d07afb73f8d000a  # lxd/storage/backend/lxd: Updates RestoreCustomVolume to use VolumeUsedByInstances with vol arg
+      git cherry-pick 06aa5dd55e83b00c129dc9f9d555234fa3492e7c  # lxd/storage/volumes: storagePoolVolumeUsedByGet usage
+      git cherry-pick a5b0ed1acb7c15702f2f9dbd857fd0de5d459fee  # lxd/storage/volumes: Updates storagePoolVolumeTypePost to use storagePools.VolumeUsedByInstances with a vol arg
+      git cherry-pick bfcbd6623e0c532d086d8ebf694f8b4648a7e1d2  # lxd/storage/volumes: Use db.StoragePoolVolumeTypeName constants
+      git cherry-pick 71324673f77d8112971308cc9e785258301b77bc  # lxd/storage/volumes: Updates storagePoolVolumeTypeGet to use storagePoolVolumeUsedByGet with a vol arg
+      git cherry-pick 00de6df32c759a768800567059d576db6b538328  # lxd/storage/volumes: Updates storagePoolVolumeTypeDelete to use storagePoolVolumeUsedByGet with a vol arg
+      git cherry-pick ac7cdde39f4f67fa1bfcc836a9c92322ccce1bf9  # lxd/storage/volumes/snapshots: storagePoolVolumeUsedByGet usage
+      git cherry-pick e62a41145f85d8f9168136f81e164251e3277df6  # lxd/storage/volumes/utils: Removes storagePoolVolumeAPI constants and converter functions
+      git cherry-pick 60c0131d64e430ff234d6a1e12ba28c755d8c833  # lxd/patches: Recreates patchStoragePoolVolumeAPI constants and function for historical patches
+      git cherry-pick f811714e50f706f5a14f0361bba964d647d11964  # lxd/storage/volumes: Simplifies volume type in URL in storagePoolVolumes routes
+      git cherry-pick 1f561cb8f2cfae8fdf6fa2cf5c510ccbe12f99e6  # lxd/storage/volumes/snapshot: Simplifies volume type in URL generation
+      git cherry-pick 5185cfd2ab837babebf3a23a74fd8805d35dab4d  # lxd/storage/volumes: Updates storagePoolVolumeTypePostRename args
+      git cherry-pick 1074387f5851c1605fb925b34b0d416ae2216ffd  # lxd/storage/volumes: Removes unnecessary var init in storagePoolVolumeTypePostMove
+      git cherry-pick 7192ed179a682f4e7c0a6bc8389368a0bb2b8bd4  # lxd/storage/drivers/driver/ceph/volumes: Fix rbd device leak in RenameVolume
+      git cherry-pick 024d571230f846b6499be2e329f461d56ea1d896  # lxd/storage/drivers/generic/vfs: Use revert package in genericVFSRenameVolume
+      git cherry-pick 4d46d8e0e87c1091ded64530498fdf8e999ec947  # lxd/storage/utils: Adds matching of instances on same node as local volume in VolumeUsedByInstances
+      git cherry-pick 97b6544f79d815444e39575da3ef13d1f86164f2  # lxd/storage/volume: Removes need for loading storage volume when doing lxc storage volume attach
+      git cherry-pick 3772867f8cc468d020a9191fd2ba9daf7066a72e  # lxd/device/disk: Reject path property for block disk devices
+      git cherry-pick 114dfa8c3e7d9a46d35b42720fc0a53f34a1cd11  # lxd/storage/utils: Renames VolumeUsedByInstanceDevices and passes usedByDevices into callback function
+      git cherry-pick 7f159072842ac036a8b58ce0fef29f286ceb3a8c  # lxd/device/disk: storagePools.VolumeUsedByInstanceDevices usage
+      git cherry-pick 59c1a320e7ae428c6738a958d38dc4ee807869e3  # lxd/storage/backend/lxd: VolumeUsedByInstanceDevices usage
+      git cherry-pick e4c7aa3e585353d59a8236a3135aa526f2796a9e  # lxd/storage/utils: VolumeUsedByInstanceDevices usage
+      git cherry-pick a45af9eb7e4ad58ed218dc9383413ea71db85670  # lxd/storage/volumes/utils: storagePools.VolumeUsedByInstanceDevices usage
+      git cherry-pick 7316a9a04ddf13c934a75fe8f77b13d23aa8ea56  # lxd/storage/volumes: storagePools.VolumeUsedByInstanceDevices usage
+      git cherry-pick 8dd61749cfd05aa2edf33b8941eb18c869284bae  # lxd/storage/volumes: Updates storagePoolVolumeTypePost to use updated storagePoolVolumeTypePostRename and storagePoolVolumeTypePostMove
+      git cherry-pick a846aee38f1c71235c53737f523bc0df8295e527  # lxd/storage/volumes: Updates storagePoolVolumeTypePostRename to use updated storagePoolVolumeUpdateUsers
+      git cherry-pick 867f334a9ac87f4b37d6cdfc99d86bef44a38215  # lxd/storage/volumes: Updates storagePoolVolumeTypePostMove to use updated storagePoolVolumeUpdateUsers
+      git cherry-pick bae41139859429626d273c6a5a8c108a86045b2d  # lxd/instance/drivers/driver/lxc: Removes common function LocalDevices implemented in LXC driver
+      git cherry-pick a52b3984ef2d78cb33673059c02c8ca3b191593f  # lxd/db/instances: Better errors in InstanceList
+      git cherry-pick 99df828ee03c530fd9955fe2b932758989b5b56c  # lxd/storage/utils: Adds VolumeUsedByProfileDevices function
+      git cherry-pick ee79c7b133bcc087c3dadbd0d31496c603dae111  # lxd/storage/utils: Removes unused volume name matching logic in VolumeUsedByInstanceDevices
+      git cherry-pick 3261eed1658a0503a4ef4ecafb6a630da76a8f06  # lxd/storage/volumes/utils: Updates storagePoolVolumeUpdateUsers to use storagePools.VolumeUsedByProfileDevices and storagePools.VolumeUsedByInstanceDevices
+      git cherry-pick 0d115c42674f248643817f157240f5ce2745080d  # lxd/storage/volumes/utils: Updates storagePoolVolumeUsedByGet to use storagePools.VolumeUsedByProfileDevices
+      git cherry-pick 7e8c314ed5e84f4426bd230eec1399a6c1085c8a  # lxd/storage/volumes/utils: Golint suggestions in storagePoolVolumeUsedByGet
+      git cherry-pick 8c0958a6dc0eee8e7f5bdb69a2a843fe5eef4559  # lxd/cluster/connect: Removes CLI command flag in error response in ConnectIfVolumeIsRemote
+      git cherry-pick 33f1523397cd40c027d4d96bc511f0d122c70b3f  # lxd/db/storage/pools/test: Initialise db.StorageRemoteDriverNames in db_test package
+      git cherry-pick 7f8d26eb15ff1e5efaacc80372aa92743dbcbb1c  # lxd/db: Removes duplicated db.StorageRemoteDriverNames init from tests
+      git cherry-pick 1f462d7515ecf46ab670d30c5604dd55f0ca6b66  # lxd/locking/lock: Adds UnlockFunc type and updates Lock() signature
+      git cherry-pick 84c6e7f0974e90827159acef204f4456803cb416  # lxd/storage/drivers/utils: Extends OperationLockName to take into account content type.
+      git cherry-pick 865cc5611ee4d7194c684d4ad2dd7653f7ce99a9  # lxd/storage/drivers/volume: Adds MountLock function
+      git cherry-pick ca8f79852d7f4b6b96166ec839eb36bf690784ba  # lxd/storage/drivers/driver/lvm/utils: drivers.OperationLockName usage
+      git cherry-pick 5df12c19e18dacd2603b688a082f61ada6bd73c5  # lxd/storage/backend/lxd: drivers.OperationLockName usage
+      git cherry-pick 547def947197373ae9cfdafe3027a71bbb1ed337  # lxd/storage/drivers: Adds mount and unmount locking
+      git cherry-pick e0e96afc6f7a61deaf62a7ac841f6b09001fb1a9  # lxd/storage/drivers/volume: Removes locking from MountTask and UnmountTask
+      git cherry-pick 16ad40f60325ffa3bc41f6268e4cb26ff726cec5  # lxd/instance/drivers/driver/lxc: Stop devices in two phases
+      git cherry-pick b18efe2d2a2d82ae73cdfe29857f20516084de9f  # lxd/device/disk: Removes workaround for ceph disks now that disks are stopped after instance is stopped
+      git cherry-pick fb5b3021a2172157ef2e815081396f9f58a8360c  # doc/rest-api: auth property is never set to guest
+      git cherry-pick c6d7f2a92bafa217593f482611fd98e941e2ce30  # lxd/apparmor: Workaround socket handling
+      git cherry-pick 2808a54b6644beffd7b80b0601f14f3ce3927f59  # lxd/storage: Expand local config
+      git cherry-pick c16f6407d64b126ba97e8f3676476c29869bf5e2  # lxd/cgroup: Fix swap limits
+      git cherry-pick bb3022a13c6ef6cd3d8e1fa5b250dbcb6e45593d  # lxd/instance/lxc: Fix crash in cgroup function
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
