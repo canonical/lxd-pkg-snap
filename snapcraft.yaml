@@ -922,6 +922,17 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
+  zstd:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - zstd
+    organize:
+      usr/bin/: bin/
+    prime:
+      - bin/pzstd
+      - bin/zstd
+
   # Core components
   lxc:
     after:
