@@ -1275,6 +1275,46 @@ parts:
       git cherry-pick f98ed83b30211bce54ebcc23f233c406e4c1b115  # lxd/instances/post: shared.InstanceIncludeWhenCopying usage in createFromCopy
       git cherry-pick 3d8cdcf1a83a098b351a32cb6d2b5a2a5bc30414  # lxd/storage: Add volatile idmap setting debug log to resetContainerDiskIdmap
       git cherry-pick 610d38f21c2eeff3c1f31f3edb30860d559bd2dc  # lxd/device/disk: Include network-config in cidata
+      git cherry-pick de67bd53f68176aff23fe3aeeca08fc2176f6654  # lxd/resources: Add GetNetworkState and GetNetworkCounters
+      git cherry-pick da8998ac19b85d0d2d97635c993d05cfee7df469  # lxd/storage/pools/utils: Updates comment and error for storagePoolCreateLocal
+      git cherry-pick 88a713e521f04ad95598cc46f2d1514a47782467  # lxd/storage/pools: Error quoting
+      git cherry-pick 5100d11c0694b767f938eca1673bc1f71bbd6bf9  # lxd/instance: Use revert package in instanceCreateFromImage
+      git cherry-pick dc9de71602879cc4b137f36bac8952a11417102a  # lxd/storage/backend/lxd: Remove revert from CreateInstanceFromImage
+      git cherry-pick 8edbfff9d88caa82615ef5545135d67805658ae0  # lxd/storage/drivers/driver/common: Enable unsafe resize mode in runFiller when unpacking into image volumes
+      git cherry-pick 922aca2f0426ce34f146c05a869e7f6afa8bbcb0  # lxd/storage/drivers/driver/ceph/volume: Allow image resize when in unsafe mode in SetVolumeQuota
+      git cherry-pick 82586e064b400a6fab43e72aed446839cb6f003a  # lxd/storage/drivers/driver/zfs/volume: Allow image resize when in unsafe mode in SetVolumeQuota
+      git cherry-pick 71ce592260ae05081f3b687ee5ffc94325f22e3c  # lxd/storage/backend/lxd: Log new volume size in CreateInstanceFromImage
+      git cherry-pick 4ae8fa38c7bdca69b80662e97ca199de38324bf4  # lxd/instance/qemu: Follow symlink to lxd-agent
+      git cherry-pick 91221d7533f30ee6b585cb4fa4c16888ad8cb205  # lxd/instance/qemu: Fix GPU passthrough
+      git cherry-pick ab85b3dcc245dfbcfc326bbf88fb9a13061133b1  # lxd/instance/operations: Allow Wait/Done on nil struct
+      git cherry-pick 5084fb9f6165af18c32777fedd13df01900cd8ef  # lxd/instance/lxc: Improve use of operations
+      git cherry-pick 80763eba205580b8dc9dc989611121227f72926f  # lxd/instance/lxc: Improve locking on file ops
+      git cherry-pick 9a6f8f6d6f772149e1a72fb3a790065eab2fb047  # lxd/instance/operations: Introduce CreateWaitGet
+      git cherry-pick c001bbb6e71d61f802599448edec71214e6d258d  # lxd/instance: Introduce restart tracking
+      git cherry-pick 619f8b327a170eb466ed710b76c3e53ea7b2042a  # Makefile: Fix golint URL
+      git cherry-pick fae25f761d4e63d93350aee761fa5f47800a464f  # lxd/network/driver/bridge: Don't fill default config on update
+      git cherry-pick 6d3139e0d6f54541ef7e3319945ca7005a724aed  # lxd/network/driver/ovn: Improve IP parsing errors
+      git cherry-pick 474a49584a6da7a336998214e76482dad86883d3  # lxd/network/driver/ovn: Don't fill default config on update
+      git cherry-pick 6665ebe9faed2f05fd0110935192f099dc58e540  # lxd/network/driver/bridge: Regenerate auto values on update
+      git cherry-pick 4338899144beb466e063e171f9aca69f7ee50c2f  # lxd/network/driver/ovn: Regenerate auto values on update
+      git cherry-pick f8a236dfe836d6bf66612f13203e57d744cb47fb  # test/suites/network: Adds test for unsetting ipv4.address and ipv6.address
+      git cherry-pick 0c368a61d610e545bbde256eb12ac5c363ad6160  # test/suites/network: Adds test for regeneration of auto values
+      git cherry-pick 1bf42210df92dbeff240ff68f5f743700c006020  # doc/networks: Clarify bridge default auto values
+      git cherry-pick 0f2cdb383a0392f99589d7d429860ab2a18c2dd9  # doc/networks: Clarifies default values for ovn ranges settings
+      git cherry-pick 75cbff964c375a5521675d276628d6e4698e925e  # doc/networks: Clarify ovn default auto values
+      git cherry-pick 3b3590cfab36b727ec2d63e72308c8295d7254f2  # lxd/device/disk: Only validate disk source pool when an actual instance is set
+      git cherry-pick de1a496c6ba1dcef90b540259ba8fb63b5a9edc4  # test/suites/migration: Adds tests for copying instance with snapshots containing invalid disk devices
+      git cherry-pick e93904bdb54f595d3df438663a9f70b7d652f2d8  # lxc-to-lxd: Fix handling on snap
+      git cherry-pick e0a6c6cf130857e2476c8cd1ff98c8090af3bc36  # lxd/instance: Bypass delete protection for internal calls
+      git cherry-pick 3c7a64033e488983de01d29456fe2253caf6b5a0  # lxd/instance/qemu: Improve state handling
+      git cherry-pick 2a5bbc2ff89c3074eafd0003e8b4f846d4aa23be  # lxd/instance/operationlock: Allow Reset
+      git cherry-pick 969e31ade47149a1ce7f50c1eaa27431490e3370  # lxd/instance/qemu: Stretch start/stop timeout
+      git cherry-pick 1a63ba03658cc813ac25fd47a714f39543a9912b  # lxd/instance/qemu: Increase virtiofsd timeout to 10s
+      git cherry-pick b75ec4fa807438980a89cebe751d6b0a5d1f68b1  # lxd/instance/qemu: Move more logic into qemuArchConfig
+      git cherry-pick 8fd26220735f8b639b0ef3fae3f91b87784b92ad  # lxd/instance: Add Info function
+      git cherry-pick 237d56e5d637b38d00aafbc26e1ff72159ed3d08  # lxd/instance: Add SupportedInstanceDrivers
+      git cherry-pick e816bef928dfeaeb7f97893e39341d2be8b96b32  # lxd/instance: Add driver cache
+      git cherry-pick 7b8272d0c6d396998318810c9333d300808a67ed  # lxd/api: Show all instance drivers
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
