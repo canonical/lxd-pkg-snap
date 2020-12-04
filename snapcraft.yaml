@@ -1315,6 +1315,7 @@ parts:
       git cherry-pick 237d56e5d637b38d00aafbc26e1ff72159ed3d08  # lxd/instance: Add SupportedInstanceDrivers
       git cherry-pick e816bef928dfeaeb7f97893e39341d2be8b96b32  # lxd/instance: Add driver cache
       git cherry-pick 7b8272d0c6d396998318810c9333d300808a67ed  # lxd/api: Show all instance drivers
+      git cherry-pick d6b2707b1b04dc2c3256d743a20d492c40d078d8  # lxd/qemu: Don't stop processing events on shutdown
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
