@@ -867,6 +867,39 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
+  zfs-2-0:
+    source: https://github.com/openzfs/zfs
+    source-type: git
+    source-tag: zfs-2.0.0
+    source-depth: 1
+    plugin: autotools
+    configflags:
+      - --with-config=user
+    build-packages:
+      - libblkid-dev
+      - libssl-dev
+      - uuid-dev
+      - zlib1g-dev
+    override-build: |
+      set -ex
+
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      set +ex
+      snapcraftctl build
+      set -ex
+
+      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/lib"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/lib/"
+      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+
   zstd:
     source: snapcraft/empty
     plugin: nil
@@ -1213,7 +1246,7 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.6 zfs-0.7 zfs-0.8; do
+      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0; do
           [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
           strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
       done
