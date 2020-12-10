@@ -333,7 +333,7 @@ parts:
   libusb:
     source: https://github.com/libusb/libusb
     source-type: git
-    source-tag: v1.0.23
+    source-tag: v1.0.24
     source-depth: 1
     plugin: autotools
     organize:
