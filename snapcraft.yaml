@@ -1117,6 +1117,17 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick bc7e0525ef8f585bbcda22d3a4bb160ae124b7e6  # lxd/network/network/interface: Adds Project function
+      git cherry-pick 4b48e17ab725d8bf598b1bcf75021e46ffeedb3e  # lxd/network/driver/common: Adds Project function
+      git cherry-pick 40defa5130a86dedd14ec111ccd6bf0667519fc8  # lxd/network/driver/common: Remove cluster notification and DB record removal from delete() function
+      git cherry-pick 4872518ed2b8a21197392e4445d84707aaa65484  # lxd/network/driver: Always delete when requested, ignore LocalStatus() pending
+      git cherry-pick 8485fc2937ded3135e4272df869d4c7f3eb203db  # lxc/networks: Remove revert removal on failure of clustered network in networksPost
+      git cherry-pick 0de956cd8e7ace5af4b454d8210c62ad5d25d2e6  # lxd/networks: Allow re-create of pending network when pending nodes already exist in networksPost
+      git cherry-pick 5b23efe39ab897bcbea474d3abbb5623d0f25236  # lxd/networks: Adds revert to doNetworksCreate
+      git cherry-pick 0d413c57563eb91ac002458dc2b536dd0d5cded3  # lxd/networks: Moves cluster notification an DB record removal into networkDelete
+      git cherry-pick c30bddaed5cf8910e1d86150bb7b24fe7f2db58f  # shared/api: Fix typo
+      git cherry-pick 74f75353c4ad07632dcc44f2ea12bd9716409caa  # lxd/instance/qmp: Update for go-qmp change
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
