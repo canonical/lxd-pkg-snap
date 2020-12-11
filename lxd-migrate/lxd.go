@@ -83,7 +83,6 @@ func (d *lxdDaemon) update() error {
 		for _, network := range networks {
 			if network.Managed {
 				d.networks = append(d.networks, network)
-				break
 			}
 		}
 	}
