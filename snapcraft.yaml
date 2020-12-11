@@ -557,6 +557,7 @@ parts:
       - --enable-vhost-vsock
       - --enable-virtfs
       - --firmwarepath=/snap/lxd/current/share/qemu/
+      - --localstatedir=/var/
     build-packages:
       - bison
       - flex
