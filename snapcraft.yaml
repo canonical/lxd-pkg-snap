@@ -226,15 +226,25 @@ parts:
   edk2:
     source: https://github.com/tianocore/edk2
     source-type: git
-    source-tag: edk2-stable202008
+    source-tag: IRRELEVANT
     source-depth: 1
     plugin: nil
     build-packages:
       - acpica-tools
       - nasm
       - uuid-dev
+    override-pull: |-
+      set -ex
+      git clone https://github.com/tianocore/edk2 . -b edk2-stable202008
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+
+      # Fix submodules
+      sed -i "s#https://git.cryptomilk.org/projects/cmocka#https://gitlab.com/cmocka/cmocka#g" .gitmodules
+      git submodule update --init --recursive
 
       # Apply patches
       patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
