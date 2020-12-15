@@ -1175,6 +1175,7 @@ parts:
       git cherry-pick 678cfbde4804df2c7d50f73b66c03b0be4491fb6  # lxd/instance/operationlock: Fixes deadlock caused by call to Reset in Create
       git cherry-pick b8d7f56488219f0dfd3cb0e6076ea9b3b506863e  # lxd/instance/operationlock: Store operation in instanceOperations before calling go routine
       git cherry-pick 18ace0e0607b0b0f15bf9dc28c6355f57bb66fde  # lxd/instance/operationlock: Exit go routine started in Create when the operation is done
+      git cherry-pick 5e507626b07034e4479ed3729152b2cc2cdd7e8d  # lxd/network/driver/ovn: Detect IPv6 DHCP options correctly
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
