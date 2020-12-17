@@ -1182,6 +1182,18 @@ parts:
       git cherry-pick fc834648941c72b9e09d1c9cb220d8da0e060bea  # lxd/device/nic/routed: Switches to network.InterfaceExists for clarity
       git cherry-pick 8069dc8a371b1ce642c457be162b9838249d9f7d  # lxd/device/nic/routed: Remove host side veth interface if exists in postStop
       git cherry-pick 12ae61c323fd04f2b18a9076c88e2ca545484d93  # lxd/network/driver/ovn: Adds support for physical uplink interface to be a bridge
+      git cherry-pick c83abda1839a80b74b60d6a238b7e84968fd0eea  # lxd/db/networks: Corrects comment on GetCreatedNetworks
+      git cherry-pick a6117fba820ee013e9c645f54078766b8466fe38  # lxd/network/driver/physical: Clarify error when changing parent interface when in use
+      git cherry-pick 5409511b8014938594684d4d5625a31e6f1415ed  # lxd/network/driver/bridge: Don't apply updates to node when network is pending
+      git cherry-pick f0a4beb75365d2e5e78ab596aa2602cc5edc5c66  # lxd/network/driver: Don't apply changes to node if network is pending
+      git cherry-pick 4174ac206e8f6da69298513dc99d192217bc09c6  # lxd/storage/backend/lxd: Only apply local node changes if both pool and node status are not pending
+      git cherry-pick 354df8872444809406ccfd14bff49401b07e52de  # lxd/db/cluster/update: Modifies updateFromV43 and updateFromV42 to use IFNULL(node_id, -1) to avoid nodes with 0 ID
+      git cherry-pick df84fc868205fc77de7ac84f724e79b0ec43fec9  # doc: features.networks is not enabled by default for projects
+      git cherry-pick a91d1ca9506d14d051a546b76718a44fc06c4187  # shared/util: Adds StringHasPrefix function
+      git cherry-pick 34c0e9bbb3f2e0e5dfb94da7724c4c1283cf1b5a  # lxd/device/disk: Adds sourceIsLocalPath function
+      git cherry-pick 84b1b66562ba46f2831c617664a28874b031f6a6  # lxd/device/disk: Use shared.StringHasPrefix when validating ceph/cephfs prefixes
+      git cherry-pick 90d716fea9ce5eb5654afdc06eee58fd18420c49  # lxd/device/disk: Use d.sourceIsLocalPath when validating source host path exists
+      git cherry-pick a914d7455dbecbcf4995cbaff226227058bc48fc  # lxd/instance/qemu: Enable multiqueue on tap NICs
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
