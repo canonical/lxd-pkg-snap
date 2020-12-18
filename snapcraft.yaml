@@ -1194,6 +1194,7 @@ parts:
       git cherry-pick 84b1b66562ba46f2831c617664a28874b031f6a6  # lxd/device/disk: Use shared.StringHasPrefix when validating ceph/cephfs prefixes
       git cherry-pick 90d716fea9ce5eb5654afdc06eee58fd18420c49  # lxd/device/disk: Use d.sourceIsLocalPath when validating source host path exists
       git cherry-pick a914d7455dbecbcf4995cbaff226227058bc48fc  # lxd/instance/qemu: Enable multiqueue on tap NICs
+      git cherry-pick 43799cb6446543aaf347324f07909d330866633f  # lxd/instance/qemu: Use a minimum of 2 network queues
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
