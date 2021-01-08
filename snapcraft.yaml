@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.9"
+version: "4.10"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -1078,7 +1078,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.9
+    source-tag: lxd-4.10
     after:
       - lxc
       - dqlite
@@ -1116,85 +1116,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick bc7e0525ef8f585bbcda22d3a4bb160ae124b7e6  # lxd/network/network/interface: Adds Project function
-      git cherry-pick 4b48e17ab725d8bf598b1bcf75021e46ffeedb3e  # lxd/network/driver/common: Adds Project function
-      git cherry-pick 40defa5130a86dedd14ec111ccd6bf0667519fc8  # lxd/network/driver/common: Remove cluster notification and DB record removal from delete() function
-      git cherry-pick 4872518ed2b8a21197392e4445d84707aaa65484  # lxd/network/driver: Always delete when requested, ignore LocalStatus() pending
-      git cherry-pick 8485fc2937ded3135e4272df869d4c7f3eb203db  # lxc/networks: Remove revert removal on failure of clustered network in networksPost
-      git cherry-pick 0de956cd8e7ace5af4b454d8210c62ad5d25d2e6  # lxd/networks: Allow re-create of pending network when pending nodes already exist in networksPost
-      git cherry-pick 5b23efe39ab897bcbea474d3abbb5623d0f25236  # lxd/networks: Adds revert to doNetworksCreate
-      git cherry-pick 0d413c57563eb91ac002458dc2b536dd0d5cded3  # lxd/networks: Moves cluster notification an DB record removal into networkDelete
-      git cherry-pick c30bddaed5cf8910e1d86150bb7b24fe7f2db58f  # shared/api: Fix typo
-      git cherry-pick 74f75353c4ad07632dcc44f2ea12bd9716409caa  # lxd/instance/qmp: Update for go-qmp change
-      git cherry-pick 88e97effbd247c1efbca563b33288eacb02adda6  # lxd/backup: Fix URL in lifecycle events
-      git cherry-pick c731e3e5ae3af292f15aa7e6e9cf8425a715c813  # Add DeepSource config
-      git cherry-pick 8d6f3f891766ee0b41eee498d5be9cc22adf7c31  # Use result of type assertion to simplify cases
-      git cherry-pick 584599931a5759911c1a9226b2ea8a64199b543a  # Replace .Sub(time.Now()) with time.Until() handler
-      git cherry-pick 07828469f9c6520ef07a48905483832c6fcec495  # Remove unnecessary fmt.Sprintf() on string
-      git cherry-pick efd22b81c3741d0d30bae86ea9e6151371240bb1  # Omit comparison with boolean constant
-      git cherry-pick f5d6d54f2b257002e100e989faeb651c9ba02cdb  # lxd/db/networks: Adds duplicate key detection to getNetworkConfig
-      git cherry-pick 849aabe23e60d7186a9f56c93606f903297da988  # lxd/db/networks: Adds NetworkErrored function
-      git cherry-pick ffc6845170d5e31b6df042a052c2518b4e464c83  # lxd/db/networks: Changes UpdateNetwork to not set created status
-      git cherry-pick 9f070059265055cbf509e0b75c78a04315e2fa67  # lxd/network/driver/ovn: Reject instance port start if cannot find DHCP options
-      git cherry-pick 2befe9020253c0fa30b783cb51185234e1942657  # lxd/networks: Updates doNetworksCreate to accept a Network rather than load its own
-      git cherry-pick 690604735c86b2b4504294d9ba4a375975dc690d  # lxd/networks: Debug log consistency in doNetworksCreate
-      git cherry-pick 06c96205c41ff05b6d3f2e0a0fc61913b80e2dca  # lxd/networks: doNetworksCreate usage
-      git cherry-pick 4d7df81acbf8224857fdf74f9e8ac8bf4cd323cb  # lxd/networks: When auto creating pending nodes, don't pass global config into DB function in networksPost
-      git cherry-pick 909778e8ad6a79ee8940ddb213ec95b8adae938d  # lxd/networks: Adds networkPartiallyCreated helper function
-      git cherry-pick 953d5d19d1bb73897eac948f838311828de4b0e7  # lxd/networks: Updates networksPostCluster to detect existing global config and skip create if already exists
-      git cherry-pick d3ddb3d84a761b0cdbce15a3f1593902c1ab41bc  # lxd/api/cluster: Skip non-created networks when joining
-      git cherry-pick bf9996d85a7bb2f3eb2ff5647d6f958d7bb714cf  # lxd/device/nic: Don't allow NICs to use networks that are not created
-      git cherry-pick bb092653bdd324d00d0eaa0ce597e17a1a4376ca  # lxd/db/networks: Renames ClusterTx GetNonPendingNetworks to GetCreatedNetworks
-      git cherry-pick b852c82eafc6293fc08fa98db022ecd9f4e1c395  # lxd/db/networks: Renames Cluster GetNonPendingNetworks to GetCreatedNetworks
-      git cherry-pick 528e7b030f949ccc7613eac58e00f09507a297b9  # lxd/api/cluster: cluster.GetCreatedNetworks usage
-      git cherry-pick 0503808c6dcd6db26c6ff5c7bf7d27ee81492a0f  # lxd/network: tx.GetCreatedNetworks usage
-      git cherry-pick 8d8bf0aeec2d1dcef99033b4e1f357b331092685  # lxd/networks: s.Cluster.GetCreatedNetworks usage
-      git cherry-pick d886bd00141641eaa05465ac6dcf94ea4444d54d  # lxd/patches: tx.GetCreatedNetworks usage
-      git cherry-pick 6fe3aae2ddffb04f0c8be0a01724f0f86753b29b  # test/suites/clustering: More network clustering tests
-      git cherry-pick 043583c2b084bb9b46335838087fb810d318f749  # lxd/db/networks: Tighten restrictions in CreatePendingNetwork to only allow pending nodes to be added while network is pending
-      git cherry-pick 2f668a4900723b15cdd6ffd549b275bcafc67328  # lxd/networks: Allow single node cluster network create using --target
-      git cherry-pick 0b928270abccc4e26b0b9b61a4cc90d10554632a  # lxd/db/cluster/update: Adds patch updateFromV41 function
-      git cherry-pick 8b452409ec6cb63a89b9d487159c1334ce949ca8  # lxd/storage/pools/utils: Debug log consistency in storagePoolCreateLocal
-      git cherry-pick caad90086a5ac000d74335cf589b24f08ef66c17  # lxd/db/storage/pools: Adds duplicate key detection to getStoragePoolConfig
-      git cherry-pick 8edbead2aee349d389cd66672ac1b0d1af737f48  # lxd/storage/pools: storagePoolsPost comments line width
-      git cherry-pick 9acf98e1e234407a59bd2eb545cf387aa1846f23  # lxd/db/storage/pools: Adds StoragePoolErrored function
-      git cherry-pick 269627aaf08d353d67b03aaf6c82f9c1e95789a9  # lxd/db/storage/pools: Renames GetNonPendingStoragePoolNames to GetCreatedStoragePoolNames
-      git cherry-pick fbf91a8b84920e7794fd941143c6b0346e1ae724  # lxd/api/cluster: cluster.GetCreatedStoragePoolNames usage
-      git cherry-pick c05a393468a2d71cfb563e598a34efd7e15f5d89  # lxd/storage/pools/utils: Renames id arg to poolID in storagePoolCreateLocal
-      git cherry-pick 42048b65206b890e8d186fc253085af6b4531f4e  # lxd/storage: s.Cluster.GetCreatedStoragePoolNames usage
-      git cherry-pick f482dc3d801d24cbb64f50fabf0358f304b56ab1  # lxd/storage/pools: Restructures storagePoolsPost to align with networksPost
-      git cherry-pick e10cf969e092a78cd3e0dba770a068735e5b3040  # lxd/storage/pools: Updates storagePoolsPostCluster to reject global config on re-create attempts
-      git cherry-pick 8bd8b6474ca5934d30ba9f08448c56cbf9e0beb3  # lxd/storage/pools: Adds storagePoolPartiallyCreated function
-      git cherry-pick 189a76714ed38d22ace96e22b55bb7effaf5db6c  # test/suites/clustering: Updates storage pool status tests
-      git cherry-pick e5db9c5cce4cde292edd61c2a23762d3b3698ed6  # lxd/db/storage/pools: Improve errors in CreatePendingStoragePool
-      git cherry-pick 4570a38da840f6bb0f1cae549927d91e58f06c1f  # test/suites/clustering: Adds additional storage pool state tests
-      git cherry-pick 76a152c1f159eb1d0e497d4e2169bedb888bca39  # lxd/db/cluster/update: Adds patch updateFromV42 function
-      git cherry-pick c389fb72b82973480decec2a90423a9fe28f8fba  # lxd/instance/drivers/qmp/monitor: Handle closed event channel from qmp package in run
-      git cherry-pick f1546afc7bf20acc6e544febcf62fd13c79cfe2e  # lxd/instance/drivers/driver/qemu: Logs when instance is stopped in getMonitorEventHandler
-      git cherry-pick 678cfbde4804df2c7d50f73b66c03b0be4491fb6  # lxd/instance/operationlock: Fixes deadlock caused by call to Reset in Create
-      git cherry-pick b8d7f56488219f0dfd3cb0e6076ea9b3b506863e  # lxd/instance/operationlock: Store operation in instanceOperations before calling go routine
-      git cherry-pick 18ace0e0607b0b0f15bf9dc28c6355f57bb66fde  # lxd/instance/operationlock: Exit go routine started in Create when the operation is done
-      git cherry-pick 5e507626b07034e4479ed3729152b2cc2cdd7e8d  # lxd/network/driver/ovn: Detect IPv6 DHCP options correctly
-      git cherry-pick 0f570776b1793f05df3d833e6c863af0d28051b5  # lxd/device: allow adding proxy device to VM instances
-      git cherry-pick 1e63a4f8dee8c9cfc51b98345e5faaf2fceaef73  # lxd/instance/drivers: run device post-start hooks in QEMU driver
-      git cherry-pick 0df442599d1a3036f98873df40ce3fec8e2de68b  # doc: update `proxy` doc to reflect VM support
-      git cherry-pick fc834648941c72b9e09d1c9cb220d8da0e060bea  # lxd/device/nic/routed: Switches to network.InterfaceExists for clarity
-      git cherry-pick 8069dc8a371b1ce642c457be162b9838249d9f7d  # lxd/device/nic/routed: Remove host side veth interface if exists in postStop
-      git cherry-pick 12ae61c323fd04f2b18a9076c88e2ca545484d93  # lxd/network/driver/ovn: Adds support for physical uplink interface to be a bridge
-      git cherry-pick c83abda1839a80b74b60d6a238b7e84968fd0eea  # lxd/db/networks: Corrects comment on GetCreatedNetworks
-      git cherry-pick a6117fba820ee013e9c645f54078766b8466fe38  # lxd/network/driver/physical: Clarify error when changing parent interface when in use
-      git cherry-pick 5409511b8014938594684d4d5625a31e6f1415ed  # lxd/network/driver/bridge: Don't apply updates to node when network is pending
-      git cherry-pick f0a4beb75365d2e5e78ab596aa2602cc5edc5c66  # lxd/network/driver: Don't apply changes to node if network is pending
-      git cherry-pick 4174ac206e8f6da69298513dc99d192217bc09c6  # lxd/storage/backend/lxd: Only apply local node changes if both pool and node status are not pending
-      git cherry-pick 354df8872444809406ccfd14bff49401b07e52de  # lxd/db/cluster/update: Modifies updateFromV43 and updateFromV42 to use IFNULL(node_id, -1) to avoid nodes with 0 ID
-      git cherry-pick df84fc868205fc77de7ac84f724e79b0ec43fec9  # doc: features.networks is not enabled by default for projects
-      git cherry-pick a91d1ca9506d14d051a546b76718a44fc06c4187  # shared/util: Adds StringHasPrefix function
-      git cherry-pick 34c0e9bbb3f2e0e5dfb94da7724c4c1283cf1b5a  # lxd/device/disk: Adds sourceIsLocalPath function
-      git cherry-pick 84b1b66562ba46f2831c617664a28874b031f6a6  # lxd/device/disk: Use shared.StringHasPrefix when validating ceph/cephfs prefixes
-      git cherry-pick 90d716fea9ce5eb5654afdc06eee58fd18420c49  # lxd/device/disk: Use d.sourceIsLocalPath when validating source host path exists
-      git cherry-pick a914d7455dbecbcf4995cbaff226227058bc48fc  # lxd/instance/qemu: Enable multiqueue on tap NICs
-      git cherry-pick 43799cb6446543aaf347324f07909d330866633f  # lxd/instance/qemu: Use a minimum of 2 network queues
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
