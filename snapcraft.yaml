@@ -1030,7 +1030,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.6
+    source-tag: lxcfs-4.0.7
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -1059,15 +1059,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 8a0e1fd9d0c8866af5947ab2acee0c28e8827573  # meminfo: show host swap values when no limit or equal limits are set
-      git cherry-pick 22ba5818484aa5ffaa26967d5d2ab228b2789205  # README: clarify SWAP
-      git cherry-pick 5fb18e7b8ab9ee0b1af375aa13135cf0dfe30874  # cgroups: Add get_memory_swappiness
-      git cherry-pick 205df44462530825ded3ffe3e2d6d68cb716287d  # swap: Fix usage reporting
-      git cherry-pick 4538af183c2f48563681f303c54cef0430741b83  # swap: Only report usage when swappiness is 0
-      git cherry-pick 1e92c18e409f37f79a24f61623b9d9c4d84e3280  # swap: Tweak meminfo logic
-      git cherry-pick a46b7b6978867101e79db1e1a51d30f2a02176ec  # swap: Make /proc/swaps match /proc/meminfo
-      git cherry-pick 1d3a4a0dd7411d34f10e47c1d850213a63a3581e  # swap: Remove now unused variable
 
       set +ex
       snapcraftctl build
