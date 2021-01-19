@@ -1108,6 +1108,69 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 55bcb19ef8055d9cc493595a46cffe197801feec  # client: Fix output of GetClusterMemberNames
+      git cherry-pick 158e4af834e7a3faaafdcb49b0f61fba9131684d  # openvswitch/ovs.go: Simplify return in Installed method
+      git cherry-pick 4a24322ab39364cdfb258858d248c1f9ec34bb5a  # rbac/server.go: Sleep for seconds instead of nanoseconds
+      git cherry-pick 80db2d3f80264ac321294a6673cfeb9ee42f7b91  # lxd/instance/drivers/driver/qemu: Updates SaveConfigFile to return nil
+      git cherry-pick d4f2dc3a92160c5c30b655dbf7b7ba01c3efb552  # lxd/api/internal: Updates internalImportFromRecovery to call inst.SaveConfigFile
+      git cherry-pick f7fbff5aa1ca529a50997616933281edcbe52ea3  # test/suites/backup: Adds test to check exec works after recovery of running container
+      git cherry-pick ac9ddfb5e998f20c746a584ee8173345fccbcd94  # cluster/raft/file_snapshot.go: defer after checking error
+      git cherry-pick 1a4bfbf909369ad0335b59aad7ab074b4b25a14e  # lxd/storage/drivers/driver/cephfs/volumes: Updates RenameVolume newName arg to newVolName to bring inline with other drivers
+      git cherry-pick 6793c10d59a424230fcb8186f9c765f62ad9ee1b  # lxd/storage/drivers/driver/ceph/volumes: Fix UnmountVolume to actually deactivate VM block volumes
+      git cherry-pick 250a3925e2bcf20c55fffdf92b4913e4e1d48856  # lxd/storage/drivers/driver/ceph/volumes: Fix RenameVolume to also rename FS volume for VM volumes
+      git cherry-pick 7c57ba7d87800c43e791e1ac421c1088c9da48fd  # test/suites/container/devices/nic/bridged: Adds port isolation feature test
+      git cherry-pick 6db2e8bee6fbd42012ad5310a7fd037784a09797  # lxc/network: Adds support for attaching instance to a managed network using `network` property
+      git cherry-pick fdd6ef9e4d004f3ceb4d8a20f0da01dfba9645ea  # test/suites/container/devices/proxy: Ensure ipv6 nat tests use a network with stateful DHCPv6 enabled
+      git cherry-pick f55684db8a376643cf5568cfc9861d76c3e83df0  # test/suites/network: Updates static IPv6 allocation test to actually test stateful DHCPv6
+      git cherry-pick 6efe0c82844ab65a0a0ba619500ffdd172030e2f  # test/suites/container/devices/nic/bridged: Improve validation of DHCPv6 allocation
+      git cherry-pick 732a627178e2b4db74d7e8ed2f1fa13ddc391967  # lxc/query: Prevent using --project
+      git cherry-pick 719fd3887353b667c528413b769ce4e9f6ed09ae  # i18n: Update translation templates
+      git cherry-pick 96ed165ec0f657d877fd2f5935458169daaaefb8  # lxd/utils: Compare all addresses from lookup in IsAddressCovered, lxc#8340
+      git cherry-pick c26c4025b3479603d1d047819f9b301c137490e5  # lxd/resources: Support DMI for CPU information
+      git cherry-pick a1f8d3d51c362f342c323d6080f8f1b1af5031d9  # lxd/device/nic/routed: Ensure IP neighbour proxy entries are removed on stop
+      git cherry-pick 97b09969f7ea4a11d5ede018794c4bf897e7f895  # lxd/device/nic/routed: Adds duplicate address detection
+      git cherry-pick d452755ce9f9b828180e6aa0c53ea85b957f5805  # lxd/device/disk: Validate size field properly
+      git cherry-pick f823c0ec601300ca0a2c91cdf621d1da504e01e8  # lxd/device/nic/bridged: Only attempt to release DHCP leases if bridge interface exists
+      git cherry-pick 51fdde0ed699a446832ef877440e58e92667229a  # lxd/device/nic/bridged: Improve error context prefix in networkClearLease
+      git cherry-pick 21665838e45c89afbf69529a3c2a292329512a23  # lxd/device/nic/bridged: Use %q for error quoting in networkClearLease
+      git cherry-pick 70c33d143bd20218ba62d0bf3da3fd9bcb1de470  # lxd/device/nic/bridged: Improve error context prefix in State
+      git cherry-pick d2ae591af9d4968776ad2c774074f13da0fb2f09  # lxd/instance: Fix progress on ceph instance move
+      git cherry-pick 7bf04fa33f9c684e377e7d5d5755d8962c26fe6c  # lxd/storage/backend/lxd: Use volume config in UpdateInstanceBackupFile so that volume.block.filesystem setting is used
+      git cherry-pick deca6f7f2cbd76774670a693f81f20a55eb5dc9d  # lxd/storage/drivers/utils: Adds filesystem being used to TryMount error
+      git cherry-pick feacd71317078cb3d337b1a8c5904b9186f06432  # lxd: Smarter handling of volatile keys in projects
+      git cherry-pick 68b825b08a0480967776941dcfd55992f6fec03a  # lxd/project: Strip volatile on copy/migrate
+      git cherry-pick 4a475aa482a636dfed8fe300123f18294ab49ec5  # tests: Update project restrictions test
+      git cherry-pick b368d1ab951c4472dc4ca966989da8fc5e9fd2de  # lxd/instance/drivers/driver/lxc: Copy parent volume config to snapshot volume config in lxcCreate
+      git cherry-pick 9b8ef9a7eb3885d8911efa93ccfe81c47a05ea65  # lxd/instance/drivers/driver/qemu: Copy parent volume config to snapshot volume config in qemuCreate
+      git cherry-pick d57a8f50d130437de0c12408cced18e41910d301  # lxd/instance/drivers/driver/lxc: Umount instance after CRIU state path check in Restore
+      git cherry-pick f37aa9621ad6c6dea9b780195db5eb55d1e8d469  # lxd/instance/drivers/driver/lxc: Avoid duplicated call to UpdateBackupFile in Restore
+      git cherry-pick fdc6b73dc6af5779fde1ce991826f3e571d36dcb  # lxd/instance/drivers/driver/lxc: Log instance restarting after snapshot restore
+      git cherry-pick a0f45e98a06408dadbe10f697829f2072cdb9096  # lxd/instance/drivers/driver/lxc: Always run UpdateBackupFile in Update
+      git cherry-pick 59924fa7e0ed75aac9f3784acdfd90b082739324  # lxd/instance/drivers/driver/qemu: Removes unnecessary call to UnmountInstance in Restore
+      git cherry-pick ce1ac69f3d4a75b5f66dc51c8bfa7df2ca314907  # lxd/instance/drivers/driver/qemu: Remove unnecessary call to UpdateBackupFile
+      git cherry-pick 68c1f9529603fab619e6a6a45cb6887fb561e72e  # lxd/instance/drivers/driver/qemu: Log instance restarting after snapshot restore
+      git cherry-pick 92727b0ea7de1b3df225d24e40553002e1d18b5d  # doc/rest-api: Fix typo
+      git cherry-pick fd20dc631c0944b8e448182eb0bac8a8edcaac30  # doc/rest-api: Fix missing escaping
+      git cherry-pick d558014d7ee3c00449bc8f84073eb9afd81fd410  # lxd/instance: Tweak error and resource links
+      git cherry-pick afb1e0dd5ec3434ec7afd824f679dce52a8145c3  # api: Adds support for bulk instance state change.
+      git cherry-pick ce509dbf253bf95f754d9d20a1b60fb00429574c  # shared/api: Adds support for bulk instance state change.
+      git cherry-pick a0876aca6cfde9992d8378350f60a9ca0b51c583  # doc: Adds doc for bulk instance state change endpoint.
+      git cherry-pick f16eebefb1a8b708b0b39fb0b661a673bf999cfa  # lxd: Adds support for bulk instance state change.
+      git cherry-pick 38c2b3e54dfff14d826584772744759422121784  # client: Adds support for bulk instance state change.
+      git cherry-pick 962fd498dca4f2771bd958cf1c8c16eb79925fd3  # lxd: Process bulk action in parallel
+      git cherry-pick 2919314d2eddd52e7ac1c290594c5a23aa175364  # test/suites/snapshots: Adds snapshot block.filesystem config check for LVM & Ceph
+      git cherry-pick 9f55844d6b1c83803b1e5393ab063465c1b257aa  # lxd/instances: Reduce code duplication
+      git cherry-pick 374f620f8c8420d8c21cc57256c0888b0c12b5a5  # shared/api: Change mass update API
+      git cherry-pick 4b0e63f65062226d1ba25e624a88de63448ada8c  # lxd/instances: Update to new bulk API
+      git cherry-pick f65d1a258b90da683487e6f9c6c027a3bef4c00f  # doc/rest-api: Update for new bulk API
+      git cherry-pick 3e74d4cf9bfc921936dfd7164e4a3256073dd9c4  # client: Re-order functions
+      git cherry-pick a8ed29e60d5b248b58f5366d545d5c385593cb6e  # lxd: Rename container functions
+      git cherry-pick d1ca4c973d18ba3dcca7dc9f9cd173a8f2ec871d  # lxd/instance_state: Simplify
+      git cherry-pick 1e25e895bbc86315ddba032d3e86102af5a79404  # lxd/instance: Refactor state handling
+      git cherry-pick 5053c28f5c21ff8cb5006c537cd987fa5b4ef8f7  # lxd/instances_state: Simplify logic
+      git cherry-pick f15938c0ee19ef65c830a25f7887e0493ff5391f  # lxd/instance/drivers: Move ephemeral restart logic
+      git cherry-pick 4dce56fb652b635f429f95373a2eeaa8b0e465c7  # lxd/vm: Expose ISO images as SCSI cdroms
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
