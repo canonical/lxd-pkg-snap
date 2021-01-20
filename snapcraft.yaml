@@ -925,7 +925,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.5
+    source-tag: lxc-4.0.6
     build-packages:
       - libapparmor-dev
       - libcap-dev
