@@ -1124,6 +1124,7 @@ parts:
       git cherry-pick b1ef6a87249b402fde43b9d7fd5f5d7eab1429d8  # lxd/storage/zfs: Add support for clone_copy rebase
       git cherry-pick 300d5b76bfefde5fbe085a0db748d046b7f11409  # lxd/qmp: Ensure checkbuffer is called
       git cherry-pick 01f0ca1c0e9e6abb9ed657b464db287570a2c9aa  # lxd/virtiofs: Fix handling of config drive
+      git cherry-pick e7ec828ea971f198b6a875a7ce66a2cc7d5dc386  # lxd/instance/qmp: Update for go-qmp change
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
