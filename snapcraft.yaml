@@ -1176,6 +1176,50 @@ parts:
       git cherry-pick 5053c28f5c21ff8cb5006c537cd987fa5b4ef8f7  # lxd/instances_state: Simplify logic
       git cherry-pick f15938c0ee19ef65c830a25f7887e0493ff5391f  # lxd/instance/drivers: Move ephemeral restart logic
       git cherry-pick 4dce56fb652b635f429f95373a2eeaa8b0e465c7  # lxd/vm: Expose ISO images as SCSI cdroms
+      git cherry-pick 8e38603cdde29a4960889d425cb4126eb4c0468f  # lxd/storage: Cleanup CreateInstanceFromCopy
+      git cherry-pick 99337ddb231538dd04db38a4a98072d7f647edb9  # lxd/storage/utils: Updates VolumeDBCreate to accept volume and content type typed arguments
+      git cherry-pick 97800c753a2154140daacb3a298e778f5e2cd1d0  # lxd/storage/backend/lxd: Error quoting and wrapping
+      git cherry-pick a94f406a980479f25ccc000b560ae521759ec040  # lxd/storage/backend/lxd: Expand argument type in updateVolumeDescriptionOnly
+      git cherry-pick 82f3317f104aa90dedf30edc85e3805ca7accf54  # lxd/storage/backend/lxd: VolumeDBCreate updated usage
+      git cherry-pick df248aa56c744edc6acd9b9ba1cbe077a8c8d37a  # lxd/network: Add check for overlapping ovn.ranges and dhcp.ranges
+      git cherry-pick 61ec407fce890dc51e338cfe67dc6931c807c510  # lxd/db/instances: Improve error message from CreateInstanceConfig
+      git cherry-pick 3e30a9f769acbba25cba568bfebbcac801a47107  # lxd/instance/drivers/driver/common: Adds insertConfigkey function
+      git cherry-pick 8896261d03fb6e0da22dcc4e010a48cf8ebd4493  # lxd/instance/drivers/driver/lxc: Updates FillNetworkDevice to use d.insertConfigkey
+      git cherry-pick abef6ef8392029644d1a141ff8ea03527dd343f5  # lxd/instance/drivers/driver/qemu: Updates FillNetworkDevice to use d.insertConfigkey
+      git cherry-pick f7f4e4633ad6fde4cd6bd2624c06f233652b82db  # lxc/instance/drivers/driver/common: Removes empty value check from insertConfigkey
+      git cherry-pick ec9a5302ed4e1ac8016bee55f8efe877663be371  # lxd/instance/drivers: Detect failed volatile key generation
+      git cherry-pick e580cfb8792babd2b1ec23aeb307c928e5c124ab  # lxd/instance/drivers/driver/lxc: Fix volatile config key scoping issue in FillNetworkDevice
+      git cherry-pick ee0bddfc35d07d73885e5c1396f829c7f42c7d08  # lxd/network/driver/bridge: Only validate non-overlapping DHCPv6 ranges with OVN ranges when stateful DHPCv6 being used
+      git cherry-pick c49be133d804b5c4a649d3995c0906bf3194c2ac  # lxd/instance/drivers/driver/common: Prevent existing row check from wiping out desired key value in insertConfigkey
+      git cherry-pick eceeac283eb71bbec87d52383c713cc133337d07  # lxd/instance/drivers: More checks and error contexts in FillNetworkDevice
+      git cherry-pick e176c0b8d55eb06062b70abc012d7e942f735e22  # lxd/instance/drivers/driver/qemu: Error alignment with container driver in Rename
+      git cherry-pick 5adfc6f4617d776abf553f5eec1c433cada5fd19  # lxd/storage/utils: Improves error in VolumeDBCreate
+      git cherry-pick 5cf821fb4d809df9ee3779a887e7d850331a4a12  # lxd/db/storage/volumes: Populates ProjectName field in GetLocalStoragePoolVolumeSnapshotsWithType
+      git cherry-pick 960db72900eb8c867305d2b7566a504fb8e3237f  # lxd/instance/drivers/driver/lxc: Error context in Rename
+      git cherry-pick d41c9ad676ec6a8aae33d9ecbb1c9522de4800a7  # lxd/instances/post: Unwraps long error and using double quotes placeholder
+      git cherry-pick 7a2f554731bfd63e8e31aec73c93d826368e36b1  # lxd/instance/instance/interface: Adds TemplateTrigger type and constants for template trigger types
+      git cherry-pick b845ea806bbd1ee1f7e7796ca491a9eff1f401c3  # lxd/instance: Adds instanceCreateAsCopyOpts argument for instanceCreateAsCopy options
+      git cherry-pick 676d3c2a9648099bbf0d67a177036e4d07ed3979  # lxd/instances/post: instanceCreateAsCopy updated usage
+      git cherry-pick d6fb79aa2a4148413a2070cb12c0b2a6b5d1dfe6  # lxd/instance/instance/interface: Updates DeferTemplateApply to accept TemplateTrigger type argument
+      git cherry-pick 01f512e299ee0429f7552b917a16102f6d012ebd  # lxd/instance/drivers/driver/common: Updates DeferTemplateApply to accept a TemplateTrigger type argument
+      git cherry-pick 3e7a74b69ddf42d2362c161806766c8a8018f93f  # lxd/storage/backend: inst.DeferTemplateApply usage
+      git cherry-pick 86b47fe8461e121bafa2346348cbf656a75a76c2  # lxd/instances/post: inst.DeferTemplateApply usage
+      git cherry-pick 8f0e05b32eb950d9cde1c81d76f453dad7052938  # lxd/instance/drivers/driver/lxc: Updates templateApplyNow to accept a TemplateTrigger argument
+      git cherry-pick d29b5d03cd38bdabed8100c1760e105aa799f7ec  # lxd/instance/drivers/driver/lxc: d.templateApplyNow usage
+      git cherry-pick bf188cbde9225c78cdfced68456dba6d2d8c91ff  # lxd/instance/drivers/driver/qemu: Updates templateApplyNow to accept a TriggerTemplate type argument
+      git cherry-pick b38f7a6d2da862c38b5864e99826c55638e451cc  # lxd/instance/drivers/driver/qemu: d.templateApplyNow usage
+      git cherry-pick a731f4339d3265ea7961e74a4d0ddc21d880ddf1  # lxd/instance/instance/interface: Adds applyTemplateTrigger argument to Rename
+      git cherry-pick 7e481a4c27624b20c8b506f93e46944b4bc785a8  # lxd/instance/drivers/driver/lxc: Adds applyTemplateTrigger argument to Rename
+      git cherry-pick ce3946ed729769d74105ce311df0dd63b7a42afe  # lxd/instance/drivers/driver/qemu: Adds applyTemplateTrigger argument to Rename
+      git cherry-pick 69cac0f2f38620a35071c69e15a88ccf6ad4e7c0  # lxd/instance/post: inst.Rename usage
+      git cherry-pick 8a9e2c4d22fb71b94881130da3a79bbcc9dcf197  # lxd/instance/snapshot: sc.Rename usage
+      git cherry-pick 5d06c927e573bf275b55b7ed4c1396327e6c2832  # lxd/storage/backend/lxd: Removes call to deferred template apply in RenameInstance
+      git cherry-pick 2fec9dcb546982bdbd864ed59485aa5c88f4a63f  # lxd/instance/test: c.Rename usage
+      git cherry-pick 9ed0464f8e416a2690944f67433dbd5381f50138  # shared/api: Add Pool field to InstancePost
+      git cherry-pick b9e1a00d5812df4f5ed151b19999159c8c5743eb  # client: Add extension check for pool migration
+      git cherry-pick 1cffb28b66d3295e361f178f9890f85b41d77aeb  # test: Add tests for volatile.apply_template config during create, copy and move
+      git cherry-pick 427b4f808012144358f7a92a2583830e277febee  # test: Adds check for volatile.apply_template state after rename
+      git cherry-pick 08131f853a7d76eda54a42342ec7c25255963272  # test: Add test for moving instance between pools without renaming
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
