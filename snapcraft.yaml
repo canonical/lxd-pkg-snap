@@ -1018,6 +1018,12 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 9d6a3de70086d46f7562ac689d10ca1e36b237a1  # configure: skip libseccomp tests if it is disabled
+      git cherry-pick 563ec46266b8967f0ee60e0032bbe66b3b37207c  # conf: fix containers retaining CAP_NET_ADMIN
+      git cherry-pick 5a13595b7bc3db36e3f0cdf6f03758591a019d93  # cgroups: fix cgroup mounting
+      git cherry-pick 93ce8339d91c9684b739cd65b8b97e9d24ab1371  # lsm: remove obsolute comment about constructor
+      git cherry-pick 027f9f8225874b683d70d1ebcce4ae8682522e65  # lxc_attach: include rexec conditionally
+
       set +ex
       snapcraftctl build
       set -ex
