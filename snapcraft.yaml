@@ -1251,6 +1251,36 @@ parts:
       git cherry-pick 1cffb28b66d3295e361f178f9890f85b41d77aeb  # test: Add tests for volatile.apply_template config during create, copy and move
       git cherry-pick 427b4f808012144358f7a92a2583830e277febee  # test: Adds check for volatile.apply_template state after rename
       git cherry-pick 08131f853a7d76eda54a42342ec7c25255963272  # test: Add test for moving instance between pools without renaming
+      git cherry-pick ea21cb483dde14c256150bd3297016b2798dcd75  # lxd/images: Skip keys with empty values
+      git cherry-pick c84070fd43deb81e05f42eddc84d5bff46fd356b  # lxd/device: Fix instance type validations
+      git cherry-pick 60239d5dd27ec9e9d1b9968378fb39b9e32e94df  # shared/instance: Adds ErrNoRootDisk error var and returns it from GetRootDiskDevice
+      git cherry-pick 30887fe0ef52d6c7948fd84dcc4d985f6120d1a6  # lxd/instance: Enforces that target instance should have valid root disk config after DB create in instanceCreateAsCopy
+      git cherry-pick c43dcc17dee3483c722bfd194a978240d9df21d4  # lxd/instance: Don't assume root disk is called "root" when copying snapshots from a source instance
+      git cherry-pick cc0986b7a1decf50f39b4ab8a40a328614e21205  # lxd/db/query/retry: Adds detection of checkpoint in progress to IsRetriableError
+      git cherry-pick bfae314d458d5fa15b6a1660b77a107b9b279f16  # lxd/instance/drivers/driver_qemu: attempt to kill qemu proc on stop
+      git cherry-pick e8163cbeee0d8206d29d8163a71fd3f268579160  # lxd/instance/driver_qemu: Add check for qemu cmdline args to pid()
+      git cherry-pick f474e695c4e36854d9352addb3725a3c5b59f194  # forkproxy: prevent zombies
+      git cherry-pick 9667b0920c412ee0d6e046a2b98aa57a2d29eb66  # lxd: Change some references of container to instance in comments
+      git cherry-pick fac1d949e4d6f06d99bf500bc8bbad9e81d1cf60  # lxd/instance/post: Change error message to instance from container in instancePost
+      git cherry-pick 15f9541bd95ab760c5ff1431a7cbd43b3bb351c4  # lxd/main/forkdns: Returns empty AAAA record response when equivalent A record exists
+      git cherry-pick 689784349d7d8d761e26241009ac20630612c31c  # lxd/main/forkdns: Fixes typo in comment
+      git cherry-pick d90f5245aa83e63ade25103895bedfc146d37b46  # test: Adds test for empty AAAA response when equivalent A record exist in clustering forkdns
+      git cherry-pick 778d8867bc00f286a10c1cca81e573733f6c159c  # lxd/device/pci: Consider DeviceUnbind successful on missing driver
+      git cherry-pick 75c38b140af963195d5bb31085205255f0ee21d1  # shared/validate: Validate PCI addresses
+      git cherry-pick 9a81b2ddabd5c96a197a0d06c443fe170ad54fd8  # lxd/device/gpu: Validate PCI addresses
+      git cherry-pick 2dbacb148e349ce0d045f4e739485c6362716e82  # lxd/device: Add function to validate PCI path
+      git cherry-pick 2312de1dff38c2b63d2741db633522e397c2e83d  # lxd/device/gpu_mdev: Valdiate PCI address and path
+      git cherry-pick 8473045ff595e154b508d89888f9274b92498bad  # lxd/device/gpu_physical: Validate PCI address and path
+      git cherry-pick 04b1f624f58751d650935bb52bab4c2cbb9353c6  # lxd/instance/qemu: Cleanup VGA ROM check
+      git cherry-pick 8075f1d8235ba49d390e3fc1fcdfbb4800ab6c3a  # lxd/network/driver/bridge: Update DHCPv4Subnet to return fan bridge address subnet when in fan mode
+      git cherry-pick 12eff7c16266bae721324ec001b288896ea5db59  # lxd/device/nic/bridge: Updates validateConfig to use parent networks DHCP subnet functions when validating address
+      git cherry-pick 36f73f21c64d8ba20b0bdd5bd0bd39e5b0080fff  # shared/termios: Fix static builds
+      git cherry-pick e4265373183ab36ab13f11f5162aef0c87fc3464  # shared/idmap: Fix shared/ build on non-cgo
+      git cherry-pick 1686c141f6867fa7ca104333dc5eeff7a13477ee  # shared/instancewriter/: Fix shared/ build on non-cgo
+      git cherry-pick bfb9746d748a8fce179c92f7404c8e13a4d8118d  # shared/eagain: Restrict to Linux
+      git cherry-pick 0c8fd1c6bd5b8975344242fd28346319c75aec4f  # shared/subprocess: Restrict to unix
+      git cherry-pick b6ad37a20a32b60d3913109b0f2bd7d8ecf76a02  # lxd/db/generate: Move DB generator
+      git cherry-pick 2d3d262fec4fc631c1a4c4a61a19edd68740d91f  # github: Replace Travis and Appveyor with Actions
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
