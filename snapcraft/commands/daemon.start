@@ -318,7 +318,18 @@ fi
 echo "==> Escaping the systemd cgroups"
 if [ -e "/sys/fs/cgroup/cgroup.procs" ]; then
     echo "====> Detected cgroup V2"
-    echo "$$" > "/sys/fs/cgroup/cgroup.procs"
+
+    # Try to escape to the root (V2 hosts)
+    cat /proc/self/cgroup
+    if ! echo "$$" > "/sys/fs/cgroup/cgroup.procs" 2>/dev/null; then
+	# Create a .lxc cgroup if missing
+        if [ ! -d "/sys/fs/cgroup/.lxc" ]; then
+            mkdir /sys/fs/cgroup/.lxc
+	fi
+
+	# Use .lxc as the cgroup
+	echo "$$" > "/sys/fs/cgroup/.lxc/cgroup.procs"
+    fi
 else
     echo "====> Detected cgroup V1"
     for ctr in /sys/fs/cgroup/*; do
