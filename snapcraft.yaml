@@ -1018,11 +1018,42 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick b1710cdb0378b998055a88e9b439a9c9d1577973  # commands: fix check for seccomp notify support
       git cherry-pick 9d6a3de70086d46f7562ac689d10ca1e36b237a1  # configure: skip libseccomp tests if it is disabled
       git cherry-pick 563ec46266b8967f0ee60e0032bbe66b3b37207c  # conf: fix containers retaining CAP_NET_ADMIN
       git cherry-pick 5a13595b7bc3db36e3f0cdf6f03758591a019d93  # cgroups: fix cgroup mounting
       git cherry-pick 93ce8339d91c9684b739cd65b8b97e9d24ab1371  # lsm: remove obsolute comment about constructor
       git cherry-pick 027f9f8225874b683d70d1ebcce4ae8682522e65  # lxc_attach: include rexec conditionally
+      git cherry-pick d12b5190ca8fe3966496858e8c5db508a86ad40a  # tree-wide: fix some header inclusions
+      git cherry-pick db574851e6d025ee0daf4afefafa0a05297ad4b5  # initutils: fix missing includes
+      git cherry-pick a8d0ef4f131a823b3f4e078f7191c4486725e303  # configure: support static binaries
+      git cherry-pick 7b16be129acf38f3a1aae63e98a867df82a5d826  # autotools: enable static builds for tools
+      git cherry-pick 132024c5e8b4617f4fd804a54d710651735711a8  # autotools: enable static builds for commands
+      git cherry-pick 4fc3bbd45c25a995b3decbdd953a389a365bc369  # tree-wide: fix compilation with-Wstrict-prototypes -Wold-style-definition
+      git cherry-pick 5fd525dfdbedf8babe469190e3cb696f01e0f353  # config: update ax_pthread.m4
+      git cherry-pick 63efab747c92667a3fea097337133c82152a9ef7  # configure: add AC_SYS_LARGEFILE checking
+      git cherry-pick 0564659714a5ed51883a491fd99c725192aece43  # autotools: update build
+      git cherry-pick 65bd3f8b4c50ba919fe46af661698f5bb620c695  # file_utils: introduce read_file_at()
+      git cherry-pick 329b11dca1312440f57a0bf87632a928e3206c4d  # string_utils: add must_make_path_relative()
+      git cherry-pick f8ea20d88b6e8cc202adf4bd0d8cc10ff70cce52  # cgroups: coding style fixes
+      git cherry-pick 391d314b7aa2087608b898399fb53a9dd259266c  # cgroups: rework cg_unified_init()
+      git cherry-pick c825d4704266c3517288895184d9232c55e1b7f8  # cgroups: detect and record cgroup2 freezer support
+      git cherry-pick 3886f4a8d9665f418c3846d16c5141753640c51f  # criu: handle cgroup2 freezer
+      git cherry-pick c1c7d42cf757c46068ef3a0eeea5a8f6c88d7f5e  # mkdir -p /proc /sys on container startup
+      git cherry-pick 6cec518d16b53d9416dd5a370c01c006de21e8ec  # conf: fix coding style
+      git cherry-pick 4b7db20ee44ed94e948fa81da7030ad3fdf31cd8  # conf: coding style fixes
+      git cherry-pick f06e80de163680ae7cd92fe8de9ae60ff3bea266  # conf: move proc and sys mountpoint creation int lxc_mount_auto_mounts()
+      git cherry-pick 30d5a566e364a9e9a9f838ceee5f46c1fa5cde6c  # attach: invert child/parent handling
+      git cherry-pick e95c4c2d9b3bef0073855eda11a0a9aaa7fe6879  # attach: use __do_free cleanup macro for cwd
+      git cherry-pick 6e9fd7e90b8b638e7b11966653228ba0139c95a1  # attach: tweak logging
+      git cherry-pick b994e6f273e2f6e9b94973a6554b02a897bb30fc  # attach: use __do_close for labelfd
+      git cherry-pick 084378794a535478961aeb8cf006221043f83bb0  # attach: coding style fixes
+      git cherry-pick 02c90439e65a1627e925cfdcda29ba898cca8d97  # attach: use free_disarm()
+      git cherry-pick 7379954b39a312972c05971274b7848a49a0c5c6  # attach: s/attach_child_main/do_attach/g
+      git cherry-pick e8a2d23cc7b3ad0f360be5c1f91e570755b06024  # attach: mark do_attach() as __noreturn
+      git cherry-pick 43a6efe7b1002ed2d5770c54fa5682d68d1df1b5  # attach: make do_attach() void
+      git cherry-pick c16fae6d41f6aa9f1a758f8bfc218b7bd7316a93  # attach: use close_prot_errno_disarm()
+      git cherry-pick 252605bccc19a0c3d75030842aac2760ac16abd5  # attach: add some DEBUG() logging to stdfd dpulication
 
       set +ex
       snapcraftctl build
