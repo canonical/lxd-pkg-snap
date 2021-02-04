@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.10"
+version: "4.11"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -1108,7 +1108,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.10
+    source-tag: lxd-4.11
     after:
       - lxc
       - dqlite
@@ -1146,143 +1146,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 55bcb19ef8055d9cc493595a46cffe197801feec  # client: Fix output of GetClusterMemberNames
-      git cherry-pick 158e4af834e7a3faaafdcb49b0f61fba9131684d  # openvswitch/ovs.go: Simplify return in Installed method
-      git cherry-pick 4a24322ab39364cdfb258858d248c1f9ec34bb5a  # rbac/server.go: Sleep for seconds instead of nanoseconds
-      git cherry-pick 80db2d3f80264ac321294a6673cfeb9ee42f7b91  # lxd/instance/drivers/driver/qemu: Updates SaveConfigFile to return nil
-      git cherry-pick d4f2dc3a92160c5c30b655dbf7b7ba01c3efb552  # lxd/api/internal: Updates internalImportFromRecovery to call inst.SaveConfigFile
-      git cherry-pick f7fbff5aa1ca529a50997616933281edcbe52ea3  # test/suites/backup: Adds test to check exec works after recovery of running container
-      git cherry-pick ac9ddfb5e998f20c746a584ee8173345fccbcd94  # cluster/raft/file_snapshot.go: defer after checking error
-      git cherry-pick 1a4bfbf909369ad0335b59aad7ab074b4b25a14e  # lxd/storage/drivers/driver/cephfs/volumes: Updates RenameVolume newName arg to newVolName to bring inline with other drivers
-      git cherry-pick 6793c10d59a424230fcb8186f9c765f62ad9ee1b  # lxd/storage/drivers/driver/ceph/volumes: Fix UnmountVolume to actually deactivate VM block volumes
-      git cherry-pick 250a3925e2bcf20c55fffdf92b4913e4e1d48856  # lxd/storage/drivers/driver/ceph/volumes: Fix RenameVolume to also rename FS volume for VM volumes
-      git cherry-pick 7c57ba7d87800c43e791e1ac421c1088c9da48fd  # test/suites/container/devices/nic/bridged: Adds port isolation feature test
-      git cherry-pick 6db2e8bee6fbd42012ad5310a7fd037784a09797  # lxc/network: Adds support for attaching instance to a managed network using `network` property
-      git cherry-pick fdd6ef9e4d004f3ceb4d8a20f0da01dfba9645ea  # test/suites/container/devices/proxy: Ensure ipv6 nat tests use a network with stateful DHCPv6 enabled
-      git cherry-pick f55684db8a376643cf5568cfc9861d76c3e83df0  # test/suites/network: Updates static IPv6 allocation test to actually test stateful DHCPv6
-      git cherry-pick 6efe0c82844ab65a0a0ba619500ffdd172030e2f  # test/suites/container/devices/nic/bridged: Improve validation of DHCPv6 allocation
-      git cherry-pick 732a627178e2b4db74d7e8ed2f1fa13ddc391967  # lxc/query: Prevent using --project
-      git cherry-pick 719fd3887353b667c528413b769ce4e9f6ed09ae  # i18n: Update translation templates
-      git cherry-pick 96ed165ec0f657d877fd2f5935458169daaaefb8  # lxd/utils: Compare all addresses from lookup in IsAddressCovered, lxc#8340
-      git cherry-pick c26c4025b3479603d1d047819f9b301c137490e5  # lxd/resources: Support DMI for CPU information
-      git cherry-pick a1f8d3d51c362f342c323d6080f8f1b1af5031d9  # lxd/device/nic/routed: Ensure IP neighbour proxy entries are removed on stop
-      git cherry-pick 97b09969f7ea4a11d5ede018794c4bf897e7f895  # lxd/device/nic/routed: Adds duplicate address detection
-      git cherry-pick d452755ce9f9b828180e6aa0c53ea85b957f5805  # lxd/device/disk: Validate size field properly
-      git cherry-pick f823c0ec601300ca0a2c91cdf621d1da504e01e8  # lxd/device/nic/bridged: Only attempt to release DHCP leases if bridge interface exists
-      git cherry-pick 51fdde0ed699a446832ef877440e58e92667229a  # lxd/device/nic/bridged: Improve error context prefix in networkClearLease
-      git cherry-pick 21665838e45c89afbf69529a3c2a292329512a23  # lxd/device/nic/bridged: Use %q for error quoting in networkClearLease
-      git cherry-pick 70c33d143bd20218ba62d0bf3da3fd9bcb1de470  # lxd/device/nic/bridged: Improve error context prefix in State
-      git cherry-pick d2ae591af9d4968776ad2c774074f13da0fb2f09  # lxd/instance: Fix progress on ceph instance move
-      git cherry-pick 7bf04fa33f9c684e377e7d5d5755d8962c26fe6c  # lxd/storage/backend/lxd: Use volume config in UpdateInstanceBackupFile so that volume.block.filesystem setting is used
-      git cherry-pick deca6f7f2cbd76774670a693f81f20a55eb5dc9d  # lxd/storage/drivers/utils: Adds filesystem being used to TryMount error
-      git cherry-pick feacd71317078cb3d337b1a8c5904b9186f06432  # lxd: Smarter handling of volatile keys in projects
-      git cherry-pick 68b825b08a0480967776941dcfd55992f6fec03a  # lxd/project: Strip volatile on copy/migrate
-      git cherry-pick 4a475aa482a636dfed8fe300123f18294ab49ec5  # tests: Update project restrictions test
-      git cherry-pick b368d1ab951c4472dc4ca966989da8fc5e9fd2de  # lxd/instance/drivers/driver/lxc: Copy parent volume config to snapshot volume config in lxcCreate
-      git cherry-pick 9b8ef9a7eb3885d8911efa93ccfe81c47a05ea65  # lxd/instance/drivers/driver/qemu: Copy parent volume config to snapshot volume config in qemuCreate
-      git cherry-pick d57a8f50d130437de0c12408cced18e41910d301  # lxd/instance/drivers/driver/lxc: Umount instance after CRIU state path check in Restore
-      git cherry-pick f37aa9621ad6c6dea9b780195db5eb55d1e8d469  # lxd/instance/drivers/driver/lxc: Avoid duplicated call to UpdateBackupFile in Restore
-      git cherry-pick fdc6b73dc6af5779fde1ce991826f3e571d36dcb  # lxd/instance/drivers/driver/lxc: Log instance restarting after snapshot restore
-      git cherry-pick a0f45e98a06408dadbe10f697829f2072cdb9096  # lxd/instance/drivers/driver/lxc: Always run UpdateBackupFile in Update
-      git cherry-pick 59924fa7e0ed75aac9f3784acdfd90b082739324  # lxd/instance/drivers/driver/qemu: Removes unnecessary call to UnmountInstance in Restore
-      git cherry-pick ce1ac69f3d4a75b5f66dc51c8bfa7df2ca314907  # lxd/instance/drivers/driver/qemu: Remove unnecessary call to UpdateBackupFile
-      git cherry-pick 68c1f9529603fab619e6a6a45cb6887fb561e72e  # lxd/instance/drivers/driver/qemu: Log instance restarting after snapshot restore
-      git cherry-pick 92727b0ea7de1b3df225d24e40553002e1d18b5d  # doc/rest-api: Fix typo
-      git cherry-pick fd20dc631c0944b8e448182eb0bac8a8edcaac30  # doc/rest-api: Fix missing escaping
-      git cherry-pick d558014d7ee3c00449bc8f84073eb9afd81fd410  # lxd/instance: Tweak error and resource links
-      git cherry-pick afb1e0dd5ec3434ec7afd824f679dce52a8145c3  # api: Adds support for bulk instance state change.
-      git cherry-pick ce509dbf253bf95f754d9d20a1b60fb00429574c  # shared/api: Adds support for bulk instance state change.
-      git cherry-pick a0876aca6cfde9992d8378350f60a9ca0b51c583  # doc: Adds doc for bulk instance state change endpoint.
-      git cherry-pick f16eebefb1a8b708b0b39fb0b661a673bf999cfa  # lxd: Adds support for bulk instance state change.
-      git cherry-pick 38c2b3e54dfff14d826584772744759422121784  # client: Adds support for bulk instance state change.
-      git cherry-pick 962fd498dca4f2771bd958cf1c8c16eb79925fd3  # lxd: Process bulk action in parallel
-      git cherry-pick 2919314d2eddd52e7ac1c290594c5a23aa175364  # test/suites/snapshots: Adds snapshot block.filesystem config check for LVM & Ceph
-      git cherry-pick 9f55844d6b1c83803b1e5393ab063465c1b257aa  # lxd/instances: Reduce code duplication
-      git cherry-pick 374f620f8c8420d8c21cc57256c0888b0c12b5a5  # shared/api: Change mass update API
-      git cherry-pick 4b0e63f65062226d1ba25e624a88de63448ada8c  # lxd/instances: Update to new bulk API
-      git cherry-pick f65d1a258b90da683487e6f9c6c027a3bef4c00f  # doc/rest-api: Update for new bulk API
-      git cherry-pick 3e74d4cf9bfc921936dfd7164e4a3256073dd9c4  # client: Re-order functions
-      git cherry-pick a8ed29e60d5b248b58f5366d545d5c385593cb6e  # lxd: Rename container functions
-      git cherry-pick d1ca4c973d18ba3dcca7dc9f9cd173a8f2ec871d  # lxd/instance_state: Simplify
-      git cherry-pick 1e25e895bbc86315ddba032d3e86102af5a79404  # lxd/instance: Refactor state handling
-      git cherry-pick 5053c28f5c21ff8cb5006c537cd987fa5b4ef8f7  # lxd/instances_state: Simplify logic
-      git cherry-pick f15938c0ee19ef65c830a25f7887e0493ff5391f  # lxd/instance/drivers: Move ephemeral restart logic
-      git cherry-pick 4dce56fb652b635f429f95373a2eeaa8b0e465c7  # lxd/vm: Expose ISO images as SCSI cdroms
-      git cherry-pick 8e38603cdde29a4960889d425cb4126eb4c0468f  # lxd/storage: Cleanup CreateInstanceFromCopy
-      git cherry-pick 99337ddb231538dd04db38a4a98072d7f647edb9  # lxd/storage/utils: Updates VolumeDBCreate to accept volume and content type typed arguments
-      git cherry-pick 97800c753a2154140daacb3a298e778f5e2cd1d0  # lxd/storage/backend/lxd: Error quoting and wrapping
-      git cherry-pick a94f406a980479f25ccc000b560ae521759ec040  # lxd/storage/backend/lxd: Expand argument type in updateVolumeDescriptionOnly
-      git cherry-pick 82f3317f104aa90dedf30edc85e3805ca7accf54  # lxd/storage/backend/lxd: VolumeDBCreate updated usage
-      git cherry-pick df248aa56c744edc6acd9b9ba1cbe077a8c8d37a  # lxd/network: Add check for overlapping ovn.ranges and dhcp.ranges
-      git cherry-pick 61ec407fce890dc51e338cfe67dc6931c807c510  # lxd/db/instances: Improve error message from CreateInstanceConfig
-      git cherry-pick 3e30a9f769acbba25cba568bfebbcac801a47107  # lxd/instance/drivers/driver/common: Adds insertConfigkey function
-      git cherry-pick 8896261d03fb6e0da22dcc4e010a48cf8ebd4493  # lxd/instance/drivers/driver/lxc: Updates FillNetworkDevice to use d.insertConfigkey
-      git cherry-pick abef6ef8392029644d1a141ff8ea03527dd343f5  # lxd/instance/drivers/driver/qemu: Updates FillNetworkDevice to use d.insertConfigkey
-      git cherry-pick f7f4e4633ad6fde4cd6bd2624c06f233652b82db  # lxc/instance/drivers/driver/common: Removes empty value check from insertConfigkey
-      git cherry-pick ec9a5302ed4e1ac8016bee55f8efe877663be371  # lxd/instance/drivers: Detect failed volatile key generation
-      git cherry-pick e580cfb8792babd2b1ec23aeb307c928e5c124ab  # lxd/instance/drivers/driver/lxc: Fix volatile config key scoping issue in FillNetworkDevice
-      git cherry-pick ee0bddfc35d07d73885e5c1396f829c7f42c7d08  # lxd/network/driver/bridge: Only validate non-overlapping DHCPv6 ranges with OVN ranges when stateful DHPCv6 being used
-      git cherry-pick c49be133d804b5c4a649d3995c0906bf3194c2ac  # lxd/instance/drivers/driver/common: Prevent existing row check from wiping out desired key value in insertConfigkey
-      git cherry-pick eceeac283eb71bbec87d52383c713cc133337d07  # lxd/instance/drivers: More checks and error contexts in FillNetworkDevice
-      git cherry-pick e176c0b8d55eb06062b70abc012d7e942f735e22  # lxd/instance/drivers/driver/qemu: Error alignment with container driver in Rename
-      git cherry-pick 5adfc6f4617d776abf553f5eec1c433cada5fd19  # lxd/storage/utils: Improves error in VolumeDBCreate
-      git cherry-pick 5cf821fb4d809df9ee3779a887e7d850331a4a12  # lxd/db/storage/volumes: Populates ProjectName field in GetLocalStoragePoolVolumeSnapshotsWithType
-      git cherry-pick 960db72900eb8c867305d2b7566a504fb8e3237f  # lxd/instance/drivers/driver/lxc: Error context in Rename
-      git cherry-pick d41c9ad676ec6a8aae33d9ecbb1c9522de4800a7  # lxd/instances/post: Unwraps long error and using double quotes placeholder
-      git cherry-pick 7a2f554731bfd63e8e31aec73c93d826368e36b1  # lxd/instance/instance/interface: Adds TemplateTrigger type and constants for template trigger types
-      git cherry-pick b845ea806bbd1ee1f7e7796ca491a9eff1f401c3  # lxd/instance: Adds instanceCreateAsCopyOpts argument for instanceCreateAsCopy options
-      git cherry-pick 676d3c2a9648099bbf0d67a177036e4d07ed3979  # lxd/instances/post: instanceCreateAsCopy updated usage
-      git cherry-pick d6fb79aa2a4148413a2070cb12c0b2a6b5d1dfe6  # lxd/instance/instance/interface: Updates DeferTemplateApply to accept TemplateTrigger type argument
-      git cherry-pick 01f512e299ee0429f7552b917a16102f6d012ebd  # lxd/instance/drivers/driver/common: Updates DeferTemplateApply to accept a TemplateTrigger type argument
-      git cherry-pick 3e7a74b69ddf42d2362c161806766c8a8018f93f  # lxd/storage/backend: inst.DeferTemplateApply usage
-      git cherry-pick 86b47fe8461e121bafa2346348cbf656a75a76c2  # lxd/instances/post: inst.DeferTemplateApply usage
-      git cherry-pick 8f0e05b32eb950d9cde1c81d76f453dad7052938  # lxd/instance/drivers/driver/lxc: Updates templateApplyNow to accept a TemplateTrigger argument
-      git cherry-pick d29b5d03cd38bdabed8100c1760e105aa799f7ec  # lxd/instance/drivers/driver/lxc: d.templateApplyNow usage
-      git cherry-pick bf188cbde9225c78cdfced68456dba6d2d8c91ff  # lxd/instance/drivers/driver/qemu: Updates templateApplyNow to accept a TriggerTemplate type argument
-      git cherry-pick b38f7a6d2da862c38b5864e99826c55638e451cc  # lxd/instance/drivers/driver/qemu: d.templateApplyNow usage
-      git cherry-pick a731f4339d3265ea7961e74a4d0ddc21d880ddf1  # lxd/instance/instance/interface: Adds applyTemplateTrigger argument to Rename
-      git cherry-pick 7e481a4c27624b20c8b506f93e46944b4bc785a8  # lxd/instance/drivers/driver/lxc: Adds applyTemplateTrigger argument to Rename
-      git cherry-pick ce3946ed729769d74105ce311df0dd63b7a42afe  # lxd/instance/drivers/driver/qemu: Adds applyTemplateTrigger argument to Rename
-      git cherry-pick 69cac0f2f38620a35071c69e15a88ccf6ad4e7c0  # lxd/instance/post: inst.Rename usage
-      git cherry-pick 8a9e2c4d22fb71b94881130da3a79bbcc9dcf197  # lxd/instance/snapshot: sc.Rename usage
-      git cherry-pick 5d06c927e573bf275b55b7ed4c1396327e6c2832  # lxd/storage/backend/lxd: Removes call to deferred template apply in RenameInstance
-      git cherry-pick 2fec9dcb546982bdbd864ed59485aa5c88f4a63f  # lxd/instance/test: c.Rename usage
-      git cherry-pick 9ed0464f8e416a2690944f67433dbd5381f50138  # shared/api: Add Pool field to InstancePost
-      git cherry-pick b9e1a00d5812df4f5ed151b19999159c8c5743eb  # client: Add extension check for pool migration
-      git cherry-pick 1cffb28b66d3295e361f178f9890f85b41d77aeb  # test: Add tests for volatile.apply_template config during create, copy and move
-      git cherry-pick 427b4f808012144358f7a92a2583830e277febee  # test: Adds check for volatile.apply_template state after rename
-      git cherry-pick 08131f853a7d76eda54a42342ec7c25255963272  # test: Add test for moving instance between pools without renaming
-      git cherry-pick ea21cb483dde14c256150bd3297016b2798dcd75  # lxd/images: Skip keys with empty values
-      git cherry-pick c84070fd43deb81e05f42eddc84d5bff46fd356b  # lxd/device: Fix instance type validations
-      git cherry-pick 60239d5dd27ec9e9d1b9968378fb39b9e32e94df  # shared/instance: Adds ErrNoRootDisk error var and returns it from GetRootDiskDevice
-      git cherry-pick 30887fe0ef52d6c7948fd84dcc4d985f6120d1a6  # lxd/instance: Enforces that target instance should have valid root disk config after DB create in instanceCreateAsCopy
-      git cherry-pick c43dcc17dee3483c722bfd194a978240d9df21d4  # lxd/instance: Don't assume root disk is called "root" when copying snapshots from a source instance
-      git cherry-pick cc0986b7a1decf50f39b4ab8a40a328614e21205  # lxd/db/query/retry: Adds detection of checkpoint in progress to IsRetriableError
-      git cherry-pick bfae314d458d5fa15b6a1660b77a107b9b279f16  # lxd/instance/drivers/driver_qemu: attempt to kill qemu proc on stop
-      git cherry-pick e8163cbeee0d8206d29d8163a71fd3f268579160  # lxd/instance/driver_qemu: Add check for qemu cmdline args to pid()
-      git cherry-pick f474e695c4e36854d9352addb3725a3c5b59f194  # forkproxy: prevent zombies
-      git cherry-pick 9667b0920c412ee0d6e046a2b98aa57a2d29eb66  # lxd: Change some references of container to instance in comments
-      git cherry-pick fac1d949e4d6f06d99bf500bc8bbad9e81d1cf60  # lxd/instance/post: Change error message to instance from container in instancePost
-      git cherry-pick 15f9541bd95ab760c5ff1431a7cbd43b3bb351c4  # lxd/main/forkdns: Returns empty AAAA record response when equivalent A record exists
-      git cherry-pick 689784349d7d8d761e26241009ac20630612c31c  # lxd/main/forkdns: Fixes typo in comment
-      git cherry-pick d90f5245aa83e63ade25103895bedfc146d37b46  # test: Adds test for empty AAAA response when equivalent A record exist in clustering forkdns
-      git cherry-pick 778d8867bc00f286a10c1cca81e573733f6c159c  # lxd/device/pci: Consider DeviceUnbind successful on missing driver
-      git cherry-pick 75c38b140af963195d5bb31085205255f0ee21d1  # shared/validate: Validate PCI addresses
-      git cherry-pick 9a81b2ddabd5c96a197a0d06c443fe170ad54fd8  # lxd/device/gpu: Validate PCI addresses
-      git cherry-pick 2dbacb148e349ce0d045f4e739485c6362716e82  # lxd/device: Add function to validate PCI path
-      git cherry-pick 2312de1dff38c2b63d2741db633522e397c2e83d  # lxd/device/gpu_mdev: Valdiate PCI address and path
-      git cherry-pick 8473045ff595e154b508d89888f9274b92498bad  # lxd/device/gpu_physical: Validate PCI address and path
-      git cherry-pick 04b1f624f58751d650935bb52bab4c2cbb9353c6  # lxd/instance/qemu: Cleanup VGA ROM check
-      git cherry-pick 8075f1d8235ba49d390e3fc1fcdfbb4800ab6c3a  # lxd/network/driver/bridge: Update DHCPv4Subnet to return fan bridge address subnet when in fan mode
-      git cherry-pick 12eff7c16266bae721324ec001b288896ea5db59  # lxd/device/nic/bridge: Updates validateConfig to use parent networks DHCP subnet functions when validating address
-      git cherry-pick 36f73f21c64d8ba20b0bdd5bd0bd39e5b0080fff  # shared/termios: Fix static builds
-      git cherry-pick e4265373183ab36ab13f11f5162aef0c87fc3464  # shared/idmap: Fix shared/ build on non-cgo
-      git cherry-pick 1686c141f6867fa7ca104333dc5eeff7a13477ee  # shared/instancewriter/: Fix shared/ build on non-cgo
-      git cherry-pick bfb9746d748a8fce179c92f7404c8e13a4d8118d  # shared/eagain: Restrict to Linux
-      git cherry-pick 0c8fd1c6bd5b8975344242fd28346319c75aec4f  # shared/subprocess: Restrict to unix
-      git cherry-pick b6ad37a20a32b60d3913109b0f2bd7d8ecf76a02  # lxd/db/generate: Move DB generator
-      git cherry-pick 2d3d262fec4fc631c1a4c4a61a19edd68740d91f  # github: Replace Travis and Appveyor with Actions
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
