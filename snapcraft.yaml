@@ -1183,6 +1183,29 @@ parts:
       git cherry-pick 764f0a740f0da01426ef731195361581c001f741  # lxd/instance/qemu/qmp: Re-shuffle functions
       git cherry-pick 2d85949cf15accd398936deec6f2f87d66ecd2b3  # lxd/instance/qemu/qmp: Rework run() function
       git cherry-pick 81d3b52d75dd82de5d7964fd4a3760448f48faed  # lxd/instance/qemu/qmp: Update commands to use run()
+      git cherry-pick 31a4fd389131fc57da91abb247092ed56e8266fb  # lxd/network/network/utils: Fixes InterfaceExists to not return true if arg is empty string
+      git cherry-pick 82e0ade7db38ffbfd413320ef28e8a856ff67486  # lxd/device/nic/routed: Dont give sysctl read error when invalid value
+      git cherry-pick 56362e05b271aec08c5bdf3d039454b4f8ad1afa  # lxd/device/nic/ipvlan: Dont give sysctl read error when invalid value
+      git cherry-pick b344a098088e3b576c948d1e8a25635004705e50  # lxd/device/nic/ipvlan: network.InterfaceExists usage
+      git cherry-pick 752e2f43f7252ef15dd26cc152838185d35de460  # lxd/device/nic/ipvlan: Detach ipvlan interface back to random host name on stop, then delete
+      git cherry-pick 721836c4fede54b111e6bc9f7231bcf093338cd7  # lxd/db/instances: Adds ErrInstanceListStop that can be returned from InstanceList to stop search
+      git cherry-pick 16b1c5772c79cd8e0a8e0d0b6131a0dcd28d6117  # shared/validate/validate: Adds IsNetworkRange and IsNetworkAddressCIDR functions
+      git cherry-pick 29bd972b4a661efc85356673fda1b899e812cc6b  # shared/validate/validate: Adds IsNetworkPort and IsNetworkPortRange functions
+      git cherry-pick 8066f899e5b61c15a8ff0539993239075e9d5880  # lxd/util/config: Adds SplitNTrimSpace function
+      git cherry-pick b6aace7754b0953102307c045e7f656e0486c752  # lxd/util/config: Avoid unnecessary allocations in CopyConfig
+      git cherry-pick 894dd55f6c02587c239bb6e0fd9243140f933f91  # shared/api/network/acl: Adds shared struct types for Network ACLs
+      git cherry-pick 1d86e4554d5fabdbd45bc77079cb3fb44afa9610  # shared/api/network/acl: Adds rule Normalise function
+      git cherry-pick 656833f4cb2c6c46efd41cfe1cc400bf4fcf7857  # client/interfaces: Adds CreateNetworkACL
+      git cherry-pick bbfa13c86c02eb235faf829951f484664cae222b  # client/interfaces: Adds GetNetworkACLs
+      git cherry-pick 0c1ae0e4ba7d030a33a1349b36f31976c3d8146c  # client/interfaces: Adds GetNetworkACL
+      git cherry-pick 05e884d5146e03876cf6caddf8a3718adc68624a  # client/interfaces: Adds UpdateNetworkACL
+      git cherry-pick 01906f3edcffb543ab7a89e0e8495280469ab058  # client/interfaces: Adds RenameNetworkACL
+      git cherry-pick 3b89621db444739e741a0c520ed45244a39d3cce  # client/interfaces: Adds DeleteNetworkACL
+      git cherry-pick 9e9f13cfcd8003f1ef77c8e41eb5e4a337cb2f0a  # client/interfaces: Adds GetNetworkACLNames
+      git cherry-pick c3350e90547f779a2446e2d91a75767e3f1cd280  # lxd/network/driver/ovn: Uplink loading error improvements
+      git cherry-pick 82756a1d9f3dab0a41ca89093f8e592fe1a34c0d  # lxd/device/nic/sriov: network.InterfaceExists usage
+      git cherry-pick f196de147ae2b74a948487ddfa6a5a12bb0db2a0  # lxd/network/network/utils: InterfaceExists usage in InterfaceBindWait
+      git cherry-pick cd4317e78a75809271615bb62012d7954c2e1d95  # lxd/device/nic/sriov: Use random VF MAC if VF has no automatic MAC set
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
