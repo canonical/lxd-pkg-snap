@@ -1147,6 +1147,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 8280983e42c54903899b6683fa8037b78cb5f51b  # containers: simplify wstatus.Close() logic in Exec()
+      git cherry-pick 9c7ad1a1e46a1659dfd6234a7b73b7b05299ec54  # containers: reap zombies on attach failure
+      git cherry-pick f8c93c65653c3fa3633cfa4c9f7798c995a1002f  # seccomp: block openat2()
+      git cherry-pick 50031c70070a161b89a2fb3c38deb120b3978888  # lxd/instance/qemu/qmp: Add SendFile, Migrate and MigrateIncoming
+      git cherry-pick d51b9549624050c7afaf1cbb880c50a5b5e14825  # lxd/instance/qemu/qmp: Add ping function
+      git cherry-pick 764f0a740f0da01426ef731195361581c001f741  # lxd/instance/qemu/qmp: Re-shuffle functions
+      git cherry-pick 2d85949cf15accd398936deec6f2f87d66ecd2b3  # lxd/instance/qemu/qmp: Rework run() function
+      git cherry-pick 81d3b52d75dd82de5d7964fd4a3760448f48faed  # lxd/instance/qemu/qmp: Update commands to use run()
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
