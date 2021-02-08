@@ -1054,6 +1054,34 @@ parts:
       git cherry-pick 43a6efe7b1002ed2d5770c54fa5682d68d1df1b5  # attach: make do_attach() void
       git cherry-pick c16fae6d41f6aa9f1a758f8bfc218b7bd7316a93  # attach: use close_prot_errno_disarm()
       git cherry-pick 252605bccc19a0c3d75030842aac2760ac16abd5  # attach: add some DEBUG() logging to stdfd dpulication
+      git cherry-pick 8cfda4171e76c7ce3e684baea7ec9dcb859a3942  # cgroups: fix cgroup mounting
+      git cherry-pick 145423e0a34baa0ca4f1a721525ac30cec3b62e4  # utils: fix mount_at()
+      git cherry-pick 5b8e411ec79ac4c85e5410bc974e19b5feb0b60b  # configure: fix static builds with clang-12 and LTO
+      git cherry-pick f9f1879966261923e7b106717e804cbdb597f8bf  # cgroups: bpf fixes
+      git cherry-pick 8d22ec0166ee8bbf6b51596e0f93ea99026b37c4  # croups: improve __do_bpf_program_free
+      git cherry-pick 5e84adf6ffb649e56c445ae4bba138654263f65b  # cgroups: coding style fixes
+      git cherry-pick 9dee31e50145ccd06061f8e3277e7874696f9d36  # cgroups: don't initiliaze NULL log
+      git cherry-pick 8f9cd8d0d27399c9a7301125a30942227ee694c2  # cgroups: ensure all memory is zeroed
+      git cherry-pick 61eb36f89cf8079c59b7a4784448c4b3da8c7142  # cgroups: use zalloc
+      git cherry-pick 1aac9f39a0587e52a83197668eee651b0e46b14c  # cgroups: tweak cgroup initialization
+      git cherry-pick 17b2106bf01d7c58642458c5c622787d3760b91b  # log: remove pointless inline
+      git cherry-pick 7491f5a162c26796d8baaac4e51a8e819d676073  # log: add lxc_log_get_fd()
+      git cherry-pick cc486b115749a467506dee9d58bf3f03c65736a5  # seccomp: use lxc_log_get_fd()
+      git cherry-pick 599086c8487dce6c68ce8807e3e6bcd3c3ef5edc  # log: rework lxc_log_get_level()
+      git cherry-pick 5e651c8e7fc99e71bab74cd679da4e8365f5100f  # seccomp: use lxc_log_get_level()
+      git cherry-pick 4e977ae8d026247e9126769a8161b5b0eeb4ae42  # cgroups: use bpf log when logging at trace level
+      git cherry-pick b4a42b37d5381da4cc7a8ba8289ed4edab41998b  # log: add lxc_log_trace() helper
+      git cherry-pick 76651de6decac24de6c17a1cdb763e4a46e4812a  # cgroups: use PTR_TO_U64()
+      git cherry-pick 76746bc5fdb444824cd2d4d89a63cc2b9950fa8c  # cgroups: align methods
+      git cherry-pick 55fd921789b0909da6098c8474111ffae7b8594f  # utils: use SYSTRACE() when logging stdio permission fixup failures
+      git cherry-pick 971dcc4313b9eb8892fc46b23c7a18474fb6407e  # attach: log failues to dup2() with SYSDEBUG()
+      git cherry-pick f235460c3cbceaa3cc411bc321ba2434ca585e99  # attach: fix logging for stdfd replacement
+      git cherry-pick 1cc616fe8c84a9681af451c4e8791d152a07edc2  # attach: fix error checking for dup2()
+      git cherry-pick c9186cc9271579bf4456fcd32c979a9912afa7bb  # cgroups: initialize variable
+      git cherry-pick 639428eb59880a70e1e179a0c1aae53210df3148  # commands_utils: don't leak memory
+      git cherry-pick eb30db661b946219c8f67b2ce1e9b1bc8063bd3a  # conf: use lxc_log_trace()
+      git cherry-pick 6f86b90ddaeb67e80ca587db7dec7de5f5f36654  # confile_utils: use lxc_log_trace()
+      git cherry-pick aff7ab782e168bda7a7a422fbe6a04be2cd40a64  # rexec: check lseek() return value
 
       set +ex
       snapcraftctl build
