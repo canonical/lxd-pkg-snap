@@ -1202,10 +1202,18 @@ parts:
       git cherry-pick 01906f3edcffb543ab7a89e0e8495280469ab058  # client/interfaces: Adds RenameNetworkACL
       git cherry-pick 3b89621db444739e741a0c520ed45244a39d3cce  # client/interfaces: Adds DeleteNetworkACL
       git cherry-pick 9e9f13cfcd8003f1ef77c8e41eb5e4a337cb2f0a  # client/interfaces: Adds GetNetworkACLNames
+      git cherry-pick 484c540979148c0d203225ca9df8445bce0263bf  # client/lxd/network/acls: Implements CreateNetworkACL function
+      git cherry-pick 8229b51b2f3ea276b83d9e0b6f9aa40795222da1  # client/lxd/network/acls: Implements GetNetworkACLs function
+      git cherry-pick 1bb6e9d0f5ae51793034263fa21c897bf557ee85  # client/lxd/network/acls: Implements GetNetworkACL function
+      git cherry-pick 06eaad40855310ae508d200559054ae363fe66e2  # client/lxd/network/acls: Implements UpdateNetworkACL function
+      git cherry-pick c95dc7e8003b84a887e159ed813c1bd519b780ee  # client/lxc/network/acls: Implements RenameNetworkACL function
+      git cherry-pick e5610cffe519e402b5298e4544cb9d196bca6c87  # client/lxd/network/acls: Implements DeleteNetworkACL function
+      git cherry-pick ed12b23fb12ac2efc15ecdcd2efa0fb1a9e22a15  # client/lxd/network/acls: Implements GetNetworkACLNames function
       git cherry-pick c3350e90547f779a2446e2d91a75767e3f1cd280  # lxd/network/driver/ovn: Uplink loading error improvements
       git cherry-pick 82756a1d9f3dab0a41ca89093f8e592fe1a34c0d  # lxd/device/nic/sriov: network.InterfaceExists usage
       git cherry-pick f196de147ae2b74a948487ddfa6a5a12bb0db2a0  # lxd/network/network/utils: InterfaceExists usage in InterfaceBindWait
       git cherry-pick cd4317e78a75809271615bb62012d7954c2e1d95  # lxd/device/nic/sriov: Use random VF MAC if VF has no automatic MAC set
+      git cherry-pick 2d013dfbeb4d10575989ab07e0a69022a6f9aa0b  # lxd/instance/qemu: Rework lxd-agent startup
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
