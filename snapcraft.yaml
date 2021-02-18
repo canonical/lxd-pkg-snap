@@ -736,8 +736,6 @@ parts:
     source-depth: 1
     source-tag: version-3.34.1
     plugin: autotools
-    configflags:
-      - CFLAGS=-DSQLITE_ENABLE_COLUMN_METADATA=1
     build-packages:
       - tcl
     override-build: |-
