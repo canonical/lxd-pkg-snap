@@ -1281,6 +1281,54 @@ parts:
       git cherry-pick b4624cbda4aeb20e3359264c6a0eae8397fefc76  # lxd/device/nic/ovn: Removes non-ovn related limit code, use network.InterfaceExist
       git cherry-pick 5ff493d3e503539a06f5cfb69b6631e93d9de88b  # lxd/network/driver/ovn: Removes unnecessary calls to CloneNative in ovnNICExternalRoutes
       git cherry-pick b2cdddf8bfbd4c4def2a6302e9f395c727993fd5  # lxd/cluster: Guarantee single hearbeat loop
+      git cherry-pick 2727c4057d288a8dc700fa8ed7bebc622dbb40d0  # doc/rest-api: Fix and clarify backup API
+      git cherry-pick 540fefdbb2fa0e26a4773a0dd5c28905b028b126  # lxd/cluster: Improve heartbeat logging
+      git cherry-pick f74f6a2eab9d206168567c31292bb927e7b1dea1  # lxd/api: Don't use potentially nil struct
+      git cherry-pick add2f92e4ed75ca38275e09b7b35b2303980e94b  # lxd/init: Better error on invalid auto-detect fan underlays
+      git cherry-pick 240d3e0c9aa6cfda5b16f0bd33a0407f63a1fc58  # doc/rest-api: More fixes for backups
+      git cherry-pick eb8e5ac4173d2f69a579c5ac9d2bd3e7584c6857  # lxd: Remove ReadToJSON
+      git cherry-pick 0b926062e7ac2337cce2582acb9eff3b84ed5500  # lxd/db: Fix RenameCertificate
+      git cherry-pick df25be4043d9f7a7789336da01dd905534d23da7  # lxd/certificate: Modernize DB handling
+      git cherry-pick 310f82ca5935347b4eb424e0888889311f7241f4  # lxd/certificate: Rework cache
+      git cherry-pick ea1f5114430712f1f377abd9bd1d6b1e44f07480  # doc/backup: Mention subuid/subgid
+      git cherry-pick bba7466168dfdb8fd75b10e3152debf1ad16d597  # lxd/db/certificates: Fix bad error handling
+      git cherry-pick 924e50a08e5caf4f0469100e15c834059a9b93f4  # shared/api: Add restricted and projects to certificate
+      git cherry-pick 981afacf154d6de46f7dc4b5c44ab256ff08115f  # lxd/instance/drivers/driver/lxc: Log when skipping volume delete in a recovery import scenario
+      git cherry-pick a35e595c2a99e0f4e1f43de018f88fd2d85b26d0  # lxd/api/internal: Don't create .importing file when performing a backup import in internalImport
+      git cherry-pick 01150ec025e581f3f61236564b1567fdf00aa307  # lxd/api/internal: internalImport usage
+      git cherry-pick 15e7d760a66bb4803b3d1f8879b5d1064a674c07  # lxd/instance/instance/utils: CreateInternal usage of revert package
+      git cherry-pick 875f86f752963143452de2711325d2b866925fe5  # lxd/instances/post: internalImport usage
+      git cherry-pick a00cca8e9632026fefd4d34dd241e609754076c1  # lxd/network/network/utils: Reorder UsedBy logic to do cheapest searches first
+      git cherry-pick d3cb494bbfec7cbc2d52c320cf27ae9023edcdd5  # tests: Reword deadcode
+      git cherry-pick 50add2650a3092dde6485205a197c8081f294c29  # shared/log15: Remove dead code
+      git cherry-pick 348eff91ae5fb22aabc4cd328506b64f2e5a2623  # lxd/storage/drivers/driver/btrfs: Unset pool size setting during creation if not relevant
+      git cherry-pick 674c76120e18b5f8d19fd739039d662439a1d9e9  # lxd/storage/drivers/driver/btrfs: Consisent error quoting in Create
+      git cherry-pick 8262ff8dfab8ee9d11f0286a85dff1ec1f673e17  # lxd/storage/pools/config: Consistent error quoting in storagePoolValidateConfig
+      git cherry-pick 06d7ed007e4f3e1d5218a3ac41e63bd7972a64b6  # driver_lxc: pass flags to shiftfs mount
+      git cherry-pick c97d751f7e928a8e35a9640cf443ce87b9ec3555  # lxd/network/driver/bridge: Ensure that DHCP firewall rules are added in fan mode
+      git cherry-pick f73aea50cae823ca630305b5f519a7dfa6ff85a8  # lxd/storage/drivers/utils: Comment clarify in BlockDiskSizeBytes
+      git cherry-pick cc0b1d08f544ba739cedc5defb611a29f549b273  # lxd/resources/storage: Rework block size handling
+      git cherry-pick 4f6a3f67c7a4d7dfd29a028bfff651e23d3b3b66  # Updated instanceLogDelete function
+      git cherry-pick 6125eca0fc3dc24da20575338f4d416aa55ce2ef  # lxd/device/disk: Tweak mkisofs flags
+      git cherry-pick 04caad58db7d949c83bf8e72170b75253939b98a  # lxd/instance/post: Update instancePostClusteringMigrate to respect instance's project
+      git cherry-pick 4cabe49c85c03da7dd73f63acf260cf160cdef3d  # lxd/instance/backup: Makes returned containers resource conditional on instance type
+      git cherry-pick 79ff1e841866db3e29e34294eac4e6aa575cb793  # lxd/instance/console: Conditional containers resources
+      git cherry-pick 5e8dc27660f8967a5d2a6bd3e7b7602023a0e6a1  # lxd/instance/delete: Updates instanceDelete to use inst var and makes returned containers resources conditional on instance type
+      git cherry-pick 40154221d4e8c602147401ed2ea12c9150d62cf5  # lxd/instance/exec: Makes containers resources conditional on instance type
+      git cherry-pick e6ff31abf29ca26fadf9d963960d473e9a9fe339  # lxd/instance/post: Renames c to inst and makes containers resources conditional on instance type
+      git cherry-pick 081ee12b75b4a875fc9dd3b65d7f330d7d2ab6b9  # lxd/instance/put: Renames c to inst and makes containers resources conditional on instance type
+      git cherry-pick 3b98d319f2ecfffbc8a51c1521faf7463feba270  # lxd/instance/snapshot: Renames sc to snapInst and makes containers resources conditional on instance type
+      git cherry-pick 77a5854624781c85f413498d38ff5be2bafe24c6  # lxd/instances/post: Makes containers resources conditional on instance type
+      git cherry-pick d0d4472cc4dd280cb8ccd5430a8e40e109dec5df  # doc/rest-api: Updates backup endpoint docs
+      git cherry-pick 58cc97105605b2488901afd31a98c6f49799e4e3  # lxd/cluster: Don't warn about pending nodes
+      git cherry-pick dd593b5efde02eabaee5b78b46c58de52dbbdbc5  # lxd/instances: Fix instance copy within project
+      git cherry-pick 89033692183bc5afd4b4dc2f89aa64fb306778fd  # netutils: improve file descriptor retrieval and increase robustness
+      git cherry-pick e2a2684c626d960c915e5edcce2e6228dc44d281  # doc/projects: Projects aren't restricted by default
+      git cherry-pick e341613be7ee5b4be0e4a0eed9334afce87ad1b7  # lxd/storage/drivers/util: Updates ensureVolumeBlockFile to add unsupportedResizeTypes argument
+      git cherry-pick 305256d1d6018dd57c6aaab78f5eee2e18f85e6c  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolume with ensureVolumeBlockFile comments
+      git cherry-pick 42c07b8b8c4cc2971b96ecfe445fb0ebe924313d  # lxd/storage/drivers/driver/btrfs/volumes: Updates SetVolumeQuota to pass VolumeTypeImage to ensureVolumeBlockFile
+      git cherry-pick 5c299e487a422b0fcf822436f746e445a05ed8a3  # lxd/storage/drivers/driver/dir/volumes: Comment improvement in CreateVolume
+      git cherry-pick dbb8766f1d6b920b378adefa71a49d27b4884f38  # lxd: improve unix fd retrieval infrastructure
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
