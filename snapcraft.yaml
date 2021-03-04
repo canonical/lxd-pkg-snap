@@ -329,7 +329,7 @@ parts:
   libtpms:
     source: https://github.com/stefanberger/libtpms
     source-type: git
-    source-tag: v0.7.4
+    source-tag: v0.7.7
     source-depth: 1
     plugin: autotools
     configflags:
