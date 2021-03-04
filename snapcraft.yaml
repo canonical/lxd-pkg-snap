@@ -519,6 +519,8 @@ parts:
       - spice-server
     source: IRRELEVANT
     source-type: git
+    source-tag: IRRELEVANT
+    source-depth: 1
     plugin: autotools
     install-via: prefix
     configflags:
