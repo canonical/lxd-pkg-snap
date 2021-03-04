@@ -454,7 +454,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v2.14.1
+    source-tag: v2.15.0
     source-depth: 1
     plugin: autotools
     stage-packages:
