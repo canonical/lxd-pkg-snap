@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.11"
+version: "4.12"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -1139,7 +1139,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.11
+    source-tag: lxd-4.12
     after:
       - lxc
       - dqlite
@@ -1177,161 +1177,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 8280983e42c54903899b6683fa8037b78cb5f51b  # containers: simplify wstatus.Close() logic in Exec()
-      git cherry-pick 9c7ad1a1e46a1659dfd6234a7b73b7b05299ec54  # containers: reap zombies on attach failure
-      git cherry-pick f8c93c65653c3fa3633cfa4c9f7798c995a1002f  # seccomp: block openat2()
-      git cherry-pick 50031c70070a161b89a2fb3c38deb120b3978888  # lxd/instance/qemu/qmp: Add SendFile, Migrate and MigrateIncoming
-      git cherry-pick d51b9549624050c7afaf1cbb880c50a5b5e14825  # lxd/instance/qemu/qmp: Add ping function
-      git cherry-pick 764f0a740f0da01426ef731195361581c001f741  # lxd/instance/qemu/qmp: Re-shuffle functions
-      git cherry-pick 2d85949cf15accd398936deec6f2f87d66ecd2b3  # lxd/instance/qemu/qmp: Rework run() function
-      git cherry-pick 81d3b52d75dd82de5d7964fd4a3760448f48faed  # lxd/instance/qemu/qmp: Update commands to use run()
-      git cherry-pick 31a4fd389131fc57da91abb247092ed56e8266fb  # lxd/network/network/utils: Fixes InterfaceExists to not return true if arg is empty string
-      git cherry-pick 82e0ade7db38ffbfd413320ef28e8a856ff67486  # lxd/device/nic/routed: Dont give sysctl read error when invalid value
-      git cherry-pick 56362e05b271aec08c5bdf3d039454b4f8ad1afa  # lxd/device/nic/ipvlan: Dont give sysctl read error when invalid value
-      git cherry-pick b344a098088e3b576c948d1e8a25635004705e50  # lxd/device/nic/ipvlan: network.InterfaceExists usage
-      git cherry-pick 752e2f43f7252ef15dd26cc152838185d35de460  # lxd/device/nic/ipvlan: Detach ipvlan interface back to random host name on stop, then delete
-      git cherry-pick 721836c4fede54b111e6bc9f7231bcf093338cd7  # lxd/db/instances: Adds ErrInstanceListStop that can be returned from InstanceList to stop search
-      git cherry-pick 16b1c5772c79cd8e0a8e0d0b6131a0dcd28d6117  # shared/validate/validate: Adds IsNetworkRange and IsNetworkAddressCIDR functions
-      git cherry-pick 29bd972b4a661efc85356673fda1b899e812cc6b  # shared/validate/validate: Adds IsNetworkPort and IsNetworkPortRange functions
-      git cherry-pick 8066f899e5b61c15a8ff0539993239075e9d5880  # lxd/util/config: Adds SplitNTrimSpace function
-      git cherry-pick b6aace7754b0953102307c045e7f656e0486c752  # lxd/util/config: Avoid unnecessary allocations in CopyConfig
-      git cherry-pick 894dd55f6c02587c239bb6e0fd9243140f933f91  # shared/api/network/acl: Adds shared struct types for Network ACLs
-      git cherry-pick 1d86e4554d5fabdbd45bc77079cb3fb44afa9610  # shared/api/network/acl: Adds rule Normalise function
-      git cherry-pick 656833f4cb2c6c46efd41cfe1cc400bf4fcf7857  # client/interfaces: Adds CreateNetworkACL
-      git cherry-pick bbfa13c86c02eb235faf829951f484664cae222b  # client/interfaces: Adds GetNetworkACLs
-      git cherry-pick 0c1ae0e4ba7d030a33a1349b36f31976c3d8146c  # client/interfaces: Adds GetNetworkACL
-      git cherry-pick 05e884d5146e03876cf6caddf8a3718adc68624a  # client/interfaces: Adds UpdateNetworkACL
-      git cherry-pick 01906f3edcffb543ab7a89e0e8495280469ab058  # client/interfaces: Adds RenameNetworkACL
-      git cherry-pick 3b89621db444739e741a0c520ed45244a39d3cce  # client/interfaces: Adds DeleteNetworkACL
-      git cherry-pick 9e9f13cfcd8003f1ef77c8e41eb5e4a337cb2f0a  # client/interfaces: Adds GetNetworkACLNames
-      git cherry-pick 484c540979148c0d203225ca9df8445bce0263bf  # client/lxd/network/acls: Implements CreateNetworkACL function
-      git cherry-pick 8229b51b2f3ea276b83d9e0b6f9aa40795222da1  # client/lxd/network/acls: Implements GetNetworkACLs function
-      git cherry-pick 1bb6e9d0f5ae51793034263fa21c897bf557ee85  # client/lxd/network/acls: Implements GetNetworkACL function
-      git cherry-pick 06eaad40855310ae508d200559054ae363fe66e2  # client/lxd/network/acls: Implements UpdateNetworkACL function
-      git cherry-pick c95dc7e8003b84a887e159ed813c1bd519b780ee  # client/lxc/network/acls: Implements RenameNetworkACL function
-      git cherry-pick e5610cffe519e402b5298e4544cb9d196bca6c87  # client/lxd/network/acls: Implements DeleteNetworkACL function
-      git cherry-pick ed12b23fb12ac2efc15ecdcd2efa0fb1a9e22a15  # client/lxd/network/acls: Implements GetNetworkACLNames function
-      git cherry-pick c3350e90547f779a2446e2d91a75767e3f1cd280  # lxd/network/driver/ovn: Uplink loading error improvements
-      git cherry-pick 82756a1d9f3dab0a41ca89093f8e592fe1a34c0d  # lxd/device/nic/sriov: network.InterfaceExists usage
-      git cherry-pick f196de147ae2b74a948487ddfa6a5a12bb0db2a0  # lxd/network/network/utils: InterfaceExists usage in InterfaceBindWait
-      git cherry-pick cd4317e78a75809271615bb62012d7954c2e1d95  # lxd/device/nic/sriov: Use random VF MAC if VF has no automatic MAC set
-      git cherry-pick 2d013dfbeb4d10575989ab07e0a69022a6f9aa0b  # lxd/instance/qemu: Rework lxd-agent startup
-      git cherry-pick 410ad0cf6a884e60bdf4d214ab695555dbe55292  # lxd/device/disk: Validate that the pool is not pending
-      git cherry-pick 9f64d993dea49e6b973ea606ad11b96f034c2900  # lxd/instance/qemu: Add migration.stateful support
-      git cherry-pick c104c5b3260ee5f87f81d034d70bd1f0261c5542  # lxd/device: Add migration.stateful support
-      git cherry-pick 3f834dac6c6add4a93f17fe791f6244513bc84c7  # lxd/storage: Add support for size.state
-      git cherry-pick d671c4462c9edb8124c577c105bae710cc68f066  # lxd/api: Port to updated SetInstanceQuota
-      git cherry-pick a3ae53a7d32f5f75f09f8d2c4ca807dc53e1999d  # lxd/device/disk: Add support for size.state
-      git cherry-pick 8cb0f981e9e9e01f64a521c62a0e6d70cc1bcf9c  # lxd/instance: Prevent stateful snapshots of VMs
-      git cherry-pick 0ac6f95b67a72082e4fc3bca2e68a68da38c2491  # doc: Fix bad Github action link
-      git cherry-pick e9666d5325900c7e163cf793e0323225d892ea5c  # lxd/instance/qemu/qmp: Switch back to upstream repo
-      git cherry-pick a030accfd239f009635c1dcdcb669b427c9d29c3  # lxd/device/device/interface: Adds Type interface for accessing type specific functions of a device
-      git cherry-pick 189fd348497de0147ac5bfe9f29f05ef35a04c4c  # lxd/device/device/common: UpdatableFields signature change
-      git cherry-pick 2cb9b718fdedf4bce74da5d2a83b44ac9196918c  # lxd/device/nic/bridged: UpdatableFields signature change
-      git cherry-pick 1efd0d7ac31f696d7204c01b8d846b2fa2dbffd9  # lxd/device/nic/p2p: UpdatableFields signature change
-      git cherry-pick eedc99cc242d2788718c95c607fed885cca9fa38  # lxd/device/nic/routed: UpdatableFields signature change
-      git cherry-pick fedb96f5cffb281fabb18a483ec7817f1c11ee64  # lxd/device/disk: UpdatableFields signature change
-      git cherry-pick 508d78a77c88944dc85aa0b750e9a0277ec0ddb7  # lxd/device/device/load: Adds newByType and LoadByType functions
-      git cherry-pick 295c56ecc7e34942f7911cac1540c2231bc29522  # lxd/instance/drivers: UpdatableFields usage
-      git cherry-pick f734c772d390e6a390c05687b47feac5769399e1  # lxd/device/device/utils/network: Changes veth route functions to not depend on device specific logic
-      git cherry-pick 533317a0ad5dba61bce3ff4854145e24e5b43b3c  # lxd/device/nic/bridged: Switches to use NIC type agnostic route helper functions
-      git cherry-pick 24fe03faf34bfb720e78d026964cd2fe3d93354d  # lxd/device/nic/p2p: Switches to use NIC type agnostic route helper functions
-      git cherry-pick 59c43b903ebc2b1ca73362a2a71b554cc31c1857  # lxd/instance/drivers/driver/common: Update comment for deviceVolatileReset to match
-      git cherry-pick 61c810014bbc1f159f3b7b522c5cd00c0b3f1530  # lxd/instance/drivers/driver/lxc: Removes deviceResetVolatile provided by common
-      git cherry-pick 19b5b998f40d3cbd7024c756a2f24d5c7c950781  # lxd/instance/drivers/driver/qemu: Removes deviceResetVolatile provided by common
-      git cherry-pick 7804bc162912048ed2583a565985aab94dd6ed7d  # lxd/instance/drivers: d.deviceVolatileReset usage
-      git cherry-pick a46f391bfadd74ede6281011d81905a35a68e3f3  # doc/preseed: LXD is pronounced lex-dee
-      git cherry-pick aabbf739d7ef1891233ffa53841b676ae58be7f5  # doc/api-extensions: LXD is pronounced lex-dee
-      git cherry-pick 073115b252924059ede275b325ca5ae19d297c40  # tests: Typo fix
-      git cherry-pick ed10740777ff2c71bc3d2ff3d97e245dad80b273  # lxd/storage: LXD is pronounced lex-dee
-      git cherry-pick c7825738cc0a796476eda044fc4c9a0424984c89  # lxd/firewall: LXD is pronounced lex-dee
-      git cherry-pick 2fa3c9aa15003e99d7dd9d333e8a0788bfe3bd45  # lxd/network: LXD is pronounced lex-dee
-      git cherry-pick 9f122de481479e5bfa9b42dcf7ccb7b8b7f5cf57  # lxd/api: LXD is pronounced lex-dee
-      git cherry-pick 1e3583eaabbf1d5b3aa7308033c21732c3588f19  # lxd/device: LXD is pronounced lex-dee
-      git cherry-pick 13ed5c8645701bf2337c6b8fcbc3cc40111166c2  # lxd/storage/utils: Updates VolumeUsedByExclusiveRemoteInstancesWithProfiles to use db.ErrInstanceListStop
-      git cherry-pick 19c825234f94220a1cd3e11fd667ffbedf115f0b  # lxd/network/network/utils: Adds optimisation to UsedBy when firstOnly is true
-      git cherry-pick b8e4063495d066b7675152e5d297f4e425882788  # lxd/network/network/utils: Removes whitespace trimming from SubnetParseAppend
-      git cherry-pick adcdce5c63df9e2abf1a98b39f0688ea8ce82bc7  # lxd/api/project: Updates projectValidateRestrictedSubnets to use util.SplitNTrimSpace
-      git cherry-pick c48b7d200ad7ef2d9b2894b5efc4acb77c9fd9fd  # lxd/network/driver/ovn: Switch to util.SplitNTrimSpace
-      git cherry-pick df46d59b1573ab159e10c763c329e4c878f19c9e  # lxd/device/nic/ovn: Updates usage of network.SubnetParseAppend to use util.SplitNTrimSpace
-      git cherry-pick c5a31041130be8215fdb9b05ad7e617fe838dbae  # lxd/network/driver/ovn: Adds OVNInstanceNICSetupOpts and OVNInstanceNICOpts types
-      git cherry-pick 0e64a9a028a34a55cc4407490b3a6953334b2be9  # lxd/network/driver/ovn: InstanceDevicePortAdd updated arguments
-      git cherry-pick 39069ebe520d6e63e6510bdb11f3b5c79b98ec45  # lxd/network/driver/ovn: InstanceDevicePortDelete updated arguments
-      git cherry-pick 07340eca489cd74107337e05832801db30da083b  # lxd/network/driver/ovn: n.InstanceDevicePortAdd usage
-      git cherry-pick 5fb2fd5a5fa26d34054c754a7a160607a11be8a7  # lxd/device/nic/ovn: ovnNet update of arguments
-      git cherry-pick a81e1876e2168b1c2df730081bb5e38f2c2b7448  # lxd/device/nic/ovn: d.network.InstanceDevicePortAdd and d.network.InstanceDevicePortDelete usage
-      git cherry-pick a74698d00ed9f5593784e96791698bea7633bda6  # lxd/network/openvswitch/ovn: Converts LogicalSwitchPortExists to LogicalSwitchPortUUID
-      git cherry-pick 36f40fb9910e0dcd673ef0d9123b5d266c091afb  # lxd/network/openvswitch/ovn: Converts string UUID variables to their own dedicated types
-      git cherry-pick c02e7d10040c3cdfe4b0d44493f8402186dc4694  # lxd/network/driver/ovn: Updates usage of OVN UUID types
-      git cherry-pick 56a0371ce026f8bd03398af6151b27d19797d4fc  # lxd/network/driver/ovn: client.LogicalSwitchPortUUID usage
-      git cherry-pick b6a43858fe72dbc435115e067d46dcec2432d653  # lxd/network/driver/ovn: Adds DNSName to OVNInstanceNICStartOpts
-      git cherry-pick 603be37e9b69c6ada20f5e42f9065bd927fd2189  # lxd/network/driver/ovn: Updates InstanceDevicePortAdd with opts.DNSName field name change
-      git cherry-pick a5c92e30c3d1592f353b5220d3d07b325d7ffeb9  # lxd/network/driver/ovn: Updates InstanceDevicePortAdd with opts.DNSName field name change in handleDependencyChange
-      git cherry-pick e3317769b15a930a0faf156c621828fd73c77c27  # lxd/device/nic/ovn: Updates use of d.network.InstanceDevicePortAdd with DNSName
-      git cherry-pick b4fa39f02be6ce4b03134ef279390c1e87beb831  # utils: trim whitespace from block device UUID
-      git cherry-pick d24d7208732cd333aff3c6121d2d0aa2b8c9fc75  # lxd/storage/drivers/btrfs: Add up fs and block quota for VMs
-      git cherry-pick 3aa1420e4e8cfd823e9be5dee2c8e18b4b093b1f  # lxd/storage/drivers/dir: Pass int64 size to setQuota
-      git cherry-pick 7d6485fba52ff66d7ccba644f65dfb8f866a5f01  # lxd/storage/drivers/dir: Add up fs and block quota for VMs
-      git cherry-pick 59b60c94ec02662f6962a7cb529e5c0acb058d40  # shared/validate/validate: Add IsCompressionAlgorithm
-      git cherry-pick c332a20e30d15a6caa06eb030e6500bcde5c3610  # lxd/cluster: Update compression validation
-      git cherry-pick 6d22800cbc75c233a6097f6cbb4a081b5b4aac37  # lxd/instance: Move CreateInternal
-      git cherry-pick 375368a5fccbd3451013da93c213392dcb06db55  # lxd/instance/drivers: Rename restart to restartCommon
-      git cherry-pick 792a1f496b71c49ddd706fdbfdf763461c3ac12c  # lxd/instance/drivers: Move snapshot creation to the driver
-      git cherry-pick b1e5719c41569203aef51ed534f86a893d7c7191  # lxd/network/network/utils: Converts UsedBy to use InstanceList function
-      git cherry-pick e6c789c01ae59f72177a551c29e5e035720f8885  # lxd/network/network/utils: Changes isInUseByDevices to isInUseByDevice
-      git cherry-pick 7bc0450d7a4cf056d3b6bf0ca091019dbf497140  # lxd/network/network/utils: Adds usedByInstanceDevices function
-      git cherry-pick b4624cbda4aeb20e3359264c6a0eae8397fefc76  # lxd/device/nic/ovn: Removes non-ovn related limit code, use network.InterfaceExist
-      git cherry-pick 5ff493d3e503539a06f5cfb69b6631e93d9de88b  # lxd/network/driver/ovn: Removes unnecessary calls to CloneNative in ovnNICExternalRoutes
-      git cherry-pick b2cdddf8bfbd4c4def2a6302e9f395c727993fd5  # lxd/cluster: Guarantee single hearbeat loop
-      git cherry-pick 2727c4057d288a8dc700fa8ed7bebc622dbb40d0  # doc/rest-api: Fix and clarify backup API
-      git cherry-pick 540fefdbb2fa0e26a4773a0dd5c28905b028b126  # lxd/cluster: Improve heartbeat logging
-      git cherry-pick f74f6a2eab9d206168567c31292bb927e7b1dea1  # lxd/api: Don't use potentially nil struct
-      git cherry-pick add2f92e4ed75ca38275e09b7b35b2303980e94b  # lxd/init: Better error on invalid auto-detect fan underlays
-      git cherry-pick 240d3e0c9aa6cfda5b16f0bd33a0407f63a1fc58  # doc/rest-api: More fixes for backups
-      git cherry-pick eb8e5ac4173d2f69a579c5ac9d2bd3e7584c6857  # lxd: Remove ReadToJSON
-      git cherry-pick 0b926062e7ac2337cce2582acb9eff3b84ed5500  # lxd/db: Fix RenameCertificate
-      git cherry-pick df25be4043d9f7a7789336da01dd905534d23da7  # lxd/certificate: Modernize DB handling
-      git cherry-pick 310f82ca5935347b4eb424e0888889311f7241f4  # lxd/certificate: Rework cache
-      git cherry-pick ea1f5114430712f1f377abd9bd1d6b1e44f07480  # doc/backup: Mention subuid/subgid
-      git cherry-pick bba7466168dfdb8fd75b10e3152debf1ad16d597  # lxd/db/certificates: Fix bad error handling
-      git cherry-pick 924e50a08e5caf4f0469100e15c834059a9b93f4  # shared/api: Add restricted and projects to certificate
-      git cherry-pick 981afacf154d6de46f7dc4b5c44ab256ff08115f  # lxd/instance/drivers/driver/lxc: Log when skipping volume delete in a recovery import scenario
-      git cherry-pick a35e595c2a99e0f4e1f43de018f88fd2d85b26d0  # lxd/api/internal: Don't create .importing file when performing a backup import in internalImport
-      git cherry-pick 01150ec025e581f3f61236564b1567fdf00aa307  # lxd/api/internal: internalImport usage
-      git cherry-pick 15e7d760a66bb4803b3d1f8879b5d1064a674c07  # lxd/instance/instance/utils: CreateInternal usage of revert package
-      git cherry-pick 875f86f752963143452de2711325d2b866925fe5  # lxd/instances/post: internalImport usage
-      git cherry-pick a00cca8e9632026fefd4d34dd241e609754076c1  # lxd/network/network/utils: Reorder UsedBy logic to do cheapest searches first
-      git cherry-pick d3cb494bbfec7cbc2d52c320cf27ae9023edcdd5  # tests: Reword deadcode
-      git cherry-pick 50add2650a3092dde6485205a197c8081f294c29  # shared/log15: Remove dead code
-      git cherry-pick 348eff91ae5fb22aabc4cd328506b64f2e5a2623  # lxd/storage/drivers/driver/btrfs: Unset pool size setting during creation if not relevant
-      git cherry-pick 674c76120e18b5f8d19fd739039d662439a1d9e9  # lxd/storage/drivers/driver/btrfs: Consisent error quoting in Create
-      git cherry-pick 8262ff8dfab8ee9d11f0286a85dff1ec1f673e17  # lxd/storage/pools/config: Consistent error quoting in storagePoolValidateConfig
-      git cherry-pick 06d7ed007e4f3e1d5218a3ac41e63bd7972a64b6  # driver_lxc: pass flags to shiftfs mount
-      git cherry-pick c97d751f7e928a8e35a9640cf443ce87b9ec3555  # lxd/network/driver/bridge: Ensure that DHCP firewall rules are added in fan mode
-      git cherry-pick f73aea50cae823ca630305b5f519a7dfa6ff85a8  # lxd/storage/drivers/utils: Comment clarify in BlockDiskSizeBytes
-      git cherry-pick cc0b1d08f544ba739cedc5defb611a29f549b273  # lxd/resources/storage: Rework block size handling
-      git cherry-pick 4f6a3f67c7a4d7dfd29a028bfff651e23d3b3b66  # Updated instanceLogDelete function
-      git cherry-pick 6125eca0fc3dc24da20575338f4d416aa55ce2ef  # lxd/device/disk: Tweak mkisofs flags
-      git cherry-pick 04caad58db7d949c83bf8e72170b75253939b98a  # lxd/instance/post: Update instancePostClusteringMigrate to respect instance's project
-      git cherry-pick 4cabe49c85c03da7dd73f63acf260cf160cdef3d  # lxd/instance/backup: Makes returned containers resource conditional on instance type
-      git cherry-pick 79ff1e841866db3e29e34294eac4e6aa575cb793  # lxd/instance/console: Conditional containers resources
-      git cherry-pick 5e8dc27660f8967a5d2a6bd3e7b7602023a0e6a1  # lxd/instance/delete: Updates instanceDelete to use inst var and makes returned containers resources conditional on instance type
-      git cherry-pick 40154221d4e8c602147401ed2ea12c9150d62cf5  # lxd/instance/exec: Makes containers resources conditional on instance type
-      git cherry-pick e6ff31abf29ca26fadf9d963960d473e9a9fe339  # lxd/instance/post: Renames c to inst and makes containers resources conditional on instance type
-      git cherry-pick 081ee12b75b4a875fc9dd3b65d7f330d7d2ab6b9  # lxd/instance/put: Renames c to inst and makes containers resources conditional on instance type
-      git cherry-pick 3b98d319f2ecfffbc8a51c1521faf7463feba270  # lxd/instance/snapshot: Renames sc to snapInst and makes containers resources conditional on instance type
-      git cherry-pick 77a5854624781c85f413498d38ff5be2bafe24c6  # lxd/instances/post: Makes containers resources conditional on instance type
-      git cherry-pick d0d4472cc4dd280cb8ccd5430a8e40e109dec5df  # doc/rest-api: Updates backup endpoint docs
-      git cherry-pick 58cc97105605b2488901afd31a98c6f49799e4e3  # lxd/cluster: Don't warn about pending nodes
-      git cherry-pick dd593b5efde02eabaee5b78b46c58de52dbbdbc5  # lxd/instances: Fix instance copy within project
-      git cherry-pick 89033692183bc5afd4b4dc2f89aa64fb306778fd  # netutils: improve file descriptor retrieval and increase robustness
-      git cherry-pick e2a2684c626d960c915e5edcce2e6228dc44d281  # doc/projects: Projects aren't restricted by default
-      git cherry-pick e341613be7ee5b4be0e4a0eed9334afce87ad1b7  # lxd/storage/drivers/util: Updates ensureVolumeBlockFile to add unsupportedResizeTypes argument
-      git cherry-pick 305256d1d6018dd57c6aaab78f5eee2e18f85e6c  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolume with ensureVolumeBlockFile comments
-      git cherry-pick 42c07b8b8c4cc2971b96ecfe445fb0ebe924313d  # lxd/storage/drivers/driver/btrfs/volumes: Updates SetVolumeQuota to pass VolumeTypeImage to ensureVolumeBlockFile
-      git cherry-pick 5c299e487a422b0fcf822436f746e445a05ed8a3  # lxd/storage/drivers/driver/dir/volumes: Comment improvement in CreateVolume
-      git cherry-pick dbb8766f1d6b920b378adefa71a49d27b4884f38  # lxd: improve unix fd retrieval infrastructure
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
