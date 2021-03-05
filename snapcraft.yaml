@@ -1192,6 +1192,12 @@ parts:
       git cherry-pick 13cbda8653089e2d96920762d6e24db7362788bd  # lxd/network/driver/bridge: util.GetStableRandomGenerator usage
       git cherry-pick fb68144aab0e3796ffc3775bc3e316dd99a3285b  # lxd/network/driver/ovn: util.GetStableRandomGenerator usage
       git cherry-pick b272cf5ae51c44e0f2c64a39d6d8434811baa0c3  # lxd/storage/volumes/snapshot: util.GetStableRandomInt64FromList usage
+      git cherry-pick 753bc0f9eaa5e9a83c40e65bfe735dff3563ea97  # shared/api/netork/acl: Adds missing example doc fields
+      git cherry-pick 2e9dad8b09b0d0c61fa5d1b43ac939d87670987a  # lxc/network/acl: Update field examples
+      git cherry-pick 938e815ea4987a17eaf6dc1cd93be27a97a87dc6  # i18n: Update translation template
+      git cherry-pick 3d4fa1ff6d45af42375734fbbe1bd24cd24e9b84  # lxd/network/acl/acl/load: Fix UsedBy with project profiles
+      git cherry-pick bef4f4a8d7b90d32b49c11bfd9ef916f2d762d2b  # test/suites: Fix sed command
+      git cherry-pick d76b135e4f278740cfb7ae0d3d2db18b25b2d7cb  # shared/api: Mark most ACL rule fields omitempty
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
