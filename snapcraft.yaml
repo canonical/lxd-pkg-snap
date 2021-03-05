@@ -235,7 +235,7 @@ parts:
       - uuid-dev
     override-pull: |-
       set -ex
-      git clone https://github.com/tianocore/edk2 . -b edk2-stable202008
+      git clone https://github.com/tianocore/edk2 . -b edk2-stable202011
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
@@ -250,6 +250,7 @@ parts:
       patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
       cp "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
       patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
 
       ARCH="X64"
       PKG="OvmfPkg/OvmfPkgX64.dsc"
