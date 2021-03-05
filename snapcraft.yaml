@@ -1178,6 +1178,21 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 16ac7cd58eea5c12eb869fb023d2b43580727652  # lxd/migration: Refresh protobuf
+      git cherry-pick 81cb3c695e844f5ad69cd20c623181d41fd9eb4f  # lxd/storage/ceph: Fix ceph.rbd.features
+      git cherry-pick 13efece57b3920df7f1949a6bb01406ee61c422c  # lxd/cluster/gateway: Expose node is not clustered error
+      git cherry-pick 1710b31fc0813647c775e04a8eb82481f404967a  # lxd/cluster/gateway/test: TestGateway_Single ErrNodeIsNotClustered usage
+      git cherry-pick 28234b9419055e02efa17e719c81098b78ad340f  # lxd/patches: Adds db_nodes_autoinc patch
+      git cherry-pick 07ca05c94dcc4243365330a13a99422815d15071  # lxd/storage/drivers/driver/ceph/utils: util.SplitNTrimSpace usage
+      git cherry-pick 791e913458e708d98ec75bb867e1988d9d422e66  # lxd/network/openvswitch/ovs: Adds TCP flag constants
+      git cherry-pick 7ed8d56d8d7ed6b9b4620eb98804f173eef95d94  # lxd/network/acl/acl/ovn: Switches to openvswitch TCP flag constants in OVNApplyNetworkBaselineRules
+      git cherry-pick 06b964d070da2d20fda0b6c08f43da2cd9d9ce84  # shared/util: Removes GetStableRandomInt64FromList and GetStableRandomGenerator from shared pkg
+      git cherry-pick c76465969fa3e1fa464a7ad0c8b54280153ae7a2  # lxd/util/random: Adds GetStableRandomGenerator and GetStableRandomInt64FromList functions
+      git cherry-pick a1078a65e4fde1e69c6d29aa7a2469e3ea3a4d69  # lxd/images: util.GetStableRandomInt64FromList usage
+      git cherry-pick 13cbda8653089e2d96920762d6e24db7362788bd  # lxd/network/driver/bridge: util.GetStableRandomGenerator usage
+      git cherry-pick fb68144aab0e3796ffc3775bc3e316dd99a3285b  # lxd/network/driver/ovn: util.GetStableRandomGenerator usage
+      git cherry-pick b272cf5ae51c44e0f2c64a39d6d8434811baa0c3  # lxd/storage/volumes/snapshot: util.GetStableRandomInt64FromList usage
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       go get -t -d ./...
