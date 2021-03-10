@@ -1198,6 +1198,18 @@ parts:
       git cherry-pick 3d4fa1ff6d45af42375734fbbe1bd24cd24e9b84  # lxd/network/acl/acl/load: Fix UsedBy with project profiles
       git cherry-pick bef4f4a8d7b90d32b49c11bfd9ef916f2d762d2b  # test/suites: Fix sed command
       git cherry-pick d76b135e4f278740cfb7ae0d3d2db18b25b2d7cb  # shared/api: Mark most ACL rule fields omitempty
+      git cherry-pick 8fd82c1214949c8d8344221d3df1b664e42e3adf  # Fix typo in doc/projects.md, replace images with backups
+      git cherry-pick d3ca7851389e41fa366b5bbbb2eeef96472daad4  # Fix a typo in rest-api.md for renaming a network ACL
+      git cherry-pick c525519a6e76b081558ff9e4d0ba32e0902db2f7  # client/lxd: Don't treat % chars from LXD server response as placeholders in lxdParseResponse
+      git cherry-pick 74cf601bcf805c83c01c625a49f0bb9dd259e87d  # doc/network/acls: Changes reserved subject names
+      git cherry-pick 8d2daff030419a08e6b945bd801e9e3241a99ac4  # lxd/network/acl/acl/ovn: Handles deprecated aliases for subjects
+      git cherry-pick 4b03c01827ffb12208eb2faae4b12c2a18c57b4a  # shared/api/network/acl: Updates example with non-depcared reserved subject
+      git cherry-pick 10b273673e3155ab2443f3a5051941a1e5818422  # lxd/network/acl/driver/common: Deprecates #internal and #external subjects and replaces them with @internal and @external
+      git cherry-pick 89681900adf748edf18cc2b1e97f0d2f9b13862a  # Doc: fix typo on network type
+      git cherry-pick 868105ae5ad967fd49cf76dbc331c4a800d786aa  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick 861f74e047540b8cbc0463d473d4cabc10012217  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick 264bf4f8a3bec12bebf1650c57c94990546daf44  # lxd: Unmount image and backup volume on shutdown
+      git cherry-pick 17ec4ee8290af6bd777096d2a367440123cc574b  # lxd: Fix static analysis
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
