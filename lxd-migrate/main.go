@@ -49,6 +49,11 @@ func run() error {
 		fmt.Printf("\nWARNING: %v\n", err)
 	}
 
+	// Attempt to create /var/log/lxd if missing
+	if !shared.PathExists("/var/log/lxd") {
+		os.MkdirAll("/var/log/lxd", 0755)
+	}
+
 	// Connect to the source LXD
 	fmt.Printf("=> Connecting to source server\n")
 	src, err := lxdConnect("/var/lib/lxd")
