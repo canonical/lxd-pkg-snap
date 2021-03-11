@@ -1218,7 +1218,31 @@ parts:
       git cherry-pick 926cb2712a33f0891caeef4159b4d103385e9ac4  # lxd/network/driver/ovn: Clarifies comment
       git cherry-pick 8b634d3f4ccfdcad25136ef0790b72024dd50e28  # lxd/storage/drivers/generic/vfs: Error quoting in genericVFSVolumeSnapshots
       git cherry-pick c2225390ae6465fd97bf4fe89f361bd797a22b90  # lxd/storage/drivers/driver/btrfs/volumes: Ensure subvolumes in snapshots are copied during CreateVolumeFromCopy
+      git cherry-pick 36f513cf4ec83af4c874a320c04f04fa068ca647  # lxd/images: Optimize image distribution
+      git cherry-pick cedeca221e964d4c39208da5b345c0429b908d72  # lxd: Properly unmount old image volume
       git cherry-pick da08b653a9fdc41a6a0c2adacd812477b90a48da  # lxd/network/acl/acl/ovn: Ensure to parenthesised || when used with && in rule match
+      git cherry-pick 6f4650846dae2e9a20b5d168b8c133d9494f51ee  # lxd/instance/qemu: Add 5s QMP timeout
+      git cherry-pick e0fdab7fc4b784836407f00d8a570adf9ee43925  # lxd/storage/drivers/volume: Optimized creation of slice in Snapshots()
+      git cherry-pick 99043f7d362c70f6efd16c121571594b6ffbfd95  # lxd/storage/drivers/volume: Adds SnapshotsMatch function
+      git cherry-pick e7f06335b58b42b52e74e0685e4fcfc9a8259cfb  # lxd/storage/drivers/interface: Updates BackupVolume to take a slice of snapshot names
+      git cherry-pick b25859db933ffd50a413c49304fc9475b655fede  # lxd/db/instances: Clarifies expected return order of snapshots in GetInstanceSnapshotsWithName
+      git cherry-pick 471fb81b8f6c1649bf0b801013d3b735af28317c  # lxd/storage/backend/lxd: Updates BackupInstance to provide list of snapshot names to b.driver.BackupVolume
+      git cherry-pick 83e5879e1f90cd45a1083d49d915f9afd92cf3a6  # lxd/storage/backend/lxd: Updates BackupCustomVolume to provide list of snapshot names to b.driver.BackupVolume
+      git cherry-pick 9325618c42087a15f680b7aa11d7f2e82e6a59a0  # lxd/storage/drivers/generic/vfs: Updates genericVFSBackupVolume to accept a list of snapshot names
+      git cherry-pick b51de775d2d431fe63310b27633decd333e157aa  # lxd/storage/drivers/driver/btrfs/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick 31ffb2306b8867e344fd40f0fec7a37538f78195  # lxd/storage/drivers/driver/ceph/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick 0934c2b040d88e76ab2ce3efb0538a47729d81bd  # lxd/storage/drivers/driver/cephfs/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick fcb3122ca5eeb4d8e582cefa1ecd96799483f488  # lxd/storage/drivers/driver/dir/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick 4eaa32d836e92792c1a9278210e59119ef38a0f8  # lxd/storage/drivers/driver/lvm/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick d3b515a882909caaab900926c3c410d6f389e4c9  # lxd/storage/drivers/driver/mock: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick a4598412bebdeba647cd5e48884a88f621f4b88e  # lxd/storage/drivers/driver/zfs/volumes: Updates BackupVolume to accept a list of snapshot names
+      git cherry-pick 62c4aaa9e8eba1d4ab8d6a019e445c1b775e14d2  # lxd/storage/drivers: Clarifies ordering of VolumeSnapshots and volume.Snapshots() in comment
+      git cherry-pick 6a0da58e91151bd1df9a784a10e332e84a668ad3  # lxd/storage/volumes/backup: Use requested project name for operation
+      git cherry-pick 50b95d648e1940c421253d0e9c48b93884583b37  # lxd/storage/volumes/snapshot: Use requested project name for operation
+      git cherry-pick 8f5206b9f3951f7079f33ab8abbd19246975717d  # lxd/storage/volumes: Use requested project name for operation
+      git cherry-pick 726b9974cb618fd9f4d5b59c3959dcf4ae5c4165  # lxd/operations: Renames project to projectName
+      git cherry-pick a2246cd17216acf7119d670cdd24e764748c0406  # lxd: Renames project to projectName
+      git cherry-pick 8525cada9c226beebd0478d717495a9ab8724052  # clustering: Force config when bootstrapping
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
