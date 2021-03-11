@@ -1210,6 +1210,15 @@ parts:
       git cherry-pick 861f74e047540b8cbc0463d473d4cabc10012217  # doc/rest-api: Refresh swagger YAML
       git cherry-pick 264bf4f8a3bec12bebf1650c57c94990546daf44  # lxd: Unmount image and backup volume on shutdown
       git cherry-pick 17ec4ee8290af6bd777096d2a367440123cc574b  # lxd: Fix static analysis
+      git cherry-pick 7d34fed3862371c7f58519c43acc7311bccb3578  # shared: Remove WriteTempFile
+      git cherry-pick eb6e630baf3729e0d22ce0d0aaa9b0c625277d34  # shared/osarch: Remove dependency on shared package
+      git cherry-pick b1cd660e4e8568494d695c97c6a3c7a82670cdee  # shared/osarch: Add SupportedArchitectures
+      git cherry-pick 2ad56972d3ccbadb3c89d4a585a242dae3120bfc  # shared/validate: Add IsArchitecture
+      git cherry-pick ba4bd2650f991eff11069ff6d863f1b32fb5ebc3  # lxd/network/driver/ovn: Adds n.ensureNetworkPortGroup and use it in setup() and Start()
+      git cherry-pick 926cb2712a33f0891caeef4159b4d103385e9ac4  # lxd/network/driver/ovn: Clarifies comment
+      git cherry-pick 8b634d3f4ccfdcad25136ef0790b72024dd50e28  # lxd/storage/drivers/generic/vfs: Error quoting in genericVFSVolumeSnapshots
+      git cherry-pick c2225390ae6465fd97bf4fe89f361bd797a22b90  # lxd/storage/drivers/driver/btrfs/volumes: Ensure subvolumes in snapshots are copied during CreateVolumeFromCopy
+      git cherry-pick da08b653a9fdc41a6a0c2adacd812477b90a48da  # lxd/network/acl/acl/ovn: Ensure to parenthesised || when used with && in rule match
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
