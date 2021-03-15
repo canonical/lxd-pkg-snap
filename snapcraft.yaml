@@ -1243,6 +1243,25 @@ parts:
       git cherry-pick 726b9974cb618fd9f4d5b59c3959dcf4ae5c4165  # lxd/operations: Renames project to projectName
       git cherry-pick a2246cd17216acf7119d670cdd24e764748c0406  # lxd: Renames project to projectName
       git cherry-pick 8525cada9c226beebd0478d717495a9ab8724052  # clustering: Force config when bootstrapping
+      git cherry-pick de1a21e6006a4c6181cd63aa60676cae81904215  # lxd/network/openvswitch/ovn: Work around ovn-nbctl NAT bugs in LogicalRouterDNATSNATAdd
+      git cherry-pick 2d8be188c6b47ed112cd4e170c2fa6f7a40e2d05  # lxd/network/openvswitch/ovn: Use same technique as LogicalRouterDNATSNATAdd when mayExist is true
+      git cherry-pick c7a498e1d02c3e5f2c97d0268405dbdea732529f  # lxd/network/openvswitch/ovn: Merge LogicalSwitchPortAdd and LogicalSwitchPortSet
+      git cherry-pick 78691df8e55bef8e71142aa661226e63fa30f2cb  # lxd/network/driver/ovn: client.LogicalSwitchPortAdd usage
+      git cherry-pick e8e7f3add7f8a19145c7f31370451f74a66e8548  # lxd/network/openvswitch/ovn: Reduce ovn-nbctl calls in LogicalSwitchPortDeleteDNS
+      git cherry-pick 883c945c9c48d97ee39d450799669d1d0ea484d4  # lxd/network/openvswitch/ovn: Reduce calls to ovn-nbctl in LogicalSwitchPortLinkRouter
+      git cherry-pick 1c036a166d0d95549c54cdbb04a9dea5c1e13d86  # lxd/network/openvswitch/ovn: Reduce calls to ovn-nbctl in LogicalSwitchPortLinkProviderNetwork
+      git cherry-pick 387f0292448c6063f3fd12de2360a5d9df936ebf  # lxd/network/openvswitch/ovn: Updates LogicalRouterDNATSNATDelete to support removing multiple entries in single call
+      git cherry-pick 4809668883f3ad96ea49e2e95726e85bbe0acbb1  # lxd/network/driver/ovn: Updates InstanceDevicePortDelete to always attempt to remove its IPs from DNAT entries
+      git cherry-pick ecb7184a1365b3cb728f5ee71bc001330f6901ba  # lxd/network/openvswitch/ovn: Updates LogicalRouterRouteDelete to support removing multiple routes
+      git cherry-pick 80138e91d4103bebd41e597f8e241c1b0cfab2aa  # lxd/network/driver/ovn: LogicalRouterRouteDelete usage to reduce ovn-nbctl calls
+      git cherry-pick 921bee51985082c6865c2177dfc443ffcf52b9c2  # lxc/network_acl: Fix example
+      git cherry-pick 12c8f85c542287fcfb4ca6b1bfef38d594278d30  # i18n: Update translation templates
+      git cherry-pick f552899a1963c1110b909d4795d7b1fd7e500179  # lxc/project: Show description
+      git cherry-pick 32e72321ca8e13a6d0aa732884d68ff3f874586d  # lxc/profile: Add description column
+      git cherry-pick cf9b1f612e7f94d6320e37949559703cbfd269cc  # lxc/storage: Add description column
+      git cherry-pick 07924ffe2966c89af170881b40c80882d314c53c  # doc: improve wording of network ACLs
+      git cherry-pick bd903412123f3907e6441449791df5b812d9bc48  # doc/instances: Adds ipv4.routes and ipv6.routes for OVN NICs
+      git cherry-pick cb9d4588716406f9c839247ee10792a06014185b  # test/main: Fix clustering test typo
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
