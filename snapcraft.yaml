@@ -1262,6 +1262,20 @@ parts:
       git cherry-pick 07924ffe2966c89af170881b40c80882d314c53c  # doc: improve wording of network ACLs
       git cherry-pick bd903412123f3907e6441449791df5b812d9bc48  # doc/instances: Adds ipv4.routes and ipv6.routes for OVN NICs
       git cherry-pick cb9d4588716406f9c839247ee10792a06014185b  # test/main: Fix clustering test typo
+      git cherry-pick 3ea23b360f57a086e46b84ddbe86880309d453f6  # test/clustering: Cleanup properly
+      git cherry-pick f586d54ac75454055dd9cc0116b04f2343950b75  # test/clustering: s/localhost/public/
+      git cherry-pick d5134569ee0d43cfb3d7bca4d3a8a319c2aa0113  # test/clustering: Replace sleep with wait
+      git cherry-pick 6951f37d6ff791d618393167699427fd3c79b45f  # test/clustring: Unset LXD_NETNS
+      git cherry-pick 7de483ebf2ad1c925d8eef5611c9ecb55ae42a1c  # lxd/device/disk: Fallback to using mount device path for major/minor number extraction for BTRFS
+      git cherry-pick f80f5c7d82cda444f7ce48431dd8cce924da28ec  # lxd/instance/drivers/driver/lxc: Ensure container is stopped if post start hooks fail
+      git cherry-pick c545c95cf49b6e7a56205569242db13eb7b594f6  # lxd/instance/drivers/driver/qemu: Adds comment clarifying order of post start hook failure actions
+      git cherry-pick c8dd22b72ac7b5da8655b358623db3361683bcc7  # lxd/network/openvswitch/ovn: Adds LogicalSwitchPorts function
+      git cherry-pick 9f3782d34902faed34d752ed6bbb6cf9b0a72285  # lxd/network/driver/ovn: Use client.LogicalSwitchPorts in handleDependencyChange and Update
+      git cherry-pick 2283780a45ed58ff6070a613c6446c1f495b44a1  # tests: Don't block on /dev/random
+      git cherry-pick aadd351799f4a8a01680877667caf82ca6c78653  # lxd/network/acl/acl/ovn: Removes unused state arg from ovnApplyToPortGroup
+      git cherry-pick 6fa2f710337712a47ed3eff535efdbd7bc29cfe6  # lxd/network/driver/ovn: Improved comment in InstanceDevicePortAdd
+      git cherry-pick 619628ab6617921cdaffc417d462d8f342e5cb1f  # lxd/db/images: Fix incorrect cached attribute handling
+      git cherry-pick d35f1e4ddf3faa0357c38e3db1a00ca6206fcf39  # lxd/images: Improve error logging in autoUpdateImages
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
