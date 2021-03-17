@@ -1331,7 +1331,7 @@ parts:
     after:
       - lxd
       - sqlite
-    plugin: go
+    plugin: nogetgo
     go-buildtags:
       - libsqlite3
     go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
@@ -1359,7 +1359,7 @@ parts:
 
   snap-query:
     source: snap-query/
-    plugin: go
+    plugin: nogetgo
     go-importpath: github.com/lxc/lxd-pkg-snap/snap-query
     prime:
       - bin/snap-query
