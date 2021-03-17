@@ -316,6 +316,7 @@ class GoPlugin(snapcraft.BasePlugin):
 
     def _build_environment(self) -> Dict[str, str]:
         env = os.environ.copy()
+        env["GO111MODULE"] "off"
         env["GOPATH"] = self._gopath
         env["GOBIN"] = self._gopath_bin
 

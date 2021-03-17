@@ -1279,6 +1279,7 @@ parts:
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
+      export GO111MODULE=off
       go get -t -d ./...
 
       # Setup for our shared libraries
