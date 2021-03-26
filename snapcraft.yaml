@@ -640,6 +640,8 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/qemu-0001-hw-s390x-fix-build-for-virtio-9p-ccw.patch"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
