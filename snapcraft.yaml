@@ -881,7 +881,7 @@ parts:
   zfs-2-0:
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.0.3
+    source-tag: zfs-2.0.4
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
