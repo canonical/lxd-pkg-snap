@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.12"
+version: "4.13"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -1141,7 +1141,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.12
+    source-tag: lxd-4.13
     after:
       - lxc
       - dqlite
@@ -1179,105 +1179,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 16ac7cd58eea5c12eb869fb023d2b43580727652  # lxd/migration: Refresh protobuf
-      git cherry-pick 81cb3c695e844f5ad69cd20c623181d41fd9eb4f  # lxd/storage/ceph: Fix ceph.rbd.features
-      git cherry-pick 13efece57b3920df7f1949a6bb01406ee61c422c  # lxd/cluster/gateway: Expose node is not clustered error
-      git cherry-pick 1710b31fc0813647c775e04a8eb82481f404967a  # lxd/cluster/gateway/test: TestGateway_Single ErrNodeIsNotClustered usage
-      git cherry-pick 28234b9419055e02efa17e719c81098b78ad340f  # lxd/patches: Adds db_nodes_autoinc patch
-      git cherry-pick 07ca05c94dcc4243365330a13a99422815d15071  # lxd/storage/drivers/driver/ceph/utils: util.SplitNTrimSpace usage
-      git cherry-pick 791e913458e708d98ec75bb867e1988d9d422e66  # lxd/network/openvswitch/ovs: Adds TCP flag constants
-      git cherry-pick 7ed8d56d8d7ed6b9b4620eb98804f173eef95d94  # lxd/network/acl/acl/ovn: Switches to openvswitch TCP flag constants in OVNApplyNetworkBaselineRules
-      git cherry-pick 06b964d070da2d20fda0b6c08f43da2cd9d9ce84  # shared/util: Removes GetStableRandomInt64FromList and GetStableRandomGenerator from shared pkg
-      git cherry-pick c76465969fa3e1fa464a7ad0c8b54280153ae7a2  # lxd/util/random: Adds GetStableRandomGenerator and GetStableRandomInt64FromList functions
-      git cherry-pick a1078a65e4fde1e69c6d29aa7a2469e3ea3a4d69  # lxd/images: util.GetStableRandomInt64FromList usage
-      git cherry-pick 13cbda8653089e2d96920762d6e24db7362788bd  # lxd/network/driver/bridge: util.GetStableRandomGenerator usage
-      git cherry-pick fb68144aab0e3796ffc3775bc3e316dd99a3285b  # lxd/network/driver/ovn: util.GetStableRandomGenerator usage
-      git cherry-pick b272cf5ae51c44e0f2c64a39d6d8434811baa0c3  # lxd/storage/volumes/snapshot: util.GetStableRandomInt64FromList usage
-      git cherry-pick 753bc0f9eaa5e9a83c40e65bfe735dff3563ea97  # shared/api/netork/acl: Adds missing example doc fields
-      git cherry-pick 2e9dad8b09b0d0c61fa5d1b43ac939d87670987a  # lxc/network/acl: Update field examples
-      git cherry-pick 938e815ea4987a17eaf6dc1cd93be27a97a87dc6  # i18n: Update translation template
-      git cherry-pick 3d4fa1ff6d45af42375734fbbe1bd24cd24e9b84  # lxd/network/acl/acl/load: Fix UsedBy with project profiles
-      git cherry-pick bef4f4a8d7b90d32b49c11bfd9ef916f2d762d2b  # test/suites: Fix sed command
-      git cherry-pick d76b135e4f278740cfb7ae0d3d2db18b25b2d7cb  # shared/api: Mark most ACL rule fields omitempty
-      git cherry-pick 8fd82c1214949c8d8344221d3df1b664e42e3adf  # Fix typo in doc/projects.md, replace images with backups
-      git cherry-pick d3ca7851389e41fa366b5bbbb2eeef96472daad4  # Fix a typo in rest-api.md for renaming a network ACL
-      git cherry-pick c525519a6e76b081558ff9e4d0ba32e0902db2f7  # client/lxd: Don't treat % chars from LXD server response as placeholders in lxdParseResponse
-      git cherry-pick 74cf601bcf805c83c01c625a49f0bb9dd259e87d  # doc/network/acls: Changes reserved subject names
-      git cherry-pick 8d2daff030419a08e6b945bd801e9e3241a99ac4  # lxd/network/acl/acl/ovn: Handles deprecated aliases for subjects
-      git cherry-pick 4b03c01827ffb12208eb2faae4b12c2a18c57b4a  # shared/api/network/acl: Updates example with non-depcared reserved subject
-      git cherry-pick 10b273673e3155ab2443f3a5051941a1e5818422  # lxd/network/acl/driver/common: Deprecates #internal and #external subjects and replaces them with @internal and @external
-      git cherry-pick 89681900adf748edf18cc2b1e97f0d2f9b13862a  # Doc: fix typo on network type
-      git cherry-pick 868105ae5ad967fd49cf76dbc331c4a800d786aa  # doc/rest-api: Refresh swagger YAML
-      git cherry-pick 861f74e047540b8cbc0463d473d4cabc10012217  # doc/rest-api: Refresh swagger YAML
-      git cherry-pick 264bf4f8a3bec12bebf1650c57c94990546daf44  # lxd: Unmount image and backup volume on shutdown
-      git cherry-pick 17ec4ee8290af6bd777096d2a367440123cc574b  # lxd: Fix static analysis
-      git cherry-pick 7d34fed3862371c7f58519c43acc7311bccb3578  # shared: Remove WriteTempFile
-      git cherry-pick eb6e630baf3729e0d22ce0d0aaa9b0c625277d34  # shared/osarch: Remove dependency on shared package
-      git cherry-pick b1cd660e4e8568494d695c97c6a3c7a82670cdee  # shared/osarch: Add SupportedArchitectures
-      git cherry-pick 2ad56972d3ccbadb3c89d4a585a242dae3120bfc  # shared/validate: Add IsArchitecture
-      git cherry-pick ba4bd2650f991eff11069ff6d863f1b32fb5ebc3  # lxd/network/driver/ovn: Adds n.ensureNetworkPortGroup and use it in setup() and Start()
-      git cherry-pick 926cb2712a33f0891caeef4159b4d103385e9ac4  # lxd/network/driver/ovn: Clarifies comment
-      git cherry-pick 8b634d3f4ccfdcad25136ef0790b72024dd50e28  # lxd/storage/drivers/generic/vfs: Error quoting in genericVFSVolumeSnapshots
-      git cherry-pick c2225390ae6465fd97bf4fe89f361bd797a22b90  # lxd/storage/drivers/driver/btrfs/volumes: Ensure subvolumes in snapshots are copied during CreateVolumeFromCopy
-      git cherry-pick 36f513cf4ec83af4c874a320c04f04fa068ca647  # lxd/images: Optimize image distribution
-      git cherry-pick cedeca221e964d4c39208da5b345c0429b908d72  # lxd: Properly unmount old image volume
-      git cherry-pick da08b653a9fdc41a6a0c2adacd812477b90a48da  # lxd/network/acl/acl/ovn: Ensure to parenthesised || when used with && in rule match
-      git cherry-pick 6f4650846dae2e9a20b5d168b8c133d9494f51ee  # lxd/instance/qemu: Add 5s QMP timeout
-      git cherry-pick e0fdab7fc4b784836407f00d8a570adf9ee43925  # lxd/storage/drivers/volume: Optimized creation of slice in Snapshots()
-      git cherry-pick 99043f7d362c70f6efd16c121571594b6ffbfd95  # lxd/storage/drivers/volume: Adds SnapshotsMatch function
-      git cherry-pick e7f06335b58b42b52e74e0685e4fcfc9a8259cfb  # lxd/storage/drivers/interface: Updates BackupVolume to take a slice of snapshot names
-      git cherry-pick b25859db933ffd50a413c49304fc9475b655fede  # lxd/db/instances: Clarifies expected return order of snapshots in GetInstanceSnapshotsWithName
-      git cherry-pick 471fb81b8f6c1649bf0b801013d3b735af28317c  # lxd/storage/backend/lxd: Updates BackupInstance to provide list of snapshot names to b.driver.BackupVolume
-      git cherry-pick 83e5879e1f90cd45a1083d49d915f9afd92cf3a6  # lxd/storage/backend/lxd: Updates BackupCustomVolume to provide list of snapshot names to b.driver.BackupVolume
-      git cherry-pick 9325618c42087a15f680b7aa11d7f2e82e6a59a0  # lxd/storage/drivers/generic/vfs: Updates genericVFSBackupVolume to accept a list of snapshot names
-      git cherry-pick b51de775d2d431fe63310b27633decd333e157aa  # lxd/storage/drivers/driver/btrfs/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick 31ffb2306b8867e344fd40f0fec7a37538f78195  # lxd/storage/drivers/driver/ceph/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick 0934c2b040d88e76ab2ce3efb0538a47729d81bd  # lxd/storage/drivers/driver/cephfs/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick fcb3122ca5eeb4d8e582cefa1ecd96799483f488  # lxd/storage/drivers/driver/dir/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick 4eaa32d836e92792c1a9278210e59119ef38a0f8  # lxd/storage/drivers/driver/lvm/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick d3b515a882909caaab900926c3c410d6f389e4c9  # lxd/storage/drivers/driver/mock: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick a4598412bebdeba647cd5e48884a88f621f4b88e  # lxd/storage/drivers/driver/zfs/volumes: Updates BackupVolume to accept a list of snapshot names
-      git cherry-pick 62c4aaa9e8eba1d4ab8d6a019e445c1b775e14d2  # lxd/storage/drivers: Clarifies ordering of VolumeSnapshots and volume.Snapshots() in comment
-      git cherry-pick 6a0da58e91151bd1df9a784a10e332e84a668ad3  # lxd/storage/volumes/backup: Use requested project name for operation
-      git cherry-pick 50b95d648e1940c421253d0e9c48b93884583b37  # lxd/storage/volumes/snapshot: Use requested project name for operation
-      git cherry-pick 8f5206b9f3951f7079f33ab8abbd19246975717d  # lxd/storage/volumes: Use requested project name for operation
-      git cherry-pick 726b9974cb618fd9f4d5b59c3959dcf4ae5c4165  # lxd/operations: Renames project to projectName
-      git cherry-pick a2246cd17216acf7119d670cdd24e764748c0406  # lxd: Renames project to projectName
-      git cherry-pick 8525cada9c226beebd0478d717495a9ab8724052  # clustering: Force config when bootstrapping
-      git cherry-pick de1a21e6006a4c6181cd63aa60676cae81904215  # lxd/network/openvswitch/ovn: Work around ovn-nbctl NAT bugs in LogicalRouterDNATSNATAdd
-      git cherry-pick 2d8be188c6b47ed112cd4e170c2fa6f7a40e2d05  # lxd/network/openvswitch/ovn: Use same technique as LogicalRouterDNATSNATAdd when mayExist is true
-      git cherry-pick c7a498e1d02c3e5f2c97d0268405dbdea732529f  # lxd/network/openvswitch/ovn: Merge LogicalSwitchPortAdd and LogicalSwitchPortSet
-      git cherry-pick 78691df8e55bef8e71142aa661226e63fa30f2cb  # lxd/network/driver/ovn: client.LogicalSwitchPortAdd usage
-      git cherry-pick e8e7f3add7f8a19145c7f31370451f74a66e8548  # lxd/network/openvswitch/ovn: Reduce ovn-nbctl calls in LogicalSwitchPortDeleteDNS
-      git cherry-pick 883c945c9c48d97ee39d450799669d1d0ea484d4  # lxd/network/openvswitch/ovn: Reduce calls to ovn-nbctl in LogicalSwitchPortLinkRouter
-      git cherry-pick 1c036a166d0d95549c54cdbb04a9dea5c1e13d86  # lxd/network/openvswitch/ovn: Reduce calls to ovn-nbctl in LogicalSwitchPortLinkProviderNetwork
-      git cherry-pick 387f0292448c6063f3fd12de2360a5d9df936ebf  # lxd/network/openvswitch/ovn: Updates LogicalRouterDNATSNATDelete to support removing multiple entries in single call
-      git cherry-pick 4809668883f3ad96ea49e2e95726e85bbe0acbb1  # lxd/network/driver/ovn: Updates InstanceDevicePortDelete to always attempt to remove its IPs from DNAT entries
-      git cherry-pick ecb7184a1365b3cb728f5ee71bc001330f6901ba  # lxd/network/openvswitch/ovn: Updates LogicalRouterRouteDelete to support removing multiple routes
-      git cherry-pick 80138e91d4103bebd41e597f8e241c1b0cfab2aa  # lxd/network/driver/ovn: LogicalRouterRouteDelete usage to reduce ovn-nbctl calls
-      git cherry-pick 921bee51985082c6865c2177dfc443ffcf52b9c2  # lxc/network_acl: Fix example
-      git cherry-pick 12c8f85c542287fcfb4ca6b1bfef38d594278d30  # i18n: Update translation templates
-      git cherry-pick f552899a1963c1110b909d4795d7b1fd7e500179  # lxc/project: Show description
-      git cherry-pick 32e72321ca8e13a6d0aa732884d68ff3f874586d  # lxc/profile: Add description column
-      git cherry-pick cf9b1f612e7f94d6320e37949559703cbfd269cc  # lxc/storage: Add description column
-      git cherry-pick 07924ffe2966c89af170881b40c80882d314c53c  # doc: improve wording of network ACLs
-      git cherry-pick bd903412123f3907e6441449791df5b812d9bc48  # doc/instances: Adds ipv4.routes and ipv6.routes for OVN NICs
-      git cherry-pick cb9d4588716406f9c839247ee10792a06014185b  # test/main: Fix clustering test typo
-      git cherry-pick 3ea23b360f57a086e46b84ddbe86880309d453f6  # test/clustering: Cleanup properly
-      git cherry-pick f586d54ac75454055dd9cc0116b04f2343950b75  # test/clustering: s/localhost/public/
-      git cherry-pick d5134569ee0d43cfb3d7bca4d3a8a319c2aa0113  # test/clustering: Replace sleep with wait
-      git cherry-pick 6951f37d6ff791d618393167699427fd3c79b45f  # test/clustring: Unset LXD_NETNS
-      git cherry-pick 7de483ebf2ad1c925d8eef5611c9ecb55ae42a1c  # lxd/device/disk: Fallback to using mount device path for major/minor number extraction for BTRFS
-      git cherry-pick f80f5c7d82cda444f7ce48431dd8cce924da28ec  # lxd/instance/drivers/driver/lxc: Ensure container is stopped if post start hooks fail
-      git cherry-pick c545c95cf49b6e7a56205569242db13eb7b594f6  # lxd/instance/drivers/driver/qemu: Adds comment clarifying order of post start hook failure actions
-      git cherry-pick c8dd22b72ac7b5da8655b358623db3361683bcc7  # lxd/network/openvswitch/ovn: Adds LogicalSwitchPorts function
-      git cherry-pick 9f3782d34902faed34d752ed6bbb6cf9b0a72285  # lxd/network/driver/ovn: Use client.LogicalSwitchPorts in handleDependencyChange and Update
-      git cherry-pick 2283780a45ed58ff6070a613c6446c1f495b44a1  # tests: Don't block on /dev/random
-      git cherry-pick aadd351799f4a8a01680877667caf82ca6c78653  # lxd/network/acl/acl/ovn: Removes unused state arg from ovnApplyToPortGroup
-      git cherry-pick 6fa2f710337712a47ed3eff535efdbd7bc29cfe6  # lxd/network/driver/ovn: Improved comment in InstanceDevicePortAdd
-      git cherry-pick 619628ab6617921cdaffc417d462d8f342e5cb1f  # lxd/db/images: Fix incorrect cached attribute handling
-      git cherry-pick d35f1e4ddf3faa0357c38e3db1a00ca6206fcf39  # lxd/images: Improve error logging in autoUpdateImages
 
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
