@@ -1180,6 +1180,39 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 33560c9473c1e7207d45aa55d73469e509292fd9  # lxd/firewwall/drivers/drivers/nftables: Changes nftables to use a single inet table rather than separate ip and ip6 tables
+      git cherry-pick b05fb4250b2a432d131482925b8f5d69040aa129  # test: Updates proxy tests to check nftables inet table
+      git cherry-pick f7318e688621239c1704e9d47954a5a47fcc6958  # tests: Fix failure on 5.11 kernel
+      git cherry-pick d49dd782ef2a10316248b9fd67e023d3f045f0db  # lxd/network/acl/driver/common: Improve error messages in d.validateRuleSubjects
+      git cherry-pick b23192e38d84c087766014adaab6147943997f12  # lxd/network/acl/driver/common: Allow single IP addresses in source/destination subjects
+      git cherry-pick de927d3b272285a462211fde5f16c5aa4d92dfb9  # lxd/network/driver/ovn: Renames logName var to logPrefix
+      git cherry-pick deafab09222973cc21c0d2077749dc24f4c7f91a  # lxd/network/acl/acl/ovn: Handle single IP in source/destination subjects
+      git cherry-pick 0f445f42ccaf08cd54827688c8765149ef7cfe48  # lxd/network/acl/acl/ovn: Renames logName arg to logPrefix in OVNApplyInstanceNICDefaultRules
+      git cherry-pick 5ff5df309bdc2305d07fa2872589b0ad352d11e1  # lxd/firewall/drivers/drivers/xtables: Don't check for existing rule in iptablesAdd
+      git cherry-pick 11be03ee9dbf056ca4d851143aadb447140abb8d  # lxd/firewall/drivers/drivers/xtables: Updates d.iptablesChainExists to return if chain has any rules
+      git cherry-pick 8043c1440e24ae9361ccc83a712fa618576fb793  # shared/validate/validate: Check IsNetworkPortRange range starts lower than end
+      git cherry-pick 8cadf41960e86a22bc3e0dfa4b49c0ccb0dfbc29  # forkexec: log more failures
+      git cherry-pick 370096cddcaaffc86cae8eb4e9563a824a30c541  # Revert "lxd/firewall/drivers/drivers/xtables: Don't check for existing rule in iptablesAdd"
+      git cherry-pick 903ba45ce034df7a258e2bf9443af6e8acf6e78f  # lxd/daemon/images: Adds imageDownloadLock function
+      git cherry-pick 68b0bd08eae3039f9186fd0d9c51a0ecc1526955  # lxd/daemon/images: Use d.imageDownloadLock in ImageDownload
+      git cherry-pick 652e8a3131cb9a9a71d8c90cd63d83691e984b04  # lxd/daemon/images: Improve error messages in ImageDownload
+      git cherry-pick fd081f700384a419e57013090bd1fdc38034a125  # lxd/instance: Improve error messages in instanceCreateFromImage
+      git cherry-pick 8f211cad3ae0f8d3565a7731d245e2ac6091d3de  # lxd/instance: Use d.imageDownloadLock in instanceCreateFromImage
+      git cherry-pick 6fba0e596cf551ba2396628893f66750f429b737  # lxd/firewall/drivers/drivers/xtables: Only add multiple instance <> instance NAT rules for proxy if connect port range used in InstanceSetupProxyNAT
+      git cherry-pick 3e69a09fab6c9c0bb1aafc1b9780a5348b787bef  # lxd/firewall/drivers/drivers/xtables: Don't look for existing rules in iptablesAdd
+      git cherry-pick dbcf091a95d55d2c633c71edb039dae2179ddf71  # lxd/firewall/drivers/drivers/nftables: Only add multiple instance <> instance NAT rules for proxy if connect port range used in InstanceSetupProxyNAT
+      git cherry-pick b1633caa3ede0af3513cd65bc84a772210defb91  # lxd/network/acl/driver/common: Add check for incorrect use of mixed IP family subjects in validateRule
+      git cherry-pick 2e59e184584216ed4bbb180693643ced6e6d1618  # lxd/network/acl/driver/common: Improve IP family validation for ICMP
+      git cherry-pick f12426bf9cc21254e416b150579f7e90dadae850  # lxd/networks: Updates doNetworksCreate to skip network validation during pre-join phase
+      git cherry-pick 5f0dfb6797a873d37c6c4f064196e617bfc89aad  # lxd/network/acl/driver/common: Fix typo
+      git cherry-pick 5a1c541fe3c4f282f57ec188b42f3bbb34d80b45  # lxd/project: Only consider syscall interception as low-level
+      git cherry-pick 46b698905564de3069ff62a3827bfdf821075b92  # shared/simplestreams: Improve error messages
+      git cherry-pick f3f04b02a3d59e045ac3ba9034cc0af11f4c2d15  # lxd/daemon/images: Improve error messages
+      git cherry-pick 9ad93a67f8219c07c1fd99112e03fed4f9187c5b  # client/simplestreams/images: Improve error messages
+      git cherry-pick bd0000d1cbaa9d65477cf64228bc9171faf65a05  # test/godeps.list: Adds github.com/pkg/errors
+      git cherry-pick 054435f33411b890f48d71ccac50c7eef04a2789  # lxd: don't set device cgroup values for unpriv containers
+      git cherry-pick 116bd2bd2038b5cac3f1b428dd86554c2815c6b1  # lxd/storage: Re-introduce cluster distributino of volume snapshots
+
       # Download any new dependencies
       export GOPATH=$(realpath ../go)
       export GO111MODULE=off
