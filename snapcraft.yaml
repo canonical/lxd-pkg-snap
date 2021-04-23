@@ -119,7 +119,7 @@ parts:
     source: snapcraft/empty
     plugin: nil
     stage-packages:
-      - btrfs-tools
+      - btrfs-progs
     prime:
       - bin/btrfs
       - bin/btrfstune
