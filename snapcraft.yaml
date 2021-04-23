@@ -214,6 +214,8 @@ parts:
     source-type: git
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     stage-packages:
       - libuv1
     build-packages:
@@ -298,6 +300,8 @@ parts:
     source-type: git
     source-tag: libmnl-1.0.4
     plugin: autotools
+    configflags:
+      - --prefix=
     organize:
       usr/lib/: lib/
     prime:
@@ -310,6 +314,8 @@ parts:
     source-type: git
     source-tag: libnftnl-1.1.9
     plugin: autotools
+    configflags:
+      - --prefix=
     organize:
       usr/lib/: lib/
     prime:
@@ -321,6 +327,8 @@ parts:
     source-tag: v2.5.1
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     build-packages:
       - gperf
     organize:
@@ -334,6 +342,8 @@ parts:
     source-tag: v1.0.24
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     organize:
       usr/lib/: lib/
     prime:
@@ -407,6 +417,7 @@ parts:
     source-tag: v0.9.8
     plugin: autotools
     configflags:
+      - --prefix=
       - --with-json
     build-packages:
       - libjansson-dev
@@ -459,6 +470,8 @@ parts:
     source-tag: v2.15.0
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     stage-packages:
       - uuid-runtime
     organize:
@@ -524,7 +537,6 @@ parts:
     source-tag: IRRELEVANT
     source-depth: 1
     plugin: autotools
-    install-via: prefix
     configflags:
       - --disable-bochs
       - --disable-cloop
@@ -562,6 +574,7 @@ parts:
       - --enable-virtfs
       - --firmwarepath=/snap/lxd/current/share/qemu/
       - --localstatedir=/var/
+    install-via: prefix
     build-packages:
       - bison
       - flex
@@ -672,6 +685,8 @@ parts:
     source-type: git
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     stage-packages:
       - libuv1
     build-packages:
@@ -687,6 +702,8 @@ parts:
     source-depth: 1
     source-tag: version-3.34.1
     plugin: autotools
+    configflags:
+      - --prefix=
     build-packages:
       - tcl
     override-build: |-
@@ -710,6 +727,8 @@ parts:
     source-tag: v1.0.4
     source-depth: 1
     plugin: autotools
+    configflags:
+      - --prefix=
     build-packages:
       - liblzma-dev
     prime:
@@ -787,6 +806,8 @@ parts:
     source-tag: zfs-0.6.5.11
     plugin: autotools
     configflags:
+      - --prefix=
+    configflags:
       - --with-config=user
     build-packages:
       - uuid-dev
@@ -823,6 +844,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
+      - --prefix=
       - --with-config=user
     build-packages:
       - libblkid-dev
@@ -855,6 +877,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
+      - --prefix=
       - --with-config=user
     build-packages:
       - libblkid-dev
@@ -888,6 +911,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
+      - --prefix=
       - --with-config=user
     build-packages:
       - libblkid-dev
@@ -940,6 +964,7 @@ parts:
       - pkg-config
     plugin: autotools
     configflags:
+      - --prefix=
       - --disable-api-docs
       - --disable-bash
       - --disable-doc
@@ -990,6 +1015,7 @@ parts:
       - fuse
     plugin: autotools
     configflags:
+      - --prefix=
       - --datarootdir=/snap/lxd/current/
       - --localstatedir=/var/snap/lxd/common/var/
     organize:
