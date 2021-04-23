@@ -807,7 +807,6 @@ parts:
     plugin: autotools
     configflags:
       - --prefix=
-    configflags:
       - --with-config=user
     build-packages:
       - uuid-dev
