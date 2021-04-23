@@ -1080,6 +1080,8 @@ parts:
       - libacl1-dev
       - libudev-dev
       - pkg-config
+    build-snaps:
+      - go
     stage-packages:
       - acl
       - attr
@@ -1093,15 +1095,7 @@ parts:
       - squashfs-tools
       - usbutils
       - xdelta3
-    plugin: nogetgo
-    go-buildtags:
-      - libsqlite3
-    go-importpath: github.com/lxc/lxd
-    go-packages:
-      - github.com/lxc/lxd/lxc
-      - github.com/lxc/lxd/lxc-to-lxd
-      - github.com/lxc/lxd/lxd
-      - github.com/lxc/lxd/lxd-benchmark
+    plugin: nil
     override-build: |
       set -ex
 
@@ -1110,22 +1104,26 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      # Download any new dependencies
-      export GOPATH=$(realpath ../go)
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
       export GO111MODULE=off
-      go get -t -d ./...
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
+      export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
 
-      # Setup for our shared libraries
-      sed -i "/\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/canonical/go-dqlite/internal/bindings/server.go
-      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
+      # Setup the GOPATH
+      rm -Rf "${GOPATH}"
+      mkdir -p "${GOPATH}/src/github.com/lxc"
+      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
 
-      # Run the standard build
-      set +ex
-      snapcraftctl build
-      set -ex
+      # Download the dependencies
+      go get -d -v ./...
 
-      # Build the agent (special build tags)
+      # Build the binaries
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/lxc/lxd/lxc
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/lxc/lxd/lxc-to-lxd
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/lxc/lxd/lxd
       CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/lxc/lxd/lxd-benchmark
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1164,25 +1162,25 @@ parts:
     after:
       - lxd
       - sqlite
-    plugin: nogetgo
-    go-buildtags:
-      - libsqlite3
-    go-importpath: github.com/lxc/lxd-pkg-snap/lxd-migrate
+    build-snaps:
+      - go
+    plugin: nil
     override-build: |
       set -ex
 
-      # Download any new dependencies
-      export GOPATH=$(realpath ../go)
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
       export GO111MODULE=off
-      go get -t -d ./...
+      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
+      export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
 
-      # Setup for our shared libraries
-      sed -i "/^\/\*/a #cgo CFLAGS: -I${SNAPCRAFT_STAGE}/include/" ../go/src/github.com/mattn/go-sqlite3/sqlite3.go
+      # Download the dependencies
+      go get -d -v ./...
 
-      set +ex
-      snapcraftctl build
-      set -ex
+      # Build the binaries
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
+      # Install bridge script
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
     prime:
@@ -1197,8 +1195,21 @@ parts:
 
   snap-query:
     source: snap-query/
-    plugin: nogetgo
-    go-importpath: github.com/lxc/lxd-pkg-snap/snap-query
+    build-snaps:
+      - go
+    plugin: nil
+    override-build: |
+      set -ex
+
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
+      export GO111MODULE=off
+
+      # Download the dependencies
+      go get -d -v ./...
+
+      # Build the binaries
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" ./
     prime:
       - bin/snap-query
 
