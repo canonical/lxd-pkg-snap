@@ -1131,6 +1131,8 @@ parts:
       - bin/unsquashfs
       - bin/xdelta3
 
+      - lib/*/libidn.so.*
+
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc
