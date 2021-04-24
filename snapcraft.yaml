@@ -148,12 +148,7 @@ parts:
       usr/lib/: lib/
     prime:
       - bin/ceph
-      - bin/python
-      - bin/python2*
       - bin/rbd
-      - lib/python2.7
-      - lib/*/libpython2.7.so*
-      - -lib/python2.7/sitecustomize.py
       - lib/*/ceph
       - lib/*/libboost_iostreams.so.*
       - lib/*/libboost_program_options.so.*
@@ -169,15 +164,7 @@ parts:
       - lib/*/libnspr4.so
       - lib/*/libnss3.so
       - lib/*/libibverbs.so*
-      - lib/*/nss/libsoftokn3.so
-      - lib/*/nss/libfreeblpriv3.so
-      - lib/*/libnssutil3.so
-      - lib/*/libplc4.so
-      - lib/*/libplds4.so
-      - lib/*/librados.so.*
-      - lib/*/librbd.so.*
-      - lib/*/libsmime3.so
-      - lib/*/libsnappy*
+      - lib/python3
 
   criu:
     source: https://github.com/checkpoint-restore/criu
@@ -194,7 +181,6 @@ parts:
       - libprotobuf-dev
       - protobuf-c-compiler
       - protobuf-compiler
-      - python
       - xmlto
     stage-packages:
       - libnet1
