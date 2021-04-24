@@ -1,5 +1,5 @@
 name: lxd
-base: core18
+base: core20
 assumes:
   - snapd2.39
 version: git
