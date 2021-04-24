@@ -761,24 +761,6 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
 
-  xtables:
-    source: snapcraft/empty
-    plugin: nil
-    stage-packages:
-      - ebtables
-      - iptables
-      - xtables-addons-common
-    organize:
-      usr/lib/*/xtables/*: lib/xtables/
-      lib/ebtables/*: lib/
-      sbin/: bin/
-    prime:
-      - bin/ebtables
-      - etc/ethertypes
-      - etc/protocols
-      - lib/libebt*
-      - lib/xtables/*
-
   xz:
     source: snapcraft/empty
     plugin: nil
@@ -1202,7 +1184,6 @@ parts:
       - squashfs-tools-ng
       - vim
       - xfs
-      - xtables
       - xz
       - zfs-0-6
       - zfs-0-7
