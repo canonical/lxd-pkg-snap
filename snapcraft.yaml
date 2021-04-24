@@ -738,6 +738,7 @@ parts:
       usr/lib/: lib/
     prime:
       - lib/libraft*so*
+      - lib/*/libuv.so*
 
   sqlite:
     source: https://github.com/sqlite/sqlite
