@@ -333,6 +333,10 @@ parts:
       usr/lib/: lib/
     prime:
       - lib/libnftnl*so*
+    override-build: |
+      snapcraftctl build
+
+      sed -i "s# /lib/libmnl.la# ${SNAPCRAFT_STAGE}/lib/libmnl.la#g" "${SNAPCRAFT_PART_INSTALL}/lib/libnftnl.la"
 
   libseccomp:
     source: https://github.com/seccomp/libseccomp
