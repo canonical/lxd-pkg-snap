@@ -16,7 +16,6 @@ export LXD_LXC_HOOK="${SNAP_CURRENT}/lxc/hooks/"
 export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
-export XTABLES_LIBDIR="${SNAP_CURRENT}/lib/xtables/"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 
