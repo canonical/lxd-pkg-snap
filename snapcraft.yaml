@@ -142,7 +142,6 @@ parts:
     plugin: nil
     stage-packages:
       - ceph-common
-      - libdb5.3
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -152,18 +151,13 @@ parts:
       - lib/*/ceph
       - lib/*/libboost_iostreams.so.*
       - lib/*/libboost_program_options.so.*
-      - lib/*/libboost_random.so.*
-      - lib/*/libboost_regex.so.*
-      - lib/*/libboost_system.so.*
       - lib/*/libboost_thread.so.*
       - lib/*/libcephfs*
-      - lib/*/libdb-5.3.so
-      - lib/*/libicudata.so.*
-      - lib/*/libicui18n.so.*
-      - lib/*/libicuuc.so.*
-      - lib/*/libnspr4.so
-      - lib/*/libnss3.so
       - lib/*/libibverbs.so*
+      - lib/*/librados.so*
+      - lib/*/librbd.so*
+      - lib/*/librdmacm.so*
+      - lib/*/libsnappy.so*
       - lib/python3
 
   criu:
