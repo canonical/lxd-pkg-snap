@@ -803,6 +803,7 @@ parts:
     source: snapcraft/empty
     plugin: nil
     stage-packages:
+      - vim-common
       - vim-tiny
     organize:
       usr/bin/: bin/
