@@ -214,7 +214,7 @@ parts:
     source-type: git
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     stage-packages:
       - libuv1
@@ -300,7 +300,7 @@ parts:
     source-type: git
     source-tag: libmnl-1.0.4
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     organize:
       usr/lib/: lib/
@@ -314,7 +314,7 @@ parts:
     source-type: git
     source-tag: libnftnl-1.2.0
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     organize:
       usr/lib/: lib/
@@ -327,7 +327,7 @@ parts:
     source-tag: v2.5.1
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     build-packages:
       - gperf
@@ -342,7 +342,7 @@ parts:
     source-tag: v0.8.3
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --with-tpm2
       - --with-openssl
@@ -357,7 +357,7 @@ parts:
     source-tag: v1.0.24
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     organize:
       usr/lib/: lib/
@@ -431,7 +431,7 @@ parts:
     source-type: git
     source-tag: v0.9.8
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --with-json
     build-packages:
@@ -485,7 +485,7 @@ parts:
     source-tag: v2.15.0
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     stage-packages:
       - uuid-runtime
@@ -508,7 +508,7 @@ parts:
     source-tag: v21.03.0
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --with-ovs-source=../../openvswitch/build/
     prime:
@@ -564,7 +564,7 @@ parts:
     source-tag: v0.5.2
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --with-seccomp
       - --with-openssl
@@ -595,7 +595,7 @@ parts:
     source-tag: IRRELEVANT
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --disable-bochs
       - --disable-cloop
       - --disable-dmg
@@ -632,7 +632,6 @@ parts:
       - --enable-virtfs
       - --firmwarepath=/snap/lxd/current/share/qemu/
       - --localstatedir=/var/
-    install-via: prefix
     build-packages:
       - bison
       - flex
@@ -743,7 +742,7 @@ parts:
     source-type: git
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     stage-packages:
       - libuv1
@@ -762,7 +761,7 @@ parts:
     source-depth: 1
     source-tag: version-3.35.5
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     build-packages:
       - tcl
@@ -787,7 +786,7 @@ parts:
     source-tag: v1.1.1
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
     build-packages:
       - liblzma-dev
@@ -865,7 +864,7 @@ parts:
     source-type: git
     source-tag: zfs-0.6.5.11
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/
       - --with-config=user
     build-packages:
@@ -902,7 +901,7 @@ parts:
     source-tag: zfs-0.7.13
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/
       - --with-config=user
     build-packages:
@@ -935,7 +934,7 @@ parts:
     source-tag: zfs-0.8.6
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/
       - --with-config=user
     build-packages:
@@ -969,7 +968,7 @@ parts:
     source-tag: zfs-2.0.4
     source-depth: 1
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/
       - --with-config=user
     build-packages:
@@ -1022,7 +1021,7 @@ parts:
       - libselinux1-dev
       - pkg-config
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --disable-api-docs
       - --disable-bash
@@ -1073,7 +1072,7 @@ parts:
     stage-packages:
       - fuse
     plugin: autotools
-    configflags:
+    autotools-configure-parameters:
       - --prefix=
       - --datarootdir=/snap/lxd/current/
       - --localstatedir=/var/snap/lxd/common/var/
