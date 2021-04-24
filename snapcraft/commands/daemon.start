@@ -23,6 +23,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
+export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
 # Clusters should always be in the phased group (special cohort).
 if [ -e "${SNAP_COMMON}/lxd/cluster.crt" ]; then
