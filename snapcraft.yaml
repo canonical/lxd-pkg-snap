@@ -139,9 +139,9 @@ parts:
       - bin/rbd
       - lib/*/ceph
       - lib/*/libatomic.so*
-      - lib/*/libboost_iostreams.so.*
-      - lib/*/libboost_program_options.so.*
-      - lib/*/libboost_thread.so.*
+      - lib/*/libboost_iostreams.so*
+      - lib/*/libboost_program_options.so*
+      - lib/*/libboost_thread.so*
       - lib/*/libcephfs*
       - lib/*/libibverbs.so*
       - lib/*/librados.so*
