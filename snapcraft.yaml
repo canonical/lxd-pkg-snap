@@ -120,6 +120,8 @@ parts:
     plugin: nil
     stage-packages:
       - btrfs-progs
+    organize:
+      sbin/: bin/
     prime:
       - bin/btrfs
       - bin/btrfstune
