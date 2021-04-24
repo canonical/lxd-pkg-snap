@@ -655,9 +655,12 @@ parts:
       set +ex
       snapcraftctl build
     organize:
-      libexec/: bin/
       usr/bin/: bin/
       usr/lib/: lib/
+      usr/local/bin/: bin/
+      usr/local/lib/: lib/
+      usr/local/libexec/: bin/
+      usr/local/share/: share/
     prime:
       - bin/genisoimage*
       - bin/mkisofs*
@@ -688,6 +691,9 @@ parts:
       - xorriso
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+
+      export ARCH="$(basename $(readlink -f ${SNAPCRAFT_STAGE}/lib/*-linux-gnu*/))"
+      export LD_LIBRARY_PATH="${SNAPCRAFT_STAGE}/lib:${SNAPCRAFT_STAGE}/lib/${ARCH}"
 
       set -ex
       rm -Rf iso-root vfat-root shell.iso
