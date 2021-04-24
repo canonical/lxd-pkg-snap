@@ -805,7 +805,7 @@ parts:
     source-tag: zfs-0.6.5.11
     plugin: autotools
     configflags:
-      - --prefix=
+      - --prefix=/
       - --with-config=user
     build-packages:
       - uuid-dev
@@ -842,7 +842,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
-      - --prefix=
+      - --prefix=/
       - --with-config=user
     build-packages:
       - libblkid-dev
@@ -875,7 +875,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
-      - --prefix=
+      - --prefix=/
       - --with-config=user
     build-packages:
       - libblkid-dev
@@ -909,7 +909,7 @@ parts:
     source-depth: 1
     plugin: autotools
     configflags:
-      - --prefix=
+      - --prefix=/
       - --with-config=user
     build-packages:
       - libblkid-dev
