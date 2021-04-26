@@ -11,6 +11,13 @@ import (
 	"github.com/lxc/lxd/shared"
 )
 
+func runSnapCommand(name string, arg ...string) (string, error) {
+	args := []string{"--mount=/run/snapd/ns/lxd.mnt", name}
+	args = append(args, arg...)
+
+	return shared.RunCommand("nsenter", args...)
+}
+
 func compareVersions(a string, b string) int {
 	aFields := strings.Split(a, ".")
 	bFields := strings.Split(b, ".")
