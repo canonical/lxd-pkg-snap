@@ -52,7 +52,8 @@ apps:
     stop-timeout: 600s
     restart-condition: on-failure
     daemon: simple
-    slots: [lxd]
+    slots:
+      - lxd
     plugs:
       - lxd-support
       - network-bind
