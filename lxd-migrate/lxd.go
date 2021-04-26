@@ -440,7 +440,7 @@ func (d *lxdDaemon) rewriteStorage(dst *lxdDaemon) error {
 
 	// ZFS rewrite function
 	zfsRewrite := func(zpool string) error {
-		output, err := shared.RunCommand("zfs", "list", "-H", "-t", "all", "-o", "name,mountpoint", "-r", zpool)
+		output, err := runSnapCommand("zfs", "list", "-H", "-t", "all", "-o", "name,mountpoint", "-r", zpool)
 		if err != nil {
 			// Print a clear error message but don't fail as that'd leave a broken LXD
 			fmt.Println("")
@@ -463,7 +463,7 @@ func (d *lxdDaemon) rewriteStorage(dst *lxdDaemon) error {
 			}
 
 			mountpoint = convertPath(mountpoint, d.path, dst.path)
-			_, err := shared.RunCommand("zfs", "set", fmt.Sprintf("mountpoint=%s", mountpoint), name)
+			_, err := runSnapCommand("zfs", "set", fmt.Sprintf("mountpoint=%s", mountpoint), name)
 			if err != nil {
 				return err
 			}
