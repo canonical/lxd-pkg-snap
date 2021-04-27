@@ -1235,6 +1235,54 @@ parts:
       git cherry-pick bd0000d1cbaa9d65477cf64228bc9171faf65a05  # test/godeps.list: Adds github.com/pkg/errors
       git cherry-pick 054435f33411b890f48d71ccac50c7eef04a2789  # lxd: don't set device cgroup values for unpriv containers
       git cherry-pick 116bd2bd2038b5cac3f1b428dd86554c2815c6b1  # lxd/storage: Re-introduce cluster distributino of volume snapshots
+      git cherry-pick b962d3fee57d205c23bdd8c94780b8bb722cf52a  # lxc/remote: Only update URL in set-url
+      git cherry-pick 5c6c8457e8abc8aa2ef2585643b42746d7b2de7d  # lxd/instance/drivers: Don't overwrite template triggers
+      git cherry-pick f169a764dc177246eae34780630d470d9368b642  # lxd/daemon/images: Removes unnecessary imagesDownloadingLock mutex
+      git cherry-pick 1747fee56e32d0592765e36591a92b29f5c3246e  # lxc: Fix help for string arguments
+      git cherry-pick 1689fa7b43993435c0fe1fddc40022c2223598d6  # tests: Fix apply_template check
+      git cherry-pick 0d117d2f3755d59a4b9d885688db6db2f567f5a4  # lxd/cluster/membership: Updates Bootstrap to generate new cluster certificate
+      git cherry-pick 6cc7d7a3e9139d27e649c81effa6df036668b031  # lxd/util/encryption: Comment on LoadCert
+      git cherry-pick da6e61c2efa6e5a14d4305c7d3db4d2e8ec3acc2  # lxd/util/encryption: Adds LoadClusterCert function
+      git cherry-pick cbf60c7928ca27c0e5623a20e9eadd6c53245d14  # test: load cluster.crt not server.crt when bootstrapping a cluster
+      git cherry-pick 85ab53e7b0b522f8609170e1e1a1f741db14860f  # lxc-to-lxd: Fix TestConvertNetworkConfig loopback only test
+      git cherry-pick 36813d3223c715e004e9029bdef256cbe3f49668  # lxd/db: Add cluster ToAPI
+      git cherry-pick 8d62c8477ab990d761d745345ff5ad2bd61248c6  # lxd: Switch to using GetNodes
+      git cherry-pick 681881e6fae11a19e57f4b945fe07f5d149a403d  # lxd/cluster: Drop List function
+      git cherry-pick 80fc3549254b417336a1918eca03501c9c1a6751  # tests: Update for current cluster messages
+      git cherry-pick 94c6f352cd01c94238d1e859e49bf123f8a5d201  # lxd/lxd: Prevent multiple routed NIC devices from using "auto" gateway mode
+      git cherry-pick bb1a47f16aec1434c24b8b2c6dcb5ab73df1bd3c  # lxd/db: Add node ID to StorageVolumeArgs
+      git cherry-pick 50841ae5efeb8947d79d9ae0f8a91aeed67210b0  # lxd/storage/volumes/snapshots: Updates autoCreateCustomVolumeSnapshotsTask to always snapshot local custom volumes
+      git cherry-pick a49c6fc62b26b838f6698ffea3f6bcc41e28f367  # lxd/storage/volumes/snapshots: Update autoCreateCustomVolumeSnapshots return value
+      git cherry-pick 8b1dc9ab019d22024bdc2ae2f578ac0371e923f7  # lxd/storage/volumes/snapshots: Adds comments to autoCreateCustomVolumeSnapshots
+      git cherry-pick 4df62cad46e03d47c7bb04bc62ac3579fe05c8dc  # lxd: Move image-refresh to /internal/testing/
+      git cherry-pick c22ec5f2212a277c79ea42a33d363725fdb25582  # test/suites: Use /internal/testing/image-refresh
+      git cherry-pick 5d760521ecc7a623c9d52db468e353193c401603  # lxc/storage_volume: Properly use cluster target
+      git cherry-pick 2842f743a9fe74ee3f223424c7da2e9633181f76  # lxc/storage_volume: Add missing target
+      git cherry-pick f86eaf85c38cda988589e64b643670189d22923f  # vm/qemu: configure spice using -spice parameter
+      git cherry-pick e605a57d1d6e45fb38a406f27776de1fba56f92f  # lxd/storage_volume_snapshots: Fix cluster redirection
+      git cherry-pick 70b41a3370ea337b20a73d97f3308d52c81c82da  # lxd/db/storage: Properly increment snapshots
+      git cherry-pick 09757bec216df44b5c24ecc2a15bc08324b8b3a2  # lxd/storage_pools: Fix ordering of pool delete
+      git cherry-pick ac1e31a781378fcb08e217517997b84ff6532e5e  # lxd/endpoint: Retry binding on startup
+      git cherry-pick 200288b76c3fa129ac8cf30aad6bed954bf9d655  # lxd/instance/qemu: Move to query-cpus-fast
+      git cherry-pick 0aebff62bcdc8051fc450f732923ff584296f48e  # shared/api/certificate: Adds certificate type constants
+      git cherry-pick e7f0e102266d0415390924c49b3ec5d7aa81859b  # lxd/db/certificates: Adds CertificateAPITypeToDBType and ToAPIType functions
+      git cherry-pick da1b8b8d29d92d202c865e35e6d19ade986e2e78  # lxd/db/certificates: Comment on Certificate
+      git cherry-pick 2a61cbbbfcd6deff5d8162965ee94f2031d6bba8  # lxc: Switch to CertificateTypeClient constant
+      git cherry-pick b2474c4ce094c4f6951a74af3a46ec9d240b405f  # lxd: Switch to CertificateTypeClient constant
+      git cherry-pick deb2e539a08eb5a6a5fa43980fe1375ca4702728  # lxd-p2c/utils: Switch to CertificateTypeClient constant
+      git cherry-pick 9bd9bdcc457cc1d2464eb6803c0a09685e8dfbad  # lxd/util/encryption: Adds LoadServerCert function
+      git cherry-pick 46b81ad5db3887f7ff09a58c8a8a89b3ccce1d57  # lxd/certificates: updateCertificateCache error quoting consistency
+      git cherry-pick 1a6673828af94dabf8956c758958dd025b8b83eb  # lxd/certificates: Store certificateCache by certificate type
+      git cherry-pick 1da382bfbff9c27e5e1dbd98a4236ee088c3cc85  # lxd/certificates: db.CertificateAPITypeToDBType usage and set certificate type to server
+      git cherry-pick b6f3800a4b64afd7a1d61708dd57f554d58ef6d2  # lxd/certificates: Comment ending consistency
+      git cherry-pick 20d6aaa00a711ca1d15efebd1277851cec18f533  # lxd/daemon: Adds getTrustedCertificates function
+      git cherry-pick df7d7d5cad245f4991db69c848ac794c7ed5037e  # lxd/daemon: Update Authenticate to use d.getTrusterCertificates
+      git cherry-pick 8e5e83d8595ff7732ab20821522ec5ee29ad934e  # lxd/daemon: Comment ending consistency in Authenticate
+      git cherry-pick 2834b5a00609bb4076a9389af2e61eeda4ab79dc  # lxd/daemon: Ensure d.clientCerts.Projects isn't accessed without a lock
+      git cherry-pick 96d1ea11194a5121c29edc6b23826d9df2780f1b  # lxd/network/driver/bridge: Don't attempt to setup ipv6 firewall when no ipv6.address
+      git cherry-pick 75fe4efe1eb4b61b66f99281e8d642d3723a8d27  # lxd/swagger: Add NotFound response
+      git cherry-pick 7027842f11af153f931304f25be95b6546f81b73  # lxd/snapshots: Fix multiple schedules
+      git cherry-pick 6761341669c0cb7f015c8213624d4c781f3e818f  # lxd/images: Ignore intervals on manual refreshes
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
