@@ -1283,6 +1283,16 @@ parts:
       git cherry-pick 75fe4efe1eb4b61b66f99281e8d642d3723a8d27  # lxd/swagger: Add NotFound response
       git cherry-pick 7027842f11af153f931304f25be95b6546f81b73  # lxd/snapshots: Fix multiple schedules
       git cherry-pick 6761341669c0cb7f015c8213624d4c781f3e818f  # lxd/images: Ignore intervals on manual refreshes
+      git cherry-pick 8a371a314dc22668ef4f9a784f416a9d488f7d2f  # shared/api: Add warning structs
+      git cherry-pick d1765bed4f030c6c8e7f6d753cc2a84d20657624  # client: Add warning functions
+      git cherry-pick 525a973e6775c4144bd4ad268549b087ed3176ab  # lxd/util/http: Fix CheckTrustState to block access for revoked certificates that were formerly trusted
+      git cherry-pick 8068d32be4a8b4daef5ff3fdd5e60720b2e9fb18  # lxd/certificates: Adds comment about the importance of a check related to CA mode in certificatesPost
+      git cherry-pick 60495431ee5f993653def1dd0592aafc2205138f  # test: Remove trusted remote before checking adding untrusted remote
+      git cherry-pick 5f8c4aeeed984328a63cfd63e78b57336b4099b2  # test: Don't use CA PKI generated server certs for LXD
+      git cherry-pick a093d03bb7747f53acd85eaa53c44d557008231e  # test/deps: Removes alternative pre-generated server cert and key
+      git cherry-pick cc43be8161ab900ea22738f4f6465ef856597107  # test: Remove LXD_ALT_CERT
+      git cherry-pick 3d2941a046482fd944d070bd47695a9a16538c58  # test: Update PKI tests to comply with expectations of revocation behaviour
+      git cherry-pick 3663df1699ee0f8b21d7e1b10a69ed112ea223d1  # Revert "lxd/instance/qemu: Move to query-cpus-fast"
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
