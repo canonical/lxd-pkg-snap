@@ -930,7 +930,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.6
+    source-tag: lxc-4.0.7
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -967,71 +967,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick b1710cdb0378b998055a88e9b439a9c9d1577973  # commands: fix check for seccomp notify support
-      git cherry-pick 9d6a3de70086d46f7562ac689d10ca1e36b237a1  # configure: skip libseccomp tests if it is disabled
-      git cherry-pick 563ec46266b8967f0ee60e0032bbe66b3b37207c  # conf: fix containers retaining CAP_NET_ADMIN
-      git cherry-pick 5a13595b7bc3db36e3f0cdf6f03758591a019d93  # cgroups: fix cgroup mounting
-      git cherry-pick 93ce8339d91c9684b739cd65b8b97e9d24ab1371  # lsm: remove obsolute comment about constructor
-      git cherry-pick 027f9f8225874b683d70d1ebcce4ae8682522e65  # lxc_attach: include rexec conditionally
-      git cherry-pick d12b5190ca8fe3966496858e8c5db508a86ad40a  # tree-wide: fix some header inclusions
-      git cherry-pick db574851e6d025ee0daf4afefafa0a05297ad4b5  # initutils: fix missing includes
-      git cherry-pick a8d0ef4f131a823b3f4e078f7191c4486725e303  # configure: support static binaries
-      git cherry-pick 7b16be129acf38f3a1aae63e98a867df82a5d826  # autotools: enable static builds for tools
-      git cherry-pick 132024c5e8b4617f4fd804a54d710651735711a8  # autotools: enable static builds for commands
-      git cherry-pick 4fc3bbd45c25a995b3decbdd953a389a365bc369  # tree-wide: fix compilation with-Wstrict-prototypes -Wold-style-definition
-      git cherry-pick 5fd525dfdbedf8babe469190e3cb696f01e0f353  # config: update ax_pthread.m4
-      git cherry-pick 63efab747c92667a3fea097337133c82152a9ef7  # configure: add AC_SYS_LARGEFILE checking
-      git cherry-pick 0564659714a5ed51883a491fd99c725192aece43  # autotools: update build
-      git cherry-pick 65bd3f8b4c50ba919fe46af661698f5bb620c695  # file_utils: introduce read_file_at()
-      git cherry-pick 329b11dca1312440f57a0bf87632a928e3206c4d  # string_utils: add must_make_path_relative()
-      git cherry-pick f8ea20d88b6e8cc202adf4bd0d8cc10ff70cce52  # cgroups: coding style fixes
-      git cherry-pick 391d314b7aa2087608b898399fb53a9dd259266c  # cgroups: rework cg_unified_init()
-      git cherry-pick c825d4704266c3517288895184d9232c55e1b7f8  # cgroups: detect and record cgroup2 freezer support
-      git cherry-pick 3886f4a8d9665f418c3846d16c5141753640c51f  # criu: handle cgroup2 freezer
-      git cherry-pick c1c7d42cf757c46068ef3a0eeea5a8f6c88d7f5e  # mkdir -p /proc /sys on container startup
-      git cherry-pick 6cec518d16b53d9416dd5a370c01c006de21e8ec  # conf: fix coding style
-      git cherry-pick 4b7db20ee44ed94e948fa81da7030ad3fdf31cd8  # conf: coding style fixes
-      git cherry-pick f06e80de163680ae7cd92fe8de9ae60ff3bea266  # conf: move proc and sys mountpoint creation int lxc_mount_auto_mounts()
-      git cherry-pick 30d5a566e364a9e9a9f838ceee5f46c1fa5cde6c  # attach: invert child/parent handling
-      git cherry-pick e95c4c2d9b3bef0073855eda11a0a9aaa7fe6879  # attach: use __do_free cleanup macro for cwd
-      git cherry-pick 6e9fd7e90b8b638e7b11966653228ba0139c95a1  # attach: tweak logging
-      git cherry-pick b994e6f273e2f6e9b94973a6554b02a897bb30fc  # attach: use __do_close for labelfd
-      git cherry-pick 084378794a535478961aeb8cf006221043f83bb0  # attach: coding style fixes
-      git cherry-pick 02c90439e65a1627e925cfdcda29ba898cca8d97  # attach: use free_disarm()
-      git cherry-pick 7379954b39a312972c05971274b7848a49a0c5c6  # attach: s/attach_child_main/do_attach/g
-      git cherry-pick e8a2d23cc7b3ad0f360be5c1f91e570755b06024  # attach: mark do_attach() as __noreturn
-      git cherry-pick 43a6efe7b1002ed2d5770c54fa5682d68d1df1b5  # attach: make do_attach() void
-      git cherry-pick c16fae6d41f6aa9f1a758f8bfc218b7bd7316a93  # attach: use close_prot_errno_disarm()
-      git cherry-pick 252605bccc19a0c3d75030842aac2760ac16abd5  # attach: add some DEBUG() logging to stdfd dpulication
-      git cherry-pick 8cfda4171e76c7ce3e684baea7ec9dcb859a3942  # cgroups: fix cgroup mounting
-      git cherry-pick 145423e0a34baa0ca4f1a721525ac30cec3b62e4  # utils: fix mount_at()
-      git cherry-pick 5b8e411ec79ac4c85e5410bc974e19b5feb0b60b  # configure: fix static builds with clang-12 and LTO
-      git cherry-pick f9f1879966261923e7b106717e804cbdb597f8bf  # cgroups: bpf fixes
-      git cherry-pick 8d22ec0166ee8bbf6b51596e0f93ea99026b37c4  # croups: improve __do_bpf_program_free
-      git cherry-pick 5e84adf6ffb649e56c445ae4bba138654263f65b  # cgroups: coding style fixes
-      git cherry-pick 9dee31e50145ccd06061f8e3277e7874696f9d36  # cgroups: don't initiliaze NULL log
-      git cherry-pick 8f9cd8d0d27399c9a7301125a30942227ee694c2  # cgroups: ensure all memory is zeroed
-      git cherry-pick 61eb36f89cf8079c59b7a4784448c4b3da8c7142  # cgroups: use zalloc
-      git cherry-pick 1aac9f39a0587e52a83197668eee651b0e46b14c  # cgroups: tweak cgroup initialization
-      git cherry-pick 17b2106bf01d7c58642458c5c622787d3760b91b  # log: remove pointless inline
-      git cherry-pick 7491f5a162c26796d8baaac4e51a8e819d676073  # log: add lxc_log_get_fd()
-      git cherry-pick cc486b115749a467506dee9d58bf3f03c65736a5  # seccomp: use lxc_log_get_fd()
-      git cherry-pick 599086c8487dce6c68ce8807e3e6bcd3c3ef5edc  # log: rework lxc_log_get_level()
-      git cherry-pick 5e651c8e7fc99e71bab74cd679da4e8365f5100f  # seccomp: use lxc_log_get_level()
-      git cherry-pick 4e977ae8d026247e9126769a8161b5b0eeb4ae42  # cgroups: use bpf log when logging at trace level
-      git cherry-pick b4a42b37d5381da4cc7a8ba8289ed4edab41998b  # log: add lxc_log_trace() helper
-      git cherry-pick 76651de6decac24de6c17a1cdb763e4a46e4812a  # cgroups: use PTR_TO_U64()
-      git cherry-pick 76746bc5fdb444824cd2d4d89a63cc2b9950fa8c  # cgroups: align methods
-      git cherry-pick 55fd921789b0909da6098c8474111ffae7b8594f  # utils: use SYSTRACE() when logging stdio permission fixup failures
-      git cherry-pick 971dcc4313b9eb8892fc46b23c7a18474fb6407e  # attach: log failues to dup2() with SYSDEBUG()
-      git cherry-pick f235460c3cbceaa3cc411bc321ba2434ca585e99  # attach: fix logging for stdfd replacement
-      git cherry-pick 1cc616fe8c84a9681af451c4e8791d152a07edc2  # attach: fix error checking for dup2()
-      git cherry-pick c9186cc9271579bf4456fcd32c979a9912afa7bb  # cgroups: initialize variable
-      git cherry-pick 639428eb59880a70e1e179a0c1aae53210df3148  # commands_utils: don't leak memory
-      git cherry-pick eb30db661b946219c8f67b2ce1e9b1bc8063bd3a  # conf: use lxc_log_trace()
-      git cherry-pick 6f86b90ddaeb67e80ca587db7dec7de5f5f36654  # confile_utils: use lxc_log_trace()
-      git cherry-pick aff7ab782e168bda7a7a422fbe6a04be2cd40a64  # rexec: check lseek() return value
 
       set +ex
       snapcraftctl build
