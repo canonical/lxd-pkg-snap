@@ -1010,8 +1010,6 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
-      git cherry-pick 725e90b5d67e264ee4a7ff0851c79728feab1da8  # proc_cpuview: release lock before returning
-
       set +ex
       snapcraftctl build
       set -ex
