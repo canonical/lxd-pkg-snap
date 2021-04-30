@@ -1012,7 +1012,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.7
+    source-tag: lxc-4.0.8
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -1050,9 +1050,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 112ccbc91300b21642daddf77a52c2113c320608  # cgroups: fix fallback attach codepath
-      git cherry-pick 2570cdf3fe541ae9ccff5c40efe66cf8944f6f86  # storage: fix dup_cloexec() call
 
       set +ex
       snapcraftctl build
