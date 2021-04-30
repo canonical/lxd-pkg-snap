@@ -1229,6 +1229,8 @@ parts:
       git cherry-pick cc43be8161ab900ea22738f4f6465ef856597107  # test: Remove LXD_ALT_CERT
       git cherry-pick 3d2941a046482fd944d070bd47695a9a16538c58  # test: Update PKI tests to comply with expectations of revocation behaviour
       git cherry-pick 3663df1699ee0f8b21d7e1b10a69ed112ea223d1  # Revert "lxd/instance/qemu: Move to query-cpus-fast"
+      git cherry-pick 5118984d3d4b1a03e0867314d3eeb5f159387fdb  # lxd/firewall/drivers/drivers/nftables: Require kernel version >= 5.2 to allow support for inet table NAT rules
+      git cherry-pick 2aefeb3e831e5b013690125a7d45839f107427cd  # lxd/images: Specify image type during distribution
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
