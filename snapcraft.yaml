@@ -1136,6 +1136,26 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick f47e445bbdc334f1b0b9b92c36f5b3372460ea29  # lxd/main/init/interactive: Clear config.Cluster.ClusterPassword after setting up trust
+      git cherry-pick 92d450b9f25a003f3420fef780d2f2a10799a914  # [Doc] fix description of PATCH warning in rest-api.md
+      git cherry-pick 48e17555df67e3d7e36c4d5ccb44b8cfb8a97928  # [Doc] Fix remove duplicated sentences in doc/network-acls.md
+      git cherry-pick f9ae30cb1bd4cb1a3519d2ece68b3b5c84241bfe  # lxd/images: Improve logging
+      git cherry-pick f9fd9f20551fb7b5d07bbc47b17a1665a8d0a81a  # lxd/api/1/0: Whitespace
+      git cherry-pick 6668bec8490cf7731c177f4a9f09f6268cb9af8d  # lxd/api/1/0: Update d.gateway.HeartbeatOfflineThreshold when cluster.offline_threshold is changed
+      git cherry-pick 054d2cf55ac29ba1ae68d13baf680515c9d99475  # lxd/cluster/config: Add minThreshold to offlineThresholdValidator
+      git cherry-pick a2be5bb97fc66fca00a6a2e415db2dd336adbf74  # lxd/cluster/gateway: Add HeartbeatOfflineThreshold var
+      git cherry-pick f644628d291833575d33164bb3e4e5ec5ce58a6b  # lxd/cluster/heartbeat: Improve logging and errors in HeartbeatNode
+      git cherry-pick 74f46cb7a73f402b388ad728515ec236af82d7db  # lxd/cluster/heartbeat: Actually use taskCtx in HeartbeatNode for HTTP request base
+      git cherry-pick d94c16fd18a04767e34c1fbf84b56296d55a935e  # lxd/cluster/heartbeat: Don't re-run Update as this throws away discovered node liveness times
+      git cherry-pick 5fcb75cc3c88bfb6d877070a331273deb190578f  # lxd/cluster/heartbeat: tx.SetNodeHeartbeat to actual last heartbeat time
+      git cherry-pick 932435e8ff9dab332e09e95845693dc82bf3b7a1  # lxd/cluster/heartbeat: Update Send to support dynamic spread duration
+      git cherry-pick 3d84f7dab2fa26bd43688fe7b0de6fded4465703  # lxd/cluster/heartbeat: Adds heartbeatInterval function
+      git cherry-pick b8e7f434449412667e009c23807bf2b0c6fe6a1b  # lxd/cluster/heartbeat: Updates HeartbeatTask to use gateway.heartbeatInterval
+      git cherry-pick 9e82d2ad3ae3a1fe246ea1bef2ce73f0dfac4853  # lxd/cluster/heartbeat: Removes heartbeatInterval constant
+      git cherry-pick d4325df22b856803b92f96a616b5d852e07322e1  # lxd/cluster/heartbeat: Updates heartbeat to use interval derived from offline threshold
+      git cherry-pick 508b8c57383d9b4dc42ea7090e0732610f6a32a2  # lxd/daemon: Populate d.gateway.HeartbeatOfflineThreshold on init
+      git cherry-pick ecc14c2b2dd037ba8bbed7f2fb08431f406d337d  # lxd/daemon: Adds taskClusterHeartbeat var and populates it
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export GO111MODULE=off
