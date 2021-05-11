@@ -1155,6 +1155,21 @@ parts:
       git cherry-pick d4325df22b856803b92f96a616b5d852e07322e1  # lxd/cluster/heartbeat: Updates heartbeat to use interval derived from offline threshold
       git cherry-pick 508b8c57383d9b4dc42ea7090e0732610f6a32a2  # lxd/daemon: Populate d.gateway.HeartbeatOfflineThreshold on init
       git cherry-pick ecc14c2b2dd037ba8bbed7f2fb08431f406d337d  # lxd/daemon: Adds taskClusterHeartbeat var and populates it
+      git cherry-pick 26c816cbea60233896ae5889ba5ffad1b8eb3943  # lxd/cluster/heartbeat: Logging improvements
+      git cherry-pick eae462329f7e878ab8c4753fbe96c03d4c05fef2  # lxc: Update interactive editor fail message to indicate ctrl+c can be used to abort change
+      git cherry-pick e2c0e37dfb0de732adb6703673b1c96cb9765589  # shared/api: Add swagger metadata for instance backups
+      git cherry-pick 47d4d823d62d52651b56dd3324c1d709d9ca16a5  # lxd/instances: Swagger for backups
+      git cherry-pick 5aedb58fcbe8fddcf8f08df2b5f0ff23da3d979a  # shared/api: Add swagger metadata for image metadata
+      git cherry-pick a6a9049bb2d7880bf4bfb91ca2b5d1225cc68bf3  # lxd/instances: Swagger for instance metadata
+      git cherry-pick ded107544e1cf9b646608a489ad0532240dc96dc  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick c8384dba99c9f368f81647a246cb4907a80f96ed  # lxd/images: Fix typo in swagger
+      git cherry-pick 88d05888c9bee50a49230717c72f9b3167712f23  # lxd/network/openvswitch: Adds shared unquote function
+      git cherry-pick e41323e1468add7707471de2302360fb39eb4bc5  # lxd/network/openvswitch: Replace strconv.Unquote with unquote
+      git cherry-pick 6ffdbb8e8285a0467ad38585e0969b257af44ce5  # lxd/network/driver/bridge: Reuse consistent bridgeLink var rather than keep creating new vars
+      git cherry-pick 24e8b74bfd69526b9a018e346c06f332bda1d2d6  # lxd/network/driver/bridge: Bring up vxlan tunnel link
+      git cherry-pick 7ed39fe057379ca67e3937ff3e5690cc95b5d1c0  # lxd/network/driver/bridge: Use clearer naming for different link types
+      git cherry-pick ab59b698c55cb4f699cd01dd8513eab8ee7a3418  # lxd/network/driver/bridge: Don't use Link suffix for var names that don't represent links
+      git cherry-pick 969ff36cc885478f9b7da7c52561e60c97e302e5  # lxd/instances: Unmount shiftfs on startup failures
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
