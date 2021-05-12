@@ -661,7 +661,7 @@ parts:
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
       python3 ovmf-vars-generator \
         --qemu-binary "${SNAPCRAFT_STAGE}/bin/qemu-system-$(uname -m)" \
-        --print-output --disable-smm --skip-testing \
+        --print-output --skip-testing \
         --oem-string "$(cat ${SNAPCRAFT_PROJECT_DIR}/snapcraft/etc/ubuntu-sb.crt)" \
         --ovmf-binary "${SNAPCRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
         --ovmf-template-vars "${SNAPCRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
