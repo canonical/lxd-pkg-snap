@@ -257,11 +257,12 @@ parts:
           make -C BaseTools ARCH=${ARCH}
           build -a ${ARCH} -t GCC49 -b RELEASE -p ${PKG} \
             -DSECURE_BOOT_ENABLE=TRUE \
+            -DNETWORK_IP4_ENABLE=TRUE \
+            -DNETWORK_IP6_ENABLE=TRUE \
             -DNETWORK_TLS_ENABLE=TRUE \
             -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
             -DFD_SIZE_2MB \
-            -DTPM2_ENABLE=TRUE \
-            -DSMM_REQUIRE=TRUE
+            -DTPM2_ENABLE=TRUE
       EOF
       ) | bash -e
 
@@ -661,7 +662,7 @@ parts:
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
       python3 ovmf-vars-generator \
         --qemu-binary "${SNAPCRAFT_STAGE}/bin/qemu-system-$(uname -m)" \
-        --print-output --skip-testing \
+        --print-output --disable-smm --skip-testing \
         --oem-string "$(cat ${SNAPCRAFT_PROJECT_DIR}/snapcraft/etc/ubuntu-sb.crt)" \
         --ovmf-binary "${SNAPCRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
         --ovmf-template-vars "${SNAPCRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
