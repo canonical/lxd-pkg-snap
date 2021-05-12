@@ -1170,6 +1170,11 @@ parts:
       git cherry-pick 7ed39fe057379ca67e3937ff3e5690cc95b5d1c0  # lxd/network/driver/bridge: Use clearer naming for different link types
       git cherry-pick ab59b698c55cb4f699cd01dd8513eab8ee7a3418  # lxd/network/driver/bridge: Don't use Link suffix for var names that don't represent links
       git cherry-pick 969ff36cc885478f9b7da7c52561e60c97e302e5  # lxd/instances: Unmount shiftfs on startup failures
+      git cherry-pick 6f08d8c1fd0b4cd5a601a38f517c7bf6f6b5ce2d  # lxd/api/cluster: Check if LXD closing down in rebalanceMemberRoles
+      git cherry-pick fc71b2539e2cc5a7923bb9b5964c672dfd12ce18  # lxd/api/cluster: Call rebalanceMemberRoles from internalClusterRaftNodeDelete
+      git cherry-pick 13ec936ac8c6901e36314548a00a513234109a34  # lxd/cluster/gateway: Logging improvements
+      git cherry-pick 5bb2a1c9161cb53dc23523f27a06c2ef01962329  # lxd/daemon: Logging improvements
+      git cherry-pick 66a7efbaddb3cfe3e52de09ac5e23013f6e313d4  # lxd/images: Logging improvements
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
