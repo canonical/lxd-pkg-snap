@@ -257,12 +257,11 @@ parts:
           make -C BaseTools ARCH=${ARCH}
           build -a ${ARCH} -t GCC49 -b RELEASE -p ${PKG} \
             -DSECURE_BOOT_ENABLE=TRUE \
-            -DNETWORK_IP4_ENABLE=TRUE \
-            -DNETWORK_IP6_ENABLE=TRUE \
             -DNETWORK_TLS_ENABLE=TRUE \
             -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
             -DFD_SIZE_2MB \
-            -DTPM2_ENABLE=TRUE
+            -DTPM2_ENABLE=TRUE \
+            -DSMM_REQUIRE=TRUE
       EOF
       ) | bash -e
 
