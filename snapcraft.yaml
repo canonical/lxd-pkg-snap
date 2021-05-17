@@ -1175,6 +1175,44 @@ parts:
       git cherry-pick 13ec936ac8c6901e36314548a00a513234109a34  # lxd/cluster/gateway: Logging improvements
       git cherry-pick 5bb2a1c9161cb53dc23523f27a06c2ef01962329  # lxd/daemon: Logging improvements
       git cherry-pick 66a7efbaddb3cfe3e52de09ac5e23013f6e313d4  # lxd/images: Logging improvements
+      git cherry-pick 595a63d2b60552f7e4975a3a352f78f0d48cd12a  # shared/api: Add swagger metadata for instances
+      git cherry-pick 654107348f3de7c0670f75a20ec7d2b78b359781  # lxd/instances: Swagger for instances
+      git cherry-pick ec3a18b5c22ac1dd8204994722a9db276f58351a  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick 3a780b9a126f16fa23980ab57c13289f75495100  # lxd/cluster/gateway: Add heartbeatCancelLock and heartbeatCancel vars
+      git cherry-pick 1023bf1116cd6d28fd05f33ce5036de28cf1ff15  # lxd/cluster/heartbeat: Introduces heartbeatMode type and constants for heartbeat modes
+      git cherry-pick 99d9b9ce3cd2ed3a0d164711c0128798b3caa4bc  # lxd/cluster/heartbeat: Updates heartbeat to accept mode argument
+      git cherry-pick 8bb6480b02863640170d28edc16462ffdb0bc624  # lxd/cluster/heartbeat: Make end of heartbeat log message include local address for clarity
+      git cherry-pick b269d158b2c0c98e8f8b6e8e194c764c8ecf8c89  # lxd/cluster/heartbeat: Adds heartbeatRestart function
+      git cherry-pick 62799d94085a42f3d807a50ba2c84a4ba9c28d0b  # lxd/cluster: g.heartbeat() usage
+      git cherry-pick 4d3336518deb39f02e59489e66e8e508035d833a  # lxd/cluster/gateway: Call g.heartbeatRestart from HandlerFuncs when handling a heartbeat
+      git cherry-pick c17acd83960ac728c50d17cdbb38ed3cf54cfc70  # lxd/cluster/heartbeat/test: Fixes TestHeartbeat so that it waits for join notification heartbeats to occur
+      git cherry-pick 1baf21ea294053353e456c9d956a1645579f4635  # lxd/daemon/images: imageDownloadLock typo
+      git cherry-pick 6e9772dc194e01517fada17753c8c39753f2aca6  # lxd/storage/ceph: Always return VolumeUsage
+      git cherry-pick ba96daf37304cf92f6c58b23634cf057262d72a4  # doc/production-setup: Cover name leakage
+      git cherry-pick 1f7c00e2692386b5130720196dceaf3355c33b65  # lxd/apparmor/instance: Deref OVMF path
+      git cherry-pick 2615db36775f7e0972f1ab89b1b906080be97d4d  # lxd/cluster/heartbeat: Fix heartbeatInterval()
+      git cherry-pick 02230bbd84c4565cc8fbb5a2fb2cbb192a4df958  # lxd/instance/qemu: Support for security.devlxd default (true) value
+      git cherry-pick 81cbdbeb2ff5337abfac69b64452438d808eb87b  # doc/environment: Documents LXD_CONF and LXD_GLOBAL_CONF env vars
+      git cherry-pick 62ee9b5694b949b682eb95f5b0d09b42073c4375  # lxd/ip/link: MTU is an acronym and so should be uppercased in SetMtu function name
+      git cherry-pick da56e8d15720a8f4660af387b7146965e195a1c5  # lxd/ip/link: Renames Mtu field to MTU as it is an acronym
+      git cherry-pick fc193af98a4309aa15788134822aac441582a77f  # lxd/device/device/utils/network: SetMTU usage
+      git cherry-pick 60eb1e15de23bf213d496f6f52e4a08e57fe425d  # lxd/network/network/utils: Removes InterfaceSetMTU
+      git cherry-pick 91f363b283914e5db6e959a6b44f67f6f2b79abb  # lxd/network/network/utils: Adds InterfaceStatus function
+      git cherry-pick c7083e4ba1050fc85d7f58f2639005bb94f40d9e  # lxd/device/infiniband/physical: SetMTU usage
+      git cherry-pick 5ffd8c668fd744e44991de419d905f474794317e  # lxd/device/infiniband/sriov: SetMTU usage
+      git cherry-pick df13a41876b9f536967803320982c06b740176b7  # lxd/device/nic/macvlan: SetMTU usage
+      git cherry-pick 478f685f651fc14d61411103d24dcd95b6f54566  # lxd/device/nic/physical: SetMTU usage
+      git cherry-pick 1f0571e62b4493cdbccaba9dd8375508a4cd23e9  # lxd/device/nic/sriov: SetMTU usage
+      git cherry-pick fe08fa97ed67933a5632f11fce328644c14159db  # lxd/network/driver/ovn: SetMTU usage
+      git cherry-pick c3439a460a63bfbc06e989ff78520ddf66b2a635  # lxd/network/driver/bridge: SetMTU usage
+      git cherry-pick e8195eafb12c904c0359bc55cc0b883b54851ffc  # lxd/network/network/utils/sriov: Updates sriovGetFreeVFInterface to use InterfaceStatus
+      git cherry-pick 204789ccbd47d67df66c4fb2db23ccc7575b8e7a  # lxd/network/driver/physical: SetMTU usage
+      git cherry-pick ff38a642cfdb1cf30415b622cfa5a8aea2c626b8  # lxd/network/driver/physical: Check that physical parent interface has no global unicast IPs configured on it before starting
+      git cherry-pick c9e9e63743e64009c40258dce870b97f4f5fa278  # lxd/network/driver/ovn: Updates startUplinkPortPhysical to check uplink has no global unicast IPs configured
+      git cherry-pick 0de10a4637131fb74f5ebbac71b29d40fc8f630e  # lxd/instances/get: Renames doContainersGet to doInstancesGet
+      git cherry-pick bca7d51f360219cedccdb1ab964f8b13dcaa0dcd  # lxd/instances/get: Remove some of the container specific terminology in doInstancesGet
+      git cherry-pick 8faf028939b64953c7334c9dd3ce5b867f2299c4  # lxd/instances/get: Remove potential source of nil pointer dereference panic in doInstancesGet
+      git cherry-pick 4b06cbc4b9afca2015a6ef9782dd3d332ea2037b  # lxd/instance: Don't use RawOperation
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
