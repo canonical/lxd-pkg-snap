@@ -1213,6 +1213,11 @@ parts:
       git cherry-pick bca7d51f360219cedccdb1ab964f8b13dcaa0dcd  # lxd/instances/get: Remove some of the container specific terminology in doInstancesGet
       git cherry-pick 8faf028939b64953c7334c9dd3ce5b867f2299c4  # lxd/instances/get: Remove potential source of nil pointer dereference panic in doInstancesGet
       git cherry-pick 4b06cbc4b9afca2015a6ef9782dd3d332ea2037b  # lxd/instance: Don't use RawOperation
+      git cherry-pick 05952da5c3ab3b190012f5aeab424435558603dc  # lxd/operations: Remove code duplication
+      git cherry-pick cda8c354207546de91781faf236b9118823e4045  # lxd/operations: Close forwarded websocket
+      git cherry-pick 271bea61277550d22dab3a195100f018d915a4cc  # shared/network: Fix channel handling in WebsocketProxy
+      git cherry-pick 95c1e2116ff825e9eaf64c1ea7755af376071c7d  # client: Update for WebsocketProxy change
+      git cherry-pick 5402dc7666a4410fc818ed6b349b5e5afd07ff6c  # lxc: Use consistent messaging when offering to respawn interactive editor
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
