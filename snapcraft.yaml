@@ -680,8 +680,10 @@ parts:
       - --prefix=
     stage-packages:
       - libuv1
+      - liblz4-1
     build-packages:
       - libuv1-dev
+      - liblz4-dev
     organize:
       usr/lib/: lib/
     prime:
