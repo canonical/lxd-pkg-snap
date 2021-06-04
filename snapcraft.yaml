@@ -2,7 +2,7 @@ name: lxd
 base: core18
 assumes:
   - snapd2.39
-version: "4.14"
+version: "4.15"
 grade: stable
 summary: LXD - the container lightervisor
 description: |-
@@ -1105,7 +1105,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.14
+    source-tag: lxd-4.15
     after:
       - lxc
       - dqlite
@@ -1137,89 +1137,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick f47e445bbdc334f1b0b9b92c36f5b3372460ea29  # lxd/main/init/interactive: Clear config.Cluster.ClusterPassword after setting up trust
-      git cherry-pick 92d450b9f25a003f3420fef780d2f2a10799a914  # [Doc] fix description of PATCH warning in rest-api.md
-      git cherry-pick 48e17555df67e3d7e36c4d5ccb44b8cfb8a97928  # [Doc] Fix remove duplicated sentences in doc/network-acls.md
-      git cherry-pick f9ae30cb1bd4cb1a3519d2ece68b3b5c84241bfe  # lxd/images: Improve logging
-      git cherry-pick f9fd9f20551fb7b5d07bbc47b17a1665a8d0a81a  # lxd/api/1/0: Whitespace
-      git cherry-pick 6668bec8490cf7731c177f4a9f09f6268cb9af8d  # lxd/api/1/0: Update d.gateway.HeartbeatOfflineThreshold when cluster.offline_threshold is changed
-      git cherry-pick 054d2cf55ac29ba1ae68d13baf680515c9d99475  # lxd/cluster/config: Add minThreshold to offlineThresholdValidator
-      git cherry-pick a2be5bb97fc66fca00a6a2e415db2dd336adbf74  # lxd/cluster/gateway: Add HeartbeatOfflineThreshold var
-      git cherry-pick f644628d291833575d33164bb3e4e5ec5ce58a6b  # lxd/cluster/heartbeat: Improve logging and errors in HeartbeatNode
-      git cherry-pick 74f46cb7a73f402b388ad728515ec236af82d7db  # lxd/cluster/heartbeat: Actually use taskCtx in HeartbeatNode for HTTP request base
-      git cherry-pick d94c16fd18a04767e34c1fbf84b56296d55a935e  # lxd/cluster/heartbeat: Don't re-run Update as this throws away discovered node liveness times
-      git cherry-pick 5fcb75cc3c88bfb6d877070a331273deb190578f  # lxd/cluster/heartbeat: tx.SetNodeHeartbeat to actual last heartbeat time
-      git cherry-pick 932435e8ff9dab332e09e95845693dc82bf3b7a1  # lxd/cluster/heartbeat: Update Send to support dynamic spread duration
-      git cherry-pick 3d84f7dab2fa26bd43688fe7b0de6fded4465703  # lxd/cluster/heartbeat: Adds heartbeatInterval function
-      git cherry-pick b8e7f434449412667e009c23807bf2b0c6fe6a1b  # lxd/cluster/heartbeat: Updates HeartbeatTask to use gateway.heartbeatInterval
-      git cherry-pick 9e82d2ad3ae3a1fe246ea1bef2ce73f0dfac4853  # lxd/cluster/heartbeat: Removes heartbeatInterval constant
-      git cherry-pick d4325df22b856803b92f96a616b5d852e07322e1  # lxd/cluster/heartbeat: Updates heartbeat to use interval derived from offline threshold
-      git cherry-pick 508b8c57383d9b4dc42ea7090e0732610f6a32a2  # lxd/daemon: Populate d.gateway.HeartbeatOfflineThreshold on init
-      git cherry-pick ecc14c2b2dd037ba8bbed7f2fb08431f406d337d  # lxd/daemon: Adds taskClusterHeartbeat var and populates it
-      git cherry-pick 26c816cbea60233896ae5889ba5ffad1b8eb3943  # lxd/cluster/heartbeat: Logging improvements
-      git cherry-pick eae462329f7e878ab8c4753fbe96c03d4c05fef2  # lxc: Update interactive editor fail message to indicate ctrl+c can be used to abort change
-      git cherry-pick e2c0e37dfb0de732adb6703673b1c96cb9765589  # shared/api: Add swagger metadata for instance backups
-      git cherry-pick 47d4d823d62d52651b56dd3324c1d709d9ca16a5  # lxd/instances: Swagger for backups
-      git cherry-pick 5aedb58fcbe8fddcf8f08df2b5f0ff23da3d979a  # shared/api: Add swagger metadata for image metadata
-      git cherry-pick a6a9049bb2d7880bf4bfb91ca2b5d1225cc68bf3  # lxd/instances: Swagger for instance metadata
-      git cherry-pick ded107544e1cf9b646608a489ad0532240dc96dc  # doc/rest-api: Refresh swagger YAML
-      git cherry-pick c8384dba99c9f368f81647a246cb4907a80f96ed  # lxd/images: Fix typo in swagger
-      git cherry-pick 88d05888c9bee50a49230717c72f9b3167712f23  # lxd/network/openvswitch: Adds shared unquote function
-      git cherry-pick e41323e1468add7707471de2302360fb39eb4bc5  # lxd/network/openvswitch: Replace strconv.Unquote with unquote
-      git cherry-pick 6ffdbb8e8285a0467ad38585e0969b257af44ce5  # lxd/network/driver/bridge: Reuse consistent bridgeLink var rather than keep creating new vars
-      git cherry-pick 24e8b74bfd69526b9a018e346c06f332bda1d2d6  # lxd/network/driver/bridge: Bring up vxlan tunnel link
-      git cherry-pick 7ed39fe057379ca67e3937ff3e5690cc95b5d1c0  # lxd/network/driver/bridge: Use clearer naming for different link types
-      git cherry-pick ab59b698c55cb4f699cd01dd8513eab8ee7a3418  # lxd/network/driver/bridge: Don't use Link suffix for var names that don't represent links
-      git cherry-pick 969ff36cc885478f9b7da7c52561e60c97e302e5  # lxd/instances: Unmount shiftfs on startup failures
-      git cherry-pick 6f08d8c1fd0b4cd5a601a38f517c7bf6f6b5ce2d  # lxd/api/cluster: Check if LXD closing down in rebalanceMemberRoles
-      git cherry-pick fc71b2539e2cc5a7923bb9b5964c672dfd12ce18  # lxd/api/cluster: Call rebalanceMemberRoles from internalClusterRaftNodeDelete
-      git cherry-pick 13ec936ac8c6901e36314548a00a513234109a34  # lxd/cluster/gateway: Logging improvements
-      git cherry-pick 5bb2a1c9161cb53dc23523f27a06c2ef01962329  # lxd/daemon: Logging improvements
-      git cherry-pick 66a7efbaddb3cfe3e52de09ac5e23013f6e313d4  # lxd/images: Logging improvements
-      git cherry-pick 595a63d2b60552f7e4975a3a352f78f0d48cd12a  # shared/api: Add swagger metadata for instances
-      git cherry-pick 654107348f3de7c0670f75a20ec7d2b78b359781  # lxd/instances: Swagger for instances
-      git cherry-pick ec3a18b5c22ac1dd8204994722a9db276f58351a  # doc/rest-api: Refresh swagger YAML
-      git cherry-pick 3a780b9a126f16fa23980ab57c13289f75495100  # lxd/cluster/gateway: Add heartbeatCancelLock and heartbeatCancel vars
-      git cherry-pick 1023bf1116cd6d28fd05f33ce5036de28cf1ff15  # lxd/cluster/heartbeat: Introduces heartbeatMode type and constants for heartbeat modes
-      git cherry-pick 99d9b9ce3cd2ed3a0d164711c0128798b3caa4bc  # lxd/cluster/heartbeat: Updates heartbeat to accept mode argument
-      git cherry-pick 8bb6480b02863640170d28edc16462ffdb0bc624  # lxd/cluster/heartbeat: Make end of heartbeat log message include local address for clarity
-      git cherry-pick b269d158b2c0c98e8f8b6e8e194c764c8ecf8c89  # lxd/cluster/heartbeat: Adds heartbeatRestart function
-      git cherry-pick 62799d94085a42f3d807a50ba2c84a4ba9c28d0b  # lxd/cluster: g.heartbeat() usage
-      git cherry-pick 4d3336518deb39f02e59489e66e8e508035d833a  # lxd/cluster/gateway: Call g.heartbeatRestart from HandlerFuncs when handling a heartbeat
-      git cherry-pick c17acd83960ac728c50d17cdbb38ed3cf54cfc70  # lxd/cluster/heartbeat/test: Fixes TestHeartbeat so that it waits for join notification heartbeats to occur
-      git cherry-pick 1baf21ea294053353e456c9d956a1645579f4635  # lxd/daemon/images: imageDownloadLock typo
-      git cherry-pick 6e9772dc194e01517fada17753c8c39753f2aca6  # lxd/storage/ceph: Always return VolumeUsage
-      git cherry-pick ba96daf37304cf92f6c58b23634cf057262d72a4  # doc/production-setup: Cover name leakage
-      git cherry-pick 1f7c00e2692386b5130720196dceaf3355c33b65  # lxd/apparmor/instance: Deref OVMF path
-      git cherry-pick 2615db36775f7e0972f1ab89b1b906080be97d4d  # lxd/cluster/heartbeat: Fix heartbeatInterval()
-      git cherry-pick 02230bbd84c4565cc8fbb5a2fb2cbb192a4df958  # lxd/instance/qemu: Support for security.devlxd default (true) value
-      git cherry-pick 81cbdbeb2ff5337abfac69b64452438d808eb87b  # doc/environment: Documents LXD_CONF and LXD_GLOBAL_CONF env vars
-      git cherry-pick 62ee9b5694b949b682eb95f5b0d09b42073c4375  # lxd/ip/link: MTU is an acronym and so should be uppercased in SetMtu function name
-      git cherry-pick da56e8d15720a8f4660af387b7146965e195a1c5  # lxd/ip/link: Renames Mtu field to MTU as it is an acronym
-      git cherry-pick fc193af98a4309aa15788134822aac441582a77f  # lxd/device/device/utils/network: SetMTU usage
-      git cherry-pick 60eb1e15de23bf213d496f6f52e4a08e57fe425d  # lxd/network/network/utils: Removes InterfaceSetMTU
-      git cherry-pick 91f363b283914e5db6e959a6b44f67f6f2b79abb  # lxd/network/network/utils: Adds InterfaceStatus function
-      git cherry-pick c7083e4ba1050fc85d7f58f2639005bb94f40d9e  # lxd/device/infiniband/physical: SetMTU usage
-      git cherry-pick 5ffd8c668fd744e44991de419d905f474794317e  # lxd/device/infiniband/sriov: SetMTU usage
-      git cherry-pick df13a41876b9f536967803320982c06b740176b7  # lxd/device/nic/macvlan: SetMTU usage
-      git cherry-pick 478f685f651fc14d61411103d24dcd95b6f54566  # lxd/device/nic/physical: SetMTU usage
-      git cherry-pick 1f0571e62b4493cdbccaba9dd8375508a4cd23e9  # lxd/device/nic/sriov: SetMTU usage
-      git cherry-pick fe08fa97ed67933a5632f11fce328644c14159db  # lxd/network/driver/ovn: SetMTU usage
-      git cherry-pick c3439a460a63bfbc06e989ff78520ddf66b2a635  # lxd/network/driver/bridge: SetMTU usage
-      git cherry-pick e8195eafb12c904c0359bc55cc0b883b54851ffc  # lxd/network/network/utils/sriov: Updates sriovGetFreeVFInterface to use InterfaceStatus
-      git cherry-pick 204789ccbd47d67df66c4fb2db23ccc7575b8e7a  # lxd/network/driver/physical: SetMTU usage
-      git cherry-pick ff38a642cfdb1cf30415b622cfa5a8aea2c626b8  # lxd/network/driver/physical: Check that physical parent interface has no global unicast IPs configured on it before starting
-      git cherry-pick c9e9e63743e64009c40258dce870b97f4f5fa278  # lxd/network/driver/ovn: Updates startUplinkPortPhysical to check uplink has no global unicast IPs configured
-      git cherry-pick 0de10a4637131fb74f5ebbac71b29d40fc8f630e  # lxd/instances/get: Renames doContainersGet to doInstancesGet
-      git cherry-pick bca7d51f360219cedccdb1ab964f8b13dcaa0dcd  # lxd/instances/get: Remove some of the container specific terminology in doInstancesGet
-      git cherry-pick 8faf028939b64953c7334c9dd3ce5b867f2299c4  # lxd/instances/get: Remove potential source of nil pointer dereference panic in doInstancesGet
-      git cherry-pick 4b06cbc4b9afca2015a6ef9782dd3d332ea2037b  # lxd/instance: Don't use RawOperation
-      git cherry-pick 05952da5c3ab3b190012f5aeab424435558603dc  # lxd/operations: Remove code duplication
-      git cherry-pick cda8c354207546de91781faf236b9118823e4045  # lxd/operations: Close forwarded websocket
-      git cherry-pick 271bea61277550d22dab3a195100f018d915a4cc  # shared/network: Fix channel handling in WebsocketProxy
-      git cherry-pick 95c1e2116ff825e9eaf64c1ea7755af376071c7d  # client: Update for WebsocketProxy change
-      git cherry-pick 5402dc7666a4410fc818ed6b349b5e5afd07ff6c  # lxc: Use consistent messaging when offering to respawn interactive editor
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
