@@ -1138,6 +1138,31 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 31d345ca4166fada764ecb132e6c24130665f5fd  # lxd/resources: Set RPM to 1 instead of 0 when rotational
+      git cherry-pick df0b666c5c0a3d89d7cb24707aa93cdb9d73b0af  # include: add open_tree() and mount_setattr()
+      git cherry-pick c15ca5916632fdbe8495b9bc97ad87c902489884  # doc/projects: Remove white list term
+      git cherry-pick 7eb83523cb8efefce9c837fd6f1ab0490e3a3fe5  # Remove hang term
+      git cherry-pick bcf09fd618565e06d08f32f250aec6d35c5629b8  # Remove white term
+      git cherry-pick 49d663a4a999e0d9e9aa0bb70e9cf5f6c724902a  # lxd/cluster/gateway: Remove black term
+      git cherry-pick 305a18a5b3172bebeff4fbc9120e82a416034cb0  # Remove dummy term
+      git cherry-pick 34729f5c336a69c26a97cb5b400e12ab883fc779  # lxd/main/checkfeature: Remove dummy term
+      git cherry-pick 1375c72b79b4975edd37a9cd6376d0035747cbf8  # shared/idmap/shift/linux: Rename set_dummy_fs_ns_caps to spoof_fs_ns_caps
+      git cherry-pick 2b587eacb9e09b5019a5f11a543197746b5c2677  # Remove sanity term
+      git cherry-pick 5f19a991c6f1c08070f9d144befa6061d5c0ee2a  # Replace Sanity Checks with Quick Checks
+      git cherry-pick a002dc1b38fb48d1a1630ce524e7126da1e03f43  # lxd/db: Update schema to apply removal of sanity term
+      git cherry-pick 31be48fcc038a0c4d11043c1652872160b2825be  # lxd: use idmapped mounts
+      git cherry-pick 0b0b4068b15a590f3a982129311be6d883a65c3a  # lxd: ensure absolute paths when hotplugging mounts
+      git cherry-pick f3596a15bb9cb9b6fadf419d311da60379540564  # forkmount: update terminology
+      git cherry-pick 5625a8a81afaf37bf60af13f14ede2cbb60e5667  # disk: allow the use of idmapped mounts
+      git cherry-pick f57af729a2fc58e380b2cf912ab62bac147b0713  # seccomp: handle idmapped mounts
+      git cherry-pick c51e6e2d05be1dcc2bf42fb5ad35334b907c6a61  # lxd: split storage handling in startCommon() into separate helper
+      git cherry-pick cf5ef0dee6e8af38d37d5860ff52946bf95e6537  # lxd: remove remaining DiskIdmap call in startCommon()
+      git cherry-pick 26291fcabe6b81b92cfebe30a939e8458ac70571  # Makefile: Add "build" target
+      git cherry-pick 5b09568073f770c7aa08cc011608564928aedb29  # lxd/instance/drivers/driver/common: Adds Internal MAAS handling functions
+      git cherry-pick 6fd31bd80402c304725690e4007062f9dcdf23f5  # lxd/instance/drivers/driver/lxc: Switch to common MAAS handling functions
+      git cherry-pick d30dabe0aa577ae88d8860501eacd049599acede  # lxd/instance/drivers/driver/qemu: Switch to common MAAS handling functions
+      git cherry-pick 5322478e5f20d6299a2b708f8bad8c3f9a748945  # Revert "lxd/main_init_interactive: replace empty validator for choosing cluster config with nil"
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export GO111MODULE=off
