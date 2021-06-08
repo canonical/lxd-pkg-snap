@@ -1162,6 +1162,7 @@ parts:
       git cherry-pick 6fd31bd80402c304725690e4007062f9dcdf23f5  # lxd/instance/drivers/driver/lxc: Switch to common MAAS handling functions
       git cherry-pick d30dabe0aa577ae88d8860501eacd049599acede  # lxd/instance/drivers/driver/qemu: Switch to common MAAS handling functions
       git cherry-pick 5322478e5f20d6299a2b708f8bad8c3f9a748945  # Revert "lxd/main_init_interactive: replace empty validator for choosing cluster config with nil"
+      git cherry-pick 05fa094d934580a0d8aecc39a530415a3b86a878  # lxd: check for new idmapped mounts extension in LXC
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
