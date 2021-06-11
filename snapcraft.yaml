@@ -1162,7 +1162,95 @@ parts:
       git cherry-pick 6fd31bd80402c304725690e4007062f9dcdf23f5  # lxd/instance/drivers/driver/lxc: Switch to common MAAS handling functions
       git cherry-pick d30dabe0aa577ae88d8860501eacd049599acede  # lxd/instance/drivers/driver/qemu: Switch to common MAAS handling functions
       git cherry-pick 5322478e5f20d6299a2b708f8bad8c3f9a748945  # Revert "lxd/main_init_interactive: replace empty validator for choosing cluster config with nil"
+      git cherry-pick 3b9ee52adcc7ab43a9d0fe8b1810d4fd8b7dd23f  # lxd/instance/drivers/load: Add revert arg to create
+      git cherry-pick d308f9537be3ce60cdd7f8468cbcfb8b3de85e18  # lxd/instance/drivers/driver/common: Don't revert by calling inst.Delete() until after storage volume created in snapshotCommon
+      git cherry-pick cac7c174d4f8a9a0c105003fc869c30f55dd28c9  # lxd/instance/drivers/driver/lxc: Add revert arg to lxcCreate and don't call d.Delete() in revert steps
+      git cherry-pick 30f04eb3705813ceb26e8586e249a762658cf818  # lxd/instance/drivers/driver/qemu: Add revert arg to qemuCreate and don't call d.Delete() in revert steps
+      git cherry-pick 49bb48e909cd938d5c5c246a4271a78a8b925a03  # lxd/instance/instance/utils: Updates Create signature with revert arg
+      git cherry-pick d5e2067d01acc985e0f0d137d979cba3c57cd36c  # lxd/instance/instance/utils: Updates CreateInternal with a revert arg
+      git cherry-pick 9cbe1128d6212f582cfdbc497e7816bc8cde390c  # lxd: instance.CreateInternal usage in tests
+      git cherry-pick d3b2cacb04f4a23a7e69ef41d373d956c7658a22  # lxd/instance: Update instanceCreateAsEmpty to only revert with inst.Delete() after storage volume created
+      git cherry-pick 84020c1736bf6ee3b0e441532d9191ad2288e0fd  # lxd/instance: Updates instanceCreateFromImage to only revert with inst.Delete() after storage volume created
+      git cherry-pick 50540c2a559021543115782e893c972c837c70ae  # lxd/instance: Updates instanceCreateAsCopy to only revert with inst.Delete() after storage volume created
+      git cherry-pick ae9966822f4ad93a24ade48ed9bab86221e857d5  # lxd/api/internal: instance.CreateInternal revert usage in internalImport
+      git cherry-pick 3755e17ead356ec765812ad12d4d40e98ece3344  # lxd/instances/post: instance.CreateInternal usage in createFromMigration
+      git cherry-pick 4571805186fd4bd41bf1f7cec9ed79ad2fa40f2d  # lxd/migrate/instance: Adds revert arg to Do function to allow usage of instance.CreateInternal
+      git cherry-pick cf475bdc5ce041464c43d180a45dac00707f63fd  # lxd/migrate/instance: Add instance delete to revert after storage volume migration succeeded in Do
+      git cherry-pick 98eedef05067668bf8cc32b13e794c62006b2a87  # lxd/instances/post: Updates createFromMigration to pass revert to instance.CreateInternal
+      git cherry-pick 54a236bb234ece275d5aabd974adeb0db2da3963  # lxd/migrate/instance: Go var naming style suggestions
       git cherry-pick 05fa094d934580a0d8aecc39a530415a3b86a878  # lxd: check for new idmapped mounts extension in LXC
+      git cherry-pick 64f8a3573868ede25ea492fd2e3d1a87ba2c39ce  # lxd/storage/backend/lxd: Remove post hook resize from CreateInstanceFromBackup
+      git cherry-pick ec94c02331b01d382cc4125b28e81e5c45a1a505  # lxd/storage/drivers/driver/common: Adds createVolumeFromBackupInstancePostHookResize function
+      git cherry-pick 47862a68a5bbc92c3d57606f480d8fb0a8e1a9b0  # lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook
+      git cherry-pick 5b5b4c8bd6067af0ba7e2272156f6b272750d39f  # lxd/storage/drivers/driver/ceph/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook
+      git cherry-pick 7ee17397e3432988e80ae499237371b7d177e0aa  # lxd/storage/drivers/driver/dir/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook
+      git cherry-pick a458634bdb8283160a4884a3442574459ed6091d  # lxd/storage/drivers/driver/lvm/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook
+      git cherry-pick 5568e42a73b28678417c7135de9f854852c8b39e  # lxd/storage/drivers/driver/zfs/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook
+      git cherry-pick 7b47cf7a673d9b4df303996579bde070bbbe9dc8  # lxd/storage/drivers/driver/generic/vfs: Adds VMConfigDriveMountDir constant
+      git cherry-pick 8cafd8f91430a65859ea6131d634133de5301a77  # lxd/storage/drivers/generic/vfs: Exclude config.mount directory in genericVFSBackupVolume
+      git cherry-pick b5e76adcd4345684cbf323cae37d841fd1d8e811  # lxd/instance/drivers/driver/qemu: storageDrivers.VMConfigDriveMountDir usage
+      git cherry-pick ba4e55f5e4ef7ce76e245297d2ac4d5537f7dfd1  # lxd/storage/drivers/utils: Adds force arg to shrinkFileSystem
+      git cherry-pick 6f43748a2063f0b1185987b2e405ba36933fcaef  # lxd/storage/drivers: SetVolumeQuota comment consistency
+      git cherry-pick 11995aeccc666cdc984abfd7e668b1d91f5483a8  # lxd/storage/drivers/driver/ceph/volumes: shrinkFileSystem force arg usage
+      git cherry-pick ec290a4e919f4930c39dd7761384e3e309112ff3  # lxd/storage/drivers/driver/lvm/volumes: shrinkFileSystem force arg usage
+      git cherry-pick 2adc0fd59bddf1353b88425e63764f2e80652e71  # lxd/storage/drivers/driver/common: runFiller comment improvement
+      git cherry-pick cd7295cbb720ad0fcad650f88e648f194e66809e  # lxd/storage/drivers/driver/common: Enable unsafe resize for container volumes in createVolumeFromBackupInstancePostHookResize
+      git cherry-pick 1c5db5e2b495c0170ccb18e93ac79194b3f61007  # lxd/network/network/utils: Fix error reporting bug in parseIPRange
+      git cherry-pick 2a147af452bdb9393602a67d1eafeb80dc68adb8  # lxd/network/network/utils/test: Fix tests in Example_parseIPRange to work with Go tip
+      git cherry-pick fe0e09f6ce5a03cdbeb3cedb164aac830acfab02  # Revert "lxd/storage/backend/lxd: Remove post hook resize from CreateInstanceFromBackup"
+      git cherry-pick d7efd22c95a7a1a89f9283ac7308481f286d0ada  # Revert "lxd/storage/drivers/driver/btrfs/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook"
+      git cherry-pick c634c44735b8d61545a412e47c6b16ef1bfbe678  # Revert "lxd/storage/drivers/driver/ceph/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook"
+      git cherry-pick 92a70eb7fb5a962d7e3eb8dc1734b19a1ce82a39  # Revert "lxd/storage/drivers/driver/lvm/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook"
+      git cherry-pick f70725a27d35680981695a8027151c89fa3525a2  # Revert "lxd/storage/drivers/driver/zfs/volumes: Updates CreateVolumeFromBackup to use createVolumeFromBackupInstancePostHookResize in generic post hook"
+      git cherry-pick de0708edad77fbf3ffd58ae559c02916a782b101  # lxd/storage/drivers/driver/dir/volumes: Remove call to createVolumeFromBackupInstancePostHookResize
+      git cherry-pick 01622c773a2de69b49d8b23a49385188218accd4  # lxd/storage/drivers/volume: Add VolumePostHook type
+      git cherry-pick b0412c832bdd6475ea1f46d5b4326b6b044c3789  # lxd/storage/drivers: Update CreateVolumeFromBackup and associated function to use VolumePostHook type
+      git cherry-pick 86099de474ffe0431239273309f0836564c72760  # lxd/revert/revert: Add Hook function type
+      git cherry-pick bd64f4350fbcae6559f38da95ebcf08439b12409  # lxd/storage/backend: Update CreateInstanceFromBackup signature to use revert.Hook
+      git cherry-pick d7c3f83437e1c1e0564b0e674b240209619b4ef2  # lxd/storage/drivers: Updates CreateVolumeFromBackup and associated function to use revert.Hook type
+      git cherry-pick 413bc791252d360319ca4f72042e07d909978062  # lxd/storage/drivers/volume: Remove allowUnsafeResize var
+      git cherry-pick a85d9b826669b3650d4ec85b994553d2764c6030  # lxd/storage/drivers/volume: Add allowUnsafeResize arg to SetQuota and pass to SetVolumeQuota
+      git cherry-pick 42eb78374a97bf11a680b0bedc062934804cc12c  # lxd/storage/drivers/interface: Add allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 503ba2aecfc7944a007f5dcb546e571931afe6a1  # lxd/storage/backend/lxd: Add allowUnsafeResize arg to function returned from imageFiller
+      git cherry-pick 9d1b176e39cb921cad3699513900b32dc1a95f1e  # lxd/storage/backend/lxd: b.driver.SetVolumeQuota usage
+      git cherry-pick 255d9fd482f7e906205757a507445ff0fd5b21cb  # lxd/storage/utils: Adds allowUnsafeResize arg to ImageUnpack and pass to vol.SetQuota()
+      git cherry-pick dfd336ea1e8fa7503cb1a5cb3b5589ee07c3a26f  # lxd/storage/drivers/utils: Adds allowUnsafeResize arg to ensureVolumeBlockFile
+      git cherry-pick 804e8c40fb44fbdef885974949f4fb024786ab59  # lxd/storage/drivers/generic/vfs: d.SetVolumeQuota allowUnsafeResize arg usage
+      git cherry-pick 5c7fc730975f6cdd8dd22f8cb1e8f7862ca8200a  # lxd/storage/drivers/driver/btrfs/volumes: ensureVolumeBlockFile allowUnsafeResize arg usage and comment
+      git cherry-pick 31ebd7c4fbda515be21eae199a1dfcde3a9d9abd  # lxd/storage/drivers/driver/btrfs/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick f1643db98bd7f8417122e0e9eeae45910e478677  # lxd/storage/drivers/driver/ceph/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 5d0251b12860b1b77921539f283cfe744b48acb1  # lxd/storage/drivers/driver/cephfs/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 319e97d89ea6cb3b4f654afe12cd6a647a5f6352  # lxd/storage/drivers/driver/dir/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick df449837de0de460addb1638f96fc43b48e1218b  # lxd/storage/drivers/driver/lvm/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 552a94b50d32fd0e3206d1e72b3c94d444778c0d  # lxd/storage/drivers/driver/zfs/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 00ae0af9b963f8761a8ed33399d0385816f03806  # lxd/storage/drivers/driver/mock/volumes: Adds allowUnsafeResize arg to SetVolumeQuota
+      git cherry-pick 74333dcc7f9c3dc3f5751c029167b62f9462e95c  # lxd/storage/drivers/driver/btrfs/volumes: d.SetVolumeQuota usage
+      git cherry-pick 2b0aadb7ad20ce7dafca020e00c45db54b888d99  # lxd/storage/drivers/driver/ceph/volumes: d.SetVolumeQuota usage
+      git cherry-pick 8d4b056762d3284be82c94b381c02defe7a466e4  # lxd/storage/drivers/driver/dir/volumes: d.SetVolumeQuota usage
+      git cherry-pick 369540fdb073a242787699dba66b061857651908  # lxd/storage/drivers/driver/lvm/volumes: d.SetVolumeQuota usage
+      git cherry-pick 0e91207fadba66718c5a30f8e7ffbfc2748f6a82  # lxd/storage/drivers/driver/btrfs/mock: d.SetVolumeQuota usage
+      git cherry-pick 14e87426eae51f89a480e394d5c6dc687372c65f  # lxd/storage/drivers/driver/zfs/volumes: d.SetVolumeQuota usage
+      git cherry-pick c7e51e1e4afd61b05f53da2d1e8a5020b0f2ae03  # lxd/storage/drivers/driver/cephfs/volumes: d.SetVolumeQuota usage
+      git cherry-pick fd9219854599e635c4c090acff5321c7a2254aca  # lxd/storage/drivers/driver/types: Adds allowUnsafeResize arg to VolumeFiller's Fill function definition
+      git cherry-pick 791f9cd0ccec49211cb44e1c2bdddd23d770f63c  # lxd/storage/drivers/driver/lvm/utils: d.SetVolumeQuota usage
+      git cherry-pick 7b184f6f478be319f219b36d84e626c8d69e0a09  # lxd/storage/drivers/driver/dir/volumes: ensureVolumeBlockFile usage and comment
+      git cherry-pick 36c79f1f0606c1c637dc371927f3c60a1d749550  # lxd/storage/drivers/common: Updates runFiller to pass allowUnsafeResize arg to filler's Fill function as needed
+      git cherry-pick ea5cdc63dece63a588cace438f534aa52a1b5970  # lxd/storage/drivers/driver/common: Updates createVolumeFromBackupInstancePostHookResize to pass allowUnsafeResize to driver.SetVolumeQuota
+      git cherry-pick 84d7d34428d8c876ee3917bc1934997c63839573  # lxd/storage/drivers/driver/common: Remove createVolumeFromBackupInstancePostHookResize
+      git cherry-pick 3084c4dcad51abb569f175e1e8d1d1e4c243a4d9  # lxd/storage/drivers/generic/vfs: Error check Unmount in post hook from genericVFSBackupUnpack
+      git cherry-pick b58b8ef127d2b0101eb881dc030350e967ea91fc  # lxd/storage/backend/lxd: Enable allowUnsafeResize for container imports in CreateInstanceFromBackup
+      git cherry-pick 9975de9c10ef9931aa69f8f35229f3c2e3361716  # lxd/init: Update for token based join
+      git cherry-pick 9bdd4fb2a3a8b3f398e43a7c7fa81356cfe533e7  # client: Simplify User-Agent logic
+      git cherry-pick 743af8e283f2197d772b1fbfce8c2bf16e044e79  # lxd/instances: Fix requestor in bulk state changes
+      git cherry-pick ac7fc06dd9fe8046906e43a5a93604ca51dd1022  # lxd/daemon: Add forwarded requestor to context
+      git cherry-pick c114529d787f24f3677eeeb902fcf6014b6a636d  # lxd/operations: Support forwarded requestor
+      git cherry-pick dc1922aac23ca11738e6db7f5d2d1e4a1aae9d7f  # lxd/cluster: Pass original requestor around
+      git cherry-pick ae3093323a6c1b46880fbdaee87afddec7c7e0b4  # lxd: Pass request around
+      git cherry-pick 210f2c1765cc35b3e98f770a14141b1a1ea4fd75  # lxd/storage/drivers/driver/zfs/volumes: Fix bug with VM optimized import not returning filesystem volume post hook
+      git cherry-pick 2f5d49fbc242c2b1d16dcb03c099d33e92fd9681  # lxd/daemon: updateCertificateCacheFromLocal usage
+      git cherry-pick 5607f2d148b3a05ce3cc4f6af8707b3bf964a29c  # lxd/certificates: Removes unused cert arg from updateCertificateCacheFromLocal
+      git cherry-pick f8f0b556050b8003f007ff6b7827cdaf95673d8e  # lxd/request: Introduce new package
+      git cherry-pick d1369fb4526b6f23226e5275c89532cb7d10037e  # lxd: Use the new request package
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
