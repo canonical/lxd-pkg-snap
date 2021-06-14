@@ -32,6 +32,7 @@ fi
 
 # Set the environment
 export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+export LXD_GLOBAL_CONF=${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/gobal-conf/"}
 
 if [ "${EDITOR:-}" != "nano" ]; then
     export EDITOR=vim.tiny
