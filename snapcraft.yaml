@@ -4,21 +4,31 @@ assumes:
   - snapd2.39
 version: "4.15"
 grade: stable
-summary: LXD - the container lightervisor
+summary: LXD - container and VM manager
 description: |-
- LXD is a container manager for system containers.
+ LXD is a system container and virtual machine manager.
 
- It offers a REST API to remotely manage containers over the network,
- using an image based workflow and with support for live migration.
+ It offers a simple CLI and REST API to manage local or remote instances,
+ uses an image based workflow and support for a variety of advanced features.
 
  Images are available for all Ubuntu releases and architectures as well
- as for a wide number of other Linux distributions.
+ as for a wide number of other Linux distributions. Existing
+ integrations with many deployment and operation tools, makes it work
+ just like a public cloud, except everything is under your control.
 
  LXD containers are lightweight, secure by default and a great
- alternative to virtual machines.
+ alternative to virtual machines when running Linux on Linux.
+
+ LXD virtual machines are modern and secure, using UEFI and secure-boot
+ by default and a great choice when a different kernel or operating
+ system is needed.
+
+ With clustering, up to 50 LXD servers can be easily joined and managed
+ together with the same tools and APIs and without needing any external
+ dependencies.
 
 
- Supported configuration options (snap set lxd [<key>=<value>...]):
+ Supported configuration options for the snap (snap set lxd [<key>=<value>...]):
 
    - ceph.builtin: Use snap-specific Ceph configuration [default=false]
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
@@ -33,6 +43,9 @@ description: |-
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
+
+ For system-wide configuration of the CLI, place your configuration in
+ /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
 
 confinement: strict
 
