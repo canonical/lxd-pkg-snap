@@ -14,30 +14,37 @@ if [ "${pid}" -gt 0 ] 2>/dev/null; then
     exit 1
 fi
 
-# Guess the real home directory
-REAL_HOME="${HOME}"
-if [ "${USER:-}" = "root" ] && [ -e "/root" ]; then
-    REAL_HOME="/root"
-elif [ -n "${USER:-}" ] && [ -e "/home/${USER}" ]; then
-    REAL_HOME="/home/${USER}"
-fi
-
-# Migrate data if needed
-if [ ! -d "${HOME}/.config/lxc" ]; then
-    mkdir -p "${HOME}/.config"
-    if [ -d "${REAL_HOME}/.config/lxc" ]; then
-        cp -r "${REAL_HOME}/.config/lxc" "${HOME}/.config/lxc" || true
+# Fill SNAP_REAL_HOME if missing
+if [ -z "${SNAP_REAL_HOME:-""}" ]; then
+    SNAP_REAL_HOME="${HOME}"
+    if [ "${USER:-}" = "root" ] && [ -e "/root" ]; then
+        SNAP_REAL_HOME="/root"
+    elif [ -n "${USER:-}" ] && [ -e "/home/${USER}" ]; then
+        SNAP_REAL_HOME="/home/${USER}"
     fi
 fi
 
+# Migrate data if needed
+if [ ! -d "${SNAP_USER_COMMON}/config" ]; then
+    if [ -d "${SNAP_USER_DATA}/.config/lxc" ]; then
+        mv "${SNAP_USER_DATA}/.config/lxc" "${SNAP_USER_COMMON}/config" || true
+        rmdir "${SNAP_USER_DATA}/.config/" || true
+    elif [ -d "${SNAP_REAL_HOME}/.config/lxc" ]; then
+        cp -r "${SNAP_REAL_HOME}/.config/lxc" "${SNAP_USER_COMMON}/config" || true
+    fi
+
+    mkdir -p "${SNAP_USER_COMMON}/config"
+fi
+
 # Set the environment
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
-export LXD_GLOBAL_CONF=${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/global-conf/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
+export LXD_CONF="${SNAP_USER_COMMON}/config"
+export LXD_GLOBAL_CONF="${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/global-conf/"}"
 
 if [ "${EDITOR:-}" != "nano" ]; then
     export EDITOR=vim.tiny
-    if [ -e "${HOME}/.vimrc" ]; then
-        export VIMINIT="source ${HOME}/.vimrc"
+    if [ -e "${SNAP_USER_COMMON}/.vimrc" ]; then
+        export VIMINIT="source ${SNAP_USER_COMMON}/.vimrc"
     else
         export VIMINIT="source ${SNAP}/etc/vimrc"
     fi

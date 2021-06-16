@@ -14,7 +14,8 @@ if [ "${pid}" -gt 0 ] 2>/dev/null; then
     exit 1
 fi
 
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
-export LXD_GLOBAL_CONF=${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/global-conf/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
+export LXD_CONF="${SNAP_USER_COMMON}/config"
+export LXD_GLOBAL_CONF="${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/global-conf/"}"
 
 exec lxd-benchmark "$@"
