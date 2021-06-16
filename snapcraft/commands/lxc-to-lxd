@@ -13,6 +13,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
+export LXD_CONF="${SNAP_USER_COMMON}/config"
 
 exec "${SNAP_CURRENT}/bin/lxc-to-lxd" "$@"
