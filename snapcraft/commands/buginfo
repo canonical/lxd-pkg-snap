@@ -17,7 +17,9 @@ export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
 echo "# Base information"
 if [ -e "/var/lib/snapd/hostfs/etc/os-release" ]; then
+    # shellcheck disable=SC1091
     . /var/lib/snapd/hostfs/etc/os-release
+
     echo " - Distribution: ${NAME}"
     echo " - Distribution version: ${VERSION}"
 else
