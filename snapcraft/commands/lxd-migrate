@@ -6,7 +6,9 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
+# shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
+
 export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
 
 # Setup for ZFS
