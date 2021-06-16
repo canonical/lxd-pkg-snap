@@ -1,5 +1,6 @@
 #!/bin/sh
-CMD="$(basename ${0})"
+CMD="$(basename "${0}")"
+
 unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
