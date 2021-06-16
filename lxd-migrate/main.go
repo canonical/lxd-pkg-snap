@@ -289,7 +289,7 @@ func removePackages(src *lxdDaemon, dst *lxdDaemon) error {
 
 	// Final message
 	fmt.Printf("\nAll done. You may need to close your current shell and open a new one to have the \"lxc\" command work.\n")
-	fmt.Printf("To migrate your existing client configuration, move ~/.config/lxc to ~/snap/lxd/current/.config/lxc\n")
+	fmt.Printf("To migrate your existing client configuration, move ~/.config/lxc to ~/snap/lxd/common/config\n")
 
 	return nil
 }
