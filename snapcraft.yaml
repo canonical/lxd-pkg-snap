@@ -1239,6 +1239,45 @@ parts:
       git cherry-pick 5607f2d148b3a05ce3cc4f6af8707b3bf964a29c  # lxd/certificates: Removes unused cert arg from updateCertificateCacheFromLocal
       git cherry-pick f8f0b556050b8003f007ff6b7827cdaf95673d8e  # lxd/request: Introduce new package
       git cherry-pick d1369fb4526b6f23226e5275c89532cb7d10037e  # lxd: Use the new request package
+      git cherry-pick 45897e3fd55dff3ea19fc61cbf78fa05fd5b76f3  # lxd/device/nic/bridged: Allow using IP filtering with an unmanaged parent bridge
+      git cherry-pick f70e47d99f9961963b2fd0ff8409e4812b4db64d  # lxd/firewall/firewall/interface: Adds parentManaged arg to InstanceSetupBridgeFilter
+      git cherry-pick f7a116af7c27d4facf7c4d4d5acdecc1cc6cd389  # lxd/firewall/drivers/drivers/nftables: InstanceSetupBridgeFilter signature
+      git cherry-pick a960fe5a57a387c9a8511e5188cecae424c397af  # lxd/firewall/drivers/driver/xtables: Adds parentManaged arg to InstanceSetupBridgeFilter
+      git cherry-pick 9a58bf37aa0f0355a6e4fb19e7a756cb6a7e5aaf  # lxd/firewall/drivers/drivers/xtables: Adds parentManaged arg to generateFilterIptablesRules
+      git cherry-pick 98958699f11cadf2f057d430ee26ce4170915843  # lxd/device/nic/bridged: Updates d.state.Firewall.InstanceSetupBridgeFilter usage to provide managed parent indicator
+      git cherry-pick 44735fe287b0bdb161408e13e175689c26b68653  # test: Include the managed bridge in the nic counters for bridged NIC filtering
+      git cherry-pick 7d5cfc87409b2798dcb1d1c2a9b4e32848a1c19a  # test: Add test for unmanaged bridge IP filtering
+      git cherry-pick 5b618796079ff8523d73dcfb9687c74c27f22fcf  # lxd: update instructions for compilation from a release tarball
+      git cherry-pick 2941128d8626224c5480228d22487daa6a1a104c  # lxd/init: show the new default value for password authentication
+      git cherry-pick adc73d1ba814cd9499968ec3ba8e911ca19f0d57  # doc/networks: Use n.n.n.n rather than a real IP 1.2.3.4 for example IP in systemd-resolve command
+      git cherry-pick 47372f2a7093992afc5b0776a070c8769bcd22ce  # doc/networks: Adds guide on how to get systemd to configure systemd-resolved on lxdbr0 start up
+      git cherry-pick 2de45865017c38978a35258e2187f65a422f3ab3  # lxd/api/project: Error improvements in projectsPost
+      git cherry-pick 17938446fa5941d335fb1c708f3ef9c06bc7a35b  # lxd/api/project: Comment ending consistency in projectsPost
+      git cherry-pick a72eaa415af46856f848d88b7cdc89dada10f9c3  # lxd/api/project: Prevent project names that contain underscores in projectValidateName
+      git cherry-pick 7be89ecd0f35214c28431feaef07de216cadb344  # lxd/api/project: Comment ending consistency in projectPost
+      git cherry-pick 17291d5250da5e12bab528cfdb426d190e7521aa  # lxd/api/project: Error improvements in projectPost
+      git cherry-pick 892fe6fd297ead442f5280ff632218d4a0f6258c  # lxd/api/project: Validate new project name not current when renaming in projectPost
+      git cherry-pick 4156445e05f2871cbce4af7cc6ba0fe053d86325  # test: Add tests for banned underscore in project names during create and rename
+      git cherry-pick f754880968ba6684f6d273fd92f5efb297ed6efb  # main/init: Define poolType type and constants
+      git cherry-pick e6855554f3a2b1e43bea92358fa33d12a0338224  # main/init: Updates availableStorageDrivers to use poolType type and associated constants
+      git cherry-pick a47c595a5d37c11d759758539aee606fa350e475  # lxd/main/init/auto: Updates RunAuto to use poolType and associated constants
+      git cherry-pick e5cb6663f05d13e1ab9285ecd55bc14a3de2c7c1  # main/init/interactive: Updates askStoragePool to use poolType and associated constants
+      git cherry-pick a17f29bcc5054e8caac7ad68a68dc0763a63f987  # lxd/main/init: Remove hard coded remote storage driver types in availableStorageDrivers
+      git cherry-pick 469f3d0614ed57fac834e8b7fd7f214b2822a250  # lxd/main/init/interactive: Fix possible confusing missing storage backends error in askStoragePool
+      git cherry-pick cf6d97a74f247e1b8047bc3cc5bbf0c63b0cb3b3  # lxd/main/init/interactive: Don't default to ceph if not available in askStoragePool
+      git cherry-pick 489e05e66685cb726eeaae4a9ace2dc90e97628e  # lxd/main/init/interactive: Use validate.Optional in askClustering
+      git cherry-pick 70ee9bbae91566ea5d0a4a4cea2f2595c9e09961  # shared/validate/validate/test: Adds tests for Required and Optional
+      git cherry-pick 043490501a81e01e02a5dc3eeedadd9ffa40bfa0  # shared/validate/validate: Remove optional check in IsOneOf
+      git cherry-pick 6c0b11e1d570a65b85c123436fbb7b7231ca954f  # lxd/api/project: validate.IsOneOf optional usage
+      git cherry-pick 57c285d4badcf1fe4784346a1e2a64044f8ff90c  # lxd/storage: validate.IsOneOf optional usage
+      git cherry-pick cfd3184f90e9766e324e976aa0a3b80ca4bdaf7a  # lxd/storage/pools/config: validate.IsOneOf optional usage
+      git cherry-pick 259ee0d5cd17b6b764b2055ab349b2be3fb90930  # shared/instance: validate.IsOneOf optional usage
+      git cherry-pick 3536af36f23c8de09777e958ea5f22cdebf1d179  # lxd/network: validate.IsOneOf optional usage
+      git cherry-pick 2908b6edd6a321e5932f8ecb33c48a58bc3bf887  # lxd/network/driver/bridge: More consistent use of validate.Optional for fan.underlay_subnet
+      git cherry-pick f3cd3aa6fe6f09adef94eefc33b58716b77fc70e  # lxd/cluster/config: Wraps images.default_architecture with validate.Optional due to IsOneOf change in IsArchitecture
+      git cherry-pick 600cb4235b83cd550722f33209e744a7c9b4598c  # lxd/device/nic: Return -1 for Mtu in State() for bridged and ovn NICs if host interface not available
+      git cherry-pick f4eb5e2f7b39ec6f7a1bbf2c3240a051a1f6db76  # shared/util: Fill Stderr in RunCommandWithFds
+      git cherry-pick 4a4d16c4096cd5cb8be836167e8ca3b64df514d2  # shared/archive: Handle newer unsquashfs errors
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
