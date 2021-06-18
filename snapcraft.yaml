@@ -1103,7 +1103,9 @@ parts:
       - go
     stage-packages:
       - acl
+      - arptables
       - attr
+      - ebtables
       - dnsmasq-base
       - gdisk
       - iw
@@ -1149,12 +1151,15 @@ parts:
       cp scripts/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
     organize:
       usr/bin/: bin/
+      usr/lib/ebtables/: lib/
       usr/lib/: lib/
       usr/share/misc/: share/misc/
       var/lib/usbutils/usb.ids: share/misc/
       usr/sbin/: bin/
       sbin/: bin/
     prime:
+      - bin/arptables-legacy
+      - bin/ebtables-legacy
       - bin/dnsmasq
       - bin/getfattr
       - bin/setfattr
@@ -1167,6 +1172,7 @@ parts:
       - bin/xdelta3
 
       - lib/*/libidn.so.*
+      - lib/libebtc.so.*
 
       - etc/bash_completion.d/snap.lxd.lxc
 
