@@ -422,24 +422,10 @@ parts:
     organize:
       sbin/: bin/
       usr/lib/: lib/
-      usr/sbin/: bin/
     prime:
-      - bin/arptables
-      - bin/ebtables
-      - bin/ip6tables
-      - bin/iptables
       - bin/nft
       - lib/*/libjansson*so*
       - lib/libnftables*so*
-    override-build: |
-      snapcraftctl build
-
-      # Avoid xtables talking to nft
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/usr/sbin/"
-      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/arptables"
-      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ebtables"
-      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ip6tables"
-      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/iptables"
 
   nvidia-container:
     after:
