@@ -1278,6 +1278,15 @@ parts:
       git cherry-pick 600cb4235b83cd550722f33209e744a7c9b4598c  # lxd/device/nic: Return -1 for Mtu in State() for bridged and ovn NICs if host interface not available
       git cherry-pick f4eb5e2f7b39ec6f7a1bbf2c3240a051a1f6db76  # shared/util: Fill Stderr in RunCommandWithFds
       git cherry-pick 4a4d16c4096cd5cb8be836167e8ca3b64df514d2  # shared/archive: Handle newer unsquashfs errors
+      git cherry-pick d3f4adc73a76436ccb85655e223a5322e4a9475e  # doc: fix cluster.https_address' description
+      git cherry-pick d55b049256ea84ef721779f227b01857f89c78cd  # lxd/patches: Fix duplicate warnings
+      git cherry-pick a0c04ef1b99c94edb50084825365c2bab8dadb7c  # forkexec: handle broken close_range() backport in openSUSE Leap 15.3
+      git cherry-pick 325fad2a40b63a842b6436b732133095b5a52f42  # lxd/apparmor/instance: Move instance profile generation into new function instanceProfileGenerate
+      git cherry-pick be07297d30cfba3e29af7f66d7a11e697252d713  # lxd/apparmor/instance: Rename InstanceParse to InstanceValidate
+      git cherry-pick 209c7db87340078e8dbfe72c598e4ed2f32dbf7e  # lxd/instance/drivers/driver/lxc: apparmor.InstanceValidate usage
+      git cherry-pick c482cb12774caf4e5d4cd9348a409d5d0fc4763d  # lxd/instance/drivers/driver/qemu: Validate raw.apparmor if changed
+      git cherry-pick 56c6e913ffbb1ee79b589a3fab8ddff13015548c  # doc/virtual-machines: Removes statement about VMs being considered experimental
+      git cherry-pick 900ca01ab606d8aaece8812762e27bb3fafa0614  # lxd/network/driver/bridge: Surface dnsmasq specific start up errors via a warning log entry
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
