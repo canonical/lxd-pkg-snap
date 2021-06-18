@@ -186,8 +186,8 @@ fi
 
 
 # Avoid xtables talking to nft
-ln -s /usr/sbin/xtables-legacy-multi "/run/bin/arptables"
-ln -s /usr/sbin/xtables-legacy-multi "/run/bin/ebtables"
+ln -s "${SNAP}/bin/arptables-legacy" "/run/bin/arptables"
+ln -s "${SNAP}/bin/ebtables-legacy" "/run/bin/ebtables"
 ln -s /usr/sbin/xtables-legacy-multi "/run/bin/ip6tables"
 ln -s /usr/sbin/xtables-legacy-multi "/run/bin/iptables"
 
