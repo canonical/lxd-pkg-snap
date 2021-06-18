@@ -187,6 +187,13 @@ if [ "${lvm_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvremove"
 fi
 
+
+# Avoid xtables talking to nft
+ln -s /usr/sbin/xtables-legacy-multi "/run/bin/arptables"
+ln -s /usr/sbin/xtables-legacy-multi "/run/bin/ebtables"
+ln -s /usr/sbin/xtables-legacy-multi "/run/bin/ip6tables"
+ln -s /usr/sbin/xtables-legacy-multi "/run/bin/iptables"
+
 # Setup a functional /etc
 echo "==> Preparing a clean copy of /etc"
 
