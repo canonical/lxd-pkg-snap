@@ -436,10 +436,10 @@ parts:
 
       # Avoid xtables talking to nft
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/usr/sbin/"
-      ln -s xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/arptables"
-      ln -s xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ebtables"
-      ln -s xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ip6tables"
-      ln -s xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/iptables"
+      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/arptables"
+      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ebtables"
+      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/ip6tables"
+      ln -s /usr/sbin/xtables-legacy-multi "${SNAPCRAFT_PART_INSTALL}/usr/sbin/iptables"
 
   nvidia-container:
     after:
