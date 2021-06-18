@@ -331,13 +331,13 @@ if [ -e "/sys/fs/cgroup/cgroup.procs" ]; then
     # Try to escape to the root (V2 hosts)
     cat /proc/self/cgroup
     if ! echo "$$" > "/sys/fs/cgroup/cgroup.procs" 2>/dev/null; then
-	# Create a .lxc cgroup if missing
+        # Create a .lxc cgroup if missing
         if [ ! -d "/sys/fs/cgroup/.lxc" ]; then
             mkdir /sys/fs/cgroup/.lxc
-	fi
+        fi
 
-	# Use .lxc as the cgroup
-	echo "$$" > "/sys/fs/cgroup/.lxc/cgroup.procs"
+        # Use .lxc as the cgroup
+        echo "$$" > "/sys/fs/cgroup/.lxc/cgroup.procs"
     fi
 else
     echo "====> Detected cgroup V1"
