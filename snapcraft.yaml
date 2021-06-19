@@ -1301,6 +1301,7 @@ parts:
       git cherry-pick c482cb12774caf4e5d4cd9348a409d5d0fc4763d  # lxd/instance/drivers/driver/qemu: Validate raw.apparmor if changed
       git cherry-pick 56c6e913ffbb1ee79b589a3fab8ddff13015548c  # doc/virtual-machines: Removes statement about VMs being considered experimental
       git cherry-pick 900ca01ab606d8aaece8812762e27bb3fafa0614  # lxd/network/driver/bridge: Surface dnsmasq specific start up errors via a warning log entry
+      git cherry-pick 46fe2f1685113a81c0027b67b9081c90dd3400eb  # client: Only retry target addresses if initial connection fails
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
