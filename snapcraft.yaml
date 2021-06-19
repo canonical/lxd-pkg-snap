@@ -764,6 +764,20 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
 
+  xtables:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - arptables
+      - ebtables
+    organize:
+      usr/lib/ebtables/: lib/
+      usr/sbin/: bin/
+    prime:
+      - bin/arptables-legacy
+      - bin/ebtables-legacy
+      - lib/libebtc.so.*
+
   xz:
     source: snapcraft/empty
     plugin: nil
