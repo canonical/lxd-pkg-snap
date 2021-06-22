@@ -780,6 +780,8 @@ parts:
     prime:
       - bin/arptables-legacy
       - bin/ebtables-legacy
+      - etc/ethertypes
+      - etc/protocols
       - lib/libebtc.so.*
 
   xz:
