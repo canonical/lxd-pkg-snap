@@ -1304,6 +1304,89 @@ parts:
       git cherry-pick 56c6e913ffbb1ee79b589a3fab8ddff13015548c  # doc/virtual-machines: Removes statement about VMs being considered experimental
       git cherry-pick 900ca01ab606d8aaece8812762e27bb3fafa0614  # lxd/network/driver/bridge: Surface dnsmasq specific start up errors via a warning log entry
       git cherry-pick 46fe2f1685113a81c0027b67b9081c90dd3400eb  # client: Only retry target addresses if initial connection fails
+      git cherry-pick 66892dbca8fd46175cc5a31179c1610975e3c436  # lxd/instance/instance/interface: Adds Error field to Info struct
+      git cherry-pick c0505aec4bf646c9cf13ffbdd62dd9673be54a4a  # lxd/instance/drivers/driver/lxc: Info.Error initialisation
+      git cherry-pick c62c520119c00e65a460a19e827b6431ddf6fc6a  # lxd/instance/drivers/driver/qemu: Populates Info.Error
+      git cherry-pick f942e7163155d1f7645513ff45c8254aa6a51354  # lxd/instance/drivers/driver/qemu: Adds detection of /dev/kvm in Info()
+      git cherry-pick 55d93ee8a2e1fee1bcfdee5b0fc631fdcf25d817  # lxd/instance/drivers/driver/qemu: Add check for vhost_vsock in Info()
+      git cherry-pick f49b64f000ebda7c0cf39d26c3b055de8d190c7b  # lxd/state/state: Removes NewState function
+      git cherry-pick 270675a85cfc38998585908bd9c96c322f944261  # lxd/daemon: state.State usage
+      git cherry-pick 064904148cb4a13b46e1f7d8bf8eb47e328a18e1  # lxd/main/init: state.State usage
+      git cherry-pick f9a0808c8bbaddf8b3e2875d735742a3191efc36  # lxd/state/test: State usage
+      git cherry-pick 81cfb57833da00ea50e8a9bcae87d9f62cd3d6c0  # lxd/state/state: Move Context field first
+      git cherry-pick 837824b8325848e8a5d1cc355ec2515f99fe7c8f  # lxd/state/state: Adds InstanceTypes field to State
+      git cherry-pick 87b9fe4ebf857c1da47a306ca94bf9022a00e753  # lxd/instance/drivers/load: Adds supportedInstanceTypes cache and lock and adds SupportedInstanceTypes
+      git cherry-pick aa82def3a4cb8357f3b572064dee97a884ec0105  # lxd/instance/instance/interface: Adds Type field to Info
+      git cherry-pick 8d6b2782c59599fe3bfd4802e99c2ef9b32c5582  # lxd/instance/drivers/driver/lxc: Populates Type in Info
+      git cherry-pick 3d15b003abab621f8308dd31a63df938da674a52  # lxd/instance/drivers/driver/qemu: Populates Type in Info
+      git cherry-pick 5899a0d9ad4039b4f30f570d4049df22dc27f569  # lxd/instance/drivers/load: Comment improvement
+      git cherry-pick 836919d1846d8d8c0f37bc469520a66faeebe214  # lxd/daemon: Usage of instanceDrivers.SupportedInstanceTypes() in State() and init()
+      git cherry-pick c1edcd7c79668d4838d9dfcade3903242befcfc9  # lxd/api/1.0: instanceDrivers.SupportedInstanceTypes usage in api10Get
+      git cherry-pick e17427c6ded8fd09359a02f282bfe28f7f2719ea  # lxd/instance: Removes instanceDriversCacheVal and supporting functions
+      git cherry-pick f30be674c6dc12f2d5c42758f1fb523709c555de  # lxd/instance/instance/utils: Checks requested instance type is supported in CreateInternal
+      git cherry-pick a63534744b19c3f78c6e86835bc07121fc94f7b7  # lxd/include: include sys/wait.h in macro.h
+      git cherry-pick 6cb37a461cde4d3f2e76869b41d7fd53bcd17c5d  # lxd/lifecycle: add lifecycle package
+      git cherry-pick c1beeb731b2e612a441180f07929907cfba878ac  # lxd/lifecycle/instance/snapshot: add instance_snapshot
+      git cherry-pick ea8215a6c351d8858e6645df81b3576982ab1575  # lxd/lifecycle/instance/backup: add instance_backup
+      git cherry-pick d401ad206d22066454e77fa43648b50669415a16  # test: add lifecycle package to static analysis
+      git cherry-pick 52305eafcac31df23ccfe105388f32daa7d4a847  # lxd/events/events: change SendLifecycle to accept apt.EventLifecycle
+      git cherry-pick 227833151c96d847f0228c5ce900b1108f4a4175  # lxd/instance/instance/interface: add Operation
+      git cherry-pick 4af0ddfde8446997e3a3fa62e19894eb0baf976b  # lxd/instance/drivers/driver/common: add Operation
+      git cherry-pick 6bd808e07e16b2934fd803b2fe43b102ea8de3d7  # lxd/instance/drivers/driver/common: fix IsStateful comment typo
+      git cherry-pick a4cde9d473154299e60c43ad769337ccef14f7d3  # lxd/instance/drivers/driver/common: remove lifecycle function
+      git cherry-pick 6794699c07bc52f28900affe6dd48f2872da6776  # lxd/instance/drivers/driver/lxc: use InstanceAction for lifecycle events
+      git cherry-pick 8c41a9bc40a32784b5ef8ee4b31fd88e3adaa8ba  # lxd/instance/drivers/driver/qemu: use InstanceAction for lifecycle events
+      git cherry-pick 096ad48021907c652a1f1e602cd63b90bbd44bc9  # lxd/backup/backup/utils: remove Lifecycle
+      git cherry-pick 05be585022a45590a68b3b28f78179ab0d941106  # lxd/backup/backup/instance: expose instance interface
+      git cherry-pick bf4ae226f92c7fa21efbf9068ab69dc7a625b5f4  # lxd/backup: use InstanceAction for lifecycle events
+      git cherry-pick 592f8d70b03ea6fe8982f8f0e04fc539584a0db3  # lxd/backup/backup/instance: use InstanceAction for lifecycle events
+      git cherry-pick 01dee9b4d22d2464465c8330be5d8ffd22b0b9c5  # lxd/lifecycle/network: add network
+      git cherry-pick f8c0d5ad712f9c258f4b278da66abf983e0a19b7  # lxd/network/driver/common: use NetworkAction for lifecycle events
+      git cherry-pick e55e60dc621b95cdc590c9c55c60d000cbb3e634  # lxd/device/proxy: Don't write out pid file until process has started OK
+      git cherry-pick 49e56a4629a13103ded3047b5a62193b1c041d37  # lxd/instance/drivers/driver/lxc: Adds onStopOperationSetup function
+      git cherry-pick f1e6bf3d279350b8103fefa2cf14b925bdc09c09  # lxd/instance/drivers/driver/lxc: Call d.onStopOperationSetup from onStopNS
+      git cherry-pick 1d0e813f6086b752a26e1f32b86101c336581a68  # lxd/instance/drivers/driver/lxc: Call d.onStopOperationSetup from onStop
+      git cherry-pick 3ea846663c00fe54f3f8b6e7a177ed28c9be5a6f  # lxd/instance/drivers/driver/lxc: Move IsRunning to before creating start operation lock
+      git cherry-pick bae13d409caf228ee1a4331ea1c92c3012306001  # lxd/instance/drivers/driver/common: Move onStopOperationSetup from lxc driver and make generic
+      git cherry-pick eb71894a82f8b8fd04b6f546262f9f5501839faa  # lxd/instance/drivers/driver/lxc: Make Start, Stop and Shutdown locking and logging consistent with qemu driver
+      git cherry-pick 69ed7f0e091a6652a527667f215e8404bf3b7a93  # lxd/instance/drivers/driver/qemu: Switch to d.onStopOperationSetup in onStop
+      git cherry-pick 1c071e3abcf0928f8c826a0e046eac095fc924af  # lxd/instance/drivers/driver/qemu: Increase onStop wait timeout to 5 minutes
+      git cherry-pick b2e39c9cb7614509af298842f797178fcc97d364  # lxd/instance/drivers/driver/qemu: Comment consistency with lxc driver in Start
+      git cherry-pick 0db7cfc776b6fc203a7a08be71cff47c7e83f7ab  # lxc/alias: workaround for subcommand errors
+      git cherry-pick 86f7b5335af5c743ab51d07581e5b342ab5d217e  # lxc/config: workaround for subcommand errors
+      git cherry-pick d1aebd379d73cb09434abff3856bc92856c8df55  # lxc/config/metadata: workaround for subcommand errors
+      git cherry-pick ff9be626ea9a0a5bb4e5612dd4141b233a75c91a  # lxc/config/trust: workaround for subcommand errors
+      git cherry-pick 493817912bf8549cf17a8e9d2090f2dd1ef7a674  # lxc/config/device: workaround for subcommand errors
+      git cherry-pick 7718737e85b27c628111775d561140c7b2c6024f  # lxc/config/template: workaround for subcommand errors
+      git cherry-pick 87d86338b33e314f7a48b1af60c852500a7869aa  # lxc/image: workaround for subcommand errors
+      git cherry-pick 19f0435264ddbd283bcbeaa14d2a77dae2a28159  # lxc/image/alias: workaround for subcommand errors
+      git cherry-pick 3888bfab292ee29eb14770a9a0aa964c584b1eb1  # lxc/network: workaround for subcommand errors
+      git cherry-pick 22f5c149aa71babc6649e811f6ec01c9165d5c80  # lxc/network/acl: workaround for subcommand errors
+      git cherry-pick faee82f80573a81e75a6b364e30c23c3842404d5  # lxc/operation: workaround for subcommand errors
+      git cherry-pick d44235c7019801dbc240ec5876e14bc09fd17fdf  # lxc/project: workaround for subcommand errors
+      git cherry-pick 1fe24f4b8b1864ea85c325188f920110bf230dd3  # lxc/warning: workaround for subcommand errors
+      git cherry-pick 229e84ec1a0311f0efcb7b9a46d8984660711ba6  # lxc/file: workaround for subcommand errors
+      git cherry-pick 6c10def4c477408e6537535a5a8e8383c11ab962  # lxc/remote: workaround for subcommand errors
+      git cherry-pick bbee5f771f9ff2225f904e9bd400cd3e36335ab8  # lxc/profile: workaround for subcommand errors
+      git cherry-pick 532650b58b8348a0a0d648f2c294cc13adc75fc6  # lxc/storage: workaround for subcommand errors
+      git cherry-pick 581d0b4af65009cd4ffc10fde5d6303b8326bff2  # lxc/storage/volume: workaround for subcommand errors
+      git cherry-pick 2a4d9ec705054a59ee4be2f0286bc5db4d58e838  # lxd/main/cluster: workaround for subcommand errors
+      git cherry-pick 46be0c61c942873a4dd66256975469b23a4ad580  # lxd/main/forkuevent: workaround for subcommand errors
+      git cherry-pick e8bb9657bf2bcf2fce2b89e9c2a989a9412a517c  # lxd/main/forkmount: workaround for subcommand errors
+      git cherry-pick 7fb9e9aca3ed47dfa7c6127b28d312bfb007c9fe  # lxd/main/forkfile: workaround for subcommand errors
+      git cherry-pick 4ed9b26c15e39238eaadc673460ae7dc5a7089f8  # lxd/main/forknet: workaround for subcommand errors
+      git cherry-pick 6446912066ef5d6d4ff05d4b9a66e504ebf03b3c  # lxd/db/generate/root: workaround for subcommand errors
+      git cherry-pick b6607afd33ef6c45d189395cef39e351740ce5aa  # lxd/db/generate/db: workaround for subcommand errors
+      git cherry-pick cbe7a9d9efd5259fb6f03cbca9f69236b4b830f8  # lxd/firewall/drivers/drivers/xtables: Don't use ebtables --concurrent flag
+      git cherry-pick 672f34b8e05cbd42d68aa5ec8acfd65da05f61da  # lxd/instance: Fix error message
+      git cherry-pick e5c08122769607519368381a8b7f60822fcea67a  # lxd/instance/drivers/driver/common: Improve error logging in restartCommon
+      git cherry-pick d9ab29ccc6d8fded5402f9a1eff7e2423411ecd4  # lxd/instance/operationlock: Close chanDone after deleting operation from map in Done
+      git cherry-pick 77a5161b4f890a0a9f5e2bc480e0c39710b08be3  # lxd/instance/drivers/driver/qemu: Don't fully regenerate config driver on start in generateConfigShare
+      git cherry-pick 3dfefe2f29e38b4823d881487dcb5825130001c6  # lxd/instance/drivers/driver/qemu: Remove config drive template files dir and regenerate
+      git cherry-pick daab8dcbce73f5067bc0e1846cae066157cd49c4  # doc/index.md: Update CGO_LDFLAGS_ALLOW
+      git cherry-pick dbfabebb18ff31bc45ab6710c1087fa4663be9b1  # Makefile: Set CGO_LDFLAGS_ALLOW
+      git cherry-pick 0e1fbebae1e4db0cfd8c4127ff8a18d790011247  # lxd/endpoints: Deal with nil listener
+      git cherry-pick 4e89d7d297c4e980166a13833eb49702730747ba  # lxd/instance: Fix snapshot etag
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
