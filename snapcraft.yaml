@@ -1387,6 +1387,39 @@ parts:
       git cherry-pick dbfabebb18ff31bc45ab6710c1087fa4663be9b1  # Makefile: Set CGO_LDFLAGS_ALLOW
       git cherry-pick 0e1fbebae1e4db0cfd8c4127ff8a18d790011247  # lxd/endpoints: Deal with nil listener
       git cherry-pick 4e89d7d297c4e980166a13833eb49702730747ba  # lxd/instance: Fix snapshot etag
+      git cherry-pick ff0c6290ce5b6016391a5195f9c22d9d67e9b999  # Revert "client: Only retry target addresses if initial connection fails"
+      git cherry-pick 7f8aa37b9cbec350bf7fd9774df5eb058bc8cd75  # lxd/storage: Handled nil config map
+      git cherry-pick bdbda7b824141df87054a91214b0f3041ff6fafc  # Makefile: Tweak quoting
+      git cherry-pick 5b9e2bd3e81eaef2dfcf247763f655574f81ca07  # lxd/instance: Fix instance volume DB entry on copy
+      git cherry-pick f1e78d357676f8b233d00a50cee3564eda36552a  # client/util: Updates remoteOperationError to accept slice of remoteOperationResult
+      git cherry-pick 49f3353e2b20fe8e6d971379645f0541c6b618f2  # client: remoteOperationError usage
+      git cherry-pick 37a6ef7d0b0cd5566ae5813f80d31e40acee4139  # shared/network: RFC3493Dialer spacing
+      git cherry-pick 50a45fc431a416e75dc3c0410ca3261c1eb6626f  # shared: Moves lxd/cluster/isClientConnectionError to shared.IsConnectionError
+      git cherry-pick b14b3a79f978b54e07ca2c51ae13623fd0730f83  # client/lxd/instance: Only try remote operation on different URL on connection error
+      git cherry-pick 51f3a65b1c5ec97a0d104d56d5e29a676612c8f2  # lxd/instance/drivers/driver/common: Adds isStartableStatusCode function
+      git cherry-pick 8a80922a72725a9ee954a5373466302937e35f77  # lxd/instance/drivers/driver/lxc: Switch to d.isStartableStatusCode in Start()
+      git cherry-pick e7deba6f582747adeed6cac5369dea05d8fbd002  # lxd/instance/drivers/driver/qemu: Switch to isStartableStatusCode in Start()
+      git cherry-pick 2c6f2f2579126985a692b4adcb209df75d6f759a  # lxd/instance/drivers/driver/qemu: If QMP socket not responding and QEMU process still exists then return Error status code
+      git cherry-pick b0614d5180000d169a24a9405bb5d54d47bd745d  # lxd/ip: Support for 'bridge' and 'ip link show' commands
+      git cherry-pick a9228d16e1d932d4b111e1acfecb47acf87ec804  # lxd/ip: Support for 'tc' command
+      git cherry-pick f93ec76ffe1f8b2be09051ae3157ec8ba803899f  # lxd/device: Use ip package instead of 'tc' command
+      git cherry-pick 86a57cee814a2bb5a06d1332c870c41b43051300  # lxd/device: Use ip package instead of 'bridge' command
+      git cherry-pick 4ebedd552e681b7f0960274cd4d78cb58b4ac5d0  # lxd/device: Use ip package instead of 'ip link' command
+      git cherry-pick 20732f1f47fd7fb20e0e95f6666ed278b5493f0b  # lxd/instance/drivers/driver/common: Adds instanceInitiated return boolean to onStopOperationSetup
+      git cherry-pick bd3b6e0e56ab9eaebd5c38bc7a9327340da7fa7e  # lxd/instance/drivers/driver/lxc: Fix lifecycle shutdown event in onStop
+      git cherry-pick 27e0437adc6f68c700d56e32a085780c19582e99  # lxd/instance/drivers/driver/qemu: Fix lifecycle shutdown event in onStop
+      git cherry-pick 63c87ee23865f16bf5197dabf0a53ea040bd8e9f  # lxd/instance/drivers/driver/lxc: Detect error status in Shutdown and return appropriate error
+      git cherry-pick 60957656871e173e5c36390f81654bc01ae44bc3  # lxd/instance/drivers/driver/qemu: Detect error status in Shutdown and return appropriate error
+      git cherry-pick e2c4670bee274317167034008498ca9275fd2815  # lxd/instance/drivers/driver/qemu: Detect error status in Stop and forcefully kill qemu process if exists
+      git cherry-pick 5ef306b8f3dec9fe6ab6c236d86264528177225d  # lxd/instance/drivers/driver/qemu: Handle internal-error status from QEMU
+      git cherry-pick b4068de9ed8b0a4f3a038acdc3c4e8f66472aa45  # lxd/instance/drivers/driver/qemu: Remove hung term from statusCode
+      git cherry-pick 25e01cfe61bfc2c0e9d395e1df6c309bb8531e1d  # lxd/instance/drivers/driver/lxc: Remove hung term from getLxcState
+      git cherry-pick fb45b0a9533201bf5a6314050409796fa0b7a480  # lxd/device/nic/bridged: Apply managed network validation checks when parent is set to a managed network
+      git cherry-pick c4a7bf2103633d737ac0c8325c3b9f9ee8830920  # test/suites/clustering: Fix tests to expect that creating container connected to pending network is forbidden
+      git cherry-pick 1119f284546aa9439bedb46609cda2b9ab6a4844  # tests: Update bridged NIC filtering tests to account for validation being improved
+      git cherry-pick d3fe6065f56cb4b6b0188c5977eb8972034b0d26  # lxd/device/nic/bridged: Allow use of static IPs with managed network that has DHCP disabled if IP filtering is in use
+      git cherry-pick 82f93b5449c03054d17b4283f1052a6f70850c9d  # lxd/device/nic/bridged: Ensure static IPs are specified when using IP filtering on unmanaged parent bridge
+      git cherry-pick 7a37a8b2b0a0ce8521cfd320f571ac086ddff97a  # lxd/db/warnings: Improve context in warning unknown entity errors
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
