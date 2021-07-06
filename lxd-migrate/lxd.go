@@ -296,17 +296,6 @@ func (d *lxdDaemon) uninstall() error {
 		return nil
 	}
 
-	//// Ubuntu 16.04
-	err = packagesRemovable([]string{"liblxc1", "lxc-common", "lxcfs"})
-	if err == nil {
-		_, err := shared.RunCommand("apt-get", "remove", "--purge", "--yes", "liblxc1", "lxc-common", "lxcfs")
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
 	return nil
 }
 
