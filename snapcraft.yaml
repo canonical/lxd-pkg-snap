@@ -462,7 +462,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v2.15.0
+    source-tag: v2.15.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
