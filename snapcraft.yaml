@@ -571,9 +571,12 @@ parts:
       - expect
       - gawk
       - iproute2
+      - libjson-glib-dev
       - python3-cryptography
       - python3-setuptools
       - socat
+    stage-packages:
+      - libjson-glib-1.0-0
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -581,6 +584,7 @@ parts:
     prime:
       - bin/swtpm
       - lib/libswtpm*so*
+      - lib/*/libjson-glib-1.0.so*
 
   qemu:
     after:
