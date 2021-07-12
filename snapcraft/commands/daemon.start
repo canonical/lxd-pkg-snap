@@ -36,6 +36,9 @@ if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     done
 fi
 
+# Workaround for systemd nuking our cgroups on refreshes
+nsenter -t 1 -m systemd-run -u snap.lxd.workaround -p Delegate=yes -r /bin/true >/dev/null 2>&1 || true
+
 # Cleanup last state
 true > "${SNAP_COMMON}/state"
 
