@@ -1181,6 +1181,78 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 41a7978db7fedf0d1427e7c8d8494e5dfc6ae1f1  # lxd/api/1.0: Wait until LXD fully started before applying API changes in doApi10UpdateTriggers
+      git cherry-pick e9b9b2641fae967efc1e7a790a99de12bef61d0d  # lxc/cluster: Fix bad format string
+      git cherry-pick 3c4f71bc1811ec5672a6f36a1efccfa4bd5779c2  # lxd/daemon: No need to call vmMonitor anymore as its served by devicesRegister
+      git cherry-pick bb0a319d957b53239434f3653a9522e9b26f4aad  # lxd/devices: Add logging to devicesRegister
+      git cherry-pick e1ff4d5b732c100430cfe7c40e7e62f1766878e1  # lxd/instances: Remove unused vmMonitor
+      git cherry-pick 862090071f9f34d6b5e6289c18fcda823c2e9ac1  # shared/instance: Adds volatile.last_state.vsock_id to validation
+      git cherry-pick 90181c86e657613e6db7bd1901f50b4a7c326c5f  # lxd/instance/drivers/driver/qemu: Adds volatile.last_state.vsock_id volatile key
+      git cherry-pick ab0aec2bc48e67ea59a5df5ae8687451a59822b4  # doc/instances: Documents volatile.last_state.vsock_id key
+      git cherry-pick e13856761339bce76b884f757d4f2f80547e7d48  # client: Make staticcheck happy
+      git cherry-pick f40f0cf0f70b04012d93404d7289435f579e9b75  # lxd-p2c: Make staticcheck happy
+      git cherry-pick 1e32250cd074a6e67fc5674bb68d8edc57b346a4  # lxc-to-lxd: Make staticcheck happy
+      git cherry-pick a2c15468706c0c50bb61060f4a53bb4d22b82adb  # lxd-agent: Make staticcheck happy
+      git cherry-pick f4e6d43d9ca1e8c444a70d83af7fe1e21d3f7063  # lxc/list: Use EqualFold for case-insensitive compare
+      git cherry-pick a1f413d829bcb4ff98781d20fe697be03eac8e24  # lxc: Make staticcheck happy
+      git cherry-pick 338f87d837fc61d130f45b84cd74b5c51f54e088  # lxd/instance/instance/utils: Adds cleanLogDir bool argument to CreateInternal
+      git cherry-pick 6320d09ce65be9320a6a6373ea73543879b652d7  # lxd: instance.CreateInternal usage
+      git cherry-pick b6e76ad89426adf65de8637bb96400a758553af0  # doc: Renames volatile.last_state.vsock_id to volatile.vsock_id
+      git cherry-pick e6d67b58a7e9b37ecbb4066e6b5eecf070280d13  # lxd/instance/drivers/driver/qemu: Renames volatile.last_state.vsock_id to volatile.vsock_id
+      git cherry-pick d2e3fd4428586b18a5bc10c49c0f455d1918a7f8  # shared/instance: Renames volatile.last_state.vsock_id to volatile.vsock_id
+      git cherry-pick b967fba9045bded9d9103a8fb42c233806614457  # lxd/db/generate/file/write: add alternate build comment to generated files
+      git cherry-pick 10e44a6db7d910369733e96c8bb075b96beb7943  # Makefile: add go formatting for update-schema
+      git cherry-pick 1bc3c885e97d56e397c5c5a3d87d90cfab226c86  # lxd/db/generate/db/stmt: replace naturalKeyWhere with whereClause
+      git cherry-pick 4f0e136e4d338f7248f5326dea891dbbcc1e4f0f  # lxd/db/generate/db/parse: use kind parameter for Filter generation
+      git cherry-pick 411fed4212d01faa3756eebdc90b7eb60ab4f66d  # lxd/db/generate/db/method: pass query kind to Filter
+      git cherry-pick 8139ea3efbcac42cabae67e12ad09ec099000201  # lxd/db/generate/db/stmt: use delete-by statements with Filter instead of only by id
+      git cherry-pick 36a4fa9d12443fbb2f81bb975bb768483ab48192  # lxd/db/generate/db/method: use and handle Filter as paramter for Delete method
+      git cherry-pick 4ffb00c2d595e2b04911d8dec687e2fed86d5c08  # lxd/db/generate/db/method: make Delete into DeleteOne and DeleteMany
+      git cherry-pick 7f3d31a973b8b12040fd27f182c16986f7150dbf  # lxd/db/certificates: add new entries for code generation
+      git cherry-pick c9fc3fdcd88a2bcf1a03b56691712c7ede1f5b23  # lxd/db/certificates: add delete-by fields to CertificateFilter
+      git cherry-pick dd88aec0e69a3e72dee63efd35bf6a5ad6cfb613  # lxd/db/certificates: remove old DeleteCertificateByNameAndType
+      git cherry-pick 462ae0fc7354ec65177893f4655605cb3f7bda24  # lxd/db/certificates.mapper: add new generated code
+      git cherry-pick 7228f7689110276aa6eda2a34740ca25283c660b  # lxd/db/certificates: use Filter as parameter for delete
+      git cherry-pick 02fc3fb9df94e9da8a6e97e4e4ca44658fc5cdc2  # lxd/cluster/membership: use Filter as parameter for delete
+      git cherry-pick 800d85863b6e4f89fd11cddb2ad15c0bd68ea4fb  # lxd/db/profiles: add new entries for code generation
+      git cherry-pick 1296ed22cda4aff16f4d18483f9097ae00c635ca  # lxd/db/profiles.mapper: add new generated code
+      git cherry-pick d58e1c6cd2d7750b21e71d13ed5af95d9c7a5c4d  # lxd/api/project: use Filter as parameter for delete
+      git cherry-pick 3b61cc14b68047e5eaf75639da10d598ea44cb70  # lxd/instance/test: use Filter as parameter for delete
+      git cherry-pick 9f07aa125157263c20c17c870caa9873481835e9  # lxd/patches: use Filter as parameter for delete
+      git cherry-pick 4d924e499ccfdf91175ca0576234fa19181a0d86  # lxd/profiles: use Filter as parameter for delete
+      git cherry-pick 20132f238e4ab4641325c7f146d1639437d52844  # lxd/db/snapshots: add new entries for code generation
+      git cherry-pick a416145e330f3d91a1a25ade540655e3813f1fed  # lxd/db/snapshots.mapper: add new generated code
+      git cherry-pick 9ce66e069c84479e67b7647afaea0316fc2645ec  # lxd/db/instances: add new entries for code generation
+      git cherry-pick c1d96701b0472ef59bfc4417c7fe83d05ee6e560  # lxd/db/instances.mapper: add new generated code
+      git cherry-pick be103b0ec8e4659d423a122cc01aa21e852b3257  # lxd/db/instances: use Filter as parameter for delete
+      git cherry-pick ff5cf6888cac0718ebd969c4b7369b6ac68092b6  # lxd/db/projects: add new entries for code generation
+      git cherry-pick eab5e23e917f802156c4ff494fa76f84b190c66f  # lxd/db/projects.mapper: add new generated code
+      git cherry-pick 24ae57c4468656b57330fc376e27f5acf31f2fb4  # lxd/api/project: use Filter as parameter for delete
+      git cherry-pick c105a59371bd2e02167866d959be23f88912838e  # lxd/node: Improve error handling
+      git cherry-pick d0d9fc1b5e5a86621ea6df8cd7413c1f4a6a77c6  # shared/validate: Add IsListenAddress
+      git cherry-pick fe9901e3a5e5b646eb12df86dc3dd565b65b94a6  # lxd/lxd: Validate https address for config key core.https_address
+      git cherry-pick f86e766410fa32b33180ebd74c03e44d4c054463  # lxd/storage/ceph: Improve version parsing
+      git cherry-pick 2f28b9e4f54695c5c1ce78d73ad3e8088a7eec35  # lxd/device: Fix duplicate MAC test
+      git cherry-pick 8e1457945c846e80b57c89b1782777d9afe5025c  # lxd/db/operations: add OperationFilter and operation database fields
+      git cherry-pick 582ad48f02f8504f55933585971502df06f46c38  # lxd/db/operations: add new entries for code generation
+      git cherry-pick e00fce6b2650c91735e7662cd2f023dd8c83cc58  # lxd/db/generate/db/mapping: add OperationType as valid type for mapping
+      git cherry-pick 2fa721c1148fd243d760743aa5c6f7b1043d46af  # lxd/db/generate/db/parse: support pointers
+      git cherry-pick 3e5f873153e79d77697c1e604e294c6468255116  # lxd/db/generate/db/stmt: add create-or-replace statement functionality
+      git cherry-pick 4c62ba113927a0ccbc01821e95a92c9522776c00  # lxd/db/generate/db/method: add CreateOrReplace method functionality
+      git cherry-pick 64a6110af5d0ce54f8e291e9440473df20cc415d  # lxd/db/operations: remove hard-coded functions
+      git cherry-pick d00a755919d942c48fedb1cfc05abca95ddb543f  # lxd/db/generate/db/parse: handle 'omit' tag
+      git cherry-pick aa59698976e7e766f5dd09c1af02b56c7dff6a89  # lxd/db/generate/db/method: pass mapping kind to Parse for 'omit' tag
+      git cherry-pick f925989ce4fa0cfb680afed8ebd2e25a0aebb8ff  # lxd/db/generate/db/stmt: pass mapping kind to Parse for 'omit' tag
+      git cherry-pick 62ca00bdee7aae3f4c48afcaca1f665f6bd84a5e  # lxd/db/generate/db/parse/test: pass mapping kind to Parse for 'omit' tag
+      git cherry-pick 6a5a61f04a33920499f560b27935dd6bc2c39f2b  # lxd/db/operations.mapper: add new generated code for operations
+      git cherry-pick 14d06b92670e2ddbfb8a351c27cb19fb243c80cf  # lxd/db/transaction: add GetNodeID
+      git cherry-pick c23f6e8ef151a0f3e973df6f0f1c1a3ae3ccfe30  # lxd/cluster/membership: use filter parameter for generated operation methods
+      git cherry-pick 307467d419b0b9a3d76319d8916d3fccafc0227f  # lxd/db/db: use filter parameter for generated operation methods
+      git cherry-pick ec88fb303b9fb1b1d564918ea9786c05c6e7829e  # lxd/db/entity: use filter parameter for generated operation methods
+      git cherry-pick 6e2e73ce54c13f6120d6a42661c9bfba60ed618a  # lxd/db/operations/test: use filter parameter for generated operation methods
+      git cherry-pick 119f5568b23a3b8a68ac00ed4732229382a3928b  # lxd/operations: use filter parameter for generated operation methods
+      git cherry-pick a60753fba0c04e615fe8df7b243f247d251c9b0d  # lxd/operations/linux: use filter parameter for generated operation methods
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export GO111MODULE=off
