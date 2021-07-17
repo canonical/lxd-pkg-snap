@@ -953,7 +953,7 @@ parts:
     source-tag: zfs-2.1.0
     source-depth: 1
     plugin: autotools
-    autotools-configure-parameters:
+    configflags:
       - --prefix=/
       - --with-config=user
     build-packages:
