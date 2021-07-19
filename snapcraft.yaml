@@ -1252,6 +1252,7 @@ parts:
       git cherry-pick 6e2e73ce54c13f6120d6a42661c9bfba60ed618a  # lxd/db/operations/test: use filter parameter for generated operation methods
       git cherry-pick 119f5568b23a3b8a68ac00ed4732229382a3928b  # lxd/operations: use filter parameter for generated operation methods
       git cherry-pick a60753fba0c04e615fe8df7b243f247d251c9b0d  # lxd/operations/linux: use filter parameter for generated operation methods
+      git cherry-pick 2741487fa30f4cfdc3516d62d5b5dda464d02adc  # lxd/node: Relax constraint on cluster address
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
