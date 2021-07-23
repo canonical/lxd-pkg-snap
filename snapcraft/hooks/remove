@@ -11,4 +11,7 @@ for path in /var/snap/lxd/common/ns/shmounts /var/snap/lxd/common/ns/mntns /var/
     nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
 
+# Stop workaround unit
+nsenter -t 1 -m systemctl stop snap.lxd.workaround >/dev/null 2>&1 || true
+
 exit 0
