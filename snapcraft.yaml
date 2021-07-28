@@ -608,7 +608,6 @@ parts:
       - --disable-guest-agent
       - --disable-parallels
       - --disable-qed
-      - --disable-sheepdog
       - --disable-slirp
       - --disable-user
       - --disable-vdi
@@ -657,12 +656,7 @@ parts:
       - libusbredirparser1
     override-pull: |-
       set -ex
-      git clone https://github.com/qemu/qemu . -b v5.2.0
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/qemu-0001-hw-s390x-fix-build-for-virtio-9p-ccw.patch"
+      git clone https://gitlab.com/qemu/qemu . -b v6.1.0
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
@@ -672,7 +666,6 @@ parts:
       [ "${QEMUARCH}" = "ppc64le" ] && QEMUARCH="ppc64"
       sed -i "s/^unset target_list$/target_list=\"${QEMUARCH}-softmmu\"/" configure
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
-      sed -i "s#https://git.qemu.org/git#https://github.com/qemu#g" .gitmodules
 
       set +ex
       snapcraftctl build
