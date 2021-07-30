@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/lxc/lxd/lxd/storage/filesystem"
 	"github.com/lxc/lxd/shared"
 )
 
@@ -115,7 +116,7 @@ func run() error {
 	fmt.Printf("Once the data is moved, the destination LXD will start and apply any needed updates.\n")
 	fmt.Printf("And finally your containers will be brought back to their previous state, completing the migration.\n")
 
-	isMnt := shared.IsMountPoint(src.path)
+	isMnt := filesystem.IsMountPoint(src.path)
 	if isMnt {
 		fmt.Printf("\nWARNING: /var/lib/lxd is a mountpoint. You will need to update that mount location after the migration.\n")
 	}
