@@ -1194,6 +1194,12 @@ parts:
       git cherry-pick 93bc5f414f386cc5de49381c0096af317a2e92cc  # lxd/cluster: Fix volatile race in restore
       git cherry-pick e93766d427e034b53abfffb44eb71060934be66d  # tests: Fix expected clustering evacuation result
       git cherry-pick 8d7fc9760284c88d8c8ee9c80ff70b64a3d153ef  # i18n: Update translations from weblate
+      git cherry-pick ef8d9a022edffd32bf93391ca04e5bc2ef1558ba  # lxd/cluster/evacuation: Improve comments
+      git cherry-pick dcf16e379f72b44c006197313e46969e150a57cc  # lxd/cluster/evacuation: Use correct project in migration
+      git cherry-pick a34519755060297fd6eb65f0fa63e7a027a1fbb9  # lxd/cluster/evacuation: Don't start running instances
+      git cherry-pick e96e5aa2cd1bcfdddd0f470d820926c6075e1b0b  # lxd/cluster/evacuation: Improve status messages
+      git cherry-pick ead628804c92340a924bb21e8b7eabbedc49ba16  # lxd/cluster/evacuation: Fix shutdown during restore
+      git cherry-pick d38d63ba028425ec0635bca1477ecd4c92448eed  # lxd/cluster/evacuation: Start with restoring local instances
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
