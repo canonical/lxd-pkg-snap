@@ -1200,6 +1200,9 @@ parts:
       git cherry-pick e96e5aa2cd1bcfdddd0f470d820926c6075e1b0b  # lxd/cluster/evacuation: Improve status messages
       git cherry-pick ead628804c92340a924bb21e8b7eabbedc49ba16  # lxd/cluster/evacuation: Fix shutdown during restore
       git cherry-pick d38d63ba028425ec0635bca1477ecd4c92448eed  # lxd/cluster/evacuation: Start with restoring local instances
+      git cherry-pick e2cf621a5b63adf0cf05560a7ab348c0980c303c  # doc/instances: Clarifies expectation of uniqueness for volatile.uuid
+      git cherry-pick 0dd6879534c3d3bcbf7fd76a614f84b2b5307012  # lxd/instance/instance/utils: Allow cross-project same instance matching on volatile.uuid in IsSameLocgicalInstance
+      git cherry-pick 651cf9b4a3a0bf51f39e510302642368f40bd3c6  # lxd: Fix typo in spelling of IsSameLogicalInstance
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
