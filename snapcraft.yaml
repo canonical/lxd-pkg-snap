@@ -289,7 +289,10 @@ parts:
             -DNETWORK_TLS_ENABLE=TRUE \
             -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
             -DFD_SIZE_2MB \
-            -DTPM2_ENABLE=TRUE
+            -DTPM_ENABLE=TRUE \
+            -DTPM_CONFIG_ENABLE=TRUE \
+            -DTPM2_ENABLE=TRUE \
+            -DTPM2_CONFIG_ENABLE=TRUE
       EOF
       ) | bash -e
 
