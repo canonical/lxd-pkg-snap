@@ -1114,7 +1114,6 @@ parts:
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
-      export GO111MODULE=off
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
@@ -1181,7 +1180,6 @@ parts:
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
-      export GO111MODULE=off
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
 
@@ -1214,13 +1212,12 @@ parts:
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
-      export GO111MODULE=off
 
       # Download the dependencies
       go get -d -v ./...
 
       # Build the binaries
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" ./
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
     prime:
       - bin/snap-query
 
