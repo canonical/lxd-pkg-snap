@@ -1275,9 +1275,6 @@ parts:
       # Setup build environment
       export GOPATH=$(realpath ./.go)
 
-      # Download the dependencies
-      go get -d -v ./...
-
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
     prime:
