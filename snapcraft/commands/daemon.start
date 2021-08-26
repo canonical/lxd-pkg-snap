@@ -515,6 +515,12 @@ if [ -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
     mv "${SNAP_DATA}/lxd/lxd.db" "${SNAP_COMMON}/lxd/lxd.db"
 fi
 
+# Clusters should always be in the phased group (special cohort).
+if [ -e "${SNAP_COMMON}/lxd/cluster.crt" ]; then
+    echo "==> Setting snap cohort"
+    nsenter -t 1 -m snap switch lxd --cohort=+ >/dev/null || true
+fi
+
 ## Start lxd
 echo "=> Starting LXD"
 
