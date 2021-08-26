@@ -25,6 +25,12 @@ export XTABLES_LIBDIR="${SNAP_CURRENT}/lib/xtables/"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 
+# Clusters should always be in the phased group (special cohort).
+if [ -e "${SNAP_COMMON}/lxd/cluster.crt" ]; then
+    echo "==> Setting snap cohort"
+    nsenter -t 1 -m snap switch lxd --cohort=+ >/dev/null || true
+fi
+
 # Detect model
 SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
 
