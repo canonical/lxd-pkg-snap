@@ -1278,3 +1278,4 @@ parts:
     source: snapcraft/
     organize:
       hooks/: snap/hooks/
+      wrappers/remote-viewer: bin/
