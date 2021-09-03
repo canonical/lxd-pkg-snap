@@ -480,7 +480,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v2.15.1
+    source-tag: v2.16.0
     source-depth: 1
     plugin: autotools
     configflags:
