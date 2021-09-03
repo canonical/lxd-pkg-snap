@@ -327,7 +327,7 @@ parts:
   libseccomp:
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.1
+    source-tag: v2.5.2
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
