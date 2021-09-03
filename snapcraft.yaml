@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "4.17"
+version: "4.18"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1144,7 +1144,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.17
+    source-tag: lxd-4.18
     after:
       - lxc
       - dqlite
@@ -1176,29 +1176,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 23ff0e54d7d22e409634bc9a49034116e780cbb0  # global: Disable the completion command
-      git cherry-pick da7ff328bb4ec8d07b944c413c929cb606d147f0  # lxd/instance/lxc: Rework raw.lxc handling
-      git cherry-pick b86253a54dbd2c0e603b1133d3820a9e431b0fc5  # lxd/storage/zfs: Fix bad key name
-      git cherry-pick 09edf8c3dced0bf4d56067f447b1ad723524e144  # lxd/storage/zfs: Fix ListVolumes to use correct pool name
-      git cherry-pick 2173bc1bc21b61f4906b47d733294425cb9d2cee  # lxd/instance: Don't allow state changes when evacuated
-      git cherry-pick 6d1c9e676a5fb6ad64cf04d84ae57b7229149d0b  # lxd/daemon: Don't auto-start instances when evacuated
-      git cherry-pick c7f9f43465efbbcc7434decf53a7dcd06153d343  # lxd/instance: Rework IsMigratable
-      git cherry-pick 8c7f08217bec061771e53228cad097e39ecf9dac  # lxd/device: Add CanMigrate
-      git cherry-pick 46b174bf435944e35fa781ed9653a5100b026b7b  # lxd/instance: Move IsMigratable logic to devices
-      git cherry-pick 5e528f33c0bb6d262f5e245ccc18670c771d013e  # lxd/instance/common: Fix error message
-      git cherry-pick 93bc5f414f386cc5de49381c0096af317a2e92cc  # lxd/cluster: Fix volatile race in restore
-      git cherry-pick e93766d427e034b53abfffb44eb71060934be66d  # tests: Fix expected clustering evacuation result
-      git cherry-pick 8d7fc9760284c88d8c8ee9c80ff70b64a3d153ef  # i18n: Update translations from weblate
-      git cherry-pick ef8d9a022edffd32bf93391ca04e5bc2ef1558ba  # lxd/cluster/evacuation: Improve comments
-      git cherry-pick dcf16e379f72b44c006197313e46969e150a57cc  # lxd/cluster/evacuation: Use correct project in migration
-      git cherry-pick a34519755060297fd6eb65f0fa63e7a027a1fbb9  # lxd/cluster/evacuation: Don't start running instances
-      git cherry-pick e96e5aa2cd1bcfdddd0f470d820926c6075e1b0b  # lxd/cluster/evacuation: Improve status messages
-      git cherry-pick ead628804c92340a924bb21e8b7eabbedc49ba16  # lxd/cluster/evacuation: Fix shutdown during restore
-      git cherry-pick d38d63ba028425ec0635bca1477ecd4c92448eed  # lxd/cluster/evacuation: Start with restoring local instances
-      git cherry-pick e2cf621a5b63adf0cf05560a7ab348c0980c303c  # doc/instances: Clarifies expectation of uniqueness for volatile.uuid
-      git cherry-pick 0dd6879534c3d3bcbf7fd76a614f84b2b5307012  # lxd/instance/instance/utils: Allow cross-project same instance matching on volatile.uuid in IsSameLocgicalInstance
-      git cherry-pick 651cf9b4a3a0bf51f39e510302642368f40bd3c6  # lxd: Fix typo in spelling of IsSameLogicalInstance
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
