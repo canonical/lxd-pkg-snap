@@ -40,15 +40,9 @@ fi
 export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
 export LXD_CONF="${SNAP_USER_COMMON}/config"
 
-if [ "${EDITOR:-}" != "nano" ]; then
-    export EDITOR=vim.tiny
-    if [ -e "${SNAP_USER_COMMON}/.vimrc" ]; then
-        export VIMINIT="source ${SNAP_USER_COMMON}/.vimrc"
-    else
-        export VIMINIT="source ${SNAP}/etc/vimrc"
-    fi
-fi
-export VISUAL=${EDITOR:-}
+# Use editor wrapper
+export EDITOR="${SNAP}/bin/editor ${EDITOR:-}"
+export VISUAL="${EDITOR}"
 
 # Reset all locales as it isn't available in the snap (#29)
 LANG=C.UTF-8
