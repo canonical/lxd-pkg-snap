@@ -1336,4 +1336,5 @@ parts:
     source: snapcraft/
     organize:
       hooks/: snap/hooks/
+      wrappers/editor: bin/
       wrappers/remote-viewer: bin/
