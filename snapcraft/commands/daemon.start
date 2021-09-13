@@ -187,6 +187,7 @@ if [ "${lvm_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvextend"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvrename"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvremove"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvresize"
 fi
 
 
