@@ -11,7 +11,6 @@ run_cmd() {
     [ -z "${XDG_CONFIG_HOME:-}" ] && export XDG_CONFIG_HOME="${HOME}/.config/"
     [ -z "${XDG_STATE_HOME:-}" ] && export XDG_STATE_HOME="${HOME}/.local/state/"
 
-    echo "Running: ${CMD} $@"
     exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
 }
 
