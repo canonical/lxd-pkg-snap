@@ -53,5 +53,4 @@ if [ "$EDIT_CMD" != "nano" ]; then
 fi
 
 # Run the editor.
-echo "Running built-in: ${EDIT_CMD} ${EDIT_PATH}"
 exec "${EDIT_CMD}" "${EDIT_PATH}"
