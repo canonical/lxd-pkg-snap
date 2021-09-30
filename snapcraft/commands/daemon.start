@@ -339,7 +339,6 @@ if [ -e "/sys/fs/cgroup/cgroup.procs" ]; then
     echo "====> Detected cgroup V2"
 
     # Try to escape to the root (V2 hosts)
-    cat /proc/self/cgroup
     if ! echo "$$" > "/sys/fs/cgroup/cgroup.procs" 2>/dev/null; then
         # Create a .lxc cgroup if missing
         if [ ! -d "/sys/fs/cgroup/.lxc" ]; then
