@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "4.18"
+version: "4.19"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1149,7 +1149,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.18
+    source-tag: lxd-4.19
     after:
       - lxc
       - dqlite
@@ -1181,47 +1181,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick cf8803490a608a6156e5ff34de646892e7301ea1  # lxd/util/net: Update CanonicalNetworkAddress to return canconical IP
-      git cherry-pick 7c937e62aa7dea630b30a35420d2f8bd3e5642ce  # lxd/util/net: Update IsAddressCovered to use net.IP when comparing IP equality
-      git cherry-pick e027f4801d270b733e7d1095ce871e077ca19f81  # lxd/endpoints/cluster: Improve error message in ClusterUpdateAddress
-      git cherry-pick 4b87a5603d5aa152d818d54eedcbad6f6ca3027d  # lxd/endpoints/network: Improve error message in NetworkUpdateAddress
-      git cherry-pick 667a1dda08d943cfdfe5675817e1a6cd0aaa89a7  # lxd/util/net: Improve comment in CanonicalNetworkAddress
-      git cherry-pick 6fa00910f237e4f8f322ba8b495c3a00a2fe91e3  # lxd/main/init/interactive: Use util.CanonicalNetworkAddress in askClustering
-      git cherry-pick 1f7a912ea3b79e2ddf190977ac34a6f495cc1d64  # lxd/main/init: Use util.CanonicalNetworkAddress when constructing address from join token
-      git cherry-pick adf107aa78b6175fd1ec1102271bb6740990e632  # lxd/main/init: Ensure config.Cluster.ServerAddress and config.Cluster.ClusterAddress are in canonical form
-      git cherry-pick 5c32da6e4cf871aea88e4bab456e421a44bd8b46  # doc: Adds network forwards to left hand nav
-      git cherry-pick 4748a79db4e65d5aec7699ca88fdeebb20dccebf  # doc/server: Fix incorrect default for routerid
-      git cherry-pick c02ab335de1ba726abd6e372d5608ae123358a91  # lxd/endpoints/endpoints: require set network listener before checking coverage
-      git cherry-pick 2fdc6c952fa539c84073bc44bfdb445fc6ffde27  # test/suites/clustering: add enable clustering test on lxd reload
-      git cherry-pick 9ba9447574b9cd91919be49c54886ce88f581521  # lxd/resources/network: send not-found error instead of internal error
-      git cherry-pick a29655125b15448bf7e3ef236783d20241b39ee2  # shared/util: rename DefaultPort to HTTPSDefaultPort
-      git cherry-pick c3350e4cd6c4c3e4ed1721b8d11828e1f7d96925  # lxd/util/net: specify default port to CanonicalNetworkAddress
-      git cherry-pick f8a1b7a6cf6e2cee047512c899382b72e0e35811  # lxd/util/net: specify default port to CanonicalNetworkAddressFromAddressAndPort
-      git cherry-pick 709de0d46976e5f4992788d15d077fb0c1befc32  # shared/util: add HTTPDefaultPort
-      git cherry-pick 082e8a2dca80013bd26e262dc81fb3ad517d6c2a  # lxd/endpoints/pprof: use HTTP port instead of HTTPS for debug address
-      git cherry-pick c487a387721a67cc5634da95c4750a4a532c1724  # lxd/node/config: Canonicalize core.debug_address
-      git cherry-pick 8821eeb931924850b7bcc659d57ab97729c0609e  # lxd/daemon: Move ahead startTime
-      git cherry-pick 71d94a43066ce02809e24052365aa152538912c3  # lxd/warnings: Add ResolveWarningsOlderThan
-      git cherry-pick 2f1ec93ae1ea0331717752e2e033e56949cc7bf4  # lxd/daemon: Resolve warnings earlier than startTime
-      git cherry-pick 6522e7b4c5507c2c743d67f01442f66a50d2f902  # lxc: Fix aliases containing @ARGS@
-      git cherry-pick f0fcbc7e5ae177550c92d398f4306930a0301b03  # lxd/db/raft: rename RemoteRaftNode to RemoveRaftNode
-      git cherry-pick 2f30d4638d6ab546280604112deb1e23bfa61e3a  # lxd/db/node/update: Add updateFromV41
-      git cherry-pick a964736936da0e12d6122b17013ecd0320c2c5f5  # lxd/db/node/schema: update schema
-      git cherry-pick 1db065b06b2e1b16ea997927d158a4cae5162714  # lxd/db/raft: add Name field to RaftNode
-      git cherry-pick 1250081bdf95c41e37fa5132cf79e4cd4c5931c2  # lxd/storage/driver/zfs: Fix ListVolumes with custom zpool
-      git cherry-pick dcf97336ace5c62386f1fc00edebdad5a293ad11  # lxd/node/raft: use empty Name if not yet clustered
-      git cherry-pick 05a20633257a35de7e6616fcdc63edcf21202278  # lxd/cluster: handle Name field for RaftNode
-      git cherry-pick 6ee336a24dd6ce69019bc8c7c17b83c8f176db0f  # lxd/cluster/gateway: populate RaftNode Name from global database
-      git cherry-pick 01d842c9e28c1542d11cc98d5b10c1d03c56da4c  # lxd/api/cluster: add Name field to internalRaftNode struct
-      git cherry-pick 45d739c0a8fbe02c84b04537b0bff374c686f252  # lxd/main/cluster: add name to 'lxd cluster show/edit'
-      git cherry-pick def098ff7b9f0e13b932d02b233ab21967183f6f  # lxd/test: add Name field to RaftNode tests
-      git cherry-pick c142d1a5c009f9aa563b18540a2a170a58e3db0b  # lxd/cluster/recover: append to patch.global.sql if exists
-      git cherry-pick db7a18a8768b2c1c641fd2791abdbd7d2cb66912  # lxd/main/cluster: make segmentID a comment instead of struct field
-      git cherry-pick a75628f03648bcb2c2aeb0c96b773f3218ea32ae  # doc/clustering: update 'lxd cluster edit' docs
-      git cherry-pick 734aa21251ad453cc1726a548cbaa43784c174da  # lxd: Fix swagger definitions to avoid conflicts
-      git cherry-pick 9ec8bc5e0419baa88261ab3aaa1368dd83a31aa6  # doc/rest-api: Refresh swagger YAML
-      git cherry-pick 5683c4deab0e95e2284ebb674b23c89cc0574fae  # doc/instances: Clarify default CPU/RAM for Vs
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
