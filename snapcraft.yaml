@@ -1182,6 +1182,29 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick ba6be1043714458b29c4b37687d4f624ee421943  # lxd/checkfeature: check whether the kernel supports core scheduling
+      git cherry-pick b019c9e6ca4e8f6f362138ed98665eb278c2eb7a  # lxd/daemon: Fix crash on lxd start when another lxd already running
+      git cherry-pick 30dab2aae3590a7e4ea1620ba0353a60db1b3aa7  # lxd/daemon: Don't fail shutdown if fail to close cluster DB
+      git cherry-pick 913bd4dfcff04cbca3947782d75317e5b32c3b25  # lxd/daemon: Don't use Infof and Errorf
+      git cherry-pick 9cd3895702548f48849495b436956d2a6bbeef3d  # lxd/metrics: Change ProcsTotal to gauge
+      git cherry-pick 1ac47b83982ee3267fcee7e7ad70b71889135db8  # lxd/instance/drivers: Log metrics failures
+      git cherry-pick 30b510aa6fa7202328f9836cb9d86aeb1e6bbaa6  # lxd-agent: Log metrics failures
+      git cherry-pick 51cea9f3a0b7228831c6a497cca6b805abe1986f  # lxd/instance/operationalock: Change lock from using instance ID to use project and instace name
+      git cherry-pick 15032a67950a219658ce87d345ba4b8b1bb6d350  # lxd/instance/operationalock: Use %q for error quoting
+      git cherry-pick b63b501dc4c82ff1a51654e33d0ef39e58f14fa8  # lxd/instance/operationlock: Get lock after checking for non-nil operation
+      git cherry-pick 4d704e2fb7c9149d0da7b29826eee440a1153fec  # lxd/instance/drivers/driver/common: operationlock usage
+      git cherry-pick 84b7a8c969a22d477d68dd939dd1b3d841ddeb36  # lxd/instance/drivers/driver/lxc: operationlock usage
+      git cherry-pick 627cf5822ca63e8204acd28eca13c84b91cb6685  # lxd/instance/drivers/driver/qemu: operationlock usage
+      git cherry-pick a8e5fee1271b204afd12bd54c4d2b9f17a1ca043  # lxd/instance/instance/utils: operationlock usage
+      git cherry-pick 8d71e2dcc25184e739c938e44b1cedc35e88a7dc  # lxd-agent: Drop aggregated cpu stats in metrics
+      git cherry-pick fbb0fee5c35f7519b00b2946b7ec0d5d88f30530  # test: Kill LXD process if doesn't start in time
+      git cherry-pick 2df26a25b7861fd9750689a5cab4bfd852c912a0  # lxd/main/shutdown: Fix shutdown regression when running in snap
+      git cherry-pick f8ee085dc7deb8fb88e2b60fb4cbcb414272ec8d  # lxc: suggest 20.04 as the first container to launch instead of 18.04
+      git cherry-pick d8e06cb3ae9cd52ab59720c2ed4791b73ca84a66  # lxc: switch from 18.04 to 20.04 for examples of Ubuntu instances
+      git cherry-pick aa76a9c4b53677730067b39d01089ac23a4b8784  # i18n: Update translation templates
+      git cherry-pick 460c882fd5d08387bb8b5f1e872678f9c8bc9bcb  # lxc: update wording when a cert is successfully trusted by a remote
+      git cherry-pick 116e09eec300a5e9474df7a6e79cf180a482e828  # i18n: Update translation templates
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
