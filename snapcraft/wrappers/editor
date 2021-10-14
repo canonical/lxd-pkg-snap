@@ -11,7 +11,7 @@ run_cmd() {
     [ -z "${XDG_CONFIG_HOME:-}" ] && export XDG_CONFIG_HOME="${HOME}/.config/"
     [ -z "${XDG_STATE_HOME:-}" ] && export XDG_STATE_HOME="${HOME}/.local/state/"
 
-    exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
+    exec unshare --kill-child -U -m -p -r -f -R "/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
 }
 
 find_and_spawn() {
