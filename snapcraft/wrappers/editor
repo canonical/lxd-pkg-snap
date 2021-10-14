@@ -24,9 +24,11 @@ find_and_spawn() {
 
 EDIT_CMD="${1}"
 EDIT_PATH="${2}"
-if [ -z "${EDIT_PATH}" ]; then
+if [ -z "${EDIT_PATH}" ] || [ "$#" -ge "3" ]; then
     EDIT_CMD=""
-    EDIT_PATH="${1}"
+    for arg in "${@}"; do
+        EDIT_PATH="${arg}"
+    done
 fi
 
 # Try running the editor through the host.
