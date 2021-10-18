@@ -1,5 +1,4 @@
 #!/bin/sh
-# Set the cluster cohort key in case it's not there yet
-nsenter -t 1 -m snap switch lxd --cohort=+ >/dev/null || true
 
-exec nsenter -t 1 -m snap refresh lxd --no-wait
+# Trigger a refresh of LXD and ensure we get the phased side of any phased rollout.
+exec nsenter -t 1 -m snap refresh lxd --cohort=+ --no-wait
