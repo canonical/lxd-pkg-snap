@@ -1346,6 +1346,10 @@ parts:
       git cherry-pick 30db7a998b61a8567f92c706ea318e65098239eb  # lxd/instance/drivers/qmp/commands: m.run usage
       git cherry-pick 36ce28980524fded86cf12bd82a7246f135c5bcd  # lxd/instance/drivers/qemu: Adds workaround for QEMU 6.x regression in handling memory object host-nodes setting
       git cherry-pick 1afc875d3f5b46b498b2e7f3dda4ddddd6940133  # lxd/device: Make sure vfio-pci is loaded
+      git cherry-pick 5638801b646f57d540a28ca877c5f76f5bea61d5  # lxc/cluster: Add --yes to remove
+      git cherry-pick f6ecb9860b9d00bd94cbf06e798727a0c9084e6a  # tests: Update for change to cluster remove
+      git cherry-pick dd01a97ea9476f8eeee80bf22f75608003718d88  # lxd/db/networks: Fixes getStoragePool to support NULL description fields
+      git cherry-pick d85db330a3736cb6aac9cc5432ffb7395f06b69d  # lxd/api/cluster: fix comment on clusterGet clusterPut
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
