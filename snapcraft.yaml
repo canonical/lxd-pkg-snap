@@ -1348,8 +1348,26 @@ parts:
       git cherry-pick 1afc875d3f5b46b498b2e7f3dda4ddddd6940133  # lxd/device: Make sure vfio-pci is loaded
       git cherry-pick 5638801b646f57d540a28ca877c5f76f5bea61d5  # lxc/cluster: Add --yes to remove
       git cherry-pick f6ecb9860b9d00bd94cbf06e798727a0c9084e6a  # tests: Update for change to cluster remove
+      git cherry-pick 8c2350ae2fe810135289ba33b470ecec9cca43aa  # lxd: Add fsmonitor package
+      git cherry-pick 36954af8ef0fc9659fc797820f7b2d6ab0fa6a7e  # lxd/state: Add DevMonitor to state
+      git cherry-pick 9cb57a9544f04f0e6ab5faf57ea8acf571761833  # lxd: Initialize DevMonitor in daemon
+      git cherry-pick bfd0ae70f075bedb26ac23fbada0c777189b8a64  # lxd/device: Switch to DevMonitor
+      git cherry-pick ba49f94dbbd762114c0de696e7ac29cba2108665  # lxd/device: Check prefix path in source
+      git cherry-pick 6dfd7da93ecbac49b40bf9401ccef807cefac30a  # lxd/device: Remove old inotify code
+      git cherry-pick a818450b7400c34610cca4b6524b8fcbe0423bb6  # test/suites: Add fsmonitor to static analysis
       git cherry-pick dd01a97ea9476f8eeee80bf22f75608003718d88  # lxd/db/networks: Fixes getStoragePool to support NULL description fields
       git cherry-pick d85db330a3736cb6aac9cc5432ffb7395f06b69d  # lxd/api/cluster: fix comment on clusterGet clusterPut
+      git cherry-pick 5930ff07c174e93cf77a96c8d4ca67d669cd3779  # lxd/device/nic/ovn: Improve error in Start
+      git cherry-pick c06d7c0c8938503102f27718907d73ed0432294f  # lxd/network/acl/acl/ovn: Adds OVNIntSwitchPortGroupAddressSetPrefix function
+      git cherry-pick 9d3fdb4e9949577ac87b5167c7f75ee8ac545e04  # lxd/network/openvswitch/ovn: Adds address management functions
+      git cherry-pick 698c244eda454c129685daf1ae3bbfb88b9956c7  # lxd/network/openvswitch/ovn: Adds router policy management function
+      git cherry-pick 07f5b8944e44b1703a541e1e00e46cbfd57af9ab  # lxd/network/driver/ovn: Move logical switch creation after internal network IP validation
+      git cherry-pick 2e34e84bcdf02af7ac4f72a9c35283d8b4ed4c98  # lxd/network/driver/ovn: Add address set that represents internal switch subnets and NIC routes
+      git cherry-pick cee7b2f17b6e2e2cc3783f82a481e4659309ff65  # lxd/network/driver/ovn: Adds instanceNICGetRoutes function
+      git cherry-pick d4c074f0883ccf2787b86db6b7bc4dcbb8804b30  # test: Set LXD_DEVMONITOR_DIR
+      git cherry-pick aaa0451d038cbde86b55d97f004795c30d0f3226  # doc/environment: Add LXD_DEVMONITOR_DIR
+      git cherry-pick 6610476491019cc1a2318507029ca2c8b02822a4  # lxd/network/driver/ovn: Reworks Update to populate active NIC routes into internal switch's address set
+      git cherry-pick 64469c7a9508fb61f2e0a46e982de2bacb9a637b  # lxd/network/driver/bridge: Fix leases
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
