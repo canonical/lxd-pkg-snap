@@ -1369,6 +1369,39 @@ parts:
       git cherry-pick 6610476491019cc1a2318507029ca2c8b02822a4  # lxd/network/driver/ovn: Reworks Update to populate active NIC routes into internal switch's address set
       git cherry-pick 64469c7a9508fb61f2e0a46e982de2bacb9a637b  # lxd/network/driver/bridge: Fix leases
 
+      git cherry-pick 8cdce8bfa9e5415c60764de540c6424abd1f36a5  # client/connection: Typo in ConnectLXD
+      git cherry-pick 5e41b6ac183c3ac5e7efe150536c452339c80cf3  # process_utils: move wait_for_pid_status_nointr() to common code
+      git cherry-pick e8593e2508b6945fc39b8fab5443c909f12b006c  # lxd: consolidate functions into common header
+      git cherry-pick d1be691a798aa6d9e8ddf86fe908cfcce9b9c4a5  # lxd: make C functions static
+      git cherry-pick 836ba6aefac41c15b4959e73aa8895a9e83ea970  # lxd: add config.h for common options
+      git cherry-pick 9bb3ac109f206ff690c020ff4d82fa37bd45bc4b  # doc: Drop part about building LXC
+      git cherry-pick 10e8244aee99a7673018a983d5f944b26b88fd25  # doc: Add bind9-dnsutils to testsuite requirements
+      git cherry-pick 122db59c086c0950cbadc819479eebd282b7aecb  # lxd: use argument struct for manip_file_in_ns()
+      git cherry-pick 8606881e2bab4925e79186c6d12a5b8449d47419  # forkfile: small coding style fixes
+      git cherry-pick dc3e4c2d3cfdc88a9f1bf2a60f1179c04ad3d4b4  # forkfile: decrease indendation level
+      git cherry-pick 5121386536cd0715f5dfad958392bdbbaf0ad89d  # lxd/fsmonitor/drivers: Add missing FAN_MARK_FILESYSTEM
+      git cherry-pick 7e5a8ef3d7d1f1b17b771221b1bb47967ee0654e  # doc/enviroment: Clarify that LXD_DEVMONITOR_DIR is for testing
+      git cherry-pick f5fb7e0a88756a44e04806a4f40cff1011cc9389  # lxd/fsmonitor: Ensure path is a mountpoint
+      git cherry-pick 0c696d5c87884518bcf486c3f91fa019f564a4ba  # test: Use mountpoint for test devices
+      git cherry-pick 5abe9e971641fbf687c1fb22e3a271e25a5f93e2  # lxd/db/query/transaction: Adds 10s timeout to Transaction
+      git cherry-pick ea4aa9d20c044d0a50fd11ad6c3ebc43e352eb9d  # lxd/cluster/gateway: Add 30s idle timeout in dqliteProxy
+      git cherry-pick 322e629ea81a2b4cff907dac286b052d7c143a78  # lxd/cluster/gateway: Close remote connection in dqliteProxy
+      git cherry-pick 4bf5a87283a464eb8a8c06a851674f36a75bb43e  # lxd/cluster/events: Disconnect event listeners for offline members in eventsUpdateListeners
+      git cherry-pick f151423d8322e11f359cc8879127bdefa21f31e2  # lxd/events/events: Rework events.Listener to use websocket heartbeats
+      git cherry-pick 5a63a76c910197f94c2bfa2e090111a092ca25eb  # lxd/device/nic/bridged: Prevent specifying ipv{n}.address when NIC is connected to unmanaged parent bridge
+      git cherry-pick 851ca2e225e40b00383c174fe7090424511735d1  # test: Add test for bridged NIC not able to specify static IPs when using unmanaged parent bridge
+      git cherry-pick c2d806154244ba596763197b28dbdf8237183ad1  # lxd/events/events: Moves blocking reader into heartbeat function
+      git cherry-pick f9ab657f7e836e6bf3405506b7a734d8efd17f7e  # lxd: Removes blocking reader from event client
+      git cherry-pick 480f4956b474ff626b0478f00190045c9316c467  # lxd-agent: Removes blocking reader from event client
+      git cherry-pick 7e024aa4955f78825ecd0ee8a52c1560db414599  # lxd/fsmonitor/drivers: Log warning instead of failing
+      git cherry-pick 72f54dc78627493663242943e73a7eec1b41dd57  # lxd/cluster/gateway: Removes dqliteProxy idle timeout
+      git cherry-pick d064e9e586b0b306f9be9c19575fca2eb5bc86a6  # lxd/cluster/gateway: Update logging in dqliteProxy
+      git cherry-pick 2254e48bebf04d8bdb96ed2ea0e73ef10c6fcb7b  # lxd/cluster/gateway: Set 30s TCP_USER_TIMEOUT and keep alive timers in dqliteProxy
+      git cherry-pick 89f48270b30deeea58e40df669c02015e19c6595  # lxd/util/net: Adds SetTCPUserTimeout function
+      git cherry-pick dd6362071473f5b90c06c2c3e72ccae6098cf7ce  # lxd/db/db: retry cluster transactions once if context deadline exceeded
+      git cherry-pick 96f9e5d503fcb2bae24704e44c1e157d48501146  # seccomp: Pass the caller TGID to pidfd_open instead of TID
+      git cherry-pick 349c62cc5a57bea3e5696f490b4ff1c39b04b864  # lxd/instance/drivers: Check swap for metrics
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
