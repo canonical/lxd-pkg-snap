@@ -1097,6 +1097,14 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 429233cf0e942e6f8109311fa0237358330b229b  # criu: support restoring containers with pre-created veth devices
+      git cherry-pick 1505f0780573f28d33f540884ba420293c1144a6  # conf: make it more obvious how auto-mount flags are defined
+      git cherry-pick 1ad1cab805b5a97cff9d0c5612a1eacbb187f091  # doc: add loglevels to ja and ko common options
+      git cherry-pick 49fab27fc58f12d49c720bf83412d2092cf0e724  # doc: Add lxc.sched.core to Japanese lxc.container.conf(5)
+      git cherry-pick d40b0deb45e35ba6f1996a0a48c265271b30ce6e  # doc: fix typo in English lxc.container.conf(5)
+      git cherry-pick e328a988e038724450dd64d8510dd16e5fda8ea5  # conf: handle kernels without or not using SMT
+      git cherry-pick 4d3aad49d6e6017ca53591339c9fe916836b87c7  # AUTHORS: Update to point to git history
+
       set +ex
       snapcraftctl build
       set -ex
