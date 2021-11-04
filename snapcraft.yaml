@@ -1144,6 +1144,24 @@ parts:
       git cherry-pick 2bd34d99a3c5b60e20fb1e3c2b6ee138779ec8a4  # lxd/storage/backend/lxd: Clarify errors in CreateInstanceFromCopy and CreateInstanceFromMigration
       git cherry-pick 46246f0aabc7133fa0356afa93b2d51af2fcbda5  # lxd/instances/post: Wrap error in createFromMigration
       git cherry-pick 833ca8ab97f6919582124b48b5feb719f3d65cfe  # lxd/instances/post: Update comment in createFromMigration
+      git cherry-pick b31f08d0f3b1f46e937d44bbf5d0574a194196a7  # lxd/instance/post: Replace node in errors with member
+      git cherry-pick c4bb3eea86ab4ae2736710b17abddec5b988a1d5  # lxd/instances/post: Replace node with member in error in clusterCopyContainerInternal
+      git cherry-pick ee5c0017d2dc13dacc50f05ba39d9a26de7e5297  # test: Update teardown_clustering_netns to succeed if process has already gone
+      git cherry-pick 4fde87d6289605c88548bfdb7fcd96d8c4042dff  # lxd/device/nic/bridged: Allow static IP on unmanaged bridge when MAAS subnet specified
+      git cherry-pick cfffde0c7ef377559eea06d974057e4c5888053a  # bash-completion: Add restore snapshots
+      git cherry-pick 2544cf3e447791ff0280f4694f5f8c76743ef607  # lxd/operations: Updates waitForOperations to accept consoleShutdownTimeout arg
+      git cherry-pick 621febe69b6f0a2b02275fbdf45a57d7bc08dddd  # lxd/daemon: Load shutdown timeout from DB in Stop()
+      git cherry-pick cd582ff0ccea33c1ca0799adc207999eb9b4c70f  # lxd/daemon: Only call waitForOperations during Stop if cluster DB is available
+      git cherry-pick 634b4311e7170b3a05746e4b5dd53480a8edeea5  # lxd/api/internal: Wait for daemon to finish starting up before shutting down in internalShutdown
+      git cherry-pick cde615d6fc9c546620d851643c451f613d2e01d2  # forkuevent: minor fixes
+      git cherry-pick 646085281948c397882c6d24ca777d52dd61937b  # forkuevent: fix "--" placement
+      git cherry-pick eed913c88400ebb31c44e634f8d0eba7d17ffbfa  # lxd/instances/qemu: Enable topoext on x86_64 with SMT
+      git cherry-pick e0f49dac2257206a9f5e926a96aa07ff12650b5a  # doc/instances: Explain CPU topology in VMs
+      git cherry-pick 84e282af2868cddf155ac2b51e26fd3a1be06f60  # lxc/file: Don't use HostPath on temp files
+      git cherry-pick 8430d54dfe20cbd6235f59e283263044361e03ad  # lxd/cluster: Log leader address on failure
+      git cherry-pick 2bde6a28481a0516c58e037388d03412ad953e3f  # lxd/api/cluster: Sleep for 100ms to allow http.Flush to render
+      git cherry-pick b2e70bebe93fe6d86c015fc136b00abb264e1720  # lxd/fsmonitor: Don't crash on Walk errors
+      git cherry-pick 1e673935bead04f013ff9ef9556bca585ae467c8  # lxd/cluster: Add missing import
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
