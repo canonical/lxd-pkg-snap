@@ -1162,6 +1162,10 @@ parts:
       git cherry-pick 2bde6a28481a0516c58e037388d03412ad953e3f  # lxd/api/cluster: Sleep for 100ms to allow http.Flush to render
       git cherry-pick b2e70bebe93fe6d86c015fc136b00abb264e1720  # lxd/fsmonitor: Don't crash on Walk errors
       git cherry-pick 1e673935bead04f013ff9ef9556bca585ae467c8  # lxd/cluster: Add missing import
+      git cherry-pick bcb605ac5961be4d67f204ec6a02c563a9a1b1ba  # lxd/instance/lxc: Only mount for file operations if stopped
+      git cherry-pick 642fbf4b4d2d7d69d9b71cca8b93d147714f8c4c  # lxd/instance_exec: Improve and expand default PATH setting
+      git cherry-pick 467a2c1f97350fbede9c51431d0394bc9c040781  # lxd/instance/drivers/driver/lxc: Adds release function to reduce repetition of liblxc clearing logic
+      git cherry-pick 79ea78f59ea11fc8be27c10b788fb786e2614f1d  # lxd/instance/drivers/driver/lxc: Release liblxc cache when stopping or shutting down
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
