@@ -300,6 +300,15 @@ sed \
     -e "s#/usr/sbin/#${SNAP}/bin/#g" \
     "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
 
+# Setup for OVN
+echo "==> Setting up OVN configuration"
+if [ "${ovn_builtin:-"false"}" = "true" ]; then
+    mkdir -p "${SNAP_COMMON}/ovn"
+    ln -s "${SNAP_COMMON}/ovn" /etc/ceph
+else
+    ln -s /var/lib/snapd/hostfs/etc/ovn /etc/ovn
+fi
+
 # Rotate logs
 echo "==> Rotating logs"
 logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status"
