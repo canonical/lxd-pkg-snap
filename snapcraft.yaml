@@ -476,6 +476,7 @@ parts:
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
+      - --enable-ssl
       - --prefix=
     stage-packages:
       - uuid-runtime
