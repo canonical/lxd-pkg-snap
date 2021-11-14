@@ -490,13 +490,23 @@ parts:
     source: https://github.com/openvswitch/ovs
     source-type: git
     source-tag: v2.16.1
-    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
       - --prefix=
     stage-packages:
       - uuid-runtime
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick 7502849e9581a1dabe53eac51fd34521126c7b3f  # ovsdb-idl: Add APIs to query if a table and a column is present.
+
+      set +ex
+      snapcraftctl build
+      set -ex
     organize:
       sbin/: bin/
       usr/bin/: bin/
