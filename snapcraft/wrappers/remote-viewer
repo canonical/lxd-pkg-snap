@@ -32,7 +32,7 @@ echo "LXD relies on either remote-viewer or spicy to provide VGA console access.
 echo "Those can't be bundled with the LXD snap and so need to be manually installed."
 echo ""
 echo " - \"remote-viewer\" usually comes in a package called virt-viewer"
-echo " - \"spicy\" usually comes in a package called gtk-spice-client"
+echo " - \"spicy\" usually comes in a package called spice-client-gtk"
 echo ""
 echo "Install either of those and they will automatically start."
 echo "Alternatively you may use another SPICE client using the following URI:"
