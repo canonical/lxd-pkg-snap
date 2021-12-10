@@ -236,7 +236,7 @@ parts:
         - uuid-dev
     override-pull: |-
       set -ex
-      git clone https://github.com/tianocore/edk2 . -b edk2-stable202108
+      git clone https://github.com/tianocore/edk2 . -b edk2-stable202111
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
