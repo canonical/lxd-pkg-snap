@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "4.20"
+version: "4.21"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1193,7 +1193,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.20
+    source-tag: lxd-4.21
     after:
       - lxc
       - dqlite
@@ -1225,63 +1225,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick c714298faddfc04478715e50f347613f377271d6  # lxd/daemon: Adds systemdSocketActivated
-      git cherry-pick b4e818506d63288422046e880456c9dd1d27f7aa  # lxd/api/cluster: Exit LXD after removal from cluster if systemd socket activated in clusterPutDisable
-      git cherry-pick 44e9490307da14ccd1e96477993ffcf142a5f9bf  # lxd/cluster/gateway: Don't restart gateway in Reset
-      git cherry-pick 159065b79be85087b09a30bef5af37d399a8220c  # lxd/api/cluster: Don't update certificate on endpoints during clusterPutDisable
-      git cherry-pick 06039c53d2c58a41482542ab8be95de32cbf272c  # lxd/db/images: Change nullable fields in Image to sql.NullTime type
-      git cherry-pick 839aa17685217431b0903910815d0c269c5c7f93  # lxd/db/images: Image sql.NullTime field usage
-      git cherry-pick 2f315ba21835ae3de11d2ed2efea91a3c2a6978d  # lxd/db/instances: Changes nullable datetime fields in Instance to sql.NullTime type
-      git cherry-pick 29b79b2523e81a461c2375467104c3d67d16175a  # lxd/db/instances: Instance sql.NullTime field usage
-      git cherry-pick af55102c44c5c37d3a9a8a96575b518e3ccfbab6  # lxd/db/snapshots: Updates InstanceSnapshot nullable datetime fields to sql.NullTime
-      git cherry-pick 05238a1ab440bc1fc1ced5720c3bdbfe3a178871  # lxd/db/snapshots: InstanceSnapshot sql.NullTime field usage
-      git cherry-pick d12420e06043d311b76b4bff610c3ed2d147d8f6  # lxd/instance/instance/utils: InstanceSnapshot sql.NullTime field usage
-      git cherry-pick b35d88372507024dbd31fbae234efdc668ce114d  # lxd/instance: Instance sql.NullTime field usage
-      git cherry-pick 12016eb368e9a605b9b12e4ce0e39ed833e3c9b3  # gomod: Upgade to go-dqlite v1.10.1
-      git cherry-pick ff981f815acf3dcc91a1fc2c279d2a6f038012d5  # lxd/api/cluster: Adds clusterPutDisableMu to control daemon replace/stop until request finished in clusterNodeDelete
-      git cherry-pick 609ae620c600e046573053ba6d091f14d41a065e  # test/suites/clustering: Fix condition in test_clustering_remove_leader
-      git cherry-pick 013cd0942ff7e523dacd9bed0a5b9120305a24d3  # lxd/api/internal: Updates internalShutdown to wait until request context is done before exiting
-      git cherry-pick fbee10f6b8798699f034726aa7d85395601248f1  # test/suites/clustering: Change test_clustering_remove_leader to test_clustering_remove_members
-      git cherry-pick 6b03d1651e5be91b65a4c1549bce14900752def1  # shared/api/error: Update StatusErrorf to not parse format to fmt.Sprintf if no replacement arguments
-      git cherry-pick c4e52e85f8a08009eec8ea4bf5d020b332edfcb9  # lxd/operations: Consistent comment endings
-      git cherry-pick 7bdb19d8133bcf20fe4f3cf52518e118c3279e07  # lxd/operations: Don't duplicate local operations in operationsGet when running in single member cluster
-      git cherry-pick c275592b2cdd3d4f3a2dcfe67a46d5fc7efb0f67  # lxd/api/1.0: Prevent update of cluster.https_address in doApi10Update
-      git cherry-pick 8a014165f31623f0161e5d17256889d83501497e  # lxd/api/cluster: Reformat clusterAcceptMember function
-      git cherry-pick a041a6d72035cd061e0e408b42f6d356320e789b  # lxd/cluster/gateway: Change client loop logic in LeaderAddress
-      git cherry-pick 87fc4fd35bddc83fcb9b084bda5c6ea181c0a6e2  # lxd/cluster/gateway: Comment cleanup
-      git cherry-pick 20b4755b9cd3dcc9bf0b2b49f7de4502deea2e41  # lxd/cluster/gateway: Error wrapping
-      git cherry-pick 91bf0fd4feb01fa5a0500c7f415b04cb8e197820  # lxd/cluster/gateway: Don't ever return an empty leader address in LeaderAddress
-      git cherry-pick aa680db99e99869c8e760a7e88b5be9423557172  # lxd/api/cluster: Add leader address check in internalClusterPostAccept
-      git cherry-pick 5a31a63b0d1f9f8e44ab855181a8413c33a443d3  # Doc: fix typo for hardware offload
-      git cherry-pick 5fb6199f5563ae8141390b3ebb7ddbc6cb413141  # Doc: fix remove non-existent anchor in link to network-peers.md
-      git cherry-pick 270e16e2eecafb5a2d8ac54bde60a5cc006c04a9  # lxd/db/cluster/update: Fix upgrade from 2.0/3.0 when using go-dqlite v1.10.1 NULLable fields
-      git cherry-pick 4b5a3ac89ab48f09ee1c053dec35ea6f94b06f9d  # lxd/instances: Use correct project in live migration
-      git cherry-pick 8a50d24195f842d6664e793565c21b2db5c8f842  # lxd/device: Clean up mdev vGPU on failure
-      git cherry-pick c543e0f04391162f3283b6e707c50863f775258e  # lxd/device: Log error message on GPU mdev cleanup failure
-      git cherry-pick 89402d9d28c56fdfcce789f48861f8f57d98df9a  # lxd/network/openvswitch/ovn: Update LogicalRouterPortAdd to accept gatewayMTU arg
-      git cherry-pick cc12c960c13ed86221053e7cfb098d6ede66290e  # lxd/network/driver/ovn: client.LogicalRouterPortAdd usage
-      git cherry-pick 95b8e0acec79ee8f07c4290040604ac388733402  # lxd/instances/qemu: fix usb pass-through with more than one device
-      git cherry-pick 4a62a1fc74478767053110fdb4ca6f65b694f3d1  # lxd/device: Switch to github.com/jochenvg/go-udev
-      git cherry-pick 51da38d0b0615026b4ff0fd5d2d911dfeb31dfe9  # gomod: Update dependencies
-      git cherry-pick 38aac467493a2eaa74e2121968ebb4f7555ab65d  # doc: Elaborate on pongo2 date-time syntax for snapshots
-      git cherry-pick f7a0fd44351542d135d67588b6af012a70542e85  # tests/macaroon-identity: Switch to go-httprequest
-      git cherry-pick b76c02b2312e9e5e986333ebcf88860b788702bf  # gomod: Update dependencies
-      git cherry-pick af804c6c5810b6e81e25d4c4a41aff5c52fb8c58  # lxd/migrate: Only use pointers to migration.MigrationControl to avoid shallow copies
-      git cherry-pick fdeafc7c4c1f900757079466bd15b1b93e6c3bf0  # lxd/db/networks: Fix panic in networkConfigAdd
-      git cherry-pick 40229ddfcbb99a6a3e91dab05da30ac9807b7ae2  # lxd/db/storage/pools: Fix panic in CreateStoragePool
-      git cherry-pick ec1eb18957d09f2f1b5cb181c4856fada0161d94  # lxd/db/storage/volumes: Fix panic in storageVolumeConfigAdd
-      git cherry-pick 78869d92b4b45bbdb0426e051449ebe59ccb3d35  # shared/util: Removes unused IsUnixDev function
-      git cherry-pick 34723e43212a2a2b571888a9a50e646f74bb4743  # lxd/project/permissions: Removes unnecessary wrapping
-      git cherry-pick bfbb053453829d661da9ff6d6632d647bff779e9  # lxd/api/project: Standardises restricted.networks.uplinks validation
-      git cherry-pick c9ce09b2609e611bb53524a01ae50f6b4100d549  # lxd/network/driver/ovn: Switch to n.state.Cluster.GetProject in InstanceDevicePortValidateExternalRoutes
-      git cherry-pick c2578563f0c082ee64db8862b2b7b944b8eb4098  # lxd/device/proxy: Improve comment in proxy validateConfig
-      git cherry-pick 9ebee1f7e5fdf8c12bf62519cee146b0cb161a0c  # doc/projects: Improve doc on restricted key
-      git cherry-pick 0347d32d1c9375721231126dc42537c1595bc1ce  # lxd/device/device/utils/disk: Error quoting and wrapping in DiskMount
-      git cherry-pick 3acafc9299b75ab1b450435005d62221aaa7969f  # seccomp: use stricter regexps when looking for Uid/Gid/Tgid in /proc/$pid/status
-      git cherry-pick bfa11d70cd0d541aa0161c30f863807ba35320c4  # lxd/devlxd: stricter regexp
-      git cherry-pick 8d052d8d2ffdabe09294f6e39be028bd82a2334c  # lxd/instance/drivers/driver/lxc: Fix liblxc handle leak in renderState
-      git cherry-pick 9670633e82b6f82aa278f4e9d17f96fdfbdaa22e  # lxd/network/ovn: Support SSL
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
