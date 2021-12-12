@@ -1216,6 +1216,23 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 6b197ccb4c38c02dfbb716c4a9770c6836b5a392  # tests: Bump pg_num to 16
+      git cherry-pick c5ab68dc6e97299c91a14573c864600a8c77eea6  # lxd/events/events: Don't mention node in user facing error
+      git cherry-pick 708664347ac5b639181327e97855467559bb4314  # lxd/events/event: Error quoting
+      git cherry-pick d1b9c8ffb0494eb1932f7dde4f9458ea75bc30ce  # lxd/cluster/events: Adds EventListenerWait to allow waiting for a event listener to connect
+      git cherry-pick 3a744951f1b86b86662d29cbc29df211d3ecd901  # lxd/cluster/connect: Switch Connect to use EventListenerWait
+      git cherry-pick 5c9a67454532a8966df9f51da9c8370a4856b275  # lxd/cluster/heartbeat: Removes deprecated Raft field from heartbeat
+      git cherry-pick 9bb889fdda8350874fd3e7100179bc6c5828f1c0  # test: Add 1s between running non-interactive exec and checking for exit status in operation
+      git cherry-pick 19ef38b3d9beb725fa165fb197dd519be1834d56  # lxd/cluster/membership: Move notifyNodesUpdate call out of transaction in Join
+      git cherry-pick 951e58d212f8f6ed64875a4e1d4f6dd0e099877e  # lxc/list: Better handle --all-projects
+      git cherry-pick 4eeadf5029b990237a2b6400952fdc48742b7497  # doc: Fixed incorrect type of ceph.rbd.clone_copy.
+      git cherry-pick 68c98f1cbfeee2fcaaa2128a456e355f5b6cd4fa  # lxd/cluster: Update not clustered error
+      git cherry-pick 1fc16a44320c193f12ea99840817ca413603fa4d  # lxd/db: Update comments
+      git cherry-pick dc995e7e70501aea98badb2cb37e465189ddde30  # lxd/cluster: Handle no available migration target
+      git cherry-pick 4d535014c0c9bf2a773168b8bad873ca9a14db53  # fuidshift: Remove accidental binary build
+      git cherry-pick 9ff7f8ba681b85c133fc48420e2395d9e21afd45  # lxd/device/nic/routed: Enable IP forwarding on veth host_name interface
+      git cherry-pick 9d3d43b08031bd9f9014f3accd480e905b0cbe9a  # test: Restores old routed NIC IPv4 forwarding behaviour
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
