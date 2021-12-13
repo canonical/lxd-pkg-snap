@@ -1232,6 +1232,18 @@ parts:
       git cherry-pick 4d535014c0c9bf2a773168b8bad873ca9a14db53  # fuidshift: Remove accidental binary build
       git cherry-pick 9ff7f8ba681b85c133fc48420e2395d9e21afd45  # lxd/device/nic/routed: Enable IP forwarding on veth host_name interface
       git cherry-pick 9d3d43b08031bd9f9014f3accd480e905b0cbe9a  # test: Restores old routed NIC IPv4 forwarding behaviour
+      git cherry-pick 50aefa97fa90820bd64510daa41f105129626887  # lxd/cluster/upgrade: Don't panic in UpgradeMembersWithoutRole in raft ID not found
+      git cherry-pick 0d9ab20689f751959c14213c99e521ee59898cd7  # lxd/cluster/upgrade: Comment clean up in UpgradeMembersWithoutRole
+      git cherry-pick 847ae972bfb664160a1b5b2a35e69f2df37e87fe  # lxd/cluster/upgrade: Removes empty line in UpgradeMembersWithoutRole
+      git cherry-pick 9db2b5c5ba99afbd40cbcb821593391824d53e3b  # lxd/cluster/upgrade: Improve variable naming in UpgradeMembersWithoutRole
+      git cherry-pick adbcc63b789bca1d905f5c2634aa02feb837e4c1  # lxd/cluster/upgrade: Error wrapping and dont use node term in user facing errors
+      git cherry-pick e694a996c733605ed4d527dd0586adbe52716e03  # lxd/cluster/upgrade: Adds additional logging to UpgradeMembersWithoutRole
+      git cherry-pick 9ac74919e0b3afa422c0bcfe5607d252b963cdfb  # gitignore: Ignore potential binaries
+      git cherry-pick 9c5821034d874007d097da2a64481937fb8dbc62  # lxd/network/driver/bridge: Adds UsesDNSMasq function
+      git cherry-pick c0b72616718684c8d580cad8acc351e0176a09b8  # lxd/network/driver/bridge: Improve comments
+      git cherry-pick f0a8d297b9a4caa5a4a570d341613d0629dfc11c  # lxd/device/nic/bridged: Don't depend on dnsmasq pid file existence to write static allocation file
+      git cherry-pick 574a1204f546394928636a2d9669978cef6b3b29  # lxd/device/nic/bridged: Removes duplicated pid check when killing dnsmasq
+      git cherry-pick 75d431748275d8a701ab05ecf46abc2ec089c50b  # lxc/utils: Make byName sort all columns
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
