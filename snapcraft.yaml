@@ -1244,6 +1244,11 @@ parts:
       git cherry-pick f0a8d297b9a4caa5a4a570d341613d0629dfc11c  # lxd/device/nic/bridged: Don't depend on dnsmasq pid file existence to write static allocation file
       git cherry-pick 574a1204f546394928636a2d9669978cef6b3b29  # lxd/device/nic/bridged: Removes duplicated pid check when killing dnsmasq
       git cherry-pick 75d431748275d8a701ab05ecf46abc2ec089c50b  # lxc/utils: Make byName sort all columns
+      git cherry-pick cd117d7074e1f636d3748c89761bb159cfb2cb46  # lxd/db/node: Fix handling of groups
+      git cherry-pick f4d77aeb3b634140778ffcdb9ff9f7364358f62d  # lxd/db/node: Support limiting to set of groups
+      git cherry-pick c264fca82233465838d19cb7e0eaacf306486c4e  # lxd: Update GetNodeWithLeastInstances usage
+      git cherry-pick c62463e44763f6f849e21a8e1f1635cdbd1407d8  # lxd/instances: Rework cluster group handling
+      git cherry-pick 02bc9cbe9f1ae1ea969f139ea1b2dfa8c18c3ab7  # tests: Fix clustering_groups tests
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
