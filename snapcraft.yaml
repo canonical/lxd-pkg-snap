@@ -1249,6 +1249,34 @@ parts:
       git cherry-pick c264fca82233465838d19cb7e0eaacf306486c4e  # lxd: Update GetNodeWithLeastInstances usage
       git cherry-pick c62463e44763f6f849e21a8e1f1635cdbd1407d8  # lxd/instances: Rework cluster group handling
       git cherry-pick 02bc9cbe9f1ae1ea969f139ea1b2dfa8c18c3ab7  # tests: Fix clustering_groups tests
+      git cherry-pick a45ddc92da8b0013fef0f6f6bb66b2735b9baa10  # lxd/api/cluster: Only take clusterMembershipMutex on leader
+      git cherry-pick 7993fb21347397ca20ff7a92da69dbda80955adc  # doc: use customized Furo theme
+      git cherry-pick 3d16e9e931abe0842bef56b8e71700a5d0cc7fb3  # doc: customize footer
+      git cherry-pick 303751921ad5eacc0497e78c812e3eeec3b62317  # doc: add a header
+      git cherry-pick ca14fcc676e169efe67a2c35cb246fd86940a68d  # doc: remove Vanilla theme from Makefile
+      git cherry-pick c2a1e2a1bd85983000ea984fed96b7cc4cfa7526  # lxd/endpoints: Make socketUnixListen return a UnixListener
+      git cherry-pick ea40b11943e412e28d2c80de373509be885afd46  # lxd/db/node: nodeIsOffline should always use UTC
+      git cherry-pick 7be14f22f2b1c3016b68368a5f04cc93e4ee4788  # lxd/api/cluster: Improve logging
+      git cherry-pick 50caff703c42c05b3d7a35a63fb79cd433967023  # lxd/cluster/heartbeat: Adds NewAPIHearbeat function
+      git cherry-pick 9f084d07207cec7935ce237b1899077421a26142  # lxd/cluster/heartbeat: Adds HearbeatCancelFunc
+      git cherry-pick 35fd2c3b34d6e623c94c0ea00462377cc236bc78  # lxd/cluster/heartbeat: Export HeartbeatRestart
+      git cherry-pick d65a1bb5ab4f42d3c28e21e3a5a8a1abe63c546c  # lxd/cluster/membership: Set tx.SetNodeHeartbeat in Join
+      git cherry-pick 39350280771799eb0d4431872510589e5ce092e3  # lxd/cluster/membership: Renames notifyNodesUpdate to NotifyHeartbeat
+      git cherry-pick 2e63e7f81f30296e297251176932a10c4bdcc8c6  # lxd/cluster/gateway: Moves heartbeatLock to other heartbeat related variables
+      git cherry-pick 1f3742a051e0ac552afdbdccd76cf910cacc54cd  # lxd/daemon: Use contextual logging with local address in NodeRefreshTask
+      git cherry-pick ddcb587db96c20922e5eccd2b2505eb976b416aa  # lxd/daemon: Adds heartbeatHandler function
+      git cherry-pick 7960c27042ba0832ff99d759b97cbea84c262a64  # lxd/daemon: Update nodeRefreshTask to only perform role changes if called from leader heartbeat send
+      git cherry-pick ac8dd32154ea3e98e0e64ebc8ead754a68737802  # lxd/cluster/gateway: Pass HeartbeatHandler into HandlerFuncs
+      git cherry-pick 13276a3f4a0f02a7e3a06e4fd8ab9301391de9a0  # lxd/cluster/gateway: Error message and log improvements
+      git cherry-pick 8ba75e2b67c92d0f97d6ba0c3cf5a4e74aa22531  # lxd/api: d.gateway.HandlerFuncs usage
+      git cherry-pick 4977ec40dfa1654b401f553dac4ce6901fc4d227  # lxd/cluster/heartbeat: Initialise unavailableMembers as empty slice in heartbeat
+      git cherry-pick 24e6e63343f0dda59bf86a5ca16f9223f159350e  # lxd/cluster/heartbeat: Updates HeartbeatTask to skip starting new heartbeat if already running
+      git cherry-pick 14c8db24fadd70cfc1bf3e34a9f1bab23d3661b5  # lxd/device/nic/routed: Don't setup auto gateway if IP family not in use
+      git cherry-pick 996e06f6c0a84b3b908fb205e09c43b72175f23f  # test: Adds test for single family routed NIC operation
+      git cherry-pick 19f5da4c125a71e423522fddf079f97621985934  # lxd/db: Updates GetInstanceNamesByNodeAddress to also return project name.
+      git cherry-pick 8a7d7e44a53f0e47c6dbdd401fe268ff48d87105  # lxd: Prevents overwriting instances with same name but different project.
+      git cherry-pick b2a6f1093c0e3bba3f9d367a156caab7dbbce8c1  # test: Adds tests for passing through unix socket with disk device
+      git cherry-pick 328a4e015935a66701b2627489cc23b3d2a7ec3b  # lxd/device/disk: Open source with O_PATH to support directories and unix sockets
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
