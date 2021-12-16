@@ -1277,6 +1277,28 @@ parts:
       git cherry-pick 8a7d7e44a53f0e47c6dbdd401fe268ff48d87105  # lxd: Prevents overwriting instances with same name but different project.
       git cherry-pick b2a6f1093c0e3bba3f9d367a156caab7dbbce8c1  # test: Adds tests for passing through unix socket with disk device
       git cherry-pick 328a4e015935a66701b2627489cc23b3d2a7ec3b  # lxd/device/disk: Open source with O_PATH to support directories and unix sockets
+      git cherry-pick 92b1190bbee34895b7337980c4192ffde669383d  # lxd/events/events: Renames noForward to localOnly
+      git cherry-pick 064ca3fee27d7133972148c8da1dcd1f8460b0b0  # lxd/cluster/membership: Call EventsUpdateListeners locally from NotifyHeartbeat
+      git cherry-pick d00ab1b601fcd663543af1e02570a36f7b2fb7b6  # lxd/cluster/heartbeat: Improve logging
+      git cherry-pick b1ca1caf613d25150bd33bd27534bd0867516da1  # lxd: Uses api.NewURL and sets project when querying other nodes.
+      git cherry-pick e3605110ecbf59ea5e741166e6328e380c7c8dad  # doc: reuse content from the repo README in the doc index
+      git cherry-pick 0e369f0278c76bd86f18d28d663357b73b184854  # doc: move relevant files out of .github folder
+      git cherry-pick 67a83cf5ee397bf98f171c7a834c4c59121b54c1  # lxd/bgp: Port to v3 of gobgp
+      git cherry-pick 1fa5da0b48d8df2b552bf9064e9364260d2d1a12  # gomod: Update dependencies
+      git cherry-pick 8af5b7609a67cd83c2629d27a6333ea7c9ff66e5  # doc: fix link in README
+      git cherry-pick 781f3b67b2378410128e6739a4cc3cf57ee2e227  # lxd/clustert/heartbeat: Logging improvements in Send
+      git cherry-pick 28fdc468b34a934ffa5b020415154b61cb575d0c  # lxd/cluster/info: Logging improvement in loadInfo
+      git cherry-pick daf63d1f1666b10ae3a6abafe49123a0eb468c00  # lxd/cluster/membership: Logging improvement
+      git cherry-pick 3a4417ad26977b10870f46ad07949fe8c130ad73  # lxd/api/cluster: No need to call cluster.EventsUpdateListeners in internalClusterPostRebalance
+      git cherry-pick 62dec024088d37175fb2273cbf1f398f8dc918a3  # test: Add short sleep for clustering rebalance to allow raft nodes to settle after join
+      git cherry-pick 4866b6c00266edb7072eef9e730aa7d3758ec608  # lxd/migrate: Change allConnected channel in migrationSourceWs to be struct{}
+      git cherry-pick 381dbcff997d57367726745ddadf4922ea63fcf1  # lxd/migrate: Change allConnected channel in migrationSink to be struct{}
+      git cherry-pick 00f28ad53768f8ce75878002dc5e1b5221c45eb1  # lxd/util/net: Adds SetTCPTimeouts and ExtractTCPConn functions
+      git cherry-pick 0ee1428792d9c4d4fedb76e96947a6b3efea80fe  # lxd/cluster/gateway: Updates dqliteProxy to use util.ExtractTCPConn and util.SetTCPTimeouts
+      git cherry-pick 89a6ec69def2f8fefeb3c87fca8a576d9c2df8a6  # lxd/migrate: Updates migrationSourceWs to use util.ExtractTCPConn and util.SetTCPTimeouts
+      git cherry-pick c534d69fd496a8e4f011c7da51d169df1ab125e9  # lxd/migrate/instance: Defers a call to disconnect in migrationSourceWs Do
+      git cherry-pick 29dbb6b371ca1f093d06dd8401b56783a8de5181  # lxd/daemon: Introduce daemonStorageSplitVolume
+      git cherry-pick bef6d7b96a341787c3407a71523c6c1a3c722cb5  # lxd/images: Don't cleanup unknown images from shared volume
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
