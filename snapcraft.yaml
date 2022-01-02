@@ -507,7 +507,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v2.16.1
+    source-tag: v2.16.2
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
