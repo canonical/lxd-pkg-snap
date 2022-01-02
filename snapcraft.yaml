@@ -1299,6 +1299,35 @@ parts:
       git cherry-pick c534d69fd496a8e4f011c7da51d169df1ab125e9  # lxd/migrate/instance: Defers a call to disconnect in migrationSourceWs Do
       git cherry-pick 29dbb6b371ca1f093d06dd8401b56783a8de5181  # lxd/daemon: Introduce daemonStorageSplitVolume
       git cherry-pick bef6d7b96a341787c3407a71523c6c1a3c722cb5  # lxd/images: Don't cleanup unknown images from shared volume
+      git cherry-pick d715e85702b86820b2e4e9f105a5e018041ed27b  # lxd: Checks that the host node is clustered before editing.
+      git cherry-pick da1141dc22e9bce5dc8969bbf41aa574645f6394  # lxd/cluster/heartbeat: Cancel APIHeartbeat Send during spread sleep if context is cancelled
+      git cherry-pick c9ad351a17518cfd9a2f35696e238be9c981f3dc  # lxd/cluster/heartbeat: Detect aborted heartbeat round quicker
+      git cherry-pick 4b0c15846c676e8d5b8e4d9a9265adebf3f2ce9c  # lxd/cluster/heartbeat: Move defer setup to after lock is released
+      git cherry-pick 3bd587677a49a5aed0d678f82b84c7d4745e3049  # lxd/cluster/heartbeat: Move clustered check before locking and context setup
+      git cherry-pick de06be5709816b2d654f71d8298dc8b280cbd852  # lxd/cluster/events: Rework listener connect notification to support multiple addresses
+      git cherry-pick cbc21bf4ff627556254fd60ceeaba07a1d762481  # lxd/cluster/connect: EventListenerWait usage in Connect
+      git cherry-pick a39969d3433004d8cc3b5970d7e538a660a37a51  # client/events: Get lock before checking e.disconnected in Disconnect
+      git cherry-pick c70e607799f0419cd564f141af62d73230ec5ff1  # client/lxd: Adds eventConn to store events websocket connection
+      git cherry-pick d41f299e7a2215a09c5ef2c68e139f7c5f65909d  # client/lxd/events: Store events websocket connection in getEvents
+      git cherry-pick 231f5abc81d1a5337100ab32aeeb5da834ccb312  # lxd/cluster/membership: Update NotifyHeartbeat to have access to gateway so it can cancel ongoing heartbeat
+      git cherry-pick 130c928255699cc2d038dd6883a85cdabb1f1b5c  # lxd/cluster/events: Close client connection on events get failure in eventsConnect
+      git cherry-pick b3ff92ee38c6feee9fd0991e80534e128f0257ff  # lxd/cluster/events: Use looked up listener rather than doing another map retrieval
+      git cherry-pick 68e379119234e521f38d81382988a40c66ee3d01  # client/events: Replace chActive and disconnected with context
+      git cherry-pick 110e862bbaa945ab56310f61c39ca48008d9cef3  # lxd/events/events: Improve logging in Listener
+      git cherry-pick 17110f4170644bd7679a8a486fce5e23bfa0841e  # lxd/events: Removes duplicate event connection logging
+      git cherry-pick 4af04bb83f18febde5c19f15a89d450d6b3b1e5a  # lxd-agent/events: Removes unnecessary logging in eventsSocket
+      git cherry-pick 90d229c7655a48ca279aa3b7a91962930a137928  # lxd/cluster/events: Clarify event connections are clients to another server
+      git cherry-pick 0347b0621a0902c1572755b9766b268621b69a00  # lxd/cluster/recover: Return separate error if no raft role found
+      git cherry-pick 4c7bcc1773f2a6c96f6e3c2d10c7c570842d8715  # lxd: Fix progress indicator for 'lxc export'
+      git cherry-pick 2a8d4cc07a6f7f9072966ffbc41dd613901bae6e  # gomod: Update dependencies
+      git cherry-pick 4d313bc15e16acaf1bf700101b1fe54728630b8e  # shared/network: Differentiate websocket network errors
+      git cherry-pick d792241fca0aacb47360b33ada7c9094c33bc847  # lxd/instance/exec: Simplify websocket error handling
+      git cherry-pick 9e7ab44242f0bbae1ab9b947e2df2eda8227f6b2  # lxd/instance/drivers/driver/qemu/cmd: Don't attempt to send signal to lxd-agent exec process if finished
+      git cherry-pick c521f24b1b0b270149bab5a76267b989691b7398  # lxd/instance/drivers/driver/qemu/cmd: Run cleanup function after command has finished in Wait
+      git cherry-pick 2216896b8aa77425a28114d6aba5afa2b8754523  # lxd/instance/exec: Close attachedChildIsDead channel first in finisher
+      git cherry-pick 4ac8bdcbb9ff286eff9f299c48c2229b47bd262f  # lxd/instance/exec: Only attempt to kill process if still running when a control connection error occurs
+      git cherry-pick 3bd9bce434ff6b0a172f6ed3ce4494043304c095  # lxd-agent/exec: Close attachedChildIsDead channel first in finisher
+      git cherry-pick 6908066e8b790b988bf0f36d115319ab2c87e462  # lxd-agent/exec:  Only attempt to kill process if still running when a control connection error occurs
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
