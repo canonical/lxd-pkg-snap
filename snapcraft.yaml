@@ -536,7 +536,7 @@ parts:
       - bin/ovn-nbctl
 
   spice-protocol:
-    source: https://gitlab.freedesktop.org/spice/spice-protocol
+    source: https://github.com/freedesktop/spice-protocol
     source-type: git
     source-tag: v0.14.3
     source-depth: 1
@@ -546,7 +546,7 @@ parts:
   spice-server:
     after:
       - spice-protocol
-    source: https://gitlab.freedesktop.org/spice/spice
+    source: https://github.com/freedesktop/spice
     source-type: git
     source-tag: v0.15.0
     source-depth: 1
