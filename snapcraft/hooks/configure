@@ -81,4 +81,11 @@ config="${SNAP_COMMON}/config"
     echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
 } > "${config}"
 
+# Set socket ownership in case it changed
+if getent group "${daemon_group}" >/dev/null 2>&1; then
+    if [ -e "${SNAP_COMMON}/lxd/unix.socket" ]; then
+        chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
+    fi
+fi
+
 exit 0
