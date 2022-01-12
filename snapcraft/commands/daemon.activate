@@ -81,6 +81,13 @@ if getent group "${daemon_group}" >/dev/null 2>&1; then
     fi
 fi
 
+if getent group "${daemon_user_group}" >/dev/null 2>&1; then
+    if [ -e "/var/snap/lxd/common/lxd-user/unix.socket" ]; then
+        echo "==> Setting LXD user socket ownership"
+        chgrp "${daemon_user_group}" /var/snap/lxd/common/lxd-user/unix.socket
+    fi
+fi
+
 # Check if LXD ever started
 if [ ! -e "/var/snap/lxd/common/lxd/database" ]; then
     echo "==> LXD never started on this system, no need to start it now"

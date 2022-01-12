@@ -34,7 +34,8 @@ description: |-
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
    - daemon.debug: Increase logging to debug level [default=false]
-   - daemon.group: Set group of users that can interact with LXD [default=lxd]
+   - daemon.group: Set group of users that have full control over LXD [default=lxd]
+   - daemon.user.group: Set group of users that have restricted LXD access [default=lxd]
    - daemon.preseed: Pass a YAML configuration to `lxd init` on initial start
    - daemon.syslog: Send LXD log events to syslog [default=false]
    - lvm.external: Use the system's LVM tools [default=false]
@@ -75,6 +76,20 @@ apps:
     sockets:
       unix:
         listen-stream: $SNAP_COMMON/lxd/unix.socket
+        socket-mode: 0660
+
+  user-daemon:
+    command: commands/lxd-user
+    stop-timeout: 600s
+    restart-condition: on-failure
+    daemon: simple
+    plugs:
+      - lxd-support
+      - network-bind
+      - system-observe
+    sockets:
+      unix:
+        listen-stream: $SNAP_COMMON/lxd-user/unix.socket
         socket-mode: 0660
 
   lxc:
@@ -1349,6 +1364,7 @@ parts:
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/lxc/lxd/lxd
       CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/lxc/lxd/lxd-benchmark
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/lxc/lxd/lxd-user
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1383,6 +1399,7 @@ parts:
       - bin/lxd
       - bin/lxd-agent
       - bin/lxd-benchmark
+      - bin/lxd-user
 
   lxd-migrate:
     source: lxd-migrate/

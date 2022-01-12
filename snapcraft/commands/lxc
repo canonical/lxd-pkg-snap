@@ -37,7 +37,14 @@ if [ ! -d "${SNAP_USER_COMMON}/config" ]; then
 fi
 
 # Set the environment
-export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
+if [ -z "${LXD_DIR:-""}" ]; then
+    export LXD_DIR="${SNAP_COMMON}/lxd/"
+
+    if [ ! -w "${SNAP_COMMON}/lxd/unix.socket" ] && [ -w "${SNAP_COMMON}/lxd-user/unix.socket" ]; then
+        export LXD_DIR="${SNAP_COMMON}/lxd-user/"
+    fi
+fi
+
 export LXD_CONF="${SNAP_USER_COMMON}/config"
 export LXD_GLOBAL_CONF="${LXD_GLOBAL_CONF:-"${SNAP_COMMON}/global-conf/"}"
 
