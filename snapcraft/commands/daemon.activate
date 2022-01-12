@@ -34,6 +34,8 @@ echo "==> Loading snap configuration"
 # shellcheck disable=SC1090
 . "${SNAP_COMMON}/config"
 
+daemon_group="${daemon_group:-"lxd"}"
+
 # Detect missing socket activation support
 echo "==> Checking for socket activation support"
 if ! nsenter -t 1 -m systemctl is-active -q snap.lxd.daemon.unix.socket; then
