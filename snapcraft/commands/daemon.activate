@@ -53,7 +53,7 @@ if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     exit 0
 fi
 
-# FIXME: Setup the "lxd" user
+# Setup the "lxd" user
 if ! getent passwd lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" user"
     if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
@@ -63,8 +63,8 @@ if ! getent passwd lxd >/dev/null 2>&1; then
     fi
 fi
 
-# FIXME: Setup the "lxd" group
-if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
+# Setup the "lxd" group
+if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
     if grep -q "^group.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
         nsenter -t 1 -m groupadd --system --extrausers lxd || true
