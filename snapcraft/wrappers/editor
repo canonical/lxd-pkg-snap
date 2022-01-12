@@ -11,6 +11,7 @@ run_cmd() {
     [ -z "${XDG_CONFIG_HOME:-}" ] && export XDG_CONFIG_HOME="${HOME}/.config/"
     [ -z "${XDG_STATE_HOME:-}" ] && export XDG_STATE_HOME="${HOME}/.local/state/"
 
+    # shellcheck disable=SC2145
     exec unshare --kill-child -U -m -p -r -f -R "/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
 }
 
@@ -34,7 +35,7 @@ fi
 # Try running the editor through the host.
 if [ -n "${EDIT_CMD}" ]; then
     exec 9< /tmp/
-    EDIT_PATH_HOST="$(echo ${EDIT_PATH} | sed "s#/tmp/#/proc/self/fd/9/#g")"
+    EDIT_PATH_HOST="$(echo "${EDIT_PATH}" | sed "s#/tmp/#/proc/self/fd/9/#g")"
     find_and_spawn "${EDIT_CMD}" "${EDIT_PATH_HOST}"
 fi
 
