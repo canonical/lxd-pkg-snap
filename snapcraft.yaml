@@ -116,6 +116,7 @@ apps:
 hooks:
   configure:
     plugs:
+      - lxd-support
       - network
       - system-observe
   remove:
