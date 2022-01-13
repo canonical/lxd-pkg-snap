@@ -15,6 +15,7 @@ export LC_ALL=C.UTF-8
 
 # Relocate to storage dir
 mkdir -p "${SNAP_COMMON}/lxd-user/"
+chmod 0711 "${SNAP_COMMON}/lxd-user/"
 cd "${SNAP_COMMON}/lxd-user/"
 
 # Run lxd-user
