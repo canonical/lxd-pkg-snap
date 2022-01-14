@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "4.21"
+version: "4.22"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1199,7 +1199,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-4.21
+    source-tag: lxd-4.22
     after:
       - lxc
       - dqlite
@@ -1231,119 +1231,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 6b197ccb4c38c02dfbb716c4a9770c6836b5a392  # tests: Bump pg_num to 16
-      git cherry-pick c5ab68dc6e97299c91a14573c864600a8c77eea6  # lxd/events/events: Don't mention node in user facing error
-      git cherry-pick 708664347ac5b639181327e97855467559bb4314  # lxd/events/event: Error quoting
-      git cherry-pick d1b9c8ffb0494eb1932f7dde4f9458ea75bc30ce  # lxd/cluster/events: Adds EventListenerWait to allow waiting for a event listener to connect
-      git cherry-pick 3a744951f1b86b86662d29cbc29df211d3ecd901  # lxd/cluster/connect: Switch Connect to use EventListenerWait
-      git cherry-pick 5c9a67454532a8966df9f51da9c8370a4856b275  # lxd/cluster/heartbeat: Removes deprecated Raft field from heartbeat
-      git cherry-pick 9bb889fdda8350874fd3e7100179bc6c5828f1c0  # test: Add 1s between running non-interactive exec and checking for exit status in operation
-      git cherry-pick 19ef38b3d9beb725fa165fb197dd519be1834d56  # lxd/cluster/membership: Move notifyNodesUpdate call out of transaction in Join
-      git cherry-pick 951e58d212f8f6ed64875a4e1d4f6dd0e099877e  # lxc/list: Better handle --all-projects
-      git cherry-pick 4eeadf5029b990237a2b6400952fdc48742b7497  # doc: Fixed incorrect type of ceph.rbd.clone_copy.
-      git cherry-pick 68c98f1cbfeee2fcaaa2128a456e355f5b6cd4fa  # lxd/cluster: Update not clustered error
-      git cherry-pick 1fc16a44320c193f12ea99840817ca413603fa4d  # lxd/db: Update comments
-      git cherry-pick dc995e7e70501aea98badb2cb37e465189ddde30  # lxd/cluster: Handle no available migration target
-      git cherry-pick 4d535014c0c9bf2a773168b8bad873ca9a14db53  # fuidshift: Remove accidental binary build
-      git cherry-pick 9ff7f8ba681b85c133fc48420e2395d9e21afd45  # lxd/device/nic/routed: Enable IP forwarding on veth host_name interface
-      git cherry-pick 9d3d43b08031bd9f9014f3accd480e905b0cbe9a  # test: Restores old routed NIC IPv4 forwarding behaviour
-      git cherry-pick 50aefa97fa90820bd64510daa41f105129626887  # lxd/cluster/upgrade: Don't panic in UpgradeMembersWithoutRole in raft ID not found
-      git cherry-pick 0d9ab20689f751959c14213c99e521ee59898cd7  # lxd/cluster/upgrade: Comment clean up in UpgradeMembersWithoutRole
-      git cherry-pick 847ae972bfb664160a1b5b2a35e69f2df37e87fe  # lxd/cluster/upgrade: Removes empty line in UpgradeMembersWithoutRole
-      git cherry-pick 9db2b5c5ba99afbd40cbcb821593391824d53e3b  # lxd/cluster/upgrade: Improve variable naming in UpgradeMembersWithoutRole
-      git cherry-pick adbcc63b789bca1d905f5c2634aa02feb837e4c1  # lxd/cluster/upgrade: Error wrapping and dont use node term in user facing errors
-      git cherry-pick e694a996c733605ed4d527dd0586adbe52716e03  # lxd/cluster/upgrade: Adds additional logging to UpgradeMembersWithoutRole
-      git cherry-pick 9ac74919e0b3afa422c0bcfe5607d252b963cdfb  # gitignore: Ignore potential binaries
-      git cherry-pick 9c5821034d874007d097da2a64481937fb8dbc62  # lxd/network/driver/bridge: Adds UsesDNSMasq function
-      git cherry-pick c0b72616718684c8d580cad8acc351e0176a09b8  # lxd/network/driver/bridge: Improve comments
-      git cherry-pick f0a8d297b9a4caa5a4a570d341613d0629dfc11c  # lxd/device/nic/bridged: Don't depend on dnsmasq pid file existence to write static allocation file
-      git cherry-pick 574a1204f546394928636a2d9669978cef6b3b29  # lxd/device/nic/bridged: Removes duplicated pid check when killing dnsmasq
-      git cherry-pick 75d431748275d8a701ab05ecf46abc2ec089c50b  # lxc/utils: Make byName sort all columns
-      git cherry-pick cd117d7074e1f636d3748c89761bb159cfb2cb46  # lxd/db/node: Fix handling of groups
-      git cherry-pick f4d77aeb3b634140778ffcdb9ff9f7364358f62d  # lxd/db/node: Support limiting to set of groups
-      git cherry-pick c264fca82233465838d19cb7e0eaacf306486c4e  # lxd: Update GetNodeWithLeastInstances usage
-      git cherry-pick c62463e44763f6f849e21a8e1f1635cdbd1407d8  # lxd/instances: Rework cluster group handling
-      git cherry-pick 02bc9cbe9f1ae1ea969f139ea1b2dfa8c18c3ab7  # tests: Fix clustering_groups tests
-      git cherry-pick a45ddc92da8b0013fef0f6f6bb66b2735b9baa10  # lxd/api/cluster: Only take clusterMembershipMutex on leader
-      git cherry-pick 7993fb21347397ca20ff7a92da69dbda80955adc  # doc: use customized Furo theme
-      git cherry-pick 3d16e9e931abe0842bef56b8e71700a5d0cc7fb3  # doc: customize footer
-      git cherry-pick 303751921ad5eacc0497e78c812e3eeec3b62317  # doc: add a header
-      git cherry-pick ca14fcc676e169efe67a2c35cb246fd86940a68d  # doc: remove Vanilla theme from Makefile
-      git cherry-pick c2a1e2a1bd85983000ea984fed96b7cc4cfa7526  # lxd/endpoints: Make socketUnixListen return a UnixListener
-      git cherry-pick ea40b11943e412e28d2c80de373509be885afd46  # lxd/db/node: nodeIsOffline should always use UTC
-      git cherry-pick 7be14f22f2b1c3016b68368a5f04cc93e4ee4788  # lxd/api/cluster: Improve logging
-      git cherry-pick 50caff703c42c05b3d7a35a63fb79cd433967023  # lxd/cluster/heartbeat: Adds NewAPIHearbeat function
-      git cherry-pick 9f084d07207cec7935ce237b1899077421a26142  # lxd/cluster/heartbeat: Adds HearbeatCancelFunc
-      git cherry-pick 35fd2c3b34d6e623c94c0ea00462377cc236bc78  # lxd/cluster/heartbeat: Export HeartbeatRestart
-      git cherry-pick d65a1bb5ab4f42d3c28e21e3a5a8a1abe63c546c  # lxd/cluster/membership: Set tx.SetNodeHeartbeat in Join
-      git cherry-pick 39350280771799eb0d4431872510589e5ce092e3  # lxd/cluster/membership: Renames notifyNodesUpdate to NotifyHeartbeat
-      git cherry-pick 2e63e7f81f30296e297251176932a10c4bdcc8c6  # lxd/cluster/gateway: Moves heartbeatLock to other heartbeat related variables
-      git cherry-pick 1f3742a051e0ac552afdbdccd76cf910cacc54cd  # lxd/daemon: Use contextual logging with local address in NodeRefreshTask
-      git cherry-pick ddcb587db96c20922e5eccd2b2505eb976b416aa  # lxd/daemon: Adds heartbeatHandler function
-      git cherry-pick 7960c27042ba0832ff99d759b97cbea84c262a64  # lxd/daemon: Update nodeRefreshTask to only perform role changes if called from leader heartbeat send
-      git cherry-pick ac8dd32154ea3e98e0e64ebc8ead754a68737802  # lxd/cluster/gateway: Pass HeartbeatHandler into HandlerFuncs
-      git cherry-pick 13276a3f4a0f02a7e3a06e4fd8ab9301391de9a0  # lxd/cluster/gateway: Error message and log improvements
-      git cherry-pick 8ba75e2b67c92d0f97d6ba0c3cf5a4e74aa22531  # lxd/api: d.gateway.HandlerFuncs usage
-      git cherry-pick 4977ec40dfa1654b401f553dac4ce6901fc4d227  # lxd/cluster/heartbeat: Initialise unavailableMembers as empty slice in heartbeat
-      git cherry-pick 24e6e63343f0dda59bf86a5ca16f9223f159350e  # lxd/cluster/heartbeat: Updates HeartbeatTask to skip starting new heartbeat if already running
-      git cherry-pick 14c8db24fadd70cfc1bf3e34a9f1bab23d3661b5  # lxd/device/nic/routed: Don't setup auto gateway if IP family not in use
-      git cherry-pick 996e06f6c0a84b3b908fb205e09c43b72175f23f  # test: Adds test for single family routed NIC operation
-      git cherry-pick 19f5da4c125a71e423522fddf079f97621985934  # lxd/db: Updates GetInstanceNamesByNodeAddress to also return project name.
-      git cherry-pick 8a7d7e44a53f0e47c6dbdd401fe268ff48d87105  # lxd: Prevents overwriting instances with same name but different project.
-      git cherry-pick b2a6f1093c0e3bba3f9d367a156caab7dbbce8c1  # test: Adds tests for passing through unix socket with disk device
-      git cherry-pick 328a4e015935a66701b2627489cc23b3d2a7ec3b  # lxd/device/disk: Open source with O_PATH to support directories and unix sockets
-      git cherry-pick 92b1190bbee34895b7337980c4192ffde669383d  # lxd/events/events: Renames noForward to localOnly
-      git cherry-pick 064ca3fee27d7133972148c8da1dcd1f8460b0b0  # lxd/cluster/membership: Call EventsUpdateListeners locally from NotifyHeartbeat
-      git cherry-pick d00ab1b601fcd663543af1e02570a36f7b2fb7b6  # lxd/cluster/heartbeat: Improve logging
-      git cherry-pick b1ca1caf613d25150bd33bd27534bd0867516da1  # lxd: Uses api.NewURL and sets project when querying other nodes.
-      git cherry-pick e3605110ecbf59ea5e741166e6328e380c7c8dad  # doc: reuse content from the repo README in the doc index
-      git cherry-pick 0e369f0278c76bd86f18d28d663357b73b184854  # doc: move relevant files out of .github folder
-      git cherry-pick 67a83cf5ee397bf98f171c7a834c4c59121b54c1  # lxd/bgp: Port to v3 of gobgp
-      git cherry-pick 1fa5da0b48d8df2b552bf9064e9364260d2d1a12  # gomod: Update dependencies
-      git cherry-pick 8af5b7609a67cd83c2629d27a6333ea7c9ff66e5  # doc: fix link in README
-      git cherry-pick 781f3b67b2378410128e6739a4cc3cf57ee2e227  # lxd/clustert/heartbeat: Logging improvements in Send
-      git cherry-pick 28fdc468b34a934ffa5b020415154b61cb575d0c  # lxd/cluster/info: Logging improvement in loadInfo
-      git cherry-pick daf63d1f1666b10ae3a6abafe49123a0eb468c00  # lxd/cluster/membership: Logging improvement
-      git cherry-pick 3a4417ad26977b10870f46ad07949fe8c130ad73  # lxd/api/cluster: No need to call cluster.EventsUpdateListeners in internalClusterPostRebalance
-      git cherry-pick 62dec024088d37175fb2273cbf1f398f8dc918a3  # test: Add short sleep for clustering rebalance to allow raft nodes to settle after join
-      git cherry-pick 4866b6c00266edb7072eef9e730aa7d3758ec608  # lxd/migrate: Change allConnected channel in migrationSourceWs to be struct{}
-      git cherry-pick 381dbcff997d57367726745ddadf4922ea63fcf1  # lxd/migrate: Change allConnected channel in migrationSink to be struct{}
-      git cherry-pick 00f28ad53768f8ce75878002dc5e1b5221c45eb1  # lxd/util/net: Adds SetTCPTimeouts and ExtractTCPConn functions
-      git cherry-pick 0ee1428792d9c4d4fedb76e96947a6b3efea80fe  # lxd/cluster/gateway: Updates dqliteProxy to use util.ExtractTCPConn and util.SetTCPTimeouts
-      git cherry-pick 89a6ec69def2f8fefeb3c87fca8a576d9c2df8a6  # lxd/migrate: Updates migrationSourceWs to use util.ExtractTCPConn and util.SetTCPTimeouts
-      git cherry-pick c534d69fd496a8e4f011c7da51d169df1ab125e9  # lxd/migrate/instance: Defers a call to disconnect in migrationSourceWs Do
-      git cherry-pick 29dbb6b371ca1f093d06dd8401b56783a8de5181  # lxd/daemon: Introduce daemonStorageSplitVolume
-      git cherry-pick bef6d7b96a341787c3407a71523c6c1a3c722cb5  # lxd/images: Don't cleanup unknown images from shared volume
-      git cherry-pick d715e85702b86820b2e4e9f105a5e018041ed27b  # lxd: Checks that the host node is clustered before editing.
-      git cherry-pick da1141dc22e9bce5dc8969bbf41aa574645f6394  # lxd/cluster/heartbeat: Cancel APIHeartbeat Send during spread sleep if context is cancelled
-      git cherry-pick c9ad351a17518cfd9a2f35696e238be9c981f3dc  # lxd/cluster/heartbeat: Detect aborted heartbeat round quicker
-      git cherry-pick 4b0c15846c676e8d5b8e4d9a9265adebf3f2ce9c  # lxd/cluster/heartbeat: Move defer setup to after lock is released
-      git cherry-pick 3bd587677a49a5aed0d678f82b84c7d4745e3049  # lxd/cluster/heartbeat: Move clustered check before locking and context setup
-      git cherry-pick de06be5709816b2d654f71d8298dc8b280cbd852  # lxd/cluster/events: Rework listener connect notification to support multiple addresses
-      git cherry-pick cbc21bf4ff627556254fd60ceeaba07a1d762481  # lxd/cluster/connect: EventListenerWait usage in Connect
-      git cherry-pick a39969d3433004d8cc3b5970d7e538a660a37a51  # client/events: Get lock before checking e.disconnected in Disconnect
-      git cherry-pick c70e607799f0419cd564f141af62d73230ec5ff1  # client/lxd: Adds eventConn to store events websocket connection
-      git cherry-pick d41f299e7a2215a09c5ef2c68e139f7c5f65909d  # client/lxd/events: Store events websocket connection in getEvents
-      git cherry-pick 231f5abc81d1a5337100ab32aeeb5da834ccb312  # lxd/cluster/membership: Update NotifyHeartbeat to have access to gateway so it can cancel ongoing heartbeat
-      git cherry-pick 130c928255699cc2d038dd6883a85cdabb1f1b5c  # lxd/cluster/events: Close client connection on events get failure in eventsConnect
-      git cherry-pick b3ff92ee38c6feee9fd0991e80534e128f0257ff  # lxd/cluster/events: Use looked up listener rather than doing another map retrieval
-      git cherry-pick 68e379119234e521f38d81382988a40c66ee3d01  # client/events: Replace chActive and disconnected with context
-      git cherry-pick 110e862bbaa945ab56310f61c39ca48008d9cef3  # lxd/events/events: Improve logging in Listener
-      git cherry-pick 17110f4170644bd7679a8a486fce5e23bfa0841e  # lxd/events: Removes duplicate event connection logging
-      git cherry-pick 4af04bb83f18febde5c19f15a89d450d6b3b1e5a  # lxd-agent/events: Removes unnecessary logging in eventsSocket
-      git cherry-pick 90d229c7655a48ca279aa3b7a91962930a137928  # lxd/cluster/events: Clarify event connections are clients to another server
-      git cherry-pick 0347b0621a0902c1572755b9766b268621b69a00  # lxd/cluster/recover: Return separate error if no raft role found
-      git cherry-pick 4c7bcc1773f2a6c96f6e3c2d10c7c570842d8715  # lxd: Fix progress indicator for 'lxc export'
-      git cherry-pick 2a8d4cc07a6f7f9072966ffbc41dd613901bae6e  # gomod: Update dependencies
-      git cherry-pick 4d313bc15e16acaf1bf700101b1fe54728630b8e  # shared/network: Differentiate websocket network errors
-      git cherry-pick d792241fca0aacb47360b33ada7c9094c33bc847  # lxd/instance/exec: Simplify websocket error handling
-      git cherry-pick 9e7ab44242f0bbae1ab9b947e2df2eda8227f6b2  # lxd/instance/drivers/driver/qemu/cmd: Don't attempt to send signal to lxd-agent exec process if finished
-      git cherry-pick c521f24b1b0b270149bab5a76267b989691b7398  # lxd/instance/drivers/driver/qemu/cmd: Run cleanup function after command has finished in Wait
-      git cherry-pick 2216896b8aa77425a28114d6aba5afa2b8754523  # lxd/instance/exec: Close attachedChildIsDead channel first in finisher
-      git cherry-pick 4ac8bdcbb9ff286eff9f299c48c2229b47bd262f  # lxd/instance/exec: Only attempt to kill process if still running when a control connection error occurs
-      git cherry-pick 3bd9bce434ff6b0a172f6ed3ce4494043304c095  # lxd-agent/exec: Close attachedChildIsDead channel first in finisher
-      git cherry-pick 6908066e8b790b988bf0f36d115319ab2c87e462  # lxd-agent/exec:  Only attempt to kill process if still running when a control connection error occurs
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
