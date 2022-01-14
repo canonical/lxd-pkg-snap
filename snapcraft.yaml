@@ -1232,6 +1232,15 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 924c5dac661d0a00fb48b416e55ee901351bd862  # Take extra precautions when calling tar
+      git cherry-pick c6450732dc1039552ed443d3de357301c70b7f89  # doc: Adds note about newuidmap to machine setup.
+      git cherry-pick b8c9b636a588dc64b450cfa6c087e5b93857a351  # lxd/instances: Don't check limits on restore
+      git cherry-pick 2b73adb5679ed2ca375c850db21679e790eed48f  # tests: Validate snapshots on limited projects
+      git cherry-pick 6beb0068a55e4585ee5f7fb97b267d09e807993e  # test: Fixes number of expected NAT rules when using xtables driver.
+      git cherry-pick aee4babe86ff807e61f9258036aea82c73b56569  # lxc/config/file: allow overriding default remote by env variable
+      git cherry-pick 64a07dcf8da3b8754e1621e1cdb937c81b2e32cb  # doc/environment: add new LXC_REMOTE variable
+      git cherry-pick 07aa805bb5e1b6c2c9436d33a437bed2c0bad485  # test: Ensure ebtables is legacy when driver is xtables.
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
