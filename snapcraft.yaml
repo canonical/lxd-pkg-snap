@@ -1245,6 +1245,14 @@ parts:
       git cherry-pick e2c6b471d7a47229690da2bb7fc190cc7436583d  # lxc/list: Add InstanceFull shortcut
       git cherry-pick dee47c1c9daba069d0d34a44025a697415c0fa36  # client: Add WithContext
       git cherry-pick 31d34b703af744cd4d9ccc1d5253c6c2254c21e9  # client: Add context-aware connection functions
+      git cherry-pick 8b0066f40d9053967819dd89784826eef7022e8d  # lxd/instance: Allow stopping during evacuation
+      git cherry-pick 9fee37cf6838dc04bcddeab055344bbde30ddf74  # lxd/cluster: Don't start the instance after live-migration
+      git cherry-pick 67b8a6ee67d05d13563e234edda39800c886ccfa  # lxd/cluster: Add evacuateClusterSetState
+      git cherry-pick 3e712d81ef89516cc2a08111fd33c2f767f3ea24  # lxd/cluster: Use instance architecture instead of cluster member
+      git cherry-pick a63bff8e0115ba36335c29822e92f1354fe06c5a  # lxd/cluster: Use evacuateClusterSetState
+      git cherry-pick 3dceb1d31d2ad102122dc3786ccc558ad667e5a7  # lxd/cluster: Fix incorrect reverter
+      git cherry-pick ac36e59522eed88aa790ee03d1524dac79ae702c  # lxd/cluster: Fix live-migrate on restore
+      git cherry-pick 7ad21e9d626b644cd44d409f8509238a0b33a06f  # lxd/instance/qemu: Extend live updatable config keys
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
