@@ -1240,6 +1240,11 @@ parts:
       git cherry-pick aee4babe86ff807e61f9258036aea82c73b56569  # lxc/config/file: allow overriding default remote by env variable
       git cherry-pick 64a07dcf8da3b8754e1621e1cdb937c81b2e32cb  # doc/environment: add new LXC_REMOTE variable
       git cherry-pick 07aa805bb5e1b6c2c9436d33a437bed2c0bad485  # test: Ensure ebtables is legacy when driver is xtables.
+      git cherry-pick 45017e574eb3dac2d94d1a7ba1c60499f67d10bd  # client: Addd GetInstanceFull
+      git cherry-pick 6f7ea93cb951f6fadc92d77aa8227454cc7554c7  # lxc/info: Port to using GetInstanceFull
+      git cherry-pick e2c6b471d7a47229690da2bb7fc190cc7436583d  # lxc/list: Add InstanceFull shortcut
+      git cherry-pick dee47c1c9daba069d0d34a44025a697415c0fa36  # client: Add WithContext
+      git cherry-pick 31d34b703af744cd4d9ccc1d5253c6c2254c21e9  # client: Add context-aware connection functions
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
