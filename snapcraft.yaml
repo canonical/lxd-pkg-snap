@@ -1232,7 +1232,11 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick cda392f148939ba1753efefc8f7c7e8f36fd9ce8  # doc: fix language in SECURITY.md
+      git cherry-pick 9e279437ca130e1b93ebc354fa155e38b88dee46  # lxd/dnsmasq: Append device name to dnsmasq entry file name.
       git cherry-pick 924c5dac661d0a00fb48b416e55ee901351bd862  # Take extra precautions when calling tar
+      git cherry-pick ef0cd5067c5a46590bcf4488fbd248213d4d7130  # lxd: Applies patch to add device names to dnsmasq files.
+      git cherry-pick 823993a21da77edbe8fa0b03eab6a5b93904136e  # test: Updates test suite to append device names to dnsmasq files.
       git cherry-pick c6450732dc1039552ed443d3de357301c70b7f89  # doc: Adds note about newuidmap to machine setup.
       git cherry-pick b8c9b636a588dc64b450cfa6c087e5b93857a351  # lxd/instances: Don't check limits on restore
       git cherry-pick 2b73adb5679ed2ca375c850db21679e790eed48f  # tests: Validate snapshots on limited projects
@@ -1253,6 +1257,19 @@ parts:
       git cherry-pick 3dceb1d31d2ad102122dc3786ccc558ad667e5a7  # lxd/cluster: Fix incorrect reverter
       git cherry-pick ac36e59522eed88aa790ee03d1524dac79ae702c  # lxd/cluster: Fix live-migrate on restore
       git cherry-pick 7ad21e9d626b644cd44d409f8509238a0b33a06f  # lxd/instance/qemu: Extend live updatable config keys
+      git cherry-pick d2697f579080c57007e9008be57d6d492d37b1d8  # lxd: Refresh all dnsmasq hosts during patch.
+      git cherry-pick c58c1a6453aa188d629f5ef6edb3404d86690de7  # lxd/instance/drivers: Adds getRootDiskDevice function to common driver.
+      git cherry-pick a780e34031b63db434a286e891abf01e151cb30f  # lxd/instance/drivers: Performs disk size check on stateful startup.
+      git cherry-pick 1fb87fb9bef7fc03a20f44cb04d85188638eea1f  # doc: add a security summary and include it where needed
+      git cherry-pick f1ae9fe023d1217adc6bea86bf61c6495a8f47bd  # doc: add an authentication section
+      git cherry-pick f2b137a6e76b8789e5b2238f35c9a2b08f8cd793  # doc: clean up security documentation
+      git cherry-pick 1e4773347da309d0bb06a79b2d84032aa1e4d508  # doc: add styling for abbreviations
+      git cherry-pick 846609fc6bb57525a009bdb65ecc2223348db6d0  # doc: fix loading of substitutions
+      git cherry-pick 7626652f93d978113ce002c2616f3d63e462de3d  # Growing a loop backed btrfs pool fix snap path
+      git cherry-pick 9b8292766c0194e086935e642d721fb46e083504  # doc: use absolute URL for Swagger
+      git cherry-pick ff4b03deb7a7d73ed2e4b24d79411bae631b4587  # doc: swagger: hide link to yaml file
+      git cherry-pick d73659ba322e597813b789c8f142134f8bb25114  # lxd/db: Import ordering
+      git cherry-pick 290d6eebb5a2c08e3c9cba47b7b90288c17eb7a8  # lxd/db: Fix volume sequence regression
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
