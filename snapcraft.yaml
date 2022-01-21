@@ -1270,6 +1270,22 @@ parts:
       git cherry-pick ff4b03deb7a7d73ed2e4b24d79411bae631b4587  # doc: swagger: hide link to yaml file
       git cherry-pick d73659ba322e597813b789c8f142134f8bb25114  # lxd/db: Import ordering
       git cherry-pick 290d6eebb5a2c08e3c9cba47b7b90288c17eb7a8  # lxd/db: Fix volume sequence regression
+      git cherry-pick f2173bd0e00ec14477b4b1143a3a12525c6b4cc4  # doc: clean up links in README
+      git cherry-pick bab18b0bc183c0f0d3dc03487df566f4ec4d7def  # doc: move missing content from SUPPORT.md to README.md
+      git cherry-pick e2d1fecf7a7fb47f52fe8e489810cb4871de59a0  # doc: add a support page and include it
+      git cherry-pick 3774a7d4d7ffb236eb577b43e63d5b1e76dbf2c2  # doc: move SUPPORT.md to .github folder
+      git cherry-pick d732acb10c11710a2e0d2b1e2ee2b8542532b783  # doc: add a link to the Code of Conduct
+      git cherry-pick 608e3bd563ab36124d1612f70459a8fa74021e0f  # doc: fix link to support documentation
+      git cherry-pick 5fa631fc85d1338603ebe03fc7ca66b1343d58e6  # doc: fix broken links
+      git cherry-pick 74a491d145378de3d4778d36a1bf3346b8c7bfd2  # lxd/network: Adds State function to interace with common implementation.
+      git cherry-pick d2d41cc52ea49fd8a580ed1d8cd9d2da487cc955  # lxd: Call the networks 'State' function if it can be loaded.
+      git cherry-pick d88d03f373ed4e52979690ebb1cf976f4d03f7e9  # lxd/storage/btrfs: Add volume delete shortcut
+      git cherry-pick be0934869ff74e277f7638a766ca362d374cdfbf  # shared/api: Fix typo
+      git cherry-pick 0092cbe7f48342b21b84ed4fa18184fa0a2dcf6b  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick 313421ddbdcf46ece8291c0bdcea738c0c238d9a  # client: Fix bad arg naming in zone functions
+      git cherry-pick d0700551ed469014da292ff7f2f151413b901b2b  # doc: enable automatically generated anchors
+      git cherry-pick 4a36f2153a0c510ac66a1fefdea1318c19f72d4a  # lxd/db: Fix storage_volumes sequence again
+      git cherry-pick f2971e261d03d3da3d613210cabdf2eb5fbba8a3  # lxd: Use projectParam function in networkStateGet.
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
