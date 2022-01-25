@@ -1286,6 +1286,25 @@ parts:
       git cherry-pick d0700551ed469014da292ff7f2f151413b901b2b  # doc: enable automatically generated anchors
       git cherry-pick 4a36f2153a0c510ac66a1fefdea1318c19f72d4a  # lxd/db: Fix storage_volumes sequence again
       git cherry-pick f2971e261d03d3da3d613210cabdf2eb5fbba8a3  # lxd: Use projectParam function in networkStateGet.
+      git cherry-pick 3254719310b161f488faeca4810900b5e3de25c9  # lxd/network/openvswitch: Adds methods for extracting OVN data.
+      git cherry-pick a8b20d2fcae9ecfeeda0b409485754324185ac6f  # lxd/network/acl: Port to using fmt.Errorf
+      git cherry-pick 1d079d19ebecd040a122c0694d2f551f22ee9c8e  # lxd/network/zone: Port to using fmt.Errorf
+      git cherry-pick b36add8bff09ed09755971576e7901ef0d9e7a82  # lxd/network/openvswitch: Port to using fmt.Errorf
+      git cherry-pick 83b3c2066cae45c135646745dfae3ea923f0b346  # lxd/network: Port to using fmt.Errorf
+      git cherry-pick 0406990f2cc91ff614d2735b2a8ac839d47fde12  # lxd/instance/lxc: Use absolute rootfs
+      git cherry-pick 2c8dc74fb283de781022880e8998678cef4a6602  # doc: kernel 5.15+ have sane value for net.core.bpf_jit_limit
+      git cherry-pick 635c51b5ff19aaeae9d0f66d5eb79e4ec86edc9d  # shared/util: Add IsFalse
+      git cherry-pick f14c88de78bf9f2bbe91dd661004ab772ccf179e  # lxd/instance/qemu: Enable HyperV flags on x86_64
+      git cherry-pick d16fa31dc793d81647fa2e32909671d3870619cc  # doc/storage: Ceph supports quotas
+      git cherry-pick 0c347e67dde5e89dc2440a42fde6c56fc0b873ae  # tests: Fix failure when shiftfs is skipped
+      git cherry-pick 82de10574637e8b69e7784a501dab70ba81af9f6  # lxd/instance/lxc: Fix mount injection on VFS idmap
+      git cherry-pick 99c0ff668d56651efb3fc923749d5218e7880f1b  # lxd-agent: Fix bad network metric
+      git cherry-pick c096dc8c5c6fe7ec759adaa9a97f8f3a95751d9a  # lxd/endpoints/listeners: Add exportable listeners package
+      git cherry-pick 23e630347f82a0a9f34a914ec61d6d1c9fc59b25  # lxd/endpoints/starttls: Remove TLS methods from endpoints package
+      git cherry-pick 1c7dbbaa234790d44419ef556f764fa61ef28cc2  # lxd/ucred/ucred: Use new listeners package
+      git cherry-pick edbfcd2e6b68b47561c3351d86ce32a2dfa1e6d0  # lxd/instance/qemu: Restrict HyperV flags to 5.10+
+      git cherry-pick 0280d611e5c78f1a59afbfcd432a2aa384aea228  # lxd/db: Fix stoarge_volumes sequence (again)
+      git cherry-pick c42dade9e4cd9b937264dc30f783ecc47d46133f  # lxd/dns: Better handle errors
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
