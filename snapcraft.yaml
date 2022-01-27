@@ -1305,6 +1305,15 @@ parts:
       git cherry-pick edbfcd2e6b68b47561c3351d86ce32a2dfa1e6d0  # lxd/instance/qemu: Restrict HyperV flags to 5.10+
       git cherry-pick 0280d611e5c78f1a59afbfcd432a2aa384aea228  # lxd/db: Fix stoarge_volumes sequence (again)
       git cherry-pick c42dade9e4cd9b937264dc30f783ecc47d46133f  # lxd/dns: Better handle errors
+      git cherry-pick ca10581e02ea112846fb092e50860037a943dbfe  # doc: Fix typo in ZFS storage
+      git cherry-pick 2d46a90811148afae2557c0c5e83659d5a0deb9e  # doc: add a target to serve the rendered docs
+      git cherry-pick 6d77d300dff80db6672d685ca53742782c1bc96e  # doc: add a doc README
+      git cherry-pick 839b9f4d0e8fd481a7f575f99288e34e3f8946fd  # doc: exclude README.md from doc build
+      git cherry-pick 1984e9da8bf0f21f3549f524ffbe0d0028a8933f  # lxd: Only patch dnsmasq for networks in the db.
+      git cherry-pick eef3d0f5ae3f24be9b932fbd417b98115efe4614  # lxc/exec: Don't terminate on SIGWINCH
+      git cherry-pick e2d20ee7fddc18d2d65ac12eb13356c60ecc704e  # lxd/events: Increase websocket pings to 10s
+      git cherry-pick 10c44fb9092df721522a5e5cbc927effd4301520  # lxd/console: Fix error wrapping
+      git cherry-pick e7c0f8fe78dd817bfde5d180bb7f04b905c9af78  # lxc/console: Properly handle GUI exitting
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
