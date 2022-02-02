@@ -996,7 +996,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-4.0.11
+    source-tag: lxc-4.0.12
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -1034,36 +1034,6 @@ parts:
 
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 429233cf0e942e6f8109311fa0237358330b229b  # criu: support restoring containers with pre-created veth devices
-      git cherry-pick 1505f0780573f28d33f540884ba420293c1144a6  # conf: make it more obvious how auto-mount flags are defined
-      git cherry-pick 1ad1cab805b5a97cff9d0c5612a1eacbb187f091  # doc: add loglevels to ja and ko common options
-      git cherry-pick 49fab27fc58f12d49c720bf83412d2092cf0e724  # doc: Add lxc.sched.core to Japanese lxc.container.conf(5)
-      git cherry-pick d40b0deb45e35ba6f1996a0a48c265271b30ce6e  # doc: fix typo in English lxc.container.conf(5)
-      git cherry-pick e328a988e038724450dd64d8510dd16e5fda8ea5  # conf: handle kernels without or not using SMT
-      git cherry-pick 4d3aad49d6e6017ca53591339c9fe916836b87c7  # AUTHORS: Update to point to git history
-      git cherry-pick 48728e9880f50c4e354eadb7b9836b63276e3eda  # conf: add cgroup2, cgroup2:ro, cgroup2:force, cgroup2:ro:force options
-      git cherry-pick bc51048b7918b5c28ef104811e9f21d80e331f84  # confile: don't use path_simplify() on lxc.{execute,init}.cmd
-      git cherry-pick d04eb166c64ca8185119d502bf84a66a04dc3fd9  # build: add static libcap to output
-      git cherry-pick 9219277cc6627654adf03628b84d15eb0a545138  # build: add io-uring-event-loop option
-      git cherry-pick 1a8895855e9f3d7afded64fca74f4d9fc7974984  # Replace 'which' with 'command -v'
-      git cherry-pick f69e6b4d3f7d614de190e72d610705272ee36909  # mainloop: make sure that descr->ring is allocated
-      git cherry-pick 71743e8111738bd70b0b126f6500b95c0db2e806  # start: check event loop type before closing fd
-      git cherry-pick fdfb4a13dec5d23f0c87b64064b092dee5583531  # Replace 'which' with 'command -v' in tests too
-      git cherry-pick 1ec5939b4aae696f1109875a6ff57e85bda37b25  # Replace deprecated backticks with $() construct
-      git cherry-pick cf931928f1998fc8404376d215aa151d574d95ca  # Replace last occurence of 'which' with 'command -v'
-      git cherry-pick 1a102b310fc20b7c814c92e78c3664eb75186826  # mainloop: make ifdefs easier to follow
-      git cherry-pick 78baec37d69969d4b4275239040c6ee5719cab9e  # build: improve liburing support detection
-      git cherry-pick 4915c91128c8609805c06f438cdb8f3502dea044  # process_utils: add signal_name() helper
-      git cherry-pick f24c234ee901e79029ecc111693d8ac1e9a95995  # start: log signal name and number
-      git cherry-pick c3637943195146cab00b4e6b74e5978a089cd4a4  # build: move _FILE_OFFSET_BITS to common option
-      git cherry-pick 1b74e01add8e8ca0a887d25fd74d330f11ce8235  # tests: include config.h
-      git cherry-pick 334cf7beba5a27e27c958c3d71d6f5cf421367d7  # conf: apply /proc/sys and /proc/<pid>/ parameters
-      git cherry-pick a10ff341883a3d2079253288734b2505819a5e51  # conf: improve logging setting sysctl and /proc/<pid>/ parameters
-      git cherry-pick 6f580343e5d82544043b8cce5c7541acba2837d0  # test: improve logging helpers
-      git cherry-pick d8027e49c334aa5fa14e11cf61c73ee477badd52  # tests: add lxc.sysctls.* test
-      git cherry-pick 93be4e51210714922dff2829d2e00d55a83dceea  # tests: add lxc.proc.* test
-      git cherry-pick a616a311a328bab86dd6022d41437db3554bab46  # build: refuse to compile with unsupported liburing version
 
       set +ex
       snapcraftctl build
