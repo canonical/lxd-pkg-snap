@@ -1299,6 +1299,35 @@ parts:
       git cherry-pick 2aa52d6183889cbdade7fa873b88061547fc649e  # lxd/metrics: lxd_cpu_seconds_total is in seconds, not ms
       git cherry-pick caadea22c9cc6053344c71c3b7b50111cb335b18  # lxd/storage: Expose GetVolume
       git cherry-pick e1a2443531f5ffeec7d03bcc287f600b8315a839  # lxd/instance/lxc: Fix filesystem metrics
+      git cherry-pick 6e1f3ea58ef1ef5282a04e41a60f5a2570557fe9  # lxd/db: Refactor storage pool used by to get info on all nodes.
+      git cherry-pick 53243d2d8be602ad258daaf40815d076a2c08e6f  # lxd: Get storage pool used-by info from all nodes if target is unset.
+      git cherry-pick 01f7775f3218e8b9a5e8504798d7e113acf6d844  # lxc/storage: Parse and include node in used-by info.
+      git cherry-pick 5059cd8719077c313f6e8b521b6f83b636e0ab6d  # lxd/device: Removes VM from list of supported instance types.
+      git cherry-pick 706822c629cd5ef6713f33997b48c969168a68a1  # doc: Clarify multiple GPU device passthrough for VMs.
+      git cherry-pick 9db4beae70c9a1208a35e477f9e113125255f3f8  # doc/metrics: switch to ECDSA with longer validity
+      git cherry-pick c557985b6e1d9dfccdc400ed6acb138593a64756  # doc/metrics: tune scrape_interval to deal with default caching done by LXD
+      git cherry-pick f943e850a3661486dccd0596310478bbdf0a47f3  # doc/metrics: alpha sort prometheus.yml snippet
+      git cherry-pick 26f0b4eaa032d1a6d0cd7a0db267ae0b9392846d  # lxd/endpoints: Implements an io.Writer to skip certain input.
+      git cherry-pick 3eb6b7c7dcfb4feae3e823d83600673d74332a2f  # lxd/endpoints: Adds tests for the networkServerErrorLogWriter.
+      git cherry-pick 04f4eef295d2292437f61cb6fb828e5aa0d6125e  # lxd/endpoints: Sets the network server logger when proxies are updated.
+      git cherry-pick a8e80ef41c777f8a91ac99ca67c8761087b86d64  # lxd/instance/lxc: Fix missing fs metrics on bind-mount
+      git cherry-pick 5b93c12d08fa8bec143eaffdebd904a755231915  # lxd/operations: Add ExtendMetadata
+      git cherry-pick d3b76916a5b50aee464739ece7ab6755a04d56a6  # lxd/exec: Use ExtendMetadata
+      git cherry-pick 78d4326169485fc2b1e66fd953f9dabace2eec52  # shared/api: Fix incorrect image aliases example
+      git cherry-pick 1e77e62cc2bf9e5d08d19f7e5890ff992649cbff  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick bbdf9f436ff6a3804aa093093b8b78cd0027bd27  # doc: Add basic instance exec information
+      git cherry-pick 7463aae27cf2049e9835a4d859a928ed05967866  # go.mod: use github.com/mdlayher/vsock@v1.0.0
+      git cherry-pick b208593c6dc4bd633fad75289deb9213a1896e37  # lxd/instance/metrics: Fix incorrect memory metrics
+      git cherry-pick 016ebc45733a521eb629dea3fcb10d8f8af18f17  # lxd/db/generate/db/stmt: Add 'order' tag
+      git cherry-pick 297487d6201308f83bb71704399c1d2f9e3561eb  # lxd/db/instance/profiles: Use 'order' tag to order queries by apply order
+      git cherry-pick 3ed1b9c4c4e606afe714e541abf5860cdbb7e03e  # lxd/db/instance/profiles.mapper: Update generated code
+      git cherry-pick fe6c1dc617c682bc26720d605d49dd613249bc55  # lxd/metrics: Invert condition as all existing metrics have labels
+      git cherry-pick 57499acfafba683b696e0b612d298df318a60a3b  # lxd/instance/lxc: Cast statfs.Bsize only once
+      git cherry-pick 20fbc9427567938e2131096e7429c417b47e498d  # lxd/instance/lxc: Only convert CPU ID once
+      git cherry-pick 74707d5618cf42f1bee07935efa55bb493cdd911  # lxd/instance/lxc: Cache labels in for loops
+      git cherry-pick f0a55f1049bfdbe3485fea5ec2aface5ed73a66d  # lxd/instance/qemu: Fix live update logic
+      git cherry-pick 460aca37c689bbefb99133cbfe4b5006e392c467  # lxd/instance/qemu: Fix agent-less memory metrics
+      git cherry-pick 7c310a2aa3b7e5ff3b6ea30f390bdda399e6d6b3  # lxd/instance/qemu/qmp: Remove GetMemoryStats
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
