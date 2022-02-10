@@ -1370,6 +1370,21 @@ parts:
       git cherry-pick 13ba5f55737e2cb0998db06d0188a09eb73d0b54  # lxd/db/storage/pools: Reworks getStoragePool to use a single transaction internally
       git cherry-pick 6d8ebcdb5fea0f088becd031560a1030e7b35af5  # lxd/db: Uses api.URL to build used-by urls for storage pools.
       git cherry-pick 3a124028d418165f0a1947481e912bb120596bfb  # doc: fix path to image in the header
+      git cherry-pick 2a3a58e7d8590e3b956ca88ab6fa5ae911da1614  # lxd/cluster/gateway: Enable TCP user timeout and connection closing on failure in dqliteNetworkDial
+      git cherry-pick 7cb3cb0bf8cb683b37437894b83605f5cf2ab882  # lxd/cluster/gateway: Improve logging in dqliteNetworkDial
+      git cherry-pick a03e5e328a67bd2efd479f7aebed4830a7d8f922  # lxd/cluster/gateway: Standardise logging naming of dqliteProxy and dqliteNetworkDial
+      git cherry-pick e56357a39d5f65ab7765b791a7183b9a05d4a1e5  # lxc: Properly report alias add/update errors
+      git cherry-pick 5d27885283297e8a1b08281276112b0ea60b26d8  # client: Update example to use instances
+      git cherry-pick 3032173320820f0a69f774d946f64541b7474ad9  # client: Clearly mark container functions as deprecated
+      git cherry-pick c6eeb4cd91aacc169ef53dc4c5fdd372c5f3a753  # lxd/cgroup: Add total_cache on V2
+      git cherry-pick 132646889807fa3de72301b9a383581fa3c4c6e5  # lxc/console: Rework concurency model for vga
+      git cherry-pick 0b881f971e03660c5bc7cf1b620df0b2ebb9f916  # lxd/instance/drivers/driver/qemu: Add check for lxd-agent running in getAgentClient
+      git cherry-pick f78c08ce8460320fecd1e2e4538a1c9845639f9b  # lxd/instance/drivers/driver/qemu: Remove duplicated lxd-agent running status check in agentGetState
+      git cherry-pick c7710d99db9583a304f04bc49d065b97c558f459  # lxd-agent: Updates startStatusNotifier to return a cancel function
+      git cherry-pick e365f6838ef50fd889c92a367410f300ae55a8b5  # lxd-agent: c.startStatusNotifier usage
+      git cherry-pick 15171edadd3d330f4ae3a33ef4d19af87fb69f5f  # lxd/instance/drivers/qmp/monitor: Add agentReadyMu for proper shared access to agentReady
+      git cherry-pick ce0988cdfbf0dfc8a010018651d8ee071284f1c9  # lxd/instance/drivers/driver/qemu: Removed unused agentClient var
+      git cherry-pick 1dc6e641ba83962d1978f67d942a311ae43cfa4d  # github: Update for current min Go version (1.16)
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
