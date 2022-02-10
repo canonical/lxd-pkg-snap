@@ -1328,6 +1328,48 @@ parts:
       git cherry-pick f0a55f1049bfdbe3485fea5ec2aface5ed73a66d  # lxd/instance/qemu: Fix live update logic
       git cherry-pick 460aca37c689bbefb99133cbfe4b5006e392c467  # lxd/instance/qemu: Fix agent-less memory metrics
       git cherry-pick 7c310a2aa3b7e5ff3b6ea30f390bdda399e6d6b3  # lxd/instance/qemu/qmp: Remove GetMemoryStats
+      git cherry-pick 34c3d722c01a33af03bf090166614cac97b2809d  # lxd/firewall/drivers/drivers/xtables: Don't attempt IPv6 RP filter if not enabled
+      git cherry-pick 871cfd818011fa221ca90ba424e15ae479907000  # lxd/network/driver/ovn: Don't attempt to configure IPv6 setting is not enabled
+      git cherry-pick 523f6d05210c32666d7cd76ce5ca14a024aa57d0  # doc/instances: Fix bridged NIC ipv{n}.address docs indicating none is valid value
+      git cherry-pick c14fc56574dbb07bfda06db08f73cd41997fa391  # shared/util/linux: Add channel closed check before writing in ExecReaderToChannel
+      git cherry-pick 536097df1efaa00608eed929f1ba656727030619  # lxd/metrics: OpenMetrics says to end with EOL
+      git cherry-pick 2c76e0ccd6f7f806fe0cdb1622b6c9f5ae6df3d8  # lxd: Rename metrics to api_metrics
+      git cherry-pick 5c9e93848aaa07e19eb25600a7512906444f0668  # lxd/daemon: Drop metrics from main struct
+      git cherry-pick d047b5ee728faeffe32aba3b3a882554d3766d69  # lxd/metrics: Rework caching and locking
+      git cherry-pick e55ed719913812a4d94157b122a5e26f6e287461  # lxd/metrics: Reduce cache to 8s to accomodate 10s intervals
+      git cherry-pick 28221173dd81cf6ecddbe900a580f1aca467e4be  # lxc/console: Don't write twice to sendDisconnect
+      git cherry-pick d7aed521dce9dc3fc7b77fdcc51f21e140311649  # lxd: Check serverName in clusterMemberJoinTokenDecode
+      git cherry-pick 8395f7773bd288db16f927797e88ec6341f3194a  # shared/api/cluster: s/Base64/base64/
+      git cherry-pick 35d37c6752f9fcd47701bd9a6164d17eeb8ce3be  # lxd/certificates: Fix typo in comment
+      git cherry-pick 14a7a202917a83122e592f3518284b15156b3eca  # lxc/config_trust: Don't remove extension from cert
+      git cherry-pick 93d0814c5627c41a27e26ca61b3adc4776ee57d9  # shared: Remove SplitExt
+      git cherry-pick ff3ac70432b548ac7879e0ca44005d32563c5ce1  # lxd/certificates: Rework certificate name logic
+      git cherry-pick bd57f3012af8c4e0d6a7e8dd2d964535f0d67a4f  # doc: download external images
+      git cherry-pick d5e794bfcfabe08b75f8b13ea41e1d8b50e368f7  # doc: use local image
+      git cherry-pick 44365f3ea78b0b144944891f027231abcaba53c4  # doc: add doc output to "make dist"
+      git cherry-pick 1b6837ced53ebd2e9d7d655092b1b4b72a92ea25  # lxd/instance/drivers/driver/lxc: Reduce calls to VolatileSet to reduce DB transactions
+      git cherry-pick 2d26c686875d856653cffe731444e091ba7da681  # lxd/instance/drivers/load: Removes unused cluster arg from validDevices
+      git cherry-pick 33bdbee58fc48a21dcc7bf79a7eeeeaffcbfe900  # lxd/instance/drivers: instance.ValidDevices usage
+      git cherry-pick 98b6e920d71537d6f8f88237eaabb38357e9da25  # lxd/instance/instance/utils: ValidDevices definition and usage
+      git cherry-pick d5eed58178a3afadfa59653d96a3b7b3ded5eca3  # lxd/profiles/utils: instance.ValidDevices usage
+      git cherry-pick 2ad702b296378ff6d2824f975e284b19bd3f977e  # lxd/profiles: instance.ValidDevices usage
+      git cherry-pick fb66550d99358dfd87b44da3ae93acbc50f52f29  # lxd/project/permissions: Updates CheckClusterTargetRestriction to accept a project record
+      git cherry-pick ae98904cce3b0854f0fddd107b5b4ee49b899e1b  # lxd/project/permissions/test: project.CheckClusterTargetRestriction usage
+      git cherry-pick 9fcd72c6759818af3e4a953c1ffdf97b9418d142  # lxd/instances/post: project.CheckClusterTargetRestriction usage
+      git cherry-pick 6d284387e073d565c672e0d0ad951b23f01924d8  # lxd/instance/post: project.CheckClusterTargetRestriction usage
+      git cherry-pick 8b91d7c4543fefcbb5114bd05aad1082df632ff9  # lxd/cluster/config: Add ImagesDefaultArchitecture function
+      git cherry-pick 9592b0a7514debc1f6f27d8160b6389865f43bda  # lxd/instances/post: Uses config.ImagesDefaultArchitecture
+      git cherry-pick 232387c4c019ec181809a9e5209b76d2f8204e22  # lxd/instance/instance/utils: Remove call to tx.ProjectExists in CreateInternal
+      git cherry-pick 9353d1e7678695998b25392523622f806cfb3c38  # lxd/instances/post: Removes unnecessary pool check in instancesPost
+      git cherry-pick 774828a9f24332e616439b70682a58ff2043bd6f  # lxd/db/query/retry: Improve consistency of logging in Retry
+      git cherry-pick 5136ad63308a6fb4b4f174c984c1a64b249eb5c7  # lxd/instance/instance/utils: Comment fix
+      git cherry-pick 5210c53c2e1731e0bf64f92f69204d3cb8b0ad79  # lxd/instance/instance/utils: Don't call ValidDevices multiple times during instance create
+      git cherry-pick 9c7e21fab819b610a08e5740c2e5f0d8d5995fb4  # lxd/db/networks: Update network load functions to share transaction
+      git cherry-pick bae1242a9c537bc739e25ab881212479f66c7404  # lxd/instance/drivers: Merge expandDevices with expandConfig
+      git cherry-pick 49f6e9443dc7d495440854b67f410a794733c5f1  # lxd/instances/post: Renames targetProject to targetProjectName and p to targetProject
+      git cherry-pick 13ba5f55737e2cb0998db06d0188a09eb73d0b54  # lxd/db/storage/pools: Reworks getStoragePool to use a single transaction internally
+      git cherry-pick 6d8ebcdb5fea0f088becd031560a1030e7b35af5  # lxd/db: Uses api.URL to build used-by urls for storage pools.
+      git cherry-pick 3a124028d418165f0a1947481e912bb120596bfb  # doc: fix path to image in the header
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
