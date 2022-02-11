@@ -1202,6 +1202,25 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick a1095a786c0e4ce3a53c1d8ee1781cca0f0741b0  # lxd-agent: Fix bad copy/paste
+      git cherry-pick 9064a5b037e8d86736a354fb71385296bbc82f61  # lxd/daemon: Fix http response error typos
+      git cherry-pick c1628b9d2158621f28a9a07af5d2a8f87c64927c  # lxd-migrate: Support certificate tokens
+      git cherry-pick 1ea51be179ba5fcc18d165bacf418d728f73cd04  # lxd/util/http: Improves comment on CheckTrustState
+      git cherry-pick 21fdc8cb1fb500c3d76bb2a18a6f951c28b075f5  # lxd/util/http: Var naming clarity in CheckTrustState
+      git cherry-pick 06d186733970ffd97fea877b4ff71eb3bcc62c56  # lxd/daemon: Adds the trusted cluster member fingerprint to the request context username field in Authenticate
+      git cherry-pick 5735bd0a4724269f2c727dbb6fed892ee8f644d7  # lxd/events/events: Adds EventSource type and constants
+      git cherry-pick 4a2e7da2b22cadd7e66a5419ee963f5f5e608a2c  # lxd/events/common: Removes localOnly concept from common listener
+      git cherry-pick b88fe9b6b90b9aa60f0cdf6a15591d50296619fd  # lxd/events/devlxdEvents: Removes isLocal concept
+      git cherry-pick 6762b7c51a26af809a56eaebcce83f5a5443238b  # lxd/events/events: Replaces isLocal with excludeSources concept for AddListener
+      git cherry-pick a131c445bc149596317830b9795eff285585b1f4  # lxd/events: Updates d.events.AddListener usage with excludeSources
+      git cherry-pick 8b539c329b21f1eb086ef3a30f2c76326cffa60a  # lxd-agent/events: Updates d.events.AddListener with excludeSources
+      git cherry-pick 5aa02c2f54e5a6b2255589944db135b5d9aeed11  # test: Adds basic cluster event tests
+      git cherry-pick f52c9582b23e9f6031f015b778b5dc786cb37fe8  # lxd/events/events: Removes listener level location concept and replaces with server location concept
+      git cherry-pick 834b26764691005e5f13965a271202951a8c3299  # lxd-agent/events: d.events.AddListener usage to remove listener level location
+      git cherry-pick 4668ea0251cfc01bc77d2a5cc6defbc8910c7ddb  # lxd/events: Updates d.events.AddListener to remove listener location
+      git cherry-pick 2ef77d3ceea7ad4bb4608601c2f3d35e23e26040  # lxd/cluster/events: Prevent concurrent running of EventsUpdateListeners
+      git cherry-pick 5026739709de5ffc900c9c372d976aa685eba3e0  # go.mod: bump github.com/mdlayher/vsock@v1.0.1
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
