@@ -550,6 +550,7 @@ parts:
       - --with-ovs-source=../../openvswitch/build/
     prime:
       - bin/ovn-nbctl
+      - bin/ovn-sbctl
 
   spice-protocol:
     source: https://github.com/freedesktop/spice-protocol
