@@ -468,7 +468,7 @@ parts:
       usr/local/lib: lib/
     prime:
       - bin/nvidia-container-cli*
-      - lib/libnvidia-container.so*
+      - lib/libnvidia-container*.so*
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
