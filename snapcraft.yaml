@@ -1221,6 +1221,15 @@ parts:
       git cherry-pick 4668ea0251cfc01bc77d2a5cc6defbc8910c7ddb  # lxd/events: Updates d.events.AddListener to remove listener location
       git cherry-pick 2ef77d3ceea7ad4bb4608601c2f3d35e23e26040  # lxd/cluster/events: Prevent concurrent running of EventsUpdateListeners
       git cherry-pick 5026739709de5ffc900c9c372d976aa685eba3e0  # go.mod: bump github.com/mdlayher/vsock@v1.0.1
+      git cherry-pick f3fe695eb12410a9c1e2b6c94be5fc5086982667  # lxd/main_init_interactive: Add missing :
+      git cherry-pick 8cf8e41acd30bcc8190ef1b9395d9e79065e48bf  # lxc/console: Don't crash on manual disconnect
+      git cherry-pick 2c7cf1527a540c6990b227d796741e6a44e21b23  # doc/metrics: stop tuning job's scrape_interval now that results are cached 8s only
+      git cherry-pick 0fb7d7f94352201dc9d32c432ddfb61fe79d0ce9  # doc/metrics: don't assume any default scrape_interval value
+      git cherry-pick 3a0870657c9bdf610f525880383c83a6d7d6db7a  # lxd/response: Modernize FileResponse
+      git cherry-pick 9d92db6c9089339ba8ecc236334e7981b4c65bbd  # lxd-agent: Update for FileResponse changes
+      git cherry-pick 7e142227344d5236dda03f29c7df2170ac783059  # lxd: Update for FileResponse changes
+      git cherry-pick 8d0433248565580b769083de87dd751214eee149  # lxd/response: Rename FileModify to FileModified
+      git cherry-pick 195b3c25b87313afb0c0e12c2ee5e06cc83467b6  # lxd/fsmonitor/drivers: Ignore stale file handle errors.
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
