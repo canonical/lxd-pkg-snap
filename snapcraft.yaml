@@ -1237,6 +1237,64 @@ parts:
       git cherry-pick 7e142227344d5236dda03f29c7df2170ac783059  # lxd: Update for FileResponse changes
       git cherry-pick 8d0433248565580b769083de87dd751214eee149  # lxd/response: Rename FileModify to FileModified
       git cherry-pick 195b3c25b87313afb0c0e12c2ee5e06cc83467b6  # lxd/fsmonitor/drivers: Ignore stale file handle errors.
+      git cherry-pick 41bb09f2b273e26dff06b22e92c6cf0b911bd9fd  # lxd/apparmor: Remove state.State dependency from apparmor package
+      git cherry-pick fba364628849020a13e5dc5e585581d04f3c3ada  # lxd/device: Remove state.State dependency from apparmor package
+      git cherry-pick 3cb3b66f9e375cbd6d9a8b19f3fbcc6af02ba913  # lxd/instance/drivers: Remove state.State dependency from apparmor package
+      git cherry-pick 746005969ecf027f678dd6511f026bbf5dd408ea  # lxd/network: Remove state.State dependency from apparmor package
+      git cherry-pick 56846c043ae363345b41634bd609c736d57acd04  # lxd/storage/drivers/driver/zfs: Set all dataset mountpoint settings to legacy
+      git cherry-pick 69a4a7baf385e6b3f209d56eca9777a511836744  # lxd/cluster/membership: Run EventsUpdateListeners in NotifyHeartbeat in wait group
+      git cherry-pick 11a112452df1701107fd0b777c27f1c2d431d421  # lxd/cluster/heartbeat: Only upsert member offline error in APIHeartbeat.Send if context not cancelled
+      git cherry-pick 8f19c0c7c103ff230ecd5aeb49dc5684466d227d  # lxd/cluster/heartbeat: Save member state gathered so far if heartbeat is cancelled
+      git cherry-pick 8f97429bfc83a014211a238d75ac9e180010b860  # lxd/cluster/heartbeat: Comment improvement
+      git cherry-pick a5b3b4c013c52c7db596e2d82b7080b4ce04f006  # lxd/cluster/heartbeat: Immediately ping remaining members when ctx is cancelled in APIHeartbeat.Send
+      git cherry-pick 850749c6fe3e52d40b5dd2b3ec1ab7b2ed6ceef1  # lxd/cluster/gateway: Export HeartbeatLock
+      git cherry-pick 934e5d214849f7a9174d4ad674396ff165d07607  # lxd/cluster/heartbeat: g.HeartbeatLock usage
+      git cherry-pick 4462e49321e11cc8b5b9578e4d2933b040403560  # lxd/cluster/heartbeat: Wait for ongoing heartbeat to finish in NotifyHeartbeat
+      git cherry-pick 31fbfd758c06619075c6cf9452d5ba0267aa0ffc  # lxc/config_trust: Support --name flag for tokens
+      git cherry-pick 2a9532ef7a26b26b002d0f6077432b52e8699990  # client: Replace chConnected with ctxConnected
+      git cherry-pick 0f9d556494be7ac8d4f980375250eaf832b88e5e  # client/lxd/events: Updates SendEvent to use context deadline for timeout
+      git cherry-pick 954f8f03a4aa063198599c1b9ec23774efb7afc5  # test: Update clustering membership tests to not expect a specific promotion order of members
+      git cherry-pick 53d2c3417418c7502ff85713f03e45f8d1af3466  # lxc/network_zone: Fix typo (entriess to entries)
+      git cherry-pick 057aa36f92a5436efd9151d2e0ec48ccaf29831d  # lxc/cluster: Fix typo (doest to does)
+      git cherry-pick 351db4d531dc9594fd0c2256fb37a517d88a87ad  # i18n: Update translation templates
+      git cherry-pick 830705755527251d1a1e596dd026ffa4711891bc  # test: Update cluster rebalance tests to not use member specific role logic
+      git cherry-pick 8f412daf48ce3eca3b62ea239a7e673c0b19b101  # test: Add cluster show to failure domains test to capture cluster state on intermittent test failure
+      git cherry-pick f12973ac3de04eca723c279240e6dd4caaf67cb9  # shared/api/url: Add WithQuery
+      git cherry-pick 5a3f18a55f6e2bb49b25d521288559120177ebc4  # lxd/daemon: Run nodeRefreshTask inside cluster.EventsUpdateListeners as part of wait group
+      git cherry-pick 17df5a31cc7e62178e5f28a0d3a241c28d6d2718  # lxd/cluster/heartbeat: Fix comment
+      git cherry-pick 0c4616964ece52072a0bbafea0984fb861ee1300  # client: Introduce DoHTTP
+      git cherry-pick bb707fcaf189facde132b4f17a4d54566c7e5a53  # client: DoHTTP usage
+      git cherry-pick 3f12ec1b56708efd4a9b65dc61e626cabf7ec919  # lxc/query: Use DoHTTP
+      git cherry-pick e518305777e439f130905af8b218b9e2f854e7e2  # lxd/api_metrics: Rename resp to metricSet
+      git cherry-pick caaaf811857a868f5f5a15d9001559447d38a964  # lxd/api_metrics: Support target
+      git cherry-pick 6d2d806299873fdae6c1ce816b8d638ddf50b92e  # doc/rest-api: Refresh swagger YAML
+      git cherry-pick e8fd59ee44cd486a4873df1a52c4fc138c77b5cd  # lxd/certificates: Fix token generation over HTTPS
+      git cherry-pick e28a254af39260dd584374cda45a3933c3533d5e  # lxd/cgroup: Fix bad cpuset check
+      git cherry-pick 2ad2addcf2f225961f53731f12d49547f990d653  # lxc/cluster_group: Update long descriptions
+      git cherry-pick 0eec93d2bdd6ce018a58dc7f7aae793752bd418c  # i18n: Update translation templates
+      git cherry-pick 4589538d1a7c1e8960c24f3aa48ddd8152c4899b  # lxd/device/nic/routed: Comment ending
+      git cherry-pick 81c0f4b6348205a648e5c04226b2a2002e623c98  # lxd/device/nic/routed: Moves parent and vlan check to validation
+      git cherry-pick 65f4e148873d91f2a92dbe93abeec6aa641aab00  # lxd/device/nic/routed: Remove feature check of liblxc as no longer depends on it
+      git cherry-pick 08a9808252f7c697c545c63a949e32d6d31873d6  # lxd/device/nic/routed: Adds d.effectiveParentName to cache result from network.GetHostDevice
+      git cherry-pick 61e2ab354adc51eb098d20502ec830432bc30ccf  # lxd/device/nic/routed: Fixes bug where if vlan effective interface didn't exist start would fail
+      git cherry-pick 4e6b7b79bd3295163595e283db73bcf7dfefa8a6  # lxd/device/nic/routed: Align with macvlan logic for setting up vlan interface
+      git cherry-pick 4300f265613ec4104057c734f97bc696469b0788  # lxd/device/nic/routed: Delete created VLAN device on start failure
+      git cherry-pick 2ed2abdd2ea6d8b7d63e32e4952d999916a17753  # lxd/device/nic/routed: Use d.effectiveParentName for consistent in postStop
+      git cherry-pick 43cf80c1eeeed3e1c4cc5e50b36028fa84c40cb4  # lxd/device/nic/routed: Adds missing comment to checkIPAvailability
+      git cherry-pick e42aea6a92cf4c59dc65ec0cc1f023006ccfb563  # lxd/device/device/utils/network: Sets ARP probe timeout based on context deadline in isIPAvailable
+      git cherry-pick f3eec2a146ef9164083c2316e730069e4bd7a688  # lxd/device/device/utils/network: Removes use of unnecessary go routines in isIPAvailable
+      git cherry-pick fc68913aeff627bd527ef75446bb08d76580b186  # lxd/device/device/utils/network: Change isIPAvailable signature to return bool for found and separate probe errors
+      git cherry-pick 413dbbda0811ee379f861217fe95470facc06e10  # lxd/device/nic/routed: Updates checkIPAvailability to use updated isIPAvailable
+      git cherry-pick 0bf35c7140802c5443500cea1d63f9fa641aa667  # test: Adds test for routed vlan without parent
+      git cherry-pick 0b37ea263e69e14ab3b6d27e594f567e2a5a5d4d  # test: Adds routed NIC test for VLAN parent interface creation
+      git cherry-pick 0fc17d04afc953f557434f0d3d586b24c0c3f78f  # doc/metrics: use secp384r1 curve with SHA384 signature
+      git cherry-pick 6f41296b86367620dda6d8f06689d849cd562ece  # test: Fix incorrect command in clustering_failure_domains
+      git cherry-pick 5b46a7f72246b602e1ced5e27cb64e6ffebc2bfd  # test: Fix profile leak
+      git cherry-pick 2e34e6f92ea2fbcfb276dad30f78f21135e5dc69  # lxd/instance/qemu: Allow live update of cluster.evacuate
+      git cherry-pick bc021e0c266ed30d8fb6d4549a8f24a8a85fedaa  # lxd/certificates: Better handle authentication
+      git cherry-pick 4a6848ba93012bb357a79fa7240bba4d3de8cbce  # shared/validate: Moves ValidHostname to validate package.
+      git cherry-pick c3458799a3c595cce10e6c88b4fc0b253119974e  # shared/validate: Adds IsDeviceName, refactoring logic from IsHostname.
+      git cherry-pick 1fa99fb023824f6a840b89f77ad9aae8a31d290b  # lxd/device: Ensures device names are valid when validating config and instantiating.
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
