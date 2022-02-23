@@ -1292,9 +1292,67 @@ parts:
       git cherry-pick 5b46a7f72246b602e1ced5e27cb64e6ffebc2bfd  # test: Fix profile leak
       git cherry-pick 2e34e6f92ea2fbcfb276dad30f78f21135e5dc69  # lxd/instance/qemu: Allow live update of cluster.evacuate
       git cherry-pick bc021e0c266ed30d8fb6d4549a8f24a8a85fedaa  # lxd/certificates: Better handle authentication
+      git cherry-pick d9db2f6735a9d24ca263ad23537398f9175129ea  # test: Fix clustering_handover test to not expect a certain member promotion order
       git cherry-pick 4a6848ba93012bb357a79fa7240bba4d3de8cbce  # shared/validate: Moves ValidHostname to validate package.
       git cherry-pick c3458799a3c595cce10e6c88b4fc0b253119974e  # shared/validate: Adds IsDeviceName, refactoring logic from IsHostname.
       git cherry-pick 1fa99fb023824f6a840b89f77ad9aae8a31d290b  # lxd/device: Ensures device names are valid when validating config and instantiating.
+      git cherry-pick 674d8fd1cb376ae8a7ee52373a294a8b2f6f8d7c  # shared/idmap: Add SysProcIDMap functions
+      git cherry-pick 09fcd52bd4840b176af7666d5f2bb74c66165a71  # lxd/storage: Sync before snapshotting
+      git cherry-pick 042e39e97122de1a058555469ee3ea34c9b13e23  # shared/util: IsTrue description
+      git cherry-pick 26d14889c674a24cc5209f632b383e72a2af69cc  # shared/util: Adds IsTrueOrEmpty function
+      git cherry-pick 69e3604300fc0447aa9487bb15ca9eebbcad1fd3  # shared/util: IsFalse description
+      git cherry-pick 1f4b303f6ce9d22e02660450e68868fb1a2f79b2  # shared/util: Adds IsFalseOrEmpty function
+      git cherry-pick 96ad2d9da3d93ba36b2d5e4352be456d4d01e8b7  # lxd/device/disk: Use shared.IsTrueOrEmpty and shared.IsFalseOrEmpty
+      git cherry-pick 65e6c02721f628f732e6e5f85be871684b6ca25a  # lxd/device/disk: Replace use of !shared.IsTrue with shared.IsFalseOrEmpty for security.shifted
+      git cherry-pick b3faeaaf51a72f5742c3e1211c9a77e44122c3b0  # lxd/device/gpu: Replace !shared.IsTrue shared.IsFalseOrEmpty for nvidia.runtime
+      git cherry-pick 153cfc4312e3d5f194b94191b205e17f8f52c55e  # lxd/device/nic: Replace !shared.IsTrue with IsFalse or IsFalseOrEmpty
+      git cherry-pick dd6bd9a606df41c969f579ba4301b94c0a6a8e8a  # lxd/device/proxy: Replace !shared.IsTrue with shared.IsFalseOrEmpty
+      git cherry-pick 8aa9001792e6b5f3bafcdf29372a2ed19c7e2d25  # lxd/storage: Adds allowInconsistent to pool interface RefreshInstance signature.
+      git cherry-pick b1f59089db0b37c88d1adeef8924c8de49a8c69d  # lxd: Passes allowInconsistent from instanceCreateAsCopyOpts into pool.RefreshInstance.
+      git cherry-pick 9c509cfd5a50b726e8d51658ba2275737ab7a3cd  # lxd/storage: Uses allowInconsistent in call to MigrateInstance on refresh.
+      git cherry-pick 0f6b3425faadf1965235f401ea34f8b7c1c9fefb  # lxd/storage/filesystem: Add SyncFS
+      git cherry-pick b2abf251137166c49b90742ae5bd176212b95a28  # lxd/storage/drivers: Replace !shared.IsTrue with shared.IsFalse for rsync.compression option
+      git cherry-pick 9be0c436d67c7fdc6c8e3047e589c65ef167b683  # lxd/storage/drivers/driver/ceph: Replace !shared.IsTrue with shared.IsFalse or shared.IsFalseOrEmpty
+      git cherry-pick a58935799d7c900c39f11ae03f787855657ace13  # lxd/storage/drivers/driver/lvm: Replaces !shared.IsTrue with shared.IsFalse or shared.IsFalseOrEmpty
+      git cherry-pick 484567c3be3d344b5c3135c102f89584c0670cc9  # lxd/storage/drivers/driver/zfs/volumes: Replace !shared.IsTrue with shared.IsFalse for zfs.clone_copy
+      git cherry-pick 4387d78b0a2808216c5c1bc2b1156086f616513d  # lxd/storage/drivers/zfs: Replace !shared.IsTrue with shared.IsFalse or shared.IsFalseOrEmpty
+      git cherry-pick 3e5abaac8f3389423292e96a73883a947286eb9a  # lxd/api/cluster: Replace !shared.IsTrue with shared.IsFalseOrEmpty for features.networks
+      git cherry-pick 4f777e4880b34861574d2709141b951259807848  # lxd/api/project: Replace !shared.IsTrue with shared.IsFalse for features.profiles
+      git cherry-pick 477517d8ea455d02e3492c06021eda79c5b7134b  # lxd/devlxd: Replace !shared.IsTrue with shared.IsFalseOrEmpty for security.devlxd.images
+      git cherry-pick 69ae52fe99722edfa16ccc4a2d488e3ad8e77604  # lxd/instance: Replace shared.IsTrue with shared.IsFalseOrEmpty for snapshots.schedule.stopped
+      git cherry-pick 567b34bd84ec071cd2c5433efb29f9d6fab1d747  # lxd/patches: Replace !shared.IsTrue with shared.IsFalse
+      git cherry-pick 30ac933a7a8a963709fa9342d5f0e13ab2a116b9  # lxd/apparmor/instance: Replace !shared.IsTrue with shared.IsFalseOrEmpty for security.privileged
+      git cherry-pick c20103e772de4cd85ef226d7aef85f5e02cf9270  # lxd/instance/drivers/driver/lxc: Replace !shared.IsTrue with !shared.IsFalseOrEmpty for security.idmap.isolated
+      git cherry-pick 95409a859d72df137a10a9fb8a9b1ce46ae29fee  # lxd/instance/drivers/driver/lxc: Replace !shared.IsTrue with shared.IsFalse for limits.memory.swap
+      git cherry-pick 0104c1659ee2b3932a1757a7542b770759e51260  # lxd/dnsmasq/dhcpalloc: Replaces !shared.IsTrue with shared.IsFalseOrEmpty for ipv6.dhcp.stateful
+      git cherry-pick a560fff72c6bc727d897c93682934f4837f6d794  # lxd/instance/drivers/driver/qemu: Replaces !shared.IsTrue with shared.IsFalseOrEmpty for migration.stateful
+      git cherry-pick c45d3ed56c245065a033f45504a0bb9867a2b7e4  # lxd/instance/instance/utils: Replace !shared.IsTrue with shared.IsFalseOrEmpty for security.privileged
+      git cherry-pick 18172464212f884cfea90d4dfccc609002215e2b  # lxd/networ/driver: Replace !shared.IsTrue with shared.IsFalseOrEmpty for ipv{n}.nat
+      git cherry-pick b56f99c348e7f4f81b3bae90ec54a87408ad0152  # lxd/network/driver/bridge: Replace !shared.IsTrue with shared.IsFalseOrEmpty ipv6.dhcp.stateful
+      git cherry-pick 9f2dd7a8429f447f95839983f5cb3ffe86a82a55  # lxd/network/driver/ovn: Replace !shared.IsTrue with shared.IsFalseOrEmpty for restricted option for projects
+      git cherry-pick eccc623bc9910f37631839555b46f1e107a8152a  # lxd/network/driver/ovn: Replace !shared.IsTrue with IsFalse for ipv{n}.dhcp
+      git cherry-pick 427acd64db2237260918faecfd8e8fa080c18665  # lxd/network/driver/physical: Replace !shared.IsTrue with shared.IsFalseOrempty for volatile.last_state.created
+      git cherry-pick ad1406a087c3016ad41e292df6b51bfb2e546c29  # lxd/network/zone: Replace shared.IsTrue usage for NAT logic
+      git cherry-pick eac7374d0ee3a9fa31d7342d305602c4dea78080  # lxd/project/permissions: Replace !shared.IsTrue with shared.IsFalse for features.images
+      git cherry-pick 89a77230a36f1b777f921f9dfb86cf63f7d0e288  # lxd/project/permissions: Replace !shared.IsTrue with shared.IsFalseOrEmpty for security.idmap.isolated
+      git cherry-pick b6e1495457a77afa5dd255ca59bd9686006ed6ce  # lxd/project/permissions: Replace !shared.IsTrue with shared.IsFalseOrEmpty for restricted
+      git cherry-pick 197d049729b9a8799cf15d305e684fa9771be52a  # lxd/seccomp: Replace !shared.IsTrue with shared.IsFalseOrEmpty for syscall interception settings
+      git cherry-pick 96eac32ee2a06f2888dc70a41f056c0bba242d9e  # lxd/instance/drivers/driver/qemu: Replace !shared.IsFalse with shared.IsTrueOrEmpty for security.secureboot
+      git cherry-pick e1801ab2b8239076aa4c2cd0e736a46783fd91c6  # test: Adds check for negated shared.Is(True|False)*() function calls
+      git cherry-pick 0c251251aa89c22f6eeb1e7da4e5e2b1290f6104  # test: Exclude .git dir from static grep checks
+      git cherry-pick 2d04ece14eca1ba3bf6fa7ad3326c5b3a78dfebe  # test: Removes reference to non-existent package shared/subtest
+      git cherry-pick 4216bd7669a08d935229396960859ea8a27efa48  # lxd/db/generate: Fix bad loop logic
+      git cherry-pick 046daaadb100fee334dcf31c6582548b88e59702  # lxd/instance/lxc: Use contextual logger in Metrics
+      git cherry-pick e2078632962f59f99ac477ee3c523939ca6bf305  # doc: add Open Graph metadata
+      git cherry-pick f5b9380ed1e96e4ddb9be387d52b6c3a70ec6304  # doc: use bugfix for Open Graph Sphinx extension
+      git cherry-pick 43a5f6930935352a8529990002726fb3497757e9  # lxd/storage: Moves PathNameEncode and PathNameDecode to filesystem package
+      git cherry-pick b7704236790c8e7d839e7f47c50822c03e6eb303  # lxd/storage/drivers/driver/btrfs/volumes: filesystem.PathNameEncode usage
+      git cherry-pick 727e0335247cb80735eef9a0b401621cde8b5002  # lxd/device: filesystem.PathNameEncode and filesystem.PathNameDecode usage
+      git cherry-pick 435d99ad49f83f83381437dc6e328273b1b5c7fd  # lxd/dnsmasq/dnsmasq: Update dnsMasqEntryFileName to use storageDrivers.PathNameEncode to escape device name
+      git cherry-pick 10111aa90131f86fd8cc1b86c4fcebe932ad0644  # lxd/device/device/load: Update New to return device even if name validation fails
+      git cherry-pick 98772d492e7dd5b56accce303d464a3ff903e7b6  # shared/validate/validate: Relax IsDeviceName checks
+      git cherry-pick 98563080492cee673c8b6f279a092d3ce59c4930  # test: Adds missing device name validation tests
+      git cherry-pick bf63e9d279c41dc75acafb5269a69a52fe9508dc  # doc: fix Open Graph version
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
