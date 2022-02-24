@@ -1042,6 +1042,7 @@ parts:
       git cherry-pick f1c4a17e7df5d819b1b170917865e2e458c8e5db  # cgroups: log fd of newly created cgroup
       git cherry-pick 8ef019a6ce2555f7b438b3841ab5216e5d6973ba  # doc: Fix reverse allowlist/denylist in Japanese man page
       git cherry-pick 3b9f84fd2397d06782bbf67dc8421463c43ab139  # ttys: ensure container_ttys= env variable is set correctly
+      git cherry-pick 5ba5725cb4a210c25707beeca64fde5f561d1c71  # cgroups: modify cgroup2 attach logic
 
       set +ex
       snapcraftctl build
