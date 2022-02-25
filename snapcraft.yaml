@@ -377,6 +377,19 @@ parts:
     prime:
       - lib/libtpms*so*
 
+  liburing:
+    source: https://github.com/axboe/liburing
+    source-type: git
+    source-tag: liburing-2.1
+    source-depth: 1
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/liburing*so*
+
   libusb:
     source: https://github.com/libusb/libusb
     source-type: git
@@ -629,6 +642,7 @@ parts:
   qemu:
     after:
       - libseccomp
+      - liburing
       - libusb
       - spice-protocol
       - spice-server
@@ -656,6 +670,7 @@ parts:
       - --enable-libusb
       - --enable-usb-redir
       - --enable-linux-aio
+      - --enable-linux-io-uring
       - --enable-numa
       - --enable-pie
       - --enable-rbd
