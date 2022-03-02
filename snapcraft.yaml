@@ -1316,6 +1316,21 @@ parts:
       git cherry-pick 1fa99fb023824f6a840b89f77ad9aae8a31d290b  # lxd/device: Ensures device names are valid when validating config and instantiating.
       git cherry-pick 674d8fd1cb376ae8a7ee52373a294a8b2f6f8d7c  # shared/idmap: Add SysProcIDMap functions
       git cherry-pick 09fcd52bd4840b176af7666d5f2bb74c66165a71  # lxd/storage: Sync before snapshotting
+      git cherry-pick c5e04b9e12a9e7ca8f822c22ec5087bb3c6969b4  # lxd/main_forkfile: Replace with SFTP server
+      git cherry-pick f35df174ce795f79c194d386503cece7d400f4af  # lxd-agent: Replace file API with SFTP
+      git cherry-pick 001f1c842fb719c690bc369f0f53522ffcee00fc  # gomod: Add pkg/sftp
+      git cherry-pick 0b7e48f31db97aba2963a62b219fac8b96df6fbe  # lxd/instance: Add FileSocket to the interface
+      git cherry-pick f3789baa653f2d298f1d74a825f6c49295710ee6  # lxd/instance/lxc: Implement FileSocket
+      git cherry-pick df558f978906abd5b6bd9931e34b769cb5d23553  # lxd/instance/qemu: Implement FileSocket
+      git cherry-pick 0a90abcaa87b93eca97bfa874cf91dc8556d0c32  # lxd/instance: Add FileSFTP to the interface
+      git cherry-pick fc07c85eaf53328fc3ee7ec204ac662cbc0be41c  # lxd/instance/lxc: Implement FileSFTP
+      git cherry-pick 50fecbae71f6590dfbec84801b796199ddce1a27  # lxd/instance/qemu: Implement FileSFTP
+      git cherry-pick 7c6cd22e3a9469066425f19f855bdd7e3a54d699  # lxd/instance: Remove FilePull
+      git cherry-pick c089c05464628940c21127f8fc9ca940362882cc  # lxd/instance: Remove FileRemove
+      git cherry-pick 38fba3a7178673e3f83f63b9aea72b71071d5a3e  # lxd/instance: Remove FileExists
+      git cherry-pick 030013692aa63d36c75d9581763440a34aa3c98c  # lxd/instance: Remove FilePush
+      git cherry-pick 7fdf5f49670142ad7ad523ab342718d891c25bc9  # lxd/instance/lxc: Port to using FileSFTP
+      git cherry-pick 2c6c496da2b1e84f7f733850f7cbb5d26a7903f2  # lxd/instance_file: Port to SFTP
       git cherry-pick 042e39e97122de1a058555469ee3ea34c9b13e23  # shared/util: IsTrue description
       git cherry-pick 26d14889c674a24cc5209f632b383e72a2af69cc  # shared/util: Adds IsTrueOrEmpty function
       git cherry-pick 69e3604300fc0447aa9487bb15ca9eebbcad1fd3  # shared/util: IsFalse description
@@ -1329,6 +1344,7 @@ parts:
       git cherry-pick b1f59089db0b37c88d1adeef8924c8de49a8c69d  # lxd: Passes allowInconsistent from instanceCreateAsCopyOpts into pool.RefreshInstance.
       git cherry-pick 9c509cfd5a50b726e8d51658ba2275737ab7a3cd  # lxd/storage: Uses allowInconsistent in call to MigrateInstance on refresh.
       git cherry-pick 0f6b3425faadf1965235f401ea34f8b7c1c9fefb  # lxd/storage/filesystem: Add SyncFS
+      git cherry-pick 3557c540a5e1962037932643790cfa60b80ae31f  # lxd/storage: Use filesystem.Syncfs
       git cherry-pick b2abf251137166c49b90742ae5bd176212b95a28  # lxd/storage/drivers: Replace !shared.IsTrue with shared.IsFalse for rsync.compression option
       git cherry-pick 9be0c436d67c7fdc6c8e3047e589c65ef167b683  # lxd/storage/drivers/driver/ceph: Replace !shared.IsTrue with shared.IsFalse or shared.IsFalseOrEmpty
       git cherry-pick a58935799d7c900c39f11ae03f787855657ace13  # lxd/storage/drivers/driver/lvm: Replaces !shared.IsTrue with shared.IsFalse or shared.IsFalseOrEmpty
@@ -1371,6 +1387,78 @@ parts:
       git cherry-pick 98772d492e7dd5b56accce303d464a3ff903e7b6  # shared/validate/validate: Relax IsDeviceName checks
       git cherry-pick 98563080492cee673c8b6f279a092d3ce59c4930  # test: Adds missing device name validation tests
       git cherry-pick bf63e9d279c41dc75acafb5269a69a52fe9508dc  # doc: fix Open Graph version
+      git cherry-pick 4db8700edf658886c0216f693e81c08b7998114f  # lxd/dnsmasq: Adds staticAllocationDeviceSeparator const
+      git cherry-pick 5649ab42ef03cc9a2b76c82fc01b9d3184b104cb  # lxd/dnsmasq: Renames dnsMasqEntryFileName to StaticAllocationFileName
+      git cherry-pick 1b3ba8c619f062ce41b29632c9b81639c6d82767  # lxd/dnsmasq: StaticAllocationFileName usage
+      git cherry-pick dd02c31fd4955ce5720aaa44eae1596280d0c452  # lxd/dnsmasq: StaticAllocationFileName test
+      git cherry-pick ae0d91f6e0ab34a4f311334d2ae3465d81c5a09f  # lxd/dnsmasq: Removes Name and Static field and replaces with StaticFileName field
+      git cherry-pick 552adb7008b60cf597918c0f3ffab51a6c90a396  # lxd/dnsmasq: Updates DHCPStaticAllocation to just accept a deviceStaticFileName
+      git cherry-pick 913f36d94757fd75271b0fc8e870882994b416e6  # lxd/dnsmasq: Update DHCPAllAllocations to use StaticFileName field
+      git cherry-pick 30422230b31f6b81b2fbc901ed2aff34f32e732a  # lxd/dnsmasq: DHCPStaticAllocation usage
+      git cherry-pick 1912436c87b968ddfb8464ce766d7030842994bd  # lxd/dnsmasq/dhcpalloc: Updates getDHCPFreeIPv4 and getDHCPFreeIPv6 to accept deviceStaticFileName argument
+      git cherry-pick 5edb3b3840164853bff07ae085aaf35c66f6d9ba  # lxd/network/network/utils: dnsmasq.DHCPStaticAllocation updated usage with deviceStaticFileName
+      git cherry-pick d13944ed48788009dad07d616318fe00361b78b4  # lxd/device/nic/bridged: dnsmasq.DHCPStaticAllocation updated usage with deviceStaticFileName
+      git cherry-pick 231e9953ee38b6476a7176ee6edf5179cc062860  # lxd/apparmor: AppArmor support for extractors
+      git cherry-pick 41bd55bdb07fc9b114b6c6e92e1b2cdf8c7edc22  # lxd/archive: Add archive package
+      git cherry-pick 80cf29883e2b8c28349eee51915bdaf469d4134c  # shared/subprocess: Support for file descriptors
+      git cherry-pick 670bec0153a83d0cc2626a3b7f20613e85c0d3e6  # lxd/backup: AppArmor support for extractors
+      git cherry-pick 7247fd79be1bc54a20d8cb2c95dcba7971b32d4b  # lxd: AppArmor support for extractors
+      git cherry-pick 7ad0515ea36660dd656dcd6c28257fc8cbc93201  # lxd/storage/drivers: AppArmor support for extractors
+      git cherry-pick 1b0c0d2aa83a4293c4852d87cff1bf72c0dacefc  # lxd/storage: AppArmor support for extractors
+      git cherry-pick 27b5e25ecaf708118fc59c8ae84c3a194cc7ea27  # shared: Move Unpack to lxd/archive
+      git cherry-pick 84a1126b9f6b2c066e62d4b5e74129b47e2e275a  # lxd/db/warnings/types: Removes unused WarningTypes and population code
+      git cherry-pick 4b01f9e1d4d0915c6b857e86323592bad73d3217  # lxd/warnings: Renames ResolveWarningsOlderThan to ResolveWarningsByLocalNodeOlderThan
+      git cherry-pick 2d7304d3bb11396944e3d2c613f5f98fc1b3c6f4  # lxd/daemon: warnings.ResolveWarningsByLocalNodeOlderThan usage
+      git cherry-pick 377975255083ef8bf0e07d63bdc4084c9dfc737d  # lxd/warnings: Fix entityID logic bugs in resolve and delete functions
+      git cherry-pick e14b12782ff5ace2d133f737aa24cc5adff0a472  # lxd/db/query/dump: Add context param to query.Dump
+      git cherry-pick 40424fdaf2a268f3ba9fa834d428fce5f52b4416  # lxd/db/query/transaction: Add TransactionCtx
+      git cherry-pick fd4d7efc62d3b6eccbfc4cd6b1f49bec82b49aba  # doc: fix the footer
+      git cherry-pick 007cca12ed9a5f19e89390899cb92c2da148c9d3  # doc: Fix cert pathing in metrics.md
+      git cherry-pick 77419679a04ac770c1082c62ca11f04cfcc7f3eb  # doc/instances: Removes trailing whitespace
+      git cherry-pick 5c19122699e5edf73a3ad7877e741a9f5e68df44  # lxd/util/sys: Move RuntimeLiblxcVersionAtLeast to instance package
+      git cherry-pick 7f22ad3bce4dfec905a12fe40efa597bb67ecd9b  # lxd/util/sys: Move GetIdmapSet to shared/idmap
+      git cherry-pick c4d37e8c43111ab520c8666aaf62c409b5b94966  # lxd/db/generate: Add leftjoin support
+      git cherry-pick 30ea0d9709ac06db966763824386d6e7cd84531d  # lxd/db/generate: Adds coalesce support for joined fields
+      git cherry-pick 3e29be79e08d670a30921b2607d34b1c2defee12  # lxd/db/generate: Removes white space
+      git cherry-pick 8d80da4b01a4717a1e99a8005d60f2b691df620b  # lxd/db/generate/db/mapping: Adds WarningStatus and WarningType to column types
+      git cherry-pick 224787cbb67db9a858b7ee73bc9812ad9b2d592b  # lxd/db/generate/db/stmt: Update filter generation to use []string for where statement
+      git cherry-pick aa716ed4abd611071f9aefc7402b1f57d2d160d6  # lxd/db/generate/db/stmt: Ensure coalesced fields are fitered on their coalesced value
+      git cherry-pick e6bed9f04dab87a0dd46c1a4820c63dac1dcdff9  # lxd/db/warnings: Uses DB generator for warnings functions
+      git cherry-pick 28ef66040f12a06848f9ac532fb84840693b63c8  # lxd: tx.GetWarnings usage
+      git cherry-pick 9a44dd176acf5d5733c164325088cd081b3419aa  # lxd/instance/drivers/driver/common: tx.DeleteWarnings usage
+      git cherry-pick c2f52ed0cde4641c56af87734350b71f09bd3526  # lxd/db/warnings: Avoid duplication results in UpsertWarning
+      git cherry-pick 58130613f2a17a45108f70a1fae24b84401f9fd7  # lxd/instance/qemu: Properly wrap error
+      git cherry-pick aef10e4c1dec206c2f8e1726bb4d23421255c135  # lxd/instance: Introduce Info.Features
+      git cherry-pick d4ac80270e34b1a91f4139a48d59fd49ef628856  # lxd/instance/qemu: Add checkFeature
+      git cherry-pick 6c4fbf46a9495b892650697b6b651e074062948d  # lxd/instance/qemu: Detect and use io_uring
+      git cherry-pick b2645184c18aee2eacb76d25cca53c9ff2a45b54  # lxd/instance/drivers/driver/lxc: Remove duplicate import of github.com/lxc/lxd/lxd/storage
+      git cherry-pick 34f108fb7d61cff92595b4662528fedd9c0100fd  # lxd/instance/test: Fix inconsistent import name of github.com/lxc/lxd/lxd/storage
+      git cherry-pick 0dc9fb9b277cd94dbdf0114d5d8355e4339acfe9  # lxd/storage/utils: Adds logging to ImageUnpack
+      git cherry-pick 830fa7ab089a6a5ee867f2e4520483cc95e7f588  # lxd/apparmor/archive: Adds additional permissions for unsquashfs to apparmor profile
+      git cherry-pick c0796bddb9403c5104fce09f39724f2572640fce  # lxd/archive/archive: Don't use supplementary unpacker command
+      git cherry-pick 95bfccb16f0a1b7ce0b3bd301e2db24b7e910067  # lxd/archive/archive: Better return structure (golint)
+      git cherry-pick 6d2902d8abdee5b380959f78edff3674c0074577  # lxd/archive: Improve error and logging in Unpack
+      git cherry-pick 4df29b35ba797b9b808534cccf653f5c7cb0824a  # lxd/instance/drivers/driver/qemu: Fix VM support detection regression
+      git cherry-pick 460e741055581b4dc69e744ed0c6a3d3c0d89c90  # lxd/instance/qemu: Fix incorrect comment
+      git cherry-pick dcf8269200826302e5875834c06b9315520ea702  # lxd/instance/qemu: Disable io_uring on loop pools
+      git cherry-pick d1e0c78c37e8168d007448b449c8e0a7f9842d83  # lxd/instance/qemu: io_uring naming consistency
+      git cherry-pick e68e1d232096398fdc007a2b3cd9e0e18a44c4c3  # lxd/apparmor: Allow rw remount of /run
+      git cherry-pick e8768ac2e60c8933d7f807b2d74e127fd53bdc8c  # Add the Grafana dashboard (15726)
+      git cherry-pick db65b501ebe667a1fda555530bddd2b6ecafef3e  # shared/tcp/tcp/timeouts: Adds tcp package with functions for setting timeouts
+      git cherry-pick 2d60fdc8a21d49643bb53525e52bcd98cbe92d8f  # lxd: github.com/lxc/lxd/shared/tcp usage
+      git cherry-pick 602e6c38add577c4324ab1423c969f0ec99379c6  # lxd/util/net: Removes TCP timeout functions
+      git cherry-pick d96638ff08e52516a07b86a570abb2240b2539f3  # test: Wait longer for second node to be demoted
+      git cherry-pick ba506e12cbf13dddeec6bf5e227da4cca3a2edb0  # lxd/network/driver/common: Fix typos in errors
+      git cherry-pick 52ff26b3118d5a12e9eed20b42366c733038c2ea  # lxc/storage_volume: Fix list of default columns
+      git cherry-pick 4bd77b78c6cca07807695ff735464d250a0819e5  # lxd/warnings: Removes unused functions
+      git cherry-pick ea11624e4c6ba9c7bf11d2094391fd28dd4173c3  # lxd/network/driver/bridge: As network ID is globally unique, delete warnings by ID on delete
+      git cherry-pick 3b0f0f5ab407897236b463df7dc3b13b11fb9835  # lxd/networks: Removes duplicated warnings delete call
+      git cherry-pick 4d8a69225027fd2142db8913cbd8c25910d5c9c0  # lxd/network/driver/bridge: Don't refresh BGP prefixes during forward update
+      git cherry-pick acf9868878cb1c32e6d90c22f458e46c77e38c00  # lxd/bgp: Fix RemovePrefixByOwner when multiple matches
+      git cherry-pick 2c3745b67f0fbf2c438691376d46fc5383241313  # shared/tcp/tcp/timeouts: Adds support for using net.TCPConn directly with ExtractConn
+      git cherry-pick dc66d8c635e3681c0b7999847ed7aaac92914747  # client/lxd: Adds setURLQueryAttributes function
+      git cherry-pick 24379ad6354dedfcbc06f136ae85a90d20eee398  # lxd/instance/drivers/driver/qemu: Close connection on client error in FileSFTP
+      git cherry-pick 5fa983437cb2fa908d474a09dfdb6a9c64d3de8b  # lxd/instance/drivers/driver/lxc: Close connection on client error in FileSFTP
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
