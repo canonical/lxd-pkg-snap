@@ -1428,9 +1428,6 @@ parts:
       git cherry-pick 9a44dd176acf5d5733c164325088cd081b3419aa  # lxd/instance/drivers/driver/common: tx.DeleteWarnings usage
       git cherry-pick c2f52ed0cde4641c56af87734350b71f09bd3526  # lxd/db/warnings: Avoid duplication results in UpsertWarning
       git cherry-pick 58130613f2a17a45108f70a1fae24b84401f9fd7  # lxd/instance/qemu: Properly wrap error
-      git cherry-pick aef10e4c1dec206c2f8e1726bb4d23421255c135  # lxd/instance: Introduce Info.Features
-      git cherry-pick d4ac80270e34b1a91f4139a48d59fd49ef628856  # lxd/instance/qemu: Add checkFeature
-      git cherry-pick 6c4fbf46a9495b892650697b6b651e074062948d  # lxd/instance/qemu: Detect and use io_uring
       git cherry-pick b2645184c18aee2eacb76d25cca53c9ff2a45b54  # lxd/instance/drivers/driver/lxc: Remove duplicate import of github.com/lxc/lxd/lxd/storage
       git cherry-pick 34f108fb7d61cff92595b4662528fedd9c0100fd  # lxd/instance/test: Fix inconsistent import name of github.com/lxc/lxd/lxd/storage
       git cherry-pick 0dc9fb9b277cd94dbdf0114d5d8355e4339acfe9  # lxd/storage/utils: Adds logging to ImageUnpack
@@ -1438,10 +1435,7 @@ parts:
       git cherry-pick c0796bddb9403c5104fce09f39724f2572640fce  # lxd/archive/archive: Don't use supplementary unpacker command
       git cherry-pick 95bfccb16f0a1b7ce0b3bd301e2db24b7e910067  # lxd/archive/archive: Better return structure (golint)
       git cherry-pick 6d2902d8abdee5b380959f78edff3674c0074577  # lxd/archive: Improve error and logging in Unpack
-      git cherry-pick 4df29b35ba797b9b808534cccf653f5c7cb0824a  # lxd/instance/drivers/driver/qemu: Fix VM support detection regression
       git cherry-pick 460e741055581b4dc69e744ed0c6a3d3c0d89c90  # lxd/instance/qemu: Fix incorrect comment
-      git cherry-pick dcf8269200826302e5875834c06b9315520ea702  # lxd/instance/qemu: Disable io_uring on loop pools
-      git cherry-pick d1e0c78c37e8168d007448b449c8e0a7f9842d83  # lxd/instance/qemu: io_uring naming consistency
       git cherry-pick e68e1d232096398fdc007a2b3cd9e0e18a44c4c3  # lxd/apparmor: Allow rw remount of /run
       git cherry-pick e8768ac2e60c8933d7f807b2d74e127fd53bdc8c  # Add the Grafana dashboard (15726)
       git cherry-pick db65b501ebe667a1fda555530bddd2b6ecafef3e  # shared/tcp/tcp/timeouts: Adds tcp package with functions for setting timeouts
