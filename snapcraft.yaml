@@ -1155,22 +1155,23 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-4.0.12
+    source-tag: lxcfs-5.0.0
     build-packages:
       - libfuse-dev
       - libpam0g-dev
       - pkg-config
+      - python3-jinja2
     stage-packages:
       - fuse
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-      - --datarootdir=/snap/lxd/current/
+    plugin: meson
+    meson-parameters:
+      - --prefix=/
+      - --datadir=/snap/lxd/current/
       - --localstatedir=/var/snap/lxd/common/var/
     organize:
-      snap/lxd/current/lxc: lxc
-      snap/lxd/current/lxcfs: lxcfs
-      lib/lxcfs: lib
+      lib/*/lxcfs/liblxcfs.so: lib/
+      snap/lxd/current/lxc/config/common.conf.d/*: lxc/config/common.conf.d/
+      snap/lxd/current/lxcfs/: lxcfs/
     prime:
       - bin/fusermount
       - lib/*/libfuse.so.*
@@ -1178,19 +1179,8 @@ parts:
       - bin/lxcfs
       - lib/liblxcfs.so
 
-      - lxc
-      - lxcfs
-    override-build: |
-      set -ex
-
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-
-      set +ex
-      snapcraftctl build
-      set -ex
-
-      sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
+      - lxc/config/common.conf.d/00-lxcfs.conf
+      - lxcfs/
 
   lxd:
     source: https://github.com/lxc/lxd
