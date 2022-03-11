@@ -446,6 +446,17 @@ parts:
       - libreadline-dev
     stage-packages:
       - libjansson4
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick 18a08fb7f0443f8bde83393bd6f69e23a04246b3  # examples: compile with `make check' and add AM_CPPFLAGS
+
+      set +ex
+      snapcraftctl build
+      set -ex
     organize:
       sbin/: bin/
       usr/lib/: lib/
