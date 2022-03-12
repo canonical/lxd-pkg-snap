@@ -1192,6 +1192,22 @@ parts:
 
       - lxc/config/common.conf.d/00-lxcfs.conf
       - lxcfs/
+    override-build: |
+      set -ex
+
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick e532b47ab892107693145d3ac30ce6a6dc1de9d6  # lxcfs_fuse: ensure lxcfs_fuse_compat.h is included after including fuse header
+      git cherry-pick 5aff2eb2c54372fbee20a9a9c2b2730fb40625f5  # tree-wide: remove struct stat argument from DIR_FILLER and make it static inline
+      git cherry-pick 02fa563b9fc2fceca1a9db1d4b316f7ddd59ce0e  # tree-wide: ensure that file information is set even with legacy fuse
+      git cherry-pick e1f2baff28b0355d3f6b77304ae564e36bc14132  # tests: add test for issue #522
+      git cherry-pick 83d9dee735625f8d2db4e1cef483cbf5a8d8ee80  # meson: Include documentation
+      git cherry-pick 9ec9ae9849e6cbafa99611fe4103c940038f2322  # workflows: disable documentation generation
+
+      set +ex
+      snapcraftctl build
+      set -ex
 
   lxd:
     source: https://github.com/lxc/lxd
