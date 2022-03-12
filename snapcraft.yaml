@@ -1245,6 +1245,18 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 67f4f8c208ff0ec66232b153984e9d91ab8a53c3  # fix typo
+      git cherry-pick 1c08d645b81c447528f5ef0761d5e3983f2bde86  # lxc/file: Update the description in lxc file mount
+      git cherry-pick f31c2e32caac2da77cc6d2ff38e4b657d86e4e89  # i18n: Update translation templates
+      git cherry-pick 7bf9269b15ef7c32b430a84fbd8438c497938e99  # sphinx: Don't pin dependencies
+      git cherry-pick 6c23c249fac4c6533d0be1989c2472ff19089127  # lxd/db: Support for expiry_date in GetLocalStoragePoolVolumeSnapshotsWithType
+      git cherry-pick 7c90bcacbf1c9d8011eff1db9174599adb3f98ea  # lxd: Support for expiry date in storagePoolVolumeSnapshotsTypeGet
+      git cherry-pick 505ebf72d1d829b27d9250a2c4ac42ff4627c10e  # lxd: Warn if exec control connection disconnects prematurely
+      git cherry-pick faa3c2c62dc2cf99eb90924d9ca9aae19485ec99  # lxd/cluster/heartbeat: Ensure g.Cluster is available
+      git cherry-pick f0fa7901ccce81c1a8b4060ce6773b8e4fded424  # client/lxd: Add 5 second handshake timeout to websocket.Dialer
+      git cherry-pick 08be1492c02c436e03b9889c98fa6b2ecf23b3a0  # lxd: Add 5 second handshake timeout to websocket.Dialer
+      git cherry-pick 3520544925880d9a0fbd93fc0c2afb7dbbc3d9f3  # test: Add 5 second handshake timeout to websocket.Dialer
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
