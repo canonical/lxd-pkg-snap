@@ -1179,6 +1179,8 @@ parts:
       - --prefix=/
       - --datadir=/snap/lxd/current/
       - --localstatedir=/var/snap/lxd/common/var/
+      - -Ddocs=false
+      - -Dtests=false
     organize:
       lib/*/lxcfs/liblxcfs.so: lib/
       snap/lxd/current/lxc/config/common.conf.d/*: lxc/config/common.conf.d/
@@ -1195,6 +1197,8 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
+      cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
