@@ -1453,6 +1453,10 @@ parts:
       git cherry-pick dc66d8c635e3681c0b7999847ed7aaac92914747  # client/lxd: Adds setURLQueryAttributes function
       git cherry-pick 24379ad6354dedfcbc06f136ae85a90d20eee398  # lxd/instance/drivers/driver/qemu: Close connection on client error in FileSFTP
       git cherry-pick 5fa983437cb2fa908d474a09dfdb6a9c64d3de8b  # lxd/instance/drivers/driver/lxc: Close connection on client error in FileSFTP
+      git cherry-pick faa3c2c62dc2cf99eb90924d9ca9aae19485ec99  # lxd/cluster/heartbeat: Ensure g.Cluster is available
+      git cherry-pick f0fa7901ccce81c1a8b4060ce6773b8e4fded424  # client/lxd: Add 5 second handshake timeout to websocket.Dialer
+      git cherry-pick 08be1492c02c436e03b9889c98fa6b2ecf23b3a0  # lxd: Add 5 second handshake timeout to websocket.Dialer
+      git cherry-pick 3520544925880d9a0fbd93fc0c2afb7dbbc3d9f3  # test: Add 5 second handshake timeout to websocket.Dialer
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
