@@ -1272,6 +1272,22 @@ parts:
       git cherry-pick f0fa7901ccce81c1a8b4060ce6773b8e4fded424  # client/lxd: Add 5 second handshake timeout to websocket.Dialer
       git cherry-pick 08be1492c02c436e03b9889c98fa6b2ecf23b3a0  # lxd: Add 5 second handshake timeout to websocket.Dialer
       git cherry-pick 3520544925880d9a0fbd93fc0c2afb7dbbc3d9f3  # test: Add 5 second handshake timeout to websocket.Dialer
+      git cherry-pick dfbecd407954dd698a56a57605e4ff9533bacef6  # lxd/db: Add snapshot id to return value in GetExpiredStorageVolumeSnapshots
+      git cherry-pick 1858a938e5241165d42c3200be4ee8422f28f9a7  # lxd/storage: Prevent concurent snapshot for a volume
+      git cherry-pick c1bfbe3270337b2dec325aac905fa5b644f618ef  # lxd: Prevent concurent snapshot expiry for a volume
+      git cherry-pick 8483ddbe516b12bda5c600d3f06bcc0e88df217c  # lxd/instance_sftp: Handle projects on forward
+      git cherry-pick 210073e632e635759b48f189e822085069f9f9d3  # client: Use DialTLS for SFTP connections
+      git cherry-pick 614f36c1c6ed3ae38aab3cbbd8832c8d2a75dbd1  # client: Replace addMacaroonHeaders with addClientHeaders function
+      git cherry-pick 5981c102fb3b4cdd90de60c65a27297d95ffdd08  # client/lxd: Removes duplicated header setting in rawQuery
+      git cherry-pick ddb9d83dd10f3228a646476e8449c176e0f4a44f  # client: Replaces r.httpHost with r.httpBaseURL from net/url package
+      git cherry-pick 68e2d7549a8631a6723f1efa983d68d13b7fc601  # test: Fix container devices nic bridged filtering tests on recent versions of nftables
+      git cherry-pick aea8e1344582b9a636ca5e6e664a2abb91522088  # client/lxd/instances: Avoids connecting twice in rawSFTPConn
+      git cherry-pick f487fce337cffe795e7218dbc4e78bc5e3383e5a  # test: Update file manipulation tests to use projects
+      git cherry-pick 38fc39da220f524995cdc4d4dc8b0eb20b13897e  # lxd/instance: Improve var naming and comments related to pruneExpiredInstanceSnapshots
+      git cherry-pick 384e35bde96ed5da00ec5bdd9ba9d0b5810b7105  # lxd/storage/volumes/snapshot: Improve var naming and comments related to pruneExpiredCustomVolumeSnapshots
+      git cherry-pick 4dc4d89016456735042129a6f0227da896089879  # lxd/instance/drivers/driver/lxc: Create log path for forkfile if missing in FileSFTPConn
+      git cherry-pick 19efaaf3875fa3de2caff73bc3e975da0b73b2eb  # lxd/instance/drivers/driver/lxc: Clean up forkfile.pid on exit
+      git cherry-pick d729fa2f929f147657bdbc420ef1b6640e6c639d  # lxd/cluster/upgrade: Improve logging in triggerUpdate
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
