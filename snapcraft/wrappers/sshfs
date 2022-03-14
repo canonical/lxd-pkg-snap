@@ -11,6 +11,22 @@ CMD="$(basename "${0}")"
 unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
+FOUND=0
+for path in $(echo ${PATH} | tr ':' '\n'); do
+    if [ -e "/var/lib/snapd/hostfs${path}/sshfs" ]; then
+         FOUND=1
+	 break
+    fi
+done
+
+if [ "${FOUND}" = "0" ]; then
+    echo "" >&2
+    echo "sshfs couldn't be found on the system." >&2
+    echo "Install sshfs or use the --connection option instead." >&2
+    echo "" >&2
+    exit 1
+fi
+
 shift 2
 SRC="${1}"
 shift
