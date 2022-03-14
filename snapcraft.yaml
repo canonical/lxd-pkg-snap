@@ -1388,3 +1388,4 @@ parts:
       hooks/: snap/hooks/
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/
+      wrappers/sshfs: bin/
