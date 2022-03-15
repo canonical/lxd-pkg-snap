@@ -1151,6 +1151,20 @@ parts:
       - usbutils
       - xdelta3
     plugin: nil
+    override-pull: |
+      snapcraftctl pull
+      set -ex
+
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
+
+      # Setup the GOPATH
+      rm -Rf "${GOPATH}"
+      mkdir -p "${GOPATH}/src/github.com/lxc"
+      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
+
+      # Download the dependencies
+      go get -d -v ./...
     override-build: |
       set -ex
 
@@ -1164,14 +1178,6 @@ parts:
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
-
-      # Setup the GOPATH
-      rm -Rf "${GOPATH}"
-      mkdir -p "${GOPATH}/src/github.com/lxc"
-      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
-
-      # Download the dependencies
-      go get -d -v ./...
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/lxc/lxd/lxc
@@ -1222,6 +1228,15 @@ parts:
     build-snaps:
       - go
     plugin: nil
+    override-pull: |
+      snapcraftctl pull
+      set -ex
+
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
+
+      # Download the dependencies
+      go get -d -v ./...
     override-build: |
       set -ex
 
@@ -1229,9 +1244,6 @@ parts:
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
-
-      # Download the dependencies
-      go get -d -v ./...
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
