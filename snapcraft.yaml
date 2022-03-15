@@ -737,6 +737,7 @@ parts:
       - libusbredirhost1
       - libusbredirparser1
     override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       set -ex
       git clone https://gitlab.com/qemu/qemu . -b v6.1.1
     override-build: |-
