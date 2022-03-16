@@ -11,6 +11,9 @@ for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMO
     nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
 
+# Unmount lxcfs.
+umount -l "${SNAP_COMMON}/var/lib/lxcfs/" 2>&1 || true
+
 # Stop workaround unit
 nsenter -t 1 -m systemctl stop snap.lxd.workaround >/dev/null 2>&1 || true
 
