@@ -1288,6 +1288,24 @@ parts:
       git cherry-pick 4dc4d89016456735042129a6f0227da896089879  # lxd/instance/drivers/driver/lxc: Create log path for forkfile if missing in FileSFTPConn
       git cherry-pick 19efaaf3875fa3de2caff73bc3e975da0b73b2eb  # lxd/instance/drivers/driver/lxc: Clean up forkfile.pid on exit
       git cherry-pick d729fa2f929f147657bdbc420ef1b6640e6c639d  # lxd/cluster/upgrade: Improve logging in triggerUpdate
+      git cherry-pick 897846e0572ac89992b898d278ea0f2665f6b2bf  # lxc/file: Use random auth creds if --no-auth and --auth-user flags not specified
+      git cherry-pick b2d6ee2e0bc58d32c9bb86f271c9c0d963fcf0c8  # test: Update SSH SFTP tests
+      git cherry-pick b72f165662a2dd8cb4a62ff5d19e6f4f9d772de9  # tests/includes: Adds util to wait for DAD to complete.
+      git cherry-pick dfaa60d5092997faf43b7252ddfb26eeb8a5bc2a  # tests: Uses wait_for_dad util instead of sleep.
+      git cherry-pick 6fab1cfb117b847cc1695303206f5a5dd83d8a7e  # doc: restrict docutils version to fix parsing of notes
+      git cherry-pick 765dfb6b078e9cd05b8ee08933f0c201df4281d9  # lxd/bgp: Handle multiple matches in RemovePrefix
+      git cherry-pick b6899ae3e1df65cfc077069d9dbe21b9ef0120ec  # lxd/bgp: Fix issue with modifying paths list while iterating
+      git cherry-pick cd20319e3c81d241484b3eb2ca757b4bf62b520a  # lxd/bgp: Don't fail on missing path
+      git cherry-pick a65680b0a2cbc5e095fcfa14ad67054eef270574  # doc: add an extension for including YouTube links
+      git cherry-pick ddabb22933febfc49d8c4e18025ec35354384566  # doc: add related YouTube links
+      git cherry-pick 9af02960e1f34d06299dc76369eb2ec12a65f55d  # lxd/daemon: Adds kernelVersion to daemon struct
+      git cherry-pick 0eb84cdc44c76995c9a78041ec846342e5b0a4b3  # lxd/state/state: Adds KernelVersion field to State structure
+      git cherry-pick 0bcb7150cf9e815ace9698d21d8b65f8c06be125  # lxd/instance/drivers/driver/qemu: Use d.state.KernelVersion
+      git cherry-pick 9645fa004fe336d3f5cd2f740154badb9ce46a6c  # lxd/instance/drivers/driver/qemu: Only enable io_uring support in kernels <= 5.13.0
+      git cherry-pick 0c8a593af091554912bf6c257fe6782425f2a1f4  # lxd/cgroup/abstractions: Wrap parse errors to give context of problematic value
+      git cherry-pick 0cf99ea1e9c1614fbe304b15e23b31eb755d5a79  # lxd/storage/utils: Prevent white space in storage pool names
+      git cherry-pick f8c0262dd3487e0770b0b036f4c883d5706480a3  # doc: update YouTube extension to be ignored by OpenGraph
+      git cherry-pick 3fecdbaa6eed5c0ed4e06c1c682c8f2def5ff424  # doc: open YouTube links in a new window
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
