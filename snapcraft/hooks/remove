@@ -7,12 +7,9 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
 fi
 
 # Unmount potential LXD paths.
-for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMON}/ns"; do
+for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMON}/ns" "${SNAP_COMMON}/var/lib/lxcfs/"; do
     nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
-
-# Unmount lxcfs.
-umount -l "${SNAP_COMMON}/var/lib/lxcfs/" 2>&1 || true
 
 # Stop workaround unit
 nsenter -t 1 -m systemctl stop snap.lxd.workaround >/dev/null 2>&1 || true
