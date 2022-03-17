@@ -1306,6 +1306,13 @@ parts:
       git cherry-pick 0cf99ea1e9c1614fbe304b15e23b31eb755d5a79  # lxd/storage/utils: Prevent white space in storage pool names
       git cherry-pick f8c0262dd3487e0770b0b036f4c883d5706480a3  # doc: update YouTube extension to be ignored by OpenGraph
       git cherry-pick 3fecdbaa6eed5c0ed4e06c1c682c8f2def5ff424  # doc: open YouTube links in a new window
+      git cherry-pick 762d962ddc0263c7ffef55f8ed4c47ed3ef7f20e  # lxd/instance/lxc: Handle long forkfile socket paths
+      git cherry-pick 8258a7b679949f0eda5177dcff1c12a56940fcf2  # lxd/cluster: Don't mask lack of cluster response
+      git cherry-pick 783de56c5c4d6be78e625b246ed8d89b6c97458f  # lxc/file: Ensure sshfs closes on exit request
+      git cherry-pick 7e772a34c80d9b4a7b2cca46e9b7e453121b77cf  # lxd/response/upgrade: Adds Upgrade function to upgrade an HTTP connection
+      git cherry-pick fe7cd5477829e289ef5113e0eb198ef5919359b3  # lxd-agent/sftp: response.Upgrade usage
+      git cherry-pick 18a66eaa8f1a6b2424636309288b03e874889592  # lxd/cluster/gateway: response.Upgrade usage
+      git cherry-pick 4c862810c44e04767f9be1cd2023fa7b67b116a3  # lxd/instance/sftp: response.Upgrade usage
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
