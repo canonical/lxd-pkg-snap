@@ -1293,6 +1293,9 @@ parts:
       git cherry-pick b72f165662a2dd8cb4a62ff5d19e6f4f9d772de9  # tests/includes: Adds util to wait for DAD to complete.
       git cherry-pick dfaa60d5092997faf43b7252ddfb26eeb8a5bc2a  # tests: Uses wait_for_dad util instead of sleep.
       git cherry-pick 6fab1cfb117b847cc1695303206f5a5dd83d8a7e  # doc: restrict docutils version to fix parsing of notes
+      git cherry-pick d77599353e1709829714c41daa2239979b9a0a2c  # lxd/firewall: Accept slices of IPv4 and IPv6 networks for bridge filter.
+      git cherry-pick 2b8473e0360a586c8279c20926c5472a4a4302f7  # lxd/device: Adds function to calculate allowed IPv4 and IPv6 subnets.
+      git cherry-pick a7986dffce98e18e32b9fb9a77b72f598dccfc35  # lxd/device: Use allowedIPNets to set up the firewall rules.
       git cherry-pick 765dfb6b078e9cd05b8ee08933f0c201df4281d9  # lxd/bgp: Handle multiple matches in RemovePrefix
       git cherry-pick b6899ae3e1df65cfc077069d9dbe21b9ef0120ec  # lxd/bgp: Fix issue with modifying paths list while iterating
       git cherry-pick cd20319e3c81d241484b3eb2ca757b4bf62b520a  # lxd/bgp: Don't fail on missing path
@@ -1308,6 +1311,18 @@ parts:
       git cherry-pick 3fecdbaa6eed5c0ed4e06c1c682c8f2def5ff424  # doc: open YouTube links in a new window
       git cherry-pick 762d962ddc0263c7ffef55f8ed4c47ed3ef7f20e  # lxd/instance/lxc: Handle long forkfile socket paths
       git cherry-pick 8258a7b679949f0eda5177dcff1c12a56940fcf2  # lxd/cluster: Don't mask lack of cluster response
+      git cherry-pick df443132d9feaff9d8865c041265ec09faae015f  # lxd/device: Use allowedIPNets when clearing firewall rules.
+      git cherry-pick 19349bd6783b4863771dfa13513567249a5ba425  # lxd/firewall/drivers: Fix typo in comment.
+      git cherry-pick de4ffdfdd42d683bb26ace258237c98ecff80650  # lxd/firewall/drivers: Adds subnetMask and subnetHexPrefix utils.
+      git cherry-pick 87fc07b82c5b1d4ff8df7e9ce2c1859cadadfe12  # lxd/firewall/drivers: Update ebtable and ip6table rule generation.
+      git cherry-pick b98ccccac0fa742d536c2816a960606d6808b871  # lxd/firewall/drivers: Update ebtables rule matching logic.
+      git cherry-pick 84b7f1c6b6a53602dfd09d1f9d54034a1ff1a375  # tests: Ensure firewall does not drop packets from within ipv4.routes.
+      git cherry-pick 727ae92180410f57d3886812fc568bc18d6e4b0e  # tests: Corrects host IP in IPv6 tests.
+      git cherry-pick d6060467bb62024681529244748772f5b2a7ea46  # tests: Change address of ipv6 network interface.
+      git cherry-pick 71b17f1d4620bc8419b917c3739ee409635ac117  # tests: Tests ipv6.routes and ipv6.routes.external rules.
+      git cherry-pick 0e2873833b68f1cb140a358496b8d7905712eef1  # lxd/firewall/drivers: Updates nftables bridge filter to accept multple subnets.
+      git cherry-pick 014ab107c1b1c49433300b97505b08d9afde0fa7  # lxd/firewall/drivers: Remove FilterAllIPv{n} consts.
+      git cherry-pick 9cfa1b564776978a3a76dc85c703f38a9d8744ca  # tests: Updates tests for new nftables rules.
       git cherry-pick 783de56c5c4d6be78e625b246ed8d89b6c97458f  # lxc/file: Ensure sshfs closes on exit request
       git cherry-pick 7e772a34c80d9b4a7b2cca46e9b7e453121b77cf  # lxd/response/upgrade: Adds Upgrade function to upgrade an HTTP connection
       git cherry-pick fe7cd5477829e289ef5113e0eb198ef5919359b3  # lxd-agent/sftp: response.Upgrade usage
