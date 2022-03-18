@@ -1121,6 +1121,9 @@ parts:
 
       sed -i "s#\${LXC_ROOTFS_MOUNT}/var/snap/lxd/common/var/lib/lxcfs/#\${LXC_ROOTFS_MOUNT}/var/lib/lxcfs/#g" $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook
 
+    override-build: |
+      snapcraftctl build
+
       patch -p1 $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${SNAPCRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
