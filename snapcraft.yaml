@@ -144,6 +144,20 @@ hooks:
       - system-observe
 
 parts:
+  # Workarounds
+  pull-meson-early:
+    source: snapcraft/empty
+    override-build: |
+      # No-op
+      true
+    override-stage: |
+      # No-op
+      true
+    plugin: nil
+    override-pull: |
+      # Fetch meson early to cause all downloads at the beginning of the build.
+      python3 -m pip install -U meson
+
   # Dependencies
   btrfs:
     source: snapcraft/empty
