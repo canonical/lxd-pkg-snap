@@ -1261,6 +1261,7 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 599dd2280553f816b945ebf5a128a6fc690a5219  # shared/util/linux: only complain on xattr size increase
       git cherry-pick 67f4f8c208ff0ec66232b153984e9d91ab8a53c3  # fix typo
       git cherry-pick 1c08d645b81c447528f5ef0761d5e3983f2bde86  # lxc/file: Update the description in lxc file mount
       git cherry-pick f31c2e32caac2da77cc6d2ff38e4b657d86e4e89  # i18n: Update translation templates
@@ -1328,6 +1329,68 @@ parts:
       git cherry-pick fe7cd5477829e289ef5113e0eb198ef5919359b3  # lxd-agent/sftp: response.Upgrade usage
       git cherry-pick 18a66eaa8f1a6b2424636309288b03e874889592  # lxd/cluster/gateway: response.Upgrade usage
       git cherry-pick 4c862810c44e04767f9be1cd2023fa7b67b116a3  # lxd/instance/sftp: response.Upgrade usage
+      git cherry-pick ba2017dfab461dba5c2c2f37512380802b3832a6  # lxd/storage: Renames setupStorageDriver to storageStartup
+      git cherry-pick 44810558f7b6ffdd8c8976f6cf2ae010ff0ddcfb  # lxd: storageStartup usage
+      git cherry-pick d4e8731f60685c5632accf3edbbf0473acbbce9c  # lxd/storage: Comment consistency with networkStartup
+      git cherry-pick 7c6b3708777c52727becf2f4a9aedeb0755303c7  # lxd/networks: Corrects comment copy/paste error
+      git cherry-pick 4727d032545d7c1251ee114f31eda4da36ba4e24  # lxd/device/config/devices: More efficient allocations
+      git cherry-pick 8dbc36a45b396fbd2fc7b7788ba9dc4f95252d77  # lxd/device/device/interface: Adds PreStartCheck
+      git cherry-pick 0f593f5952ab711aa98d93ea0ba4f0d88b2c8373  # lxd/device/device/common: No-op PreStartCheck
+      git cherry-pick 57090863b1c06dd38d7e9de2e00da330b6ffeeee  # lxd/device/disk: Adds PreStartCheck function to check if storage pool is available
+      git cherry-pick c5f42fb2e5b444fba9ede2cedba2c713b1b9dee0  # lxd/device/disk: Included wrapped error in diskSourceNotFoundError
+      git cherry-pick e661c1fa00e68d8c092091274dd0937b21641433  # lxd/instance/drivers: Expand start up validation to check for root disk storage pool availability
+      git cherry-pick ff2606e05e545df35a68e1538202dbb1c1d732a3  # lxd/storage/load: Replaces UnavailablePools with IsAvailable
+      git cherry-pick a5fbb60432ccdf14a044b38bed6ce9d5e2aa4ade  # lxd/storage/errors: Removes unused ErrPoolUnavailable error var
+      git cherry-pick 7071e0214fe33ca9f962e47e94f3706915806272  # lxd/storage/backend/lxd: IsAvailable usage
+      git cherry-pick 7062ea7b4f7c5ba3dd179f3f6006c13616679f60  # lxd/storage/backend/lxd: Replaces use of ErrPoolUnavailable with generic http.StatusServiceUnavailable
+      git cherry-pick c34318c5980f8c411d3c04ef1e1115ea135a007a  # lxd/instances: Prevent concurrent running of instancesStart
+      git cherry-pick df02fd047d1ab6070d036cf3157841c332f157e3  # lxd/instances: Updates instancesStart to detect http.StatusServiceUnavailable error class
+      git cherry-pick 8b448b0e4f8f2df6f5797e52c94899e920cc4463  # lxd/instance/drivers: Call device.PreStartcheck() from deviceStart()
+      git cherry-pick 73e69581e237776a3485d6be90da919a3b0b0d23  # lxd/instance/drivers: Use device rather than devName in contextual logging
+      git cherry-pick c4ad1f2268f10596dd3b212e55ee23788827c48a  # lxd/instance/drivers/driver/qemu: Log project and instance name in getAgentMetrics
+      git cherry-pick 76c995bd309862fa078efa3a2b9be1880f0e07b2  # lxd/storage: Increase log warnings to errors in storageStartup
+      git cherry-pick 96273bb2c5ca7283d2ed3d53a701e3ac547e4d9b  # lxd/device/device/interface: Adds Name and Config to Device interface
+      git cherry-pick 2e47788da24b79baf7a621836127022a696680d3  # lxd/instance/drivers/driver/lxc: Update deviceLoad to just return Device
+      git cherry-pick ca3d6f5e8634e7c0262d46fd330e4573e675dd48  # lxd/instance/drivers/driver/lxc: Updates lxcCreate to use deviceLoad and deviceAdd
+      git cherry-pick 57d7a578c0bf4e886b60fd52dd4c628813761cf6  # lxd/instance/drivers/driver/lxc: Updated usage of deviceLoad
+      git cherry-pick fe3c9cb424967abc93220d49df3193eeb8482e70  # lxd/instance/drivers/driver/lxc: Updates deviceAdd to accept a device
+      git cherry-pick c66645a40ecfeab4dbfbc517f06b06357425a520  # lxd/instance/drivers/driver/lxc: Updates deviceStart to accept a device
+      git cherry-pick 013cb4726ba827be305a6cf156ba41b04133ee74  # lxd/instance/drivers/driver/lxc: Adds Adding device log message
+      git cherry-pick af1f3cc21693ef03430c6d233699d62ceb32457c  # lxd/instance/drivers/driver/lxc: Updates startCommon to use deviceLoad and deviceStart separately
+      git cherry-pick 07c383eef93e892ea8e06d6125017ba414a8fab0  # lxd/instance/drivers/driver/lxc: Updates updateDevices to use deviceLoad and deviceAdd/deviceUpdate separately
+      git cherry-pick cab9aeaf6a3a4c98dcbea211878fa1eddaabab8b  # lxd/instance/drivers/driver/qemu: Update deviceLoad to just return Device
+      git cherry-pick 5f416f83f1cb2ea4575e14d4a5fee44d8432638f  # lxd/instance/drivers/driver/qemu: d.deviceLoad usage
+      git cherry-pick 6e1149bc59890759517834461a5e0c520f6450cb  # lxd/instance/drivers/driver/qemu: Adds Adding device log message
+      git cherry-pick cf749f3fa7ba7f41a849cccfd1613755f7e4b8aa  # lxd/instance/drivers/driver/qemu: Adds Removing device log message
+      git cherry-pick e09fae0efa0c232933adf383f1d6f70983350c6c  # lxd/instance/drivers/driver/qemu: Update deviceAdd to accept a device
+      git cherry-pick 93306f2f829c2c8611e280898ec4037d61d5fea9  # lxd/instance/drivers/driver/qemu: Updates qemuCreate to use deviceLoad and deviceAdd
+      git cherry-pick 89eb8ebe2af637de4872209fb37a5d6da6e926f8  # lxd/instance/drivers/driver/qemu: Updates updateDevices to use deviceLoad and deviceAdd/deviceUpdate separately
+      git cherry-pick af7b1fefa3e0602469a4ff80c46df1eef53331b8  # lxd/isntance/drivers/driver/qemu: Updates deviceStart to accept a device
+      git cherry-pick 5c95862b6650e713e88c41912722843a3c338866  # lxd/instance/drivers/driver/qemu: deviceStart usage
+      git cherry-pick 15ace962a4e431673bcb8817beb8b845c64e4c01  # lxd/instance/drivers: Load all devices before starting them during instance start
+      git cherry-pick 979248df7c2e214216286cf2da0acc1548b3f381  # lxd/instance/drivers: Add pre-start device checks when starting instance devices
+      git cherry-pick 867fb48fda0005b919c115a5a3fc3a736e207dba  # lxd/instance/drivers/driver/lxc: Update deviceStop to accept a device
+      git cherry-pick 589cb6d46c33d1a642bcaeccd735d6a1d2dba835  # lxd/instance/drivers/driver/lxc: Update startCommon to pass device to d.deviceStop
+      git cherry-pick a3b562d56038861097f6c51c1b1ac5a20393d357  # lxd/instance/drivers/driver/lxc: Updates cleanupDevices to pass device to d.deviceStop
+      git cherry-pick 3ba68d9585e8cb5dd7cd8b6de6427f87f4aadb80  # lxd/instance/drivers/driver/lxc: Updates updateDevices to pass device to d.deviceStop
+      git cherry-pick b72bece1f6582a7600bf37b39366e11dbc7f752b  # lxd/instance/drivers/driver/qemu: Updates deviceStop to accept device
+      git cherry-pick cd468c6ac3310a9a5005f469d60838198547a64b  # lxd/instance/drivers/driver/qemu: Update Start to pass device to deviceStop
+      git cherry-pick a86b560d5ac6c6ea87dcb6d4a383a04d4b9b2835  # lxd/instance/drivers/driver/qemu: Updates updateDevices to pass device to deviceStop
+      git cherry-pick 3c6cdd02154fd910dcfb4a7a9d4274c2a21d1ca4  # lxd/instance/drivers/driver/qemu: Updates cleanupDevices to pass device to deviceStop
+      git cherry-pick 76bd2c3b1f004c96e625866f1ca88438037fb14b  # lxd/response/smart: Adds IsNotFoundError function
+      git cherry-pick c1c87b6fe8da00185320a4c86352b08f370fc7ae  # lxd: Replace checks for various not found errors with response.IsNotFound() usage
+      git cherry-pick d0661a706e2b0dbfb3eb33e7895ef0f907c1a001  # lxd/storage/backend/lxd: Replaces bespoke revert with revert package
+      git cherry-pick 1b8bd80545b8965ac7bb6fdb094777821f150f40  # doc/environment: Adds LXD_IDMAPPED_MOUNTS_DISABLE env var
+      git cherry-pick 2dd411d41216d0c91ade95d95a3899341d658176  # lxd/daemon: Detect LXD_IDMAPPED_MOUNTS_DISABLE env var and disable idmapped mount support
+      git cherry-pick 3d87b4ac4c5aec9b7151aa42ba194fb62fb273ba  # lxd/storage/utils: Adds VolumeDBDelete function
+      git cherry-pick f414673e802111277e69bce1cdbefc444970048b  # lxd/storage/backend/lxd: Replace usage of RemoveStoragePoolVolume with VolumeDBDelete
+      git cherry-pick 3676ab9ac823623ab10c1f55524b314b74ca4b16  # lxd/storage/utils: Reduce arguments of VolumeDBCreate in style of VolumeDBDelete
+      git cherry-pick 6782ca24d1e61aae7d6c6cf3702ddbd2d8650256  # lxd/storage/backend/lxd: VolumeDBCreate usage
+      git cherry-pick 935f43f12da483ae2a0c9a3acf5212fa4b4f5772  # doc: add an extension for adding Discourse links
+      git cherry-pick d60e2e7a1684e62cdac2fe1b0178aab0772a753e  # doc: add links to tutorials on Discourse
+      git cherry-pick 71951e8af60af1e5686a86bc6373c9efd41ed343  # doc: add links to specifications on Discourse
+      git cherry-pick 39a8f2e929c001c6e1bd8884a962180d353937dd  # lxd/network/ovn: Don't use HostPathFollow on OVN configs
+      git cherry-pick 51eaa589f799d8814ed3fe0af6b8a6995c3daa2b  # lxd-agent: cleaner shutdown sequence
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
