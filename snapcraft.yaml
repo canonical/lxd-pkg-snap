@@ -49,6 +49,10 @@ description: |-
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
 
+contact: lxc-devel@lists.linuxcontainers.org
+issues: https://github.com/lxc/lxd/issues
+source-code: https://github.com/lxc/lxd
+website: https://linuxcontainers.org/lxd
 confinement: strict
 
 apps:
