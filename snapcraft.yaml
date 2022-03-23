@@ -44,6 +44,10 @@ description: |-
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
 
+contact: lxc-devel@lists.linuxcontainers.org
+issues: https://github.com/lxc/lxd/issues
+source-code: https://github.com/lxc/lxd
+website: https://linuxcontainers.org/lxd
 confinement: strict
 
 apps:
