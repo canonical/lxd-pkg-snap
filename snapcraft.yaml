@@ -34,7 +34,7 @@ description: |-
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
    - daemon.debug: Increase logging to debug level [default=false]
-   - daemon.group: Set group of users that can interact with LXD [default=lxd]
+   - daemon.group: Set group of users that have full control over LXD [default=lxd]
    - daemon.preseed: Pass a YAML configuration to `lxd init` on initial start
    - daemon.syslog: Send LXD log events to syslog [default=false]
    - lvm.external: Use the system's LVM tools [default=false]
