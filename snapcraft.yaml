@@ -1424,6 +1424,39 @@ parts:
       git cherry-pick 71951e8af60af1e5686a86bc6373c9efd41ed343  # doc: add links to specifications on Discourse
       git cherry-pick 39a8f2e929c001c6e1bd8884a962180d353937dd  # lxd/network/ovn: Don't use HostPathFollow on OVN configs
       git cherry-pick 51eaa589f799d8814ed3fe0af6b8a6995c3daa2b  # lxd-agent: cleaner shutdown sequence
+      git cherry-pick d3064da5209d816fe1d1e1823a956420ca3ce61b  # lxd/storage/load: Update GetPoolByInstance to use instance's StoragePool() function
+      git cherry-pick 6243cc3a1fc6fe75194da3fde9a6ea1453934521  # lxd/storage/backend/lxd: Ensure we use errors.Is when checking for drivers.ErrNotSupported
+      git cherry-pick 757fb04bed8eab2a51064a01cc52bda05d88beab  # lxd/instance: Avoid extra query when copying instance snapshot's creation time
+      git cherry-pick 5c551c4d0a25e53cafb3a4cef249846f1aecdd43  # lxd/storage/utils: Adds VolumeDBGet function
+      git cherry-pick 83a37186ae3429572ef2984370b62b813285b8ee  # lxd/storage/backend/lxd: Renames and reworks instanceRootVolumeConfig into instanceEffectiveRootVolumeConfig
+      git cherry-pick 803c327de5a6ec9a4207d82c9bdeee542df7a93d  # lxd/storage/backend/lxd: b.instanceEffectiveRootVolumeConfig usage
+      git cherry-pick 5fdfc9c197882ac51fad46ff28fee9924039b1d6  # lxd/storage/utils: Updates comment on VolumeDBCreate
+      git cherry-pick e5a9361cd7dcc89ed1c28f7ada760f0904366b35  # lxd/storage/pool/interface: Rename srcVolOnly to snapshots for RefreshCustomVolume and CreateCustomVolumeFromCopy
+      git cherry-pick ea7d0e6231f66d65271467e789fb2e0843080517  # lxd/storage/backend: Update RefreshCustomVolume and CreateCustomVolumeFromCopy to use snapshots arg
+      git cherry-pick 2b50a8da8ba69d872a11c9dd38e906f968b94dbb  # lxd/storage/volumes: pool.CreateCustomVolumeFromCopy and pool.RefreshCustomVolume usage
+      git cherry-pick 1591e8acafb63af63c13fbbd085205c9e0ed6802  # lxd/storage/utils: Renames and reworks VolumeSnapshotsGet to VolumeDBSnapshotsGet
+      git cherry-pick e88703b234970f405f96a891285851056ac0c9a3  # lxd/migrate/storage/volumes: storagePools.VolumeDBSnapshotsGet usage
+      git cherry-pick c98a5931b9968b4f6074bba1942cb2a29c03fe91  # lxd/storage/backend/lxd: VolumeDBSnapshotsGet usage
+      git cherry-pick ae8425039be8417fa72a043b266fd9bdc744bd6e  # lxd/storage/backend/lxd: Allocate snapshotNames more efficiently in CreateCustomVolumeFromCopy
+      git cherry-pick 5d39fcdea8f80af82617dc6234935c785372a1b3  # lxd/migrate/instance: Don't ignore existing snapshot instances on migrate receiver
+      git cherry-pick d7d9565c584a966e4be36349a48889fea78db7b6  # lxd/storage/backend/lxd: Comment improvements CreateCustomVolumeFromCopy
+      git cherry-pick 05b047786bba8eae323411480bd6bba0a97775ef  # grafana: Add missing datasource field
+      git cherry-pick c967d4a5e5186bc9325f1de416d2d1f917258efb  # github: Add Go 1.18
+      git cherry-pick c42c32d6f27c03e20598803ce4759c11dbf3647b  # doc/clustering: Make more space in table
+      git cherry-pick 6428d3d1486e11a1d58435ea6994cf576ba6c937  # doc/clustering: Remove condition column
+      git cherry-pick a4da647ce98a56980f5b70c6e4bb59c19f1df7db  # doc/clustering: Add section about roles
+      git cherry-pick f4388f7689327178f075218d6f0c6e002de261ac  # lxd/network/ovn: Fix typo
+      git cherry-pick 8d111fe3e6b35b9c2ef864f3590574e085f77883  # lxd/network/ovn: Fix bad comment
+      git cherry-pick 84b469b4678aa3247c874e561235ef598968e275  # lxd/api_internal: Sort endpoints
+      git cherry-pick 6ed842b342aa834fd5e048e7d92c3bf5939c1b2c  # doc: rename extension file
+      git cherry-pick cfd6ee24b9e610a32eafdae4b13c9b8f76803911  # doc: rename stylesheet classes for extension
+      git cherry-pick f70bc8d820d472f3b02dc62c257e9c4d81c1a1b0  # doc: update the extension to allow for general related links
+      git cherry-pick 0b909b3a565b298ec144e04cfcfdf9ae4d1d2105  # doc: add related links to the documentation
+      git cherry-pick 63600c1e210729ba1b2c5305d80c68092e77523a  # lxd/storage/utils: Updates VolumeDBSnapshotsGet to accept drivers.VolumeType arg
+      git cherry-pick b7b29a4cafa7535f8d79fcf81bacfdd3e7272d68  # lxd/storage/backend/lxd: VolumeDBSnapshotsGet usage
+      git cherry-pick 44cc9d7d5b7f97f4403218f33cb8b92877fd4309  # lxd/migrate/storage/volumes: Updates storagePools.VolumeDBSnapshotsGet usage
+      git cherry-pick b874e438f7c7631086ce5443817f21b0db814c85  # lxd/db/storage/volumes: Updates GetLocalStoragePoolVolumeSnapshotsWithType to populate ID and Config fields
+      git cherry-pick 5782d8c48e40c831e26c86196ff2a4b1a842ef31  # lxd/instance/qemu: Fix regression in cdrom handling
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
