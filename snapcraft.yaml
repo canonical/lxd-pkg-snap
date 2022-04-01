@@ -1332,6 +1332,10 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 1b153b5e16eb5aba470653ebba29e94c98d9d61c  # lxd/storage/btrfs: Fix usage nested
+      git cherry-pick 160ade378c7107b127e963bba186522f5c0ace27  # lxd/instance/qemu: Fix bad topoext logic
+      git cherry-pick 93f9bf4e9edfd6d7c758ee1a5a3a34b6a308d34d  # lxd/instance/drivers/qemu: Add serial key to device
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
