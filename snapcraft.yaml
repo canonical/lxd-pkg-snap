@@ -1518,6 +1518,27 @@ parts:
       git cherry-pick 4b984c14e245de6bb49ee5f802af694cbe912467  # lxd: No need to import deprecated syscall
       git cherry-pick d5f3d0cd602dd4d55dd4f89e4fd70d8eb5a4bccc  # lxd/storage/utils: Run qemu-img dd with low priority and 16M buffer
       git cherry-pick a3b568bad94b27771f4843439d270569dbde3d89  # lxd/instance/drivers/driver/qemu: Run qemu-img with low priority in Export
+      git cherry-pick 01ef3aad0ae4e50be98444e05b36f3d8f4186dbd  # lxd: Error quoting fixes
+      git cherry-pick 09f47e0bf8d5eb3845da0ad828b2de6019d1d4d1  # lxd: Use SmartError rather than NotFound
+      git cherry-pick 6fee3b624d3adbda4d07c24bd8d143abca2f96c9  # lxd/networks: Don't return os.ErrNotExist from doNetworkGet
+      git cherry-pick 32b92f6f6ff138de1845cfa6c1cdcaf9fa7fe7ed  # test: drop dependency on uuidgen
+      git cherry-pick 0d831e51e967dfa6a462cf6f562158cf7eb29026  # lxd-agent: Ignore both trans= and msize= when on virtiofs
+      git cherry-pick b27d541f0997358b571ac2840f86660d55c9130c  # lxd/instance/qemu: Set msize on 9p
+      git cherry-pick 43c9ab57470f9331c61ec34ae967535d01dede6e  # lxd/main_forkfile: Update comment
+      git cherry-pick d88054b8f18db4fc210904134848ce0c54ae0bfa  # shared/idmap: Expose IdmapSet on all platforms
+      git cherry-pick 8604637ed68799dd7c2a8b93748adbba8fcc4e61  # shared/subprocess: Add SetUserns
+      git cherry-pick ebae6babd733b442ed3bacb47614006fd24d2f16  # lxd/device/disk: Port to SetUserns
+      git cherry-pick 22ec0b8594bee8d13f1f26500c9e2f7d82e6167e  # lxd: Remove forkuserns
+      git cherry-pick ce9365f5cd29db77a655767d7b600a5182b89ecb  # global: Remove legacy build tags
+      git cherry-pick eff59c0bbda054488a22b0ab9cb16e865b7043db  # lxd/instance_exec: Improve error on openpty
+      git cherry-pick 1ae663e768d76b72e9846982b3aee641eab95fe3  # lxd/util: Extend tests for CanonicalNetworkAddress
+      git cherry-pick 2b799a43640f3c8fea9463e74f99bf3537c7e15b  # lxd/devlxd: Don't expand format strings
+      git cherry-pick 91dbf44056242aebea32defc9eb4d90a652bdee1  # tests: Test for format string in devlxd
+      git cherry-pick 955c005042ab1baf77a4deb3c3d839da843b7529  # lxd/instance: Prevent deleting volatile keys
+      git cherry-pick 3a35bf42fc9635d3499ea16ba3c4d1875529ac95  # lxd/instance: Update tests
+      git cherry-pick 5836a2041989a269ddbd156b0fc468a5af3976d2  # lxd/instance: Don't allow root pool changes
+      git cherry-pick 5d715eae49436e8eb4f7eae0687a39680559aee1  # tests: Test root disk device pool override
+      git cherry-pick ba32c048577261081fe15e420b2cb5e6c466da20  # tests: Fix typo in storage_profiles test
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
