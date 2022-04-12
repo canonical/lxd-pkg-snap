@@ -9,6 +9,7 @@ import (
 
 	"github.com/lxc/lxd/lxd/storage/filesystem"
 	"github.com/lxc/lxd/shared"
+	"github.com/lxc/lxd/shared/version"
 )
 
 var argYes = flag.Bool("yes", false, "Answer yes to all questions")
@@ -109,6 +110,13 @@ func run() error {
 	err = dst.showReport()
 	if err != nil {
 		return err
+	}
+
+	// Compare source and target version
+	minimumVersion, _ := version.NewDottedVersion("4.0.0")
+	v, err := version.NewDottedVersion(src.info.Environment.ServerVersion)
+	if err == nil && v.Compare(minimumVersion) == -1 {
+		return fmt.Errorf("LXD %s can't be directly upgraded to %s, please upgrade to LXD 4.0.x first.", src.info.Environment.ServerVersion, dst.info.Environment.ServerVersion)
 	}
 
 	// Confirm that the user wants to go ahead
