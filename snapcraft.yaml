@@ -1539,6 +1539,49 @@ parts:
       git cherry-pick 5836a2041989a269ddbd156b0fc468a5af3976d2  # lxd/instance: Don't allow root pool changes
       git cherry-pick 5d715eae49436e8eb4f7eae0687a39680559aee1  # tests: Test root disk device pool override
       git cherry-pick ba32c048577261081fe15e420b2cb5e6c466da20  # tests: Fix typo in storage_profiles test
+      git cherry-pick 4dd3fd74ba55b868825a80862a821f4e20764621  # doc: make it explicit that automake is needed to build LXD
+      git cherry-pick 12c13b0389e75a45f11602768b82b54507bd31ff  # doc: LXD requires Golan 1.18 now
+      git cherry-pick 82eda2694b12f6eea094703b2de26610441526c2  # lxd/main_init_interactive: Mention port
+      git cherry-pick 334e331d5c47bb574dc98cdcb84773db32c610c6  # lxd/storage/drivers/zfs: Check if raw flag can be used
+      git cherry-pick f91b8c9e215a1ba3df42565bd9c18144a7217f71  # lxd/storage/drivers/zfs: Use -w in `zfs send` if possible
+      git cherry-pick b556879294de8a3ce465e47ec74a963b48cf361f  # shared/subprocess: Fix comment
+      git cherry-pick 96198fee3898b3078e42b87af8b17621a30f9312  # shared/api: Update to new godoc comment
+      git cherry-pick f91201cea495c7e8448643c0264a6317a4b592fc  # client: Update to new godoc syntax
+      git cherry-pick 502548d093aa0011aa19c52df3c194b5e207ed81  # shared/cert: Update test certs to EC
+      git cherry-pick ecc0390e843da3dcff9661c5d357b03b9d6982de  # Revert "Skip clustering-related unit tests, see issue #6122"
+      git cherry-pick 19ca58f62695260cc46465a9a510fc297abe6d4b  # lxd: Remove old clustering tests
+      git cherry-pick b1e85cd53182ff9e606b09b03f5c94ff5f616e5b  # lxd/cluster/connect: Modify ConnectIfInstanceIsRemote to return a client configured with project
+      git cherry-pick 69ce28e9c1064d2c8fbc6bfb43c8f598a826de10  # lxd/instance/console: Use api.NewURL in instanceConsolePost
+      git cherry-pick da91af6f24a6dbda0d570857f429c892d60fd9ff  # lxd/instance/exec: Use api.NewURL in instanceExecPost
+      git cherry-pick fca44041833375f99e3780db929444dd0deb03a4  # lxd: No need to use UseProject() with client from ConnectIfInstanceIsRemote
+      git cherry-pick ce31d10996647a515bd92319c291fc640eceef9f  # lxd/migrate: Adds migrationControlResponse type
+      git cherry-pick 1233e65a33afd898830364ae76e951c7e10f91db  # lxd/migrate: Update controlChannel to return migrationControlResponse
+      git cherry-pick c04b054da6f65602284be248984872d622b6ff26  # lxd: golint fixes
+      git cherry-pick 4e3c8939c7677ad1b036780c2d46420aa42c2b28  # lxd/migrate/instance: migrationControlResponse usage
+      git cherry-pick 3c5c0d84d04c46f8ae1fba5b0786bc34219dca11  # lxd/migrate/storage/volumes: migrationControlResponse usage
+      git cherry-pick 7b2092387ce74ce910c09cf30df5ffbb4ed4f0bb  # lxd/device/device/utils/disk: Look for QEMU helpers in /usr/libexec/
+      git cherry-pick a454256593384ae5f9535bd48e3c9bd88cfb955b  # lxd: Switch to using api.StatusErrorCheck where appropriate
+      git cherry-pick 02752018678899311d63a3459157fed51ac9dfe5  # lxd/db/generate: Update to use api.StatusErrorCheck
+      git cherry-pick a35f015b2731af68a3461ef31ff19d002ab68362  # lxd/db: Regenerates DB functions
+      git cherry-pick 11aa39bee34c0e614efe939e8ddace382e7e94bf  # lxd/storage/drivers/zfs: send -w is possible since 0.8.0
+      git cherry-pick ac607cf07a4f268c9d0fcbe51f3a0e24ef545033  # lxd/state: Make InstanceTypes store errors
+      git cherry-pick 529e5a26a318909fa0afd5120caa8bf9861d7e0c  # lxd/instance/drivers: Replace SupportedInstanceTypes with DriverStatuses
+      git cherry-pick a8673756b0a10fe60169aa43eae963330d838a49  # lxd: DriverStatuses usage
+      git cherry-pick f798689ccb259def00047c5cec426f5ccf66f87f  # lxd/instance: Report driver errors
+      git cherry-pick a622172fed1645cdf771f5099fde70b2a03bae60  # lxd/instance/qemu: Improve errors in Info
+      git cherry-pick 14c88e2812f62270c700b725014151c23f6cc7f9  # lxd-agent: Fix trans= handling
+      git cherry-pick 07676c48ccd7491bedb912215f29d0ef3387ec9f  # lxd/instance/drivers/driver/qemu: Update Export to use qemu-img convert in direct I/O mode
+      git cherry-pick 41a60caca7efdef647fcf1f08920f97ef577c374  # lxd/storage/utils: Updates ImageUnpack to use qemu-img convert in direct I/O mode
+      git cherry-pick b5149552207adceb3fa077968e13c8c872f7acd8  # lxd/storage/drivers/utils: Update copyDevice to open files in read only mode
+      git cherry-pick d8100581a3645bac4dba38416fc0d2c2dfc9abfa  # lxd/storage/drivers/driver/dir/volumes: Reduce var scope in CreateVolumeSnapshot
+      git cherry-pick 667093aec7b29e528c7b4cdba083808276d38a91  # lxd/storage/drivers/driver/dir/volumes: Use dd to restore block volumes in RestoreVolume
+      git cherry-pick e1ce0b8b58496804217b0d7c1ce36bf8936bdd1c  # lxd/instance: Enforce a 64 chars device name limit
+      git cherry-pick 24f6cb7b71a06c330fa9c5a70a73c0bd5fe62d7e  # doc/instances: Mention 64 chars limit on device names
+      git cherry-pick 2b10c198086fc18abff5bd6acf605f906e38e79b  # lxd/device/disk: Drop 27 chars limit
+      git cherry-pick a026affe52b11a1c68ffc345f195c291a55774e3  # lxd/storage/utils: Disable format detection in qemu-img info in ImageUnpack
+      git cherry-pick 13ede0e3a40a45b54d0c551683ec6726f9d3aa4f  # lxd/instance/qemu: Use a hash for long disk names
+      git cherry-pick fd13fdd542a5964466195d695246a8d0dc6b9053  # lxd/instance: Fix Update calls for ephemeral instances
+      git cherry-pick 8a6fd0ae8be4d7ac94620c28ac539a50b88790c5  # tests: Add restart test for ephemeral instances
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
