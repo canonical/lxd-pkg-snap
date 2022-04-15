@@ -1542,11 +1542,24 @@ parts:
       git cherry-pick 4dd3fd74ba55b868825a80862a821f4e20764621  # doc: make it explicit that automake is needed to build LXD
       git cherry-pick 12c13b0389e75a45f11602768b82b54507bd31ff  # doc: LXD requires Golan 1.18 now
       git cherry-pick 82eda2694b12f6eea094703b2de26610441526c2  # lxd/main_init_interactive: Mention port
+      git cherry-pick 20668eeb326c7cd8f96f080140e8df1edeaf828c  # lxd/db/generate/db/method/v2: Create methods for reference tables
+      git cherry-pick 8c5b248167b06ca3b4e7ddda89d2fc37e18d5efb  # lxd/db/projects: Use v2 generator, remove UsedBy/Config fields
+      git cherry-pick a9e6bf2c2a3760e4d3e312de5efff708f7bd2986  # lxd/db/projects.mapper: Update generated code
+      git cherry-pick 9f4aeb4b624b7cf0dcbb3d7beb0a72e53d4d8b21  # lxd/db/projects: Populate config in ToAPI
+      git cherry-pick df284e5ee48f7293c41547908afc3f70e62b72b6  # lxd/db/projects: Use GetProjectConfig
+      git cherry-pick 330a90e17b9ca6f90a985016d1eb3af8d5ca16ad  # lxd/db/projects: Removed UsedBy handling from db package
       git cherry-pick 334e331d5c47bb574dc98cdcb84773db32c610c6  # lxd/storage/drivers/zfs: Check if raw flag can be used
       git cherry-pick f91b8c9e215a1ba3df42565bd9c18144a7217f71  # lxd/storage/drivers/zfs: Use -w in `zfs send` if possible
       git cherry-pick b556879294de8a3ce465e47ec74a963b48cf361f  # shared/subprocess: Fix comment
       git cherry-pick 96198fee3898b3078e42b87af8b17621a30f9312  # shared/api: Update to new godoc comment
       git cherry-pick f91201cea495c7e8448643c0264a6317a4b592fc  # client: Update to new godoc syntax
+      git cherry-pick 9d9f88406ca9828a962b565dfca3c53f4d89f2a9  # lxd/api/project: Add projectUsedBy
+      git cherry-pick 7fda0cada962fbfc08d37b6be79a7e38b9b57555  # shared/api/project: Add URL method
+      git cherry-pick c49cd9fdb0a345676f620a9aaa0ec2685040814f  # lxd/storage/volumes/utils: Use api.Project for InstanceList
+      git cherry-pick 7392d6bf231a259159f95437b83c6466bc09065d  # lxd/api/project: Use api.Project over db.Project
+      git cherry-pick 18e8b43636eb936e896d736cceb1bfcdd27a7c1e  # lxd: manually fetch project Config or use api struct
+      git cherry-pick 93de35596702f1e9dea1382cedd787673f0bee99  # lxd/project/permissions/test: Fix tests
+      git cherry-pick 6096458d3a75623ea4d2e604a6fb0f5f4ba10424  # lxd/api/project: Return immediately if project is used
       git cherry-pick 502548d093aa0011aa19c52df3c194b5e207ed81  # shared/cert: Update test certs to EC
       git cherry-pick ecc0390e843da3dcff9661c5d357b03b9d6982de  # Revert "Skip clustering-related unit tests, see issue #6122"
       git cherry-pick 19ca58f62695260cc46465a9a510fc297abe6d4b  # lxd: Remove old clustering tests
@@ -1582,6 +1595,22 @@ parts:
       git cherry-pick 13ede0e3a40a45b54d0c551683ec6726f9d3aa4f  # lxd/instance/qemu: Use a hash for long disk names
       git cherry-pick fd13fdd542a5964466195d695246a8d0dc6b9053  # lxd/instance: Fix Update calls for ephemeral instances
       git cherry-pick 8a6fd0ae8be4d7ac94620c28ac539a50b88790c5  # tests: Add restart test for ephemeral instances
+      git cherry-pick 3c06b4725b9e365054fb3d72fc2bf69883626b73  # lxd/db/generate: Don't list bash completion
+      git cherry-pick 02343001f0c03a603aa249fd8777d1aeb14e2594  # lxd/storage: Forward instance volume state request
+      git cherry-pick b517a443bc5c0b6f9c6581d7cacf2d9f016393a4  # client: Add GetMetrics
+      git cherry-pick 709cc124a1106e1ad8b538110c800b5985901b43  # lxd/device/proxy: Fix comment typo
+      git cherry-pick 13d8168b4cc313033e33145595a7171f4d880b71  # doc: Remove user-facing mentions of cluster node
+      git cherry-pick 79df182108528021860328fc0987c5b9580c34f8  # lxd: Replace local node mentions with local member
+      git cherry-pick ac6b443c1f6d0a3583d91fc40c199f8108ea4bb4  # lxd/api/cluster: Request that projects with restricted.networks be created first in clusterInitMember
+      git cherry-pick 98c9ed0b05723a880588f846796ec1f9625a50cb  # lxd/init: Re-arrange initDataNodeApply order
+      git cherry-pick 47ddf104041cbe606e1206bd16d07f38042b99bc  # lxd/init: Error quoting in initDataNodeApply
+      git cherry-pick edef4b884062a84169da6a4548d5695d9ca7e3e5  # lxd/init: Create relevant networks before and after projects in initDataNodeApply
+      git cherry-pick fb3d80cab2b911a4070b32ceb5b14db9e55c3ce8  # test: Check that default project networks are created before projects during cluster member join
+      git cherry-pick f7b59b225c5f52f0c580a53c4dd8094e5d13e7cf  # doc/reference/network/bridge: Clarify ipv{n}.nat default value added when creating networks
+      git cherry-pick 4ad77a056583a2b1fd636439682f104227ef8db9  # lxd/instance/drivers/driver/qemu: Catch stateful resume errors in Snapshot
+      git cherry-pick ab6745cf3e9292e1d5e0b34cc842186853543fdb  # lxd/instance/drivers/driver/qemu: Pass nvram file by FD and make writable by QEMU process
+      git cherry-pick 56fd5527c0f3c7f6b6f5d56ac83fbb22395f07ee  # lxd/console: Move PTS logic to LXC driver
+      git cherry-pick 22b0e36760831fbab1dade1c06b0689c4b076064  # lxd/instance/qemu: Switch to socket for console
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
