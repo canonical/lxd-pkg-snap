@@ -43,6 +43,7 @@ description: |-
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
+   - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
 
