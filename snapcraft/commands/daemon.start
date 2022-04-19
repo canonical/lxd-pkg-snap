@@ -158,6 +158,11 @@ if [ "${ceph_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/rbd"
 fi
 
+if [ "${openvswitch_external:-"false"}" = "true" ]; then
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/ovs-appctl"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/ovs-vsctl"
+fi
+
 if [ "${lvm_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvm"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/vgs"
