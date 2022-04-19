@@ -60,6 +60,7 @@ lxcfs_loadavg=$(get_bool "$(snapctl get lxcfs.loadavg)")
 lxcfs_pidfd=$(get_bool "$(snapctl get lxcfs.pidfd)")
 lxcfs_cfs=$(get_bool "$(snapctl get lxcfs.cfs)")
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
+openvswitch_external=$(get_bool "$(snapctl get openvswitch.external)")
 ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
 
@@ -86,6 +87,7 @@ config="${SNAP_COMMON}/config"
     echo "lxcfs_pidfd=${lxcfs_pidfd:-"false"}"
     echo "lxcfs_cfs=${lxcfs_cfs:-"false"}"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
+    echo "openvswitch_external=${openvswitch_external:-"false"}"
     echo "ovn_builtin=${ovn_builtin:-"false"}"
     echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
 } > "${config}"
