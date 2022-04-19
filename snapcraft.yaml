@@ -1611,6 +1611,11 @@ parts:
       git cherry-pick ab6745cf3e9292e1d5e0b34cc842186853543fdb  # lxd/instance/drivers/driver/qemu: Pass nvram file by FD and make writable by QEMU process
       git cherry-pick 56fd5527c0f3c7f6b6f5d56ac83fbb22395f07ee  # lxd/console: Move PTS logic to LXC driver
       git cherry-pick 22b0e36760831fbab1dade1c06b0689c4b076064  # lxd/instance/qemu: Switch to socket for console
+      git cherry-pick aa9fee41cb65920f45d8af5167bd571b94573115  # lxd/apparmor: Treat ramfs the same as tmpfs
+      git cherry-pick d5369d750d30a0b9fa3501cc7ba8e6beb6c9efd3  # lxd/network/driver/sriov: Mark network as available on successful start
+      git cherry-pick 6360743831c1dc812ce9e3dde30137a616650edc  # lxd/instance/drivers/driver/qemu: Centralise logic for UEFI architecture detection
+      git cherry-pick 31aa5c775373586c54b3f8a936858d787bf2cf6d  # lxd/instance/drivers/driver/qemu: Only use NVRAM firmware template on UEFI architectures
+      git cherry-pick 4a6c9557e9ad71ad599a8b2a172e31433fb68d31  # lxd/instance/drivers/driver/qemu/templates: Removes duplicated arch check in qemuDriveFirmware
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
