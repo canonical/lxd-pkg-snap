@@ -1333,6 +1333,22 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 7e4abf5193aa887f61879e71c81c587000ce8096  # lxd/storage/drivers/btrfs: Modify received UUID
+      git cherry-pick 94180308e133e9637ec6e24a8b760207622dd412  # lxd/storage/drivers/btrfs: Set Received UUID
+      git cherry-pick 3e2bf70f6e6921d576c8047788c258bef18ffe21  # test: Extend migration refresh test
+      git cherry-pick fd6845ddda3f80cdd24a8f94c42acce6bff0c41f  # lxd/secommp: Fix sysinfo syscall interception on 32 bit platforms
+      git cherry-pick a3f0fae1090d643dff1f134bf279132feeeb1657  # client/util: Add timeouts to tlsHTTPClient
+      git cherry-pick 3cd532714d9a792159771fd832465eed5a75a5b5  # client/util: Add timeouts to unixHTTPClient
+      git cherry-pick 540ba5df1af846fa40580242ce034724802ad047  # lxd/cluster/tls: Add timeouts to tlsTransport
+      git cherry-pick 76de86ab898d9988b3b9eca1681dd758661680c3  # lxd/main/shutdown: Increase default timeout in cmdShutdown
+      git cherry-pick 5cd4bd87f0c0a096f40048c68ad0239323ea36bf  # lxd/util/http: Adds timeouts in HTTPClient
+      git cherry-pick 91e6e20e07e2cf35c14575ebe9a0afa29f9c2434  # lxd/vsock/vsock: Adds timeouts in HTTPClient
+      git cherry-pick 396c6a30e754eef11f9496208dfa1aaf0146571d  # shared/cert: Adds timeouts in GetRemoteCertificate
+      git cherry-pick 54d4db389f556fb3b6935a622bc37a299037d4c5  # lxd/certificates: Simplify non-admin check
+      git cherry-pick d0dc795b954d8ede11859313adf787500250b645  # lxd/certificates: Comment the logic a bit
+      git cherry-pick 4148e03f53d8fbff46cd4843c54324628c58a0a0  # lxd/certificates: Move duplicate cert detection
+      git cherry-pick 675995fa97b3b5769a0cae79f0cfef0d4cc1b0b4  # doc: Fix typos
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
