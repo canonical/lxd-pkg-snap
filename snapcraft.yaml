@@ -1348,6 +1348,55 @@ parts:
       git cherry-pick d0dc795b954d8ede11859313adf787500250b645  # lxd/certificates: Comment the logic a bit
       git cherry-pick 4148e03f53d8fbff46cd4843c54324628c58a0a0  # lxd/certificates: Move duplicate cert detection
       git cherry-pick 675995fa97b3b5769a0cae79f0cfef0d4cc1b0b4  # doc: Fix typos
+      git cherry-pick 2258ce0cc5c4827ba35592f6e70b56d85e944110  # server.crt referred to as lxd.crt in the prometheus config file
+      git cherry-pick a6a491d11ccbda4e319f1b47a9a89e6e5cac90c7  # doc: headings and whitespace
+      git cherry-pick 772003a58e44c3d8f6a021d28a0b491fbf086813  # doc: check for inclusive language
+      git cherry-pick b85514b4e60b82167643087cce0b723cb741afcd  # doc: change to "Machine in the middle"
+      git cherry-pick 1ee1da44dbf6d00fda8edb7a1abae6291f0789b7  # doc: add exceptions for inclusive language
+      git cherry-pick c51fef6304d8a4c62013a78623e6dacaa30ff730  # doc: update doc for OVN peer routing relationships
+      git cherry-pick 303984636ddf9ecddaa98f8b9cd121e5a01160b1  # github: Re-organize workflows
+      git cherry-pick 3de3c7120b5d618aef1a65dffb45f2ebdd03b574  # github: Add DCO check
+      git cherry-pick 87539f9480bcff7c049dbe1f807a99ffc33f10e1  # github: Split static builds from tests
+      git cherry-pick 765ed1157989797611c28a68cd2f64b5d780e4f4  # github: Add branch target test
+      git cherry-pick c8cfef12334a30a0431afc6fc7dad4639a7abf18  # github: Run commit tests on target
+      git cherry-pick 8b9d3113be85e20f798535555e367315870c0095  # github: Fix commit checks
+      git cherry-pick c2c9355b3e5e152235d8ad90a9de8ba1488f789c  # doc: update firewall configuration documentation
+      git cherry-pick ed30b731e6dec309a22143906e30c02dc153339a  # doc: add a section about LXD and Docker
+      git cherry-pick 814a16a976340229520549f04aa61847d77dfa08  # shared/network: Always return 0 on error
+      git cherry-pick fefbb99066c8e8ee08aa9120060136728e205313  # lxd/utils: Improve errors in instancesExist
+      git cherry-pick 8a2d9b84a5cadb05410fcf778df223d1780630ec  # lxd/device/disk: Improve error in validateConfig
+      git cherry-pick a9ed18794b058e157e2be63f3ccb750b1c067781  # lxd/utils: Check snapshots only once in instancesExist
+      git cherry-pick 755622e22b4312e9563c12486ea4837722df771f  # i18n: Update translation templates
+      git cherry-pick 17554028bb8249d0c0d3c734c9769ff6583ab031  # doc: Fix typo
+      git cherry-pick d8cbd91274bbc6c99180c70ce2db9820fc6541de  # lxd: Prevent use of instance/snapshot name in instance specific routes
+      git cherry-pick b96517aa7200d42d3fec1fdf13f85bc77cf5d240  # doc: document how to handle SAN vs target name mismatch in Prometheus sample
+      git cherry-pick a6801cfab8e766a8fb492ea9da819a8d6947a837  # lxc/list: Don't skip extra info when name filtering
+      git cherry-pick 7bb10081086b1896bf346539cf2b95c50307bdde  # doc: rework doc for setting up OVN
+      git cherry-pick 72908e3210790655024032927e33b25e4ec558a1  # lxd/certificates: Fix token request validation
+      git cherry-pick 884448548ee58c33e371a616e1d65548d495ea5d  # doc: add a Discourse link about simple streams
+      git cherry-pick e737a41e07041e8a98380463a6afd1025d80b2f6  # lxc/config_trust: revoke-token requires a name, not a token
+      git cherry-pick f50b3352e06dd6d0a601762c64dd88cb66d0a7c2  # i18n: Update translation templates
+      git cherry-pick 35accce9080d02bcd00b7e8c09c99b1b7fb52098  # lxd/project: Fix bad error on invalid instance type
+      git cherry-pick 06b97e97ae4e323a11be08e6fbfca269b57b8db3  # lxc/config_trust: update help when client should be singular
+      git cherry-pick ce281f221e46df612173c2b8f6c48c54d6c6395c  # lxc/config_trust: clarify help for join token creation
+      git cherry-pick 5ba747ae0b6f58e2c0b862cf4f7fb783f248615f  # i18n: Update translation templates
+      git cherry-pick 81af9115bc5b03294bfd668aa445e0ac1118bbaa  # lxd/daemon: Fix LXD crash is failing to start due to already running LXD process
+      git cherry-pick 6b4fe985d1dbe0ddbd97636cc71d7a3a8026eb22  # lxd/request: Export CtxKey type and use for all keys.
+      git cherry-pick 3ce35b7cae15d821cb37e8b66d630687baad25d3  # lxd/storage/drivers/driver/zfs/volumes: Simplifies UnmountVolume
+      git cherry-pick cec20ceac5c6ee9d4f1f7db2ad5a7b5aa51bd28e  # lxd/storage/drivers/driver/lvm/volumes: Simplifies UnmountVolume
+      git cherry-pick 48039fb97c40cb12e5e2cc7d4db052441a3ddbe9  # lxd/storage/drivers/driver/ceph/volumes: Simplifies UnmountVolume
+      git cherry-pick c11afc02dc95e7a38abf061f30fbfeba2f7816f5  # lxd/storage/drivers/volumes: v.driver.MountVolumeSnapshot usage in MountTask
+      git cherry-pick c8f826abb661aaf1a2cb23830bcb6476ec0985b7  # lxd/storage/drivers/interface: Removes ourMount indicator from MountVolumeSnapshot
+      git cherry-pick a7f2640509845decbd692c91673aaba131399abc  # lxd/storage/backend/lxd: b.driver.MountVolumeSnapshot usage
+      git cherry-pick 31daa75b563460fcddb55c16429642e45a47998e  # lxd/storage/drivers/driver/mock: Updates MountVolumeSnapshot
+      git cherry-pick c2ed02ca8d76083a529ff9d03983949a991e424f  # lxd/storage/driver/driver/btrfs/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick a873a4e461d0c11ca1673b2560e6064663d0dcea  # lxd/storage/drivers/driver/ceph/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick 3210627f4f54d4d60a81b1a614e990c25d650cf9  # lxd/storage/drivers/driver/cephfs/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick 1f395a48dda7407dc8104ac199b2b2a0fd013929  # lxd/storage/drivers/driver/dir/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick f83b9233172b55379088000544b2a6913c80a8c6  # lxd/storage/drivers/driver/lvm/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick d0d7ffc56c170c14a8473e7c061f132c0f93bd48  # lxd/storage/drivers/driver/zfs/volumes: Adds ref counting to MountVolumeSnapshot
+      git cherry-pick 2c07abb2f176a426ebec4def55516dc0c2df68ca  # lxc/config: no name shown when editing the instance's config
+      git cherry-pick 5e63eb17b68f640ac6d9f33ec2c6c9d3d63835ab  # i18n: Update translation templates
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
