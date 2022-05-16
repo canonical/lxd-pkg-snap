@@ -1463,6 +1463,9 @@ parts:
       git cherry-pick 28c09e0c5955e63584de714a1d191eb2d9eb656d  # lxd/storage/drivers/ceph: Fix typo
       git cherry-pick 7013d1fcd8e6dbbdd4558634c334057e53eeb3c6  # lxd/instance/drivers/qemu: Handle rbd root devices
       git cherry-pick 5fef4e57c163e25fc1bd04a5782a833aee3e00c5  # lxd/instance: Fix auto-snapshot on restricted projects
+      git cherry-pick 3b401a2597506b6ab1d76e9abe7045dacaf3ff35  # lxd/instance/qemu: Fix ceph username key
+      git cherry-pick d5f4a5993c11b045b283ebf032f519a81ae60800  # lxd/instance/qemu: Fix ceph volname in projects
+      git cherry-pick e3a8911ac4a8e7fe88712ccbc4779ac00ff0c3db  # doc: add link to YouTube video for network ACLs
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
