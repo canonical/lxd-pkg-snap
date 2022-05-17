@@ -1465,7 +1465,14 @@ parts:
       git cherry-pick 5fef4e57c163e25fc1bd04a5782a833aee3e00c5  # lxd/instance: Fix auto-snapshot on restricted projects
       git cherry-pick 3b401a2597506b6ab1d76e9abe7045dacaf3ff35  # lxd/instance/qemu: Fix ceph username key
       git cherry-pick d5f4a5993c11b045b283ebf032f519a81ae60800  # lxd/instance/qemu: Fix ceph volname in projects
+      git cherry-pick b378f75bd65667450da0b09aebc9f11da2d21c22  # test: Add additional tests for checking volume snapshot config is copied
+      git cherry-pick 6eda335cdaa9e189a8c11b169ef107e862bf5e90  # lxd/storage/volume: Use source snapshot volume config when copying to new volume in cmdStorageVolumeCopy
+      git cherry-pick 7f66d34c917497c1eef8c5d474e1c54f1b9b7d86  # lxd/storage/volume: Fix move of snapshot in cmdStorageVolumeCopy
+      git cherry-pick ae832a262f5543a9e3b88127409f1d6934696655  # test: Adds check that source snapshot config is used when copying snapshot to new volume
+      git cherry-pick 9ca95398b56c81b6e359b819f917c06d63e56cfa  # lxd/cluster/heartbeat: Improve heartbeat logging
       git cherry-pick e3a8911ac4a8e7fe88712ccbc4779ac00ff0c3db  # doc: add link to YouTube video for network ACLs
+      git cherry-pick 6dd536cf272b0b836f6675c746d11ac9fab049a3  # lxd-agent/devlxd: Don't expand format strings
+      git cherry-pick d2f5b7c30d7054f2cf82295461ec9619218dbff6  # lxd/instance/drivers/qemu: Set conf option in rbd driver
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
