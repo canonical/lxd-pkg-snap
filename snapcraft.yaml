@@ -1473,6 +1473,7 @@ parts:
       git cherry-pick e3a8911ac4a8e7fe88712ccbc4779ac00ff0c3db  # doc: add link to YouTube video for network ACLs
       git cherry-pick 6dd536cf272b0b836f6675c746d11ac9fab049a3  # lxd-agent/devlxd: Don't expand format strings
       git cherry-pick d2f5b7c30d7054f2cf82295461ec9619218dbff6  # lxd/instance/drivers/qemu: Set conf option in rbd driver
+      git cherry-pick a8ab396e46e3d19cae7415e2b2c7d01d4e41b6e2  # lxd/instance/drivers/qemu: Fix ceph conf filename
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
