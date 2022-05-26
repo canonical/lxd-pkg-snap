@@ -366,7 +366,7 @@ parts:
   libusb:
     source: https://github.com/libusb/libusb
     source-type: git
-    source-tag: v1.0.25
+    source-tag: v1.0.26
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
