@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.1"
+version: "5.2"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1286,7 +1286,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.1
+    source-tag: lxd-5.2
     after:
       - lxc
       - dqlite
@@ -1332,148 +1332,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 7e4abf5193aa887f61879e71c81c587000ce8096  # lxd/storage/drivers/btrfs: Modify received UUID
-      git cherry-pick 94180308e133e9637ec6e24a8b760207622dd412  # lxd/storage/drivers/btrfs: Set Received UUID
-      git cherry-pick 3e2bf70f6e6921d576c8047788c258bef18ffe21  # test: Extend migration refresh test
-      git cherry-pick fd6845ddda3f80cdd24a8f94c42acce6bff0c41f  # lxd/secommp: Fix sysinfo syscall interception on 32 bit platforms
-      git cherry-pick a3f0fae1090d643dff1f134bf279132feeeb1657  # client/util: Add timeouts to tlsHTTPClient
-      git cherry-pick 3cd532714d9a792159771fd832465eed5a75a5b5  # client/util: Add timeouts to unixHTTPClient
-      git cherry-pick 540ba5df1af846fa40580242ce034724802ad047  # lxd/cluster/tls: Add timeouts to tlsTransport
-      git cherry-pick 76de86ab898d9988b3b9eca1681dd758661680c3  # lxd/main/shutdown: Increase default timeout in cmdShutdown
-      git cherry-pick 5cd4bd87f0c0a096f40048c68ad0239323ea36bf  # lxd/util/http: Adds timeouts in HTTPClient
-      git cherry-pick 91e6e20e07e2cf35c14575ebe9a0afa29f9c2434  # lxd/vsock/vsock: Adds timeouts in HTTPClient
-      git cherry-pick 396c6a30e754eef11f9496208dfa1aaf0146571d  # shared/cert: Adds timeouts in GetRemoteCertificate
-      git cherry-pick 54d4db389f556fb3b6935a622bc37a299037d4c5  # lxd/certificates: Simplify non-admin check
-      git cherry-pick d0dc795b954d8ede11859313adf787500250b645  # lxd/certificates: Comment the logic a bit
-      git cherry-pick 4148e03f53d8fbff46cd4843c54324628c58a0a0  # lxd/certificates: Move duplicate cert detection
-      git cherry-pick 675995fa97b3b5769a0cae79f0cfef0d4cc1b0b4  # doc: Fix typos
-      git cherry-pick 2258ce0cc5c4827ba35592f6e70b56d85e944110  # server.crt referred to as lxd.crt in the prometheus config file
-      git cherry-pick a6a491d11ccbda4e319f1b47a9a89e6e5cac90c7  # doc: headings and whitespace
-      git cherry-pick 772003a58e44c3d8f6a021d28a0b491fbf086813  # doc: check for inclusive language
-      git cherry-pick b85514b4e60b82167643087cce0b723cb741afcd  # doc: change to "Machine in the middle"
-      git cherry-pick 1ee1da44dbf6d00fda8edb7a1abae6291f0789b7  # doc: add exceptions for inclusive language
-      git cherry-pick c51fef6304d8a4c62013a78623e6dacaa30ff730  # doc: update doc for OVN peer routing relationships
-      git cherry-pick 303984636ddf9ecddaa98f8b9cd121e5a01160b1  # github: Re-organize workflows
-      git cherry-pick 3de3c7120b5d618aef1a65dffb45f2ebdd03b574  # github: Add DCO check
-      git cherry-pick 87539f9480bcff7c049dbe1f807a99ffc33f10e1  # github: Split static builds from tests
-      git cherry-pick 765ed1157989797611c28a68cd2f64b5d780e4f4  # github: Add branch target test
-      git cherry-pick c8cfef12334a30a0431afc6fc7dad4639a7abf18  # github: Run commit tests on target
-      git cherry-pick 8b9d3113be85e20f798535555e367315870c0095  # github: Fix commit checks
-      git cherry-pick c2c9355b3e5e152235d8ad90a9de8ba1488f789c  # doc: update firewall configuration documentation
-      git cherry-pick ed30b731e6dec309a22143906e30c02dc153339a  # doc: add a section about LXD and Docker
-      git cherry-pick 814a16a976340229520549f04aa61847d77dfa08  # shared/network: Always return 0 on error
-      git cherry-pick fefbb99066c8e8ee08aa9120060136728e205313  # lxd/utils: Improve errors in instancesExist
-      git cherry-pick 8a2d9b84a5cadb05410fcf778df223d1780630ec  # lxd/device/disk: Improve error in validateConfig
-      git cherry-pick a9ed18794b058e157e2be63f3ccb750b1c067781  # lxd/utils: Check snapshots only once in instancesExist
-      git cherry-pick 755622e22b4312e9563c12486ea4837722df771f  # i18n: Update translation templates
-      git cherry-pick 17554028bb8249d0c0d3c734c9769ff6583ab031  # doc: Fix typo
-      git cherry-pick d8cbd91274bbc6c99180c70ce2db9820fc6541de  # lxd: Prevent use of instance/snapshot name in instance specific routes
-      git cherry-pick b96517aa7200d42d3fec1fdf13f85bc77cf5d240  # doc: document how to handle SAN vs target name mismatch in Prometheus sample
-      git cherry-pick a6801cfab8e766a8fb492ea9da819a8d6947a837  # lxc/list: Don't skip extra info when name filtering
-      git cherry-pick 7bb10081086b1896bf346539cf2b95c50307bdde  # doc: rework doc for setting up OVN
-      git cherry-pick 72908e3210790655024032927e33b25e4ec558a1  # lxd/certificates: Fix token request validation
-      git cherry-pick 884448548ee58c33e371a616e1d65548d495ea5d  # doc: add a Discourse link about simple streams
-      git cherry-pick e737a41e07041e8a98380463a6afd1025d80b2f6  # lxc/config_trust: revoke-token requires a name, not a token
-      git cherry-pick f50b3352e06dd6d0a601762c64dd88cb66d0a7c2  # i18n: Update translation templates
-      git cherry-pick 35accce9080d02bcd00b7e8c09c99b1b7fb52098  # lxd/project: Fix bad error on invalid instance type
-      git cherry-pick 06b97e97ae4e323a11be08e6fbfca269b57b8db3  # lxc/config_trust: update help when client should be singular
-      git cherry-pick ce281f221e46df612173c2b8f6c48c54d6c6395c  # lxc/config_trust: clarify help for join token creation
-      git cherry-pick 5ba747ae0b6f58e2c0b862cf4f7fb783f248615f  # i18n: Update translation templates
-      git cherry-pick 81af9115bc5b03294bfd668aa445e0ac1118bbaa  # lxd/daemon: Fix LXD crash is failing to start due to already running LXD process
-      git cherry-pick 6b4fe985d1dbe0ddbd97636cc71d7a3a8026eb22  # lxd/request: Export CtxKey type and use for all keys.
-      git cherry-pick 3ce35b7cae15d821cb37e8b66d630687baad25d3  # lxd/storage/drivers/driver/zfs/volumes: Simplifies UnmountVolume
-      git cherry-pick cec20ceac5c6ee9d4f1f7db2ad5a7b5aa51bd28e  # lxd/storage/drivers/driver/lvm/volumes: Simplifies UnmountVolume
-      git cherry-pick 48039fb97c40cb12e5e2cc7d4db052441a3ddbe9  # lxd/storage/drivers/driver/ceph/volumes: Simplifies UnmountVolume
-      git cherry-pick c11afc02dc95e7a38abf061f30fbfeba2f7816f5  # lxd/storage/drivers/volumes: v.driver.MountVolumeSnapshot usage in MountTask
-      git cherry-pick c8f826abb661aaf1a2cb23830bcb6476ec0985b7  # lxd/storage/drivers/interface: Removes ourMount indicator from MountVolumeSnapshot
-      git cherry-pick a7f2640509845decbd692c91673aaba131399abc  # lxd/storage/backend/lxd: b.driver.MountVolumeSnapshot usage
-      git cherry-pick 31daa75b563460fcddb55c16429642e45a47998e  # lxd/storage/drivers/driver/mock: Updates MountVolumeSnapshot
-      git cherry-pick c2ed02ca8d76083a529ff9d03983949a991e424f  # lxd/storage/driver/driver/btrfs/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick a873a4e461d0c11ca1673b2560e6064663d0dcea  # lxd/storage/drivers/driver/ceph/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick 3210627f4f54d4d60a81b1a614e990c25d650cf9  # lxd/storage/drivers/driver/cephfs/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick 1f395a48dda7407dc8104ac199b2b2a0fd013929  # lxd/storage/drivers/driver/dir/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick f83b9233172b55379088000544b2a6913c80a8c6  # lxd/storage/drivers/driver/lvm/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick d0d7ffc56c170c14a8473e7c061f132c0f93bd48  # lxd/storage/drivers/driver/zfs/volumes: Adds ref counting to MountVolumeSnapshot
-      git cherry-pick 2c07abb2f176a426ebec4def55516dc0c2df68ca  # lxc/config: no name shown when editing the instance's config
-      git cherry-pick 5e63eb17b68f640ac6d9f33ec2c6c9d3d63835ab  # i18n: Update translation templates
-      git cherry-pick d5efd293005d0358ff66472f32dadfcaba12429f  # lxd/resources: Fix comment
-      git cherry-pick 8387d59ad1897fca1e692916f76ee8ac9f6356b1  # lxd/response: Adds nolint directive for deadcode.
-      git cherry-pick 96453cb4ee60feda0a48e19efe02e0fa4fb855c7  # lxd: Removes unused test function (deadcode).
-      git cherry-pick 8bbaeb2965724b65a57333c909d93f1a62b14386  # lxd/network/openvswitch/ovn: Pass --wait=sb when using ovn-nbctl
-      git cherry-pick 3e1726d4a90de1ef5bac0083fd4c8111c959a397  # lxd/network/driver/ovn: Fix cleanup of bridge mappings of physical OVS parent
-      git cherry-pick 5bc8891a7e02002c14a23889d2fe17745de27b80  # lxd/storage/backend/lxd: Restore instance snapshot volume config and description
-      git cherry-pick 8f82a7ce2b653039ac4076194940a5194241d493  # test: Adds tests for restoration of instance volume snapshot config
-      git cherry-pick d436f5e28bac6aaa6eb7f0d3735d7734fb084606  # test: Run snapshot naming tests for all storage pool types
-      git cherry-pick a3f4b975b91c70febdd2f3e28d0c00173f9b7ccc  # shared/instance: Adds volatile.apply_nvram config key
-      git cherry-pick 46d37d2740459011ada91afa770d33eff73b260c  # lxd/instance/drivers/driver/qemu: Regenerate nvram on next start when security.secureboot profile config is changed
-      git cherry-pick 7b1aca0af9b1955adfe9fd4598d285037ee294ec  # doc/instances: Documents VM volatile.apply_nvram setting
-      git cherry-pick e784133ec090930b92f437f20ba99fcd3cc39d41  # test/static_analysis: Adds golangci-lint and runs deadcode.
-      git cherry-pick c555125936df1068fe846f062ab82c275a5ce612  # lxd/resources: Handle negative CPU indexes
-      git cherry-pick b1d4ef79d1a914b4ba5faaf430d30b2cfa6e3ce9  # lxc/config_device: Add extra example to device add
-      git cherry-pick 4f6ba811aa9893c2e26d5d0c5c4006426a35fd94  # lxd: Increase client header timeout from 30s to 1 hour
-      git cherry-pick a0b9dcfe32bb80501b54c9a23e9dc6d99a00b174  # client: Increase header timeout from 30s to 1 hour
-      git cherry-pick 5d9e62ebd24147d007c6e3449f2b24bcd49c562b  # shared/cert: Increase header timeout from 30s to 1 hour
-      git cherry-pick ff3a045312b4ffeb92f8edfd02afd4f11114d703  # lxc/config_device: Fix small typo
-      git cherry-pick 27d397396e00f8963fcf49964ffbb0c3d274d8db  # lxd/storage/utils: Updates DB functions to take Pool interface argument
-      git cherry-pick b4903584ab66289d95d57ddbed8ea77805681d0f  # lxd/storage/utils: Updates VolumeDBSnapshotsGet to align with other DB function arguments
-      git cherry-pick 4cd8ddb8c1ab85edc987a5c6bfb59117de894eb1  # lxd/migrate/storage/volumes: storagePools.VolumeDBSnapshotsGet usage
-      git cherry-pick b07dd0f8a943091862d5f1bb959ae3350a297dbc  # lxd/storage/backend/lxd: Update DB function usage to pass Pool
-      git cherry-pick 0beb2f7447eaa3065c8f96bbb1370c5926c39b9a  # lxd/storage/backend/lxd: Updates UpdateInstanceBackupFile to use VolumeDBGet
-      git cherry-pick 327b9499d99544680a2a1d12fad798593dedf9b4  # lxd/storage/backend/lxd: Preallocate snapshot slice in UpdateInstanceBackupFile
-      git cherry-pick 5b55f2f47ae88b1d813869fbc56848f4db2e7755  # lxd/db/storage/volumes: Populate content type and config in GetLocalStoragePoolVolumeSnapshotsWithType
-      git cherry-pick 056711b40117a6a12a74abb3f0269414363cae77  # lxd/storage/backend: Populate instance storage volume snapshots in UpdateInstanceBackupFile
-      git cherry-pick 89e5cc30be695d64a3838d6705c6c2d6d91118a3  # lxd/backup: Switch to storagePools.VolumeDBGet in volumeBackupCreate
-      git cherry-pick 6271b7bfe356021feaa0cdaa51db93429b0b3d11  # lxd/backup: Updates volumeBackupWriteIndex to use storagePools.VolumeDBSnapshotsGet
-      git cherry-pick 4d07ab5188883d426d4079b9e1339b7c25023e3c  # lxd/db/storage/volumes/snapshots: Removes unused function GetStorageVolumeSnapshotsNames
-      git cherry-pick 24f0bd373dad271e20f5593cf663592fe9c71317  # lxd/storage/backend/lxd: Updates BackupCustomVolume to use VolumeDBSnapshotsGet
-      git cherry-pick c9a22ca4ee9d265a259837715a78cbc9aa16b922  # lxd/images: Remove references to cluster node in user facing error messages
-      git cherry-pick e9c52606d9512e389ef5039ec346186177e0d6f6  # lxd/db/query/transaction: Start errors with capital letter
-      git cherry-pick 66de913f1512ce54d8566e73fc033375f210e572  # lxd/backup: Whitespace
-      git cherry-pick 2e9cff18b1950acde75a8cd0b3e26f1fc6c2639f  # lxd/backup: Populate volume config in backupWriteIndex
-      git cherry-pick f5dbba350a305e7ea59929063aaaec919d6be0b4  # test: Add tests for checking that storage volume records are exported and restored from backups
-      git cherry-pick 29141a8e601edaf2f59e9faba8dd53578330f22e  # lxd/storage/utils: Adds removeUnknownKeys argument to VolumeDBCreate
-      git cherry-pick 9f6a305c63dfe5008a743f02118f3c20191319db  # lxd/storage/backend/lxd: VolumeDBCreate updated usage
-      git cherry-pick 17ade3e1c6a40f64673a09177accd8652f32ff88  # lxd/storage/backend/lxd: Updates CreateInstanceFromMigration to strip unknown storage volume config keys
-      git cherry-pick f4eb2cfddff85fe641da7144e3a7e45d5fc58428  # lxd/storage/backend/lxd: Don't strip unknown storage volume keys for same pool copies in CreateCustomVolumeFromCopy
-      git cherry-pick 2b7f1d95ebe5e90f3d3f5d37a4da8f9fdbbbe6da  # lxd/storage/backend/lxd: Updates CreateCustomVolumeFromMigration to strip unknown storage volume config keys
-      git cherry-pick de3aedd3d8701c934ee19f5513c0a9aae7743630  # lxd/storage/backend/lxd: VolumeDBCreate updated usage when stripping unknown storage volume config keys
-      git cherry-pick f030133a8eae7a021d89f59d78aea8ecc6069713  # lxd/storage/backend/lxd: Updates CreateInstanceFromBackup to use storage volume config from backup
-      git cherry-pick 93e99101d1a4e790156545f54b6b0096476dcc6d  # lxd/storage/backend: Copy snapshot config for same-pool copies in CreateCustomVolumeFromCopy
-      git cherry-pick ccc24ff92e7bf0907e1f70dff6878e8c55e849a2  # lxd/storage/backend/lxd: Use snapshot volume config when restoring custom volume in CreateCustomVolumeFromBackup
-      git cherry-pick f3b58db35697172a5cf31e531d5e96abd3795521  # test: Add tests to check snapshot volume config is restored from backup
-      git cherry-pick 2ef818941e3c8934ee64ab2ea0ace8b251b9eece  # lxc/config_trust: Fix single argument trust remove
-      git cherry-pick 1e3631c58020c451a7ba0c8daf475f8f8290cf4c  # Revert "lxc/config: no name shown when editing the instance's config"
-      git cherry-pick c02c059cefc7cedcbeaa4fc1afa942d8effa177d  # shared/api: Mark ExpandedConfig and ExpandedDevices fields as omitempty
-      git cherry-pick 2892bd1ab02c513d0c17db2fc4e7336f76735936  # lxc/config: Exclude expanded config from edit screen
-      git cherry-pick 0452873cb3396e355070fd1a1e6f6814bd262b02  # lxd/filter/value: Fix parsing of yaml tags in ValueOf
-      git cherry-pick 555ed25027d7204f332907932986b2879431b055  # test: Check instance name in edit screen
-      git cherry-pick 16748816f34c2d8e2e76f29cde494df1e22c6582  # lxd/device: Add rbd format constants
-      git cherry-pick b0d31c1f18450d9e8466e1ffe28f1041d6bf373f  # lxd-agent/state: Handle cgroup v2 cpu usage
-      git cherry-pick c7bf2e5e76ae36bff6fd91a9731103a78bb129ad  # lxd-agent/state: Use /proc/meminfo
-      git cherry-pick eac62ff1e86a14c2ca5159a0ac3cafca5a0bf748  # lxd/device: Add DiskGetRBDFormat
-      git cherry-pick 4628402fd34a98e2582d4f28184d8a87c2a9f46c  # lxd/device: Add DiskParseRBDFormat
-      git cherry-pick c7450dc3c08e088511757570740001fca310c4e8  # lxd/storage/drivers/ceph: Add cluster and user name constants
-      git cherry-pick 2d3a472d9b80f592dfe6e17d2470db7c5b443134  # lxd/storage/drivers/ceph: Use constants
-      git cherry-pick 3d1b106f441c1c1ace9cae9826429843f60b957b  # lxd/device/disk: Use ceph constants
-      git cherry-pick 0bfa989db2ea6ec23b2ae99bb1ab50f83994386b  # lxd/instance/drivers/qmp: Add AddSecret
-      git cherry-pick b17a8b6f7cdcda59ece3dc208bedb00eb4c9c1b7  # lxd/storage/drivers/ceph: Add CephGetRBDImageName
-      git cherry-pick 513db1b4cea9621643d26e8a160202b3b7a96c61  # lxd/instance/drivers/qemu: Use QEMU rbd driver if possible
-      git cherry-pick 897a481be9738ccc1e3a0ab3c736ed02e4de05f6  # lxd/device/disk: Use rbd syntax for rbd volumes
-      git cherry-pick 28c09e0c5955e63584de714a1d191eb2d9eb656d  # lxd/storage/drivers/ceph: Fix typo
-      git cherry-pick 7013d1fcd8e6dbbdd4558634c334057e53eeb3c6  # lxd/instance/drivers/qemu: Handle rbd root devices
-      git cherry-pick 5fef4e57c163e25fc1bd04a5782a833aee3e00c5  # lxd/instance: Fix auto-snapshot on restricted projects
-      git cherry-pick 3b401a2597506b6ab1d76e9abe7045dacaf3ff35  # lxd/instance/qemu: Fix ceph username key
-      git cherry-pick d5f4a5993c11b045b283ebf032f519a81ae60800  # lxd/instance/qemu: Fix ceph volname in projects
-      git cherry-pick b378f75bd65667450da0b09aebc9f11da2d21c22  # test: Add additional tests for checking volume snapshot config is copied
-      git cherry-pick 6eda335cdaa9e189a8c11b169ef107e862bf5e90  # lxd/storage/volume: Use source snapshot volume config when copying to new volume in cmdStorageVolumeCopy
-      git cherry-pick 7f66d34c917497c1eef8c5d474e1c54f1b9b7d86  # lxd/storage/volume: Fix move of snapshot in cmdStorageVolumeCopy
-      git cherry-pick ae832a262f5543a9e3b88127409f1d6934696655  # test: Adds check that source snapshot config is used when copying snapshot to new volume
-      git cherry-pick 9ca95398b56c81b6e359b819f917c06d63e56cfa  # lxd/cluster/heartbeat: Improve heartbeat logging
-      git cherry-pick e3a8911ac4a8e7fe88712ccbc4779ac00ff0c3db  # doc: add link to YouTube video for network ACLs
-      git cherry-pick 6dd536cf272b0b836f6675c746d11ac9fab049a3  # lxd-agent/devlxd: Don't expand format strings
-      git cherry-pick d2f5b7c30d7054f2cf82295461ec9619218dbff6  # lxd/instance/drivers/qemu: Set conf option in rbd driver
-      git cherry-pick a8ab396e46e3d19cae7415e2b2c7d01d4e41b6e2  # lxd/instance/drivers/qemu: Fix ceph conf filename
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
