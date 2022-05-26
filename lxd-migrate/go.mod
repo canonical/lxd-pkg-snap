@@ -5,8 +5,8 @@ go 1.18
 replace google.golang.org/grpc/naming => google.golang.org/grpc v1.29.1
 
 require (
-	github.com/lxc/lxd v0.0.0-20220411201111-31e57c0cfe9c
-	github.com/mattn/go-sqlite3 v1.14.12
+	github.com/lxc/lxd v0.0.0-20220526200742-11ace6e6c1b3
+	github.com/mattn/go-sqlite3 v1.14.13
 )
 
 require (
@@ -24,10 +24,10 @@ require (
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rogpeppe/fastuuid v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
-	golang.org/x/net v0.0.0-20220407224826-aac1ed45d8e3 // indirect
-	golang.org/x/sys v0.0.0-20220408201424-a24fb2fb8a0f // indirect
-	golang.org/x/term v0.0.0-20220411215600-e5f449aeb171 // indirect
+	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
+	golang.org/x/net v0.0.0-20220526153639-5463443f8c37 // indirect
+	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/term v0.0.0-20220526004731-065cf7ba2467 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/errgo.v1 v1.0.1 // indirect
 	gopkg.in/httprequest.v1 v1.2.1 // indirect
