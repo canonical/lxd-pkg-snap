@@ -316,7 +316,7 @@ fi
 
 # Rotate logs
 echo "==> Rotating logs"
-logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status"
+logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status" || true
 
 # Setup for ZFS
 if [ -e /sys/module/zfs/version ]; then
