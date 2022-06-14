@@ -8,6 +8,7 @@ fi
 
 # Set the environment
 export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
+export PATH="/run/bin:${PATH}"
 
 # Reset all locales as it isn't available in the snap (#29)
 LANG=C.UTF-8
