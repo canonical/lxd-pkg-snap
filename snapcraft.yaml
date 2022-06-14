@@ -1170,37 +1170,37 @@ parts:
       - libgnutls28-dev
       - libselinux1-dev
       - pkg-config
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-      - --disable-api-docs
-      - --disable-bash
-      - --disable-doc
-      - --disable-examples
-      - --disable-memfd-rexec
-      - --disable-tests
-      - --disable-tools
-      - --enable-apparmor
-      - --enable-seccomp
-      - --enable-selinux
-      - --enable-capabilities
-      - --with-rootfs-path=/var/snap/lxd/common/lxc/
-      - --libexecdir=/snap/lxd/current/libexec/
+    plugin: meson
+    meson-parameters:
+      - --prefix=/
+      - -Dexamples=false
+      - -Dman=false
+      - -Dtools=false
+      - -Dtests=false
+      - -Dmemfd-rexec=false
+      - -Dapparmor=true
+      - -Dseccomp=true
+      - -Dselinux=true
+      - -Dcapabilities=true
+      - -Drootfs-mount-path=/var/snap/lxd/common/lxc/
+      - -Dlibexecdir=/snap/lxd/current/libexec/
     organize:
       snap/lxd/current/lxc: lxc
       snap/lxd/current/libexec: libexec
       share/lxc/hooks: lxc/hooks
     prime:
       - bin/lxc-checkconfig
-      - lib/liblxc.so.1
-      - lib/liblxc.so.1.*
+      - lib/*/liblxc.so.1
+      - lib/*/liblxc.so.1.*
       - lxc/config/common.conf.d
       - lxc/hooks/nvidia
     override-build: |
       set -ex
 
+      cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
+      cd ../build
 
       git cherry-pick ca4c25c6e9ebb92f9e241ef9a231d4a715cb812d  # lxc-net: don't start by default inside lxc
       git cherry-pick f314419d1e054f7833b6976ec5ed32373aace622  # lxc-checkconfig: Fix bashism
@@ -1217,8 +1217,6 @@ parts:
 
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
-      sed -i "s#includedir=.*#includedir=$SNAPCRAFT_PART_INSTALL/include#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
-      sed -i "s#libdir=.*#libdir=$SNAPCRAFT_PART_INSTALL/lib#g" $SNAPCRAFT_PART_INSTALL/lib/pkgconfig/lxc.pc
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
