@@ -567,6 +567,10 @@ if [ "${daemon_syslog:-"false"}" = "true" ]; then
     CMD="${CMD} --syslog"
 fi
 
+if [ "${daemon_verbose:-"false"}" = "true" ]; then
+    CMD="${CMD} --verbose"
+fi
+
 # Check if this is the first time LXD is started.
 FIRSTRUN="false"
 if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
