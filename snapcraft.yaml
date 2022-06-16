@@ -1239,7 +1239,6 @@ parts:
 
       - lxc/config/common.conf.d/00-lxcfs.conf
       - lxcfs/
-
     override-build: |
       snapcraftctl build
 
