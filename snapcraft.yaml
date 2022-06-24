@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.2"
+version: "5.3"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1276,7 +1276,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.2
+    source-tag: lxd-5.3
     after:
       - lxc
       - dqlite
@@ -1322,12 +1322,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 03d56b1757af452b4ed5fb2afde81d3157cd238d  # lxd/resources: Handle ethtool not supported
-      git cherry-pick c90ab70a36930863c20b0e0874309c0f28dcc077  # client: Move image profile override to ImageCopyArgs
-      git cherry-pick 78ac0b1c4423723e09a137704a97a921390ad648  # lxc/image: Update for Profiles in ImageCopyArgs
-      git cherry-pick a1cedd9a1e8dc152dae5abbff52a914eb3acf268  # lxc/profile: Fix bad target project handling
-      git cherry-pick 549e4cbbf4b3aa6796529e2bef7a5ff3c518714a  # tests: Fix bad profile copy test
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
