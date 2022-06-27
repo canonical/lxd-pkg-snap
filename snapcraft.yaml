@@ -1323,6 +1323,11 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick a12dd42338eb902864e9a59cc86ee2d0ffe2a309  # shared/subprocess/manager: Improve errors in ImportProcess
+      git cherry-pick 668eef85f6c72f221aa70170663134d081a45a4e  # lxd/network/openvswitch: Use %s so that delimiting quotes are not escaped.
+      git cherry-pick daa9d2e54dae7417f251721f4b11d3ef6f8ac7de  # doc: fix version switcher to work for latest
+      git cherry-pick c88d99ac40a7b5d1354e412c71e17a9e458bccbb  # doc: storage: clarify moving of storage volumes
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
