@@ -569,7 +569,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v2.17.0
+    source-tag: v2.17.2
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
