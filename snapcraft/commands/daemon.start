@@ -189,6 +189,12 @@ if [ "${lvm_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/lvresize"
 fi
 
+# Detect presence of sideloaded lxd-agent executable.
+if [ -x "${SNAP_COMMON}/lxd-agent.debug" ]; then
+    echo "==> WARNING: Using a custom debug lxd-agent binary!"
+    ln -s "${SNAP_COMMON}/lxd-agent.debug" "/run/bin/lxd-agent"
+fi
+
 # Redirect getent to the host
 ln -s "${SNAP}/wrappers/run-host" "/run/bin/getent"
 
