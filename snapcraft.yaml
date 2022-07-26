@@ -1226,7 +1226,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-5.0.0
+    source-tag: lxcfs-5.0.1
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -1261,23 +1261,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 42c155d1df92d8bbabdb1de3433048584bb05d47  # lxcfs_fuse: ensure lxcfs_fuse_compat.h is included after including fuse header
-      git cherry-pick e297458cb0d2a5c7f91ddacc771d4cf9efe301f8  # tree-wide: remove struct stat argument from DIR_FILLER and make it static inline
-      git cherry-pick d58528f752aaa532eb3871899a27d66996a2a798  # tree-wide: ensure that file information is set even with legacy fuse
-      git cherry-pick 02beb5d4e1b82e3416988af2341142518c804bd3  # tests: add test for issue #522
-      git cherry-pick 112f0b9ca720b8f0da4d4a39153c16f55e3294e1  # meson: Include documentation
-      git cherry-pick 1ef15e0d1f345ebb851f1bab8835cace5279e392  # workflows: disable documentation generation
-      git cherry-pick 9d6cded612483cfb31919f306d1975ce801d8e25  # sysfs: Don't incorrectly filter entries
-      git cherry-pick dcc13128a03b8af4e975e65b32afc841074bedb8  # tests: Fix sysfs test
-      git cherry-pick 5daf75dbed117c75198e104f852fd170cac766de  # utils: add and use opathdir()
-      git cherry-pick 2e3a6f5d8240695bd13a7a6da75de895b9407492  # sysfs_fuse: fix indendation
-      git cherry-pick 2e13f0be3ad903adf870e7a3032c3356c0c9e4eb  # sysfs_fuse: generate file info for cpu<nr> entries as well
-      git cherry-pick 75395f89cf6de91695562a0a47e36acbba879c1e  # meson: bump fuse version
-      git cherry-pick 35bf60d4eed08e703180c1f6ec505c7c91442915  # github: add fuse3 tests
-      git cherry-pick 006db260b1202761a6661085f7af2fd3cd7083f3  # meson: handle fuse versions with buggy dt_type handling
-      git cherry-pick b997ce418919137df7a4552b2b8e0d8207edbaa5  # init/meson: Use libdir instead of hardcoded /lib path
-      git cherry-pick a08da8d7e63a023679603a93c18b6bfc443f9471  # Query systemd system unit dir.
 
       set +ex
       snapcraftctl build
