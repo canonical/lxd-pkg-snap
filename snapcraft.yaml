@@ -1166,7 +1166,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-5.0.0
+    source-tag: lxc-5.0.1
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -1203,16 +1203,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 289d6413ebac8b34394a9f5dbffdb6a70e7f145f  # meson: Generate compile commands by iterating over an array
-      git cherry-pick c55353f84a8c171d0ccb911e1d34a5ed5577def1  # use systemd dbus StartTransientUnit for unpriv cgroup2
-      git cherry-pick 26de6cbc8d8c765877c8e55cf2d84b0ceec5fad1  # fix for issue 4026: set broadcast to 0.0.0.0 for /31 and /32
-      git cherry-pick fc133a9f37a62f4f35d66ee309d28d4953920b4a  # conf: log file descriptors on error during idmapped mount setup
-      git cherry-pick 7317d2a8a7d81a6208c64446b47f09748d406ecc  # start: don't overwrite file descriptors during namespace preservation
-      git cherry-pick 6c50e09f2cd59d60aa3d60d87c8e6442ad062c48  # start: record inherited namespaces earlier to make it available for idmapped rootfs setup
-      git cherry-pick eae44ce1993160508dc7155318f6cc9c18bfaf3f  # conf: fix append_ttyname()
-      git cherry-pick 07a00b78f0142ee2098a30b792c80eb578765d39  # start: fix namespace sharing
-      git cherry-pick 8ee615c27d4e646b13a767ffc59823262b38427d  # add check for statvfs
 
       cd ../build
 
