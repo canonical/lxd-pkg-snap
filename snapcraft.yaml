@@ -1309,6 +1309,139 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 4b46f58c02779362f416cf627ec71ab8f8ac29f4  # Doc: Fix LXD volume group to LVM
+      git cherry-pick d63fba01e8ea7819717f1967be9085558e27ce49  # Remove redundant LXD before ZFS pool
+      git cherry-pick fc140d3015e1a5c013f1f1580692eeb0efbe6f41  # Doc: change a LVM to an LVM
+      git cherry-pick 43c4fd3130ba94d21a853d4aef2f0ffd80b30d0f  # doc/authentication: add information about a server behind NAT
+      git cherry-pick 7f27a3ba1a8f21b18dc9c0f35f9061145c597e08  # lxc/remote: Allow specifying alternate server address for tokens
+      git cherry-pick ab77b4f9a180b877eae35d5c72a05693e3a99e60  # i18n: Update translation templates
+      git cherry-pick 8c713b286fbafff93d982b95a88d4b29455b1004  # lxd/db/warningtype: Move warning type definitions to warningtype package
+      git cherry-pick cf361a63bc33ec9a4848255af50b77d3fd66632e  # lxd: Update usages of warning types
+      git cherry-pick 9af51f059cb710da41ffc3a49069812dd44877fc  # lxd/db/cluster/warnings: Add cluster.Warnings
+      git cherry-pick 07154953e21d79cf8824d8edf2b865030351b51c  # lxd/db/warnings.mapper: Remove db.Warnings and its code generation
+      git cherry-pick d97997b7a539e0a2856b26365a9f0683ee37c951  # lxd/db/cluster/warnings.mapper: Update generated code
+      git cherry-pick 75345c33907cb16cc051f7cb0890c883e8c8ba27  # lxd/db/cluster/mapper: Get Images/Certificates by ID
+      git cherry-pick 14fcce518ed8e06ddec55fcb1b82b0032400682e  # shared/api/certificate: Add api.Certificate URL helper
+      git cherry-pick 3a351cb4f92308cfe6fa87fd377d87bcdaed7374  # lxd/warnings: Add getWarningEntityURL
+      git cherry-pick 1dd0710c60e182b97877f577e636f1f9b590d8c8  # lxd/warnings/warnings: Use cluster package helpers for Warnings
+      git cherry-pick 5822fcc540fad5e3e0a08ee2944e62f5bfee2471  # lxd/db/warnings.mapper: Remove db package warnings generated files
+      git cherry-pick acd8783c30e7f50e10fc8befc98bb5ea1187ea66  # lxd/db/generate: Remove v1 generator
+      git cherry-pick 61d268bf607318c85369765c426f3460130cc9ec  # lxd/db/cluster: Remove version flag from generator comments
+      git cherry-pick b25bcf87363fa8344e075c154c473ed0edbf3b03  # lxd/db/warnings: Remove unused types
+      git cherry-pick 31decfb3436bd5360cc9c0389ace2ca90dbe853d  # doc/storage: add link to video about benchmarking storage drivers
+      git cherry-pick 3d5031854587fd72c44eab8332b633cc76cb8955  # lxd/db/storage/buckets: Fix member specific filter bug in GetNetworkLoadBalancers
+      git cherry-pick a0f934c15e2377ac3d7faead87b20d5b567390c3  # lxd/db/cluster/projects: Move ProjectFeatures and ProjectFeaturesDefaults into cluster package
+      git cherry-pick c6d0928b0f5ad63d8eb835d0ff454e14b4931b16  # lxd/db/cluster/open: Update EnsureSchema to use ProjectFeaturesDefaults for default project features
+      git cherry-pick 4543d68bf1300e173ca4bf985202a9f38b274af7  # lxd/api/project: Use cluster.ProjectFeatures and cluster.ProjectFeaturesDefaults
+      git cherry-pick 08be2fbdfe2b14bba768bbb4ebab950c512cad96  # lxd/db/network/forwards: Adds context arg to GetNetworkForwards and GetNetworkForward
+      git cherry-pick 39d23740c9cd231ab028f0b90e536802519401e8  # lxd/network: GetNetworkForward and GetNetworkForwards usage
+      git cherry-pick c668fa4c8db10ed59eb9206d4b68e1ab8674dd23  # lxd/db/network/forwards: Adds optional listenAddresses filter to GetNetworkForwards
+      git cherry-pick 17afd9a652d28fcc8ec35db085cb2861ab0a48fe  # lxd/db/network/load/balancers: Adds context argument to GetNetworkLoadBalancer and GetNetworkLoadBalancers
+      git cherry-pick ddf01698534606fda914be4b4577bb4c3a8a2a4b  # lxd/network: Usage of GetNetworkLoadBalancers and GetNetworkLoadBalancer
+      git cherry-pick df55120483f11031266ab67c5a35f977813e11db  # lxd/db/network/load/balancers: Adds optional listenAddresses filter to GetNetworkLoadBalancers
+      git cherry-pick 5b062fa7c88b8eb52f98ffcf4a747eecc7933723  # lxd/db/cluster/stmt: Export Stmt helper
+      git cherry-pick b1169eba5bd9f835ccf4e08b6c67c4fe471e24f5  # lxd/db/cluster: Use exported Stmt helper
+      git cherry-pick 414d5f653fa062aeb4825ae4fb2bb8dae993dbad  # lxd/db/generate/db/method: Use exported Stmt helper
+      git cherry-pick 4b3a5b4d5d2c1555cde239bede406c66da5af372  # lxd/db/cluster/mapper: Update generated code
+      git cherry-pick f382739606e8de40c371cd3f49a3aa711cfbf2f0  # lxd/db/transaction: Remove Cluster/ClusterTx prepared stmts field
+      git cherry-pick bcdb5d1166f4edcda65e2a782f7fe4c9150249cb  # lxd/db: Use cluster.Stmt as the only statement store
+      git cherry-pick 999f190c75ce359cd0e63b3549079eccc309e843  # lxd/storage/drivers/driver/lvm/volumes: Fix "lvm.stripes cannot be used with thin pool volumes" error
+      git cherry-pick 6de3139072bc6c74cfe672d33d30b0778670eace  # lxd/lifecycle/network/load/balancer: Fix load balancer lifecycle types
+      git cherry-pick 107e6f99ebf2c8c281b07bb96131d6262b8b84fc  # shared/api/event/lifecycle: Fix typo in constant
+      git cherry-pick 93f381604b0b14ce8a737cdcffd4d93776628099  # lxd: Update response.SyncResponseLocation URL generation to use api.NewURL() helper
+      git cherry-pick f9e5058f652db516e5862278c6396c5054779fee  # lxd/network/load/balancers: Add missing networks segment to URL response in networkLoadBalancersPost
+      git cherry-pick 9d18ed16bf4d4a20b986c10c0771d8886cc1bddf  # lxd/storage/volumes: Adds missing volume name to URL response in storagePoolVolumeTypePostRename
+      git cherry-pick 6494353de00fc5b69b79351b1c90795e14abb6a9  # lxd/lifecycle: Reworks URL generation to use api.NewURL()
+      git cherry-pick 6986133e1699725b4d904d67a9d34c626f2ea083  # lxd/lifecycle/cluster/member: Update ClusterMemberAction.Event to use api.NewURL
+      git cherry-pick 338c345e21a4511d2d22d2a4f103a3cc6176dd60  # lxd/lifecycle/instance/backup: Updates InstanceBackupAction.Event to clarify what backup name is expected
+      git cherry-pick 659ce1df8e1d76e793e304b3b1f41d193d561ff4  # lxd/instance/backup: Pass full backup name to lifecycle.InstanceBackupRetrieved.Event
+      git cherry-pick 4235d8c00b0ae26e9b44324c3a1b8e6716ee4ee9  # lxd/lifecycle/storage/volume: Make StorageVolumeAction.Event require volume with name and type
+      git cherry-pick 03ac407276c3347306db774050c8568815a86d67  # lxd/lifecycle/storage/volume/backup: Updates StorageVolumeBackupAction.Event to clarify the type of backup name required
+      git cherry-pick e3b297c1b5cfd1b614aa7f84eeaec6db38d5739a  # lxd/storage/volumes/backup: Pass full backup name into lifecycle events
+      git cherry-pick bfbea843ae8953d2023f391eb483cf1b45a21b21  # lxd/lifecycle/storage/volume/snapshot: Updates StorageVolumeSnapshotAction.Event to expect snapshot volume
+      git cherry-pick 68f9e39365275c6414b36adb3a8b7f687b30c48a  # doc: add spellcheck
+      git cherry-pick 0ebdc22bf0b38b9c7c4459466e4550e74f843ca7  # doc: add spellchecking to the tests
+      git cherry-pick f13821f285ca1e6d5bf7934a21f8f795d7ae5541  # doc: add an extension to allow spelling exceptions
+      git cherry-pick b594468dda9e09f261bff9a43649f7f3bca4c2a9  # doc: update word list for spellchecker
+      git cherry-pick aa86f6cda40d8a09b6f2360c2d4b0949203540df  # doc: fix spelling README.md
+      git cherry-pick 8d6a722665b24cb66800e056ad558a34cc67cbca  # doc: fix spelling api-extensions.md
+      git cherry-pick 6bdbe427f0351a96bebf1aedf85cd2bee612ab6a  # doc: fix spelling architectures.md
+      git cherry-pick f31ac38efb6b09a16f0b11b4a47cfeb55808e370  # doc: fix spelling backup.md
+      git cherry-pick 5d2e44471859b0cdbdc6b084cbb5e6beb51f2c90  # doc: fix spelling events.md
+      git cherry-pick f1ca335f6cf664a9bae16b39098bcb375dd586b4  # doc: fix spelling faq.md
+      git cherry-pick 330cb3bcd3a7601abb84b92e95e9461391561109  # doc: fix spelling instances.md
+      git cherry-pick 1bf0cf4fec90b3be19bfa76e3cd84b65a55ad0ba  # doc: fix spelling security.md
+      git cherry-pick 80ffd27e075856bd5ae29d341065357a983db87f  # doc: fix spelling server.md
+      git cherry-pick ce30f2537f3ae09c5fb5b4dcbf955aee25a7b637  # doc: fix spelling network_bridge_resolved.md
+      git cherry-pick 9c1f1f5db47214de19c79e41b758530cdb2ed6b0  # doc: fix spelling metrics.md
+      git cherry-pick d1ec7df36c93c92b38abea9029283765d84e9251  # doc: fix spelling projects.md
+      git cherry-pick 3bf8206544f6618cdb6967cc87ed5004a54eb9b8  # doc: fix spelling rest-api.md
+      git cherry-pick 94d1ea8814f1d0e8ff364571f4615c25089fc051  # doc: fix spelling network_bridge.md
+      git cherry-pick e81a8b5ed8d0e2d85b020aa0359ba59314a55d35  # doc: fix spelling network_macvlan.md
+      git cherry-pick 1a865f9fb7e128491a2a89133956f972f8cc6d43  # doc: fix spelling network_ovn.md
+      git cherry-pick a934751bbe5649bafc185d1e70ba40958cfe9ecc  # doc: fix spelling storage_btrfs.md
+      git cherry-pick 36c6886e042024a647c97798bd6e38b0498329cc  # doc: fix spelling clustering.md
+      git cherry-pick 40ca0710fed5618ae9d736e7850cee4d3a9a114e  # doc: fix spelling container-environment.md
+      git cherry-pick f35b07d6e8255750e77db70dd36fc7658662211a  # doc: fix spelling database.md
+      git cherry-pick 5bb49fb9873d5c3e98d554af1366499665458f32  # doc: fix spelling dev-lxd.md
+      git cherry-pick fee5fb7ab04d797ffe014405b8ab3cadb57f65cf  # doc: fix spelling network_acls.md
+      git cherry-pick 2c68f04d1e45219f0946a6ef92e700323ad7466e  # doc: fix spelling network_load_balancers.md
+      git cherry-pick f8b498baad15bedf013bc999bc80574c1a5c65fa  # doc: fix spelling userns-idmap.md
+      git cherry-pick 9fe2935e298c568d8328d36021955e164fc8467d  # doc: fix spelling syscall-interception.md
+      git cherry-pick 2c5d90f3c699ab2aa02eb48293f9b61442948e76  # doc: fix spelling requirements.md
+      git cherry-pick 640f4ea001ce60a296c8deac7e45e9b6e6de1322  # doc: fix spelling remotes.md
+      git cherry-pick 20f3d383afe08df696b9827219820ec8a9983b63  # doc: fix spelling storage_zfs.md
+      git cherry-pick 61c28bd884f8ddb8bb85b330123c61aedff68689  # doc: fix spelling storage_lvm.md
+      git cherry-pick 756e5d7b54023b4fc53ed344f9ca59dd79af092a  # doc: fix spelling storage_drivers.md
+      git cherry-pick b86eb620f1d57394b575e5398c190b0b0b709aa0  # doc: fix spelling storage_dir.md
+      git cherry-pick 35158d612fa098a334bd4cbecd56c1b38191c8c4  # doc: fix spelling storage_cephfs.md
+      git cherry-pick a0f64cf3382610a8892cfa7427b19b5c5cc8e07a  # doc: fix spelling storage_ceph.md
+      git cherry-pick 0e029aa734673f4a06c6eaf4a8dae416195ce9de  # doc: fix spelling network_sriov.md
+      git cherry-pick a5ed04ce0aff932113331e2517ca4cc9983937c8  # doc: fix spelling network_physical.md
+      git cherry-pick be38767a8f5b5fdca72c9b20fea01ca198c2d1cf  # doc: fix spelling network_forwards.md
+      git cherry-pick ba9026d0a3baac8ebed8c040117bb1267a86f395  # doc: fix spelling network_ovn_peers.md
+      git cherry-pick 87704d4192066b6c7ba4e8d4f6895bbcd7e898fa  # doc: fix spelling network_zones.md
+      git cherry-pick 625fb8c726e3dd20db8fc4fcfabe863b78fa505f  # doc: fix spelling storage_add_volume.md
+      git cherry-pick 9e771e37a187e878e0d538f8997c435d55060520  # doc: fix spelling image_handling.md
+      git cherry-pick a2d3c94dc8dbcaae7306221b17cad44ee3a559c1  # doc: fix spelling migration.md
+      git cherry-pick afa92f2fcad77245a8bb994cedb3638b7304b1b7  # doc: fix spelling production-setup.md
+      git cherry-pick 5cda53749755f940870c7603588d77cc177418d9  # doc: exclude some tags from spell checking
+      git cherry-pick 5b86ebb754fb3bb63a26faa46b442f35db36c45a  # doc: allow Markdown syntax when we need markup in a link
+      git cherry-pick 8cf95b842e616cb82310b0df3029ef94595e1515  # doc: fix spelling authentication.md
+      git cherry-pick d4852e11b55a957f9e41cad63e45cc1d8e148a4c  # doc: fix spelling cloud-init.md
+      git cherry-pick 9f4ff3240cc29c4b94f5122b37cc421cb13db8ea  # doc: fix spelling containers.md
+      git cherry-pick ae775563e9aec08f1bb38269aeac2249da5a12ff  # doc: fix spelling contributing.md
+      git cherry-pick b710c743c727ddca28a399be97229c6ffbca8b25  # doc: fix spelling daemon-behavior
+      git cherry-pick d13f045c45a3b0b6e2baaa069ad3f9ff05c8e152  # doc: fix spelling debugging.md
+      git cherry-pick 1b22739e0e2aec3075d627b0c2734b29e2aefe41  # doc: fix spelling doc-cheat-sheet.md
+      git cherry-pick 66c756c1b0e40d09a4cf0aba8f03c15eba13f246  # doc: fix spelling networks.md
+      git cherry-pick c311a8b3af07afdcdbc9d1ab04327bbb6e65d721  # doc: fix spelling storage.md
+      git cherry-pick 3057fe511f54f7c2d3ed6bcbc5ce65e62dbaadcc  # doc: fix spelling network_bridge_firewalld.md
+      git cherry-pick 53d00147585e7516b3851b80dcb7ab22b5eaaba8  # doc: fix spelling network_ovn_setup.md
+      git cherry-pick 04094a4612b90e8ef6a0d34b9f2b2c447a550e09  # doc: fix spelling storage_backup.md
+      git cherry-pick 77c83416b6b88f14e1245df12dacc45e2a516688  # doc: fix spelling installing.md
+      git cherry-pick 71ad2a5c0c2d44f56c441f873d1c066540873d3e  # doc: fix spelling instance-exec.md
+      git cherry-pick ee38e0697ff38804cf7bbc69d18b1dc08ad7baf2  # doc: fix spelling profiles.md
+      git cherry-pick f95b8a701c620e51972001e61e76149ebe61c889  # doc: fix spelling CONTRIBUTING.md
+      git cherry-pick 137687f7457b9394391ee69220bf978241620e6f  # lxd: Use lifecycle URL in SyncResponseLocation
+      git cherry-pick f5b2b31b414b2b468a72dbffbf583d94d114e4e0  # lxd/lifecycle/storage/pool: Remove projectName arg from StoragePoolAction.Event
+      git cherry-pick 94efac92ffcfaff110705294023e0e141fd0b797  # lxd/networks: Adds project to networksPost SyncResponseLocation response
+      git cherry-pick c45853320a2dff8a5dfc17e98e4cbc078cd716ae  # lxd/storage/pools: Updates storagePoolsPost to use a common lifecycle var
+      git cherry-pick 38176042231d7c59b7e44b42ece79291c6b527ed  # lxd/storage/pools: Fix comment typo in storagePoolsPost
+      git cherry-pick a6974a574440e01558fc613c838330c5741b3692  # lxd/storage/pools: Updates storagePoolPut and storagePoolDelete to use updated lifecycle function
+      git cherry-pick 8867fed437306f6732ab215f4403deb1a2a8e83e  # lxd/storage/volumes: Adds project to SyncResponseLocation in storagePoolVolumeTypePostRename
+      git cherry-pick a0a49a91a6a8702cf645675daaac9f3175fb9c8b  # lxd/db/instances: Don't use query parameters with IN statement when loading instance config in InstanceList
+      git cherry-pick ddd27b3861ee68310c98ffb61a6f4bd161105a4b  # lxd/db/instances: Use query.Params in GetProjectAndInstanceNamesByNodeAddress
+      git cherry-pick 8d0b084d5676d1c1d76874b5caf7fced83ebfc5b  # lxd/db/instances: Use query.Params in GetProjectInstanceToNodeMap
+      git cherry-pick 85129e9f1f93c361d8c9c322eb99cea8a3129964  # lxd/db/instances: Use consistent IN format
+      git cherry-pick 92e9bb77ee7a479c47088308814724c6adb14b6f  # lxd/db/instances: Remove unused generateInClauseParams function
+      git cherry-pick c8580ecb73a3888f438389727b670f0e093ae4b4  # lxd/db/network/forwards: Use query.Params in GetNetworkForwards
+      git cherry-pick fb06087603f0cde649fd26cd326b2185d87df978  # lxd/db/network/load/balancers: Use query.Params in GetNetworkLoadBalancers
+      git cherry-pick a30daec9a2f3f17937beea556e5b34131ebf579f  # lxd/db/cluster: Don't use prepared statements in RemoveNodeFromClusterGroup and AddNodeToClusterGroup
+      git cherry-pick 4a5655ddeeb0e8e5cdb754f93de0b8a56d802fb6  # lxd/db/images: Updates getImagesByFingerprintPrefix to use QueryScan rather than prepare
+      git cherry-pick 5720164a3ae50ce5d70a1058b755742412f47abc  # lxd/db/transaction: Removes unused prepare function
+      git cherry-pick eab1a3a9eb1e6d4314f48528a021c1bae736eaa9  # lxd/resources: Fix VPD parser crash
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
