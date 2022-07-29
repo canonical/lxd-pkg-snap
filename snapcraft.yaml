@@ -1166,6 +1166,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
+    source-branch: stable-5.0
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -1215,6 +1216,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
+    source-branch: stable-5.0
     build-packages:
       - libfuse-dev
       - libpam0g-dev
@@ -1260,6 +1262,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
+    source-branch: stable-5.0
     after:
       - lxc
       - dqlite
