@@ -1216,7 +1216,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-5.0.1
+    source-tag: lxcfs-5.0.2
     build-packages:
       - libfuse-dev
       - libpam0g-dev
