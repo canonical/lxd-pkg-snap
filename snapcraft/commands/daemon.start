@@ -161,6 +161,7 @@ export PATH="/run/bin:${PATH}"
 
 if [ "${ceph_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/ceph"
+    ln -s "${SNAP}/wrappers/run-host" "/run/bin/radosgw-admin"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/rbd"
 fi
 
