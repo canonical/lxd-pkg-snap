@@ -510,6 +510,31 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
+  minio:
+    build-attributes: [core22-step-dependencies]
+    source: https://github.com/minio/minio
+    source-type: git
+    source-tag: RELEASE.2022-09-07T22-25-02Z
+    plugin: nil
+    build-snaps:
+      - go
+    override-pull: |
+      snapcraftctl pull
+    override-build: |
+      set -ex
+
+      # Setup build environment
+      export GOPATH=$(realpath ./.go)
+
+      # Build the binaries
+      make build
+
+      # Install minio command
+      mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
+      cp minio ${SNAPCRAFT_PART_INSTALL}/bin/minio
+    prime:
+      - bin/minio
+
   nano:
     build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
