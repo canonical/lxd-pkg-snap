@@ -288,6 +288,8 @@ parts:
 
   edk2:
     build-attributes: [core22-step-dependencies]
+    after:
+      - nasm
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: IRRELEVANT
@@ -544,6 +546,22 @@ parts:
     prime:
       - bin/nano
       - etc/nanorc
+
+  nasm:
+    build-attributes: [core22-step-dependencies]
+    source: https://github.com/netwide-assembler/nasm
+    source-type: git
+    source-tag: nasm-2.15.05
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=
+    organize:
+      usr/bin/: bin/
+    prime:
+      - bin/nasm
+    override-build: |
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/nasm-0000-disable-manpages.patch"
+      snapcraftctl build
 
   nftables:
     build-attributes: [core22-step-dependencies]
