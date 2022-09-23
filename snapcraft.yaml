@@ -614,9 +614,7 @@ parts:
       - --enable-vhost-crypto
       - --enable-vhost-kernel
       - --enable-vhost-net
-      - --enable-vhost-scsi
       - --enable-vhost-user
-      - --enable-vhost-vsock
       - --enable-virtfs
       - --firmwarepath=/snap/lxd/current/share/qemu/
       - --localstatedir=/var/
@@ -641,7 +639,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       set -ex
-      git clone https://gitlab.com/qemu/qemu . -b v7.0.0
+      git clone https://gitlab.com/qemu/qemu . -b v7.1.0
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
