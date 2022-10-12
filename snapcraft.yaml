@@ -1276,12 +1276,12 @@ parts:
     source: https://github.com/lxc/lxcfs
     source-type: git
     build-packages:
-      - libfuse-dev
+      - libfuse3-dev
       - libpam0g-dev
       - pkg-config
       - python3-jinja2
     stage-packages:
-      - fuse
+      - fuse3
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -1295,7 +1295,7 @@ parts:
       snap/lxd/current/lxcfs/: lxcfs/
     prime:
       - bin/fusermount
-      - lib/*/libfuse.so.*
+      - lib/*/libfuse3.so.*
 
       - bin/lxcfs
       - lib/liblxcfs.so
