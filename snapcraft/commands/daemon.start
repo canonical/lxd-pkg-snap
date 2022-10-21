@@ -484,7 +484,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
 
     if [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
         echo "==> FUSE version mismatch, restart system to upgrade LXCFS"
-    else
+    elif [ -n "${CURRENT_PID:-}" ]; then
         echo "==> Reloading LXCFS"
         kill -USR1 "${CURRENT_PID}" || true
     fi
