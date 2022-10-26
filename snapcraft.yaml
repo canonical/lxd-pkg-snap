@@ -57,14 +57,6 @@ source-code: https://github.com/lxc/lxd
 website: https://linuxcontainers.org/lxd
 confinement: strict
 
-package-repositories:
-  - type: apt
-    formats: [deb, deb-src]
-    components: [main]
-    suites: [focal-updates/yoga]
-    key-id: 391A9AA2147192839E9DB0315EDB1B62EC4926EA
-    url: http://ubuntu-cloud.archive.canonical.com/ubuntu
-
 apps:
   # Main commands
   activate:
@@ -219,7 +211,6 @@ parts:
       - lib/*/libkrb5.so*
       - lib/*/liblber-2.4.so*
       - lib/*/libldap_r-2.4.so*
-      - lib/*/liblua5.3.so*
       - lib/*/libnghttp2.so*
       - lib/*/libpsl.so*
       - lib/*/librabbitmq.so*
