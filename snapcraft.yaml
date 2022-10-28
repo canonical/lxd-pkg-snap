@@ -520,8 +520,12 @@ parts:
     build-snaps:
       - go
     override-pull: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+
       snapcraftctl pull
     override-build: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+
       set -ex
 
       # Setup build environment
@@ -534,7 +538,7 @@ parts:
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp minio ${SNAPCRAFT_PART_INSTALL}/bin/minio
     prime:
-      - bin/minio
+      - bin/minio*
 
   nano:
     build-attributes: [core22-step-dependencies]
