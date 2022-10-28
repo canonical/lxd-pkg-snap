@@ -372,6 +372,7 @@ parts:
     source: https://git.netfilter.org/libmnl
     source-type: git
     source-tag: libmnl-1.0.5
+    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -387,6 +388,7 @@ parts:
     source: https://git.netfilter.org/libnftnl
     source-type: git
     source-tag: libnftnl-1.2.3
+    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -515,6 +517,7 @@ parts:
     source: https://github.com/minio/minio
     source-type: git
     source-tag: RELEASE.2022-09-17T00-09-45Z
+    source-depth: 1
     plugin: nil
     build-snaps:
       - go
@@ -552,6 +555,7 @@ parts:
     source: https://github.com/netwide-assembler/nasm
     source-type: git
     source-tag: nasm-2.15.05
+    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -571,6 +575,7 @@ parts:
     source: https://git.netfilter.org/nftables
     source-type: git
     source-tag: v1.0.5
+    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -636,6 +641,7 @@ parts:
     source: https://github.com/openvswitch/ovs
     source-type: git
     source-tag: v3.0.0
+    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
