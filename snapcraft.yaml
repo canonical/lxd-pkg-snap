@@ -372,7 +372,6 @@ parts:
     source: https://git.netfilter.org/libmnl
     source-type: git
     source-tag: libmnl-1.0.5
-    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -388,7 +387,6 @@ parts:
     source: https://git.netfilter.org/libnftnl
     source-type: git
     source-tag: libnftnl-1.2.3
-    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -549,7 +547,6 @@ parts:
     source: https://git.netfilter.org/nftables
     source-type: git
     source-tag: v1.0.5
-    source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
