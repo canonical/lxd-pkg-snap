@@ -13,7 +13,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Environment
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
 
 echo "# Base information"
 if [ -e "/var/lib/snapd/hostfs/etc/os-release" ]; then
