@@ -9,7 +9,7 @@ fi
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
 
 # Setup for ZFS
 if [ -e /sys/module/zfs/version ]; then
