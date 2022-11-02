@@ -17,12 +17,12 @@ fi
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155,SC2046,SC2086
-export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu*/))"
+# shellcheck disable=SC2155
+export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
-export LXD_DIR=${LXD_DIR:-"${SNAP_COMMON}/lxd/"}
+export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
 
 # Make sure we have a ZFS binary on the path
 export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
