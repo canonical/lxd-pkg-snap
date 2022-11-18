@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.7"
+version: "5.8"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1329,7 +1329,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.7
+    source-tag: lxd-5.8
     after:
       - lxc
       - dqlite
@@ -1375,17 +1375,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 31accc5f09209ce7f473d8f1c7f59b75b364e35f  # doc: Clarify that remote token expiry default to no expiry
-      git cherry-pick 2f567dc6304f1649a0a2cb47a7ff28e7daa3c873  # doc: Add missing expires_at field to token structs
-      git cherry-pick b449eb77bca5b29ac0fa2441973131b7482456ba  # lxd/db/operationtype: Rename to RemoveExpiredTokens
-      git cherry-pick 54e8f960d82b78e90c924d6e0d85de672a024283  # lxd: Remove auto removal of cluster join tokens
-      git cherry-pick 9de4831fb23946a7e8dcc619cfab5d5306543612  # lxd: Add tasks for expired token removal
-      git cherry-pick 77a39d41ae7db37493a6fe36770d889b31a57c2e  # shared/api/init: Add exported preseed structs
-      git cherry-pick 55066360172da866a9994e809c247a7bbb6d5254  # lxd/main/init/preseed: Update usages
-      git cherry-pick 4d4311d097681b38e516d5ce3691e6b9ed6a9e16  # shared/version/api: Update api extensions
-      git cherry-pick 0bbd851818ed1405e76f940549ccfa628adb27ea  # lxd/device: Continue if device is nil
-      git cherry-pick 9520044158c240a191d102d33dfda2df9ec1de35  # lxd/network/driver/ovn: Get dynamically allocated IPs from OVN switch port even if not using DHCP
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
