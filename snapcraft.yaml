@@ -514,7 +514,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/minio/minio
     source-type: git
-    source-tag: RELEASE.2022-09-17T00-09-45Z
+    source-tag: RELEASE.2022-11-17T23-20-09Z
     source-depth: 1
     plugin: nil
     build-snaps:
