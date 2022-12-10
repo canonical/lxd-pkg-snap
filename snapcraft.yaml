@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.8"
+version: "5.9"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1329,7 +1329,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.8
+    source-tag: lxd-5.9
     after:
       - lxc
       - dqlite
@@ -1375,10 +1375,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 48013b6beec7f11ab22a561226e29f353630eaa8  # lxd/instance/drivers: Restrict CPU hotplugging
-      git cherry-pick f64fef570ae693d22082bf51b4c1ec64550ef931  # lxd/instance/drivers: Fix CPU hotplug check
-      git cherry-pick 7aecb58cce887cd4b1132b693f60a0ea970d1c75  # lxd/instance/drivers: Handle unset limits.cpu
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
