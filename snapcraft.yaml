@@ -518,7 +518,7 @@ parts:
     source-depth: 1
     plugin: nil
     build-snaps:
-      - go
+      - go/1.18/stable
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
@@ -1353,7 +1353,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go
+      - go/1.18/stable
     stage-packages:
       - acl
       - attr
@@ -1448,7 +1448,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1488,7 +1488,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: snap-query/
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-build: |
       set -ex
