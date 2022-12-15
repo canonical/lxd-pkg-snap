@@ -1391,6 +1391,12 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick 34b3cd04c3887d00c43c077d32d9d5590ad4cbac  # lxd/storage/ceph: Remove osd map timeout
+      git cherry-pick 7aad038628918787ef75da86e3d7f4bcd66bc03c  # lxd/instance/drivers/qmp: Don't mask unexpected monitor response errors with sentinel
+      git cherry-pick 15fea8f692d411d2ba9a8f14f1324f1f084d6736  # lxd/util/http: Update EtagCheck to return api.StatusError with http.StatusPreconditionFailed
+      git cherry-pick 9d112d1ee91c9ae3466bf76d0ea4c122d9cb5580  # lxd/instance/drivers/driver/qemu: Show actual qemu path in checkFeatures
+      git cherry-pick 5aa3ac052e31f18905191cc6499785639990c9c6  # lxd/instance/drivers/driver/qemu: Remove -bios flag from qemu feature check invocation
+      git cherry-pick 9160f81c90a7914f8366421af481f0e7cc424c2a  # lxd/instance/drivers/driver/qemu: Extract stderr output from qemu during checkFeatures
+      git cherry-pick 15e73e71cf2204f740f5b6cce1d1144baf098493  # lxd/instance/drivers/driver/qemu: Add -no-user-config to qemu invocation in checkFeatures
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
