@@ -1397,6 +1397,8 @@ parts:
       git cherry-pick 5aa3ac052e31f18905191cc6499785639990c9c6  # lxd/instance/drivers/driver/qemu: Remove -bios flag from qemu feature check invocation
       git cherry-pick 9160f81c90a7914f8366421af481f0e7cc424c2a  # lxd/instance/drivers/driver/qemu: Extract stderr output from qemu during checkFeatures
       git cherry-pick 15e73e71cf2204f740f5b6cce1d1144baf098493  # lxd/instance/drivers/driver/qemu: Add -no-user-config to qemu invocation in checkFeatures
+      git cherry-pick 62df19331775f428b06b9f7525cbb017a78c5cc8  # lxd/instance/drivers/driver/qemu: Update architectureSupportsUEFI to add arch argumnent
+      git cherry-pick d0f2ca8c9ff333ba9364326865646320035d5c10  # lxd/instance/drivers/driver/qemu: Update checkFeatures to add -bios flag for UEFI architectures
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
