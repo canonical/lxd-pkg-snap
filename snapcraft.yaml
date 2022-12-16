@@ -1399,6 +1399,8 @@ parts:
       git cherry-pick 15e73e71cf2204f740f5b6cce1d1144baf098493  # lxd/instance/drivers/driver/qemu: Add -no-user-config to qemu invocation in checkFeatures
       git cherry-pick 62df19331775f428b06b9f7525cbb017a78c5cc8  # lxd/instance/drivers/driver/qemu: Update architectureSupportsUEFI to add arch argumnent
       git cherry-pick d0f2ca8c9ff333ba9364326865646320035d5c10  # lxd/instance/drivers/driver/qemu: Update checkFeatures to add -bios flag for UEFI architectures
+      git cherry-pick 42cc0a0e85d50b30b94f07f0428c1f3d668621f1  # lxcfs: explicitly enable direct_IO for libfuse3
+      git cherry-pick a8f7fe95034b47a108a9ca2af777be039613eb0e  # lxcfs: fix copypaste typo in error message
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
