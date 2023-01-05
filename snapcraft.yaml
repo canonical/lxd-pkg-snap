@@ -1399,8 +1399,35 @@ parts:
       git cherry-pick 5aa3ac052e31f18905191cc6499785639990c9c6  # lxd/instance/drivers/driver/qemu: Remove -bios flag from qemu feature check invocation
       git cherry-pick 9160f81c90a7914f8366421af481f0e7cc424c2a  # lxd/instance/drivers/driver/qemu: Extract stderr output from qemu during checkFeatures
       git cherry-pick 15e73e71cf2204f740f5b6cce1d1144baf098493  # lxd/instance/drivers/driver/qemu: Add -no-user-config to qemu invocation in checkFeatures
+      git cherry-pick f487cb0e6b1a58aac0094fc0cf0e7aad0b59d96a  # lxd: Move to current bakery version
+      git cherry-pick 2c7154665e2d53eee57c6718fd7d2ff77c7c0377  # lxd-migrate: Move to current bakery version
+      git cherry-pick 661bfbafda815eb5d0104bae21b66904f68160d2  # client: Move to current bakery version
+      git cherry-pick 8f7ff41339c66a76c65694bbd437809153817913  # lxc: Move to current bakery version
+      git cherry-pick 86baf2df6244f869f21a3b320733fa8f0c7005fc  # test/macaroon-identity: Move to current bakery version
+      git cherry-pick 8c910d4634c2c8a13a5c70839dc332199d13640b  # tests: Update godeps.list
+      git cherry-pick dc945794ba4839f350a7b3fd04cd35bca4f01109  # gomod: Update dependencies
       git cherry-pick 62df19331775f428b06b9f7525cbb017a78c5cc8  # lxd/instance/drivers/driver/qemu: Update architectureSupportsUEFI to add arch argumnent
       git cherry-pick d0f2ca8c9ff333ba9364326865646320035d5c10  # lxd/instance/drivers/driver/qemu: Update checkFeatures to add -bios flag for UEFI architectures
+      git cherry-pick 74d9de2dff7a6de7207fa383b306a9124c545628  # lxd-migrate: Fix usage string
+      git cherry-pick 57cb9b7555a11eb56ed119f36a5ec13bede80f60  # lxd/storage/drivers/driver/zfs: Improve error when existing zpool isn't empty
+      git cherry-pick d765a15c2605dcece4b302cbb6e392fc762cb6cf  # lxd/storage/s3/miniod: Wait 10s for minio process to start
+      git cherry-pick b8deb997f80a141975b662a0ceb75b6fb9193491  # lxd/instance/drivers: Don't fail Start if renaming old log file doesn't exist
+      git cherry-pick bce1a4e109a9d83477d018d3f377793b62cb25a9  # lxd/storage/backend/lxd: Improve bucket errors
+      git cherry-pick 6d0960054587d30e2452ebd7a1c7be499f6d8e55  # forksyscall: ensure that parent mount is dependent mount
+      git cherry-pick 380d6ce477e59b12a3837a43577ed740b123e934  # lxd/storage/drivers/driver/btrfs/utils: Fix getQGroup to suport BTRFS >= 6.0.1
+      git cherry-pick 35af84276af83bff3523960454c0fa4d3889211a  # lxd/storage/s3/miniod: Wait for config to be available before considering ready
+      git cherry-pick 1be85b46fba95b353c42a3f36fe2cbb5f5e1986f  # forksyscall: avoid double MS_MOVE
+      git cherry-pick 5ceb4753cf4b329678f29f9e5d6d00f46a9a451d  # lxd/db/query/dump: Correctly generate CREATE TABLE statement
+      git cherry-pick f3909299478ea5a5268658dc151d0e0290e6aa70  # lxd/db/query/dump: Correctly escape single quote and \n and \r
+      git cherry-pick 1e06c62ab325a085e807b6f7b6fec94e56b94c04  # lxd/db/query/dump/test: Fix dump tests
+      git cherry-pick 848187f0f5a220aabd5d35ad6b6afde30901d141  # lxd/db/warnings: Store warning times in UTC
+      git cherry-pick df3244532ad47567643fde121802647ff3715994  # gomod: Update github.com/shirou/gopsutil/v3
+      git cherry-pick 9063a09689b928202d02c2eb04c81dc92f1d17bb  # lxc/init: Fix --no-profiles flag
+      git cherry-pick 07fef740c4ab47abcec3d2b43f28819f9443a55e  # test: Adds test for lxc init --no-profiles
+      git cherry-pick 632dcaaa6da7b10ed044a8bb67f1ee588035f88a  # lxd/instance/drivers/driver/qemu: Add qemuMachineType function
+      git cherry-pick 9cd22b885c54c0959bd7575207a335c59bdf468f  # lxd/instance/drivers/driver/qemu/config/test: Fix architecture tests
+      git cherry-pick db2a7d6a305983139fcf703285742710bd922212  # lxd/instance/drivers/driver/qemu/config/test: Fix whitespace
+      git cherry-pick 022796197f903b6a3d5c4cf80a6e6283cee59a81  # lxd/instance/drivers/driver/qemu: Adds -machine type argument to checkFeatures
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
