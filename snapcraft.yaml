@@ -1458,6 +1458,23 @@ parts:
       - bin/lxd-migrate
       - bin/upgrade-bridge
 
+  lxd-ui:
+    source: https://github.com/canonical/lxd-ui
+    source-type: git
+    plugin: npm
+    npm-node-version: 18.13.0
+    override-build: |
+      snapcraftctl build
+
+      npm install yarn --global
+      yarn install
+      yarn build
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share"
+      cp -R build "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
+    prime:
+      - share/lxd-ui/
+
   shmounts:
     build-attributes: [core22-step-dependencies]
     source: shmounts/
