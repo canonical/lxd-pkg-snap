@@ -520,6 +520,7 @@ else
         [ "${lxcfs_loadavg:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} --enable-loadavg"
         [ "${lxcfs_pidfd:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} --enable-pidfd"
         [ "${lxcfs_cfs:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} --enable-cfs"
+        [ "${lxcfs_debug:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} -d"
 
         if [ -n "${lxcfs_args}" ]; then
             # shellcheck disable=SC2086
