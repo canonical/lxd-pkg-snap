@@ -1539,7 +1539,6 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/bin/lxc
       strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
       strip -s ${SNAPCRAFT_PRIME}/bin/snap*
-      strip -s ${SNAPCRAFT_PRIME}/lib/liblxc*
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
