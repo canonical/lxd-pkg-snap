@@ -1519,7 +1519,7 @@ parts:
       yarn build
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/share"
-      cp -R build "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
+      cp -R build/ui "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
     prime:
       - share/lxd-ui/
 
