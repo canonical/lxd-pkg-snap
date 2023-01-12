@@ -522,6 +522,11 @@ else
         [ "${lxcfs_cfs:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} --enable-cfs"
         [ "${lxcfs_debug:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} -d"
 
+        # Preload libSegFault.so to catch crashes
+        export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD}:}/lib/${ARCH}/libSegFault.so"
+        export SEGFAULT_USE_ALTSTACK=1
+        export SEGFAULT_SIGNALS="all"
+
         if [ -n "${lxcfs_args}" ]; then
             # shellcheck disable=SC2086
             lxcfs ${lxcfs_args} "${SNAP_COMMON}/var/lib/lxcfs" -p "${SNAP_COMMON}/lxcfs.pid" &
