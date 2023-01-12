@@ -1511,7 +1511,13 @@ parts:
     source-type: git
     plugin: npm
     npm-node-version: 18.13.0
+    override-pull: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+
+      snapcraftctl pull
     override-build: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+
       snapcraftctl build
 
       npm install yarn --global
@@ -1521,7 +1527,7 @@ parts:
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/share"
       cp -R build/ui "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
     prime:
-      - share/lxd-ui/
+      - share/lxd-ui*
 
   shmounts:
     source: shmounts/
