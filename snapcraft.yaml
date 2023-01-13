@@ -1335,6 +1335,9 @@ parts:
       git cherry-pick 853f003311476fef47c26780cc4528a8d6b0b215  # github: enable ASAN and UBSAN during PR tests
       git cherry-pick 42cc0a0e85d50b30b94f07f0428c1f3d668621f1  # lxcfs: explicitly enable direct_IO for libfuse3
       git cherry-pick a8f7fe95034b47a108a9ca2af777be039613eb0e  # lxcfs: fix copypaste typo in error message
+      git cherry-pick c8c28aec8b438cd688f75fe5db0d9f5de688137e  # /proc/stat: render physical cpu number in non-view mode
+      git cherry-pick 8a54e90e0df4125c881c2444e22db62d3ac0b810  # sysfs: don't mask cpus in /sys/devices/system/cpu
+      git cherry-pick f4d0253f4c42d8837c26a4000841e98bd24cb89d  # lxcfs: handle NULL path in lxcfs_releasedir/lxcfs_release
 
       set +ex
       snapcraftctl build
