@@ -1153,7 +1153,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.1.6
+    source-tag: zfs-2.1.7
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
