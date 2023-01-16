@@ -1338,6 +1338,7 @@ parts:
       git cherry-pick c8c28aec8b438cd688f75fe5db0d9f5de688137e  # /proc/stat: render physical cpu number in non-view mode
       git cherry-pick 8a54e90e0df4125c881c2444e22db62d3ac0b810  # sysfs: don't mask cpus in /sys/devices/system/cpu
       git cherry-pick f4d0253f4c42d8837c26a4000841e98bd24cb89d  # lxcfs: handle NULL path in lxcfs_releasedir/lxcfs_release
+      git cherry-pick 8e2dfeb1a277c77426675065568e792d3e1f4fc1  # cpuview: fix ABBA deadlock in find_proc_stat_node
 
       set +ex
       snapcraftctl build
