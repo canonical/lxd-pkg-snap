@@ -612,7 +612,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v3.0.1
+    source-tag: v3.0.3
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
