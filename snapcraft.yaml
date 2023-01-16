@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.0.1"
+version: "5.0.2"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1300,7 +1300,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.0.1
+    source-tag: lxd-5.0.2
     after:
       - lxc
       - dqlite
@@ -1346,11 +1346,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick a0933b4442733aeb5ab88e8b0fa29cabf5f1569a  # lxd/network/driver_ovn: Fixes impossibility to set MTU for a pair of veths connecting uplink and ovs-system bridges
-      git cherry-pick 09e4302bb86da48f7f644f72040fd568d48a929f  # lxd/firewall/drivers/drivers/xtables: Use xtables locking in NetworkApplyACLRules
-      git cherry-pick ef3f29a2286c20799e46f2dd8e19f4fea421d597  # lxd/firewall/drivers/drivers/xtables: Simplify args list in iptablesAdd
-      git cherry-pick 50c31bd28fe7e8e0321853002a32d92a6f62f3b8  # lxd/firewall/drivers/drivers/xtables: Use long form xtables arguments in iptablesClear
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
