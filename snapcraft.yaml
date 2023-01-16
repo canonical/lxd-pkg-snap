@@ -1284,7 +1284,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-5.0.2
+    source-tag: lxcfs-5.0.3
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1319,26 +1319,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 6ef298d26e96b55436d3c8aca62092b85260ac18  # set oom_score_adj of lxcfs process to -1000
-      git cherry-pick 3b081820dc31fa0fc31b985c84fde9282a389ca3  # init: respect --prefix when installing systemd unit files
-      git cherry-pick 999410c06958d91e3c9c0a1a104d08306fbf9a04  # Fix build on ia64
-      git cherry-pick b83a1382abd3db3b56558c6e027c13f59e722911  # doc: guide for mount /sys/devices/system/cpu in docker demo
-      git cherry-pick 3ab65d470274a5d7749958d14a6c04fceb67fbb7  # utils: add safe_uint32() helper
-      git cherry-pick 9dd4c4caebe35aa781ec95b737862670d575ffe7  # macro.h: add strnprintf macro
-      git cherry-pick 335dc831ae1300b6f38b448ee0f235f17832a162  # utils: add get_task_personality helper
-      git cherry-pick d3a3e216a838a9299189388be4dc3ed391795279  # cpuview: paththrough personality when reading cpuinfo
-      git cherry-pick 95d3d0dc30ae3159039a5e6ecef8ffde9d5f8277  # cpuview: fix possible use-after-free in find_proc_stat_node
-      git cherry-pick a1f42caaa3ef716de5db03061e2129cdb80fdf74  # github: make coverity workflow work with meson
-      git cherry-pick 90ceb28d83c068a6bb03a077741968db5ddc10ad  # README: how to build with sanitizers
-      git cherry-pick e5e541e83c4624438bb7a6cd2ff11f3d7b38eab5  # cpuset_parse: check input string in cpuset_nexttok
-      git cherry-pick 853f003311476fef47c26780cc4528a8d6b0b215  # github: enable ASAN and UBSAN during PR tests
-      git cherry-pick 42cc0a0e85d50b30b94f07f0428c1f3d668621f1  # lxcfs: explicitly enable direct_IO for libfuse3
-      git cherry-pick a8f7fe95034b47a108a9ca2af777be039613eb0e  # lxcfs: fix copypaste typo in error message
-      git cherry-pick c8c28aec8b438cd688f75fe5db0d9f5de688137e  # /proc/stat: render physical cpu number in non-view mode
-      git cherry-pick 8a54e90e0df4125c881c2444e22db62d3ac0b810  # sysfs: don't mask cpus in /sys/devices/system/cpu
-      git cherry-pick f4d0253f4c42d8837c26a4000841e98bd24cb89d  # lxcfs: handle NULL path in lxcfs_releasedir/lxcfs_release
-      git cherry-pick 8e2dfeb1a277c77426675065568e792d3e1f4fc1  # cpuview: fix ABBA deadlock in find_proc_stat_node
 
       set +ex
       snapcraftctl build
