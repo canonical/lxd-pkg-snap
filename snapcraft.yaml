@@ -1377,6 +1377,9 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick a1dc7c3f5bd1c46b7dd5914500c9baf687fe22cb  # lxd/instances_post: Fix copying profiles during instance copy
+      git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
