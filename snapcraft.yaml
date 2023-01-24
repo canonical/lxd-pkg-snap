@@ -151,20 +151,6 @@ hooks:
       - system-observe
 
 parts:
-  # Workarounds
-  pull-meson-early:
-    source: snapcraft/empty
-    override-build: |
-      # No-op
-      true
-    override-stage: |
-      # No-op
-      true
-    plugin: nil
-    override-pull: |
-      # Fetch meson early to cause all downloads at the beginning of the build.
-      python3 -m pip install -U meson
-
   # Dependencies
   btrfs:
     source: snapcraft/empty
@@ -670,6 +656,9 @@ parts:
     source-depth: 1
     plugin: meson
     prime: []
+    build-packages:
+      - meson
+      - ninja-build
 
   spice-server:
     after:
@@ -692,6 +681,8 @@ parts:
       - libjpeg-turbo8-dev
       - python3-pyparsing
       - python3-six
+      - meson
+      - ninja-build
     stage-packages:
       - libjpeg-turbo8
       - libpixman-1-0
@@ -1129,6 +1120,8 @@ parts:
       - libgnutls28-dev
       - libselinux1-dev
       - pkg-config
+      - meson
+      - ninja-build
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -1178,6 +1171,8 @@ parts:
       - libpam0g-dev
       - pkg-config
       - python3-jinja2
+      - meson
+      - ninja-build
     stage-packages:
       - fuse3
     plugin: meson
