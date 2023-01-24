@@ -178,39 +178,35 @@ parts:
       - bin/radosgw-admin
       - bin/rbd
       - lib/*/ceph
-      - lib/*/libasn1.so*
-      - lib/*/libatomic.so*
+      - lib/*/libcephfs*
+      - lib/python3
+
       - lib/*/libboost_context.so*
+      - lib/*/libboost_filesystem.so*
       - lib/*/libboost_iostreams.so*
       - lib/*/libboost_program_options.so*
       - lib/*/libboost_thread.so*
-      - lib/*/libbrotlicommon.so*
-      - lib/*/libbrotlidec.so*
-      - lib/*/libcephfs*
-      - lib/*/libcurl-gnutls*
-      - lib/*/libgssapi.so*
-      - lib/*/libhcrypto.so*
-      - lib/*/libheimbase.so*
-      - lib/*/libheimntlm.so*
-      - lib/*/libhx509.so*
+      - lib/*/libcurl-gnutls.so*
+      - lib/*/libdaxctl.so*
       - lib/*/libibverbs.so*
-      - lib/*/libkrb5.so*
-      - lib/*/liblber-2.4.so*
-      - lib/*/libldap_r-2.4.so*
+      - lib/*/libicudata.so*
+      - lib/*/libicuuc.so*
+      - lib/*/liblber-2.5.so*
+      - lib/*/libldap-2.5.so*
+      - lib/*/liblua5.3.so*
+      - lib/*/libndctl.so*
       - lib/*/libnghttp2.so*
+      - lib/*/liboath.so*
+      - lib/*/libpmemobj.so*
+      - lib/*/libpmem.so*
       - lib/*/libpsl.so*
       - lib/*/librabbitmq.so*
       - lib/*/librados.so*
       - lib/*/librbd.so*
       - lib/*/librdmacm.so*
-      - lib/*/libroken.so*
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
-      - lib/*/libssh.so*
-      - lib/*/libwind.so*
-      - lib/liboath.so*
-      - lib/python3
 
   criu:
     source: https://github.com/checkpoint-restore/criu
