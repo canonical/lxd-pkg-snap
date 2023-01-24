@@ -949,6 +949,7 @@ parts:
     stage-packages:
       - xfsprogs
     organize:
+      usr/lib/: lib/
       usr/sbin/: bin/
       sbin/: bin/
     prime:
@@ -957,6 +958,7 @@ parts:
       - bin/xfs_growfs
       - bin/xfs_repair
       - bin/mkfs.xfs
+      - lib/*/libinih.so*
 
   xtables:
     source: snapcraft/empty
