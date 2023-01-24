@@ -27,12 +27,6 @@ elif echo "${VERSION}" | grep -q ^2\.0; then
 elif echo "${VERSION}" | grep -q ^0\.8; then
     export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.8/lib/:${LD_LIBRARY_PATH}"
     export PATH="${SNAP_CURRENT}/zfs-0.8/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.7; then
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.7/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.6; then
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.6/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.6/bin:${PATH}"
 fi
 
 exec lxd-migrate "$@"
