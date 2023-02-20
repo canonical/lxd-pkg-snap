@@ -1377,6 +1377,11 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick aae900da5f064aa687ef4bac1ff3bc19c57ea0a2  # lxd/instance/drivers/driver/lxc: Prevent panic in cgroup if liblxc not initialized
+      git cherry-pick 10bd69b1e70ed762a5ab275083d336069b1af253  # lxd/instance/drivers/driver/lxc: Adds is running check to Metrics
+      git cherry-pick 551ead3b28b97b963662c3df9fbef9d5a6577d9e  # lxd/api/metrics: Detect and ignore ErrInstanceIsStopped error from inst.Metrics()
+      git cherry-pick f1becf38cc64dd46155d08d3d67ee545847d62b8  # lxd/instance/drivers/driver/lxc: Only intialise cgroup reader/writer when needed
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
