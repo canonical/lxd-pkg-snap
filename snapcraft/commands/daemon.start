@@ -474,6 +474,8 @@ if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
            "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
         )
     )
+elif [ -d /var/snap/microovn/ ]; then
+    ln -s /var/snap/microovn/common/run/switch /run/openvswitch
 else
     ln -s /var/lib/snapd/hostfs/run/openvswitch /run/openvswitch
 fi
