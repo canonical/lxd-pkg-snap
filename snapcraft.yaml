@@ -1345,8 +1345,9 @@ parts:
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
     source-type: git
-    plugin: npm
-    npm-node-version: 18.13.0
+    plugin: nil
+    build-snaps:
+      - node/19/stable
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
