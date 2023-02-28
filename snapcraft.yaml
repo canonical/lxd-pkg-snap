@@ -1350,7 +1350,8 @@ parts:
     source-type: git
     plugin: nil
     build-snaps:
-      - node/18/stable
+      - try:
+        - node/18/stable
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
