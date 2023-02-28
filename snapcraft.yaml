@@ -1349,12 +1349,10 @@ parts:
     source: https://github.com/canonical/lxd-ui
     source-type: git
     plugin: nil
-    build-snaps:
-      - try:
-        - node/18/stable
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
+      snap install node --channel=18/stable || true
       craftctl default
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
