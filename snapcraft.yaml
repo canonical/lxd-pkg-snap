@@ -572,6 +572,7 @@ parts:
     build-packages:
       - bmake
       - curl
+      - libelf-dev
       - lsb-release
     override-build: |-
       set -ex
@@ -580,6 +581,8 @@ parts:
 
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
+
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
       cp ${SNAPCRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
