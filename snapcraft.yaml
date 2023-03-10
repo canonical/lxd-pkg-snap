@@ -319,15 +319,14 @@ parts:
       cat << EOF
           . ./edksetup.sh
           make -C BaseTools ARCH=${ARCH}
-          build -a ${ARCH} -t GCC49 -b RELEASE -p ${PKG} \
+          build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
+            -DSMM_REQUIRE=TRUE \
             -DSECURE_BOOT_ENABLE=TRUE \
             -DNETWORK_IP4_ENABLE=TRUE \
             -DNETWORK_IP6_ENABLE=TRUE \
             -DNETWORK_TLS_ENABLE=TRUE \
             -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
             -DFD_SIZE_2MB \
-            -DTPM_ENABLE=TRUE \
-            -DTPM_CONFIG_ENABLE=TRUE \
             -DTPM2_ENABLE=TRUE \
             -DTPM2_CONFIG_ENABLE=TRUE
       EOF
