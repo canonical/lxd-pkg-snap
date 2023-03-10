@@ -299,11 +299,9 @@ parts:
     build-packages:
       - on amd64:
         - acpica-tools
-        - nasm
         - uuid-dev
       - on arm64:
         - acpica-tools
-        - nasm
         - uuid-dev
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -795,6 +793,7 @@ parts:
       - libusbredirhost-dev
     stage-packages:
       - genisoimage
+      - libatomic1
       - libmagic1
       - libnuma1
       - libpixman-1-0
