@@ -3,3 +3,4 @@ prime/
 snap/
 stage/
 *.snap
+edk2-vars-generator/UEFI/__pycache__/
