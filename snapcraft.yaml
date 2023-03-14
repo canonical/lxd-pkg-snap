@@ -855,8 +855,13 @@ parts:
 
       set -ex
 
+      FIRMWARE="OVMF"
+      if [ "$(uname -m)" = "aarch64" ]; then
+        FIRMWARE="AAVMF"
+      fi
+
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
-      ./edk2-vars-generator -f OVMF \
+      ./edk2-vars-generator -f "${FIRMWARE}" \
         -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
         -s ../../edk2/build/Build/*/*/*/Shell.efi \
         -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
