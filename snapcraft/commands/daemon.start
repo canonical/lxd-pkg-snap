@@ -514,17 +514,24 @@ fi
 # LXCFS
 if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
+
     NEW_FUSE=$(ldd "${SNAP_CURRENT}/bin/lxcfs" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
     CURRENT_FUSE="${NEW_FUSE}"
+
+    NEW_BASE="$(grep ^name /meta/snap.yaml)"
+    CURRENT_BASE="${NEW_BASE}"
 
     if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
             CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
+            CURRENT_BASE="$(grep ^name "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
 
-    if [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
+    if [ "${CURRENT_BASE}" != "${NEW_BASE}" ]; then
+        echo "==> snap base has changed, restart system to upgrade LXCFS"
+    elif [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
         echo "==> FUSE version mismatch, restart system to upgrade LXCFS"
     elif [ -n "${CURRENT_PID:-}" ]; then
         echo "==> Reloading LXCFS"
