@@ -1250,6 +1250,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick a3e07f127f39cc01c0e7eba53dc6b85a6027d14b  # lxd/instance/qemu: vmgenid isn't supported on aarch64
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
