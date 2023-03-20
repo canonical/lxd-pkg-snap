@@ -1109,6 +1109,7 @@ parts:
     build-packages:
       - libapparmor-dev
       - libcap-dev
+      - libdbus-1-dev
       - libgnutls28-dev
       - libselinux1-dev
       - pkg-config
