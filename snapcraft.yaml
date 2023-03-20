@@ -589,6 +589,7 @@ parts:
       git config user.name "LXD snap builder"
 
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
       cp ${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${CRAFT_PART_INSTALL}/bin/"
