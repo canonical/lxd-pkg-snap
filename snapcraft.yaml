@@ -1278,6 +1278,7 @@ parts:
       - ninja-build
     stage-packages:
       - fuse3
+      - glibc-tools
     plugin: meson
     meson-parameters:
       - --prefix=/
