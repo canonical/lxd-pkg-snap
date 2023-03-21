@@ -96,7 +96,7 @@ if __name__ == '__main__':
             'QemuCommand': Qemu.QemuCommand(
                 QemuEfiMachine.OVMF_Q35,
                 variant=QemuEfiVariant.SECBOOT,
-                flash_size=QemuEfiFlashSize.SIZE_2MB,
+                flash_size=QemuEfiFlashSize.SIZE_4MB,
                 code_path=args.code,
                 vars_template_path=args.vars_template,
             ),
