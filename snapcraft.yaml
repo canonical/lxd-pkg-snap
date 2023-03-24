@@ -288,55 +288,100 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      OVMF_TARGET_DIRECTORY="${CRAFT_PART_INSTALL}/share/qemu/"
+      CLEAN_AFTER_BUILD=true
+      IFS='' read -r DEFAULT_BUILD_FLAGS << EOF1
+              -DSMM_REQUIRE=TRUE \
+              -DSECURE_BOOT_ENABLE=TRUE \
+              -DNETWORK_IP4_ENABLE=TRUE \
+              -DNETWORK_IP6_ENABLE=TRUE \
+              -DNETWORK_TLS_ENABLE=TRUE \
+              -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
+              -DTPM2_ENABLE=TRUE \
+              -DTPM2_CONFIG_ENABLE=TRUE
+      EOF1
 
-      # Fix submodules
-      sed -i "s#https://git.cryptomilk.org/projects/cmocka#https://gitlab.com/cmocka/cmocka#g" .gitmodules
-      git submodule update --init --recursive
+      fix_submodules(){
+          sed -i "s#https://git.cryptomilk.org/projects/cmocka#https://gitlab.com/cmocka/cmocka#g" .gitmodules
+          git submodule update --init --recursive
+      }
 
       # Apply patches
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
-      cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
+      apply_patches(){
+          patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
+          cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
+          patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
+          patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
+      }
 
-      ARCH="X64"
-      PKG="OvmfPkg/OvmfPkgX64.dsc"
-      FV_CODE="OVMF_CODE"
-      FV_VARS="OVMF_VARS"
-      if [ "$(uname -m)" = "aarch64" ]; then
+      init_build_environment(){
+          fix_submodules
+          apply_patches
+          mkdir -p "${OVMF_TARGET_DIRECTORY}"
+      }
+
+      build_edk2(){
+          OVMF_CODE_PATH=$1
+          OVMF_VARS_PATH=$2
+          shift 2
+          EXTRA_BUILD_FLAGS="$@"
+
+          # Run in a bash sub-shell as edksetup.sh requires it
+          set -ex
+          (
+          cat <<EOF2
+          . ./edksetup.sh
+          make -C BaseTools ARCH=${ARCH}
+          build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
+              ${DEFAULT_BUILD_FLAGS} \
+              ${EXTRA_BUILD_FLAGS}
+          cp Build/*/*/FV/${FV_CODE}.fd "${OVMF_CODE_PATH}"
+          cp Build/*/*/FV/${FV_VARS}.fd "${OVMF_VARS_PATH}"
+
+          # The last build needs to stay as the build files are needed for the secureboot part
+          if [ "${CLEAN_AFTER_BUILD}" = true ]; then
+              build clean -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG}
+          fi
+      EOF2
+          ) | bash -e
+      }
+
+      if [ "$(uname -m)" = "x86_64" ]; then
+          # VARS
+          ARCH="X64"
+          PKG="OvmfPkg/OvmfPkgX64.dsc"
+          FV_CODE="OVMF_CODE"
+          FV_VARS="OVMF_VARS"
+
+          # Start building
+          init_build_environment
+          build_edk2 "${OVMF_TARGET_DIRECTORY}/OVMF_CODE.fd" "${OVMF_TARGET_DIRECTORY}/OVMF_VARS.fd" -DFD_SIZE_2MB=2
+          # Don't clean on last build as files are needed during secureboot part
+          CLEAN_AFTER_BUILD=false
+          build_edk2 "${OVMF_TARGET_DIRECTORY}/OVMF_CODE_4M.fd" "${OVMF_TARGET_DIRECTORY}/OVMF_VARS_4M.fd" -DFD_SIZE_4MB
+
+      elif [ "$(uname -m)" = "aarch64" ]; then
           ARCH="AARCH64"
           PKG="ArmVirtPkg/ArmVirtQemu.dsc"
           FV_CODE="QEMU_EFI"
           FV_VARS="QEMU_VARS"
+
+          # Start building
+          init_build_environment
+          # Don't clean on last build as files are needed during secureboot part
+          CLEAN_AFTER_BUILD=false
+          build_edk2 "${OVMF_TARGET_DIRECTORY}/OVMF_CODE.fd" "${OVMF_TARGET_DIRECTORY}/OVMF_VARS.fd" -DFD_SIZE_IN_MB=2
+
+          truncate -s 64m "${OVMF_TARGET_DIRECTORY}/OVMF_CODE.fd"
+          truncate -s 64m "${OVMF_TARGET_DIRECTORY}/OVMF_VARS.fd"
+
+      else
+          exit 0
       fi
 
-      # Run in a bash sub-shell as edksetup.sh requires it
-      set -ex
-      (
-      cat << EOF
-          . ./edksetup.sh
-          make -C BaseTools ARCH=${ARCH}
-          build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
-            -DSMM_REQUIRE=TRUE \
-            -DSECURE_BOOT_ENABLE=TRUE \
-            -DNETWORK_IP4_ENABLE=TRUE \
-            -DNETWORK_IP6_ENABLE=TRUE \
-            -DNETWORK_TLS_ENABLE=TRUE \
-            -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
-            -DFD_SIZE_2MB \
-            -DTPM2_ENABLE=TRUE \
-            -DTPM2_CONFIG_ENABLE=TRUE
-      EOF
-      ) | bash -e
-
-      mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
-      cp Build/*/*/FV/${FV_CODE}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-      cp Build/*/*/FV/${FV_VARS}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
-
-      if [ "$(uname -m)" = "aarch64" ]; then
-          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
+      if [ "${CLEAN_AFTER_BUILD}" = true ]; then
+         echo "Last build must not be cleaned as the files are used by secureboot part. Set CLEAN_AFTER_BUILD accordingly."
+         exit 2
       fi
 
     prime:
@@ -855,20 +900,45 @@ parts:
       export LD_LIBRARY_PATH="${CRAFT_STAGE}/lib:${CRAFT_STAGE}/lib/${ARCH}"
 
       set -ex
+      build_secureboot_vars(){
+         FIRMWARE_PROFILE=$1
+         OVMF_CODE_PATH=$2
+         OVMF_VARS_PATH=$3
+         CA_FILE_PATH=$4
+         OVMF_VARS_SECUREBOOT_PATH=$5
 
-      FIRMWARE="OVMF"
-      if [ "$(uname -m)" = "aarch64" ]; then
-        FIRMWARE="AAVMF"
+         mkdir -p "$(dirname -- ${OVMF_VARS_SECUREBOOT_PATH} )"
+        ./edk2-vars-generator -f "${FIRMWARE_PROFILE}" \
+          -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
+          -s ../../edk2/build/Build/*/*/*/Shell.efi \
+          -c "${OVMF_CODE_PATH}" \
+          -V "${OVMF_VARS_PATH}" \
+          -C "$(cat ${CA_FILE_PATH} )" \
+          -o "${OVMF_VARS_SECUREBOOT_PATH}"
+      }
+
+      QEMU_INSTALL="${CRAFT_PART_INSTALL}/share/qemu"
+      QEMU_STAGE="${CRAFT_STAGE}/share/qemu"
+
+      if [ "$(uname -m)" = "x86_64" ]; then
+          build_secureboot_vars OVMF "${QEMU_STAGE}/OVMF_CODE.fd" \
+                                     "${QEMU_STAGE}/OVMF_VARS.fd" \
+                                     "ubuntu-sb.crt" \
+                                     "${QEMU_INSTALL}/OVMF_VARS.ms.fd"
+
+          build_secureboot_vars OVMF_4M "${QEMU_STAGE}/OVMF_CODE_4M.fd" \
+                                        "${QEMU_STAGE}/OVMF_VARS_4M.fd" \
+                                        "ubuntu-sb.crt" \
+                                        "${QEMU_INSTALL}/OVMF_VARS_4M.ms.fd"
+
+      elif [ "$(uname -m)" = "aarch64" ]; then
+          build_secureboot_vars AAVMF "${QEMU_STAGE}/OVMF_CODE.fd" \
+                                      "${QEMU_STAGE}/OVMF_VARS.fd" \
+                                      "ubuntu-sb.crt" \
+                                      "${QEMU_INSTALL}/OVMF_VARS.ms.fd"
+      else
+          exit 0
       fi
-
-      mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
-      ./edk2-vars-generator -f "${FIRMWARE}" \
-        -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
-        -s ../../edk2/build/Build/*/*/*/Shell.efi \
-        -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
-        -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
-        -C "$(cat ubuntu-sb.crt)" \
-        -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
     prime:
       - share/qemu/*
 
