@@ -1262,6 +1262,18 @@ parts:
       git cherry-pick 0a65f87263c77412bf9c960ed61c422872db259c  # doc: Add source.wipe
       git cherry-pick 383c7e6ad4dfa09a61e47ad5c5568b0a7e4a69ff  # lxd/storage/drivers/driver/ceph/volumes: Don't fail CreateVolumeSnapshot when freezing filesystem not possible
       git cherry-pick 6fa480199732174672488fec7f1bf84101327e95  # lxd/instance/post: Stop instance before moving statelessly between cluster members
+      git cherry-pick 70d7064c4b0b0bf5fb10c09954c8f32f4c14322b  # client/connection: Add URL to debug logging in ConnectLXDWithContext
+      git cherry-pick 05c61379a830477916895532139e15203e3a3f40  # lxd/instance/qemu: struct/insert func for vmgenid description in `qemu.conf`
+      git cherry-pick 384114482c8807dcf19b3394277f6050b627401f  # lxd/instance/qemu: add VM Generation ID to QEMU config
+      git cherry-pick 7ca0b08f8618fb0ca0fafffa3cf5f8f50d202952  # lxd/instance/drivers/driver/qemu: Fix VM start with vmgenid
+      git cherry-pick 6dbffebb32ce8e337f2542e3713aabd725c0ce7d  # doc/devices/pci: add link to YouTube video
+      git cherry-pick 43917cb36ce481046ecc8be0a202d3588c15f72b  # client/lxd: Log warning when failing to call tcp.SetTimeouts
+      git cherry-pick e14045ad6408f8520b0830350653ff011b69635d  # lxd: Log warning when failing to call tcp.SetTimeouts
+      git cherry-pick 198eb7d3fd97927c94cfdeb6848b96a7220c09ab  # doc/network: Expand on txqueuelen
+      git cherry-pick 7c62c815857e3db9de9e793e40114b20f351bf7f  # doc/authentication: Update minimum TLS
+      git cherry-pick c4915b02a94ba7da27fdab3cc5285818163ba8c1  # lxc/config: Fix config trust fail when remote is specified
+      git cherry-pick 289e9b832e178c574aae56a83ef0182aaf449e9e  # shared/simplestreams: Add support for disk-kvm.img.vcdiff
+      git cherry-pick 94e6d661e9ae4e217b072757bfbc3b83ef0d6975  # lxd/api: Don't crash by passing a nil localConfig
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
