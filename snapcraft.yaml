@@ -1182,6 +1182,8 @@ parts:
       - bin/fusermount
       - lib/*/libfuse3.so.*
 
+      - lib/*/libSegFault.so
+
       - bin/lxcfs
       - lib/liblxcfs.so
 
