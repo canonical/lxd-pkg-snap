@@ -547,7 +547,7 @@ else
         [ "${lxcfs_debug:-"false"}" = "true" ] && lxcfs_args="${lxcfs_args} -d"
 
         # Preload libSegFault.so to catch crashes
-        export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD}:}/lib/${ARCH}/libSegFault.so"
+        export LD_PRELOAD="${LD_PRELOAD:+${LD_PRELOAD}:}${SNAP_CURRENT}/lib/${ARCH}/libSegFault.so"
         export SEGFAULT_USE_ALTSTACK=1
         export SEGFAULT_SIGNALS="all"
 
