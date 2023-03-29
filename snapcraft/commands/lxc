@@ -2,16 +2,18 @@
 set -eu
 
 # Re-exec outside of apparmor confinement
-if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
-    exec aa-exec -p unconfined -- "$0" "$@"
+if [ -d /sys/kernel/security/apparmor ] && [ "$(while read l; do echo $l; done < /proc/self/attr/current)" != "unconfined" ]; then
+    exec /usr/bin/aa-exec -p unconfined -- "$0" "$@"
 fi
 
 # Check if native and snap installed
-pid=$(ss -nlpx src "/var/lib/lxd/unix.socket" 2>/dev/null | grep "/var/lib/lxd/unix.socket" | sed -e "s/.*pid=//" -e "s/,.*//g")
-if [ "${pid}" -gt 0 ] 2>/dev/null; then
-    echo "Error: Both native and snap packages are installed on this system"
-    echo "       Run \"lxd.migrate\" to complete your migration to the snap package"
-    exit 1
+if [ -e "/var/lib/lxd/unix.socket" ]; then
+    pid=$(ss -nlpx src "/var/lib/lxd/unix.socket" 2>/dev/null | grep "/var/lib/lxd/unix.socket" | sed -e "s/.*pid=//" -e "s/,.*//g")
+    if [ "${pid}" -gt 0 ] 2>/dev/null; then
+        echo "Error: Both native and snap packages are installed on this system"
+        echo "       Run \"lxd.migrate\" to complete your migration to the snap package"
+        exit 1
+    fi
 fi
 
 # Fill SNAP_REAL_HOME if missing
@@ -59,7 +61,7 @@ export LC_ALL=C.UTF-8
 # Add extra binaries to path
 export PATH="/run/bin:${PATH}"
 
-LXC="lxc"
+LXC="${SNAP}/bin/lxc"
 if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
     LXC="${SNAP_COMMON}/lxc.debug"
 fi
