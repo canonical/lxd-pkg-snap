@@ -1274,6 +1274,7 @@ parts:
       lib/*/lxcfs/liblxcfs.so: lib/
       snap/lxd/current/lxc/config/common.conf.d/*: lxc/config/common.conf.d/
       snap/lxd/current/lxcfs/: lxcfs/
+      usr/lib/: lib/
     prime:
       - bin/fusermount
       - lib/*/libfuse3.so.*
