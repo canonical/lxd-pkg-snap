@@ -1,0 +1,113 @@
+From aa0f0821faef24a2e74810fe7afe43a44bcc917a Mon Sep 17 00:00:00 2001
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+Date: Sat, 8 Oct 2022 00:58:58 -0700
+Subject: [PATCH 1/2] vhost-vdpa: allow passing opened vhostfd to vhost-vdpa
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Similar to other vhost backends, vhostfd can be passed to vhost-vdpa
+backend as another parameter to instantiate vhost-vdpa net client.
+This would benefit the use case where only open file descriptors, as
+opposed to raw vhost-vdpa device paths, are accessible from the QEMU
+process.
+
+(qemu) netdev_add type=vhost-vdpa,vhostfd=61,id=vhost-vdpa1
+
+Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
+Acked-by: Eugenio Pérez <eperezma@redhat.com>
+Signed-off-by: Jason Wang <jasowang@redhat.com>
+---
+ net/vhost-vdpa.c | 25 ++++++++++++++++++++-----
+ qapi/net.json    |  3 +++
+ qemu-options.hx  |  6 ++++--
+ 3 files changed, 27 insertions(+), 7 deletions(-)
+
+diff --git a/net/vhost-vdpa.c b/net/vhost-vdpa.c
+index 303447a68e..d046d1f927 100644
+--- a/net/vhost-vdpa.c
++++ b/net/vhost-vdpa.c
+@@ -570,14 +570,29 @@ int net_init_vhost_vdpa(const Netdev *netdev, const char *name,
+ 
+     assert(netdev->type == NET_CLIENT_DRIVER_VHOST_VDPA);
+     opts = &netdev->u.vhost_vdpa;
+-    if (!opts->vhostdev) {
+-        error_setg(errp, "vdpa character device not specified with vhostdev");
++    if (!opts->has_vhostdev && !opts->has_vhostfd) {
++        error_setg(errp,
++                   "vhost-vdpa: neither vhostdev= nor vhostfd= was specified");
+         return -1;
+     }
+ 
+-    vdpa_device_fd = qemu_open(opts->vhostdev, O_RDWR, errp);
+-    if (vdpa_device_fd == -1) {
+-        return -errno;
++    if (opts->has_vhostdev && opts->has_vhostfd) {
++        error_setg(errp,
++                   "vhost-vdpa: vhostdev= and vhostfd= are mutually exclusive");
++        return -1;
++    }
++
++    if (opts->has_vhostdev) {
++        vdpa_device_fd = qemu_open(opts->vhostdev, O_RDWR, errp);
++        if (vdpa_device_fd == -1) {
++            return -errno;
++        }
++    } else if (opts->has_vhostfd) {
++        vdpa_device_fd = monitor_fd_param(monitor_cur(), opts->vhostfd, errp);
++        if (vdpa_device_fd == -1) {
++            error_prepend(errp, "vhost-vdpa: unable to parse vhostfd: ");
++            return -1;
++        }
+     }
+ 
+     r = vhost_vdpa_get_features(vdpa_device_fd, &features, errp);
+diff --git a/qapi/net.json b/qapi/net.json
+index 75ba2cb989..49a327ae1f 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -442,6 +442,8 @@
+ # @vhostdev: path of vhost-vdpa device
+ #            (default:'/dev/vhost-vdpa-0')
+ #
++# @vhostfd: file descriptor of an already opened vhost vdpa device
++#
+ # @queues: number of queues to be created for multiqueue vhost-vdpa
+ #          (default: 1)
+ #
+@@ -456,6 +458,7 @@
+ { 'struct': 'NetdevVhostVDPAOptions',
+   'data': {
+     '*vhostdev':     'str',
++    '*vhostfd':      'str',
+     '*queues':       'int',
+     '*x-svq':        {'type': 'bool', 'features' : [ 'unstable'] } } }
+ 
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 31c04f7eea..a9646bfa43 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -2750,8 +2750,10 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                configure a vhost-user network, backed by a chardev 'dev'\n"
+ #endif
+ #ifdef __linux__
+-    "-netdev vhost-vdpa,id=str,vhostdev=/path/to/dev\n"
++    "-netdev vhost-vdpa,id=str[,vhostdev=/path/to/dev][,vhostfd=h]\n"
+     "                configure a vhost-vdpa network,Establish a vhost-vdpa netdev\n"
++    "                use 'vhostdev=/path/to/dev' to open a vhost vdpa device\n"
++    "                use 'vhostfd=h' to connect to an already opened vhost vdpa device\n"
+ #endif
+ #ifdef CONFIG_VMNET
+     "-netdev vmnet-host,id=str[,isolated=on|off][,net-uuid=uuid]\n"
+@@ -3256,7 +3258,7 @@ SRST
+              -netdev type=vhost-user,id=net0,chardev=chr0 \
+              -device virtio-net-pci,netdev=net0
+ 
+-``-netdev vhost-vdpa,vhostdev=/path/to/dev``
++``-netdev vhost-vdpa[,vhostdev=/path/to/dev][,vhostfd=h]``
+     Establish a vhost-vdpa netdev.
+ 
+     vDPA device is a device that uses a datapath which complies with
+-- 
+2.37.2
+
