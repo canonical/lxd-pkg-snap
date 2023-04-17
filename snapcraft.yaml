@@ -1259,6 +1259,16 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick d877b64613d0c73fba8813de3fa48a704aa288a5  # doc/metrics: restructure existing content
+      git cherry-pick 6c8ca0fd190721b3c39cd3b597a653ab8a2de044  # lxd/instance/drivers/driver/qemu: Comment whitespace
+      git cherry-pick 22a022422d3ee027426b397f4404764747a7cf54  # lxd/instance/drivers/driver/qemu: Rename snapshot file handle for clarity in migrateSendLive
+      git cherry-pick c8cf40368303c3f4209e9f0302e9fa8db62ad9d0  # lxd/network/openvswitch/ovn: Add support for storing instance port location in external-ids
+      git cherry-pick 31b92835b0d2ae4054db44b64aaf90aae638b2f9  # lxd/network/openvswitch/ovn: Adds LogicalSwitchPortOptionsSet function
+      git cherry-pick 963caa538a63858ebdf27959178198ddf5e3be8a  # lxd/network/driver/ovn: Set instance switch port Location in InstanceDevicePortStart
+      git cherry-pick 5f04a8e260959025ca09c275854548fad802a53e  # lxd/network/driver/ovn: Skip clearing up logical switch port if last active host wasn't local in InstanceDevicePortStop
+      git cherry-pick f794d08e942862fc39c217c5f1940fe1d36d6a00  # lxd/device/nic/ovn: Start setting requested-chassis ID for logical switch port in post start hook
+      git cherry-pick c5ffacc0e394e2b93fa98dfcab124722bdd9a71a  # doc/metrics: update metrics documentation
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
