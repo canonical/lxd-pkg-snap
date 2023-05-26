@@ -422,6 +422,12 @@ if [ "${criu_enable:-"false"}" = "true" ]; then
     export PATH="${SNAP_CURRENT}/criu:${PATH}"
 fi
 
+# Setup UI
+if [ "${ui_enable:-"false"}" = "true" ]; then
+    echo "==> Enabling LXD UI"
+    export LXD_UI="${SNAP_CURRENT}/share/lxd-ui/"
+fi
+
 # Setup shiftfs
 if [ "${shiftfs_enable:-"auto"}" = "auto" ]; then
     echo "==> Disabling shiftfs on this kernel (auto)"
