@@ -19,7 +19,6 @@ export LXD_DIR="${SNAP_COMMON}/lxd/"
 export LXD_LXC_TEMPLATE_CONFIG="${SNAP_CURRENT}/lxc/config/"
 export LXD_LXC_HOOK="${SNAP_CURRENT}/lxc/hooks/"
 export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
-export LXD_UI="${SNAP_CURRENT}/share/lxd-ui/"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
@@ -421,6 +420,12 @@ fi
 if [ "${criu_enable:-"false"}" = "true" ]; then
     echo "==> Enabling CRIU"
     export PATH="${SNAP_CURRENT}/criu:${PATH}"
+fi
+
+# Setup UI
+if [ "${ui_enable:-"false"}" = "true" ]; then
+    echo "==> Enabling LXD UI"
+    export LXD_UI="${SNAP_CURRENT}/share/lxd-ui/"
 fi
 
 # Setup shiftfs

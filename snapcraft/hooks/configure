@@ -65,6 +65,7 @@ openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 openvswitch_external=$(get_bool "$(snapctl get openvswitch.external)")
 ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 shiftfs_enable=$(get_bool "$(snapctl get shiftfs.enable)")
+ui_enable=$(get_bool "$(snapctl get ui.enable)")
 
 # Special-handling of daemon.preseed
 daemon_preseed=$(snapctl get daemon.preseed)
@@ -94,6 +95,7 @@ config="${SNAP_COMMON}/config"
     echo "openvswitch_external=${openvswitch_external:-"false"}"
     echo "ovn_builtin=${ovn_builtin:-"false"}"
     echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
+    echo "ui_enable=${ui_enable:-"false"}"
 } > "${config}"
 
 # Set socket ownership in case it changed
