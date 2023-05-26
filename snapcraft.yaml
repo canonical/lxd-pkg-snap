@@ -209,7 +209,7 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.17.1
+    source-tag: v3.18
     source-type: git
     source-depth: 1
     plugin: nil
