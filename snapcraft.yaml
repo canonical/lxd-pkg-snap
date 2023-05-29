@@ -1278,6 +1278,23 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 21a62d811d8eddcc2af789248ad0edc830db4477  # lxd/storage/backend/lxd: Switch to errgroup for migration in CreateInstanceFromCopy
+      git cherry-pick 27d2ba4872e148fbc25d1b16d9923de3aa0a6907  # lxd/storage/backend/lxd: Switch to errgroup for migration in RefreshInstance
+      git cherry-pick 2bc027e10848318d06507a51de7845bdf41cc85c  # lxd/storage/backend/lxd: Use source pool to indicate if source instance needs to be frozen in CreateInstanceFromCopy
+      git cherry-pick 5460947a67125164169d6e086021e12d71755419  # lxd/storage/backend/lxd: Allow copying running VMs in CreateInstanceFromCopy
+      git cherry-pick cdfc697827b33d80e0eae9fab14c3665f5bbb742  # lxd/storage/backend/lxd: Use same instance freezing logic from CreateInstanceFromCopy in RefreshInstance
+      git cherry-pick c292277cd87d032499b6b3099e161d8d07a82d9f  # lxd/storage/backend/lxd: Allow migrating running VMs when using raw block mode transfer in MigrateInstance
+      git cherry-pick db08f9ffe3db15e7478d35ab28bc0cfb5540edae  # lxd/storage/drivers: Record future improvement areas for non-optimized consistent migrations in MigrateVolume
+      git cherry-pick 6bbb1303153be9bc414143df166c6d730537c19f  # lxd/instance: Clarify lock exclusive error for target instance in instanceCreateAsCopy
+      git cherry-pick a3818a6c506c7341bb716ebeb06f5ad816af8f39  # lxc/copy: Remove pointless error check in copyInstance
+      git cherry-pick 774b9056b058a3077c0e59319e568f9b3e02991c  # lxc/copy: Don't try and modify root disk's pool when doing refresh in cmdCopy
+      git cherry-pick c7d17bdfbb0de5c309034040da02e3069deb8b3d  # lxd/instance/drivers/driver/qemu: Fixes crash if /dev/vhost-net not available
+      git cherry-pick 1f1dfd316e355e3520fef6c12a00c369ab638288  # doc: Fix descrption for lxd_memory_Inactive_anon_bytes metric
+      git cherry-pick f1959d3813a16b3a4ab6a9dbb19f73ae50b8cbe0  # lxd/metrics: fix copy-n-paste error for MemoryInactiveAnonBytes help text
+      git cherry-pick b80f06f6cd517edb6bfece563c3b377d72935ee6  # lxd/storage/drivers/utils: Updates loopFileSizeDefault to consider non-root free space
+      git cherry-pick 7a62450e842b63ce4af4d6e2a22e4bcacbc77468  # doc/faq: Drop reference to eth1
+      git cherry-pick 307b5a7045889e08222d996d1a9c3e9fd8c2cb6e  # shared/instance: Separate some instance type specific config key validation
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
