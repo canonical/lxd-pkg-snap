@@ -1294,6 +1294,19 @@ parts:
       git cherry-pick b80f06f6cd517edb6bfece563c3b377d72935ee6  # lxd/storage/drivers/utils: Updates loopFileSizeDefault to consider non-root free space
       git cherry-pick 7a62450e842b63ce4af4d6e2a22e4bcacbc77468  # doc/faq: Drop reference to eth1
       git cherry-pick 307b5a7045889e08222d996d1a9c3e9fd8c2cb6e  # shared/instance: Separate some instance type specific config key validation
+      git cherry-pick 9071290a2de88e66c5318b7fab9919c4e75fdff6  # shared/ws/mirror: Allow passing nil to Exec
+      git cherry-pick 76493f38d709caca169b6f8747e979a2e04c97cb  # lxd/device/nic/ovn: Enable hotplug for VMs
+      git cherry-pick d92294b451db84e696098cedfa0158e54c854b2f  # doc/cluster: link directly to cluster options instead of server options
+      git cherry-pick 8e377c4216f1ed2dc06ce4e3a010bbcab52dbef1  # doc/cluster: add information about automatic evacuation
+      git cherry-pick f32d540e5804a6dc7cdb2099ad1c479752b1624d  # doc/UI: update instructions for enabling the UI
+      git cherry-pick 46c2691df521440e99f19835f5fef65040fe3b72  # doc/CPU limits: clarify what live update means for CPU limits
+      git cherry-pick b0ce91cf99ca7aabbf49070e0b2f633fd06e0045  # lxd/instance/instance/interface: Adds PowerStateRunning and PowerStateStopped constants
+      git cherry-pick aef2cd8359ce4e273d3e03fba7b2c8c068190e15  # lxd: instance.PowerStateRunning and instance.PowerStateStopped usage
+      git cherry-pick 6e7b1381a4c29dede567730bbd619cdfb2ed82fb  # lxd: Unifies instance auto start logic
+      git cherry-pick 911a02ff5c9f9941d9b44e2d916204b32218559a  # lxd/api/cluster: Fix instance start after cluster heal in evacuateInstances
+      git cherry-pick 0e407b76bcee7462b3292a4e17e19a90364c417e  # doc/faq: add information about `lxc monitor`
+      git cherry-pick 103769a9a90ad3150d5249aac587ad0c6f2ba699  # lxc/init: Accept Description field from stdin
+      git cherry-pick 0a36372424e0dd112cccb88f2dd94faa370d7ce0  # doc/API: add video link and small updates
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
