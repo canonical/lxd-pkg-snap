@@ -286,6 +286,7 @@ parts:
   edk2:
     after:
       - nasm
+      - seabios
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: IRRELEVANT
@@ -318,6 +319,10 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
 
+      # Setup CSM blob
+      cp ../../seabios/build/out/Csm16.bin OvmfPkg/Csm/Csm16/Csm16.bin
+
+      # Arch-specific logic
       ARCH="X64"
       PKG="OvmfPkg/OvmfPkgX64.dsc"
       FV_CODE="OVMF_CODE"
@@ -330,33 +335,62 @@ parts:
       fi
 
       # Run in a bash sub-shell as edksetup.sh requires it
-      set -ex
-      (
-      cat << EOF
-          . ./edksetup.sh
-          make -C BaseTools ARCH=${ARCH}
-          build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
-            -DSMM_REQUIRE=TRUE \
-            -DSECURE_BOOT_ENABLE=TRUE \
-            -DNETWORK_IP4_ENABLE=TRUE \
-            -DNETWORK_IP6_ENABLE=TRUE \
-            -DNETWORK_TLS_ENABLE=TRUE \
-            -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
-            -DFD_SIZE_2MB \
-            -DTPM2_ENABLE=TRUE \
-            -DTPM2_CONFIG_ENABLE=TRUE
+      build_edk2() {
+          TARGET_CODE="$1"
+          shift
+          TARGET_VARS="$1"
+          shift
+
+          set -ex
+          (
+          cat << EOF
+              . ./edksetup.sh
+              make -C BaseTools ARCH=${ARCH}
+              build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
+                -DSMM_REQUIRE=TRUE \
+                -DSECURE_BOOT_ENABLE=TRUE \
+                -DNETWORK_IP4_ENABLE=TRUE \
+                -DNETWORK_IP6_ENABLE=TRUE \
+                -DNETWORK_TLS_ENABLE=TRUE \
+                -DNETWORK_HTTP_BOOT_ENABLE=TRUE \
+                -DTPM2_ENABLE=TRUE \
+                -DTPM2_CONFIG_ENABLE=TRUE \
+                $@
       EOF
-      ) | bash -e
+          ) | bash -e
 
+          cp Build/*/*/FV/${FV_CODE}.fd "${TARGET_CODE}"
+          cp Build/*/*/FV/${FV_VARS}.fd "${TARGET_VARS}"
+
+          if [ "$(uname -m)" = "aarch64" ]; then
+              truncate -s 64m "${TARGET_CODE}"
+              truncate -s 64m "${TARGET_VARS}"
+          fi
+      }
+
+      # Create the firmware path
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
-      cp Build/*/*/FV/${FV_CODE}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-      cp Build/*/*/FV/${FV_VARS}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
 
-      if [ "$(uname -m)" = "aarch64" ]; then
-          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
-      fi
+      # Primary firmware (4MB, no CSM)
+      build_edk2 \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.fd" \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.fd" \
+        -DFD_SIZE_4MB
 
+      # Compatibility firmware (2MB, no CSM)
+      build_edk2 \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.2MB.fd" \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.fd" \
+        -DFD_SIZE_2MB
+      ln -s OVMF_CODE.2MB.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd
+      ln -s OVMF_VARS.2MB.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd
+
+      # Legacy firmware (4MB, CSM)
+      build_edk2 \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
+        -DFD_SIZE_4MB \
+        -DCSM_ENABLE=TRUE
     prime:
       - share/qemu/*
 
@@ -880,13 +914,24 @@ parts:
       fi
 
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
+
+      # 4MB variant
       ./edk2-vars-generator -f "${FIRMWARE}" \
         -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
         -s ../../edk2/build/Build/*/*/*/Shell.efi \
-        -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
-        -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
+        -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.4MB.fd" \
+        -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.4MB.fd" \
         -C "$(cat ubuntu-sb.crt)" \
-        -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
+        -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.ms.fd"
+
+      # 2MB variant
+      ./edk2-vars-generator -f "${FIRMWARE}" \
+        -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
+        -s ../../edk2/build/Build/*/*/*/Shell.efi \
+        -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.2MB.fd" \
+        -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.2MB.fd" \
+        -C "$(cat ubuntu-sb.crt)" \
+        -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.ms.fd"
     prime:
       - share/qemu/*
 
