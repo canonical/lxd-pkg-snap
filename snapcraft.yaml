@@ -266,6 +266,23 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
 
+  seabios:
+    source: https://gitlab.com/qemu-project/seabios
+    source-type: git
+    source-tag: rel-1.16.2
+    source-depth: 1
+    plugin: nil
+    override-build: |-
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/seabios-0001-CSM-memory.patch"
+
+      make clean distclean
+      echo "CONFIG_QEMU_HARDWARE=y" > .config
+      echo "CONFIG_CSM=y" >> .config
+      echo "CONFIG_BOOTSPLASH=n" >> .config
+      echo "CONFIG_ROM_SIZE=128" >> .config
+      make oldnoconfig V=1
+      make V=1 PYTHON=python3
+
   edk2:
     after:
       - nasm
