@@ -273,7 +273,7 @@ parts:
     source-depth: 1
     plugin: nil
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && exit 0
 
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/seabios-0001-CSM-memory.patch"
 
