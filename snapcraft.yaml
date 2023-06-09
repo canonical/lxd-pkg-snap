@@ -322,7 +322,9 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
 
       # Setup CSM blob
-      cp ../../seabios/build/out/Csm16.bin OvmfPkg/Csm/Csm16/Csm16.bin
+      if [ "$(uname -m)" = "x86_64" ]; then
+          cp ../../seabios/build/out/Csm16.bin OvmfPkg/Csm/Csm16/Csm16.bin
+      fi
 
       # Arch-specific logic
       ARCH="X64"
@@ -388,11 +390,13 @@ parts:
       ln -s OVMF_VARS.2MB.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd
 
       # Legacy firmware (4MB, CSM)
-      build_edk2 \
-        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
-        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
-        -DFD_SIZE_4MB \
-        -DCSM_ENABLE=TRUE
+      if [ "$(uname -m)" = "x86_64" ]; then
+          build_edk2 \
+            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
+            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
+            -DFD_SIZE_4MB \
+            -DCSM_ENABLE=TRUE
+      fi
     prime:
       - share/qemu/*
 
