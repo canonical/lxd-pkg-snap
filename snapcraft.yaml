@@ -938,6 +938,7 @@ parts:
         -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.2MB.fd" \
         -C "$(cat ubuntu-sb.crt)" \
         -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.ms.fd"
+      ln -s OVMF_VARS.2MB.ms.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd
     prime:
       - share/qemu/*
 
