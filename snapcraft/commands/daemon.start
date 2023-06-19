@@ -321,6 +321,12 @@ echo "==> Setting up OVN configuration"
 if [ "${ovn_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ovn"
     ln -s "${SNAP_COMMON}/ovn" /etc/ovn
+elif [ -d /var/snap/microovn/ ]; then
+    echo "=> Detected MicroOVN"
+    mkdir /etc/ovn
+    ln -s /var/snap/microovn/common/data/pki/ovnnb-cert.pem /etc/ovn/cert_host
+    ln -s /var/snap/microovn/common/data/pki/ovnnb-privkey.pem /etc/ovn/key_host
+    ln -s /var/snap/microovn/common/data/pki/cacert.pem /etc/ovn/ovn-central.crt
 else
     ln -s /var/lib/snapd/hostfs/etc/ovn /etc/ovn
 fi
