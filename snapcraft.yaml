@@ -2,7 +2,7 @@ name: lxd
 base: core22
 assumes:
   - snapd2.39
-version: "5.14"
+version: "5.15"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1300,7 +1300,7 @@ parts:
   lxd:
     source: https://github.com/lxc/lxd
     source-type: git
-    source-tag: lxd-5.14
+    source-tag: lxd-5.15
     after:
       - lxc
       - dqlite
@@ -1346,36 +1346,6 @@ parts:
       cd ../src
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 21a62d811d8eddcc2af789248ad0edc830db4477  # lxd/storage/backend/lxd: Switch to errgroup for migration in CreateInstanceFromCopy
-      git cherry-pick 27d2ba4872e148fbc25d1b16d9923de3aa0a6907  # lxd/storage/backend/lxd: Switch to errgroup for migration in RefreshInstance
-      git cherry-pick 2bc027e10848318d06507a51de7845bdf41cc85c  # lxd/storage/backend/lxd: Use source pool to indicate if source instance needs to be frozen in CreateInstanceFromCopy
-      git cherry-pick 5460947a67125164169d6e086021e12d71755419  # lxd/storage/backend/lxd: Allow copying running VMs in CreateInstanceFromCopy
-      git cherry-pick cdfc697827b33d80e0eae9fab14c3665f5bbb742  # lxd/storage/backend/lxd: Use same instance freezing logic from CreateInstanceFromCopy in RefreshInstance
-      git cherry-pick c292277cd87d032499b6b3099e161d8d07a82d9f  # lxd/storage/backend/lxd: Allow migrating running VMs when using raw block mode transfer in MigrateInstance
-      git cherry-pick db08f9ffe3db15e7478d35ab28bc0cfb5540edae  # lxd/storage/drivers: Record future improvement areas for non-optimized consistent migrations in MigrateVolume
-      git cherry-pick 6bbb1303153be9bc414143df166c6d730537c19f  # lxd/instance: Clarify lock exclusive error for target instance in instanceCreateAsCopy
-      git cherry-pick a3818a6c506c7341bb716ebeb06f5ad816af8f39  # lxc/copy: Remove pointless error check in copyInstance
-      git cherry-pick 774b9056b058a3077c0e59319e568f9b3e02991c  # lxc/copy: Don't try and modify root disk's pool when doing refresh in cmdCopy
-      git cherry-pick c7d17bdfbb0de5c309034040da02e3069deb8b3d  # lxd/instance/drivers/driver/qemu: Fixes crash if /dev/vhost-net not available
-      git cherry-pick 1f1dfd316e355e3520fef6c12a00c369ab638288  # doc: Fix descrption for lxd_memory_Inactive_anon_bytes metric
-      git cherry-pick f1959d3813a16b3a4ab6a9dbb19f73ae50b8cbe0  # lxd/metrics: fix copy-n-paste error for MemoryInactiveAnonBytes help text
-      git cherry-pick b80f06f6cd517edb6bfece563c3b377d72935ee6  # lxd/storage/drivers/utils: Updates loopFileSizeDefault to consider non-root free space
-      git cherry-pick 7a62450e842b63ce4af4d6e2a22e4bcacbc77468  # doc/faq: Drop reference to eth1
-      git cherry-pick 307b5a7045889e08222d996d1a9c3e9fd8c2cb6e  # shared/instance: Separate some instance type specific config key validation
-      git cherry-pick 9071290a2de88e66c5318b7fab9919c4e75fdff6  # shared/ws/mirror: Allow passing nil to Exec
-      git cherry-pick 76493f38d709caca169b6f8747e979a2e04c97cb  # lxd/device/nic/ovn: Enable hotplug for VMs
-      git cherry-pick d92294b451db84e696098cedfa0158e54c854b2f  # doc/cluster: link directly to cluster options instead of server options
-      git cherry-pick 8e377c4216f1ed2dc06ce4e3a010bbcab52dbef1  # doc/cluster: add information about automatic evacuation
-      git cherry-pick f32d540e5804a6dc7cdb2099ad1c479752b1624d  # doc/UI: update instructions for enabling the UI
-      git cherry-pick 46c2691df521440e99f19835f5fef65040fe3b72  # doc/CPU limits: clarify what live update means for CPU limits
-      git cherry-pick b0ce91cf99ca7aabbf49070e0b2f633fd06e0045  # lxd/instance/instance/interface: Adds PowerStateRunning and PowerStateStopped constants
-      git cherry-pick aef2cd8359ce4e273d3e03fba7b2c8c068190e15  # lxd: instance.PowerStateRunning and instance.PowerStateStopped usage
-      git cherry-pick 6e7b1381a4c29dede567730bbd619cdfb2ed82fb  # lxd: Unifies instance auto start logic
-      git cherry-pick 911a02ff5c9f9941d9b44e2d916204b32218559a  # lxd/api/cluster: Fix instance start after cluster heal in evacuateInstances
-      git cherry-pick 0e407b76bcee7462b3292a4e17e19a90364c417e  # doc/faq: add information about `lxc monitor`
-      git cherry-pick 103769a9a90ad3150d5249aac587ad0c6f2ba699  # lxc/init: Accept Description field from stdin
-      git cherry-pick 0a36372424e0dd112cccb88f2dd94faa370d7ce0  # doc/API: add video link and small updates
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
