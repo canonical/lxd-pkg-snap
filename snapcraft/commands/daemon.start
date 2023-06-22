@@ -27,7 +27,7 @@ export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
 # Detect model
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
+SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
 
 # Wait for appliance configuration
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
