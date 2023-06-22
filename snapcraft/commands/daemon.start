@@ -80,7 +80,7 @@ if [ ! -e "${SNAP_COMMON}/mntns" ] || [ -L "${SNAP_COMMON}/mntns" ]; then
 fi
 
 # Fix /dev/pts
-if [ "$(grep "devpts /dev/pts " /proc/self/mountinfo)" = "2" ]; then
+if [ "$(grep -F "devpts /dev/pts " /proc/self/mountinfo)" = "2" ]; then
     echo "==> Setting up /dev/pts"
     umount -l /dev/ptmx
     umount -l /dev/pts
@@ -88,7 +88,7 @@ fi
 
 # Setup rshared propagation on mount holding paths
 for path in "${SNAP_COMMON}/lxd/storage-pools" "${SNAP_COMMON}/lxd/devices"; do
-    if ! cut -d' ' -f5 /proc/self/mountinfo | grep -q "${path}"; then
+    if ! cut -d' ' -f5 /proc/self/mountinfo | grep -qF "${path}"; then
         echo "==> Setting up mount propagation on ${path}"
         if [ ! -e "${path}" ]; then
             mkdir -p "${path}"
@@ -455,7 +455,7 @@ fi
 ## Host specific overrides
 mkdir -p "${SNAP_COMMON}/lxc"
 touch "${SNAP_COMMON}/lxc/local.conf"
-if [ -d /sys/kernel/security/apparmor ] && ! grep -q "\\-Ubuntu" /proc/version; then
+if [ -d /sys/kernel/security/apparmor ] && ! grep -qF -- "-Ubuntu" /proc/version; then
     echo "==> Detected kernel with partial AppArmor support"
     echo "lxc.apparmor.allow_incomplete = 1" > "${SNAP_COMMON}/lxc/local.conf"
 else
@@ -567,7 +567,7 @@ fi
 # LXD
 ## Check for existing LXDs
 for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
-    grep -q "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
+    grep -qF "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
     rm -f "/var/snap/lxd/common/lxd/.validate"
     touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
