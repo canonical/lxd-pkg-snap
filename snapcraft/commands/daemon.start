@@ -520,7 +520,7 @@ fi
 if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
 
-    NEW_FUSE=$(ldd "${SNAP_CURRENT}/bin/lxcfs" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
+    NEW_FUSE=$(ldd "${SNAP_CURRENT}/bin/lxcfs" | sed -n "/libfuse\.so/ s/.*libfuse\.so\.\([^ ]\+\) .*/\1/p")
     CURRENT_FUSE="${NEW_FUSE}"
 
     NEW_BASE="$(grep ^name /meta/snap.yaml)"
@@ -529,7 +529,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
-            CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
+            CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse\.so/ s/.*libfuse\.so\.\([^ ]\+\) .*/\1/p")
             CURRENT_BASE="$(grep ^name "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
