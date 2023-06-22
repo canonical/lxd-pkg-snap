@@ -681,8 +681,8 @@ if [ "${FIRSTRUN}" = "true" ]; then
     elif echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
         echo "==> Initializing LXD appliance"
 
-        # Network (default gateway)
-        NIC="$(ip -4 route get 1.1.1.1 | grep " dev " | cut -d' ' -f5)"
+        # Network (NIC with the default gateway)
+        NIC="$(ip -4 -o route get 0.0.0.1 | cut -d' ' -f5)"
         lxc --force-local --quiet profile device add default eth0 nic nictype=macvlan parent="${NIC}" name=eth0
 
         # Storage (80% of free space)
