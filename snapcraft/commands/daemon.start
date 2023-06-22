@@ -134,13 +134,13 @@ fi
 
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
-mountpoint -q /bin/kmod || mount -o bind "${SNAP}/wrappers/kmod" "/bin/kmod"
+mountpoint -q /bin/kmod || mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
     echo "==> Preparing /boot"
     umount -l /boot >/dev/null 2>&1 || true
-    mount -o bind "/var/lib/snapd/hostfs/boot" "/boot"
+    mount -o ro,bind "/var/lib/snapd/hostfs/boot" "/boot"
 fi
 
 # Setup a functional /run
@@ -241,7 +241,7 @@ ln -s "/proc/mounts" "/etc/mtab"
 ## Handle SSL certs
 if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/share/ca-certificates" ]; then
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
-    mountpoint -q "/usr/share/ca-certificates" || mount -o bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
+    mountpoint -q "/usr/share/ca-certificates" || mount -o ro,bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
     ln -s "/snap/core22/current/etc/ssl" "/etc/ssl"
 fi
