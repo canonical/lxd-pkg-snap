@@ -2,8 +2,9 @@
 set -eu
 
 # Re-exec outside of apparmor confinement
-if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
-    exec aa-exec -p unconfined -- "$0" "$@"
+if [ -d /sys/kernel/security/apparmor ]; then
+    read -r PROFILE < /proc/self/attr/current
+    [ "${PROFILE}" != "unconfined" ] && exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
 echo "=> Preparing the system (${SNAP_REVISION})"
@@ -331,7 +332,7 @@ logrotate -f "${SNAP}/etc/logrotate.conf" -s "/etc/logrotate.status" || true
 
 # Setup for ZFS
 if [ -e /sys/module/zfs/version ]; then
-    VERSION=$(cat /sys/module/zfs/version)
+    read -r VERSION < /sys/module/zfs/version
 else
     VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
@@ -396,28 +397,32 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
 
     ## Handle sysctls
     if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
-        if [ "$(cat /proc/sys/fs/inotify/max_user_instances)" -lt "1024" ]; then
+        read -r VALUE < /proc/sys/fs/inotify/max_user_instances
+        if [ "${VALUE}" -lt "1024" ]; then
             echo "==> Increasing the number of inotify user instances"
             echo 1024 > /proc/sys/fs/inotify/max_user_instances || true
         fi
     fi
 
     if [ -e /proc/sys/kernel/keys/maxkeys ]; then
-        if [ "$(cat /proc/sys/kernel/keys/maxkeys)" -lt "2000" ]; then
+        read -r VALUE < /proc/sys/kernel/keys/maxkeys
+        if [ "${VALUE}" -lt "2000" ]; then
             echo "==> Increasing the number of keys for a nonroot user"
             echo 2000 > /proc/sys/kernel/keys/maxkeys || true
         fi
     fi
 
     if [ -e /proc/sys/kernel/keys/maxbytes ]; then
-        if [ "$(cat /proc/sys/kernel/keys/maxbytes)" -lt "2000000" ]; then
+        read -r VALUE < /proc/sys/kernel/keys/maxbytes
+        if [ "${VALUE}" -lt "2000000" ]; then
             echo "==> Increasing the number of bytes for a nonroot user"
             echo 2000000 > /proc/sys/kernel/keys/maxbytes || true
         fi
     fi
 
     if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
-        if [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "0" ]; then
+        read -r VALUE < /proc/sys/kernel/unprivileged_userns_clone
+        if [ "${VALUE}" = "0" ]; then
             echo "==> Enabling unprivileged containers kernel support"
             echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
         fi
@@ -485,7 +490,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     CURRENT_FUSE="${NEW_FUSE}"
 
     if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
-        CURRENT_PID="$(cat "${SNAP_COMMON}/lxcfs.pid")"
+        read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
             CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
         fi
@@ -539,7 +544,8 @@ else
     )
 fi
 
-PID=$(cat "${SNAP_COMMON}/lxcfs.pid" || true)
+PID=""
+[ -e "${SNAP_COMMON}/lxcfs.pid" ] && read -r PID < "${SNAP_COMMON}/lxcfs.pid"
 if [ -n "${PID}" ] && [ "$(readlink "/proc/self/ns/mnt")" != "$(readlink "/proc/${PID}/ns/mnt")" ]; then
     echo "==> Cleaning up existing LXCFS namespace"
 
@@ -698,12 +704,15 @@ if [ "${RET}" -gt "0" ]; then
     echo "=> LXD failed with return code ${RET}"
     exit 1
 else
-    if [ -e "${SNAP_COMMON}/state" ] && [ "$(cat "${SNAP_COMMON}/state")" = "reload" ]; then
+    STATE=""
+    [ -e "${SNAP_COMMON}/state" ] && read -r STATE < "${SNAP_COMMON}/state"
+
+    if [ "${STATE}" = "reload" ]; then
         echo "=> LXD is reloading"
         exit 1
     fi
 
-    if [ -e "${SNAP_COMMON}/state" ] && [ "$(cat "${SNAP_COMMON}/state")" = "host-shutdown" ]; then
+    if [ "${STATE}" = "host-shutdown" ]; then
         true > "${SNAP_COMMON}/state"
     else
         echo shutdown > "${SNAP_COMMON}/state"
