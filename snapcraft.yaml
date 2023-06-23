@@ -1347,6 +1347,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 20f1f971ad71e2700839e27a7e74fbe2e020850c # lxc/rebuild: Don't stop all instances on force
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
