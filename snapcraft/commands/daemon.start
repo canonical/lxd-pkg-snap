@@ -2,9 +2,8 @@
 set -eu
 
 # Re-exec outside of apparmor confinement
-if [ -d /sys/kernel/security/apparmor ]; then
-    read -r PROFILE < /proc/self/attr/current
-    [ "${PROFILE}" != "unconfined" ] && exec aa-exec -p unconfined -- "$0" "$@"
+if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
 echo "=> Preparing the system (${SNAP_REVISION})"
@@ -403,8 +402,7 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
 
     ## Handle sysctls
     if [ -e /proc/sys/fs/inotify/max_user_instances ]; then
-        read -r VALUE < /proc/sys/fs/inotify/max_user_instances
-        if [ "${VALUE}" -lt "1024" ]; then
+        if [ "$(cat /proc/sys/fs/inotify/max_user_instances)" -lt "1024" ]; then
             echo "==> Increasing the number of inotify user instances"
             echo 1024 > /proc/sys/fs/inotify/max_user_instances || true
         fi
@@ -418,24 +416,21 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
     fi
 
     if [ -e /proc/sys/kernel/keys/maxkeys ]; then
-        read -r VALUE < /proc/sys/kernel/keys/maxkeys
-        if [ "${VALUE}" -lt "2000" ]; then
+        if [ "$(cat /proc/sys/kernel/keys/maxkeys)" -lt "2000" ]; then
             echo "==> Increasing the number of keys for a nonroot user"
             echo 2000 > /proc/sys/kernel/keys/maxkeys || true
         fi
     fi
 
     if [ -e /proc/sys/kernel/keys/maxbytes ]; then
-        read -r VALUE < /proc/sys/kernel/keys/maxbytes
-        if [ "${VALUE}" -lt "2000000" ]; then
+        if [ "$(cat /proc/sys/kernel/keys/maxbytes)" -lt "2000000" ]; then
             echo "==> Increasing the number of bytes for a nonroot user"
             echo 2000000 > /proc/sys/kernel/keys/maxbytes || true
         fi
     fi
 
     if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
-        read -r VALUE < /proc/sys/kernel/unprivileged_userns_clone
-        if [ "${VALUE}" = "0" ]; then
+        if [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "0" ]; then
             echo "==> Enabling unprivileged containers kernel support"
             echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
         fi
