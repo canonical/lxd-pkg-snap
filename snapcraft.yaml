@@ -1347,6 +1347,8 @@ parts:
       git config user.email "noreply@linuxcontainers.org"
       git config user.name "LXD snap builder"
 
+      git cherry-pick d6b87a9e60e6bf1e9c5e45172801a91ee10745ca # lxc/rebuild: Restart instance if it was stopped
+      git cherry-pick 31ef2a31a91cc5bfca3ff8dda9a1e2ed046a4063 # lxd/instance/rebuild: Fix getSourceImageFromInstanceSource usage
       git cherry-pick 20f1f971ad71e2700839e27a7e74fbe2e020850c # lxc/rebuild: Don't stop all instances on force
 
       # Setup build environment
