@@ -1350,6 +1350,9 @@ parts:
       git cherry-pick d6b87a9e60e6bf1e9c5e45172801a91ee10745ca # lxc/rebuild: Restart instance if it was stopped
       git cherry-pick 31ef2a31a91cc5bfca3ff8dda9a1e2ed046a4063 # lxd/instance/rebuild: Fix getSourceImageFromInstanceSource usage
       git cherry-pick 20f1f971ad71e2700839e27a7e74fbe2e020850c # lxc/rebuild: Don't stop all instances on force
+      git cherry-pick 7a127748a3d548ad9812ad4514aadd1b419c2ed4 # lxd/instance/drivers/qemu: Use uint32 for vsock Context ID
+      git cherry-pick 67f40160bd96b9e1e32a68188677c54b64f46314 # lxd/instance/drivers/qemu: Add function to retrieve the vsock Context ID
+      git cherry-pick 90ea2ce206377bb9f48d14968d89b8e467d365e0 # lxd/instance/drivers/qemu: Pick a random vsock Context ID
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
