@@ -9,7 +9,7 @@ import (
 
 	_ "github.com/mattn/go-sqlite3"
 
-	"github.com/lxc/lxd/shared"
+	"github.com/canonical/lxd/shared"
 )
 
 func dbRewritePoolSource(src *lxdDaemon, dst *lxdDaemon, pool string, path string) error {
