@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/lxc/lxd/client"
-	"github.com/lxc/lxd/shared"
-	"github.com/lxc/lxd/shared/api"
+	"github.com/canonical/lxd/client"
+	"github.com/canonical/lxd/shared"
+	"github.com/canonical/lxd/shared/api"
 )
 
 type lxdDaemon struct {

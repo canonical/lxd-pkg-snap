@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lxc/lxd/shared"
+	"github.com/canonical/lxd/shared"
 )
 
 func runSnapCommand(name string, arg ...string) (string, error) {
