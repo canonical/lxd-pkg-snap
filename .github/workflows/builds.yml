@@ -1,0 +1,30 @@
+name: Builds
+on:
+  - push
+
+permissions:
+  contents: read
+
+jobs:
+  snap:
+    name: Snap build
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Launchpad SSH access
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a "${SSH_AUTH_SOCK}" > /dev/null
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh-keyscan -H git.launchpad.net >> ~/.ssh/known_hosts
+
+      - name: Trigger Launchpad snap build
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          git clone -b latest-edge git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
+
