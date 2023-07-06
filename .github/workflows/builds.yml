@@ -39,7 +39,7 @@ jobs:
           git config --global user.name "Canonical LXD Bot"
           git config --global user.email "lxd@lists.canonical.com"
           localRev=$(git rev-parse HEAD)
-          go install github.com/canonical/lxd-ci/lxd-snapcraft
+          go install github.com/canonical/lxd-ci/lxd-snapcraft@latest
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
           ver=($(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
