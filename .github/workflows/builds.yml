@@ -24,6 +24,11 @@ jobs:
           mkdir -p ~/.ssh/
           ssh-keyscan -H git.launchpad.net >> ~/.ssh/known_hosts
 
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.18.x
+
       - name: Trigger Launchpad snap build
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
