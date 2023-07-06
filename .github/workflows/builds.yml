@@ -34,8 +34,8 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           TARGET: ${{ github.ref_name }}
         run: |
-          git config user.name "LXD Bot"
-          git config user.email "lxd@lists.canonical.com"
+          git config --global user.name "LXD Bot"
+          git config --global user.email "lxd@lists.canonical.com"
           localRev=$(git rev-parse HEAD)
           cd lxd-snapcraft
           go install
