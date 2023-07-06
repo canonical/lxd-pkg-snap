@@ -27,7 +27,8 @@ jobs:
       - name: Trigger Launchpad snap build
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          TARGET: ${{ github.ref_name }}
         run: |
-          echo "${GITHUB_REF}"
+          echo "${TARGET}"
           git clone -b latest-edge git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
 
