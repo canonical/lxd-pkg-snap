@@ -21,6 +21,7 @@ jobs:
         run: |
           ssh-agent -a "${SSH_AUTH_SOCK}" > /dev/null
           ssh-add - <<< "${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}"
+          mkdir -p ~/.ssh/
           ssh-keyscan -H git.launchpad.net >> ~/.ssh/known_hosts
 
       - name: Trigger Launchpad snap build
