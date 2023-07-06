@@ -1,6 +1,8 @@
 name: Builds
 on:
   - push
+    branches:
+      - latest-edge
 
 permissions:
   contents: read
@@ -37,9 +39,7 @@ jobs:
           git config --global user.name "Canonical LXD Bot"
           git config --global user.email "lxd@lists.canonical.com"
           localRev=$(git rev-parse HEAD)
-          cd lxd-snapcraft
-          go install
-          cd -
+          go get github.com/canonical/lxd-ci/lxd-snapcraft
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
           ver=($(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
