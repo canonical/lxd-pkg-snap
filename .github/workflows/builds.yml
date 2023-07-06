@@ -34,6 +34,9 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           TARGET: ${{ github.ref_name }}
         run: |
+          git config user.name "LXD Bot"
+          git config user.email "lxd@lists.canonical.com"
+          localRev=$(git rev-parse HEAD)
           cd lxd-snapcraft
           go install
           cd -
@@ -42,4 +45,6 @@ jobs:
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
           cd ~/lxd-pkg-snap-lp
           lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
-          git diff
+          git add --all
+          git commit --all --quiet -s --allow-empty -m "Automatic upstream build ${TARGET}" -m "Upstream commit: ${localRev}"
+          git show
