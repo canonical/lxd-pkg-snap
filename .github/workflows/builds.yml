@@ -46,5 +46,7 @@ jobs:
           cd ~/lxd-pkg-snap-lp
           lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
           git add --all
-          git commit --all --quiet -s --allow-empty -m "Automatic upstream build ${TARGET}" -m "Upstream commit: ${localRev}"
+          git commit --all --quiet -s --allow-empty -m "Automatic upstream build (${TARGET})" -m "Upstream commit: ${localRev}"
           git show
+          git push --quiet
+
