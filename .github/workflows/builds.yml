@@ -29,6 +29,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           TARGET: ${{ github.ref_name }}
         run: |
-          echo "${TARGET}"
-          git clone -b latest-edge git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
-
+          git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
+          rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
+          cs ~/lxd-pkg-snap-lp
+          git diff
