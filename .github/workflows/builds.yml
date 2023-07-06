@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   snap:
-    name: Snap build
+    name: Trigger snap build
     runs-on: ubuntu-22.04
 
     steps:
