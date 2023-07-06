@@ -1178,6 +1178,40 @@ parts:
       mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-2.1/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
+  zfs-2-2:
+    source: https://github.com/openzfs/zfs
+    source-type: git
+    source-tag: zfs-2.2.0-rc1
+    source-depth: 1
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=/
+      - --with-config=user
+    build-packages:
+      - libblkid-dev
+      - libssl-dev
+      - uuid-dev
+      - zlib1g-dev
+    override-build: |
+      set -ex
+
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      set +ex
+      craftctl default
+      set -ex
+
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-2.2/bin" "${CRAFT_PART_INSTALL}/zfs-2.2/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-2.2/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
+
 
   zstd:
     source: snapcraft/empty
@@ -1495,6 +1529,7 @@ parts:
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
+      - zfs-2-2
       - lxc
       - lxcfs
       - criu
@@ -1513,7 +1548,7 @@ parts:
       strip -s ${CRAFT_PRIME}/lib/libdqlite*
       strip -s ${CRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.8 zfs-2.0 zfs-2.1; do
+      for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
           [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
           strip -s ${CRAFT_PRIME}/${zfs}/bin/* ${CRAFT_PRIME}/${zfs}/lib/*
       done
