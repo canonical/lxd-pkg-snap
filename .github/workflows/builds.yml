@@ -31,5 +31,5 @@ jobs:
         run: |
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
-          cs ~/lxd-pkg-snap-lp
+          cd ~/lxd-pkg-snap-lp
           git diff
