@@ -15,6 +15,9 @@ run_cmd() {
     exec unshare --kill-child -U -m -p -r -f -R "/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
 }
 
+USERNS=1
+[ -e /proc/sys/kernel/unprivileged_userns_clone ] && grep -q 0 /proc/sys/kernel/unprivileged_userns_clone && USERNS=0
+
 find_and_spawn() {
     for path in / /usr/ /usr/local/; do
         if [ -e "/var/lib/snapd/hostfs/${path}bin/${1}" ] || [ -L "/var/lib/snapd/hostfs/${path}bin/${1}" ]; then
@@ -33,7 +36,7 @@ if [ -z "${EDIT_PATH}" ] || [ "$#" -ge "3" ]; then
 fi
 
 # Try running the editor through the host.
-if [ -n "${EDIT_CMD}" ]; then
+if [ -n "${EDIT_CMD}" ] && [ "${USERNS}" = 1 ]; then
     exec 9< /tmp/
     EDIT_PATH_HOST="$(echo "${EDIT_PATH}" | sed "s#/tmp/#/proc/self/fd/9/#g")"
     find_and_spawn "${EDIT_CMD}" "${EDIT_PATH_HOST}"
