@@ -249,7 +249,7 @@ parts:
       set -ex
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -474,7 +474,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -505,7 +505,7 @@ parts:
 
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
@@ -534,7 +534,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -878,7 +878,7 @@ parts:
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
@@ -1084,7 +1084,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick ca4c25c6e9ebb92f9e241ef9a231d4a715cb812d  # lxc-net: don't start by default inside lxc
@@ -1136,7 +1136,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1193,7 +1193,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick 2c5b0078a0e84ab62c9494e32e131d0686bb0c18  # lxd/devlxd: Don't expand format strings
