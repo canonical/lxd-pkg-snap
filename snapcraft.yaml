@@ -306,7 +306,7 @@ parts:
       set -ex
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202305
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -611,7 +611,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -643,7 +643,7 @@ parts:
 
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
@@ -675,7 +675,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1234,7 +1234,7 @@ parts:
       set -ex
 
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       cd ../build
@@ -1288,7 +1288,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1344,7 +1344,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick d6b87a9e60e6bf1e9c5e45172801a91ee10745ca # lxc/rebuild: Restart instance if it was stopped
