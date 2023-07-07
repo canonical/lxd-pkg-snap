@@ -311,7 +311,7 @@ parts:
       set -ex
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -562,7 +562,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -594,7 +594,7 @@ parts:
 
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
@@ -624,7 +624,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1274,7 +1274,7 @@ parts:
       set -ex
 
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       cd ../build
@@ -1323,7 +1323,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1380,7 +1380,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick a1dc7c3f5bd1c46b7dd5914500c9baf687fe22cb  # lxd/instances_post: Fix copying profiles during instance copy
