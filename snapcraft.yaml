@@ -1353,6 +1353,9 @@ parts:
       git cherry-pick 7a127748a3d548ad9812ad4514aadd1b419c2ed4 # lxd/instance/drivers/qemu: Use uint32 for vsock Context ID
       git cherry-pick 67f40160bd96b9e1e32a68188677c54b64f46314 # lxd/instance/drivers/qemu: Add function to retrieve the vsock Context ID
       git cherry-pick 90ea2ce206377bb9f48d14968d89b8e467d365e0 # lxd/instance/drivers/qemu: Pick a random vsock Context ID
+      git cherry-pick 6ed5dccc0913cff892855219e4d8e033d197158e # lxd/device/veth: Fix MTU handling
+      git cherry-pick 569da41bfb23b9dd1194d8b15b2fc3077fedf223 # lxd/device/tap: Fix MTU handling
+      git cherry-pick d05d299413c0e51b81b2a0aa029d1c005b481525 # tests: Update for bridged host MTU behavior
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
