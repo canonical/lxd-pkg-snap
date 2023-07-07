@@ -11,8 +11,8 @@ echo "=> Preparing the system (${SNAP_REVISION})"
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155,SC2046,SC2086
-export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu*/))"
+# shellcheck disable=SC2155
+export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
 
 export HOME="/tmp/"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
@@ -37,7 +37,7 @@ if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
 fi
 
 # Workaround for systemd nuking our cgroups on refreshes
-nsenter -t 1 -m systemd-run -u snap.${SNAP_INSTANCE_NAME}.workaround -p Delegate=yes -r /bin/true >/dev/null 2>&1 || true
+nsenter -t 1 -m systemd-run -u snap."${SNAP_INSTANCE_NAME}".workaround -p Delegate=yes -r /bin/true >/dev/null 2>&1 || true
 
 # Cleanup last state
 true > "${SNAP_COMMON}/state"
@@ -49,7 +49,7 @@ if [ ! -e "${SNAP_COMMON}/config" ]; then
 fi
 
 echo "==> Loading snap configuration"
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 . "${SNAP_COMMON}/config"
 
 # Create the main directory
