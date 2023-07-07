@@ -12,7 +12,7 @@ unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 FOUND=0
-for path in $(echo ${PATH} | tr ':' '\n'); do
+for path in $(echo "${PATH}" | tr ':' '\n'); do
     if [ -e "/var/lib/snapd/hostfs${path}/sshfs" ]; then
          FOUND=1
          break
@@ -30,7 +30,7 @@ fi
 shift 2
 SRC="${1}"
 shift
-DST="$(echo ${1} | sed "s#/var/lib/snapd/hostfs##g")"
+DST="$(echo "${1}" | sed "s#/var/lib/snapd/hostfs##g")"
 shift
 
 exec nsenter -t 1 -m "${CMD}" -o slave "${SRC}" "${DST}" "$@"
