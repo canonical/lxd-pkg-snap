@@ -1,0 +1,51 @@
+name: Builds
+on:
+  push:
+    branches:
+      - latest-candidate
+
+permissions:
+  contents: read
+
+jobs:
+  snap:
+    name: Trigger snap build
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Launchpad SSH access
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          LAUNCHPAD_LXD_BOT_KEY: ${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}
+        run: |
+          ssh-agent -a "${SSH_AUTH_SOCK}" > /dev/null
+          ssh-add - <<< "${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}"
+          mkdir -p ~/.ssh/
+          ssh-keyscan -H git.launchpad.net >> ~/.ssh/known_hosts
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.18.x
+
+      - name: Trigger Launchpad snap build
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          TARGET: ${{ github.ref_name }}
+        run: |
+          git config --global user.name "Canonical LXD Bot"
+          git config --global user.email "lxd@lists.canonical.com"
+          localRev=$(git rev-parse HEAD)
+          go install github.com/canonical/lxd-ci/lxd-snapcraft@latest
+          git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
+          ver=($(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
+          rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
+          cd ~/lxd-pkg-snap-lp
+          lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
+          git add --all
+          git commit --all --quiet -s --allow-empty -m "Automatic upstream build (${TARGET})" -m "Upstream commit: ${localRev}"
+          git show
+
