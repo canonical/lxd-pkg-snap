@@ -385,7 +385,7 @@ parts:
       - libmnl
     source: https://git.netfilter.org/libnftnl
     source-type: git
-    source-tag: libnftnl-1.2.4
+    source-tag: libnftnl-1.2.6
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
