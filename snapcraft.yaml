@@ -320,6 +320,7 @@ parts:
       cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
+      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0005-disable-dynamic-mmio-winsize.patch"
 
       # Setup CSM blob
       if [ "$(uname -m)" = "x86_64" ]; then
