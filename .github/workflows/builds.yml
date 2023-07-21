@@ -2,6 +2,7 @@ name: Builds
 on:
   push:
     branches:
+      - latest-edge
       - latest-candidate
 
 permissions:
@@ -53,3 +54,4 @@ jobs:
           git commit --all --quiet -s --allow-empty -m "Automatic upstream build (${TARGET})" -m "Upstream commit: ${localRev}"
           git show
           git push --quiet
+
