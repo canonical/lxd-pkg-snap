@@ -1382,6 +1382,16 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 6d7b7ef0170e10cef1cea077965e600c049c810f # lxc/utils: Support parsing of anonymous nested structs
+      git cherry-pick 2da3564720a0fbb0ca5fe48ffece64546f613dd2 # test: Add get timestamp property test with instance snapshot
+      git cherry-pick 01e492aaad056c2548e764b7cf869e8376f88ce7 # lxd/device/disk: Fix boot from Windows ISO by setting correct FSType
+      git cherry-pick 4c14fcc6d641c3f1a86dc9a064fe075c0bf5020b # lxd/storage/drivers/volume: Use vol.IsBlockBacked() in ConfigSize
+      git cherry-pick dc968cbcdffef4cba0b178835292ea51b49eb316 # lxd/storage/utils: Use vol.IsBlockBacked in ImageUnpack
+      git cherry-pick 2fe1cc62fa8d47c92e3e97e40a702c9d8b53f534 # lxd/storage/backend/lxd: ImageUnpack usage
+      git cherry-pick c2ff32d6beb03891a9439afebcfec116666de75e # lxd/storage/backend/lxd: Use the result of FillVolumeConfig in EnsureImage when comparing cached volumes
+      git cherry-pick b33cbdb957f60a0dd9bdc1b21f1664aac7312663 # lxd/storage/drivers/driver/zfs/volumes: Don't populate block volume settings for VM volumes in FillVolumeConfig
+      git cherry-pick 7b0b57f9aa9b7aa3f25d9df76f31e0c18b45ec79 # lxd/storage/backend/lxd: Removes unused poolBlockFilesystem function
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
