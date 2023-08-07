@@ -1364,6 +1364,8 @@ parts:
       - libacl1-dev
       - libudev-dev
       - pkg-config
+      - shellcheck
+      - python3.10-venv
     build-snaps:
       - go
     stage-packages:
@@ -1417,6 +1419,13 @@ parts:
       go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
       go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
+      # Build the static website
+      make doc
+
+      # Copy the static website
+      mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
+      cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
+
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       cp scripts/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
@@ -1443,6 +1452,7 @@ parts:
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc
+      - share/lxd-documentation*
 
       - bin/lxc
       - bin/lxc-to-lxd

@@ -463,6 +463,10 @@ if [ "${ui_enable:-"false"}" = "true" ]; then
     export LXD_UI="${SNAP_CURRENT}/share/lxd-ui/"
 fi
 
+# Setup documentation
+echo "==> Exposing LXD documentation"
+export LXD_DOCUMENTATION="${SNAP_CURRENT}/share/lxd-documentation"
+
 # Setup shiftfs
 if [ "${shiftfs_enable:-"auto"}" = "auto" ]; then
     echo "==> Disabling shiftfs on this kernel (auto)"
