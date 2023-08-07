@@ -1426,6 +1426,13 @@ parts:
       mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
       cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
 
+      # Build the static website
+      make doc
+
+      # Copy the static website
+      mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
+      cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
+
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       cp scripts/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
