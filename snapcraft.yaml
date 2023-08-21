@@ -598,7 +598,7 @@ parts:
       - libnftnl
     source: https://git.netfilter.org/nftables
     source-type: git
-    source-tag: v1.0.7
+    source-tag: v1.0.8
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
