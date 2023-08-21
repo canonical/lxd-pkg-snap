@@ -1231,6 +1231,7 @@ parts:
     after:
       - libseccomp
     source: https://github.com/lxc/lxc
+    source-commit: c1d73028e873f88153d023c5ef55dfc6272cf74d
     source-type: git
     build-packages:
       - libapparmor-dev
