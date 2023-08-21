@@ -539,7 +539,7 @@ parts:
   minio:
     source: https://github.com/minio/minio
     source-type: git
-    source-tag: RELEASE.2023-07-11T21-29-34Z
+    source-tag: RELEASE.2023-08-16T20-17-30Z
     source-depth: 1
     plugin: nil
     build-snaps:
