@@ -282,6 +282,7 @@ parts:
       echo "CONFIG_QEMU_HARDWARE=y" > .config
       echo "CONFIG_CSM=y" >> .config
       echo "CONFIG_BOOTSPLASH=n" >> .config
+      echo "CONFIG_SDCARD=n" >> .config
       echo "CONFIG_ROM_SIZE=128" >> .config
       make oldnoconfig V=1
       make V=1 PYTHON=python3
