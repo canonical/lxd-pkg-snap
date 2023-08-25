@@ -1472,6 +1472,7 @@ parts:
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
     source-type: git
+    source-commit: b53587d9774c123f6703f4ce3c5107f87bc7e446
     plugin: nil
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
