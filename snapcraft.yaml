@@ -305,7 +305,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
-      git clone https://github.com/tianocore/edk2 . -b edk2-stable202305
+      git clone https://github.com/tianocore/edk2 . -b edk2-stable202308
 
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
@@ -321,7 +321,6 @@ parts:
       cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
-      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0005-disable-dynamic-mmio-winsize.patch"
 
       # Setup CSM blob
       if [ "$(uname -m)" = "x86_64" ]; then
