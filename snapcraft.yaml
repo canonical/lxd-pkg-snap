@@ -1372,6 +1372,7 @@ parts:
       - dnsmasq-base
       - gdisk
       - iw
+      - lshw
       - netbase
       - pciutils
       - pigz
