@@ -1363,6 +1363,8 @@ parts:
     build-packages:
       - libacl1-dev
       - libudev-dev
+      - libxml2-dev
+      - libxslt-dev
       - pkg-config
       - shellcheck
       - pypy-dev
