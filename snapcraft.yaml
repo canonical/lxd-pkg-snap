@@ -1361,6 +1361,7 @@ parts:
       - dqlite
       - sqlite
     build-packages:
+      - cmake
       - libacl1-dev
       - libudev-dev
       - libxml2-dev
