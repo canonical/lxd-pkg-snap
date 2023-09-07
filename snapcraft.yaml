@@ -355,7 +355,7 @@ parts:
               . ./edksetup.sh
               make -C BaseTools ARCH=${ARCH}
               build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
-                -DSMM_REQUIRE=TRUE \
+                -DSMM_REQUIRE=FALSE \
                 -DSECURE_BOOT_ENABLE=TRUE \
                 -DNETWORK_IP4_ENABLE=TRUE \
                 -DNETWORK_IP6_ENABLE=TRUE \
