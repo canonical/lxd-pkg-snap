@@ -323,6 +323,7 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
       patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0005-disable-dynamic-mmio-winsize.patch"
+      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0006-disable-EFI-memory-attributes-protocol.patch"
 
       # Setup CSM blob
       if [ "$(uname -m)" = "x86_64" ]; then
