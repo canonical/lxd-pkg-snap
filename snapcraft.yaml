@@ -1431,12 +1431,14 @@ parts:
       mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
       cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
 
-      # Build the static website
-      make doc
+      if [ "$(uname -m)" != "riscv64" ]; then
+        # Build the static website
+        make doc
 
-      # Copy the static website
-      mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
-      cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
+        # Copy the static website
+        mkdir -p "${CRAFT_STAGE}/share/lxd-documentation"
+        cp -a doc/html/. "${CRAFT_STAGE}/share/lxd-documentation/"
+      fi
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1464,7 +1466,6 @@ parts:
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc
-      - share/lxd-documentation*
 
       - bin/lxc
       - bin/lxc-to-lxd
@@ -1646,6 +1647,13 @@ parts:
           echo "Found broken symlinks:"
           echo "${broken_symlinks}"
           exit 1
+      fi
+
+      if [ "$(uname -m)" != "riscv64" ]; then
+          # Prime the documentation only if the arch is not riscv64.
+          # Some python dependencies are not available for riscv64 or just require a build from source.
+          # Not worth the effort for now.
+          cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
 
       exit 0
