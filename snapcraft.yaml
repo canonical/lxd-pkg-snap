@@ -1410,12 +1410,14 @@ parts:
       go build -o "${CRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
       go build -o "${CRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
-      # Build the static website
-      make doc
+      if [ "$(uname -m)" != "riscv64" ]; then
+        # Build the static website
+        make doc
 
-      # Copy the static website
-      mkdir -p "${CRAFT_PART_INSTALL}/share/lxd-documentation"
-      cp -a doc/html/. "$CRAFT_PART_INSTALL/share/lxd-documentation/"
+        # Copy the static website
+        mkdir -p "${CRAFT_STAGE}/share/lxd-documentation"
+        cp -a doc/html/. "${CRAFT_STAGE}/share/lxd-documentation/"
+      fi
 
       # Setup bash completion
       mkdir -p ${CRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1444,7 +1446,6 @@ parts:
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc
-      - share/lxd-documentation*
 
       - bin/lxc
       - bin/lxc-to-lxd
@@ -1579,6 +1580,13 @@ parts:
           [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
           strip -s ${CRAFT_PRIME}/${zfs}/bin/* ${CRAFT_PRIME}/${zfs}/lib/*
       done
+
+      if [ "$(uname -m)" != "riscv64" ]; then
+          # Prime the documentation only if the arch is not riscv64.
+          # Some python dependencies are not available for riscv64 or just require a build from source.
+          # Not worth the effort for now.
+          cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
+      fi
 
       [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s ${CRAFT_PRIME}/criu/criu
 
