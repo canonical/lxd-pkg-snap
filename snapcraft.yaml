@@ -1009,7 +1009,7 @@ parts:
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
     source-type: git
-    source-tag: v1.6.1
+    source-tag: v1.8.0
     source-depth: 1
     plugin: rust
     build-packages:
