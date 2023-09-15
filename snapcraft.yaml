@@ -322,7 +322,8 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
       patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0005-disable-dynamic-mmio-winsize.patch"
-      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0006-disable-EFI-memory-attributes-protocol.patch"
+      # revert "ArmVirtPkg: make EFI_LOADER_DATA non-executable" as it breaks almost everything
+      git revert 2997ae38739756ecba9b0de19e86032ebc689ef9
 
       # Setup CSM blob
       if [ "$(uname -m)" = "x86_64" ]; then
