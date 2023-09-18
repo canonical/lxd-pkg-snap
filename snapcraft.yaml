@@ -1367,6 +1367,7 @@ parts:
       - libxml2-dev
       - libxslt-dev
       - libblas-dev
+      - libopenblas-dev
       - liblapack-dev
       - pkg-config
       - shellcheck
