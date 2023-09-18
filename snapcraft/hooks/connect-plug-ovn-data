@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if ! test -e /etc/ovn ; then
+  mkdir /etc/ovn
+fi
+
+ln -snf ${SNAP_DATA}/microovn/data/pki/client-cert.pem /etc/ovn/cert_host
+ln -snf ${SNAP_DATA}/microovn/data/pki/client-privkey.pem /etc/ovn/key_host
+ln -snf ${SNAP_DATA}/microovn/data/pki/cacert.pem /etc/ovn/ovn-central.crt

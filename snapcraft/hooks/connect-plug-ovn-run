@@ -1,0 +1,4 @@
+#!/bin/sh
+
+
+ln -snf ${SNAP_DATA}/microovn/run/switch /run/openvswitch

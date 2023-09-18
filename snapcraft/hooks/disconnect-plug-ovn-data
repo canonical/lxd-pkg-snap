@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "${ovn_builtin:-"false"}" = "true" ]; then
+    mkdir -p "${SNAP_COMMON}/ovn"
+    ln -snf "${SNAP_COMMON}/ovn" /etc/ovn
+else
+    ln -snf /var/lib/snapd/hostfs/etc/ovn /etc/ovn
+fi
