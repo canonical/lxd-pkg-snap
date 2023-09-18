@@ -59,6 +59,11 @@ source-code: https://github.com/canonical/lxd
 website: https://ubuntu.com/lxd
 confinement: strict
 
+plugs:
+ ceph-conf:
+   interface: content
+   target: "$SNAP_DATA/microceph"
+
 apps:
   # Main commands
   activate:
