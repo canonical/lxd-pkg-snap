@@ -59,6 +59,10 @@ source-code: https://github.com/canonical/lxd
 website: https://ubuntu.com/lxd
 confinement: strict
 
+ ovn-conf:
+   interface: content
+   target: "${SNAP_DATA}/microovn"
+
 apps:
   # Main commands
   activate:
