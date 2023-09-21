@@ -1,0 +1,41 @@
+#!/bin/sh
+
+
+set -eu
+
+# Utility functions
+get_bool() {
+    value=$(echo "${1:-}" | tr '[:upper:]' '[:lower:]')
+
+    # See if it's true
+    for yes in "true" "1" "yes" "on"; do
+        if [ "${value}" = "${yes}" ]; then
+            echo "true"
+            return
+        fi
+    done
+
+    # See if it's false
+    for no in "false" "0" "no" "off"; do
+        if [ "${value}" = "${no}" ]; then
+            echo "false"
+            return
+        fi
+    done
+
+    # Invalid value (or not set)
+    return
+}
+
+verify_int () {
+    value="${1:-}"
+
+    # Verify if the value is a positive integer
+    if echo "${value}" | grep -Eq '^[0-9]+$'; then
+        echo "${value}"
+        return
+    fi
+
+    # Invalid value (or not set)
+    return
+}
