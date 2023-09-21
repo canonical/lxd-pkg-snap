@@ -2,7 +2,7 @@ name: lxd
 base: core22
 assumes:
   - snapd2.39
-version: "5.17"
+version: "5.18"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1341,7 +1341,7 @@ parts:
   lxd:
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-5.17
+    source-tag: lxd-5.18
     after:
       - lxc
       - dqlite
@@ -1398,8 +1398,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick eff325a387a7c5aa3569c26922bf8c8a1822de14 # lxd/auth/rbac: Fix regression
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
