@@ -1,13 +1,31 @@
 #!/bin/sh
 
-set -eu
+# Utility functions
+get_bool() {
+    value=$(echo "${1:-}" | tr '[:upper:]' '[:lower:]')
 
-SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
-export SNAP_CURRENT
+    # See if it's true
+    for yes in "true" "1" "yes" "on"; do
+        if [ "${value}" = "${yes}" ]; then
+            echo "true"
+            return
+        fi
+    done
 
-. "${SNAP_CURRENT}/snap/hooks/common"
+    # See if it's false
+    for no in "false" "0" "no" "off"; do
+        if [ "${value}" = "${no}" ]; then
+            echo "false"
+            return
+        fi
+    done
+
+    # Invalid value (or not set)
+    return
+}
 
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
+
 if ! [ "${ceph_builtin:-"false"}" = "true" ]; then
   ln -snf ${SNAP_DATA}/microceph/conf/ /etc/ceph
 fi
