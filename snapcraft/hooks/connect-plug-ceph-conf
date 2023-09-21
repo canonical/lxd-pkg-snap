@@ -3,7 +3,7 @@
 set -eu
 
 SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
-export "${SNAP_CURRENT}"
+export SNAP_CURRENT
 
 . "${SNAP_CURRENT}/snap/hooks/common"
 
