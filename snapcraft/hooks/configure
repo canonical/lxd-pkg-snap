@@ -1,16 +1,46 @@
-#!/bin/sh
-
-set -eu
+#!/bin/sh -eu
 
 # Re-exec outside of apparmor confinement
 if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
-export SNAP_CURRENT
+# Utility functions
+get_bool() {
+    value=$(echo "${1:-}" | tr '[:upper:]' '[:lower:]')
 
-. "${SNAP_CURRENT}/snap/hooks/common"
+    # See if it's true
+    for yes in "true" "1" "yes" "on"; do
+        if [ "${value}" = "${yes}" ]; then
+            echo "true"
+            return
+        fi
+    done
+
+    # See if it's false
+    for no in "false" "0" "no" "off"; do
+        if [ "${value}" = "${no}" ]; then
+            echo "false"
+            return
+        fi
+    done
+
+    # Invalid value (or not set)
+    return
+}
+
+verify_int () {
+    value="${1:-}"
+
+    # Verify if the value is a positive integer
+    if echo "${value}" | grep -Eq '^[0-9]+$'; then
+        echo "${value}"
+        return
+    fi
+
+    # Invalid value (or not set)
+    return
+}
 
 # Don't fail if the mount namespace isn't properly setup yet
 if [ ! -e /run/snapd-snap.socket ]; then
