@@ -1400,6 +1400,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick 5ccebec7d2a4f2e98ded41fac891504e3072daf3 # patches: Don't fail if no storage pools were found
+      git cherry-pick 2d8481712055d0cbb3bd952e25a1df469939990d # simplestreams: Fix regression in lxd_combined.tar.gz handling
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
