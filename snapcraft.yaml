@@ -1540,12 +1540,9 @@ parts:
       # Build the binaries
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
-      # Install bridge script
       mkdir -p ${CRAFT_PART_INSTALL}/bin/
-      cp scripts/upgrade-bridge ${CRAFT_PART_INSTALL}/bin/upgrade-bridge
     prime:
       - bin/lxd-migrate
-      - bin/upgrade-bridge
 
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
