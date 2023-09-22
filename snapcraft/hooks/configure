@@ -29,19 +29,6 @@ get_bool() {
     return
 }
 
-verify_int () {
-    value="${1:-}"
-
-    # Verify if the value is a positive integer
-    if echo "${value}" | grep -Eq '^[0-9]+$'; then
-        echo "${value}"
-        return
-    fi
-
-    # Invalid value (or not set)
-    return
-}
-
 # Don't fail if the mount namespace isn't properly setup yet
 if [ ! -e /run/snapd-snap.socket ]; then
     exit 0
