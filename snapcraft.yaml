@@ -134,11 +134,6 @@ apps:
     plugs:
       - lxd-support
       - system-observe
-  migrate:
-    command: commands/lxd-migrate
-    plugs:
-      - lxd-support
-      - system-observe
 
 hooks:
   configure:
@@ -1452,41 +1447,6 @@ parts:
       - bin/lxd-benchmark
       - bin/lxd-user
 
-  lxd-migrate:
-    source: lxd-migrate/
-    after:
-      - lxd
-      - sqlite
-    build-snaps:
-      - go
-    plugin: nil
-    override-pull: |
-      craftctl default
-      set -ex
-
-      # Setup build environment
-      export GOPATH=$(realpath ./.go)
-
-      # Download the dependencies
-      go get -d -v ./...
-    override-build: |
-      set -ex
-
-      # Setup build environment
-      export GOPATH=$(realpath ./.go)
-      export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
-      export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
-
-      # Build the binaries
-      go build -o "${CRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
-
-      # Install bridge script
-      mkdir -p ${CRAFT_PART_INSTALL}/bin/
-      cp scripts/upgrade-bridge ${CRAFT_PART_INSTALL}/bin/upgrade-bridge
-    prime:
-      - bin/lxd-migrate
-      - bin/upgrade-bridge
-
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
     source-type: git
@@ -1559,7 +1519,6 @@ parts:
       - lxcfs
       - criu
       - lxd
-      - lxd-migrate
       - shmounts
       - snap-query
     plugin: nil
