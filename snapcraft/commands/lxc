@@ -28,10 +28,7 @@ fi
 
 # Migrate data if needed
 if [ ! -d "${SNAP_USER_COMMON}/config" ]; then
-    if [ -d "${SNAP_USER_DATA}/.config/lxc" ]; then
-        mv "${SNAP_USER_DATA}/.config/lxc" "${SNAP_USER_COMMON}/config" || true
-        rmdir "${SNAP_USER_DATA}/.config/" || true
-    elif [ -d "${SNAP_REAL_HOME}/.config/lxc" ]; then
+    if [ -d "${SNAP_REAL_HOME}/.config/lxc" ]; then
         cp -r "${SNAP_REAL_HOME}/.config/lxc" "${SNAP_USER_COMMON}/config" || true
     fi
 
