@@ -1,4 +1,5 @@
-#!/bin/sh -eu
+#!/bin/sh
+set -eu
 
 # Re-exec outside of apparmor confinement
 if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" != "unconfined" ]; then
@@ -24,19 +25,6 @@ get_bool() {
             return
         fi
     done
-
-    # Invalid value (or not set)
-    return
-}
-
-verify_int () {
-    value="${1:-}"
-
-    # Verify if the value is a positive integer
-    if echo "${value}" | grep -Eq '^[0-9]+$'; then
-        echo "${value}"
-        return
-    fi
 
     # Invalid value (or not set)
     return
