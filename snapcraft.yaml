@@ -1401,6 +1401,8 @@ parts:
 
       git cherry-pick 5ccebec7d2a4f2e98ded41fac891504e3072daf3 # patches: Don't fail if no storage pools were found
       git cherry-pick c5a691c13a2f589c2f72f16edc2817f29639e77a # simplestreams: Fix regression in lxd_combined.tar.gz handling
+      git cherry-pick f71bd5d539f6f2a4146a28848e9fe90b9386e2b3 # patches: Remove invalid block settings from existing volumes
+      git cherry-pick 05a73a7a1648e5c1d776bbc2a95598243256f472 # lxc/network-allocations: Fix project and remote usage
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
