@@ -70,7 +70,8 @@ jobs:
           localRev="$(git rev-parse HEAD)"
           go install github.com/canonical/lxd-ci/lxd-snapcraft@latest
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
-          ver="$(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml)"
+          # XXX: `ver` contains an array with the 2 versions
+          ver=($(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
           cd ~/lxd-pkg-snap-lp
           lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
