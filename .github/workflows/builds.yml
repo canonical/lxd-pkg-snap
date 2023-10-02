@@ -21,6 +21,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           LAUNCHPAD_LXD_BOT_KEY: ${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}
         run: |
+          set -eux
           mkdir -m 0700 -p ~/.ssh/
           ssh-agent -a "${SSH_AUTH_SOCK}" > /dev/null
           ssh-add - <<< "${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}"
@@ -40,7 +41,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           TARGET: ${{ github.ref_name }}
         run: |
-          set -x
+          set -eux
           git config --global transfer.fsckobjects true
           git config --global user.name "Canonical LXD Bot"
           git config --global user.email "lxd@lists.canonical.com"
@@ -50,7 +51,8 @@ jobs:
           localRev="$(git rev-parse HEAD)"
           go install github.com/canonical/lxd-ci/lxd-snapcraft@latest
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
-          ver="$(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml)"
+          # XXX: `ver` contains an array with the 2 versions
+          ver=($(lxd-snapcraft -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
           cd ~/lxd-pkg-snap-lp
           lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
