@@ -33,7 +33,7 @@ jobs:
       env:
         TARGET: ${{ github.event.pull_request.base.ref }}
       run: |
-        set -x
+        set -eux
         [ "${TARGET}" = "latest-edge" ] && exit 0
 
         echo "Invalid branch target: ${TARGET}"
