@@ -26,6 +26,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           LAUNCHPAD_LXD_BOT_KEY: ${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}
         run: |
+          set -eux
           mkdir -m 0700 -p ~/.ssh/
           ssh-agent -a "${SSH_AUTH_SOCK}" > /dev/null
           ssh-add - <<< "${{ secrets.LAUNCHPAD_LXD_BOT_KEY }}"
@@ -45,7 +46,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           TARGET: ${{ github.ref_name }}
         run: |
-          set -x
+          set -eux
           git config --global transfer.fsckobjects true
           git config --global user.name "Canonical LXD Bot"
           git config --global user.email "lxd@lists.canonical.com"
