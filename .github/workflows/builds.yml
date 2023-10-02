@@ -19,7 +19,7 @@ jobs:
     if: ${{ github.repository == 'canonical/lxd-pkg-snap' && github.event_name == 'push' && github.actor != 'dependabot[bot]' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Launchpad SSH access
         env:
