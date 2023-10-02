@@ -28,7 +28,7 @@ jobs:
         TARGET: ${{ github.event.pull_request.base.ref }}
         TITLE: ${{ github.event.pull_request.title }}
       run: |
-        set -x
+        set -eux
         TARGET_FROM_PR_TITLE="$(echo "${TITLE}" | sed -n 's/.*(\(\(latest\|[0-9]\+\.[0-9]\+\)-\(edge\|candidate\)\))$/\1/p')"
         if [ -z "${TARGET_FROM_PR_TITLE}" ]; then
           TARGET_FROM_PR_TITLE="latest-edge"
