@@ -46,6 +46,7 @@ jobs:
           TARGET: ${{ github.ref_name }}
         run: |
           set -x
+          git config --global transfer.fsckobjects true
           git config --global user.name "Canonical LXD Bot"
           git config --global user.email "lxd@lists.canonical.com"
           git config --global commit.gpgsign true
