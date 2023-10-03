@@ -292,6 +292,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
+      git config --global transfer.fsckobjects true
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
 
       git config user.email "noreply@lists.canonical.com"
