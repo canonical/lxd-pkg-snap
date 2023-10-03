@@ -321,6 +321,7 @@ parts:
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
 
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
@@ -631,12 +632,12 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
       craftctl default
-      set -ex
     organize:
       sbin/: bin/
       usr/lib/: lib/
@@ -665,6 +666,7 @@ parts:
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
 
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
@@ -1292,6 +1294,7 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
