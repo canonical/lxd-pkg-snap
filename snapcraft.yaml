@@ -687,7 +687,7 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
-      cp ${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${CRAFT_PART_INSTALL}/bin/"
+      cp "${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli" "${CRAFT_PART_INSTALL}/bin/"
 
       set +ex
       craftctl default
@@ -1332,8 +1332,8 @@ parts:
       craftctl default
       set -ex
 
-      mkdir -p $CRAFT_PART_INSTALL/lxc/config/common.conf.d/
-      ln -s /var/snap/lxd/common/lxc/local.conf $CRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+      mkdir -p "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/"
+      ln -s /var/snap/lxd/common/lxc/local.conf "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/01-local.conf"
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
@@ -1384,7 +1384,7 @@ parts:
       craftctl default
       set -ex
 
-      patch -p1 $CRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
+      patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
     source: https://github.com/canonical/lxd
@@ -1478,8 +1478,8 @@ parts:
       fi
 
       # Setup bash completion
-      mkdir -p ${CRAFT_PART_INSTALL}/etc/bash_completion.d/
-      cp scripts/bash/lxd-client ${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      mkdir -p "${CRAFT_PART_INSTALL}/etc/bash_completion.d/"
+      cp scripts/bash/lxd-client "${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc"
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -1540,7 +1540,7 @@ parts:
       # Build the binaries
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
-      mkdir -p ${CRAFT_PART_INSTALL}/bin/
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
     prime:
       - bin/lxd-migrate
 
@@ -1633,7 +1633,7 @@ parts:
 
       for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
           [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
-          strip -s ${CRAFT_PRIME}/${zfs}/bin/* ${CRAFT_PRIME}/${zfs}/lib/*
+          strip -s "${CRAFT_PRIME}/${zfs}"/bin/* "${CRAFT_PRIME}/${zfs}"/lib/*
       done
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1643,7 +1643,7 @@ parts:
           cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
 
-      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s ${CRAFT_PRIME}/criu/criu
+      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s "${CRAFT_PRIME}/criu/criu"
 
       exit 0
 
