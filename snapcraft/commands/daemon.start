@@ -429,6 +429,13 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
         fi
     fi
 
+    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
+            echo "==> Disabling Apparmor unprivileged userns mediation"
+            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+        fi
+    fi
+
     if [ -e /proc/sys/kernel/unprivileged_userns_clone ]; then
         if [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "0" ]; then
             echo "==> Enabling unprivileged containers kernel support"
