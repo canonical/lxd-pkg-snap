@@ -291,6 +291,9 @@ parts:
     source-tag: rel-1.16.2
     source-depth: 1
     plugin: nil
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && exit 0
 
