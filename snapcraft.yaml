@@ -580,8 +580,8 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
-      cp ${SNAPCRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+      cp "${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli" "${CRAFT_PART_INSTALL}/bin/"
 
       set +ex
       snapcraftctl build
@@ -1313,8 +1313,13 @@ parts:
       snapcraftctl build
       set -ex
 
+<<<<<<< HEAD
       mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
       ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+=======
+      mkdir -p "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/"
+      ln -s /var/snap/lxd/common/lxc/local.conf "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/01-local.conf"
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
@@ -1366,7 +1371,11 @@ parts:
       snapcraftctl build
       set -ex
 
+<<<<<<< HEAD
       patch -p1 $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${SNAPCRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
+=======
+      patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
 
   lxd:
     source: https://github.com/canonical/lxd
@@ -1460,8 +1469,13 @@ parts:
       fi
 
       # Setup bash completion
+<<<<<<< HEAD
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
       cp scripts/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+=======
+      mkdir -p "${CRAFT_PART_INSTALL}/etc/bash_completion.d/"
+      cp scripts/bash/lxd-client "${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc"
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -1521,9 +1535,13 @@ parts:
       # Build the binaries
       go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
+<<<<<<< HEAD
       # Install bridge script
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
       cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
+=======
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
     prime:
       - bin/lxd-migrate
       - bin/upgrade-bridge
@@ -1620,6 +1638,7 @@ parts:
       # XXX: remove unneeded files/directories
       rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
 
+<<<<<<< HEAD
       # Strip some of the heavy bits
       strip -s ${SNAPCRAFT_PRIME}/bin/lxc
       strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
@@ -1645,6 +1664,11 @@ parts:
       for binary in "${SNAPCRAFT_PRIME}/criu/criu"; do
         [ -e "${binary}" ] || continue
         strip -s "${binary}"
+=======
+      for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
+          [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
+          strip -s "${CRAFT_PRIME}/${zfs}"/bin/* "${CRAFT_PRIME}/${zfs}"/lib/*
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
       done
 
       # Strip all versions of zfs utils
@@ -1675,6 +1699,11 @@ parts:
           cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
 
+<<<<<<< HEAD
+=======
+      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s "${CRAFT_PRIME}/criu/criu"
+
+>>>>>>> bb00f29f (snapcraft: add quoting in override blocks)
       exit 0
 
   wrappers:
