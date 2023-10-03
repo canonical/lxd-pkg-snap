@@ -1114,15 +1114,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1148,15 +1150,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1182,15 +1186,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1216,15 +1222,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
