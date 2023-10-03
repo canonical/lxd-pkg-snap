@@ -232,14 +232,20 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armv7l" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      set -ex
 
       make
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
