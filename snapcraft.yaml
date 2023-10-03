@@ -1090,16 +1090,18 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
-      snapcraftctl build
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      craftctl default
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -1124,16 +1126,18 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
-      snapcraftctl build
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      craftctl default
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -1158,16 +1162,18 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
-      snapcraftctl build
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      craftctl default
       set -ex
 
       mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
@@ -1197,13 +1203,13 @@ parts:
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-      snapcraftctl pull
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-      snapcraftctl build
+      craftctl default
       set -ex
 
       ZFS_VER="2.2"
