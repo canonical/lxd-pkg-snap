@@ -711,9 +711,9 @@ parts:
       - libusb
       - spice-protocol
       - spice-server
-    source: IRRELEVANT
+    source: https://gitlab.com/qemu-project/qemu
     source-type: git
-    source-tag: IRRELEVANT
+    source-tag: v8.0.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -772,8 +772,8 @@ parts:
       - libusbredirparser1
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      set -ex
-      git clone https://gitlab.com/qemu/qemu . -b v8.0.5
+      craftctl default
+
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
