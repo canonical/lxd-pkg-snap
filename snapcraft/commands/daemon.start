@@ -424,6 +424,15 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
             echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
         fi
     fi
+
+    # enable cephfs idmapped mounts support for old versions of ceph MDS
+    modprobe ceph || true
+    if [ -e /sys/module/ceph/parameters/enable_unsafe_idmap ]; then
+        if [ "$(cat /sys/module/ceph/parameters/enable_unsafe_idmap)" = "N" ]; then
+            echo "==> Enabling ceph's unsafe idmap feature"
+            echo Y > /sys/module/ceph/parameters/enable_unsafe_idmap || true
+        fi
+    fi
 fi
 
 # Setup CRIU
