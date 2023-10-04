@@ -1604,17 +1604,21 @@ parts:
     override-prime: |
       set -x
 
-      # Strip some of the heavy bits
-      strip -s "${CRAFT_PRIME}"/bin/lxc
-      strip -s "${CRAFT_PRIME}"/bin/lxd*
-      strip -s "${CRAFT_PRIME}"/bin/snap*
-      strip -s "${CRAFT_PRIME}"/lib/libdqlite*
-      strip -s "${CRAFT_PRIME}"/lib/libsqlite*
+      # Strip binaries (excluding shell scripts)
+      find "${CRAFT_PRIME}"/bin -type f \
+        -not -path "${CRAFT_PRIME}/bin/ceph" \
+        -not -path "${CRAFT_PRIME}/bin/editor" \
+        -not -path "${CRAFT_PRIME}/bin/lxc-checkconfig" \
+        -not -path "${CRAFT_PRIME}/bin/nvidia-container-cli" \
+        -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${CRAFT_PRIME}/bin/sshfs" \
+        -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
+        -exec strip -s {} +
 
-      for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
-          [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
-          strip -s "${CRAFT_PRIME}/${zfs}"/bin/* "${CRAFT_PRIME}/${zfs}"/lib/*
-      done
+      # Strip libraries (excluding python3 scripts)
+      find "${CRAFT_PRIME}"/lib -type f \
+        -not -path "${CRAFT_PRIME}/lib/python3/*" \
+        -exec strip -s {} +
 
       if [ "$(uname -m)" != "riscv64" ]; then
           # Prime the documentation only if the arch is not riscv64.
@@ -1622,8 +1626,6 @@ parts:
           # Not worth the effort for now.
           cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
-
-      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s "${CRAFT_PRIME}/criu/criu"
 
       exit 0
 
