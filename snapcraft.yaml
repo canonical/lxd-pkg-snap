@@ -367,8 +367,8 @@ parts:
           (
           cat << EOF
               . ./edksetup.sh
-              make -C BaseTools ARCH=${ARCH}
-              build -a ${ARCH} -t GCC5 -b RELEASE -p ${PKG} \
+              make -C BaseTools ARCH="${ARCH}"
+              build -a "${ARCH}" -t GCC5 -b RELEASE -p "${PKG}" \
                 -DSMM_REQUIRE=FALSE \
                 -DSECURE_BOOT_ENABLE=TRUE \
                 -DNETWORK_IP4_ENABLE=TRUE \
@@ -404,8 +404,8 @@ parts:
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.2MB.fd" \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.fd" \
         -DFD_SIZE_2MB
-      ln -s OVMF_CODE.2MB.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd
-      ln -s OVMF_VARS.2MB.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd
+      ln -s OVMF_CODE.2MB.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
+      ln -s OVMF_VARS.2MB.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
 
       # Legacy firmware (4MB, CSM)
       if [ "$(uname -m)" = "x86_64" ]; then
@@ -574,14 +574,14 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Build the binaries
       make build
 
       # Install minio command
-      mkdir -p ${CRAFT_PART_INSTALL}/bin/
-      cp minio ${CRAFT_PART_INSTALL}/bin/minio
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+      cp minio "${CRAFT_PART_INSTALL}/bin/minio"
     prime:
       - bin/minio*
 
@@ -927,7 +927,7 @@ parts:
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      export ARCH="$(basename $(readlink -f ${CRAFT_STAGE}/lib/*-linux-gnu*/))"
+      export ARCH="$(basename "$(readlink -f "${CRAFT_STAGE}"/lib/*-linux-gnu*/)")"
       export LD_LIBRARY_PATH="${CRAFT_STAGE}/lib:${CRAFT_STAGE}/lib/${ARCH}"
 
       set -ex
@@ -956,7 +956,7 @@ parts:
         -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.2MB.fd" \
         -C "$(cat ubuntu-sb.crt)" \
         -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.ms.fd"
-      ln -s OVMF_VARS.2MB.ms.fd ${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd
+      ln -s OVMF_VARS.2MB.ms.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
     prime:
       - share/qemu/*
 
@@ -1403,7 +1403,7 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
@@ -1428,7 +1428,7 @@ parts:
       git cherry-pick d88c6d9fc161485ee9025eb808d535909aae2471 # patches: Fix patchStorageRenameCustomISOBlockVolumes when no storage pools exist
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
@@ -1498,7 +1498,7 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Download the dependencies
       go get -d -v ./...
@@ -1506,7 +1506,7 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
 
@@ -1559,7 +1559,7 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Build the binaries
       go build -o "${CRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
@@ -1601,11 +1601,11 @@ parts:
       set -x
 
       # Strip some of the heavy bits
-      strip -s ${CRAFT_PRIME}/bin/lxc
-      strip -s ${CRAFT_PRIME}/bin/lxd*
-      strip -s ${CRAFT_PRIME}/bin/snap*
-      strip -s ${CRAFT_PRIME}/lib/libdqlite*
-      strip -s ${CRAFT_PRIME}/lib/libsqlite*
+      strip -s "${CRAFT_PRIME}"/bin/lxc
+      strip -s "${CRAFT_PRIME}"/bin/lxd*
+      strip -s "${CRAFT_PRIME}"/bin/snap*
+      strip -s "${CRAFT_PRIME}"/lib/libdqlite*
+      strip -s "${CRAFT_PRIME}"/lib/libsqlite*
 
       for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
           [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
