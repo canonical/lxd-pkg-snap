@@ -1133,12 +1133,14 @@ parts:
       craftctl default
       set -ex
 
+      ZFS_VER="0.8"
+
       mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-0.8/bin" "${CRAFT_PART_INSTALL}/zfs-0.8/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-0.8/lib/"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-0:
@@ -1169,12 +1171,14 @@ parts:
       craftctl default
       set -ex
 
+      ZFS_VER="2.0"
+
       mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-2.0/bin" "${CRAFT_PART_INSTALL}/zfs-2.0/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-2.0/lib/"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-1:
@@ -1205,12 +1209,14 @@ parts:
       craftctl default
       set -ex
 
+      ZFS_VER="2.1"
+
       mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-2.1/bin" "${CRAFT_PART_INSTALL}/zfs-2.1/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-2.1/lib/"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-2:
@@ -1241,12 +1247,14 @@ parts:
       craftctl default
       set -ex
 
+      ZFS_VER="2.2"
+
       mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-2.2/bin" "${CRAFT_PART_INSTALL}/zfs-2.2/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-2.2/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-2.2/lib/"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
 
