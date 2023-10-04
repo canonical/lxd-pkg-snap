@@ -240,14 +240,20 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "armv7l" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "armv7l" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      set -ex
 
       make
       mkdir -p "${CRAFT_PART_INSTALL}/criu/"
@@ -285,6 +291,9 @@ parts:
     source-tag: rel-1.16.2
     source-depth: 1
     plugin: nil
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && exit 0
 
@@ -318,12 +327,15 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
+      git config --global transfer.fsckobjects true
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202305
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      set -ex
+
+      # Git cherry-picks
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
 
       # Fix submodules
       sed -i "s#https://git.cryptomilk.org/projects/cmocka#https://gitlab.com/cmocka/cmocka#g" .gitmodules
@@ -486,6 +498,9 @@ parts:
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       craftctl default
@@ -629,12 +644,12 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
       craftctl default
-      set -ex
     organize:
       sbin/: bin/
       usr/lib/: lib/
@@ -656,11 +671,14 @@ parts:
       - curl
       - libelf-dev
       - lsb-release
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
-
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
@@ -668,7 +686,7 @@ parts:
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
-      cp ${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${CRAFT_PART_INSTALL}/bin/"
+      cp "${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli" "${CRAFT_PART_INSTALL}/bin/"
 
       set +ex
       craftctl default
@@ -690,15 +708,6 @@ parts:
       - --prefix=
     stage-packages:
       - uuid-runtime
-    override-build: |
-      set -ex
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-
-      set +ex
-      craftctl default
-      set -ex
     organize:
       sbin/: bin/
       usr/bin/: bin/
@@ -812,9 +821,9 @@ parts:
       - libusb
       - spice-protocol
       - spice-server
-    source: IRRELEVANT
+    source: https://gitlab.com/qemu-project/qemu
     source-type: git
-    source-tag: IRRELEVANT
+    source-tag: v8.0.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -873,8 +882,7 @@ parts:
       - libusbredirparser1
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      set -ex
-      git clone https://gitlab.com/qemu-project/qemu . -b v8.0.5
+      craftctl default
 
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
@@ -924,6 +932,9 @@ parts:
       - mtools
       - python3-pexpect
       - xorriso
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
@@ -1108,15 +1119,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1142,15 +1155,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1176,15 +1191,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1210,15 +1227,17 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
-
+    override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      set +ex
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
       craftctl default
       set -ex
 
@@ -1284,6 +1303,7 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
@@ -1294,8 +1314,8 @@ parts:
       craftctl default
       set -ex
 
-      mkdir -p $CRAFT_PART_INSTALL/lxc/config/common.conf.d/
-      ln -s /var/snap/lxd/common/lxc/local.conf $CRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+      mkdir -p "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/"
+      ln -s /var/snap/lxd/common/lxc/local.conf "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/01-local.conf"
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
@@ -1345,7 +1365,7 @@ parts:
       craftctl default
       set -ex
 
-      patch -p1 $CRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
+      patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
     source: https://github.com/canonical/lxd
@@ -1431,8 +1451,8 @@ parts:
       fi
 
       # Setup bash completion
-      mkdir -p ${CRAFT_PART_INSTALL}/etc/bash_completion.d/
-      cp scripts/bash/lxd-client ${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      mkdir -p "${CRAFT_PART_INSTALL}/etc/bash_completion.d/"
+      cp scripts/bash/lxd-client "${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc"
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -1493,7 +1513,7 @@ parts:
       # Build the binaries
       go build -o "${CRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
-      mkdir -p ${CRAFT_PART_INSTALL}/bin/
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
     prime:
       - bin/lxd-migrate
 
@@ -1585,7 +1605,7 @@ parts:
 
       for zfs in zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
           [ ! -d "${CRAFT_PRIME}/${zfs}" ] && continue
-          strip -s ${CRAFT_PRIME}/${zfs}/bin/* ${CRAFT_PRIME}/${zfs}/lib/*
+          strip -s "${CRAFT_PRIME}/${zfs}"/bin/* "${CRAFT_PRIME}/${zfs}"/lib/*
       done
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1595,7 +1615,7 @@ parts:
           cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
 
-      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s ${CRAFT_PRIME}/criu/criu
+      [ -e "${CRAFT_PRIME}/criu/criu" ] && strip -s "${CRAFT_PRIME}/criu/criu"
 
       exit 0
 
