@@ -419,7 +419,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/stefanberger/libtpms
     source-type: git
-    source-tag: v0.9.5
+    source-tag: v0.9.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
