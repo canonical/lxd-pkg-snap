@@ -803,7 +803,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       set -ex
-      git clone https://gitlab.com/qemu/qemu . -b v8.0.5
+      git clone https://gitlab.com/qemu/qemu . -b v7.1.0
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
@@ -829,6 +829,7 @@ parts:
       - bin/qemu-system-*
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
+      - bin/virtiofsd*
       - lib/*/libatomic.so*
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
@@ -953,28 +954,6 @@ parts:
     prime:
       - bin/vim.tiny
       - etc/vimrc
-
-  virtiofsd:
-    build-attributes: [core22-step-dependencies]
-    source: https://gitlab.com/virtio-fs/virtiofsd
-    source-type: git
-    source-tag: v1.8.0
-    source-depth: 1
-    plugin: rust
-    build-packages:
-      - cargo
-      - libseccomp-dev
-      - rustc
-    organize:
-      usr/bin: bin/
-    prime:
-      - bin/virtiofsd*
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      snapcraftctl pull
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      snapcraftctl build
 
   xfs:
     build-attributes: [core22-step-dependencies]
