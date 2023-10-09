@@ -671,6 +671,12 @@ parts:
       - bin/nvidia-container-cli*
       - lib/libnvidia-container*.so*
 
+  nvme:
+    source: snapcraft/empty
+    plugin: nil
+    stage-packages:
+      - nvme-cli
+
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-type: git
