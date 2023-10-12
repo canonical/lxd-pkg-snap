@@ -1624,6 +1624,8 @@ parts:
       # Strip libraries (excluding python3 scripts)
       find "${CRAFT_PRIME}"/lib -type f \
         -not -path "${CRAFT_PRIME}/lib/python3/*" \
+        -not -path "${CRAFT_PRIME}/lib/udev/rules.d/*" \
+        -not -path "${CRAFT_PRIME}/lib/systemd/system/*" \
         -exec strip -s {} +
 
       if [ "$(uname -m)" != "riscv64" ]; then
