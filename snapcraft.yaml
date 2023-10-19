@@ -2,7 +2,7 @@ name: lxd
 base: core22
 assumes:
   - snapd2.39
-version: "5.18"
+version: "5.19"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1388,7 +1388,7 @@ parts:
   lxd:
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-5.18
+    source-tag: lxd-5.19
     after:
       - lxc
       - dqlite
@@ -1445,13 +1445,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 5ccebec7d2a4f2e98ded41fac891504e3072daf3 # patches: Don't fail if no storage pools were found
-      git cherry-pick c5a691c13a2f589c2f72f16edc2817f29639e77a # simplestreams: Fix regression in lxd_combined.tar.gz handling
-      git cherry-pick f71bd5d539f6f2a4146a28848e9fe90b9386e2b3 # patches: Remove invalid block settings from existing volumes
-      git cherry-pick 05a73a7a1648e5c1d776bbc2a95598243256f472 # lxc/network-allocations: Fix project and remote usage
-      git cherry-pick b9e6eb9bf5acabd8193680d8e7a7becc9d8786a1 # patches: Check server name when unsetting invalid block settings
-      git cherry-pick d88c6d9fc161485ee9025eb808d535909aae2471 # patches: Fix patchStorageRenameCustomISOBlockVolumes when no storage pools exist
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
