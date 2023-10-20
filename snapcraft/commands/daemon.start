@@ -442,20 +442,6 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
             echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
         fi
     fi
-
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged userns mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
-        fi
-    fi
-
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged unconfined mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
-        fi
-    fi
 fi
 
 # Setup CRIU
