@@ -421,17 +421,19 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
         fi
     fi
 
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged userns mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+    if [ "${apparmor_unprivileged_restrictions_disable:-"true"}" = "true" ]; then
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged userns mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+            fi
         fi
-    fi
 
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged unconfined mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged unconfined mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
+            fi
         fi
     fi
 fi
