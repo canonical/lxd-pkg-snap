@@ -1446,6 +1446,12 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick 9a916ab0fbd2467e13896ba3d6f816536a6d31bb # gitignore: Ignore pycache
+      git cherry-pick 56fa98f726a1b844e637ff1a821c2e614e55eb12 # lxd/daemon: Initialise server name and global config before patches
+      git cherry-pick 5235a06231b92fa4f2ef2775bfc3e98b59aaf103 # lxd/patches: Only update volumes that need updating in patchStorageZfsUnsetInvalidBlockSettingsV2
+      git cherry-pick 942350ef274622e1857002f86902c964d61c111d # lxd/patches: Only update volumes that need updating in patchStorageZfsUnsetInvalidBlockSettings
+      git cherry-pick 89d4048db8c35f0ec11a8cb1cb97f22534380150 # lxd/firewall: Fix nftables ACL template
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
