@@ -5,7 +5,7 @@ set -eu
 if [ -d /sys/kernel/security/apparmor ]; then
   label="$(while read -r l; do echo "$l"; done < /proc/self/attr/current)"
   if [ "$label" != "unconfined" ] && [ -n "${label##*(unconfined)}" ]; then
-    exec aa-exec -p unconfined -- "$0" "$@"
+    exec /usr/bin/aa-exec -p unconfined -- "$0" "$@"
   fi
 fi
 
