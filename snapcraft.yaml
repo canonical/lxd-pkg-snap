@@ -47,7 +47,6 @@ description: |-
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
-   - shiftfs.enable: Enable shiftfs support [default=auto]
    - ui.enable: Enable the experimental web interface [default=false]
 
  For system-wide configuration of the CLI, place your configuration in
