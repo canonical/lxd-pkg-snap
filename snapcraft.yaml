@@ -411,14 +411,6 @@ parts:
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.fd" \
         -DFD_SIZE_4MB
 
-      # Compatibility firmware (2MB, no CSM)
-      build_edk2 \
-        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.2MB.fd" \
-        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.fd" \
-        -DFD_SIZE_2MB
-      ln -s OVMF_CODE.2MB.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-      ln -s OVMF_VARS.2MB.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
-
       # Legacy firmware (4MB, CSM)
       if [ "$(uname -m)" = "x86_64" ]; then
           build_edk2 \
@@ -964,16 +956,6 @@ parts:
         -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.4MB.fd" \
         -C "$(cat ubuntu-sb.crt)" \
         -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.ms.fd"
-
-      # 2MB variant
-      ./edk2-vars-generator -f "${FIRMWARE}" \
-        -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
-        -s ../../edk2/build/Build/*/*/*/Shell.efi \
-        -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.2MB.fd" \
-        -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.2MB.fd" \
-        -C "$(cat ubuntu-sb.crt)" \
-        -o "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.2MB.ms.fd"
-      ln -s OVMF_VARS.2MB.ms.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
     prime:
       - share/qemu/*
 
