@@ -218,10 +218,6 @@ func (d *lxdDaemon) reload() error {
 		return systemdCtl("reload", "snap.lxd.daemon.service")
 	}
 
-	if osInit() == "upstart" {
-		return upstartCtl("restart", "lxd")
-	}
-
 	return systemdCtl("restart", "lxd.service", "lxd.socket")
 }
 
@@ -229,10 +225,6 @@ func (d *lxdDaemon) start() error {
 	// Start the relevant systemd units
 	if strings.HasPrefix(d.path, "/var/snap") {
 		return systemdCtl("start", "snap.lxd.daemon.service")
-	}
-
-	if osInit() == "upstart" {
-		return upstartCtl("start", "lxd")
 	}
 
 	return systemdCtl("start", "lxd.service", "lxd.socket")
@@ -246,10 +238,6 @@ func (d *lxdDaemon) stop() error {
 		}
 
 		return systemdCtl("stop", "snap.lxd.daemon.service")
-	}
-
-	if osInit() == "upstart" {
-		return upstartCtl("stop", "lxd")
 	}
 
 	return systemdCtl("stop", "lxd.service", "lxd.socket")
