@@ -1452,6 +1452,7 @@ parts:
       git cherry-pick 942350ef274622e1857002f86902c964d61c111d # lxd/patches: Only update volumes that need updating in patchStorageZfsUnsetInvalidBlockSettings
       git cherry-pick 89d4048db8c35f0ec11a8cb1cb97f22534380150 # lxd/firewall: Fix nftables ACL template
       git cherry-pick c525e53aa59edaa8838dcd9b6fe853f4f595a57f # lxd/patches: Add cluster check for patches fixing volumes
+      git cherry-pick 781905a01b68d68b4071643d947b75004ea4fad9 # lxd/instance/exec: Only use keepalives on TCP sockets
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
