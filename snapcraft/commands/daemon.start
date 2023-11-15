@@ -616,6 +616,11 @@ if [ -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
     mv "${SNAP_DATA}/lxd/lxd.db" "${SNAP_COMMON}/lxd/lxd.db"
 fi
 
+# Warn the user if a debug LXC binary is found
+if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
+    echo "==> WARNING: A custom debug LXC binary was found!"
+fi
+
 ## Start lxd
 echo "=> Starting LXD"
 
