@@ -375,13 +375,15 @@ parts:
           shift
           TARGET_VARS="$1"
           shift
+          TARGET_BUILD_TYPE="$1"
+          shift
 
           set -ex
           (
           cat << EOF
               . ./edksetup.sh
               make -C BaseTools ARCH="${ARCH}"
-              build -a "${ARCH}" -t GCC5 -b RELEASE -p "${PKG}" \
+              build -a "${ARCH}" -t GCC5 -b "${TARGET_BUILD_TYPE}" -p "${PKG}" \
                 -DSMM_REQUIRE=FALSE \
                 -DSECURE_BOOT_ENABLE=TRUE \
                 -DNETWORK_IP4_ENABLE=TRUE \
@@ -394,8 +396,8 @@ parts:
       EOF
           ) | bash -e
 
-          cp Build/*/*/FV/${FV_CODE}.fd "${TARGET_CODE}"
-          cp Build/*/*/FV/${FV_VARS}.fd "${TARGET_VARS}"
+          cp Build/*/${TARGET_BUILD_TYPE}*/FV/${FV_CODE}.fd "${TARGET_CODE}"
+          cp Build/*/${TARGET_BUILD_TYPE}*/FV/${FV_VARS}.fd "${TARGET_VARS}"
 
           if [ "$(uname -m)" = "aarch64" ]; then
               truncate -s 64m "${TARGET_CODE}"
@@ -410,6 +412,7 @@ parts:
       build_edk2 \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.fd" \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.fd" \
+        RELEASE \
         -DFD_SIZE_4MB
 
       # Legacy firmware (4MB, CSM)
@@ -417,9 +420,26 @@ parts:
           build_edk2 \
             "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
             "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
+            RELEASE \
             -DFD_SIZE_4MB \
             -DCSM_ENABLE=TRUE
       fi
+
+      # Debug firmware (4MB, debug mode)
+      # Can be enabled with the LXD boot.debug_edk2 instance option
+      # Set DEBUG_VERBOSE flag
+      if [ "$(uname -m)" = "aarch64" ]; then
+          sed -i "s#DEBUG_PRINT_ERROR_LEVEL = 0x8000004F#DEBUG_PRINT_ERROR_LEVEL = 0x8040004F#g" ArmVirtPkg/ArmVirt.dsc.inc
+      fi
+      if [ "$(uname -m)" = "x86_64" ]; then
+          sed -i "s#PcdDebugPrintErrorLevel|0x8000004F#PcdDebugPrintErrorLevel|0x8040004F#g" "${PKG}"
+      fi
+      build_edk2 \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.debug.fd" \
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.debug.fd" \
+        DEBUG \
+        -DFD_SIZE_4MB
+      rm "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.debug.fd"
     prime:
       - share/qemu/*
 
@@ -951,8 +971,8 @@ parts:
 
       # 4MB variant
       ./edk2-vars-generator -f "${FIRMWARE}" \
-        -e ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi \
-        -s ../../edk2/build/Build/*/*/*/Shell.efi \
+        -e ../../edk2/build/Build/*/RELEASE*/*/EnrollDefaultKeys.efi \
+        -s ../../edk2/build/Build/*/RELEASE*/*/Shell.efi \
         -c "${CRAFT_STAGE}/share/qemu/OVMF_CODE.4MB.fd" \
         -V "${CRAFT_STAGE}/share/qemu/OVMF_VARS.4MB.fd" \
         -C "$(cat ubuntu-sb.crt)" \
