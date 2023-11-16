@@ -72,16 +72,6 @@ func systemdCtl(action string, units ...string) error {
 	return err
 }
 
-func upstartCtl(action string, units ...string) error {
-	args := []string{}
-	args = append(args, action)
-	args = append(args, units...)
-
-	// Run initctl
-	_, err := shared.RunCommand("initctl", args...)
-	return err
-}
-
 func convertPath(path string, src string, dst string) string {
 	// Relative paths are handled by LXD
 	if !strings.HasPrefix(path, "/") {
@@ -133,10 +123,6 @@ func osInit() string {
 
 	fields := strings.Split(initExe, " ")
 	init := filepath.Base(fields[0])
-
-	if init == "init" {
-		init = "upstart"
-	}
 
 	return init
 }
