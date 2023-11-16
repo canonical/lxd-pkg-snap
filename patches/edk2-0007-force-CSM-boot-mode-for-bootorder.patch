@@ -1,0 +1,115 @@
+From 14b3103f2069194416633447b940c01d31b6682b Mon Sep 17 00:00:00 2001
+From: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
+Date: Thu, 16 Nov 2023 12:20:18 +0100
+Subject: [PATCH] edk2: force CSM boot mode for bootorder
+
+If "-fw_cfg name=opt/com.canonical.lxd/force_csm,string=yes" is specified
+in the Qemu commandline then treat bootorder settings from Qemu
+as settings for CSM boot. Right now bootorder from Qemu is always considered
+as UEFI and CSM boot is always last in the priority list. Even worser,
+you can't really make CSM to be the first in the bootorder, because in the
+SetBootOrderFromQemu() function we always fixup bootorder in accordance with
+Qemu provided and setting from NVRAM are always got reset.
+
+Fortunately, we don't need to patch SeaBIOS, because it already handles
+bootorder from Qemu properly. So, we just need to pass execution from
+UEFI to SeaBIOS and from this point everything will work just fine.
+
+This is a very hacky solution but we have no choice here. Because
+the alternative here is to extend Qemu fwcfg "bootorder" interface
+to make it aware of CSM/UEFI boot modes and then patch UEFI and SeaBIOS
+to handle all of that. This can be an ready-to-upstream solution,
+but I'm not sure that it can be interesting for edk2 folks, because
+all of this CSM stuff considered as a legacy thing.
+
+This thing is enabled only when CSM_ENABLE=TRUE AND
+"-fw_cfg name=opt/com.canonical.lxd/force_csm,string=yes"
+specified in the Qemu cmdline.
+
+Signed-off-by: Alexander Mikhalitsyn <aleksandr.mikhalitsyn@canonical.com>
+---
+ .../QemuBootOrderLib/QemuBootOrderLib.c       | 48 +++++++++++++++++++
+ .../QemuBootOrderLib/QemuBootOrderLib.inf     |  1 +
+ 2 files changed, 49 insertions(+)
+
+diff --git a/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.c b/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.c
+index 2fe6ab30c0..b0efab9b00 100644
+--- a/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.c
++++ b/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.c
+@@ -2190,6 +2190,9 @@ SetBootOrderFromQemu (
+   EFI_BOOT_MANAGER_LOAD_OPTION  *BootOptions;
+   UINTN                         BootOptionCount;
+ 
++  FIRMWARE_CONFIG_ITEM  ForceCSMFwCfgItem;
++  UINTN                 ForceCSMFwCfgSize;
++
+   Status = QemuFwCfgFindFile ("bootorder", &FwCfgItem, &FwCfgSize);
+   if (Status != RETURN_SUCCESS) {
+     return Status;
+@@ -2245,6 +2248,51 @@ SetBootOrderFromQemu (
+     goto ErrorFreeBootOptions;
+   }
+ 
++  Status = QemuFwCfgFindFile ("opt/com.canonical.lxd/force_csm", &ForceCSMFwCfgItem, &ForceCSMFwCfgSize);
++  if (FeaturePcdGet (PcdCsmEnable) && (Status == RETURN_SUCCESS)) {
++    CHAR8  *ForceCSMFwCfg;
++    UINTN  Idx;
++
++    if (ForceCSMFwCfgSize == 0) {
++      Status = RETURN_NOT_FOUND;
++      goto ErrorFreeActiveOption;
++    }
++
++    ForceCSMFwCfg = AllocatePool (ForceCSMFwCfgSize);
++    if (ForceCSMFwCfg == NULL) {
++      Status = RETURN_OUT_OF_RESOURCES;
++      goto ErrorFreeActiveOption;
++    }
++
++    QemuFwCfgSelectItem (ForceCSMFwCfgItem);
++    QemuFwCfgReadBytes (ForceCSMFwCfgSize, ForceCSMFwCfg);
++    if (ForceCSMFwCfgSize != 3 || CompareMem("yes", ForceCSMFwCfg, ForceCSMFwCfgSize)) {
++      Status = RETURN_INVALID_PARAMETER;
++      FreePool (ForceCSMFwCfg);
++      goto ErrorFreeActiveOption;
++    }
++
++    DEBUG ((DEBUG_VERBOSE, "%a: ForceCSMFwCfg enabled\n", __func__));
++
++    /* make all CSM boot options first in the bootorder list */
++    for (Idx = 0; Idx < ActiveCount; ++Idx) {
++      /* ActiveOption[Idx].BootOption is a CSM option? */
++      if ((DevicePathType (ActiveOption[Idx].BootOption->FilePath) == BBS_DEVICE_PATH) &&
++          (DevicePathSubType (ActiveOption[Idx].BootOption->FilePath) == BBS_BBS_DP))
++      {
++        DEBUG ((DEBUG_VERBOSE, "%a: Found a legacy boot option: %s\n", __func__, ActiveOption[Idx].BootOption->Description));
++        /* add an option to a final list, so everything that will be added later will go AFTER */
++        Status = BootOrderAppend (&BootOrder, &ActiveOption[Idx]);
++        if (Status != RETURN_SUCCESS) {
++          FreePool (ForceCSMFwCfg);
++          goto ErrorFreeActiveOption;
++        }
++      }
++    }
++
++    FreePool (ForceCSMFwCfg);
++  }
++
+   if (FeaturePcdGet (PcdQemuBootOrderPciTranslation)) {
+     Status = CreateExtraRootBusMap (&ExtraPciRoots);
+     if (EFI_ERROR (Status)) {
+diff --git a/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.inf b/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.inf
+index 6e320e3e85..628b6bde46 100644
+--- a/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.inf
++++ b/OvmfPkg/Library/QemuBootOrderLib/QemuBootOrderLib.inf
+@@ -54,6 +54,7 @@
+ [FeaturePcd]
+   gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderPciTranslation
+   gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderMmioTranslation
++  gUefiOvmfPkgTokenSpaceGuid.PcdCsmEnable
+ 
+ [Pcd]
+   gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut
+-- 
+2.34.1
+
