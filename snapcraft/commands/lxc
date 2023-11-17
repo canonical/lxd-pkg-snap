@@ -2,8 +2,11 @@
 set -eu
 
 # Re-exec outside of apparmor confinement
-if [ -d /sys/kernel/security/apparmor ] && [ "$(while read -r l; do echo "$l"; done < /proc/self/attr/current)" != "unconfined" ]; then
+if [ -d /sys/kernel/security/apparmor ]; then
+  label="$(while read -r l; do echo "$l"; done < /proc/self/attr/current)"
+  if [ "$label" != "unconfined" ] && [ -n "${label##*(unconfined)}" ]; then
     exec /usr/bin/aa-exec -p unconfined -- "$0" "$@"
+  fi
 fi
 
 # Check if native and snap installed
