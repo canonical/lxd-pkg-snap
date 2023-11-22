@@ -1436,6 +1436,9 @@ parts:
       git cherry-pick 781905a01b68d68b4071643d947b75004ea4fad9 # lxd/instance/exec: Only use keepalives on TCP sockets
       git cherry-pick 1a747fa8b64a6254fec7be2bd4153f3fbf459d96 # btrfs: Add function to check subvolumes in a given path
       git cherry-pick 4f2ace5a1cf32aa0724ce89d37ba9e3a21b4bdf6 # btrfs: Use hasSubvolumes when creating a new pool
+      git cherry-pick 449e8ff22f6febc23ada94db6c244398b4bbefa2 # lxd/instance/drivers/driver_qemu: factor out config volume mounting from setupNvram
+      git cherry-pick ac76c1cb7cfd5acbc972601dd3081635d17c20da # lxd/instance/drivers/driver_qemu: force 4MB UEFI firmware in snap
+      git cherry-pick db9b3e4b76597f38fa729bc519c3a45b869cacc6 # lxd/instance/drivers/driver_qemu: use OVMF_CODE.fd in a non-snap environment
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
