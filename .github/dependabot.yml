@@ -5,3 +5,18 @@ updates:
     labels: []
     schedule:
       interval: "weekly"
+
+  # XXX: also check on other (non-default) edge branches
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels: []
+    schedule:
+      interval: "weekly"
+    target-branch: "5.0-edge"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels: []
+    schedule:
+      interval: "weekly"
+    target-branch: "4.0-edge"
