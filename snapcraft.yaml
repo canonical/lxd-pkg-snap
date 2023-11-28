@@ -1364,6 +1364,7 @@ parts:
       usr/lib/: lib/
     prime:
       - bin/fusermount
+      - bin/fusermount3
       - lib/*/libfuse3.so.*
 
       - lib/*/libSegFault.so
