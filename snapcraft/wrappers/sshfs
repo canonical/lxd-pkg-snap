@@ -2,7 +2,7 @@
 if [ "$(id -u)" != "0" ]; then
     echo "" >&2
     echo "\"lxc file mount\" with SSHFS can only be used as root in the LXD snap." >&2
-    echo  "For use as a regular user, please use the --connect option instead." >&2
+    echo  "For use as a regular user, please use the --listen option instead." >&2
     echo "" >&2
     exit 1
 fi
