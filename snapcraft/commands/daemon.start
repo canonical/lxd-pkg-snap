@@ -301,8 +301,8 @@ echo "==> Setting up ceph configuration"
 if [ "${ceph_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ceph"
     ln -s "${SNAP_COMMON}/ceph" /etc/ceph
-elif [ -e "/var/snap/microceph" ]; then
-    ln -s /var/snap/microceph/current/conf/ /etc/ceph
+elif [ -d "${SNAP_DATA}/microceph" ]; then
+    ln -snf "${SNAP_DATA}/microceph/conf/" /etc/ceph
 else
     ln -s /var/lib/snapd/hostfs/etc/ceph /etc/ceph
 fi
