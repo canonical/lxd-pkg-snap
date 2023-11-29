@@ -1496,7 +1496,7 @@ parts:
       - bin/dnsmasq
       - bin/getfattr
       - bin/setfattr
-      - bin/iw
+      - bin/iw   # used by liblxc when moving the parent dev in a container
       - bin/pigz
       - bin/rsync
       - bin/setfacl
