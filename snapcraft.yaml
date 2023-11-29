@@ -1413,7 +1413,7 @@ parts:
       - shellcheck
       - pypy-dev
       - python3-dev
-      - python3.10-venv
+      - python3-venv
     build-snaps:
       - go
     stage-packages:
