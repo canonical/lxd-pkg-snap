@@ -1553,6 +1553,15 @@ parts:
 
       [ -e "${SNAPCRAFT_PRIME}/criu/criu" ] && strip -s ${SNAPCRAFT_PRIME}/criu/criu
 
+      # XXX: look for broken symlinks indicating missing/invalid prime
+      broken_symlinks="$(find "${SNAPCRAFT_PRIME}/" -xtype l \
+                           -not -path "${SNAPCRAFT_PRIME}/lxc/config/common.conf.d/*")"
+      if [ -n "${broken_symlinks}" ]; then
+          echo "Found broken symlinks:"
+          echo "${broken_symlinks}"
+          exit 1
+      fi
+
       exit 0
 
   wrappers:
