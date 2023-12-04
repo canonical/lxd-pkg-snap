@@ -1624,8 +1624,6 @@ parts:
       # Strip libraries (excluding python3 scripts)
       find "${CRAFT_PRIME}"/lib -type f \
         -not -path "${CRAFT_PRIME}/lib/python3/*" \
-        -not -path "${CRAFT_PRIME}/lib/udev/rules.d/*" \
-        -not -path "${CRAFT_PRIME}/lib/systemd/system/*" \
         -exec strip -s {} +
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1637,8 +1635,7 @@ parts:
 
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${CRAFT_PRIME}/" -xtype l \
-                           -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*" \
-                           -not -path "${CRAFT_PRIME}/usr/share/doc/uuid-runtime/*")"
+                           -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*")"
       if [ -n "${broken_symlinks}" ]; then
           echo "Found broken symlinks:"
           echo "${broken_symlinks}"
