@@ -1604,6 +1604,7 @@ parts:
       set -x
 
       # XXX: remove unneeded files/directories
+      rm -rf "${CRAFT_PRIME}/lib/python3/dist-packages/*.egg-info/"
       rm -rf "${CRAFT_PRIME}/lib/systemd/"
       rm -rf "${CRAFT_PRIME}/lib/udev/"
       rm -rf "${CRAFT_PRIME}/usr/local/"
