@@ -1613,13 +1613,18 @@ parts:
       - raft
       - sqlite
       - squashfs-tools-ng
+      - swtpm
       - vim
+      - virtiofsd
       - xfs
       - xz
+      - wrappers
+      - xtables
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
       - zfs-2-2
+      - zstd
       - lxc
       - lxcfs
       - criu
