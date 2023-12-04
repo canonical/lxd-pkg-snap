@@ -1603,6 +1603,10 @@ parts:
     override-prime: |
       set -x
 
+      # XXX: remove unneeded files/directories
+      rm -rf "${CRAFT_PRIME}/lib/systemd/"
+      rm -rf "${CRAFT_PRIME}/lib/udev/"
+
       # Strip binaries (excluding shell scripts)
       find "${CRAFT_PRIME}"/bin -type f \
         -not -path "${CRAFT_PRIME}/bin/ceph" \
