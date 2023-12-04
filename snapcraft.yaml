@@ -1626,6 +1626,10 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
 
+      # Strip all versions of zfs utils
+      find "${CRAFT_PRIME}"/zfs-*/ -type f \
+        -exec strip -s {} +
+
       # Strip libraries (excluding python3 scripts)
       find "${CRAFT_PRIME}"/lib -type f \
         -not -path "${CRAFT_PRIME}/lib/python3/*" \
