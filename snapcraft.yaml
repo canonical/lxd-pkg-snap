@@ -403,7 +403,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.4
+    source-tag: v2.5.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
