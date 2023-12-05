@@ -1492,7 +1492,6 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/sgdisk
-      - bin/unsquashfs
       - bin/xdelta3
 
       - lib/*/libidn.so.*
