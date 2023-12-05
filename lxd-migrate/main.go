@@ -313,9 +313,9 @@ func askBool(question string, default_ string) bool {
 		if input == "" {
 			input = default_
 		}
-		if shared.StringInSlice(strings.ToLower(input), []string{"yes", "y"}) {
+		if shared.ValueInSlice(strings.ToLower(input), []string{"yes", "y"}) {
 			return true
-		} else if shared.StringInSlice(strings.ToLower(input), []string{"no", "n"}) {
+		} else if shared.ValueInSlice(strings.ToLower(input), []string{"no", "n"}) {
 			return false
 		}
 
