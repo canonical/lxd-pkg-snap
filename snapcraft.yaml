@@ -1585,13 +1585,18 @@ parts:
       - raft
       - sqlite
       - squashfs-tools-ng
+      - swtpm
       - vim
+      - virtiofsd
       - xfs
       - xz
+      - wrappers
+      - xtables
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
       - zfs-2-2
+      - zstd
       - lxc
       - lxcfs
       - criu
@@ -1602,6 +1607,13 @@ parts:
     plugin: nil
     override-prime: |
       set -x
+
+      # XXX: remove unneeded files/directories
+      rm -rf "${CRAFT_PRIME}/lib/python3/dist-packages/*.egg-info/"
+      rm -rf "${CRAFT_PRIME}/lib/systemd/"
+      rm -rf "${CRAFT_PRIME}/lib/udev/"
+      rm -rf "${CRAFT_PRIME}/usr/local/"
+      rm -rf "${CRAFT_PRIME}/usr/share/"
 
       # Strip binaries (excluding shell scripts)
       find "${CRAFT_PRIME}"/bin -type f \
@@ -1614,11 +1626,13 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
 
+      # Strip all versions of zfs utils
+      find "${CRAFT_PRIME}"/zfs-*/ -type f \
+        -exec strip -s {} +
+
       # Strip libraries (excluding python3 scripts)
       find "${CRAFT_PRIME}"/lib -type f \
         -not -path "${CRAFT_PRIME}/lib/python3/*" \
-        -not -path "${CRAFT_PRIME}/lib/udev/rules.d/*" \
-        -not -path "${CRAFT_PRIME}/lib/systemd/system/*" \
         -exec strip -s {} +
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1630,8 +1644,7 @@ parts:
 
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${CRAFT_PRIME}/" -xtype l \
-                           -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*" \
-                           -not -path "${CRAFT_PRIME}/usr/share/doc/uuid-runtime/*")"
+                           -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*")"
       if [ -n "${broken_symlinks}" ]; then
           echo "Found broken symlinks:"
           echo "${broken_symlinks}"
