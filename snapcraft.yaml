@@ -231,7 +231,7 @@ parts:
   criu:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.18
+    source-tag: v3.19
     source-type: git
     source-depth: 1
     plugin: nil
@@ -403,7 +403,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.4
+    source-tag: v2.5.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -435,7 +435,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/axboe/liburing
     source-type: git
-    source-tag: liburing-2.4
+    source-tag: liburing-2.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -526,7 +526,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/netwide-assembler/nasm
     source-type: git
-    source-tag: nasm-2.15.05
+    source-tag: nasm-2.16.01
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -546,7 +546,7 @@ parts:
       - libnftnl
     source: https://git.netfilter.org/nftables
     source-type: git
-    source-tag: v1.0.8
+    source-tag: v1.0.9
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -580,7 +580,7 @@ parts:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.14.2
+    source-tag: v1.14.3
     source-depth: 1
     plugin: make
     build-packages:
@@ -611,7 +611,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v3.1.2
+    source-tag: v3.1.3
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -914,7 +914,7 @@ parts:
     source: https://github.com/sqlite/sqlite
     source-type: git
     source-depth: 1
-    source-tag: version-3.42.0
+    source-tag: version-3.44.2
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -1174,7 +1174,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.1.12
+    source-tag: zfs-2.1.14
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
