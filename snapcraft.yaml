@@ -1023,18 +1023,6 @@ parts:
       - bin/tar2sqfs
       - lib/libsquashfs.so*
 
-  vim:
-    plugin: nil
-    stage-packages:
-      - vim-common
-      - vim-tiny
-    organize:
-      usr/bin/: bin/
-      usr/share/vim/vim*/debian.vim: etc/vimrc
-    prime:
-      - bin/vim.tiny
-      - etc/vimrc
-
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
     source-type: git
@@ -1601,7 +1589,6 @@ parts:
       - sqlite
       - squashfs-tools-ng
       - swtpm
-      - vim
       - virtiofsd
       - xfs
       - xz
