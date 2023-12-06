@@ -47,10 +47,11 @@ fi
 
 # If the editor's rcfile is not readable, ignore it.
 EDIT_IGNORE_RC=""
-
+EDIT_RESTRICT=""
 # Default to built-in nano.
 if [ -z "${EDIT_CMD}" ]; then
     EDIT_CMD="nano"
+    EDIT_RESTRICT="--restricted"
     [ -r "${SNAP}/etc/nanorc" ] || EDIT_IGNORE_RC="--ignorercfiles"
 fi
 
@@ -68,7 +69,8 @@ if [ "$EDIT_CMD" != "nano" ]; then
     fi
 
     EDIT_CMD="vim.tiny"
+    EDIT_RESTRICT="-Z"
 fi
 
 # Run the editor.
-exec "${EDIT_CMD}" ${EDIT_IGNORE_RC} "${EDIT_PATH}"
+exec "${EDIT_CMD}" ${EDIT_RESTRICT} ${EDIT_IGNORE_RC} "${EDIT_PATH}"
