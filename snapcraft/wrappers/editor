@@ -38,7 +38,8 @@ fi
 # Try running the editor through the host.
 if [ -n "${EDIT_CMD}" ] && [ "${USERNS}" = 1 ]; then
     exec 9< /tmp/
-    EDIT_PATH_HOST="$(echo "${EDIT_PATH}" | sed "s#/tmp/#/proc/self/fd/9/#g")"
+    # Replace "/tmp/" prefix by exec'ed FD 9.
+    EDIT_PATH_HOST="/proc/self/fd/9/$(echo "${EDIT_PATH}" | cut -d/ -f2)"
     find_and_spawn "${EDIT_CMD}" "${EDIT_PATH_HOST}"
 fi
 
