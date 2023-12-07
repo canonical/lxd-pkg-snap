@@ -1035,6 +1035,12 @@ parts:
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
 
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0001-Add-support-for-libtirpc.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0002-config-better-libtirpc-detection.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0003-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0004-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0005-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
+
       set +ex
       snapcraftctl build
       set -ex
@@ -1068,6 +1074,10 @@ parts:
         [ "$(uname -m)" != "aarch64" ] && \
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
+
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0001-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0002-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0003-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
 
       set +ex
       snapcraftctl build
