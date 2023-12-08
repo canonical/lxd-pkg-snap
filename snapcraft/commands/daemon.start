@@ -515,20 +515,25 @@ fi
 if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
 
-    NEW_FUSE=$(ldd "${SNAP_CURRENT}/bin/lxcfs" | sed -n "/libfuse\.so/ s/.*libfuse\.so\.\([^ ]\+\) .*/\1/p")
+    ## Get the libfuse soname the new lxcfs wants to use
+    NEW_FUSE="$(ldd "${SNAP_CURRENT}/bin/lxcfs" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
     CURRENT_FUSE="${NEW_FUSE}"
 
+    ## Get the name of the base (core2X) used by the new snap
     NEW_BASE="$(grep ^name /meta/snap.yaml)"
     CURRENT_BASE="${NEW_BASE}"
 
+    ## Use the old lxcfs instance to get the libfuse soname and old base it uses
     if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
-            CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse\.so/ s/.*libfuse\.so\.\([^ ]\+\) .*/\1/p")
+            CURRENT_FUSE="$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
             CURRENT_BASE="$(grep ^name "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
 
+    ## If the base snap or the libfuse soname changed, warn that a system restart is needed
+    ## otherwise, proceed with reloading lxcfs
     if [ "${CURRENT_BASE}" != "${NEW_BASE}" ]; then
         echo "==> snap base has changed, restart system to upgrade LXCFS"
     elif [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
