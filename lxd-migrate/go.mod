@@ -1,6 +1,6 @@
 module github.com/canonical/lxd-pkg-snap/lxd-migrate
 
-go 1.18
+go 1.20
 
 replace google.golang.org/grpc/naming => google.golang.org/grpc v1.59.0
 
@@ -23,7 +23,6 @@ require (
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/kr/fs v0.1.0 // indirect
 	github.com/muhlemmer/gu v0.3.1 // indirect
-	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/pkg/sftp v1.13.6 // indirect
 	github.com/pkg/xattr v0.4.9 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
