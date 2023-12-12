@@ -272,29 +272,6 @@ func (d *lxdDaemon) uninstall() error {
 		return err
 	}
 
-	// Check if we can get rid of liblxc1, liblxc-common and lxcfs too
-	//// Ubuntu 18.04
-	err = packagesRemovable([]string{"liblxc1", "liblxc-common", "lxcfs"})
-	if err == nil {
-		_, err := shared.RunCommand("apt-get", "remove", "--purge", "--yes", "liblxc1", "liblxc-common", "lxcfs")
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
-	//// Ubuntu 16.04
-	err = packagesRemovable([]string{"liblxc1", "lxc-common", "lxcfs"})
-	if err == nil {
-		_, err := shared.RunCommand("apt-get", "remove", "--purge", "--yes", "liblxc1", "lxc-common", "lxcfs")
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
 	return nil
 }
 

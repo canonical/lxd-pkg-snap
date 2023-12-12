@@ -80,17 +80,6 @@ func run() error {
 	if err == nil {
 		fmt.Printf("The source server is empty, no migration needed.\n")
 
-		if shared.PathExists("/usr/lib/lxd/lxd-bridge") {
-			shared.RunCommand("/usr/lib/lxd/lxd-bridge", "stop")
-
-			if shared.PathExists("/etc/default/lxd-bridge") {
-				_, err = shared.RunCommand("mv", "/etc/default/lxd-bridge", "/etc/default/lxd-bridge.migrated")
-				if err != nil {
-					return fmt.Errorf("Failed to move the bridge configuration: %v", err)
-				}
-			}
-		}
-
 		return removePackages(src, dst)
 	}
 
@@ -202,21 +191,6 @@ func run() error {
 		return fmt.Errorf("Failed to update the storage pools: %v", err)
 	}
 
-	// Copy the network config
-	if src.networks == nil && dst.networks == nil {
-		fmt.Printf("=> Moving bridge configuration\n")
-
-		// Atempt to stop lxd-bridge
-		systemdCtl("stop", "lxd-bridge")
-
-		if shared.PathExists("/etc/default/lxd-bridge") {
-			_, err = shared.RunCommand("mv", "/etc/default/lxd-bridge", "/var/snap/lxd/common/lxd-bridge/config")
-			if err != nil {
-				return fmt.Errorf("Failed to move the bridge configuration: %v", err)
-			}
-		}
-	}
-
 	// Start the destination LXD
 	fmt.Printf("=> Starting the destination LXD\n")
 	err = dst.start()
@@ -236,29 +210,6 @@ func run() error {
 	err = dst.wait(src.info.Environment.ServerClustered)
 	if err != nil {
 		return err
-	}
-
-	if src.networks == nil && dst.networks != nil {
-		// Update the network configuration
-		fmt.Printf("=> Converting the network configuration\n")
-		_, err = shared.RunCommand("upgrade-bridge")
-		if err != nil {
-			return fmt.Errorf("Failed to convert the network configuration: %v", err)
-		}
-
-		// Reload LXD post-update (to re-create the bridge if needed)
-		fmt.Printf("=> Reloading LXD after network update\n")
-		err = dst.reload()
-		if err != nil {
-			return err
-		}
-
-		// Wait for LXD to be online
-		fmt.Printf("=> Waiting for LXD to come online\n")
-		err = dst.wait(false)
-		if err != nil {
-			return err
-		}
 	}
 
 	// Show the updated destination server
@@ -313,9 +264,9 @@ func askBool(question string, default_ string) bool {
 		if input == "" {
 			input = default_
 		}
-		if shared.StringInSlice(strings.ToLower(input), []string{"yes", "y"}) {
+		if shared.ValueInSlice(strings.ToLower(input), []string{"yes", "y"}) {
 			return true
-		} else if shared.StringInSlice(strings.ToLower(input), []string{"no", "n"}) {
+		} else if shared.ValueInSlice(strings.ToLower(input), []string{"no", "n"}) {
 			return false
 		}
 
