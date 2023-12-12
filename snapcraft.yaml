@@ -5,6 +5,7 @@ assumes:
 version: git
 grade: devel
 summary: LXD - container and VM manager
+license: AGPL-3.0
 description: |-
  LXD is a system container and virtual machine manager.
 
