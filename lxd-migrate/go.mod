@@ -1,6 +1,6 @@
 module github.com/canonical/lxd-pkg-snap/lxd-migrate
 
-go 1.18
+go 1.20
 
 replace google.golang.org/grpc/naming => google.golang.org/grpc v1.59.0
 
