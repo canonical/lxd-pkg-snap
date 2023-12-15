@@ -1547,6 +1547,7 @@ parts:
         -not -path "${SNAPCRAFT_PRIME}/bin/nvidia-container-cli" \
         -not -path "${SNAPCRAFT_PRIME}/bin/remote-viewer" \
         -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
         -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
 
