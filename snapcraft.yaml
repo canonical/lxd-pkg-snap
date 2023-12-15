@@ -1539,12 +1539,27 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0 zfs-2.1; do
-          [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
-          strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
+      # Strip binaries (excluding shell scripts)
+      find "${SNAPCRAFT_PRIME}"/bin -type f \
+        -not -path "${SNAPCRAFT_PRIME}/bin/ceph" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/editor" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/lxc-checkconfig" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/nvidia-container-cli" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
+        -exec strip -s {} +
+
+      # Strip all versions of zfs utils
+      for v in "${SNAPCRAFT_PRIME}"/zfs-*; do
+        [ -d "${v}" ] || continue
+        find "${v}/" -type f -exec strip -s {} +
       done
 
-      [ -e "${SNAPCRAFT_PRIME}/criu/criu" ] && strip -s ${SNAPCRAFT_PRIME}/criu/criu
+      # Strip libraries (excluding python3 scripts)
+      find "${SNAPCRAFT_PRIME}"/lib -type f \
+        -not -path "${SNAPCRAFT_PRIME}/lib/python3/*" \
+        -exec strip -s {} +
 
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${SNAPCRAFT_PRIME}/" -xtype l \
