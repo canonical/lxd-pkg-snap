@@ -50,7 +50,7 @@ fi
 EDIT_IGNORE_RC=""
 EDIT_RESTRICT=""
 # Default to built-in nano.
-if [ -z "${EDIT_CMD}" ]; then
+if [ -z "${EDIT_CMD}" ] || [ "$EDIT_CMD" = "nano" ]; then
     EDIT_CMD="nano"
     EDIT_RESTRICT="--restricted"
     [ -r "${SNAP}/etc/nanorc" ] || EDIT_IGNORE_RC="--ignorercfiles"
