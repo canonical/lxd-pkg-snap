@@ -1538,6 +1538,9 @@ parts:
     override-prime: |
       set -x
 
+      # XXX: remove unneeded files/directories
+      rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
+
       # Strip some of the heavy bits
       strip -s ${SNAPCRAFT_PRIME}/bin/lxc
       strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
