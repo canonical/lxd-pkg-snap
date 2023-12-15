@@ -942,20 +942,6 @@ parts:
       - bin/tar2sqfs
       - lib/libsquashfs.so*
 
-  vim:
-    build-attributes: [core22-step-dependencies]
-    source: snapcraft/empty
-    plugin: nil
-    stage-packages:
-      - vim-common
-      - vim-tiny
-    organize:
-      usr/bin/: bin/
-      usr/share/vim/vim*/debian.vim: etc/vimrc
-    prime:
-      - bin/vim.tiny
-      - etc/vimrc
-
   virtiofsd:
     build-attributes: [core22-step-dependencies]
     source: https://gitlab.com/virtio-fs/virtiofsd
@@ -1533,7 +1519,6 @@ parts:
       - raft
       - sqlite
       - squashfs-tools-ng
-      - vim
       - xfs
       - xz
       - zfs-0-6
