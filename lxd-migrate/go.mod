@@ -2,7 +2,7 @@ module github.com/canonical/lxd-pkg-snap/lxd-migrate
 
 go 1.20
 
-replace google.golang.org/grpc/naming => google.golang.org/grpc v1.59.0
+replace google.golang.org/grpc/naming => google.golang.org/grpc v1.60.1
 
 require (
 	github.com/canonical/lxd v0.0.0-20231208160500-e90ae16cc7c5
