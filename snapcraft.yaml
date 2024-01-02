@@ -940,20 +940,6 @@ parts:
       - bin/tar2sqfs
       - lib/libsquashfs.so*
 
-  vim:
-    build-attributes: [core22-step-dependencies]
-    source: snapcraft/empty
-    plugin: nil
-    stage-packages:
-      - vim-common
-      - vim-tiny
-    organize:
-      usr/bin/: bin/
-      usr/share/vim/vim*/debian.vim: etc/vimrc
-    prime:
-      - bin/vim.tiny
-      - etc/vimrc
-
   virtiofsd:
     build-attributes: [core22-step-dependencies]
     source: https://gitlab.com/virtio-fs/virtiofsd
@@ -1404,7 +1390,6 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/sgdisk
-      - bin/unsquashfs
       - bin/xdelta3
 
       - lib/*/libidn.so.*
@@ -1520,14 +1505,18 @@ parts:
       - raft
       - sqlite
       - squashfs-tools-ng
-      - vim
+      - swtpm
+      - virtiofsd
       - xfs
       - xz
+      - wrappers
+      - xtables
       - zfs-0-6
       - zfs-0-7
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
+      - zstd
       - lxc
       - lxcfs
       - criu
@@ -1539,6 +1528,10 @@ parts:
     override-prime: |
       set -x
 
+      # XXX: remove unneeded files/directories
+      rm -rf "${SNAPCRAFT_PRIME}/lib/python3/dist-packages/*.egg-info/"
+      rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
+
       # Strip some of the heavy bits
       strip -s ${SNAPCRAFT_PRIME}/bin/lxc
       strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
@@ -1546,12 +1539,28 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0 zfs-2.1; do
-          [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
-          strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
+      # Strip binaries (excluding shell scripts)
+      find "${SNAPCRAFT_PRIME}"/bin -type f \
+        -not -path "${SNAPCRAFT_PRIME}/bin/ceph" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/editor" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/lxc-checkconfig" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/nvidia-container-cli" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
+        -exec strip -s {} +
+
+      # Strip all versions of zfs utils
+      for v in "${SNAPCRAFT_PRIME}"/zfs-*; do
+        [ -d "${v}" ] || continue
+        find "${v}/" -type f -exec strip -s {} +
       done
 
-      [ -e "${SNAPCRAFT_PRIME}/criu/criu" ] && strip -s ${SNAPCRAFT_PRIME}/criu/criu
+      # Strip libraries (excluding python3 scripts)
+      find "${SNAPCRAFT_PRIME}"/lib -type f \
+        -not -path "${SNAPCRAFT_PRIME}/lib/python3/*" \
+        -exec strip -s {} +
 
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${SNAPCRAFT_PRIME}/" -xtype l \
