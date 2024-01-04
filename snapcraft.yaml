@@ -281,6 +281,7 @@ parts:
     source-depth: 1
     plugin: nil
     build-packages:
+      - g++
       - on amd64:
         - acpica-tools
         - uuid-dev
