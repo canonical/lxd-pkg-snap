@@ -758,6 +758,7 @@ parts:
       - --localstatedir=/var/
     build-packages:
       - bison
+      - bzip2
       - flex
       - pkg-config
       - libaio-dev
