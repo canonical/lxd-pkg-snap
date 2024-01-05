@@ -1294,6 +1294,7 @@ parts:
     source-type: git
     source-branch: stable-5.0
     build-packages:
+      - dpkg-dev
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
