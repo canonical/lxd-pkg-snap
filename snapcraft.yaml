@@ -184,6 +184,8 @@ parts:
     plugin: nil
     stage-packages:
       - ceph-common
+      - libssh-dev
+      - libsnappy1v5
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -205,9 +207,10 @@ parts:
       - lib/*/libibverbs.so*
       - lib/*/libicudata.so*
       - lib/*/libicuuc.so*
-      - lib/*/liblber-2.5.so*
-      - lib/*/libldap-2.5.so*
-      - lib/*/liblua5.3.so*
+      - lib/*/liblber*.so*
+      - lib/*/libldap*.so*
+      - lib/*/liblua*.so*
+      - lib/*/libncurses.so*
       - lib/*/libndctl.so*
       - lib/*/libnghttp2.so*
       - lib/*/liboath.so*
@@ -221,6 +224,10 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
+      - lib/*/libssh.so*
+      - lib/*/libtcmalloc.so*
+      - lib/*/libunistring.so*
+      - lib/*/libunwind.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
