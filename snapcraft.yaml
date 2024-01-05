@@ -1,5 +1,6 @@
 name: lxd
-base: core22
+base: core24
+build-base: devel
 assumes:
   - snapd2.39
 version: git
@@ -184,6 +185,8 @@ parts:
     plugin: nil
     stage-packages:
       - ceph-common
+      - libssh-dev
+      - libsnappy1v5
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -205,9 +208,10 @@ parts:
       - lib/*/libibverbs.so*
       - lib/*/libicudata.so*
       - lib/*/libicuuc.so*
-      - lib/*/liblber-2.5.so*
-      - lib/*/libldap-2.5.so*
-      - lib/*/liblua5.3.so*
+      - lib/*/liblber*.so*
+      - lib/*/libldap*.so*
+      - lib/*/liblua*.so*
+      - lib/*/libncurses.so*
       - lib/*/libndctl.so*
       - lib/*/libnghttp2.so*
       - lib/*/liboath.so*
@@ -221,6 +225,10 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
+      - lib/*/libssh.so*
+      - lib/*/libtcmalloc.so*
+      - lib/*/libunistring.so*
+      - lib/*/libunwind.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
@@ -256,7 +264,7 @@ parts:
         [ "$(uname -m)" != "ppc64le" ] && exit 0
       set -ex
 
-      make
+      make USERCFLAGS=-Wno-error=format-truncation
       mkdir -p "${CRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${CRAFT_PART_INSTALL}/criu/"
     organize:
@@ -319,6 +327,7 @@ parts:
     source-depth: 1
     plugin: nil
     build-packages:
+      - g++
       - on amd64:
         - acpica-tools
         - uuid-dev
@@ -879,6 +888,7 @@ parts:
       - --localstatedir=/var/
     build-packages:
       - bison
+      - bzip2
       - flex
       - pkg-config
       - libaio-dev
@@ -1061,6 +1071,7 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
       - lib/*/libinih.so*
+      - lib/*/liburcu.so*
 
   xtables:
     plugin: nil
@@ -1265,6 +1276,7 @@ parts:
     source: https://github.com/lxc/lxc
     source-type: git
     build-packages:
+      - dpkg-dev
       - libapparmor-dev
       - libcap-dev
       - libdbus-1-dev
@@ -1377,12 +1389,12 @@ parts:
       - libacl1-dev
       - libudev-dev
       - libxml2-dev
-      - libxslt-dev
+      - libxslt1-dev
       - libblas-dev
       - libopenblas-dev
       - liblapack-dev
       - pkg-config
-      - pypy-dev
+      - pypy3-dev
       - python3-dev
       - python3-venv
     build-snaps:
