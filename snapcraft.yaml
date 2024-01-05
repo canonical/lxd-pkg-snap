@@ -1082,6 +1082,7 @@ parts:
       - bin/xfs_repair
       - bin/mkfs.xfs
       - lib/*/libinih.so*
+      - lib/*/liburcu.so*
 
   xtables:
     plugin: nil
