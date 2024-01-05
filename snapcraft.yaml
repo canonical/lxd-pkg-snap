@@ -1208,6 +1208,12 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      snapcraftctl pull
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
