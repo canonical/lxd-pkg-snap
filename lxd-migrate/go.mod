@@ -5,7 +5,7 @@ go 1.20
 replace google.golang.org/grpc/naming => google.golang.org/grpc v1.60.1
 
 require (
-	github.com/canonical/lxd v0.0.0-20231214113525-e676fc63c50a
+	github.com/canonical/lxd v0.0.0-20240108112534-97792f744ecf
 	github.com/mattn/go-sqlite3 v1.14.19
 )
 
