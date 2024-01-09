@@ -28,6 +28,9 @@ export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 # Detect model
 SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
 
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
+
 # Wait for appliance configuration
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     while :; do
@@ -228,7 +231,7 @@ done
 
 ## And the bits we need from the core snap
 for entry in alternatives apparmor apparmor.d; do
-    ln -s "/snap/core22/current/etc/${entry}" "/etc/${entry}"
+    ln -s "/snap/${SNAP_BASE}/current/etc/${entry}" "/etc/${entry}"
 done
 
 ## And those we directly ship in the snap
@@ -244,7 +247,7 @@ if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/sha
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
     mountpoint -q "/usr/share/ca-certificates" || mount -o ro,bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
-    ln -s "/snap/core22/current/etc/ssl" "/etc/ssl"
+    ln -s "/snap/${SNAP_BASE}/current/etc/ssl" "/etc/ssl"
 fi
 
 ## Try to handle special /etc/resolv.conf setups
