@@ -342,30 +342,16 @@ else
     VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
 
-if echo "${VERSION}" | grep -q ^2\.2; then
-    echo "==> Setting up ZFS (2.2)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.2/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.2/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.1; then
-    echo "==> Setting up ZFS (2.1)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.1/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.1/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.0; then
-    echo "==> Setting up ZFS (2.0)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.0/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.0/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.8; then
-    echo "==> Setting up ZFS (0.8)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.8/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.8/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.7; then
-    echo "==> Setting up ZFS (0.7)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.7/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.6; then
-    echo "==> Setting up ZFS (0.6)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.6/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.6/bin:${PATH}"
+ZFS_VER="$(echo "${VERSION}" | cut -c 1-3)"
+
+if [ -d "${SNAP_CURRENT}/zfs-${ZFS_VER}/bin" ]; then
+    echo "==> Setting up ZFS (${ZFS_VER})"
+    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/lib/:${LD_LIBRARY_PATH}"
+    export PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/bin:${PATH}"
+elif [ -n "${ZFS_VER}" ]; then
+    echo "==> Unsupported ZFS version (${ZFS_VER})"
+else
+    echo "==> No ZFS support"
 fi
 
 # Escape resource limits
