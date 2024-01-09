@@ -1711,6 +1711,8 @@ parts:
           exit 1
       fi
 
+      # Fixup logrotate.conf permissions to not be group writable
+      chmod g-w "${CRAFT_PRIME}/etc/logrotate.conf"
       exit 0
 
   wrappers:
