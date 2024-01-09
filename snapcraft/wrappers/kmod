@@ -5,7 +5,7 @@ NAME="$(basename "${0}")"
 SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
 
 if [ "$(id -u)" != "0" ] && [ "${NAME}" = "modinfo" ]; then
-    TMPDIR=$(mktemp -d)
+    TMPDIR="$(mktemp -d)"
     ln -s "/snap/${SNAP_BASE}/current/bin/kmod" "${TMPDIR}/modinfo"
     "${TMPDIR}/modinfo" "$@"
     RET=$?
