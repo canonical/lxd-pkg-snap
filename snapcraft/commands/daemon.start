@@ -139,7 +139,8 @@ fi
 
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
-mountpoint -q /bin/kmod || mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
+mountpoint -q /bin/kmod && umount -l /bin/kmod
+mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
