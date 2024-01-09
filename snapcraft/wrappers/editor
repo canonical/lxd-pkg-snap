@@ -15,6 +15,9 @@ run_cmd() {
     exec unshare --kill-child -U -m -p -r -f --root="/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
 }
 
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
+
 USERNS=1
 [ -e /proc/sys/kernel/unprivileged_userns_clone ] && grep -qxF 0 /proc/sys/kernel/unprivileged_userns_clone && USERNS=0
 [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ] && grep -qxF 1 /proc/sys/kernel/apparmor_restrict_unprivileged_userns && USERNS=0
@@ -58,7 +61,7 @@ fi
 # Setup for VIM.
 if [ "$EDIT_CMD" != "nano" ]; then
     # Find the base use by the LXD snap.
-    for vimrc in "${SNAP_USER_COMMON}/.vimrc" "/snap/core20/current/etc/vim/vimrc"; do
+    for vimrc in "${SNAP_USER_COMMON}/.vimrc" "/snap/${SNAP_BASE}/current/etc/vim/vimrc"; do
         [ -r "${vimrc}" ] || continue
         export VIMINIT="source ${vimrc}"
     done
