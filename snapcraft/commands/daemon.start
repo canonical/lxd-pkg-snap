@@ -31,6 +31,9 @@ export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 # Detect model
 SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
 
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
+
 # Wait for appliance configuration
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     while :; do
@@ -229,7 +232,7 @@ done
 
 ## And the bits we need from the core snap
 for entry in alternatives apparmor apparmor.d; do
-    ln -s "/snap/core22/current/etc/${entry}" "/etc/${entry}"
+    ln -s "/snap/${SNAP_BASE}/current/etc/${entry}" "/etc/${entry}"
 done
 
 ## And those we directly ship in the snap
@@ -245,7 +248,7 @@ if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/sha
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
     mountpoint -q "/usr/share/ca-certificates" || mount -o ro,bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
-    ln -s "/snap/core22/current/etc/ssl" "/etc/ssl"
+    ln -s "/snap/${SNAP_BASE}/current/etc/ssl" "/etc/ssl"
 fi
 
 ## Try to handle special /etc/resolv.conf setups
@@ -486,7 +489,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     CURRENT_FUSE="${NEW_FUSE}"
 
     ## Get the name of the base (core2X) used by the new snap
-    NEW_BASE="$(grep ^name /meta/snap.yaml)"
+    NEW_BASE="${SNAP_BASE}"
     CURRENT_BASE="${NEW_BASE}"
 
     ## Use the old lxcfs instance to get the libfuse soname and old base it uses
@@ -494,7 +497,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
             CURRENT_FUSE="$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
-            CURRENT_BASE="$(grep ^name "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
+            CURRENT_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
 
