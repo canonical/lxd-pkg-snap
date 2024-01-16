@@ -811,9 +811,9 @@ parts:
       - libusb
       - spice-protocol
       - spice-server
-    source: https://gitlab.com/qemu-project/qemu
+    source: https://git.launchpad.net/ubuntu/+source/qemu
     source-depth: 1
-    source-tag: v8.1.3
+    source-tag: import/1%8.1.3+ds-1ubuntu2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -851,6 +851,7 @@ parts:
       - --enable-virtfs
       - --firmwarepath=/snap/lxd/current/share/qemu/
       - --localstatedir=/var/
+      - --disable-install-blobs # Ubuntu sources don't have the ROM blobs in them.
     build-packages:
       - bison
       - bzip2
@@ -858,21 +859,26 @@ parts:
       - pkg-config
       - libaio-dev
       - libcap-ng-dev
+      - libfdt-dev
       - libglib2.0-dev
       - libnuma-dev
       - libpixman-1-dev
       - librbd-dev
       - libseccomp-dev
       - libusbredirhost-dev
+      - quilt
     stage-packages:
       - genisoimage
+      - ipxe-qemu # This is needed due to --disable-install-blobs.
       - libatomic1
+      - libfdt1
       - libmagic1
       - libnuma1
       - libpixman-1-0
       - libusbredirhost1
       - libusbredirparser1
-      - seabios
+      - seabios # This is needed due to --disable-install-blobs.
+      - qemu-system-data # This is needed due to --disable-install-blobs.
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       craftctl default
@@ -885,16 +891,21 @@ parts:
       # Mangle the configure a bit
       QEMUARCH="$(uname -m)"
       [ "${QEMUARCH}" = "ppc64le" ] && QEMUARCH="ppc64"
+
+      # Apply patches from Ubuntu sources.
+      QUILT_PATCHES=debian/patches quilt push -a
+
       sed -i "s/^unset target_list$/target_list=\"${QEMUARCH}-softmmu\"/" configure
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
+
+      # Extract efi-virtio.rom from ipxe-qemu.
+      # This doesn't work in the organize section below.
+      mkdir -p "${CRAFT_PART_INSTALL}"/share/qemu
+      mv "${CRAFT_PART_INSTALL}"/usr/lib/ipxe/qemu/efi-virtio.rom "${CRAFT_PART_INSTALL}"/share/qemu/
 
       set +ex
       craftctl default
 
-      set -ex
-      # we don't want to take this file from the qemu tree, but instead from the seabios package
-      rm "${CRAFT_PART_INSTALL}/usr/local/share/qemu/bios-256k.bin"
-      set +ex
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -902,7 +913,12 @@ parts:
       usr/local/lib/: lib/
       usr/local/libexec/: bin/
       usr/local/share/: share/
+      usr/share/qemu/kvmvapic.bin: share/qemu/
+      usr/share/qemu/s390-ccw.img: share/qemu/
+      usr/share/qemu/s390-netboot.img: share/qemu/
+      usr/share/qemu/slof.bin: share/qemu/
       usr/share/seabios/bios-256k.bin: share/qemu/
+      usr/share/seabios/vgabios-*: share/qemu/
     prime:
       - bin/genisoimage*
       - bin/mkisofs*
@@ -914,13 +930,22 @@ parts:
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
       - lib/*/libusbredir*so*
-      - share/qemu/keymaps*
-      - share/qemu/efi-virtio.rom*
-      - share/qemu/kvmvapic.bin*
-      - share/qemu/s390-*.img*
-      - share/qemu/slof.bin*
-      - share/qemu/vgabios-*.bin*
-      - share/qemu/bios-256k.bin*
+      - lib/*/libfdt*.so*
+      - share/qemu/keymaps/*
+      - share/qemu/bios-256k.bin
+      - share/qemu/efi-virtio.rom
+      - share/qemu/kvmvapic.bin
+      - share/qemu/s390-ccw.img
+      - share/qemu/s390-netboot.img
+      - share/qemu/slof.bin
+      - share/qemu/vgabios-ati.bin
+      - share/qemu/vgabios-bochs-display.bin
+      - share/qemu/vgabios-cirrus.bin
+      - share/qemu/vgabios-qxl.bin
+      - share/qemu/vgabios-ramfb.bin
+      - share/qemu/vgabios-stdvga.bin
+      - share/qemu/vgabios-virtio.bin
+      - share/qemu/vgabios-vmware.bin
 
   qemu-ovmf-secureboot:
     after:
