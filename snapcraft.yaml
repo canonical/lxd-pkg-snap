@@ -286,29 +286,6 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
 
-  seabios:
-    source: https://gitlab.com/qemu-project/seabios
-    source-type: git
-    source-tag: rel-1.16.2
-    source-depth: 1
-    plugin: nil
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && exit 0
-
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/seabios-0001-CSM-memory.patch"
-
-      make clean distclean
-      echo "CONFIG_QEMU_HARDWARE=y" > .config
-      echo "CONFIG_CSM=y" >> .config
-      echo "CONFIG_BOOTSPLASH=n" >> .config
-      echo "CONFIG_SDCARD=n" >> .config
-      echo "CONFIG_ROM_SIZE=128" >> .config
-      make oldnoconfig V=1
-      make V=1 PYTHON=python3
-
   edk2:
     after:
       - nasm
@@ -352,12 +329,6 @@ parts:
       # revert "ArmVirtPkg: make EFI_LOADER_DATA non-executable" as it breaks almost everything
       git revert 2997ae38739756ecba9b0de19e86032ebc689ef9
       patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0006-disable-EFI-memory-attributes-protocol.patch"
-      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0007-force-CSM-boot-mode-for-bootorder.patch"
-
-      # Setup CSM blob
-      if [ "$(uname -m)" = "x86_64" ]; then
-          cp ../../seabios/build/out/Csm16.bin OvmfPkg/Csm/Csm16/Csm16.bin
-      fi
 
       # Arch-specific logic
       ARCH="X64"
@@ -410,22 +381,12 @@ parts:
       # Create the firmware path
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
 
-      # Primary firmware (4MB, no CSM)
+      # Primary firmware (4MB)
       build_edk2 \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.fd" \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.fd" \
         RELEASE \
         -DFD_SIZE_4MB
-
-      # Legacy firmware (4MB, CSM)
-      if [ "$(uname -m)" = "x86_64" ]; then
-          build_edk2 \
-            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
-            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
-            RELEASE \
-            -DFD_SIZE_4MB \
-            -DCSM_ENABLE=TRUE
-      fi
 
       # Debug firmware (4MB, debug mode)
       # Can be enabled with the LXD boot.debug_edk2 instance option
@@ -922,7 +883,7 @@ parts:
       usr/local/lib/: lib/
       usr/local/libexec/: bin/
       usr/local/share/: share/
-      usr/share/seabios/bios-256k.bin: share/qemu/seabios.bin
+      usr/share/seabios/bios-256k.bin: share/qemu/bios-256k.bin
     prime:
       - bin/genisoimage*
       - bin/mkisofs*
@@ -940,7 +901,7 @@ parts:
       - share/qemu/s390-*.img*
       - share/qemu/slof.bin*
       - share/qemu/vgabios-*.bin*
-      - share/qemu/seabios.bin
+      - share/qemu/bios-256k.bin
 
   qemu-ovmf-secureboot:
     after:
