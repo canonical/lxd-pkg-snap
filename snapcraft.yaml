@@ -289,7 +289,6 @@ parts:
   edk2:
     after:
       - nasm
-      - seabios
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: IRRELEVANT
