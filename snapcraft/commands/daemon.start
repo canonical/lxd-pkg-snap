@@ -25,7 +25,7 @@ export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
-export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
+export LXD_QEMU_FW_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
 # Detect model
