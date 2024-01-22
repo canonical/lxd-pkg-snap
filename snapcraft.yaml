@@ -63,6 +63,12 @@ plugs:
  ceph-conf:
    interface: content
    target: "$SNAP_DATA/microceph"
+ ovn-api:
+   interface: content
+   target: "$SNAP_DATA/microovn/api"
+ ovn-chassis:
+   interface: content
+   target: "$SNAP_DATA/microovn/chassis"
 
 apps:
   # Main commands
