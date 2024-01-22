@@ -323,12 +323,12 @@ echo "==> Setting up OVN configuration"
 if [ "${ovn_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ovn"
     ln -s "${SNAP_COMMON}/ovn" /etc/ovn
-elif [ -d /var/snap/microovn/ ]; then
+elif [ -d "${SNAP_DATA}/microovn/api" ]; then
     echo "=> Detected MicroOVN"
     mkdir /etc/ovn
-    ln -s /var/snap/microovn/common/data/pki/client-cert.pem /etc/ovn/cert_host
-    ln -s /var/snap/microovn/common/data/pki/client-privkey.pem /etc/ovn/key_host
-    ln -s /var/snap/microovn/common/data/pki/cacert.pem /etc/ovn/ovn-central.crt
+    ln -s "${SNAP_DATA}/microovn/api/client-cert.pem" /etc/ovn/cert_host
+    ln -s "${SNAP_DATA}/microovn/api/client-privkey.pem" /etc/ovn/key_host
+    ln -s "${SNAP_DATA}/microovn/api/cacert.pem" /etc/ovn/ovn-central.crt
 else
     ln -s /var/lib/snapd/hostfs/etc/ovn /etc/ovn
 fi
@@ -470,8 +470,8 @@ if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
            "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
         )
     )
-elif [ -d /var/snap/microovn/ ]; then
-    ln -s /var/snap/microovn/common/run/switch /run/openvswitch
+elif [ -d "${SNAP_DATA}/microovn/chassis" ]; then
+    ln -s "${SNAP_DATA}/microovn/chassis" /run/openvswitch
 else
     ln -s /var/lib/snapd/hostfs/run/openvswitch /run/openvswitch
 fi
