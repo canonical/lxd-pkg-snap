@@ -1583,6 +1583,8 @@ parts:
       set -x
 
       # XXX: remove unneeded files/directories
+      rm -rf "${CRAFT_PRIME}/lib/systemd/"
+      rm -rf "${CRAFT_PRIME}/lib/udev/"
       rm -rf "${CRAFT_PRIME}/usr/local/"
 
       # Strip some of the heavy bits
