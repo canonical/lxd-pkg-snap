@@ -1615,7 +1615,9 @@ parts:
       - nvidia-container
       - openvswitch
       - ovn
+      - qemu-ovmf-secureboot
       - raft
+      - spice-server
       - sqlite
       - squashfs-tools-ng
       - swtpm
