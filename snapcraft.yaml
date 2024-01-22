@@ -671,6 +671,10 @@ parts:
     plugin: nil
     stage-packages:
       - nvme-cli
+    organize:
+      usr/sbin/: bin/
+    prime:
+      - bin/nvme
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
