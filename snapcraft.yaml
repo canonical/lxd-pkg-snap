@@ -284,33 +284,9 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
 
-  seabios:
-    source: https://gitlab.com/qemu-project/seabios
-    source-type: git
-    source-tag: rel-1.16.2
-    source-depth: 1
-    plugin: nil
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && exit 0
-
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/seabios-0001-CSM-memory.patch"
-
-      make clean distclean
-      echo "CONFIG_QEMU_HARDWARE=y" > .config
-      echo "CONFIG_CSM=y" >> .config
-      echo "CONFIG_BOOTSPLASH=n" >> .config
-      echo "CONFIG_SDCARD=n" >> .config
-      echo "CONFIG_ROM_SIZE=128" >> .config
-      make oldnoconfig V=1
-      make V=1 PYTHON=python3
-
   edk2:
     after:
       - nasm
-      - seabios
     source: https://github.com/tianocore/edk2
     source-type: git
     source-tag: IRRELEVANT
@@ -349,12 +325,6 @@ parts:
       # revert "ArmVirtPkg: make EFI_LOADER_DATA non-executable" as it breaks almost everything
       git revert 2997ae38739756ecba9b0de19e86032ebc689ef9
       patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0006-disable-EFI-memory-attributes-protocol.patch"
-      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0007-force-CSM-boot-mode-for-bootorder.patch"
-
-      # Setup CSM blob
-      if [ "$(uname -m)" = "x86_64" ]; then
-          cp ../../seabios/build/out/Csm16.bin OvmfPkg/Csm/Csm16/Csm16.bin
-      fi
 
       # Arch-specific logic
       ARCH="X64"
@@ -407,22 +377,12 @@ parts:
       # Create the firmware path
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
 
-      # Primary firmware (4MB, no CSM)
+      # Primary firmware (4MB)
       build_edk2 \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.fd" \
         "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.fd" \
         RELEASE \
         -DFD_SIZE_4MB
-
-      # Legacy firmware (4MB, CSM)
-      if [ "$(uname -m)" = "x86_64" ]; then
-          build_edk2 \
-            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB.CSM.fd" \
-            "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.CSM.fd" \
-            RELEASE \
-            -DFD_SIZE_4MB \
-            -DCSM_ENABLE=TRUE
-      fi
 
       # Debug firmware (4MB, debug mode)
       # Can be enabled with the LXD boot.debug_edk2 instance option
@@ -894,6 +854,7 @@ parts:
       - libpixman-1-0
       - libusbredirhost1
       - libusbredirparser1
+      - seabios
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       craftctl default
@@ -910,6 +871,11 @@ parts:
 
       set +ex
       craftctl default
+
+      set -ex
+      # we don't want to take this file from the qemu tree, but instead from the seabios package
+      rm "${CRAFT_PART_INSTALL}/usr/local/share/qemu/bios-256k.bin"
+      set +ex
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -917,6 +883,7 @@ parts:
       usr/local/lib/: lib/
       usr/local/libexec/: bin/
       usr/local/share/: share/
+      usr/share/seabios/bios-256k.bin: share/qemu/
     prime:
       - bin/genisoimage*
       - bin/mkisofs*
@@ -934,6 +901,7 @@ parts:
       - share/qemu/s390-*.img*
       - share/qemu/slof.bin*
       - share/qemu/vgabios-*.bin*
+      - share/qemu/bios-256k.bin*
 
   qemu-ovmf-secureboot:
     after:
@@ -1425,6 +1393,16 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
+
+      git cherry-pick -x d4c975ad30906b96867863538f34f6e2db4e9752 # lxd/apparmor/instance_qemu: only allow QEMU system emulator
+      git cherry-pick -x ce24649a9164a7eecc4fcc4d9f7ec98bf29b2ec8 # lxd/apparmor/instance_qemu: remove partial duplication of unix rule
+      git cherry-pick -x ee8a111b2cec7724346054ee7d2d0297ec34bb3e # lxd/instance/qemu: Start using seabios as CSM firmware
+      git cherry-pick -x 1441e5956285d65a9d79c9d402b761e0813b40aa # lxd/instance/drivers/driver_qemu: force SeaBIOS CSM firmware instead of OVMF
+      git cherry-pick -x 8f8f17f91e052cefdcd51091dbc258c1aecf3721 # instance/qemu: support extended firmware search algorithm
+      git cherry-pick -x 7e61b93e5116c2ec3804dbe40afee308fc786320 # instance/qemu: rename ovmf mentions
+      git cherry-pick -x be489048500718a3a6b96f1a786d4be7568be6cc # instance/qemu: do some sanity checks around enabling security.csm
+      git cherry-pick -x 62ee9ff4c4baa0412b316f55e1eed9a15d9a79c4 # lxd/instance/drivers/driver_qemu: use bios-256k.bin instead of seabios.bin
+      git cherry-pick -x 6df2cd00c48834dab78710ccdc448f28b137d1c2 # lxc/move: Only use server-side move when dealing with a single server
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
