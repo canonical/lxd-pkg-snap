@@ -1394,6 +1394,15 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x d4c975ad30906b96867863538f34f6e2db4e9752 # lxd/apparmor/instance_qemu: only allow QEMU system emulator
+      git cherry-pick -x ce24649a9164a7eecc4fcc4d9f7ec98bf29b2ec8 # lxd/apparmor/instance_qemu: remove partial duplication of unix rule
+      git cherry-pick -x ee8a111b2cec7724346054ee7d2d0297ec34bb3e # lxd/instance/qemu: Start using seabios as CSM firmware
+      git cherry-pick -x 1441e5956285d65a9d79c9d402b761e0813b40aa # lxd/instance/drivers/driver_qemu: force SeaBIOS CSM firmware instead of OVMF
+      git cherry-pick -x 8f8f17f91e052cefdcd51091dbc258c1aecf3721 # instance/qemu: support extended firmware search algorithm
+      git cherry-pick -x 7e61b93e5116c2ec3804dbe40afee308fc786320 # instance/qemu: rename ovmf mentions
+      git cherry-pick -x be489048500718a3a6b96f1a786d4be7568be6cc # instance/qemu: do some sanity checks around enabling security.csm
+      git cherry-pick -x 62ee9ff4c4baa0412b316f55e1eed9a15d9a79c4 # lxd/instance/drivers/driver_qemu: use bios-256k.bin instead of seabios.bin
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
