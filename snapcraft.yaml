@@ -1402,6 +1402,7 @@ parts:
       git cherry-pick -x 7e61b93e5116c2ec3804dbe40afee308fc786320 # instance/qemu: rename ovmf mentions
       git cherry-pick -x be489048500718a3a6b96f1a786d4be7568be6cc # instance/qemu: do some sanity checks around enabling security.csm
       git cherry-pick -x 62ee9ff4c4baa0412b316f55e1eed9a15d9a79c4 # lxd/instance/drivers/driver_qemu: use bios-256k.bin instead of seabios.bin
+      git cherry-pick -x 6df2cd00c48834dab78710ccdc448f28b137d1c2 # lxc/move: Only use server-side move when dealing with a single server
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
