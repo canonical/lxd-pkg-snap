@@ -12,7 +12,7 @@ run_cmd() {
     [ -z "${XDG_STATE_HOME:-}" ] && export XDG_STATE_HOME="${HOME}/.local/state/"
 
     # shellcheck disable=SC2145
-    exec unshare --kill-child -U -m -p -r -f -R "/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
+    exec unshare --kill-child -U -m -p -r -f --root="/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
 }
 
 # Detect base name
