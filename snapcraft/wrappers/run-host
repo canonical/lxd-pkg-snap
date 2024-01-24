@@ -9,4 +9,4 @@ if [ "$(id -u)" = "0" ]; then
     exec nsenter -t 1 -m "${CMD}" "$@"
 fi
 
-exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
+exec unshare -U -r --root="/var/lib/snapd/hostfs/" "${CMD}" "$@"
