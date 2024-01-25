@@ -53,8 +53,8 @@ description: |-
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
 
 contact: lxc-devel@lists.linuxcontainers.org
-issues: https://github.com/lxc/lxd/issues
-source-code: https://github.com/lxc/lxd
+issues: https://github.com/canonical/lxd/issues
+source-code: https://github.com/canonical/lxd
 website: https://linuxcontainers.org/lxd
 confinement: strict
 
@@ -272,6 +272,7 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
+    source-tag: v1.14.0
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -659,7 +660,7 @@ parts:
 
   spice-protocol:
     build-attributes: [core22-step-dependencies]
-    source: https://github.com/freedesktop/spice-protocol
+    source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
     source-tag: v0.14.4
     source-depth: 1
@@ -670,7 +671,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     after:
       - spice-protocol
-    source: https://github.com/freedesktop/spice
+    source: https://gitlab.freedesktop.org/spice/spice
     source-type: git
     source-tag: v0.15.1
     source-depth: 1
@@ -893,6 +894,7 @@ parts:
   raft:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/raft
+    source-tag: v0.17.1
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -1184,6 +1186,38 @@ parts:
       mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/lib/"
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
+  zfs-2-2:
+    build-attributes: [core22-step-dependencies]
+    source: https://github.com/openzfs/zfs
+    source-type: git
+    source-tag: zfs-2.2.2
+    source-depth: 1
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=/
+      - --with-config=user
+    build-packages:
+      - libblkid-dev
+      - libssl-dev
+      - uuid-dev
+      - zlib1g-dev
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      snapcraftctl build
+      set -ex
+
+      ZFS_VER="2.2"
+
+      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zstd:
     build-attributes: [core22-step-dependencies]
@@ -1298,7 +1332,7 @@ parts:
 
   lxd:
     build-attributes: [core22-step-dependencies]
-    source: https://github.com/lxc/lxd
+    source: https://github.com/canonical/lxd
     source-type: git
     source-tag: lxd-5.0.2
     after:
@@ -1334,8 +1368,17 @@ parts:
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
-      mkdir -p "${GOPATH}/src/github.com/lxc"
-      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
+      mkdir -p "${GOPATH}/src/github.com/canonical"
+      ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
+
+      # Git cherry-picks
+      cd ../src
+      git config user.email "noreply@linuxcontainers.org"
+      git config user.name "LXD snap builder"
+
+      # XXX: replace all occurences of the old repo (github.com/lxc/lxd) by the new one
+      find -type f -exec sed -i 's|github.com/lxc/lxd|github.com/canonical/lxd|g' {} +
+      git commit --all -m "*: s|github.com/lxc/lxd|github.com/canonical/lxd|g"
 
       # Download the dependencies
       go get -d -v ./...
@@ -1348,7 +1391,9 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick a1dc7c3f5bd1c46b7dd5914500c9baf687fe22cb  # lxd/instances_post: Fix copying profiles during instance copy
-      git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
+      #git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
+      git show 124b908e55c8ff7da9a91b6989a5af782c8017ff | sed 's|github\.com/lxc/lxd|github.com/canonical/lxd|g' | git apply -
+      git show --no-patch 124b908e55c8ff7da9a91b6989a5af782c8017ff --format="%s%n%n%b" | git commit --all --author="kayos@tcp.direct <kayos@tcp.direct>" --date="Tue Jan 17 02:56:07 2023 -0800" --file -
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
@@ -1357,12 +1402,12 @@ parts:
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
       # Build the binaries
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/lxc/lxd/lxc
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/lxc/lxd/lxc-to-lxd
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/lxc/lxd/lxd
-      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/lxc/lxd/lxd-benchmark
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/lxc/lxd/lxd-user
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
+      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1484,6 +1529,7 @@ parts:
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
+      - zfs-2-2
       - lxc
       - lxcfs
       - criu
@@ -1502,7 +1548,7 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0 zfs-2.1; do
+      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
           [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
           strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
       done

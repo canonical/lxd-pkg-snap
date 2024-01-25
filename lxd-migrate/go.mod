@@ -34,3 +34,5 @@ require (
 	gopkg.in/macaroon-bakery.v2 v2.3.0 // indirect
 	gopkg.in/macaroon.v2 v2.1.0 // indirect
 )
+
+replace github.com/lxc/lxd => github.com/canonical/lxd v0.0.0-20220526200742-11ace6e6c1b3
