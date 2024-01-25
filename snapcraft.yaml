@@ -239,18 +239,10 @@ parts:
       - libnet1
       - libprotobuf-c1
     override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
       craftctl default
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
       set -ex
 
       make USERCFLAGS=-Wno-error=format-truncation criu
