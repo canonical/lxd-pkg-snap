@@ -245,7 +245,7 @@ parts:
         [ "$(uname -m)" != "ppc64le" ] && exit 0
       set -ex
 
-      make USERCFLAGS=-Wno-error=format-truncation
+      make USERCFLAGS=-Wno-error=format-truncation criu
       mkdir -p "${CRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${CRAFT_PART_INSTALL}/criu/"
     organize:
