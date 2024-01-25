@@ -1609,6 +1609,10 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
 
+      # Strip binaries not under bin/ due to being dynamically
+      # added to the path with `snap set lxd`
+      strip -s "${CRAFT_PRIME}/criu/criu"  # snap set lxd criu.enable=true
+
       # Strip all versions of zfs utils
       for v in "${CRAFT_PRIME}"/zfs-*; do
         [ -d "${v}" ] || continue
