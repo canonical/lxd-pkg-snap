@@ -957,14 +957,11 @@ parts:
       - share/qemu/s390-ccw.img
       - share/qemu/s390-netboot.img
       - share/qemu/slof.bin
-      - share/qemu/vgabios-ati.bin
       - share/qemu/vgabios-bochs-display.bin
-      - share/qemu/vgabios-cirrus.bin
       - share/qemu/vgabios-qxl.bin
       - share/qemu/vgabios-ramfb.bin
       - share/qemu/vgabios-stdvga.bin
       - share/qemu/vgabios-virtio.bin
-      - share/qemu/vgabios-vmware.bin
 
   qemu-ovmf-secureboot:
     after:
