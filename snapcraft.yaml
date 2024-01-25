@@ -407,7 +407,8 @@ parts:
 
   libmnl:
     source: https://git.netfilter.org/libmnl
-    source-depth: 1
+    # XXX: git.netfilter.org does not support depth/shallow clones
+    #source-depth: 1
     source-tag: libmnl-1.0.5
     source-type: git
     plugin: autotools
@@ -422,7 +423,8 @@ parts:
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
-    source-depth: 1
+    # XXX: git.netfilter.org does not support depth/shallow clones
+    #source-depth: 1
     source-tag: libnftnl-1.2.6
     source-type: git
     plugin: autotools
@@ -607,7 +609,8 @@ parts:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
-    source-depth: 1
+    # XXX: git.netfilter.org does not support depth/shallow clones
+    #source-depth: 1
     source-tag: v1.0.9
     source-type: git
     plugin: autotools
