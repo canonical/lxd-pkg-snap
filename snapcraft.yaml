@@ -405,6 +405,7 @@ parts:
 
   libmnl:
     source: https://git.netfilter.org/libmnl
+    source-depth: 1
     source-tag: libmnl-1.0.5
     source-type: git
     plugin: autotools
@@ -419,6 +420,7 @@ parts:
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
+    source-depth: 1
     source-tag: libnftnl-1.2.6
     source-type: git
     plugin: autotools
@@ -603,6 +605,7 @@ parts:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
+    source-depth: 1
     source-tag: v1.0.9
     source-type: git
     plugin: autotools
@@ -1240,6 +1243,7 @@ parts:
     after:
       - libseccomp
     source: https://github.com/lxc/lxc
+    source-depth: 1
     source-type: git
     source-tag: lxc-5.0.3
     build-packages:
@@ -1295,6 +1299,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
+    source-depth: 1
     source-type: git
     source-tag: lxcfs-5.0.4
     build-packages:
@@ -1347,6 +1352,7 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
+    source-depth: 1
     source-type: git
     source-tag: lxd-5.20
     after:
@@ -1512,6 +1518,7 @@ parts:
 
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
+    source-depth: 1
     source-type: git
     source-tag: 0.5
     plugin: nil
