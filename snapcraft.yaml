@@ -504,8 +504,6 @@ parts:
       - --prefix=
     organize:
       usr/bin/: bin/
-    prime:
-      - bin/nasm
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
