@@ -344,6 +344,7 @@ parts:
       # revert "ArmVirtPkg: make EFI_LOADER_DATA non-executable" as it breaks almost everything
       git revert 2997ae38739756ecba9b0de19e86032ebc689ef9
       patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0006-disable-EFI-memory-attributes-protocol.patch"
+      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0007-Disable-the-Shell-when-SecureBoot-is-enabled.patch"
 
       # Arch-specific logic
       ARCH="X64"
