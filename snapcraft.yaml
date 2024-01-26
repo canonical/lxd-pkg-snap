@@ -1569,6 +1569,7 @@ parts:
       rm -rf "${CRAFT_PRIME}/lib/udev/"
       rm -rf "${CRAFT_PRIME}/usr/local/"
       rm -rf "${CRAFT_PRIME}/usr/share/"
+      rm -f "${CRAFT_PRIME}/bin/nasm"
 
       # Strip binaries (excluding shell scripts)
       find "${CRAFT_PRIME}"/bin -type f \
