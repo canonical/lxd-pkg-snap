@@ -497,7 +497,7 @@ parts:
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
-    source-tag: nasm-2.16.01
+    source-tag: nasm-2.15.05
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1640,10 +1640,7 @@ parts:
       rm -rf "${CRAFT_PRIME}/lib/systemd/"
       rm -rf "${CRAFT_PRIME}/lib/udev/"
       rm -rf "${CRAFT_PRIME}/usr/local/"
-<<<<<<< HEAD
-=======
       rm -rf "${CRAFT_PRIME}/usr/share/"
->>>>>>> e436b6f2 (snapcraft: don't prime anything from the nasm part)
 
       # Strip some of the heavy bits
       strip -s ${CRAFT_PRIME}/bin/lxc
