@@ -1373,15 +1373,6 @@ parts:
       mkdir -p "${GOPATH}/src/github.com/canonical"
       ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
 
-      # Git cherry-picks
-      cd ../src
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-
-      # XXX: replace all occurences of the old repo (github.com/lxc/lxd) by the new one
-      find -type f -exec sed -i 's|github.com/lxc/lxd|github.com/canonical/lxd|g' {} +
-      git commit --all -m "*: s|github.com/lxc/lxd|github.com/canonical/lxd|g"
-
       # Download the dependencies
       go get -d -v ./...
     override-build: |
