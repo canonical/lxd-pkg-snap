@@ -53,8 +53,8 @@ description: |-
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
 
 contact: lxc-devel@lists.linuxcontainers.org
-issues: https://github.com/canonical/lxd/issues
-source-code: https://github.com/canonical/lxd
+issues: https://github.com/lxc/lxd/issues
+source-code: https://github.com/lxc/lxd
 website: https://linuxcontainers.org/lxd
 confinement: strict
 
@@ -1334,7 +1334,7 @@ parts:
 
   lxd:
     build-attributes: [core22-step-dependencies]
-    source: https://github.com/canonical/lxd
+    source: https://github.com/lxc/lxd
     source-type: git
     source-tag: lxd-5.0.2
     after:
@@ -1370,8 +1370,8 @@ parts:
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
-      mkdir -p "${GOPATH}/src/github.com/canonical"
-      ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
+      mkdir -p "${GOPATH}/src/github.com/lxc"
+      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
 
       # Download the dependencies
       go get -d -v ./...
@@ -1393,12 +1393,12 @@ parts:
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
       # Build the binaries
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
-      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/lxc/lxd/lxc
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/lxc/lxd/lxc-to-lxd
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/lxc/lxd/lxd
+      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/lxc/lxd/lxd-benchmark
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/lxc/lxd/lxd-user
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
