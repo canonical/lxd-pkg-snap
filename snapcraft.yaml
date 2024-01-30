@@ -1567,7 +1567,6 @@ parts:
       set -x
 
       # XXX: remove unneeded files/directories
-      rm -rf "${SNAPCRAFT_PRIME}/lib/python3/dist-packages/*.egg-info/"
       rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
 
       # Strip some of the heavy bits
