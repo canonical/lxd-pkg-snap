@@ -1391,9 +1391,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick a1dc7c3f5bd1c46b7dd5914500c9baf687fe22cb  # lxd/instances_post: Fix copying profiles during instance copy
-      #git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
-      git show 124b908e55c8ff7da9a91b6989a5af782c8017ff | sed 's|github\.com/lxc/lxd|github.com/canonical/lxd|g' | git apply -
-      git show --no-patch 124b908e55c8ff7da9a91b6989a5af782c8017ff --format="%s%n%n%b" | git commit --all --author="kayos@tcp.direct <kayos@tcp.direct>" --date="Tue Jan 17 02:56:07 2023 -0800" --file -
+      git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
