@@ -1192,6 +1192,7 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-2-2:
+    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-2.2.2
@@ -1588,6 +1589,13 @@ parts:
         -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
         -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
+
+      # Strip binaries not under bin/ due to being dynamically
+      # added to the path with `snap set lxd`, like `criu.enable=true`
+      for binary in "${SNAPCRAFT_PRIME}/criu/criu"; do
+        [ -e "${binary}" ] || continue
+        strip -s "${binary}"
+      done
 
       # Strip all versions of zfs utils
       for v in "${SNAPCRAFT_PRIME}"/zfs-*; do
