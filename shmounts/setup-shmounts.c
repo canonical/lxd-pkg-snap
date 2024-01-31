@@ -117,7 +117,7 @@ int setup_ns() {
 			return -1;
 		}
 
-		fd = open("/var/snap/lxd/common/ns/shmounts", O_CREAT | O_RDWR);
+		fd = open("/var/snap/lxd/common/ns/shmounts", O_CREAT | O_RDWR, 0600);
 		if (fd < 0) {
 			return -1;
 		}
@@ -446,12 +446,18 @@ int main() {
 	}
 
 	// Save our current mntns
-	fd = open("/var/snap/lxd/common/ns/mntns", O_CREAT | O_RDWR);
+	fd = open("/var/snap/lxd/common/ns/mntns", O_CREAT | O_RDWR, 0600);
 	if (fd < 0) {
 		fprintf(stderr, "Failed to create new mntns mountpoint: %s\n", strerror(errno));
 		return -1;
 	}
 	close(fd);
+
+	// Make sure that the ns path is still private
+	if (mount("none", "/var/snap/lxd/common/ns", NULL, MS_PRIVATE, NULL) < 0) {
+		fprintf(stderr, "Failed to mark mount as private: %s\n", strerror(errno));
+		return -1;
+	}
 
 	if (mount("/run/snapd/ns/lxd.mnt", "/var/snap/lxd/common/ns/mntns", NULL, MS_BIND, NULL) < 0) {
 		fprintf(stderr, "Failed to mount new mntns: %s\n", strerror(errno));

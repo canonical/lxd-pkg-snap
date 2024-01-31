@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/lxc/lxd/lxd/storage/filesystem"
-	"github.com/lxc/lxd/shared"
-	"github.com/lxc/lxd/shared/version"
+	"github.com/canonical/lxd/lxd/storage/filesystem"
+	"github.com/canonical/lxd/shared"
+	"github.com/canonical/lxd/shared/version"
 )
 
 var argYes = flag.Bool("yes", false, "Answer yes to all questions")
@@ -313,9 +313,9 @@ func askBool(question string, default_ string) bool {
 		if input == "" {
 			input = default_
 		}
-		if shared.StringInSlice(strings.ToLower(input), []string{"yes", "y"}) {
+		if shared.ValueInSlice(strings.ToLower(input), []string{"yes", "y"}) {
 			return true
-		} else if shared.StringInSlice(strings.ToLower(input), []string{"no", "n"}) {
+		} else if shared.ValueInSlice(strings.ToLower(input), []string{"no", "n"}) {
 			return false
 		}
 

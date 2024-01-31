@@ -15,8 +15,8 @@ fi
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155,SC2046,SC2086
-export ARCH="$(basename $(readlink -f ${SNAP_CURRENT}/lib/*-linux-gnu*/))"
+# shellcheck disable=SC2155
+export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
@@ -31,7 +31,7 @@ if [ ! -e "${SNAP_COMMON}/config" ]; then
 fi
 
 echo "==> Loading snap configuration"
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 . "${SNAP_COMMON}/config"
 
 daemon_group="${daemon_group:-"lxd"}"
@@ -39,11 +39,11 @@ daemon_user_group="${daemon_user_group:-"lxd"}"
 
 # Detect missing socket activation support
 echo "==> Checking for socket activation support"
-if ! nsenter -t 1 -m systemctl is-active -q snap.${SNAP_INSTANCE_NAME}.daemon.unix.socket; then
+if ! nsenter -t 1 -m systemctl is-active -q snap."${SNAP_INSTANCE_NAME}".daemon.unix.socket; then
     sleep 3s
-    if ! nsenter -t 1 -m systemctl is-active -q snap.${SNAP_INSTANCE_NAME}.daemon.unix.socket; then
+    if ! nsenter -t 1 -m systemctl is-active -q snap."${SNAP_INSTANCE_NAME}".daemon.unix.socket; then
         echo "===> System doesn't support socket activation, starting LXD now"
-        nsenter -t 1 -m systemctl start snap.${SNAP_INSTANCE_NAME}.daemon
+        nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon
         exit 0
     fi
 fi
@@ -52,7 +52,7 @@ fi
 SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     echo "==> LXD appliance detected, starting LXD"
-    nsenter -t 1 -m systemctl start snap.${SNAP_INSTANCE_NAME}.daemon --no-block
+    nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon --no-block
     exit 0
 fi
 
@@ -107,7 +107,7 @@ fi
 echo "==> Checking if LXD needs to be activated"
 if ! "${LXD}" activateifneeded; then
     echo "====> Activation check failed, forcing activation"
-    nsenter -t 1 -m systemctl start snap.${SNAP_INSTANCE_NAME}.daemon
+    nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon
 fi
 
 exit 0

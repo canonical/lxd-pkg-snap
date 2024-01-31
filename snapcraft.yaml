@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.0.2"
+version: "5.0.3"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -48,14 +48,15 @@ description: |-
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
+   - ui.enable: Enable the tech preview web interface [default=false]
 
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
 
-contact: lxc-devel@lists.linuxcontainers.org
+contact: lxd@lists.canonical.com
 issues: https://github.com/canonical/lxd/issues
 source-code: https://github.com/canonical/lxd
-website: https://linuxcontainers.org/lxd
+website: https://ubuntu.com/lxd
 confinement: strict
 
 apps:
@@ -230,7 +231,7 @@ parts:
   criu:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.17.1
+    source-tag: v3.19
     source-type: git
     source-depth: 1
     plugin: nil
@@ -272,7 +273,7 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-tag: v1.14.0
+    source-tag: v1.15.1
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -300,18 +301,16 @@ parts:
     build-packages:
       - on amd64:
         - acpica-tools
-        - nasm
         - uuid-dev
       - on arm64:
         - acpica-tools
-        - nasm
         - uuid-dev
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -388,7 +387,7 @@ parts:
       - libmnl
     source: https://git.netfilter.org/libnftnl
     source-type: git
-    source-tag: libnftnl-1.2.4
+    source-tag: libnftnl-1.2.6
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -405,7 +404,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.4
+    source-tag: v2.5.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -421,7 +420,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/stefanberger/libtpms
     source-type: git
-    source-tag: v0.9.5
+    source-tag: v0.9.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -437,7 +436,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/axboe/liburing
     source-type: git
-    source-tag: liburing-2.3
+    source-tag: liburing-2.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -548,7 +547,7 @@ parts:
       - libnftnl
     source: https://git.netfilter.org/nftables
     source-type: git
-    source-tag: v1.0.6
+    source-tag: v1.0.9
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -562,7 +561,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -582,7 +581,7 @@ parts:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.11.0
+    source-tag: v1.14.3
     source-depth: 1
     plugin: make
     build-packages:
@@ -594,7 +593,7 @@ parts:
 
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
@@ -613,7 +612,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v3.0.3
+    source-tag: v3.2.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -624,7 +623,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -647,7 +646,7 @@ parts:
       - openvswitch
     source: https://github.com/ovn-org/ovn
     source-type: git
-    source-tag: v22.09.1
+    source-tag: v23.09.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -673,7 +672,7 @@ parts:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
     source-type: git
-    source-tag: v0.15.1
+    source-tag: v0.15.2
     source-depth: 1
     plugin: meson
     meson-parameters:
@@ -708,7 +707,7 @@ parts:
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-type: git
-    source-tag: v0.8.0
+    source-tag: v0.8.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -796,6 +795,7 @@ parts:
       - libusbredirhost-dev
     stage-packages:
       - genisoimage
+      - libatomic1
       - libmagic1
       - libnuma1
       - libpixman-1-0
@@ -804,7 +804,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
       set -ex
-      git clone https://gitlab.com/qemu/qemu . -b v7.1.0
+      git clone https://gitlab.com/qemu/qemu . -b v8.0.5
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
@@ -830,7 +830,6 @@ parts:
       - bin/qemu-system-*
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
-      - bin/virtiofsd*
       - lib/*/libatomic.so*
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
@@ -850,6 +849,7 @@ parts:
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
     source-type: git
+    source-commit: 4da81a4cbdd6d96b7a653239865d3b1d92cc6117
     source-depth: 1
     plugin: nil
     build-packages:
@@ -894,7 +894,7 @@ parts:
   raft:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/raft
-    source-tag: v0.17.1
+    source-tag: v0.18.0
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -917,7 +917,7 @@ parts:
     source: https://github.com/sqlite/sqlite
     source-type: git
     source-depth: 1
-    source-tag: version-3.40.1
+    source-tag: version-3.44.2
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -943,19 +943,27 @@ parts:
       - bin/tar2sqfs
       - lib/libsquashfs.so*
 
-  vim:
+  virtiofsd:
     build-attributes: [core22-step-dependencies]
-    source: snapcraft/empty
-    plugin: nil
-    stage-packages:
-      - vim-common
-      - vim-tiny
+    source: https://gitlab.com/virtio-fs/virtiofsd
+    source-type: git
+    source-tag: v1.8.0
+    source-depth: 1
+    plugin: rust
+    build-packages:
+      - cargo
+      - libseccomp-dev
+      - rustc
     organize:
-      usr/bin/: bin/
-      usr/share/vim/vim*/debian.vim: etc/vimrc
+      usr/bin: bin/
     prime:
-      - bin/vim.tiny
-      - etc/vimrc
+      - bin/virtiofsd*
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      snapcraftctl pull
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      snapcraftctl build
 
   xfs:
     build-attributes: [core22-step-dependencies]
@@ -1155,7 +1163,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.1.7
+    source-tag: zfs-2.1.14
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1201,6 +1209,12 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && \
+        [ "$(uname -m)" != "aarch64" ] && \
+        [ "$(uname -m)" != "s390x" ] && \
+        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      snapcraftctl pull
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && \
         [ "$(uname -m)" != "aarch64" ] && \
@@ -1238,10 +1252,11 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-5.0.2
+    source-tag: lxc-5.0.3
     build-packages:
       - libapparmor-dev
       - libcap-dev
+      - libdbus-1-dev
       - libgnutls28-dev
       - libselinux1-dev
       - pkg-config
@@ -1273,7 +1288,7 @@ parts:
       set -ex
 
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       cd ../build
@@ -1288,7 +1303,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-5.0.3
+    source-tag: lxcfs-5.0.4
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1307,8 +1322,10 @@ parts:
       lib/*/lxcfs/liblxcfs.so: lib/
       snap/lxd/current/lxc/config/common.conf.d/*: lxc/config/common.conf.d/
       snap/lxd/current/lxcfs/: lxcfs/
+      usr/lib/: lib/
     prime:
       - bin/fusermount
+      - bin/fusermount3
       - lib/*/libfuse3.so.*
 
       - bin/lxcfs
@@ -1321,7 +1338,7 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1334,7 +1351,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-5.0.2
+    source-tag: lxd-5.0.3
     after:
       - lxc
       - dqlite
@@ -1344,7 +1361,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go
+      - go/1.21/stable
     stage-packages:
       - acl
       - attr
@@ -1371,15 +1388,6 @@ parts:
       mkdir -p "${GOPATH}/src/github.com/canonical"
       ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
 
-      # Git cherry-picks
-      cd ../src
-      git config user.email "noreply@linuxcontainers.org"
-      git config user.name "LXD snap builder"
-
-      # XXX: replace all occurences of the old repo (github.com/lxc/lxd) by the new one
-      find -type f -exec sed -i 's|github.com/lxc/lxd|github.com/canonical/lxd|g' {} +
-      git commit --all -m "*: s|github.com/lxc/lxd|github.com/canonical/lxd|g"
-
       # Download the dependencies
       go get -d -v ./...
     override-build: |
@@ -1387,13 +1395,8 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick a1dc7c3f5bd1c46b7dd5914500c9baf687fe22cb  # lxd/instances_post: Fix copying profiles during instance copy
-      #git cherry-pick 124b908e55c8ff7da9a91b6989a5af782c8017ff  # lxc/migrate: Make live migration error message more helpful
-      git show 124b908e55c8ff7da9a91b6989a5af782c8017ff | sed 's|github\.com/lxc/lxd|github.com/canonical/lxd|g' | git apply -
-      git show --no-patch 124b908e55c8ff7da9a91b6989a5af782c8017ff --format="%s%n%n%b" | git commit --all --author="kayos@tcp.direct <kayos@tcp.direct>" --date="Tue Jan 17 02:56:07 2023 -0800" --file -
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
@@ -1428,7 +1431,6 @@ parts:
       - bin/rsync
       - bin/setfacl
       - bin/sgdisk
-      - bin/unsquashfs
       - bin/xdelta3
 
       - lib/*/libidn.so.*
@@ -1451,7 +1453,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go
+      - go/1.21/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1479,6 +1481,30 @@ parts:
     prime:
       - bin/lxd-migrate
       - bin/upgrade-bridge
+
+  lxd-ui:
+    source: https://github.com/canonical/lxd-ui
+    source-type: git
+    source-tag: "0.5"
+    plugin: nil
+    override-pull: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+      snapcraftctl pull
+      set -ex
+
+      snap install node --channel=18/stable --classic || true
+    override-build: |
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+      set -ex
+
+      npm install yarn --global
+      yarn install
+      yarn build
+
+      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share"
+      cp -R build/ui "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
+    prime:
+      - share/lxd-ui*
 
   shmounts:
     build-attributes: [core22-step-dependencies]
@@ -1521,15 +1547,19 @@ parts:
       - raft
       - sqlite
       - squashfs-tools-ng
-      - vim
+      - swtpm
+      - virtiofsd
       - xfs
       - xz
+      - wrappers
+      - xtables
       - zfs-0-6
       - zfs-0-7
       - zfs-0-8
       - zfs-2-0
       - zfs-2-1
       - zfs-2-2
+      - zstd
       - lxc
       - lxcfs
       - criu
@@ -1541,6 +1571,9 @@ parts:
     override-prime: |
       set -x
 
+      # XXX: remove unneeded files/directories
+      rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
+
       # Strip some of the heavy bits
       strip -s ${SNAPCRAFT_PRIME}/bin/lxc
       strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
@@ -1548,12 +1581,44 @@ parts:
       strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
       strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
 
-      for zfs in zfs-0.6 zfs-0.7 zfs-0.8 zfs-2.0 zfs-2.1 zfs-2.2; do
-          [ ! -d "${SNAPCRAFT_PRIME}/${zfs}" ] && continue
-          strip -s ${SNAPCRAFT_PRIME}/${zfs}/bin/* ${SNAPCRAFT_PRIME}/${zfs}/lib/*
+      # Strip binaries (excluding shell scripts)
+      find "${SNAPCRAFT_PRIME}"/bin -type f \
+        -not -path "${SNAPCRAFT_PRIME}/bin/ceph" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/editor" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/lxc-checkconfig" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/nvidia-container-cli" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
+        -exec strip -s {} +
+
+      # Strip binaries not under bin/ due to being dynamically
+      # added to the path with `snap set lxd`, like `criu.enable=true`
+      for binary in "${SNAPCRAFT_PRIME}/criu/criu"; do
+        [ -e "${binary}" ] || continue
+        strip -s "${binary}"
       done
 
-      [ -e "${SNAPCRAFT_PRIME}/criu/criu" ] && strip -s ${SNAPCRAFT_PRIME}/criu/criu
+      # Strip all versions of zfs utils
+      for v in "${SNAPCRAFT_PRIME}"/zfs-*; do
+        [ -d "${v}" ] || continue
+        find "${v}/" -type f -exec strip -s {} +
+      done
+
+      # Strip libraries (excluding python3 scripts)
+      find "${SNAPCRAFT_PRIME}"/lib -type f \
+        -not -path "${SNAPCRAFT_PRIME}/lib/python3/*" \
+        -exec strip -s {} +
+
+      # XXX: look for broken symlinks indicating missing/invalid prime
+      broken_symlinks="$(find "${SNAPCRAFT_PRIME}/" -xtype l \
+                           -not -path "${SNAPCRAFT_PRIME}/lxc/config/common.conf.d/*")"
+      if [ -n "${broken_symlinks}" ]; then
+          echo "Found broken symlinks:"
+          echo "${broken_symlinks}"
+          exit 1
+      fi
 
       exit 0
 
