@@ -849,6 +849,7 @@ parts:
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
     source-type: git
+    source-commit: 4da81a4cbdd6d96b7a653239865d3b1d92cc6117
     source-depth: 1
     plugin: nil
     build-packages:
