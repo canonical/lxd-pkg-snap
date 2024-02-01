@@ -1398,6 +1398,12 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 827f1fce57898467b6b5d6eb909a5eb639e95c3c # lxd/storage/drivers/ceph: Restore the filesystems UUID on the volume
+      git cherry-pick -x 53e017a1db6a7f0667c55855b50220479f6fb827 # test/suites/storage: Add check for UUID generation on restore
+      git cherry-pick -x b737ae50e2590c7aa367254237f89ddc4d388ffb # lxd/storage/drivers/ceph: Restore the VM block filesystem volume too
+      git cherry-pick -x b61ffddda691d553eab3fbf23fb25ef2185ed6de # lxd/storage/drivers/lvm: Restore the VM block filesystem volume for thin-pools too
+      git cherry-pick -x 59cdc0a758b627083f729cd4b81dbb69035cb04d # lxd/storage/drivers/ceph: Double check the volumes content type
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
