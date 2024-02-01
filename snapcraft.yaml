@@ -1403,6 +1403,9 @@ parts:
       git cherry-pick -x be489048500718a3a6b96f1a786d4be7568be6cc # instance/qemu: do some sanity checks around enabling security.csm
       git cherry-pick -x 62ee9ff4c4baa0412b316f55e1eed9a15d9a79c4 # lxd/instance/drivers/driver_qemu: use bios-256k.bin instead of seabios.bin
       git cherry-pick -x 6df2cd00c48834dab78710ccdc448f28b137d1c2 # lxc/move: Only use server-side move when dealing with a single server
+      git cherry-pick -x be930d736fb58dc8bcf91f1623e7521f273c5dc3 # lxd/sys: handle apparmor unconfined profile mode appropriately
+      git cherry-pick -x 148876f05843288a8611cf5c1183585866d4ba56 # lxd/apparmor: allow confined services to receive required signals
+      git cherry-pick -x e6901cde38f6d53fcaae906681582338da6fa899 # lxd/sys: add comment clarifying AppArmor unconfined profile mode
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
