@@ -48,7 +48,7 @@ description: |-
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
-   - ui.enable: Enable the web interface [default=true]
+   - ui.enable: Enable the web interface [default=false]
 
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
