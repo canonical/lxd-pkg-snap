@@ -1523,7 +1523,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: snap-query/
     build-snaps:
-      - go
+      - go/1.21/stable
     plugin: nil
     override-build: |
       set -ex
