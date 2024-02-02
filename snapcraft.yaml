@@ -1503,6 +1503,8 @@ parts:
       [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
 
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/lxd-ui-0.5-lxd-5.0-compat.patch"
+
       npm install yarn --global
       yarn install
       yarn build

@@ -1,0 +1,116 @@
+Subject: [PATCH] LXD_backend_5_0_compatibility_for_the_0_5_UI_tag
+---
+Index: src/pages/instances/InstanceConsole.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/instances/InstanceConsole.tsx b/src/pages/instances/InstanceConsole.tsx
+--- a/src/pages/instances/InstanceConsole.tsx	(revision 2c26f319671e2d3d99c9aa65f04c3d6d420d4599)
++++ b/src/pages/instances/InstanceConsole.tsx	(date 1706876422039)
+@@ -20,7 +20,6 @@
+   sendAltTab,
+   sendCtrlAltDel,
+ } from "../../lib/spice/src/inputs";
+-import AttachIsoBtn from "pages/instances/actions/AttachIsoBtn";
+ 
+ interface Props {
+   instance: LxdInstance;
+@@ -81,7 +80,6 @@
+           </div>
+           {isGraphic && isRunning && (
+             <div>
+-              <AttachIsoBtn instance={instance} />
+               <Button
+                 className="u-no-margin--bottom"
+                 onClick={() => handleFullScreen()}
+Index: src/pages/instances/forms/InstanceCreateDetailsForm.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/instances/forms/InstanceCreateDetailsForm.tsx b/src/pages/instances/forms/InstanceCreateDetailsForm.tsx
+--- a/src/pages/instances/forms/InstanceCreateDetailsForm.tsx	(revision 2c26f319671e2d3d99c9aa65f04c3d6d420d4599)
++++ b/src/pages/instances/forms/InstanceCreateDetailsForm.tsx	(date 1706876422039)
+@@ -15,7 +15,6 @@
+ import { CreateInstanceFormValues } from "pages/instances/CreateInstance";
+ import { LxdImageType, RemoteImage } from "types/image";
+ import InstanceLocationSelect from "pages/instances/forms/InstanceLocationSelect";
+-import UseCustomIsoBtn from "pages/images/actions/UseCustomIsoBtn";
+ import AutoExpandingTextArea from "components/AutoExpandingTextArea";
+ 
+ export interface InstanceDetailsFormValues {
+@@ -125,7 +124,6 @@
+             {!formik.values.image && (
+               <>
+                 <SelectImageBtn onSelect={onSelectImage} />
+-                <UseCustomIsoBtn onSelect={onSelectImage} />
+               </>
+             )}
+           </div>
+Index: src/api/server.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/api/server.tsx b/src/api/server.tsx
+--- a/src/api/server.tsx	(revision 2c26f319671e2d3d99c9aa65f04c3d6d420d4599)
++++ b/src/api/server.tsx	(date 1706876422039)
+@@ -36,11 +36,13 @@
+   });
+ };
+ 
+-export const fetchConfigOptions = (): Promise<LxdConfigOptions> => {
+-  return new Promise((resolve, reject) => {
+-    fetch("/1.0/metadata/configuration")
+-      .then(handleResponse)
+-      .then((data: LxdApiResponse<LxdConfigOptions>) => resolve(data.metadata))
+-      .catch(reject);
+-  });
++export const fetchConfigOptions = (): LxdConfigOptions => {
++  return {
++    configs: {
++      cluster: {},
++      instance: {},
++      project: {},
++      server: {},
++    }
++  };
+ };
+Index: src/pages/storage/Storage.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/storage/Storage.tsx b/src/pages/storage/Storage.tsx
+--- a/src/pages/storage/Storage.tsx	(revision 2c26f319671e2d3d99c9aa65f04c3d6d420d4599)
++++ b/src/pages/storage/Storage.tsx	(date 1706876422039)
+@@ -3,14 +3,13 @@
+ import BaseLayout from "components/BaseLayout";
+ import NotificationRow from "components/NotificationRow";
+ import { useParams } from "react-router-dom";
+-import CustomIsoList from "pages/storage/CustomIsoList";
+ import StoragePools from "pages/storage/StoragePools";
+ import StorageVolumes from "pages/storage/StorageVolumes";
+ import HelpLink from "components/HelpLink";
+ import TabLinks from "components/TabLinks";
+ import { useDocs } from "context/useDocs";
+ 
+-export const tabs: string[] = ["Pools", "Volumes", "Custom ISOs"];
++export const tabs: string[] = ["Pools", "Volumes"];
+ 
+ const Storage: FC = () => {
+   const docBaseLink = useDocs();
+@@ -53,12 +52,6 @@
+             <StorageVolumes />
+           </div>
+         )}
+-
+-        {activeTab === "custom-isos" && (
+-          <div role="tabpanel">
+-            <CustomIsoList project={project} />
+-          </div>
+-        )}
+       </Row>
+     </BaseLayout>
+   );
