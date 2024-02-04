@@ -259,8 +259,8 @@ parts:
       - --prefix=
       - --enable-build-raft
     stage-packages:
-      - libuv1
       - liblz4-1
+      - libuv1
     build-packages:
       - liblz4-dev
       - libuv1-dev
@@ -269,6 +269,7 @@ parts:
     prime:
       - lib/libdqlite*so*
       - lib/*/libuv*
+      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
 
   edk2:
     after:
