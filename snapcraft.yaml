@@ -1698,6 +1698,9 @@ parts:
           cp -r "${CRAFT_STAGE}/share/lxd-documentation" "${CRAFT_PRIME}/share/"
       fi
 
+      # Delete empty directories
+      find "${CRAFT_PRIME}/" -type d -empty -print -delete
+
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${CRAFT_PRIME}/" -xtype l \
                            -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*" \
