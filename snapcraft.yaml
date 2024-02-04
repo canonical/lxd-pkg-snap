@@ -1395,7 +1395,7 @@ parts:
       - gdisk
       - iw
       - lshw
-      - pciutils
+      - pci.ids
       - pigz
       - rsync
       - usbutils
@@ -1471,7 +1471,7 @@ parts:
 
       - etc/bash_completion.d/snap.lxd.lxc
 
-      - share/misc
+      - share/misc/pci.ids
 
       - bin/lxc
       - bin/lxc-to-lxd
