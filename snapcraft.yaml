@@ -1359,11 +1359,9 @@ parts:
       - gdisk
       - iw
       - lshw
-      - netbase
       - pciutils
       - pigz
       - rsync
-      - squashfs-tools
       - usbutils
       - xdelta3
     plugin: nil
