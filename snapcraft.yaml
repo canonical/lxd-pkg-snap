@@ -1604,6 +1604,9 @@ parts:
         -not -path "${CRAFT_PRIME}/lib/liblxcfs.so" \
         -exec strip -s {} +
 
+      # Delete empty directories
+      find "${CRAFT_PRIME}/" -type d -empty -print -delete
+
       # XXX: look for broken symlinks indicating missing/invalid prime
       broken_symlinks="$(find "${CRAFT_PRIME}/" -xtype l \
                            -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*")"
