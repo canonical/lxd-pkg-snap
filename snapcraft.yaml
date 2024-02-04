@@ -983,14 +983,15 @@ parts:
     stage-packages:
       - arptables
       - ebtables
+      - netbase
     organize:
       usr/lib/ebtables/: lib/
       usr/sbin/: bin/
     prime:
+      #- etc/ethertypes  # use ethertypes from the base snap
+      #- etc/protocols   # use protocols from the base snap
       - bin/arptables-legacy
       - bin/ebtables-legacy
-      - etc/ethertypes
-      - etc/protocols
       - lib/libebtc.so.*
 
   xz:
