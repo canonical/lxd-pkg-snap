@@ -897,6 +897,7 @@ parts:
     prime:
       - lib/libraft*so*
       - lib/*/libuv.so*
+      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
 
   sqlite:
     source: https://github.com/sqlite/sqlite
