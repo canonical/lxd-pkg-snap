@@ -1419,7 +1419,6 @@ parts:
       - gdisk
       - iw
       - lshw
-      - netbase
       - pciutils
       - pigz
       - rsync
