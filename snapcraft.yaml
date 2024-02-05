@@ -1498,7 +1498,7 @@ parts:
         rm -rf doc/html/_sphinx_design_static/
         rm -rf doc/html/_sources/
 
-        # Copy the static website
+        # Stage the static website
         mkdir -p "${CRAFT_STAGE}/share/lxd-documentation"
         cp -a doc/html/. "${CRAFT_STAGE}/share/lxd-documentation/"
       fi
