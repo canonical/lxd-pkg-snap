@@ -383,22 +383,6 @@ parts:
 
       sed -i "s# /lib/libmnl.la# ${CRAFT_STAGE}/lib/libmnl.la#g" "${CRAFT_PART_INSTALL}/lib/libnftnl.la"
 
-  libseccomp:
-    source: https://github.com/seccomp/libseccomp
-    source-depth: 1
-    source-tag: v2.5.5
-    source-type: git
-    source-depth: 1
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    build-packages:
-      - gperf
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libseccomp*so*
-
   libtpms:
     source: https://github.com/stefanberger/libtpms
     source-depth: 1
@@ -561,8 +545,6 @@ parts:
       - lib/libnftables*so*
 
   nvidia-container:
-    after:
-      - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-depth: 1
     source-tag: v1.14.3
@@ -572,6 +554,7 @@ parts:
       - bmake
       - curl
       - libelf-dev
+      - libseccomp-dev
       - lsb-release
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -708,7 +691,6 @@ parts:
 
   swtpm:
     after:
-      - libseccomp
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-depth: 1
@@ -725,6 +707,7 @@ parts:
       - gawk
       - iproute2
       - libjson-glib-dev
+      - libseccomp-dev
       - python3-cryptography
       - python3-setuptools
       - socat
@@ -741,7 +724,6 @@ parts:
 
   qemu:
     after:
-      - libseccomp
       - liburing
       - libusb
       - spice-protocol
@@ -797,6 +779,7 @@ parts:
       - libnuma-dev
       - libpixman-1-dev
       - librbd-dev
+      - libseccomp-dev
       - libusbredirhost-dev
     stage-packages:
       - genisoimage
@@ -1314,7 +1297,6 @@ parts:
   # Core components
   lxc:
     after:
-      - libseccomp
       - apparmor
     source: https://github.com/lxc/lxc
     source-branch: stable-5.0
@@ -1325,6 +1307,7 @@ parts:
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
+      - libseccomp-dev
       - libselinux1-dev
       - pkg-config
       - meson
@@ -1636,7 +1619,6 @@ parts:
       - btrfs
       - ceph
       - dqlite
-      - libseccomp
       - logrotate
       - lvm
       - nano
