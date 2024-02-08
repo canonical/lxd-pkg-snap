@@ -1403,8 +1403,8 @@ parts:
       git cherry-pick -x b737ae50e2590c7aa367254237f89ddc4d388ffb # lxd/storage/drivers/ceph: Restore the VM block filesystem volume too
       git cherry-pick -x b61ffddda691d553eab3fbf23fb25ef2185ed6de # lxd/storage/drivers/lvm: Restore the VM block filesystem volume for thin-pools too
       git cherry-pick -x 59cdc0a758b627083f729cd4b81dbb69035cb04d # lxd/storage/drivers/ceph: Double check the volumes content type
-      git cherry-pick -x 3681d5e54649fcc2fc9375b6820c1133f140228d # shared/simplestreams/products: Fix regression in parsing version files
-      git cherry-pick -x 56364f5a97373155d5e6a5a6b10d06d16a25fb3c # shared/simplestreams/simplestreams: Improve error messages
+      git cherry-pick -x fe71f2135bdc3aa6ea28de7ed1ac324f7d689ed6 # shared/simplestreams/products: Fix regression in parsing version files
+      git cherry-pick -x d3253e4cbc85b97e3bc6dba9a27fd2ab0c4d8685 # shared/simplestreams/simplestreams: Improve error messages
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
