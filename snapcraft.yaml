@@ -1455,7 +1455,6 @@ parts:
         # not needed once built
         rm doc/html/.buildinfo
         rm -rf doc/html/_sphinx_design_static/
-        rm -rf doc/html/_sources/
 
         # Stage the static website
         mkdir -p "${CRAFT_STAGE}/share/lxd-documentation"
