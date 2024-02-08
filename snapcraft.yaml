@@ -179,6 +179,7 @@ parts:
       - lib/*/libcephfs*
       - lib/python3
 
+      - lib/*/libatomic.so*
       - lib/*/libboost_context.so*
       - lib/*/libboost_filesystem.so*
       - lib/*/libboost_iostreams.so*
