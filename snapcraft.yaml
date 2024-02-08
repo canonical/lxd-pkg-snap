@@ -155,6 +155,22 @@ hooks:
     plugs:
       - lxd-support
       - system-observe
+  connect-plug-ovn-api:
+    plugs:
+      - lxd-support
+      - system-observe
+  disconnect-plug-ovn-api:
+    plugs:
+      - lxd-support
+      - system-observe
+  connect-plug-ovn-chassis:
+    plugs:
+      - lxd-support
+      - system-observe
+  disconnect-plug-ovn-chassis:
+    plugs:
+      - lxd-support
+      - system-observe
   configure:
     plugs:
       - lxd-support
