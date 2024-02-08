@@ -84,7 +84,7 @@ config="${SNAP_COMMON}/config"
     echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
     echo "openvswitch_external=${openvswitch_external:-"false"}"
     echo "ovn_builtin=${ovn_builtin:-"false"}"
-    echo "ui_enable=${ui_enable:-"false"}"
+    echo "ui_enable=${ui_enable:-"true"}"
 } > "${config}"
 
 # Set socket ownership in case it changed
