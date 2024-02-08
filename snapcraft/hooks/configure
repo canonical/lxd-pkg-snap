@@ -56,6 +56,7 @@ openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 openvswitch_external=$(get_bool "$(snapctl get openvswitch.external)")
 ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 ui_enable=$(get_bool "$(snapctl get ui.enable)")
+minio_path="$(snapctl get minio.path)"
 
 # Special-handling of daemon.preseed
 daemon_preseed=$(snapctl get daemon.preseed)
@@ -85,6 +86,7 @@ config="${SNAP_COMMON}/config"
     echo "openvswitch_external=${openvswitch_external:-"false"}"
     echo "ovn_builtin=${ovn_builtin:-"false"}"
     echo "ui_enable=${ui_enable:-"true"}"
+    echo "minio_path=${minio_path:-}"
 } > "${config}"
 
 # Set socket ownership in case it changed
