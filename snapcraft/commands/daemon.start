@@ -230,14 +230,9 @@ for entry in hostid hostname hosts nsswitch.conf os-release passwd group localti
     ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
 
-## And the bits we need from the core snap
-for entry in alternatives apparmor apparmor.d; do
+## And the bits we need from the base/core snap
+for entry in alternatives apparmor apparmor.d ethertypes protocols; do
     ln -s "/snap/${SNAP_BASE}/current/etc/${entry}" "/etc/${entry}"
-done
-
-## And those we directly ship in the snap
-for entry in ethertypes protocols; do
-    ln -s "${SNAP}/etc/${entry}" "/etc/${entry}"
 done
 
 ## Setup mtab
