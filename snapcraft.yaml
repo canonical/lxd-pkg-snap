@@ -1582,7 +1582,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
-      snap install node --channel=20/stable --classic || true
+      snap install node --channel=20/stable --classic
       craftctl default
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
