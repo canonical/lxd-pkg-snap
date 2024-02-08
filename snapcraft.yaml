@@ -49,6 +49,7 @@ description: |-
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
    - ui.enable: Enable the web interface [default=true]
+   - minio.path: Path to the minio binary to use with LXD [default=""]
 
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
@@ -543,36 +544,6 @@ parts:
       - lib/*/libdevmapper*
       - lib/*/liblvm*
       - lib/*/libreadline.so*
-
-  minio:
-    source: https://github.com/minio/minio
-    source-depth: 1
-    source-tag: RELEASE.2023-11-20T22-40-07Z
-    source-type: git
-    plugin: nil
-    build-snaps:
-      - go
-    override-prime: |-
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      set -ex
-
-      # Setup build environment
-      export GOPATH="$(realpath ./.go)"
-
-      # Build the binaries
-      make build
-
-      # Install minio command
-      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
-      cp minio "${CRAFT_PART_INSTALL}/bin/minio"
-    prime:
-      - bin/minio*
 
   nano:
     plugin: nil
