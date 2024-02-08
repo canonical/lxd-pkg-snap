@@ -209,11 +209,14 @@ parts:
       - lib/*/libcephfs*
       - lib/python3
 
+      - lib/*/libatomic.so*
       - lib/*/libboost_context.so*
       - lib/*/libboost_filesystem.so*
       - lib/*/libboost_iostreams.so*
       - lib/*/libboost_program_options.so*
       - lib/*/libboost_thread.so*
+      - lib/*/libbrotlicommon.so*
+      - lib/*/libbrotlidec.so*
       - lib/*/libcurl-gnutls.so*
       - lib/*/libdaxctl.so*
       - lib/*/libibverbs.so*
