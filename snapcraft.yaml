@@ -542,35 +542,6 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
-  minio:
-    source: https://github.com/minio/minio
-    source-type: git
-    source-tag: RELEASE.2023-11-20T22-40-07Z
-    source-depth: 1
-    plugin: nil
-    build-snaps:
-      - go/1.21/stable
-    override-pull: |
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-
-      craftctl default
-    override-build: |
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-
-      set -ex
-
-      # Setup build environment
-      export GOPATH="$(realpath ./.go)"
-
-      # Build the binaries
-      make build
-
-      # Install minio command
-      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
-      cp minio "${CRAFT_PART_INSTALL}/bin/minio"
-    prime:
-      - bin/minio*
-
   nano:
     plugin: nil
     stage-packages:
