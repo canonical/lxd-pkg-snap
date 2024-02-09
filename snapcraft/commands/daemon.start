@@ -608,7 +608,7 @@ fi
 
 # Note: Snaps disallow running binaries from certain paths (for example paths under home directories).
 # These will show `permission denied` when trying to run the executable.
-if [ -n "${minio_path}" ] ; then
+if [ -n "${minio_path:-}" ] ; then
   minio_dir="$(dirname "/var/lib/snapd/hostfs${minio_path}")"
   export PATH="${PATH}:${minio_dir}"
 fi
