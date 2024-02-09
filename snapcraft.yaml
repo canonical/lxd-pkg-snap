@@ -196,6 +196,8 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
+    after:
+      - libatomic
     plugin: nil
     stage-packages:
       - ceph-common
@@ -416,6 +418,15 @@ parts:
       rm "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB.debug.fd"
     prime:
       - share/qemu/*
+
+  libatomic:
+    plugin: nil
+    stage-packages:
+      - libatomic1
+    organize:
+      usr/lib/: lib/
+    prime:
+      - lib/*/libatomic.so*
 
   libmnl:
     source: https://git.netfilter.org/libmnl
@@ -800,6 +811,7 @@ parts:
 
   qemu:
     after:
+      - libatomic
       - liburing
       - libusb
       - spice-protocol
@@ -863,7 +875,6 @@ parts:
     stage-packages:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
-      - libatomic1
       - libfdt1
       - libmagic1
       - libnuma1
@@ -1244,8 +1255,9 @@ parts:
       mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
-
   zstd:
+    after:
+      - libatomic
     plugin: nil
     stage-packages:
       - zstd
