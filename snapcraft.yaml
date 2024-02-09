@@ -1405,6 +1405,7 @@ parts:
       git cherry-pick -x 59cdc0a758b627083f729cd4b81dbb69035cb04d # lxd/storage/drivers/ceph: Double check the volumes content type
       git cherry-pick -x fe71f2135bdc3aa6ea28de7ed1ac324f7d689ed6 # shared/simplestreams/products: Fix regression in parsing version files
       git cherry-pick -x d3253e4cbc85b97e3bc6dba9a27fd2ab0c4d8685 # shared/simplestreams/simplestreams: Improve error messages
+      git cherry-pick -x 55bd4024dbfc315c0f57da57f2f9bd9c5c97dad1 # shared/simplestreams/products: Search only for lxd archives
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
