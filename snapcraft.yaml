@@ -1408,6 +1408,7 @@ parts:
       git cherry-pick -x e6901cde38f6d53fcaae906681582338da6fa899 # lxd/sys: add comment clarifying AppArmor unconfined profile mode
       git cherry-pick -x 3681d5e54649fcc2fc9375b6820c1133f140228d # shared/simplestreams/products: Fix regression in parsing version files
       git cherry-pick -x 56364f5a97373155d5e6a5a6b10d06d16a25fb3c # shared/simplestreams/simplestreams: Improve error messages
+      git cherry-pick -x 4ea61558b59ff2e5f14f137a95f81accfc6b98d0 # lxd/auth/tls: Return falsy permission checker when client is restricted
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
