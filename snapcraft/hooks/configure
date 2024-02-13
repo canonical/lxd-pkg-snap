@@ -39,6 +39,7 @@ if [ ! -e /run/snapd-snap.socket ]; then
 fi
 
 # Get the current config
+apparmor_unprivileged_restrictions_disable=$(get_bool "$(snapctl get apparmor.unprivileged-restrictions-disable)")
 ceph_builtin=$(get_bool "$(snapctl get ceph.builtin)")
 ceph_external=$(get_bool "$(snapctl get ceph.external)")
 criu_enable=$(get_bool "$(snapctl get criu.enable)")
@@ -69,6 +70,7 @@ config="${SNAP_COMMON}/config"
 
 cat << EOC > "${config}"
 # This file is auto-generated, do NOT manually edit
+apparmor_unprivileged_restrictions_disable=${apparmor_unprivileged_restrictions_disable:-"true"}
 ceph_builtin=${ceph_builtin:-"false"}
 ceph_external=${ceph_external:-"false"}
 criu_enable=${criu_enable:-"false"}
