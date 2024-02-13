@@ -31,6 +31,7 @@ description: |-
 
  Supported configuration options for the snap (snap set lxd [<key>=<value>...]):
 
+   - apparmor.unprivileged-restrictions-disable: Whether to disable restrictions on unprivileged user namespaces [default=true]
    - ceph.builtin: Use snap-specific Ceph configuration [default=false]
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
@@ -45,11 +46,11 @@ description: |-
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - lxcfs.debug: Increase logging to debug level [default=false]
+   - minio.path: Path to the minio binary to use with LXD [default=""]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
    - ui.enable: Enable the web interface [default=true]
-   - minio.path: Path to the minio binary to use with LXD [default=""]
 
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
