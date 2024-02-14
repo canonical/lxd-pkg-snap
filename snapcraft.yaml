@@ -503,7 +503,7 @@ parts:
   libusb:
     source: https://github.com/libusb/libusb
     source-depth: 1
-    source-tag: v1.0.26
+    source-tag: v1.0.27
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -628,7 +628,7 @@ parts:
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
     source-depth: 1
-    source-tag: v1.14.3
+    source-tag: v1.14.5
     source-type: git
     plugin: make
     build-packages:
@@ -678,7 +678,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-depth: 1
-    source-tag: v3.2.1
+    source-tag: v3.2.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1015,7 +1015,7 @@ parts:
   sqlite:
     source: https://github.com/sqlite/sqlite
     source-depth: 1
-    source-tag: version-3.44.2
+    source-tag: version-3.45.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1044,7 +1044,7 @@ parts:
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
     source-depth: 1
-    source-tag: v1.8.0
+    source-tag: v1.10.1
     source-type: git
     plugin: rust
     build-packages:
