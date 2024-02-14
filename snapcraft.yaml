@@ -1,5 +1,5 @@
 name: lxd
-base: core20
+base: core22
 assumes:
   - snapd2.39
 version: git
@@ -152,23 +152,8 @@ hooks:
       - system-observe
 
 parts:
-  # Workarounds
-  pull-meson-early:
-    source: snapcraft/empty
-    override-build: |
-      # No-op
-      true
-    override-stage: |
-      # No-op
-      true
-    plugin: nil
-    override-pull: |
-      # Fetch meson early to cause all downloads at the beginning of the build.
-      python3 -m pip install -U meson
-
   # Dependencies
   btrfs:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -181,7 +166,6 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -229,7 +213,6 @@ parts:
       - lib/python3
 
   criu:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
     source-tag: v3.19
     source-type: git
@@ -268,7 +251,6 @@ parts:
       - lib/*/libproto*
 
   dqlite:
-    build-attributes: [core22-step-dependencies]
     after:
       - raft
       - sqlite
@@ -289,7 +271,6 @@ parts:
       - lib/*/libuv*
 
   edk2:
-    build-attributes: [core22-step-dependencies]
     after:
       - nasm
     source: https://github.com/tianocore/edk2
@@ -368,7 +349,6 @@ parts:
       - share/qemu/*
 
   libmnl:
-    build-attributes: [core22-step-dependencies]
     source: https://git.netfilter.org/libmnl
     source-type: git
     source-tag: libmnl-1.0.5
@@ -381,7 +361,6 @@ parts:
       - lib/libmnl*so*
 
   libnftnl:
-    build-attributes: [core22-step-dependencies]
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
@@ -400,7 +379,6 @@ parts:
       sed -i "s# /lib/libmnl.la# ${SNAPCRAFT_STAGE}/lib/libmnl.la#g" "${SNAPCRAFT_PART_INSTALL}/lib/libnftnl.la"
 
   libseccomp:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/seccomp/libseccomp
     source-type: git
     source-tag: v2.5.5
@@ -416,7 +394,6 @@ parts:
       - lib/libseccomp*so*
 
   libtpms:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/stefanberger/libtpms
     source-type: git
     source-tag: v0.9.6
@@ -432,7 +409,6 @@ parts:
       - lib/libtpms*so*
 
   liburing:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/axboe/liburing
     source-type: git
     source-tag: liburing-2.5
@@ -449,7 +425,6 @@ parts:
       - lib/liburing*so*
 
   libusb:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/libusb/libusb
     source-type: git
     source-tag: v1.0.26
@@ -463,7 +438,6 @@ parts:
       - lib/libusb*so*
 
   logrotate:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -478,7 +452,6 @@ parts:
       - bin/logrotate
 
   lvm:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -511,7 +484,6 @@ parts:
       - lib/*/libreadline.so*
 
   nano:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -523,7 +495,6 @@ parts:
       - etc/nanorc
 
   nasm:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/netwide-assembler/nasm
     source-type: git
     source-tag: nasm-2.15.05
@@ -540,7 +511,6 @@ parts:
       snapcraftctl build
 
   nftables:
-    build-attributes: [core22-step-dependencies]
     after:
       - libmnl
       - libnftnl
@@ -575,7 +545,6 @@ parts:
       - lib/libnftables*so*
 
   nvidia-container:
-    build-attributes: [core22-step-dependencies]
     after:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
@@ -586,6 +555,7 @@ parts:
     build-packages:
       - bmake
       - curl
+      - libelf-dev
       - lsb-release
     override-build: |-
       set -ex
@@ -594,6 +564,9 @@ parts:
 
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
+
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
       cp ${SNAPCRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
@@ -608,7 +581,6 @@ parts:
       - lib/libnvidia-container*.so*
 
   openvswitch:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
     source-tag: v3.2.1
@@ -640,7 +612,6 @@ parts:
       - share/openvswitch/
 
   ovn:
-    build-attributes: [core22-step-dependencies]
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
@@ -657,16 +628,17 @@ parts:
       - bin/ovn-sbctl
 
   spice-protocol:
-    build-attributes: [core22-step-dependencies]
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
     source-tag: v0.14.4
     source-depth: 1
     plugin: meson
     prime: []
+    build-packages:
+      - meson
+      - ninja-build
 
   spice-server:
-    build-attributes: [core22-step-dependencies]
     after:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
@@ -687,6 +659,8 @@ parts:
       - libjpeg-turbo8-dev
       - python3-pyparsing
       - python3-six
+      - meson
+      - ninja-build
     stage-packages:
       - libjpeg-turbo8
       - libpixman-1-0
@@ -700,7 +674,6 @@ parts:
       - lib/*/libpixman*so*
 
   swtpm:
-    build-attributes: [core22-step-dependencies]
     after:
       - libseccomp
       - libtpms
@@ -734,7 +707,6 @@ parts:
       - lib/*/libjson-glib-1.0.so*
 
   qemu:
-    build-attributes: [core22-step-dependencies]
     after:
       - libseccomp
       - liburing
@@ -842,7 +814,6 @@ parts:
       - share/qemu/vgabios-*.bin*
 
   qemu-ovmf-secureboot:
-    build-attributes: [core22-step-dependencies]
     after:
       - edk2
       - qemu
@@ -890,7 +861,6 @@ parts:
       - share/qemu/*
 
   raft:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/raft
     source-type: git
     source-depth: 1
@@ -910,7 +880,6 @@ parts:
       - lib/*/libuv.so*
 
   sqlite:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/sqlite/sqlite
     source-type: git
     source-depth: 1
@@ -925,7 +894,6 @@ parts:
       - lib/libsqlite3*so*
 
   squashfs-tools-ng:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
     source-tag: v1.2.0
@@ -941,7 +909,6 @@ parts:
       - lib/libsquashfs.so*
 
   virtiofsd:
-    build-attributes: [core22-step-dependencies]
     source: https://gitlab.com/virtio-fs/virtiofsd
     source-type: git
     source-tag: v1.8.0
@@ -963,7 +930,6 @@ parts:
       snapcraftctl build
 
   xfs:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -979,7 +945,6 @@ parts:
       - bin/mkfs.xfs
 
   xtables:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -996,7 +961,6 @@ parts:
       - lib/libebtc.so.*
 
   xz:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -1016,7 +980,6 @@ parts:
       ln -s xz "${SNAPCRAFT_PART_INSTALL}/usr/bin/lzma"
 
   zfs-0-6:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.6.5.11
@@ -1040,6 +1003,12 @@ parts:
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
 
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0001-Add-support-for-libtirpc.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0002-config-better-libtirpc-detection.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0003-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0004-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0005-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
+
       set +ex
       snapcraftctl build
       set -ex
@@ -1053,7 +1022,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-0-7:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.7.13
@@ -1074,6 +1042,10 @@ parts:
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
 
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0001-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0002-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0003-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
+
       set +ex
       snapcraftctl build
       set -ex
@@ -1087,7 +1059,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-0-8:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-0.8.6
@@ -1122,7 +1093,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-2-0:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-2.0.7
@@ -1157,7 +1127,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-2-1:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-2.1.14
@@ -1192,7 +1161,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zfs-2-2:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
     source-tag: zfs-2.2.2
@@ -1231,7 +1199,6 @@ parts:
       rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
 
   zstd:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     plugin: nil
     stage-packages:
@@ -1244,7 +1211,6 @@ parts:
 
   # Core components
   lxc:
-    build-attributes: [core22-step-dependencies]
     after:
       - libseccomp
     source: https://github.com/lxc/lxc
@@ -1257,6 +1223,8 @@ parts:
       - libgnutls28-dev
       - libselinux1-dev
       - pkg-config
+      - meson
+      - ninja-build
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -1306,6 +1274,8 @@ parts:
       - libpam0g-dev
       - pkg-config
       - python3-jinja2
+      - meson
+      - ninja-build
     stage-packages:
       - fuse3
     plugin: meson
@@ -1345,7 +1315,6 @@ parts:
       patch -p1 $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${SNAPCRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
-    build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
     source-branch: stable-5.0
@@ -1444,7 +1413,6 @@ parts:
       - bin/lxd-user
 
   lxd-migrate:
-    build-attributes: [core22-step-dependencies]
     source: lxd-migrate/
     after:
       - lxd
@@ -1503,14 +1471,12 @@ parts:
       - share/lxd-ui*
 
   shmounts:
-    build-attributes: [core22-step-dependencies]
     source: shmounts/
     plugin: make
     prime:
       - bin/setup-shmounts
 
   snap-query:
-    build-attributes: [core22-step-dependencies]
     source: snap-query/
     build-snaps:
       - go
@@ -1527,7 +1493,6 @@ parts:
       - bin/snap-query
 
   strip:
-    build-attributes: [core22-step-dependencies]
     source: snapcraft/empty
     after:
       - btrfs
@@ -1619,7 +1584,6 @@ parts:
       exit 0
 
   wrappers:
-    build-attributes: [core22-step-dependencies]
     plugin: dump
     source: snapcraft/
     organize:
