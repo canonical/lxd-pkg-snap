@@ -46,12 +46,11 @@ description: |-
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - lxcfs.debug: Increase logging to debug level [default=false]
-   - minio.path: Path to the minio binary to use with LXD [default=""]
+   - minio.path: Path to the directory containing the minio and mc binaries to use with LXD [default=""]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
    - ui.enable: Enable the web interface [default=true]
-   - minio.path: Path to the directory containing the minio and mc binaries to use with LXD [default=""]
 
  For system-wide configuration of the CLI, place your configuration in
  /var/snap/lxd/common/global-conf/ (config.yml and servercerts)
