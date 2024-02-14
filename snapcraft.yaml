@@ -1016,7 +1016,7 @@ parts:
   sqlite:
     source: https://github.com/sqlite/sqlite
     source-depth: 1
-    source-tag: version-3.44.2
+    source-tag: version-3.45.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
