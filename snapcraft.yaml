@@ -1410,7 +1410,7 @@ parts:
       - pci.ids
       - pigz
       - rsync
-      - usbutils
+      - usb.ids
       - xdelta3
     plugin: nil
     override-pull: |
