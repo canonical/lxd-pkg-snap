@@ -1383,9 +1383,10 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-depth: 1
-    source-type: git
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
+    #source-depth: 1
     source-tag: lxd-5.20
+    source-type: git
     after:
       - lxc
       - dqlite
