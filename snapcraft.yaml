@@ -1339,7 +1339,7 @@ parts:
       - pigz
       - rsync
       - squashfs-tools
-      - usbutils
+      - usb.ids
       - xdelta3
     plugin: nil
     override-pull: |
