@@ -25,11 +25,14 @@ export LXD_EXEC_PATH="${SNAP_CURRENT}/bin/lxd"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
 export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
-export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
+export LXD_QEMU_FW_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
 # Detect model
 SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
+
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
 
 # Wait for appliance configuration
 if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
@@ -136,7 +139,8 @@ fi
 
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
-mountpoint -q /bin/kmod || mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
+mountpoint -q /bin/kmod && umount -l /bin/kmod
+mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
@@ -227,14 +231,9 @@ for entry in hostid hostname hosts nsswitch.conf os-release passwd group localti
     ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
 
-## And the bits we need from the core snap
-for entry in alternatives apparmor apparmor.d; do
-    ln -s "/snap/core22/current/etc/${entry}" "/etc/${entry}"
-done
-
-## And those we directly ship in the snap
-for entry in ethertypes protocols; do
-    ln -s "${SNAP}/etc/${entry}" "/etc/${entry}"
+## And the bits we need from the base/core snap
+for entry in alternatives apparmor apparmor.d ethertypes protocols; do
+    ln -s "/snap/${SNAP_BASE}/current/etc/${entry}" "/etc/${entry}"
 done
 
 ## Setup mtab
@@ -245,7 +244,7 @@ if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/sha
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
     mountpoint -q "/usr/share/ca-certificates" || mount -o ro,bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
-    ln -s "/snap/core22/current/etc/ssl" "/etc/ssl"
+    ln -s "/snap/${SNAP_BASE}/current/etc/ssl" "/etc/ssl"
 fi
 
 ## Try to handle special /etc/resolv.conf setups
@@ -324,12 +323,12 @@ echo "==> Setting up OVN configuration"
 if [ "${ovn_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ovn"
     ln -s "${SNAP_COMMON}/ovn" /etc/ovn
-elif [ -d /var/snap/microovn/ ]; then
+elif [ -d "${SNAP_DATA}/microovn/api" ]; then
     echo "=> Detected MicroOVN"
     mkdir /etc/ovn
-    ln -s /var/snap/microovn/common/data/pki/client-cert.pem /etc/ovn/cert_host
-    ln -s /var/snap/microovn/common/data/pki/client-privkey.pem /etc/ovn/key_host
-    ln -s /var/snap/microovn/common/data/pki/cacert.pem /etc/ovn/ovn-central.crt
+    ln -s "${SNAP_DATA}/microovn/api/client-cert.pem" /etc/ovn/cert_host
+    ln -s "${SNAP_DATA}/microovn/api/client-privkey.pem" /etc/ovn/key_host
+    ln -s "${SNAP_DATA}/microovn/api/cacert.pem" /etc/ovn/ovn-central.crt
 else
     ln -s /var/lib/snapd/hostfs/etc/ovn /etc/ovn
 fi
@@ -345,22 +344,16 @@ else
     VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
 
-if echo "${VERSION}" | grep -q ^2\.2; then
-    echo "==> Setting up ZFS (2.2)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.2/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.2/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.1; then
-    echo "==> Setting up ZFS (2.1)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.1/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.1/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.0; then
-    echo "==> Setting up ZFS (2.0)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.0/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.0/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.8; then
-    echo "==> Setting up ZFS (0.8)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.8/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.8/bin:${PATH}"
+ZFS_VER="$(echo "${VERSION}" | cut -c 1-3)"
+
+if [ -d "${SNAP_CURRENT}/zfs-${ZFS_VER}/bin" ]; then
+    echo "==> Setting up ZFS (${ZFS_VER})"
+    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/lib/:${LD_LIBRARY_PATH}"
+    export PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/bin:${PATH}"
+elif [ -n "${ZFS_VER}" ]; then
+    echo "==> Unsupported ZFS version (${ZFS_VER})"
+else
+    echo "==> No ZFS support"
 fi
 
 # Escape resource limits
@@ -427,6 +420,22 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
             echo 1 > /proc/sys/kernel/unprivileged_userns_clone || true
         fi
     fi
+
+    if [ "${apparmor_unprivileged_restrictions_disable:-"true"}" = "true" ]; then
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged userns mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+            fi
+        fi
+
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged unconfined mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
+            fi
+        fi
+    fi
 fi
 
 # Setup CRIU
@@ -477,8 +486,8 @@ if [ "${openvswitch_builtin:-"false"}" = "true" ]; then
            "${SNAP}/share/openvswitch/scripts/ovs-ctl" start --system-id=random
         )
     )
-elif [ -d /var/snap/microovn/ ]; then
-    ln -s /var/snap/microovn/common/run/switch /run/openvswitch
+elif [ -d "${SNAP_DATA}/microovn/chassis" ]; then
+    ln -s "${SNAP_DATA}/microovn/chassis" /run/openvswitch
 else
     ln -s /var/lib/snapd/hostfs/run/openvswitch /run/openvswitch
 fi
@@ -492,7 +501,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     CURRENT_FUSE="${NEW_FUSE}"
 
     ## Get the name of the base (core2X) used by the new snap
-    NEW_BASE="$(grep ^name /meta/snap.yaml)"
+    NEW_BASE="${SNAP_BASE}"
     CURRENT_BASE="${NEW_BASE}"
 
     ## Use the old lxcfs instance to get the libfuse soname and old base it uses
@@ -500,7 +509,7 @@ if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
             CURRENT_FUSE="$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
-            CURRENT_BASE="$(grep ^name "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
+            CURRENT_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
 
@@ -606,6 +615,13 @@ if [ -x "${SNAP_COMMON}/lxd.debug" ]; then
     LXD="${SNAP_COMMON}/lxd.debug"
     export LXD_EXEC_PATH="${LXD}"
     echo "==> WARNING: Using a custom debug LXD binary!"
+fi
+
+# Note: Snaps disallow running binaries from certain paths (for example paths under home directories).
+# These will show `permission denied` when trying to run the executable.
+if [ -n "${minio_path:-""}" ] ; then
+  minio_dir="/var/lib/snapd/hostfs${minio_path}"
+  export PATH="${PATH}:${minio_dir}"
 fi
 
 CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"

@@ -1,9 +1,12 @@
 #!/bin/sh
 NAME="$(basename "${0}")"
 
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
+
 if [ "$(id -u)" != "0" ] && [ "${NAME}" = "modinfo" ]; then
-    TMPDIR=$(mktemp -d)
-    ln -s "/snap/core22/current/bin/kmod" "${TMPDIR}/modinfo"
+    TMPDIR="$(mktemp -d)"
+    ln -s "/snap/${SNAP_BASE}/current/bin/kmod" "${TMPDIR}/modinfo"
     "${TMPDIR}/modinfo" "$@"
     RET=$?
     rm -Rf "${TMPDIR}"
@@ -11,7 +14,7 @@ if [ "$(id -u)" != "0" ] && [ "${NAME}" = "modinfo" ]; then
 fi
 
 if [ "${NAME}" = "lsmod" ]; then
-    exec "/snap/core22/current/bin/kmod" "list" "$@"
+    exec "/snap/${SNAP_BASE}/current/bin/kmod" "list" "$@"
 fi
 
 for i in "/bin/${NAME}" "/sbin/${NAME}" "/usr/bin/${NAME}" "/usr/sbin/${NAME}"; do
