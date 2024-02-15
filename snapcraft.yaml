@@ -1456,7 +1456,6 @@ parts:
       - pci.ids
       - pigz
       - rsync
-      - squashfs-tools
       - usb.ids
       - xdelta3
     plugin: nil
