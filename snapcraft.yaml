@@ -996,7 +996,7 @@ parts:
   raft:
     source: https://github.com/canonical/raft
     source-depth: 1
-    source-tag: v0.18.0
+    source-tag: v0.18.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
