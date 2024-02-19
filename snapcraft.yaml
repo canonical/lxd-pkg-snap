@@ -1555,22 +1555,6 @@ parts:
     prime:
       - bin/setup-shmounts
 
-  snap-query:
-    source: snap-query/
-    build-snaps:
-      - go/1.21/stable
-    plugin: nil
-    override-build: |
-      set -ex
-
-      # Setup build environment
-      export GOPATH="$(realpath ./.go)"
-
-      # Build the binaries
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
-    prime:
-      - bin/snap-query
-
   strip:
     after:
       - btrfs
@@ -1603,7 +1587,6 @@ parts:
       - criu
       - lxd
       - shmounts
-      - snap-query
     plugin: nil
     override-prime: |
       set -x
@@ -1621,6 +1604,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/lxc-checkconfig" \
         -not -path "${CRAFT_PRIME}/bin/nvidia-container-cli" \
         -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${CRAFT_PRIME}/bin/snap-query" \
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -exec strip -s {} +
@@ -1670,6 +1654,7 @@ parts:
     plugin: dump
     source: snapcraft/
     organize:
+      commands/snap-query: bin/
       hooks/: snap/hooks/
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/
