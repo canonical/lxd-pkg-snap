@@ -14,7 +14,7 @@ PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
 
 # FIXME: Detect stop reason
 #        This should be exposed by snapd directly
-STATUS=$(snap-query /run/snapd.socket lxd 2>/dev/null || true)
+STATUS=$(snap-query 2>/dev/null || true)
 
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
