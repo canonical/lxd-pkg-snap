@@ -534,6 +534,7 @@ parts:
     autotools-configure-parameters:
       - --prefix=
       - --with-json
+      - --disable-man-doc
     build-packages:
       - libedit-dev
       - libjansson-dev
