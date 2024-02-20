@@ -1318,6 +1318,12 @@ parts:
     source-tag: v1.0.0
     source-type: git
     plugin: python
+    organize:
+      lib/python3.10/site-packages/: lib/python3/dist-packages/
+    prime:
+      - bin/uefivars.py
+      - lib/python3/dist-packages/google_crc32c*
+      - lib/python3/dist-packages/pyuefivars*
 
   lxd:
     source: https://github.com/canonical/lxd
