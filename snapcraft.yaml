@@ -1278,6 +1278,7 @@ parts:
       - ninja-build
     stage-packages:
       - fuse3
+      - glibc-tools
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -1294,6 +1295,8 @@ parts:
       - bin/fusermount
       - bin/fusermount3
       - lib/*/libfuse3.so.*
+
+      - lib/*/libSegFault.so
 
       - bin/lxcfs
       - lib/liblxcfs.so
