@@ -1410,7 +1410,7 @@ parts:
       - pci.ids
       - pigz
       - rsync
-      - usbutils
+      - usb.ids
       - xdelta3
     plugin: nil
     override-pull: |
@@ -1490,6 +1490,7 @@ parts:
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc/pci.ids
+      - share/misc/usb.ids
 
       - bin/lxc
       - bin/lxc-to-lxd
