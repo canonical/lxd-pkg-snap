@@ -602,6 +602,7 @@ parts:
     autotools-configure-parameters:
       - --prefix=
       - --with-json
+      - --disable-man-doc
     build-packages:
       - libedit-dev
       - libjansson-dev
@@ -1377,6 +1378,17 @@ parts:
 
       patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
+  uefivars:
+    after:
+      - spice-server
+      - qemu-ovmf-secureboot
+      - nftables
+    source: https://github.com/awslabs/python-uefivars
+    source-depth: 1
+    source-tag: v1.0.0
+    source-type: git
+    plugin: python
+
   lxd:
     source: https://github.com/canonical/lxd
     source-depth: 1
@@ -1584,6 +1596,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/snap-query" \
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
+        -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
