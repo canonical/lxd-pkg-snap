@@ -24,9 +24,6 @@ if echo "${VERSION}" | grep -q ^2\.2; then
 elif echo "${VERSION}" | grep -q ^2\.1; then
     export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.1/lib/:${LD_LIBRARY_PATH}"
     export PATH="${SNAP_CURRENT}/zfs-2.1/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.0; then
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.0/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.0/bin:${PATH}"
 elif echo "${VERSION}" | grep -q ^0\.8; then
     export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.8/lib/:${LD_LIBRARY_PATH}"
     export PATH="${SNAP_CURRENT}/zfs-0.8/bin:${PATH}"
