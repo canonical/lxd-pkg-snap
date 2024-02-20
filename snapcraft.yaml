@@ -1100,6 +1100,7 @@ parts:
 
       # Include the lzma symlink
       ln -s xz "${CRAFT_PART_INSTALL}/usr/bin/lzma"
+
   zfs-2-1:
     source: https://github.com/openzfs/zfs
     source-depth: 1
