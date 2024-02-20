@@ -351,7 +351,10 @@ if [ -d "${SNAP_CURRENT}/zfs-${ZFS_VER}/bin" ]; then
     export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/lib/:${LD_LIBRARY_PATH}"
     export PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/bin:${PATH}"
 elif [ -n "${ZFS_VER}" ]; then
-    echo "==> Unsupported ZFS version (${ZFS_VER})"
+    NEWEST_ZFS_VER="$(cd "${SNAP_CURRENT}" && find -maxdepth 1 -type d -name 'zfs-*' | sort | tail -n1 | cut -d- -f2-)"
+    echo "==> Unsupported ZFS version (${ZFS_VER}), falling back to ${NEWEST_ZFS_VER}"
+    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-${NEWEST_ZFS_VER}/lib/:${LD_LIBRARY_PATH}"
+    export PATH="${SNAP_CURRENT}/zfs-${NEWEST_ZFS_VER}/bin:${PATH}"
 else
     echo "==> No ZFS support"
 fi
