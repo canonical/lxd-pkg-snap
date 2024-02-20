@@ -71,7 +71,7 @@ fi
 
 # Shutdown the daemons
 ## LXD
-echo "=> Stopping LXD (with container shutdown)"
+echo "=> Stopping LXD (with instance shutdown)"
 
 echo host-shutdown > "${SNAP_COMMON}/state"
 if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
