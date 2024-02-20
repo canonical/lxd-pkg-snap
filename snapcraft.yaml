@@ -1304,15 +1304,6 @@ parts:
     source-tag: v1.0.0
     source-type: git
     plugin: python
-    override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
-      craftctl default
     organize:
       lib/python3.10/site-packages/: lib/python3/dist-packages/
     prime:
