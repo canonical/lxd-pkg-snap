@@ -283,7 +283,6 @@ parts:
 
   dqlite:
     after:
-      - raft
       - sqlite
     source: https://github.com/canonical/dqlite
     source-depth: 1
@@ -291,15 +290,19 @@ parts:
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+      - --enable-build-raft
     stage-packages:
+      - liblz4-1
       - libuv1
     build-packages:
+      - liblz4-dev
       - libuv1-dev
     organize:
       usr/lib/: lib/
     prime:
       - lib/libdqlite*so*
       - lib/*/libuv*
+      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
 
   edk2:
     after:
@@ -993,26 +996,6 @@ parts:
     prime:
       - share/qemu/*
 
-  raft:
-    source: https://github.com/canonical/raft
-    source-depth: 1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    stage-packages:
-      - libuv1
-      - liblz4-1
-    build-packages:
-      - libuv1-dev
-      - liblz4-dev
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libraft*so*
-      - lib/*/libuv.so*
-      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
-
   sqlite:
     source: https://github.com/sqlite/sqlite
     source-depth: 1
@@ -1485,7 +1468,6 @@ parts:
       - openvswitch
       - ovn
       - qemu-ovmf-secureboot
-      - raft
       - spice-server
       - sqlite
       - squashfs-tools-ng
