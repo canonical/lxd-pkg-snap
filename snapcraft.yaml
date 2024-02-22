@@ -142,11 +142,6 @@ apps:
     plugs:
       - lxd-support
       - system-observe
-  lxc-to-lxd:
-    command: commands/lxc-to-lxd
-    plugs:
-      - lxd-support
-      - system-observe
 
 hooks:
   connect-plug-ceph-conf:
