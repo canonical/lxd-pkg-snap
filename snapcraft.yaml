@@ -1396,7 +1396,6 @@ parts:
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1445,7 +1444,6 @@ parts:
       - bin/lxc
       - bin/lxd
       - bin/lxd-agent
-      - bin/lxd-benchmark
       - bin/lxd-user
 
   lxd-ui:
