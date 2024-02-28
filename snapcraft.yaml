@@ -127,11 +127,6 @@ apps:
       - system-observe
 
   # Sub-commands
-  benchmark:
-    command: commands/lxd-benchmark
-    plugs:
-      - lxd-support
-      - system-observe
   buginfo:
     command: commands/buginfo
     plugs:
