@@ -37,10 +37,14 @@ get_bool() {
 if [ -e "/etc/.lxd_generated" ]; then
   ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 
+  if test -d /etc/ovn ; then
+    rm -rf /etc/ovn
+  fi
+
   if ! [ "${ovn_builtin:-"false"}" = "true" ]; then
     mkdir /etc/ovn
-    ln -snf "${SNAP_DATA}/microovn/api/client-cert.pem" /etc/ovn/cert_host
-    ln -snf "${SNAP_DATA}/microovn/api/client-privkey.pem" /etc/ovn/key_host
-    ln -snf "${SNAP_DATA}/microovn/api/cacert.pem" /etc/ovn/ovn-central.crt
+    ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-cert.pem" /etc/ovn/cert_host
+    ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-privkey.pem" /etc/ovn/key_host
+    ln -snf "${SNAP_DATA}/microovn/certificates/pki/cacert.pem" /etc/ovn/ovn-central.crt
   fi
 fi
