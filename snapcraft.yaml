@@ -1408,6 +1408,7 @@ parts:
       git cherry-pick -x 55bd4024dbfc315c0f57da57f2f9bd9c5c97dad1 # shared/simplestreams/products: Search only for lxd archives
       git cherry-pick -x f1c377195a1febda39d6d99ecfbc647ffcd5d740 # lxd/rsync: Merge sendSetup and Send functions
       git cherry-pick -x e1a37a5c240e068ffaff4fe20fa8af612e4143fe # lxd/rsync: Add description of cleanup function to RunWrappers
+      git cherry-pick -x 0fefac32ccd543494c07008eddb0bb621c94b19d # lxd/instance/drivers/driver/qemu: Don't leak file descriptor when probing for Direct I/O support
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
