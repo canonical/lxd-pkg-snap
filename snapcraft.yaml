@@ -67,7 +67,7 @@ plugs:
    target: "$SNAP_DATA/microceph"
  ovn-api:
    interface: content
-   target: "$SNAP_DATA/microovn/api"
+   target: "$SNAP_DATA/microovn/certificates"
  ovn-chassis:
    interface: content
    target: "$SNAP_DATA/microovn/chassis"
@@ -147,11 +147,11 @@ hooks:
     plugs:
       - lxd-support
       - system-observe
-  connect-plug-ovn-api:
+  connect-plug-ovn-certificates:
     plugs:
       - lxd-support
       - system-observe
-  disconnect-plug-ovn-api:
+  disconnect-plug-ovn-certificates:
     plugs:
       - lxd-support
       - system-observe
