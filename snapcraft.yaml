@@ -67,7 +67,7 @@ plugs:
    target: "$SNAP_DATA/microceph"
  ovn-api:
    interface: content
-   target: "$SNAP_DATA/microovn/api"
+   target: "$SNAP_DATA/microovn/certificates"
  ovn-chassis:
    interface: content
    target: "$SNAP_DATA/microovn/chassis"
@@ -127,11 +127,6 @@ apps:
       - system-observe
 
   # Sub-commands
-  benchmark:
-    command: commands/lxd-benchmark
-    plugs:
-      - lxd-support
-      - system-observe
   buginfo:
     command: commands/buginfo
     plugs:
@@ -139,11 +134,6 @@ apps:
       - system-observe
   check-kernel:
     command: commands/lxd-check-kernel
-    plugs:
-      - lxd-support
-      - system-observe
-  lxc-to-lxd:
-    command: commands/lxc-to-lxd
     plugs:
       - lxd-support
       - system-observe
@@ -157,11 +147,11 @@ hooks:
     plugs:
       - lxd-support
       - system-observe
-  connect-plug-ovn-api:
+  connect-plug-ovn-certificates:
     plugs:
       - lxd-support
       - system-observe
-  disconnect-plug-ovn-api:
+  disconnect-plug-ovn-certificates:
     plugs:
       - lxd-support
       - system-observe
@@ -283,24 +273,27 @@ parts:
 
   dqlite:
     after:
-      - raft
       - sqlite
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-tag: v1.16.2
+    source-tag: v1.16.4
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+      - --enable-build-raft
     stage-packages:
+      - liblz4-1
       - libuv1
     build-packages:
+      - liblz4-dev
       - libuv1-dev
     organize:
       usr/lib/: lib/
     prime:
       - lib/libdqlite*so*
       - lib/*/libuv*
+      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
 
   edk2:
     after:
@@ -603,6 +596,7 @@ parts:
     autotools-configure-parameters:
       - --prefix=
       - --with-json
+      - --disable-man-doc
     build-packages:
       - libedit-dev
       - libjansson-dev
@@ -993,27 +987,6 @@ parts:
     prime:
       - share/qemu/*
 
-  raft:
-    source: https://github.com/canonical/raft
-    source-depth: 1
-    source-tag: v0.18.1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    stage-packages:
-      - libuv1
-      - liblz4-1
-    build-packages:
-      - libuv1-dev
-      - liblz4-dev
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libraft*so*
-      - lib/*/libuv.so*
-      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
-
   sqlite:
     source: https://github.com/sqlite/sqlite
     source-depth: 1
@@ -1117,76 +1090,6 @@ parts:
 
       # Include the lzma symlink
       ln -s xz "${CRAFT_PART_INSTALL}/usr/bin/lzma"
-
-  zfs-0-8:
-    source: https://github.com/openzfs/zfs
-    source-depth: 1
-    source-tag: zfs-0.8.6
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=/
-      - --with-config=user
-    build-packages:
-      - libblkid-dev
-      - libssl-dev
-      - uuid-dev
-      - zlib1g-dev
-    override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-      set -ex
-
-      ZFS_VER="0.8"
-
-      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
-      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
-
-  zfs-2-0:
-    source: https://github.com/openzfs/zfs
-    source-depth: 1
-    source-tag: zfs-2.0.7
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=/
-      - --with-config=user
-    build-packages:
-      - libblkid-dev
-      - libssl-dev
-      - uuid-dev
-      - zlib1g-dev
-    override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-      set -ex
-
-      ZFS_VER="2.0"
-
-      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
-      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
@@ -1381,6 +1284,32 @@ parts:
 
       patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
+  uefivars:
+    after:
+      - spice-server
+      - qemu-ovmf-secureboot
+      - nftables
+    source: https://github.com/awslabs/python-uefivars
+    source-depth: 1
+    source-tag: v1.0.0
+    source-type: git
+    plugin: python
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
+    organize:
+      lib/python3.10/site-packages/: lib/python3/dist-packages/
+    prime:
+      - bin/uefivars.py
+      - lib/python3/dist-packages/google_crc32c*
+      - lib/python3/dist-packages/pyuefivars*
+
   lxd:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
@@ -1405,7 +1334,7 @@ parts:
       - python3-dev
       - python3-venv
     build-snaps:
-      - go/1.21/stable
+      - go/1.22/stable
     stage-packages:
       - acl
       - attr
@@ -1416,7 +1345,7 @@ parts:
       - pci.ids
       - pigz
       - rsync
-      - usbutils
+      - usb.ids
       - xdelta3
     plugin: nil
     override-pull: |
@@ -1465,10 +1394,8 @@ parts:
 
       # Build the binaries
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
       go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
       if [ "$(uname -m)" != "riscv64" ]; then
@@ -1512,12 +1439,11 @@ parts:
       - etc/bash_completion.d/snap.lxd.lxc
 
       - share/misc/pci.ids
+      - share/misc/usb.ids
 
       - bin/lxc
-      - bin/lxc-to-lxd
       - bin/lxd
       - bin/lxd-agent
-      - bin/lxd-benchmark
       - bin/lxd-user
 
   lxd-ui:
@@ -1554,22 +1480,6 @@ parts:
     prime:
       - bin/setup-shmounts
 
-  snap-query:
-    source: snap-query/
-    build-snaps:
-      - go/1.21/stable
-    plugin: nil
-    override-build: |
-      set -ex
-
-      # Setup build environment
-      export GOPATH="$(realpath ./.go)"
-
-      # Build the binaries
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
-    prime:
-      - bin/snap-query
-
   strip:
     after:
       - btrfs
@@ -1582,7 +1492,6 @@ parts:
       - openvswitch
       - ovn
       - qemu-ovmf-secureboot
-      - raft
       - spice-server
       - sqlite
       - squashfs-tools-ng
@@ -1592,8 +1501,6 @@ parts:
       - xz
       - wrappers
       - xtables
-      - zfs-0-8
-      - zfs-2-0
       - zfs-2-1
       - zfs-2-2
       - zstd
@@ -1602,7 +1509,6 @@ parts:
       - criu
       - lxd
       - shmounts
-      - snap-query
     plugin: nil
     override-prime: |
       set -x
@@ -1620,8 +1526,10 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/lxc-checkconfig" \
         -not -path "${CRAFT_PRIME}/bin/nvidia-container-cli" \
         -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${CRAFT_PRIME}/bin/snap-query" \
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
+        -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
@@ -1669,6 +1577,7 @@ parts:
     plugin: dump
     source: snapcraft/
     organize:
+      commands/snap-query: bin/
       hooks/: snap/hooks/
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/

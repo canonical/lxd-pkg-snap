@@ -37,6 +37,6 @@ get_bool() {
 if [ -e "/etc/.lxd_generated" ]; then
   openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
   if ! [ "${openvswitch_builtin:-"false"}" = "true" ]; then
-      ln -snf "${SNAP_DATA}/microovn/chassis" /run/openvswitch
+      ln -snf "${SNAP_DATA}/microovn/chassis/switch" /run/openvswitch
   fi
 fi
