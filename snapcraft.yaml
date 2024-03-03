@@ -551,16 +551,6 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
-  nano:
-    plugin: nil
-    stage-packages:
-      - nano
-    organize:
-      usr/bin/: bin/
-    prime:
-      - bin/nano
-      - etc/nanorc
-
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
@@ -1487,7 +1477,6 @@ parts:
       - dqlite
       - logrotate
       - lvm
-      - nano
       - nvidia-container
       - openvswitch
       - ovn
