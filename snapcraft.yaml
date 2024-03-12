@@ -612,7 +612,7 @@ parts:
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
     source-depth: 1
-    source-tag: v1.14.5
+    source-tag: v1.14.6
     source-type: git
     plugin: make
     build-packages:
