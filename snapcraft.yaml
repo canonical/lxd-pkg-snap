@@ -551,16 +551,6 @@ parts:
       - lib/*/liblvm*
       - lib/*/libreadline.so*
 
-  nano:
-    plugin: nil
-    stage-packages:
-      - nano
-    organize:
-      usr/bin/: bin/
-    prime:
-      - bin/nano
-      - etc/nanorc
-
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
@@ -1094,7 +1084,7 @@ parts:
   zfs-2-1:
     source: https://github.com/openzfs/zfs
     source-depth: 1
-    source-tag: zfs-2.1.14
+    source-tag: zfs-2.1.15
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1129,7 +1119,7 @@ parts:
   zfs-2-2:
     source: https://github.com/openzfs/zfs
     source-depth: 1
-    source-tag: zfs-2.2.2
+    source-tag: zfs-2.2.3
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1450,7 +1440,7 @@ parts:
     source: https://github.com/canonical/lxd-ui
     source-depth: 1
     source-type: git
-    source-tag: 0.6
+    source-tag: 0.7
     plugin: nil
     override-prime: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
@@ -1487,7 +1477,6 @@ parts:
       - dqlite
       - logrotate
       - lvm
-      - nano
       - nvidia-container
       - openvswitch
       - ovn
