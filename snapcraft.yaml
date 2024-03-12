@@ -994,7 +994,7 @@ parts:
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-depth: 1
-    source-tag: v1.2.0
+    source-tag: v1.3.0
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
