@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - latest-candidate
+      - 5.21-candidate
 
 permissions:
   contents: read
