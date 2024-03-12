@@ -686,7 +686,7 @@ parts:
       - openvswitch
     source: https://github.com/ovn-org/ovn
     source-depth: 1
-    source-tag: v23.09.1
+    source-tag: v24.03.0
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
