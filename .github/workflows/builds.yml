@@ -3,7 +3,7 @@ on:
   pull_request:
   push:
     branches:
-      - latest-edge
+      - 5.21-edge
 
 permissions:
   contents: read
