@@ -406,6 +406,13 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
         fi
     fi
 
+    if [ -e /proc/sys/fs/inotify/max_user_watches ]; then
+        if [ "$(cat /proc/sys/fs/inotify/max_user_watches)" -lt "1048576" ]; then
+            echo "==> Increasing the number of inotify user watches"
+            echo 1048576 > /proc/sys/fs/inotify/max_user_watches || true
+        fi
+    fi
+
     if [ -e /proc/sys/kernel/keys/maxkeys ]; then
         if [ "$(cat /proc/sys/kernel/keys/maxkeys)" -lt "2000" ]; then
             echo "==> Increasing the number of keys for a nonroot user"
