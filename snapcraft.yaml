@@ -803,7 +803,7 @@ parts:
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
     source-depth: 1
-    source-tag: import/1%8.1.3+ds-1ubuntu2
+    source-tag: import/1%8.2.1+ds-1ubuntu5
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
