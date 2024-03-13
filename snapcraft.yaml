@@ -2,7 +2,7 @@ name: lxd
 base: core22
 assumes:
   - snapd2.39
-version: "5.20"
+version: "5.21.0"
 grade: stable
 summary: LXD - container and VM manager
 license: AGPL-3.0
@@ -1304,7 +1304,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-tag: lxd-5.20
+    source-tag: v5.21.0
     source-type: git
     after:
       - lxc
@@ -1360,22 +1360,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x d4c975ad30906b96867863538f34f6e2db4e9752 # lxd/apparmor/instance_qemu: only allow QEMU system emulator
-      git cherry-pick -x ce24649a9164a7eecc4fcc4d9f7ec98bf29b2ec8 # lxd/apparmor/instance_qemu: remove partial duplication of unix rule
-      git cherry-pick -x ee8a111b2cec7724346054ee7d2d0297ec34bb3e # lxd/instance/qemu: Start using seabios as CSM firmware
-      git cherry-pick -x 1441e5956285d65a9d79c9d402b761e0813b40aa # lxd/instance/drivers/driver_qemu: force SeaBIOS CSM firmware instead of OVMF
-      git cherry-pick -x 8f8f17f91e052cefdcd51091dbc258c1aecf3721 # instance/qemu: support extended firmware search algorithm
-      git cherry-pick -x 7e61b93e5116c2ec3804dbe40afee308fc786320 # instance/qemu: rename ovmf mentions
-      git cherry-pick -x be489048500718a3a6b96f1a786d4be7568be6cc # instance/qemu: do some sanity checks around enabling security.csm
-      git cherry-pick -x 62ee9ff4c4baa0412b316f55e1eed9a15d9a79c4 # lxd/instance/drivers/driver_qemu: use bios-256k.bin instead of seabios.bin
-      git cherry-pick -x 6df2cd00c48834dab78710ccdc448f28b137d1c2 # lxc/move: Only use server-side move when dealing with a single server
-      git cherry-pick -x be930d736fb58dc8bcf91f1623e7521f273c5dc3 # lxd/sys: handle apparmor unconfined profile mode appropriately
-      git cherry-pick -x 148876f05843288a8611cf5c1183585866d4ba56 # lxd/apparmor: allow confined services to receive required signals
-      git cherry-pick -x e6901cde38f6d53fcaae906681582338da6fa899 # lxd/sys: add comment clarifying AppArmor unconfined profile mode
-      git cherry-pick -x 3681d5e54649fcc2fc9375b6820c1133f140228d # shared/simplestreams/products: Fix regression in parsing version files
-      git cherry-pick -x 56364f5a97373155d5e6a5a6b10d06d16a25fb3c # shared/simplestreams/simplestreams: Improve error messages
-      git cherry-pick -x 4ea61558b59ff2e5f14f137a95f81accfc6b98d0 # lxd/auth/tls: Return falsy permission checker when client is restricted
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
