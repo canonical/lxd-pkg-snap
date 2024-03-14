@@ -7,9 +7,6 @@ run_cmd() {
     export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     export HOME="${SNAP_REAL_HOME}"
     export USER="${USERNAME}"
-    [ -z "${XDG_DATA_HOME:-}" ] && export XDG_DATA_HOME="${HOME}/.local/share/"
-    [ -z "${XDG_CONFIG_HOME:-}" ] && export XDG_CONFIG_HOME="${HOME}/.config/"
-    [ -z "${XDG_STATE_HOME:-}" ] && export XDG_STATE_HOME="${HOME}/.local/state/"
 
     exec unshare -U -r chroot "/var/lib/snapd/hostfs/" "${CMD}" "$@"
 }
