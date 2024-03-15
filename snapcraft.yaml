@@ -65,7 +65,7 @@ plugs:
  ceph-conf:
    interface: content
    target: "$SNAP_DATA/microceph"
- ovn-api:
+ ovn-certificates:
    interface: content
    target: "$SNAP_DATA/microovn/certificates"
  ovn-chassis:
