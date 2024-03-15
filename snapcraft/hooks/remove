@@ -10,7 +10,7 @@ if [ -d /sys/kernel/security/apparmor ]; then
 fi
 
 # Unmount potential LXD paths.
-for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMON}/ns" "${SNAP_COMMON}/var/lib/lxcfs/"; do
+for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMON}/ns" "${SNAP_COMMON}/var/lib/lxcfs/" "${SNAP_COMMON}/shmounts"; do
     nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
 
