@@ -1361,6 +1361,58 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 22936cfc4a146e54feaae95f28e3148e482fdaed # test/suites/basic: check version number format (X.Y.Z for LTSes, X.Y otherwise)
+      git cherry-pick -x dae532189c05dc569fbdfd99269076d4eec7442c # lxd/storage/s3/miniod: Specify a port for minio --console-address
+      git cherry-pick -x e201ef9825faea72eb5fba91a3b4f992b91b9252 # lxc: Add context to socket access errors
+      git cherry-pick -x 24ffbc19d4e26d4799d8d9c03aed69ab7c04037c # doc/devices/nic: add missing spaces
+      git cherry-pick -x 7fae45c3bb39e0fcdf17a8350ca85c0c01189fe5 # doc/devices/unix-*: add configuration examples
+      git cherry-pick -x 1488f502b83cb3386bcaa72d6427b9f9e0dd748e # doc/explanation: Add authorization explanation page.
+      git cherry-pick -x 399e5ac616ef431b3a4f5ce8dc3fc47a13e661d8 # doc: Add instructions for OIDC clients post 'access_management' extension.
+      git cherry-pick -x ff9818c8291f9af2dca78d317ee49787a5c1cc05 # doc: Update authentication page for authorization.
+      git cherry-pick -x a97f1059c0f2076206f3ca855464f074fbab9f41 # doc: Add links to authorization page.
+      git cherry-pick -x 320cfa306886d28f7c4cff160842aa87a691cb0b # doc: Add IAM related words to wordlist.
+      git cherry-pick -x 046acf3bf826019aa758e54bd1a50458d1e2036c # lxd/auth: Remove no-op methods from authorizer interface.
+      git cherry-pick -x a59d90b6173b3cde0aceca0a0e60bfff380e331c # lxd/instance/drivers: Remove authorizer calls to no-op methods.
+      git cherry-pick -x 73b580f71666bfde8fdd27521dffc12c8e12caba # lxd/storage: Remove authorizer calls to no-op methods.
+      git cherry-pick -x ad363c2129be7ff8f2d4e337e0d9a7166cf6ee3c # lxd: Remove authorizer calls to no-op methods.
+      git cherry-pick -x 7042ae111df1e844d011907b5d97b2fb9275f00d # doc/devices: add CLI examples for more device types
+      git cherry-pick -x ebadc0d061487183223b76b6c88ecab11cafd72b # doc: except commands from the spelling check
+      git cherry-pick -x 686da722fc877a25decdeeb5223cac0ba65766fd # lxc: Correctly parse remote when listing permissions.
+      git cherry-pick -x 0b363a34729f3f496b15e6c2298802ddc7b4328e # doc/devices/proxy: add CLI examples for proxy device
+      git cherry-pick -x 352c970cafefab9a956840f9513c4f7e9a90e44e # doc/devices/gpu: add configuration examples for gpu devices
+      git cherry-pick -x 9bc8b517b5e797822c2c1d5bb2587cddae4106c6 # lxd/patches: Add patchStorageSetVolumeUUIDV2
+      git cherry-pick -x 11f327e071dc9352e47b07748acd3257a5942f77 # lxd/patches: Deactivate patchStorageSetVolumeUUID
+      git cherry-pick -x 019b02e604e1985dad2a0bd5692d057542fa4304 # lxd/storage/backend_lxd: Ensure new images have a volatile.UUID
+      git cherry-pick -x c23e498b2b145258821b6d437230bc3595bb34fd # lxd: Pre-check permissions when performing bulk state update.
+      git cherry-pick -x f228adf2f153fbcaa53eabd4ac2540f897af4563 # scripts: Add bash completions for `lxc auth`
+      git cherry-pick -x ba597630ea9e8921c48be8cdf98b947e479d825c # lxd: Improves efficiency of operation cancel with permission checker.
+      git cherry-pick -x 3c753929a6102e7e131f2cfea2fd4475a8370a59 # lxd: Update `X-Xss-Protection` (deprecated) for `Content-Security-Policy`
+      git cherry-pick -x 69ab06427315f52cc173f8ecb02653219a209065 # lxd: add explanations on the security headers provided for the UI responses.
+      git cherry-pick -x 2417c04d1fe56c9c492134914eb5d9ba6bf9d6f1 # lxd/storage/drivers/btrfs: Add createVolumeFromCopy for copy and refresh
+      git cherry-pick -x dd2ea027d3ac26ab82807d5be4037329dce99067 # lxd/storage/drivers/btrfs: Use createVolumeFromCopy when copying a volume
+      git cherry-pick -x 3552fa11876a5c85fd03dafe9c4a4770423ee703 # lxd/storage/drivers/btrfs: Use createVolumeFromCopy when refreshing a volume
+      git cherry-pick -x c455eae3ef89608a061fb4611cbf5a9e6910b86b # shared/api: Implement xerrors.Unwrap for StatusError.
+      git cherry-pick -x 75bac17c455de6c3bc6c8195145ff4d3b0ea23be # lxd/auth: Wrap errors in api.StatusErrorf.
+      git cherry-pick -x 07f3894af7f2e12e469f4b9eb2ae72c69832114b # lxd/response: Wrap errors in api.StatusErrorf.
+      git cherry-pick -x 814eeaa8e55244d754733cdc3ed68524d2475859 # lxd: Wrap errors in api.StatusErrorf.
+      git cherry-pick -x 6ba07ea510c1bb1055bd4043893326a58c74f356 # lxc: Wrap errors in api.StatusErrorf.
+      git cherry-pick -x 755e0a6ff28dad4444e597a53265e722545858fd # lxd/auth: Return appropriate HTTP error codes when getting request details.
+      git cherry-pick -x 543e0f8802879eb89fe0ddd001bfaea64b20f39e # lxd/request: Add a `CtxTrusted` context key.
+      git cherry-pick -x 245766b6b6f574245f8581ab16a4a448f9f26295 # lxd/auth: Get authentication status from request.
+      git cherry-pick -x 859f42db74df5bc3a8f35e441aa60195bbfb098f # lxd/auth: Handle untrusted requests in authorizer.
+      git cherry-pick -x b22e3f8f0e824f59a39eaccf04a3efa55468bf2c # lxd: Add `trusted` value to context.
+      git cherry-pick -x 6421945b5e35b78066088bca2a073e5b00ef764c # lxd: Remove checkTrustedClient method.
+      git cherry-pick -x 1a64ae50a7b22574457b0c78041c920daf400545 # lxd: Update allowAuthenticated access handler.
+      git cherry-pick -x ef6d7b9151e899daa2b9465903cf275ad187bd06 # lxd: Remove call to `checkTrustedClient`.
+      git cherry-pick -x 0ad17b457a33f7fc64af7109a07685a430546a92 # lxd: Handle certificate creation from untrusted users.
+      git cherry-pick -x 25b2af294d08d6581cd81e64b0f056e07dbe2a51 # lxd: Remove `Authenticate` call from operation wait handler.
+      git cherry-pick -x 66e19d0b5723c70954c5c39a071295e00a6630dd # lxd: Remove `isTrustedClient` call from image export handler.
+      git cherry-pick -x 43f3320c1777cac5f7560cbfefe644e75d0d7b42 # lxd: Remove `isTrustedClient` call from image alias get handler.
+      git cherry-pick -x 881a3e39cfd4d1552539ae40dab42466f68abf65 # lxd: Remove `isTrustedClient` call from image get handler.
+      git cherry-pick -x e21ee8d3424f09c46fe6f78b8c6d5adef97e50ad # lxd: Remove `isTrustedClient` call from images get handler.
+      git cherry-pick -x 391aef2f03b4f2d033e155e89be5f2914a8d0b2d # lxd: Remove `isTrustedClient` call from images post handler.
+      git cherry-pick -x df17187fe0962264871146a9d28feb571a5f1960 # lxd/project: Update cluster target restriction tests.
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
