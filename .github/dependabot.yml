@@ -12,6 +12,13 @@ updates:
     labels: []
     schedule:
       interval: "weekly"
+    target-branch: "5.21-edge"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels: []
+    schedule:
+      interval: "weekly"
     target-branch: "5.0-edge"
 
   - package-ecosystem: "github-actions"
