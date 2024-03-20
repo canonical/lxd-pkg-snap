@@ -56,16 +56,6 @@ if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
     exit 0
 fi
 
-# Setup the "lxd" user
-if ! getent passwd lxd >/dev/null 2>&1; then
-    echo "==> Creating \"lxd\" user"
-    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --extrausers lxd || true
-    else
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false lxd || true
-    fi
-fi
-
 # Setup the "lxd" group
 if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
@@ -73,6 +63,16 @@ if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
         nsenter -t 1 -m groupadd --system --extrausers lxd || true
     else
         nsenter -t 1 -m groupadd --system lxd || true
+    fi
+fi
+
+# Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd --extrausers lxd || true
+    else
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd lxd || true
     fi
 fi
 
