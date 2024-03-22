@@ -1268,6 +1268,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x ce8e6e973c1b4fb1261b29ec02dad069bff61c6c # sysfs: forbid write()
+
       set +ex
       craftctl default
       set -ex
