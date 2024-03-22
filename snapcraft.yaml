@@ -1223,7 +1223,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-depth: 1
+    #source-depth: 1
     source-type: git
     source-tag: lxcfs-5.0.4
     build-packages:
