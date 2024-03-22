@@ -1409,6 +1409,8 @@ parts:
       git cherry-pick -x f1c377195a1febda39d6d99ecfbc647ffcd5d740 # lxd/rsync: Merge sendSetup and Send functions
       git cherry-pick -x e1a37a5c240e068ffaff4fe20fa8af612e4143fe # lxd/rsync: Add description of cleanup function to RunWrappers
       git cherry-pick -x 0fefac32ccd543494c07008eddb0bb621c94b19d # lxd/instance/drivers/driver/qemu: Don't leak file descriptor when probing for Direct I/O support
+      git cherry-pick -x 8e22091af07f29c0c626b1746689491c8bedbaa8 # incusd/instance/qemu: Cap hotplug CPU slots to 64
+      git cherry-pick -x eff4a63e9b5804066437df995fbc4fbcddf4daf0 # incusd/instance/qemu: Fix handling of > 64 limits.cpu
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
