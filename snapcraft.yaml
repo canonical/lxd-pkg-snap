@@ -1221,7 +1221,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-depth: 1
+    #source-depth: 1
     source-type: git
     build-packages:
       - libfuse3-dev
