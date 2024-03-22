@@ -58,6 +58,8 @@ echo "==> Loading snap configuration"
 # shellcheck disable=SC1091
 . "${SNAP_COMMON}/config"
 
+daemon_group="${daemon_group:-"lxd"}"
+
 # Create the main directory
 if [ ! -d "${SNAP_COMMON}/lxd" ]; then
     echo "==> Creating ${SNAP_COMMON}/lxd"
@@ -272,20 +274,20 @@ for entry in dev proc sys; do
     mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
 done
 
-# FIXME: Setup the "lxd" user
+# Setup the "lxd" user
 if ! getent passwd lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" user"
-    if grep -q "^passwd.*extrausers" /etc/nsswitch.conf; then
-        nsenter -t 1 -m useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false --extrausers lxd || true
+    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --extrausers lxd || true
     else
-        nsenter -t 1 -m useradd --system -M -N --home /var/snap/lxd/common/lxd --shell /bin/false lxd || true
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false lxd || true
     fi
 fi
 
-# FIXME: Setup the "lxd" group
-if [ "${daemon_group:-"lxd"}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
+# Setup the "lxd" group
+if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
-    if grep -q "^group.*extrausers" /etc/nsswitch.conf; then
+    if grep -q "^group.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
         nsenter -t 1 -m groupadd --system --extrausers lxd || true
     else
         nsenter -t 1 -m groupadd --system lxd || true
