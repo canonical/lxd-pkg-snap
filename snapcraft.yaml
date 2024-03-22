@@ -698,6 +698,8 @@ parts:
       - bin/ovn-sbctl
 
   spice-protocol:
+    after:
+      - virt-v2v
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-depth: 1
     source-tag: v0.14.4
@@ -760,6 +762,49 @@ parts:
       - lib/*/libjpeg*so*
       - lib/*/libspice-server*so*
       - lib/*/libpixman*so*
+
+  virt-v2v:
+    source: https://github.com/libguestfs/virt-v2v
+    source-tag: v2.4.0
+    source-type: git
+    source-depth: 1
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=
+    build-packages:
+      - genisoimage
+      - gettext
+      - libguestfs-ocaml-dev
+      - libjansson-dev
+      - libnbd-ocaml-dev
+      - libosinfo-1.0-dev
+      - libpcre2-dev
+      - libvirt-ocaml-dev
+      - libxml2-dev
+      - pkg-config
+    stage-packages:
+      - libguestfs0
+      - libnbd0
+      - libosinfo-1.0-0
+      - libfuse2
+      - libyajl2
+      - libvirt0
+    organize:
+      usr/bin/: bin/
+      usr/lib/: lib/
+    stage:
+      - bin/virt-v2v
+      - bin/virt-v2v-in-place
+      - bin/virt-v2v-inspector
+      - lib/*/libfuse.so*
+      - lib/*/libguestfs.so*
+      - lib/*/libnbd.so*
+      - lib/*/libosinfo*so*
+      - lib/*/libsoup*so*
+      - lib/*/libvirt.so*
+      - lib/*/libxml2.so*
+      - lib/*/libxslt.so*
+      - lib/*/libyajl.so*
 
   swtpm:
     after:
