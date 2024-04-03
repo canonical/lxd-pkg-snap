@@ -1168,7 +1168,7 @@ parts:
     source: https://github.com/lxc/lxc
     source-depth: 1
     source-type: git
-    source-tag: lxc-5.0.3
+    source-tag: v6.0.0
     build-packages:
       - dpkg-dev
       - libapparmor-dev
