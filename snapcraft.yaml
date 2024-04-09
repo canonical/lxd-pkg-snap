@@ -1361,6 +1361,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x ddfdeb3bfcd38e39121487180903a4316d1ba66b # UI: Add canonical.com domain to content security policy, so the ui can load data from images.lxd.canonical.com
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
