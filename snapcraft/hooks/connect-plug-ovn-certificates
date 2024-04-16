@@ -42,7 +42,7 @@ if [ -e "/etc/.lxd_generated" ]; then
   fi
 
   if ! [ "${ovn_builtin:-"false"}" = "true" ]; then
-    mkdir /etc/ovn
+    mkdir -p /etc/ovn
     ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-cert.pem" /etc/ovn/cert_host
     ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-privkey.pem" /etc/ovn/key_host
     ln -snf "${SNAP_DATA}/microovn/certificates/pki/cacert.pem" /etc/ovn/ovn-central.crt
