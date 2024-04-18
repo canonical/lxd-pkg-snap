@@ -1452,24 +1452,28 @@ parts:
 
   lxd-ui:
     source: https://github.com/canonical/lxd-ui
+    source-depth: 1
     source-type: git
     plugin: nil
-    override-pull: |
+    override-prime: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
-      snapcraftctl pull
-      set -ex
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" = "riscv64" ] && exit 0
 
-      snap install node --channel=18/stable --classic || true
+      snap install node --channel=20/stable --classic
+      craftctl default
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
-      set -ex
+
+      craftctl default
 
       npm install yarn --global
       yarn install
       yarn build
 
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share"
-      cp -R build/ui "${SNAPCRAFT_PART_INSTALL}/share/lxd-ui/"
+      mkdir -p "${CRAFT_PART_INSTALL}/share"
+      cp -R build/ui "${CRAFT_PART_INSTALL}/share/lxd-ui/"
     prime:
       - share/lxd-ui*
 
