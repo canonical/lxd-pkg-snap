@@ -327,13 +327,13 @@ if [ "${ovn_builtin:-"false"}" = "true" ]; then
     ln -s "${SNAP_COMMON}/ovn" /etc/ovn
 elif [ -d "${SNAP_DATA}/microovn/certificates/pki" ]; then
     echo "=> Detected MicroOVN Content Interface"
-    mkdir /etc/ovn
+    mkdir -p /etc/ovn
     ln -s "${SNAP_DATA}/microovn/certificates/pki/client-cert.pem" /etc/ovn/cert_host
     ln -s "${SNAP_DATA}/microovn/certificates/pki/client-privkey.pem" /etc/ovn/key_host
     ln -s "${SNAP_DATA}/microovn/certificates/pki/cacert.pem" /etc/ovn/ovn-central.crt
 elif [ -d /var/snap/microovn/ ]; then
     echo "=> Detected MicroOVN"
-    mkdir /etc/ovn
+    mkdir -p /etc/ovn
     ln -s /var/snap/microovn/common/data/pki/client-cert.pem /etc/ovn/cert_host
     ln -s /var/snap/microovn/common/data/pki/client-privkey.pem /etc/ovn/key_host
     ln -s /var/snap/microovn/common/data/pki/cacert.pem /etc/ovn/ovn-central.crt
