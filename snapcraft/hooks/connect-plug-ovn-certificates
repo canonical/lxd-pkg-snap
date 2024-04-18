@@ -37,7 +37,10 @@ get_bool() {
 if [ -e "/etc/.lxd_generated" ]; then
   ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 
-  if test -d /etc/ovn ; then
+  # Remove any symlink or cleanup the directory we created
+  if [ -L /etc/ovn ]; then
+    rm -f /etc/ovn
+  elif [ -d /etc/ovn ]; then
     rm -rf /etc/ovn
   fi
 
