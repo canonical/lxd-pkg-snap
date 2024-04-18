@@ -37,14 +37,17 @@ get_bool() {
 if [ -e "/etc/.lxd_generated" ]; then
   ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
 
-  # Remove any symlink or cleanup the directory we created
+  echo "==> Cleaning up OVN configuration"
   if [ -L /etc/ovn ]; then
+    echo "=> Removing /etc/ovn symlink"
     rm -f /etc/ovn
   elif [ -d /etc/ovn ]; then
+    echo "=> Removing /etc/ovn directory"
     rm -rf /etc/ovn
   fi
 
   if ! [ "${ovn_builtin:-"false"}" = "true" ]; then
+    echo "=> Configuring MicroOVN Content Interface"
     mkdir -p /etc/ovn
     ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-cert.pem" /etc/ovn/cert_host
     ln -snf "${SNAP_DATA}/microovn/certificates/pki/client-privkey.pem" /etc/ovn/key_host
