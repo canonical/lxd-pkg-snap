@@ -1417,6 +1417,9 @@ parts:
       git cherry-pick -x 43dfdce8d90bd029a503fe94d7609cb34359c1c2 # instance/drivers/driver_lxc: do not set "soft" limit when hard limit is set
       git cherry-pick -x 79dcfe6bced1998fdf1c213a6bbad17fce6e540a # lxd/instance: Reject limits.kernel config for VMs
       git cherry-pick -x 2b62f940826bfe2e18112f19e827a61f8b659c9d # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
+      git cherry-pick -x 482241ed1f692be3c0bd45161dd0a8beca7e85c5 # lxd/network/acl: Change protocol field for ovn logs
+      git cherry-pick -x c35ac36962dd5cf691ff2b464055648ff8bcf463 # lxd/device/nic_ovn: Only stop device if network is populated
+      git cherry-pick -x 551c252d1653360ccfda981b7a9a42fc8eed5370 # lxd/storage/drivers: Always use default block.filesysem for VM volumes
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
