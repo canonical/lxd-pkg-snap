@@ -60,7 +60,7 @@ jobs:
           ver=($(lxd-snapcraft -package lxd -get-version -file ~/lxd-pkg-snap-lp/snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
           cd ~/lxd-pkg-snap-lp
-          lxd-snapcraft -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
+          lxd-snapcraft -package lxd -set-version "${ver[0]}" -set-source-commit "${ver[1]}"
           git add --all
           git commit --all --quiet -s --allow-empty -m "Automatic upstream build (${TARGET})" -m "Upstream commit: ${localRev}"
           git show
