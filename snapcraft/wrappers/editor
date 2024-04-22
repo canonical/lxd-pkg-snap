@@ -7,9 +7,17 @@ run_cmd() {
     export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     export HOME="${SNAP_REAL_HOME}"
     export USER="${USERNAME}"
+    IGNORERCFILES=""
+    if [ "${HOME}" != "/root" ] && [ "${CMD}" = "nano" ]; then
+        export XDG_DATA_HOME="${HOME}/.local/share"
+        if [ ! -d "/var/lib/snapd/hostfs/${XDG_DATA_HOME}" ]; then
+            echo "Instructing nano to ignore RC files due to missing directory: \"${XDG_DATA_HOME}\""
+           IGNORERCFILES="--ignorercfiles"
+        fi
+    fi
 
     # shellcheck disable=SC2145
-    exec unshare --kill-child -U -m -p -r -f --root="/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" \"$@\""
+    exec unshare --kill-child -U -m -p -r -f --root="/var/lib/snapd/hostfs/" "/bin/sh" -c "mount -t proc proc /proc 2>/dev/null || true; exec \"${CMD}\" ${IGNORERCFILES} \"$@\""
 }
 
 # Detect base name
