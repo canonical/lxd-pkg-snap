@@ -318,15 +318,6 @@ sed \
     "${SNAP}/etc/lvm/lvm.conf" > /etc/lvm/lvm.conf
 
 # Setup for OVN
-echo "==> Cleaning up OVN configuration"
-if [ -L /etc/ovn ]; then
-    echo "=> Removing /etc/ovn symlink"
-    rm -f /etc/ovn
-elif [ -d /etc/ovn ]; then
-    echo "=> Removing /etc/ovn directory"
-    rm -rf /etc/ovn
-fi
-
 echo "==> Setting up OVN configuration"
 if [ "${ovn_builtin:-"false"}" = "true" ]; then
     echo "=> Using builtin OVN"
