@@ -274,16 +274,6 @@ for entry in dev proc sys; do
     mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
 done
 
-# Setup the "lxd" user
-if ! getent passwd lxd >/dev/null 2>&1; then
-    echo "==> Creating \"lxd\" user"
-    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --extrausers lxd || true
-    else
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false lxd || true
-    fi
-fi
-
 # Setup the "lxd" group
 if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
@@ -291,6 +281,16 @@ if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
         nsenter -t 1 -m groupadd --system --extrausers lxd || true
     else
         nsenter -t 1 -m groupadd --system lxd || true
+    fi
+fi
+
+# Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd --extrausers lxd || true
+    else
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd lxd || true
     fi
 fi
 
@@ -323,15 +323,34 @@ sed \
 # Setup for OVN
 echo "==> Setting up OVN configuration"
 if [ "${ovn_builtin:-"false"}" = "true" ]; then
+    echo "=> Using builtin OVN"
     mkdir -p "${SNAP_COMMON}/ovn"
     ln -s "${SNAP_COMMON}/ovn" /etc/ovn
 elif [ -d "${SNAP_DATA}/microovn/certificates/pki" ]; then
+    echo "==> Cleaning up OVN configuration"
+    if [ -L /etc/ovn ]; then
+        echo "=> Removing /etc/ovn symlink"
+        rm -f /etc/ovn
+    elif [ -d /etc/ovn ]; then
+        echo "=> Removing /etc/ovn directory"
+        rm -rf /etc/ovn
+    fi
+
     echo "=> Detected MicroOVN Content Interface"
     mkdir -p /etc/ovn
     ln -s "${SNAP_DATA}/microovn/certificates/pki/client-cert.pem" /etc/ovn/cert_host
     ln -s "${SNAP_DATA}/microovn/certificates/pki/client-privkey.pem" /etc/ovn/key_host
     ln -s "${SNAP_DATA}/microovn/certificates/pki/cacert.pem" /etc/ovn/ovn-central.crt
 elif [ -d /var/snap/microovn/ ]; then
+    echo "==> Cleaning up OVN configuration"
+    if [ -L /etc/ovn ]; then
+        echo "=> Removing /etc/ovn symlink"
+        rm -f /etc/ovn
+    elif [ -d /etc/ovn ]; then
+        echo "=> Removing /etc/ovn directory"
+        rm -rf /etc/ovn
+    fi
+
     echo "=> Detected MicroOVN"
     mkdir -p /etc/ovn
     ln -s /var/snap/microovn/common/data/pki/client-cert.pem /etc/ovn/cert_host
