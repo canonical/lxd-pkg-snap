@@ -628,9 +628,8 @@ for pid in $(pgrep -f "lxd(\.debug)? --logfile"); do
     # to a file using the `/proc` path and comparing the content seen from
     # the `/var` path, we can conclude if the LXD daemon is executing
     # in the same mount namespace as ours (safe to kill) or not (ignore).
-    rm -f "/var/snap/lxd/common/lxd/.validate"
-    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
-    if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
+    echo "$$" > "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
+    if [ "$(cat /var/snap/lxd/common/lxd/.validate 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
         rm -f "/var/snap/lxd/common/lxd/.validate"
