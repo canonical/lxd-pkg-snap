@@ -620,7 +620,8 @@ fi
 # LXD
 ## Check for existing LXDs
 for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
-    grep -qF "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
+    # Cheap confirmation that we likely have a LXD PID
+    grep -qxFm1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
     # Confirm the PID found by pgrep is indeed ours and was not recycled
     # If the PID's root leads to the server.key we know it was indeed a LXD process
