@@ -605,6 +605,11 @@ for pid in $(pgrep -f "lxd(\.debug)? --logfile"); do
     # Cheap confirmation that we likely have a LXD PID
     grep -q --line-regexp --fixed-strings --max-count=1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
+    # Confirm the PID found by pgrep is indeed ours and not one from
+    # a nested instance also running LXD or a recycled PID. By writing
+    # to a file using the `/proc` path and comparing the content seen from
+    # the `/var` path, we can conclude if the LXD daemon is executing
+    # in the same mount namespace as ours (safe to kill) or not (ignore).
     rm -f "/var/snap/lxd/common/lxd/.validate"
     touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
     if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
