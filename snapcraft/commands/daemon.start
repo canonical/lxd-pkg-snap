@@ -622,12 +622,11 @@ fi
 for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
     grep -qF "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
-    rm -f "/var/snap/lxd/common/lxd/.validate"
-    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
-    if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
+    # Confirm the PID found by pgrep is indeed ours and was not recycled
+    # If the PID's root leads to the server.key we know it was indeed a LXD process
+    if [ -r "/proc/${pid}/root/var/snap/lxd/common/lxd/server.key" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
-        rm -f "/var/snap/lxd/common/lxd/.validate"
     fi
 done
 
