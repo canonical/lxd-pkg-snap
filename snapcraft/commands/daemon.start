@@ -619,7 +619,7 @@ fi
 
 # LXD
 ## Check for existing LXDs
-for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
+for pid in $(pgrep -f "lxd(\.debug)? --logfile"); do
     # Cheap confirmation that we likely have a LXD PID
     grep -q --line-regexp --fixed-strings --max-count=1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
