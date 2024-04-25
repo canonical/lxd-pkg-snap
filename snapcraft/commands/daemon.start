@@ -589,7 +589,7 @@ fi
 
 # LXD
 ## Check for existing LXDs
-for pid in $(pgrep -f "lxd(\.debug)? --logfile"); do
+for pid in $(pgrep --euid 0 --full "lxd(\.debug)? --logfile"); do
     # Cheap confirmation that we likely have a LXD PID
     grep -q --line-regexp --fixed-strings --max-count=1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
@@ -598,6 +598,8 @@ for pid in $(pgrep -f "lxd(\.debug)? --logfile"); do
     # to a file using the `/proc` path and comparing the content seen from
     # the `/var` path, we can conclude if the LXD daemon is executing
     # in the same mount namespace as ours (safe to kill) or not (ignore).
+    # A priv nested LXD would pass the EUID=0 and SNAP_NAME=lxd tests but would
+    # fail the `.validate` test as it wouldn't be in the same mount namespace.
     echo "$$" > "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
     if [ "$(cat /var/snap/lxd/common/lxd/.validate 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
