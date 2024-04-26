@@ -1420,6 +1420,7 @@ parts:
       git cherry-pick -x 482241ed1f692be3c0bd45161dd0a8beca7e85c5 # lxd/network/acl: Change protocol field for ovn logs
       git cherry-pick -x c35ac36962dd5cf691ff2b464055648ff8bcf463 # lxd/device/nic_ovn: Only stop device if network is populated
       git cherry-pick -x 551c252d1653360ccfda981b7a9a42fc8eed5370 # lxd/storage/drivers: Always use default block.filesysem for VM volumes
+      git cherry-pick -x 6ae9c4e522c226efed94af447dd9e92ef658e28a # doc: pin version of myst-parser
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
