@@ -275,7 +275,8 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-depth: 1
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
+    #source-depth: 1
     source-tag: v1.16.4
     source-type: git
     plugin: autotools
@@ -294,6 +295,17 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
       #- lib/*/liblz4.so*  # use liblz4.so from the base snap
+    override-build: |
+      set -ex
+
+      # Git cherry-picks
+      cd ../src
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick -x 14bc162cb99a42ed3417c0356962d04e56015365 # Revert tolerance for EAGAIN when probing async I/O
+
+      craftctl default
 
   edk2:
     after:
