@@ -275,7 +275,8 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-depth: 1
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
+    #source-depth: 1
     source-tag: v1.16.4
     source-type: git
     plugin: autotools
@@ -294,6 +295,17 @@ parts:
       - lib/libdqlite*so*
       - lib/*/libuv*
       #- lib/*/liblz4.so*  # use liblz4.so from the base snap
+    override-build: |
+      set -ex
+
+      # Git cherry-picks
+      cd ../src
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
+
+      git cherry-pick -x 14bc162cb99a42ed3417c0356962d04e56015365 # Revert tolerance for EAGAIN when probing async I/O
+
+      craftctl default
 
   edk2:
     after:
@@ -1406,6 +1418,7 @@ parts:
       git cherry-pick -x 81de9aaae166f204bd0901fbd0abb46582e87684 # lxd/api/metrics: Avoid repeated calls to wg.Add in metricsGet
       git cherry-pick -x 5ddbe0849827421669ec6633bc5d1bb5a8e8d7cc # lxd/config/default: Add images to DefaultRemotes
       git cherry-pick -x cc890c8c4a39e9b52f69fc66640fbffdc2ab2e9f # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
+      git cherry-pick -x 5c46455fbb5f3f63620bf63e4b65bdc87b9aca72 # doc: pin version of myst-parser
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
