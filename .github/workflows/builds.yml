@@ -57,10 +57,10 @@ jobs:
           go install github.com/canonical/lxd-ci/lxd-snapcraft@latest
           git clone -b "${TARGET}" git+ssh://lxdbot@git.launchpad.net/~canonical-lxd/lxd ~/lxd-pkg-snap-lp
           # XXX: `originVer` contains an array with the 2 versions
-          originVer=($(lxd-snapcraft -get-version -file snapcraft.yaml))
+          originVer=($(lxd-snapcraft -package lxd -get-version -file snapcraft.yaml))
           rsync -a --exclude .git --delete . ~/lxd-pkg-snap-lp/
           cd ~/lxd-pkg-snap-lp
-          lxd-snapcraft -set-version "${originVer[0]}-${localRev:0:7}" -set-source-commit ""
+          lxd-snapcraft -package lxd -set-version "${originVer[0]}-${localRev:0:7}" -set-source-commit ""
           git add --all
           git commit --all --quiet -s --allow-empty -m "Automatic upstream build (${TARGET})" -m "Upstream commit: ${localRev}"
           git show
