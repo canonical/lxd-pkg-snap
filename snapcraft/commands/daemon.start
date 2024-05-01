@@ -604,8 +604,8 @@ for pid in $(pgrep --euid 0 --full "lxd(\.debug)? --logfile"); do
     if [ "$(cat /var/snap/lxd/common/lxd/.validate 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
-        rm -f "/var/snap/lxd/common/lxd/.validate"
     fi
+    rm -f "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate"
 done
 
 ## Move the database out of the versioned path if present
