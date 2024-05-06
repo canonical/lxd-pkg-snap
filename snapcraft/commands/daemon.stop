@@ -165,7 +165,7 @@ rm -f "${SNAP_COMMON}/lxcfs.pid" "${SNAP_COMMON}/lxd.pid"
 
 ## Flush our shared namespace from the host
 echo "=> Cleaning up namespaces"
-nsenter -t 1 -m umount -l /var/snap/lxd/common/ns 2>/dev/null || true
+nsenter -t 1 -m umount -l "${SNAP_COMMON}/ns" 2>/dev/null || true
 
 echo "=> All done"
 exit 0
