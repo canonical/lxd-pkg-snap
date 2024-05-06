@@ -92,7 +92,7 @@ if getent group "${daemon_user_group}" >/dev/null 2>&1; then
 fi
 
 # Check if LXD ever started
-if [ ! -e "${SNAP_COMMON}/lxd/database" ]; then
+if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
     echo "==> LXD never started on this system, no need to start it now"
     exit 0
 fi
