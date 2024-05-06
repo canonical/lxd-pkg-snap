@@ -851,6 +851,7 @@ parts:
       - --disable-docs
       - --disable-guest-agent
       - --disable-parallels
+      - --disable-pvrdma
       - --disable-qed
       - --disable-slirp
       - --disable-user
