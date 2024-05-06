@@ -630,12 +630,12 @@ for pid in $(pgrep --euid 0 --full "lxd(\.debug)? --logfile"); do
     # in the same mount namespace as ours (safe to kill) or not (ignore).
     # A priv nested LXD would pass the EUID=0 and SNAP_NAME=lxd tests but would
     # fail the `.validate` test as it wouldn't be in the same mount namespace.
-    echo "$$" > "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
-    if [ "$(cat /var/snap/lxd/common/lxd/.validate 2>/dev/null)" = "$$" ]; then
+    echo "$$" > "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate" 2>/dev/null || true
+    if [ "$(cat "${SNAP_COMMON}/lxd/.validate" 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
     fi
-    rm -f "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate"
+    rm -f "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate"
 done
 
 ## Move the database out of the versioned path if present
@@ -671,8 +671,8 @@ CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group "${daemon_group}" >/dev/null 2>&1; then
     CMD="${CMD} --group ${daemon_group}"
-    if [ -e "/var/snap/lxd/common/lxd/unix.socket" ]; then
-        chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
+    if [ -e "${SNAP_COMMON}/lxd/unix.socket" ]; then
+        chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
     fi
 else
     echo "==> No \"${daemon_group}\" group found, only root will be able to use LXD."
