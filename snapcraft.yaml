@@ -761,6 +761,7 @@ parts:
       - --disable-vdi
       - --disable-vnc
       - --disable-xen
+      - --disable-xkbcommon
       - --enable-attr
       - --enable-cap-ng
       - --enable-kvm
