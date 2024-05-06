@@ -726,16 +726,14 @@ fi
 
 ## Check if this is the first time LXD is started
 if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
-    set -e
     echo "=> First LXD execution on this system"
 
-    ## Process preseed if present
+    ## Process preseed if present and ignore any errors
     if [ -e "${SNAP_COMMON}/init.yaml" ]; then
         echo "==> Running LXD preseed file"
-        ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
+        ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml" || true
         mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
     fi
-    set +e
 fi
 
 ## Wait for the daemon to die
