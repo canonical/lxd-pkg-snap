@@ -10,7 +10,7 @@ if [ -d /sys/kernel/security/apparmor ]; then
 fi
 
 export LXD_DIR="${SNAP_COMMON}/lxd/"
-PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
+read -r PID < "${SNAP_COMMON}/lxd.pid" || true
 
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
@@ -106,8 +106,8 @@ fi
 
 ## OpenVswitch
 if [ -e "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" ]; then
-    PID=$(cat "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid")
-    if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
+    read -r OVS_PID < "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" || true
+    if [ -n "${OVS_PID}" ] && kill -0 "${OVS_PID}" 2>/dev/null; then
         (
             echo "=> Stopping Open vSwitch"
 
@@ -133,15 +133,16 @@ fi
 if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
     echo "=> Stopping LXCFS"
 
-    PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
-    if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
-        if ! kill "$PID"; then
+    read -r LXCFS_PID < "${SNAP_COMMON}/lxcfs.pid" || true
+    if [ -n "${LXCFS_PID}" ] && kill -0 "${LXCFS_PID}" 2>/dev/null; then
+
+        if ! kill "${LXCFS_PID}"; then
             echo "==> Failed to signal LXCFS to stop"
         fi
 
         DEAD=0
         for _ in $(seq 30); do
-            if ! kill -0 "${PID}" 2>/dev/null; then
+            if ! kill -0 "${LXCFS_PID}" 2>/dev/null; then
                 DEAD=1
                 echo "==> Stopped LXCFS"
                 break
@@ -151,7 +152,7 @@ if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
 
         if [ "${DEAD}" = "0" ]; then
             echo "==> Forcefully stopping LXCFS after 30 seconds wait"
-            if kill -9 "${PID}" 2>/dev/null; then
+            if kill -9 "${LXCFS_PID}" 2>/dev/null; then
                 echo "==> Stopped LXCFS"
             else
                 echo "==> Failed to stop LXCFS"
