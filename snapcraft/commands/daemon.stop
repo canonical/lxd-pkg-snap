@@ -12,21 +12,23 @@ fi
 export LXD_DIR="${SNAP_COMMON}/lxd/"
 PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
 
-# FIXME: Detect stop reason
-#        This should be exposed by snapd directly
-STATUS=$(snap-query 2>/dev/null || true)
-
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
     read -r reason < "${SNAP_COMMON}/state"
-elif [ "${STATUS}" = "auto-refresh" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "refresh-snap" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "install-snap" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "remove-snap" ]; then
-    reason="snap removal"
+else
+  # FIXME: Detect stop reason
+  #        This should be exposed by snapd directly
+  STATUS=$(snap-query 2>/dev/null || true)
+
+  if [ "${STATUS}" = "auto-refresh" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "refresh-snap" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "install-snap" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "remove-snap" ]; then
+      reason="snap removal"
+  fi
 fi
 
 echo "=> Stop reason is: ${reason}"
