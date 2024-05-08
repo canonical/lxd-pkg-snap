@@ -6,9 +6,6 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-export LXD_DIR="${SNAP_COMMON}/lxd/"
-read -r PID < "${SNAP_COMMON}/lxd.pid" || true
-
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
     read -r reason < "${SNAP_COMMON}/state"
@@ -39,6 +36,9 @@ fi
 if [ "${reason}" = "reload" ] || [ "${reason}" = "crashed" ]; then
     exit 0
 fi
+
+export LXD_DIR="${SNAP_COMMON}/lxd/"
+read -r PID < "${SNAP_COMMON}/lxd.pid" || true
 
 # Handle refreshes
 if [ "${reason}" = "snap refresh" ]; then
