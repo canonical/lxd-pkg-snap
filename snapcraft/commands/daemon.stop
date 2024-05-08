@@ -128,10 +128,9 @@ fi
 
 ## LXCFS
 if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
-    echo "=> Stopping LXCFS"
-
     read -r LXCFS_PID < "${SNAP_COMMON}/lxcfs.pid" || true
     if [ -n "${LXCFS_PID}" ] && kill -0 "${LXCFS_PID}" 2>/dev/null; then
+        echo "=> Stopping LXCFS"
 
         if ! kill "${LXCFS_PID}"; then
             echo "==> Failed to signal LXCFS to stop"
