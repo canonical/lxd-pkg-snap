@@ -10,5 +10,5 @@ if [ -d /sys/kernel/security/apparmor ]; then
 fi
 
 echo reload > "${SNAP_COMMON}/state"
-PID=$(cat "${SNAP_COMMON}/lxd.pid")
-/bin/kill "$PID"
+read -r PID < "${SNAP_COMMON}/lxd.pid"
+kill "$PID"
