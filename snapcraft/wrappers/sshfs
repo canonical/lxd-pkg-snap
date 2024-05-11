@@ -7,7 +7,10 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-CMD="$(basename "${0}")"
+# Turn `/usr/sbin/foo` into `foo`
+# Similar to `basename` but using variable substitution instead of external executable
+CMD="${0##*/}"
+
 unset LD_LIBRARY_PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
