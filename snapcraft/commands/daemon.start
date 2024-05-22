@@ -25,14 +25,17 @@ export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
-# Detect model
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
+# Detect LXD appliance
+LXD_APPLIANCE="false"
+if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
+    LXD_APPLIANCE="true"
+fi
 
 # Detect base name
 SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
 
 # Wait for appliance configuration
-if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+if [ "${LXD_APPLIANCE}" = "true" ]; then
     while :; do
         [ "$(nsenter -t 1 -m snap managed)" = "true" ] && break
         sleep 5
@@ -713,7 +716,7 @@ if [ "${FIRSTRUN}" = "true" ]; then
         echo "==> Running LXD preseed file"
         ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
         mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
-    elif echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+    elif [ "${LXD_APPLIANCE}" = "true" ]; then
         echo "==> Initializing LXD appliance"
 
         # Network (NIC with the default gateway)
