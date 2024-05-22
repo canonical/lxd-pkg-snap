@@ -52,8 +52,7 @@ if ! nsenter -t 1 -m systemctl is-active -q snap."${SNAP_INSTANCE_NAME}".daemon.
 fi
 
 # Start LXD if running as an appliance
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
-if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
     echo "==> LXD appliance detected, starting LXD"
     nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon --no-block
     exit 0
