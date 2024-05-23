@@ -1,5 +1,7 @@
 #!/bin/sh
-CMD="$(basename "${0}")"
+# Turn `/usr/sbin/foo` into `foo`
+# Similar to `basename` but using variable substitution instead of external executable
+CMD="${0##*/}"
 
 unset LD_LIBRARY_PATH
 unset PYTHONPATH
