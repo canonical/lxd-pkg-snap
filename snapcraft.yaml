@@ -1421,6 +1421,9 @@ parts:
       git cherry-pick -x 5c46455fbb5f3f63620bf63e4b65bdc87b9aca72 # doc: pin version of myst-parser
       git cherry-pick -x b9777d1679728517f6fc0195a3c4819ea24e4631 # lxd/storage/drivers: Add volume param to roundVolumeBlockSizeBytes
       git cherry-pick -x d03811cd65fb418697fe859ed84fa0b0a08d2829 # lxd/storage/drivers/zfs: Round to zfs.blocksize or 16KiB
+      git cherry-pick -x 8dfce018f722215d056baf8a5c34576d78bc8c3b # lxd/storage/drivers/lvm: Fix source.wipe
+      git cherry-pick -x 24b34fbd68aeb26e3c99d573dff6382334aae97a # lxd/storage/drivers/btrfs: Correctly detect raw disks
+      git cherry-pick -x 267d60d110c2e016e6b2d97dce957657189353ce # lxd/storage/drivers/utils: fsUUID returns err for missing UUID
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
