@@ -14,8 +14,10 @@ echo "=> Preparing the system (${SNAP_REVISION})"
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155
-export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
+# Turn `/snap/lxd/28637/lib/x86_64-linux-gnu` into `x86_64-linux-gnu`
+# Similar to `basename` but using variable substitution instead of external executable
+LIB_ARCH="$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)"
+export ARCH="${LIB_ARCH##*/}"
 
 export HOME="/tmp/"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
@@ -28,14 +30,17 @@ export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_QEMU_FW_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
-# Detect model
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
+# Detect LXD appliance
+LXD_APPLIANCE="false"
+if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
+    LXD_APPLIANCE="true"
+fi
 
 # Detect base name
 SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
 
 # Wait for appliance configuration
-if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+if [ "${LXD_APPLIANCE}" = "true" ]; then
     while :; do
         [ "$(nsenter -t 1 -m snap managed)" = "true" ] && break
         sleep 5
@@ -619,16 +624,23 @@ fi
 
 # LXD
 ## Check for existing LXDs
-for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
-    grep -qF "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
+for pid in $(pgrep --euid 0 --full "lxd(\.debug)? --logfile"); do
+    # Cheap confirmation that we likely have a LXD PID
+    grep -q --line-regexp --fixed-strings --max-count=1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
-    rm -f "/var/snap/lxd/common/lxd/.validate"
-    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
-    if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
+    # Confirm the PID found by pgrep is indeed ours and not one from
+    # a nested instance also running LXD or a recycled PID. By writing
+    # to a file using the `/proc` path and comparing the content seen from
+    # the `/var` path, we can conclude if the LXD daemon is executing
+    # in the same mount namespace as ours (safe to kill) or not (ignore).
+    # A priv nested LXD would pass the EUID=0 and SNAP_NAME=lxd tests but would
+    # fail the `.validate` test as it wouldn't be in the same mount namespace.
+    echo "$$" > "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate" 2>/dev/null || true
+    if [ "$(cat "${SNAP_COMMON}/lxd/.validate" 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
-        rm -f "/var/snap/lxd/common/lxd/.validate"
     fi
+    rm -f "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate"
 done
 
 ## Move the database out of the versioned path if present
@@ -664,8 +676,8 @@ CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group "${daemon_group}" >/dev/null 2>&1; then
     CMD="${CMD} --group ${daemon_group}"
-    if [ -e "/var/snap/lxd/common/lxd/unix.socket" ]; then
-        chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
+    if [ -e "${SNAP_COMMON}/lxd/unix.socket" ]; then
+        chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
     fi
 else
     echo "==> No \"${daemon_group}\" group found, only root will be able to use LXD."
@@ -681,12 +693,6 @@ fi
 
 if [ "${daemon_verbose:-"false"}" = "true" ]; then
     CMD="${CMD} --verbose"
-fi
-
-# Check if this is the first time LXD is started.
-FIRSTRUN="false"
-if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
-    FIRSTRUN="true"
 fi
 
 # We deal with errors ourselves from this point on
@@ -734,16 +740,17 @@ if [ "${RET}" -gt "0" ]; then
     exit 1
 fi
 
-## Process preseed if present
-if [ "${FIRSTRUN}" = "true" ]; then
+## Check if this is the first time LXD is started
+if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
     set -e
     echo "=> First LXD execution on this system"
 
+    ## Process preseed if present
     if [ -e "${SNAP_COMMON}/init.yaml" ]; then
         echo "==> Running LXD preseed file"
         ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
         mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
-    elif echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+    elif [ "${LXD_APPLIANCE}" = "true" ]; then
         echo "==> Initializing LXD appliance"
 
         # Network (NIC with the default gateway)

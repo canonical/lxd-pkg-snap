@@ -52,7 +52,7 @@ fi
 if [ -n "${EDIT_CMD}" ] && [ "${USERNS}" = 1 ]; then
     exec 9< /tmp/
     # Replace "/tmp/" prefix by exec'ed FD 9.
-    EDIT_PATH_HOST="/proc/self/fd/9/$(echo "${EDIT_PATH}" | cut -d/ -f3)"
+    EDIT_PATH_HOST="/proc/self/fd/9/${EDIT_PATH##*/}"
     find_and_spawn "${EDIT_CMD}" "${EDIT_PATH_HOST}"
 fi
 
