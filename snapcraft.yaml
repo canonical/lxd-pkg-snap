@@ -1419,6 +1419,8 @@ parts:
       git cherry-pick -x 5ddbe0849827421669ec6633bc5d1bb5a8e8d7cc # lxd/config/default: Add images to DefaultRemotes
       git cherry-pick -x cc890c8c4a39e9b52f69fc66640fbffdc2ab2e9f # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
       git cherry-pick -x 5c46455fbb5f3f63620bf63e4b65bdc87b9aca72 # doc: pin version of myst-parser
+      git cherry-pick -x b9777d1679728517f6fc0195a3c4819ea24e4631 # lxd/storage/drivers: Add volume param to roundVolumeBlockSizeBytes
+      git cherry-pick -x d03811cd65fb418697fe859ed84fa0b0a08d2829 # lxd/storage/drivers/zfs: Round to zfs.blocksize or 16KiB
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
