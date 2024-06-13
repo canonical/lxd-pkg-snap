@@ -1559,7 +1559,7 @@ parts:
         -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
         -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
         -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
-        -not -path "${CRAFT_PRIME}/bin/lxcfs" \
+        -not -path "${SNAPCRAFT_PRIME}/bin/lxcfs" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
@@ -1578,7 +1578,7 @@ parts:
       # Strip libraries (excluding python3 scripts and liblxcfs)
       find "${SNAPCRAFT_PRIME}"/lib -type f \
         -not -path "${SNAPCRAFT_PRIME}/lib/python3/*" \
-        -not -path "${CRAFT_PRIME}/lib/liblxcfs.so" \
+        -not -path "${SNAPCRAFT_PRIME}/lib/liblxcfs.so" \
         -exec strip -s {} +
 
       # XXX: look for broken symlinks indicating missing/invalid prime
