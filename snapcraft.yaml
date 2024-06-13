@@ -1526,7 +1526,7 @@ parts:
       rm -rf "${CRAFT_PRIME}/usr/local/"
       rm -rf "${CRAFT_PRIME}/usr/share/"
 
-      # Strip binaries (excluding shell scripts)
+      # Strip binaries (excluding shell scripts and LXCFS)
       find "${CRAFT_PRIME}"/bin -type f \
         -not -path "${CRAFT_PRIME}/bin/ceph" \
         -not -path "${CRAFT_PRIME}/bin/editor" \
@@ -1537,6 +1537,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
+        -not -path "${CRAFT_PRIME}/bin/lxcfs" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
@@ -1552,9 +1553,10 @@ parts:
         find "${v}/" -type f -exec strip -s {} +
       done
 
-      # Strip libraries (excluding python3 scripts)
+      # Strip libraries (excluding python3 scripts and liblxcfs)
       find "${CRAFT_PRIME}"/lib -type f \
         -not -path "${CRAFT_PRIME}/lib/python3/*" \
+        -not -path "${CRAFT_PRIME}/lib/liblxcfs.so" \
         -exec strip -s {} +
 
       if [ "$(uname -m)" != "riscv64" ]; then
