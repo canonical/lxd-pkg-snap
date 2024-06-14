@@ -53,13 +53,6 @@ if ! nsenter -t 1 -m systemctl is-active -q snap."${SNAP_INSTANCE_NAME}".daemon.
     fi
 fi
 
-# Start LXD if running as an appliance
-if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
-    echo "==> LXD appliance detected, starting LXD"
-    nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon --no-block
-    exit 0
-fi
-
 # Setup the "lxd" group
 if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
