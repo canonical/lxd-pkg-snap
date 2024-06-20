@@ -1159,7 +1159,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go
+      - go/1.18/stable
     stage-packages:
       - acl
       - attr
@@ -1252,7 +1252,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1290,7 +1290,7 @@ parts:
   snap-query:
     source: snap-query/
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-build: |
       set -ex
