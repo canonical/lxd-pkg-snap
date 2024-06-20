@@ -211,6 +211,7 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
+    source-commit: 50ee9af350b2fb4e79f9eb58db22c8a0927138de # few commits before v1.13.0
     source-type: git
     source-depth: 1
     plugin: autotools
