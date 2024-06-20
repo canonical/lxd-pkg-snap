@@ -749,6 +749,7 @@ parts:
 
   raft:
     source: https://github.com/canonical/raft
+    source-commit: abf9c42a9bb63c24920ab9f0bfbc4b7a47e7e5f4 # no proximate release tag/version
     source-type: git
     source-depth: 1
     plugin: autotools
