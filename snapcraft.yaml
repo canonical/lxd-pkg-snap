@@ -1,5 +1,5 @@
 name: lxd
-base: core22
+base: core24
 assumes:
   - snapd2.39
 version: git
@@ -553,7 +553,7 @@ parts:
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
-    source-tag: nasm-2.16.01
+    source-tag: nasm-2.16.03
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -621,6 +621,7 @@ parts:
       - libelf-dev
       - libseccomp-dev
       - lsb-release
+      - libtirpc-dev
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -662,7 +663,7 @@ parts:
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-depth: 1
-    source-tag: v3.3.0
+    source-tag: v3.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -686,7 +687,7 @@ parts:
       - openvswitch
     source: https://github.com/ovn-org/ovn
     source-depth: 1
-    source-tag: v24.03.0
+    source-tag: v24.03.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -766,7 +767,7 @@ parts:
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-depth: 1
-    source-tag: v0.8.1
+    source-tag: v0.8.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -995,7 +996,7 @@ parts:
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-depth: 1
-    source-tag: v1.3.0
+    source-tag: v1.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1120,7 +1121,7 @@ parts:
   zfs-2-2:
     source: https://github.com/openzfs/zfs
     source-depth: 1
-    source-tag: zfs-2.2.3
+    source-tag: zfs-2.2.4
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
