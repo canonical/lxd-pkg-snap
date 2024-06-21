@@ -231,6 +231,7 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
+      - lib/*/libncurses.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
@@ -303,9 +304,13 @@ parts:
     source-type: git
     plugin: nil
     build-packages:
-      - on amd64,arm64:
+      - on amd64:
         - g++
         - acpica-tools
+        - uuid-dev
+      - on arm64:
+        - g++
+        - acpica-tools12
         - uuid-dev
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -657,9 +662,11 @@ parts:
     stage-packages:
       - nvme-cli
     organize:
+      usr/lib/: lib/
       usr/sbin/: bin/
     prime:
       - bin/nvme
+      - lib/*/libnvme*
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
@@ -857,10 +864,17 @@ parts:
       - libglib2.0-dev
       - libnuma-dev
       - libpixman-1-dev
-      - librbd-dev
       - libseccomp-dev
       - libusbredirhost-dev
       - quilt
+      - on amd64: # workaround for armhf, because it lacks of librbd-dev
+        - librbd-dev
+      - on arm64:
+        - librbd-dev
+      - on ppc64el:
+        - librbd-dev
+      - on s390x:
+        - librbd-dev
     stage-packages:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
