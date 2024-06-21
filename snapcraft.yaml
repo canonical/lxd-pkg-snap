@@ -287,9 +287,10 @@ parts:
     source-type: git
     plugin: nil
     build-packages:
-      - g++
-      - acpica-tools
-      - uuid-dev
+      - on amd64,arm64:
+        - g++
+        - acpica-tools
+        - uuid-dev
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
