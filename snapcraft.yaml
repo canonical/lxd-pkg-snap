@@ -566,7 +566,7 @@ parts:
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
-    source-tag: nasm-2.16.01
+    source-tag: nasm-2.16.03
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
