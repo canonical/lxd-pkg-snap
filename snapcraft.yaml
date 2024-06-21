@@ -1227,8 +1227,8 @@ parts:
 
   apparmor:
     source: https://gitlab.com/apparmor/apparmor.git
+    source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
     source-depth: 1
-    source-tag: v4.0.1
     source-type: git
     plugin: autotools
     build-packages:
@@ -1265,8 +1265,8 @@ parts:
   lxc:
     build-attributes: [core22-step-dependencies]
     after:
-      - libseccomp
       - apparmor
+      - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
     source-commit: cb8e38aca27a23964941f0f011a8919aab8bebab # lxc-5.0.3
