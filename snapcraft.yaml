@@ -191,10 +191,26 @@ parts:
       - libatomic
     plugin: nil
     stage-packages:
-      - ceph-common
+      - on amd64:
+        - ceph-common
+      - on arm64:
+        - ceph-common
+      - on ppc64el:
+        - ceph-common
+      - on s390x:
+        - ceph-common
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     prime:
       - bin/ceph
       - bin/radosgw-admin
