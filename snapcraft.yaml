@@ -768,7 +768,7 @@ parts:
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-depth: 1
-    source-tag: v0.8.1
+    source-tag: v0.8.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
