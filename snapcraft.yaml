@@ -231,6 +231,7 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
+      - lib/*/libncurses.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
