@@ -863,10 +863,17 @@ parts:
       - libglib2.0-dev
       - libnuma-dev
       - libpixman-1-dev
-      - librbd-dev
       - libseccomp-dev
       - libusbredirhost-dev
       - quilt
+      - on amd64: # workaround for armhf, because it lacks of librbd-dev
+        - librbd-dev
+      - on arm64:
+        - librbd-dev
+      - on ppc64el:
+        - librbd-dev
+      - on s390x:
+        - librbd-dev
     stage-packages:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
