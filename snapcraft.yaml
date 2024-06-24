@@ -1325,7 +1325,7 @@ parts:
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
     organize:
-      lib/python3.10/site-packages/: lib/python3/dist-packages/
+      lib/python3.12/site-packages/: lib/python3/dist-packages/
     prime:
       - bin/uefivars.py
       - lib/python3/dist-packages/google_crc32c*
