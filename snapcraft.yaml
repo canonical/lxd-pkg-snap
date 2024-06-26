@@ -1099,7 +1099,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-branch: stable-4.0
+    source-tag: lxcfs-4.0.12
     build-packages:
       - libfuse-dev
       - libpam0g-dev
