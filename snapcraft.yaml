@@ -1338,7 +1338,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-tag: lxd-5.21.1
+    source-commit: 5a492a3f0036c44d22c344505952e06ce517993a # LXD 6.1
     source-type: git
     after:
       - lxc
@@ -1394,18 +1394,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x ddfdeb3bfcd38e39121487180903a4316d1ba66b # UI: Add canonical.com domain to content security policy, so the ui can load data from images.lxd.canonical.com
-      git cherry-pick -x 2b5c27c595b347ec5cb05484934fd4c90c9ed316 # shared/simplestreams: Fix delta always using container rootfs as source
-      git cherry-pick -x a2394d8d03910e001933b1eb5e52a5e3dc9e5ca7 # lxd/instances: Don't start instances when evacuated
-      git cherry-pick -x 7fcceaf83ac4e8ba6603063f25c97710678650d7 # client: Fix permissions extension typo
-      git cherry-pick -x 616416879591c2305386f611a2a78a343db9d96e # lxd/storage/drivers/zfs: Fix refresh of VM volumes
-      git cherry-pick -x 6fee73a8cb39ac1f966491131db688d14d2ea89a # lxd/api/metrics: Don't repeatedly call instance.Project() in metricsGet
-      git cherry-pick -x 4179610fbbd6c5a21921992ab949a5675339f388 # lxd/api/metrics: Fix crash due to absent locking in metricsGet
-      git cherry-pick -x 81de9aaae166f204bd0901fbd0abb46582e87684 # lxd/api/metrics: Avoid repeated calls to wg.Add in metricsGet
-      git cherry-pick -x 5ddbe0849827421669ec6633bc5d1bb5a8e8d7cc # lxd/config/default: Add images to DefaultRemotes
-      git cherry-pick -x cc890c8c4a39e9b52f69fc66640fbffdc2ab2e9f # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
-      git cherry-pick -x 4080e9f406b67ec255706562dab36708947840e1 # doc: pin version of myst-parser
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
