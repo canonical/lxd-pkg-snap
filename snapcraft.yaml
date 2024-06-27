@@ -310,7 +310,7 @@ parts:
       - --enable-build-raft
     stage-packages:
       - liblz4-1
-      - libuv1
+      - libuv1t64
     build-packages:
       - liblz4-dev
       - libuv1-dev
@@ -905,11 +905,11 @@ parts:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
       - libfdt1
-      - libmagic1
+      - libmagic1t64
       - libnuma1
       - libpixman-1-0
-      - libusbredirhost1
-      - libusbredirparser1
+      - libusbredirhost1t64
+      - libusbredirparser1t64
       - seabios # This is needed due to --disable-install-blobs.
       - qemu-system-data # This is needed due to --disable-install-blobs.
     override-prime: |-
