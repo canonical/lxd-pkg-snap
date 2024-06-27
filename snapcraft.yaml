@@ -251,7 +251,7 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
-    source-depth: 1
+    #source-depth: 1
     source-tag: v3.19
     source-type: git
     plugin: nil
@@ -278,7 +278,17 @@ parts:
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
       set -ex
 
-      make USERCFLAGS=-Wno-error=format-truncation criu
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
+
+      # temporary workaround builds on core24
+      sed -i 's/-Wall -Wformat-security/-Wno-error=format -Wformat-security/g' Makefile
+
+      git cherry-pick -x 61828769a2d253a836f116413912176fda29078b # criu: move timers dump/restore code into separate file
+      git cherry-pick -x 7de0b45729842d828a6cd05093bf6246d2f22a3e # criu: use proper format-specified to accommodate time_t 64-bit change
+      git cherry-pick -x b384afa0d965e74e3b09467583aba671253140aa # net: Fix TOCTOU race condition in unix_conf_op
+
+      make criu
       mkdir -p "${CRAFT_PART_INSTALL}/criu/"
       cp criu/criu "${CRAFT_PART_INSTALL}/criu/"
     organize:
@@ -300,7 +310,7 @@ parts:
       - --enable-build-raft
     stage-packages:
       - liblz4-1
-      - libuv1
+      - libuv1t64
     build-packages:
       - liblz4-dev
       - libuv1-dev
@@ -895,11 +905,11 @@ parts:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
       - libfdt1
-      - libmagic1
+      - libmagic1t64
       - libnuma1
       - libpixman-1-0
-      - libusbredirhost1
-      - libusbredirparser1
+      - libusbredirhost1t64
+      - libusbredirparser1t64
       - seabios # This is needed due to --disable-install-blobs.
       - qemu-system-data # This is needed due to --disable-install-blobs.
     override-prime: |-
