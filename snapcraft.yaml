@@ -171,6 +171,14 @@ hooks:
     plugs:
       - lxd-support
       - system-observe
+  connect-plug-graphics-core22:
+    plugs:
+      - lxd-support
+      - system-observe
+  disconnect-plug-graphics-core22:
+    plugs:
+      - lxd-support
+      - system-observe
   configure:
     plugs:
       - lxd-support
