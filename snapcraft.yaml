@@ -1149,7 +1149,7 @@ parts:
   lxd:
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-4.0.9
+    source-commit: 71874bffc9583716224b43e3781c5d924d4ff745 # Pre LXD 4.0.10
     after:
       - lxc
       - dqlite
@@ -1195,9 +1195,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 2c5b0078a0e84ab62c9494e32e131d0686bb0c18  # lxd/devlxd: Don't expand format strings
-      git cherry-pick af5c49e020877c238510eb096ac586e9708721a6  # lxd/instance/qemu: Set spawn=allow
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
