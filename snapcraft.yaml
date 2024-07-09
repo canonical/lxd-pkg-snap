@@ -191,10 +191,26 @@ parts:
       - libatomic
     plugin: nil
     stage-packages:
-      - ceph-common
+      - on amd64:
+        - ceph-common
+      - on arm64:
+        - ceph-common
+      - on ppc64el:
+        - ceph-common
+      - on s390x:
+        - ceph-common
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     prime:
       - bin/ceph
       - bin/radosgw-admin
@@ -231,6 +247,7 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
+      - lib/*/libncurses.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
@@ -303,9 +320,14 @@ parts:
     source-type: git
     plugin: nil
     build-packages:
-      - g++
-      - acpica-tools
-      - uuid-dev
+      - on amd64:
+        - g++
+        - acpica-tools
+        - uuid-dev
+      - on arm64:
+        - g++
+        - acpica-tools
+        - uuid-dev
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -553,7 +575,7 @@ parts:
   nasm:
     source: https://github.com/netwide-assembler/nasm
     source-depth: 1
-    source-tag: nasm-2.16.01
+    source-tag: nasm-2.16.03
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -612,7 +634,7 @@ parts:
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
     source-depth: 1
-    source-tag: v1.14.5
+    source-tag: v1.14.6
     source-type: git
     plugin: make
     build-packages:
@@ -621,6 +643,7 @@ parts:
       - libelf-dev
       - libseccomp-dev
       - lsb-release
+      - libtirpc-dev
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -655,14 +678,16 @@ parts:
     stage-packages:
       - nvme-cli
     organize:
+      usr/lib/: lib/
       usr/sbin/: bin/
     prime:
       - bin/nvme
+      - lib/*/libnvme*
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
     source-depth: 1
-    source-tag: v3.3.0
+    source-tag: v3.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -686,7 +711,7 @@ parts:
       - openvswitch
     source: https://github.com/ovn-org/ovn
     source-depth: 1
-    source-tag: v24.03.0
+    source-tag: v24.03.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -766,7 +791,7 @@ parts:
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-depth: 1
-    source-tag: v0.8.1
+    source-tag: v0.8.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -855,10 +880,17 @@ parts:
       - libglib2.0-dev
       - libnuma-dev
       - libpixman-1-dev
-      - librbd-dev
       - libseccomp-dev
       - libusbredirhost-dev
       - quilt
+      - on amd64: # workaround for armhf, because it lacks of librbd-dev
+        - librbd-dev
+      - on arm64:
+        - librbd-dev
+      - on ppc64el:
+        - librbd-dev
+      - on s390x:
+        - librbd-dev
     stage-packages:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
@@ -995,7 +1027,7 @@ parts:
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
     source-depth: 1
-    source-tag: v1.3.0
+    source-tag: v1.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1155,7 +1187,7 @@ parts:
   zfs-2-2:
     source: https://github.com/openzfs/zfs
     source-depth: 1
-    source-tag: zfs-2.2.3
+    source-tag: zfs-2.2.4
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
