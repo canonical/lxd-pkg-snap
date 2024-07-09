@@ -1421,6 +1421,7 @@ parts:
       git cherry-pick -x c35ac36962dd5cf691ff2b464055648ff8bcf463 # lxd/device/nic_ovn: Only stop device if network is populated
       git cherry-pick -x 551c252d1653360ccfda981b7a9a42fc8eed5370 # lxd/storage/drivers: Always use default block.filesysem for VM volumes
       git cherry-pick -x 6ae9c4e522c226efed94af447dd9e92ef658e28a # doc: pin version of myst-parser
+      git cherry-pick -x 6e96624b1cf707cfc5b511dd6f91b5a34d4db9a3 # lxd/storage/drivers: Add volume param to roundVolumeBlockSizeBytes
       git cherry-pick -x a6e08cc8b897ea149ee5fa395cb9e242749f7db1 # lxd/storage/drivers/zfs: Round to zfs.blocksize or 16KiB
       git cherry-pick -x 33d712497bfc5d6a8892bd8f6e1ddb3583bee1eb # lxd/storage/drivers: Refactor volume size rounding logic
       git cherry-pick -x a7477c4cb0056efeb2ba781fad9f51230e21a664 # lxd/storage/drivers: Fix linter errors
