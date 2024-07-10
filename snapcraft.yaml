@@ -191,14 +191,19 @@ parts:
       - libatomic
     plugin: nil
     stage-packages:
+      # XXX: explicitly depend on libsnappy1v5 due to https://bugs.launchpad.net/ubuntu/+source/ceph/+bug/2072656
       - on amd64:
         - ceph-common
+        - libsnappy1v5
       - on arm64:
         - ceph-common
+        - libsnappy1v5
       - on ppc64el:
         - ceph-common
+        - libsnappy1v5
       - on s390x:
         - ceph-common
+        - libsnappy1v5
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -232,8 +237,12 @@ parts:
       - lib/*/libicudata.so*
       - lib/*/libicuuc.so*
       - lib/*/liblber-2.5.so*
+      - lib/*/liblber.so*
       - lib/*/libldap-2.5.so*
+      - lib/*/libldap.so*
+      - lib/*/liblmdb.so*
       - lib/*/liblua5.4.so*
+      - lib/*/libncurses.so*
       - lib/*/libndctl.so*
       - lib/*/libnghttp2.so*
       - lib/*/liboath.so*
@@ -247,13 +256,9 @@ parts:
       - lib/*/librtmp.so*
       - lib/*/libsasl2.so*
       - lib/*/libsnappy.so*
-      - lib/*/libncurses.so*
-      - lib/*/liblber.so*
-      - lib/*/libldap.so*
       - lib/*/libssh.so*
-      - lib/*/liblmdb.so*
-      - lib/*/libunwind.so*
       - lib/*/libtcmalloc.so*
+      - lib/*/libunwind.so*
 
   criu:
     source: https://github.com/checkpoint-restore/criu
