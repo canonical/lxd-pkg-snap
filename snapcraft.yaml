@@ -456,11 +456,9 @@ parts:
       - lib/*/libatomic.so*
 
   libmnl:
-    source: https://git.netfilter.org/libmnl
-    # XXX: git.netfilter.org does not support depth/shallow clones
-    #source-depth: 1
-    source-tag: libmnl-1.0.5
-    source-type: git
+    # XXX: Netfilter's git repo is unreliable
+    source: https://www.netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2
+    source-checksum: sha256/274b9b919ef3152bfb3da3a13c950dd60d6e2bcd54230ffeca298d03b40d0525
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -472,11 +470,9 @@ parts:
   libnftnl:
     after:
       - libmnl
-    source: https://git.netfilter.org/libnftnl
-    # XXX: git.netfilter.org does not support depth/shallow clones
-    #source-depth: 1
-    source-tag: libnftnl-1.2.6
-    source-type: git
+    # XXX: Netfilter's git repo is unreliable
+    source: https://www.netfilter.org/projects/libnftnl/files/libnftnl-1.2.6.tar.xz
+    source-checksum: sha256/ceeaea2cd92147da19f13a35a7f1a4bc2767ff897e838e4b479cf54b59c777f4
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
