@@ -1391,6 +1391,9 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 2f7c7cd501d9b1b84daeb4deb95b67ebe3de1193 # lxd/instance/exec: Only use keepalives on TCP sockets
+      git cherry-pick -x 5b44f9a5d9218e60f75ce5abdc6705b11121d1b7 # gomod: Revert github.com/gorilla/websocket to v1.5.1
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
