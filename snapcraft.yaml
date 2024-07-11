@@ -1438,6 +1438,7 @@ parts:
       git cherry-pick -x 45126f2a54079799066abf6477a252605709b8e5 # shared: Set `GetClientCertificate` in TLS config.
       git cherry-pick -x 52eaf3efa780d68fa51a74d9631f3c5e7a7fc879 # shared: Add comments to exported functions (revive: exported).
       git cherry-pick -x 75fbdaeebea454fd074c9efac7a2c584a78762c7 # test/suites: Improve PKI test coverage.
+      git cherry-pick -x d406168d699a5d91f3518338ca2bfa31efdd7dd0 # lxd/instance/exec: Only use keepalives on TCP sockets
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
