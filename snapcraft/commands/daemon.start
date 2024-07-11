@@ -180,6 +180,13 @@ echo "==> Preparing /run/bin"
 mkdir -p "/run/bin"
 export PATH="/run/bin:${PATH}"
 
+if [ -e "${SNAP_COMMON}/use-qemu-external-snap" ]; then
+    echo "==> Setting up external QEMU snap integration"
+    export SNAP_QEMU_PREFIX="external/qemu"
+    LD_LPATH_PIPEWIRE="$(readlink -f "${SNAP_CURRENT}"/${SNAP_QEMU_PREFIX}/lib/"${ARCH}"/pipewire-*/)"
+    export LD_LIBRARY_PATH="${SNAP_CURRENT}/${SNAP_QEMU_PREFIX}/lib/${ARCH}:${SNAP_CURRENT}/${SNAP_QEMU_PREFIX}/lib/${ARCH}/pulseaudio:${SNAP_CURRENT}/${SNAP_QEMU_PREFIX}/lib/${ARCH}/ceph:${LD_LPATH_PIPEWIRE:+${LD_LPATH_PIPEWIRE}:}${LD_LIBRARY_PATH}"
+fi
+
 if [ "${ceph_external:-"false"}" = "true" ]; then
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/ceph"
     ln -s "${SNAP}/wrappers/run-host" "/run/bin/radosgw-admin"
