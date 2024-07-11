@@ -1436,23 +1436,6 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x ddfdeb3bfcd38e39121487180903a4316d1ba66b # UI: Add canonical.com domain to content security policy, so the ui can load data from images.lxd.canonical.com
-      git cherry-pick -x 2b5c27c595b347ec5cb05484934fd4c90c9ed316 # shared/simplestreams: Fix delta always using container rootfs as source
-      git cherry-pick -x a2394d8d03910e001933b1eb5e52a5e3dc9e5ca7 # lxd/instances: Don't start instances when evacuated
-      git cherry-pick -x 7fcceaf83ac4e8ba6603063f25c97710678650d7 # client: Fix permissions extension typo
-      git cherry-pick -x 616416879591c2305386f611a2a78a343db9d96e # lxd/storage/drivers/zfs: Fix refresh of VM volumes
-      git cherry-pick -x 6fee73a8cb39ac1f966491131db688d14d2ea89a # lxd/api/metrics: Don't repeatedly call instance.Project() in metricsGet
-      git cherry-pick -x 4179610fbbd6c5a21921992ab949a5675339f388 # lxd/api/metrics: Fix crash due to absent locking in metricsGet
-      git cherry-pick -x 81de9aaae166f204bd0901fbd0abb46582e87684 # lxd/api/metrics: Avoid repeated calls to wg.Add in metricsGet
-      git cherry-pick -x 5ddbe0849827421669ec6633bc5d1bb5a8e8d7cc # lxd/config/default: Add images to DefaultRemotes
-      git cherry-pick -x cc890c8c4a39e9b52f69fc66640fbffdc2ab2e9f # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
-      git cherry-pick -x 5c46455fbb5f3f63620bf63e4b65bdc87b9aca72 # doc: pin version of myst-parser
-      git cherry-pick -x b9777d1679728517f6fc0195a3c4819ea24e4631 # lxd/storage/drivers: Add volume param to roundVolumeBlockSizeBytes
-      git cherry-pick -x d03811cd65fb418697fe859ed84fa0b0a08d2829 # lxd/storage/drivers/zfs: Round to zfs.blocksize or 16KiB
-      git cherry-pick -x 8dfce018f722215d056baf8a5c34576d78bc8c3b # lxd/storage/drivers/lvm: Fix source.wipe
-      git cherry-pick -x 24b34fbd68aeb26e3c99d573dff6382334aae97a # lxd/storage/drivers/btrfs: Correctly detect raw disks
-      git cherry-pick -x 267d60d110c2e016e6b2d97dce957657189353ce # lxd/storage/drivers/utils: fsUUID returns err for missing UUID
-
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
