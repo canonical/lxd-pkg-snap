@@ -71,6 +71,16 @@ plugs:
  ovn-chassis:
    interface: content
    target: "$SNAP_DATA/microovn/chassis"
+ gpu-2404:
+   interface: content
+   target: $SNAP/gpu-2404
+#   default-provider: mesa-2404
+
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/gpu-2404/libdrm
+  /usr/share/drirc.d:
+    symlink: $SNAP/gpu-2404/drirc.d
 
 apps:
   # Main commands
@@ -82,6 +92,8 @@ apps:
       - system-observe
 
   daemon:
+    command-chain:
+      - bin/gpu-2404-custom-wrapper
     command: commands/daemon.start
     reload-command: commands/daemon.reload
     stop-command: commands/daemon.stop
@@ -1500,6 +1512,15 @@ parts:
     prime:
       - bin/setup-shmounts
 
+  gpu-2404:
+    after:
+      - lxd
+      - qemu
+    source: https://github.com/canonical/gpu-snap.git
+    plugin: dump
+    override-prime: |
+      ${CRAFT_PART_SRC}/bin/gpu-2404-cleanup mesa-2404 nvidia-2404
+
   strip:
     after:
       - btrfs
@@ -1550,6 +1571,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -not -path "${CRAFT_PRIME}/bin/lxcfs" \
+        -not -path "${CRAFT_PRIME}/bin/gpu-2404-custom-wrapper" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
@@ -1600,6 +1622,7 @@ parts:
     organize:
       commands/snap-query: bin/
       hooks/: snap/hooks/
+      wrappers/gpu-2404-custom-wrapper: bin/
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/
       wrappers/sshfs: bin/
