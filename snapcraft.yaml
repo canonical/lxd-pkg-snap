@@ -957,6 +957,7 @@ parts:
     source-tag: v1.8.0
     source-type: git
     plugin: rust
+    rust-channel: stable
     build-packages:
       - cargo
       - libseccomp-dev
