@@ -1395,6 +1395,8 @@ parts:
       git cherry-pick -x 5b44f9a5d9218e60f75ce5abdc6705b11121d1b7 # gomod: Revert github.com/gorilla/websocket to v1.5.1
       git cherry-pick -x 7e468c7cb5b59e67189d0b7141007303b5f74140 # lxd: Extract certificate add token metadata from remote member
       git cherry-pick -x af70982132866ffb9feb0f543b625abb238eb17a # lxd: Return an error if the client uses a trust password
+      git cherry-pick -x b551f47dfdd8699772c7b8fd2cfb72fe439ad0c7 # lxd/certificates: Improve expiry validation checks in clusterMemberJoinTokenValid
+      git cherry-pick -x 39f97587a2c30eb59ac78979d7b60e11dfd6132e # lxd/certificates: Improve validation in certificateTokenValid
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
