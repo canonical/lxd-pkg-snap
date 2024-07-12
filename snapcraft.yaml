@@ -942,6 +942,7 @@ parts:
     source-commit: d20f4d698c14ada07ea9ff5cb7050c2c4703ff66 # v1.11.1
     source-depth: 1
     plugin: rust
+    rust-channel: stable
     build-packages:
       - cargo
       - libseccomp-dev
