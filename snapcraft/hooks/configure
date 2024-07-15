@@ -64,27 +64,27 @@ fi
 # Generate the config
 config="${SNAP_COMMON}/config"
 
-{
-    echo "# This file is auto-generated, do NOT manually edit"
-    echo "ceph_builtin=${ceph_builtin:-"false"}"
-    echo "ceph_external=${ceph_external:-"false"}"
-    echo "criu_enable=${criu_enable:-"false"}"
-    echo "daemon_debug=${daemon_debug:-"false"}"
-    echo "daemon_group=${daemon_group:-"lxd"}"
-    echo "daemon_user_group=${daemon_user_group:-"lxd"}"
-    echo "daemon_syslog=${daemon_syslog:-"false"}"
-    echo "daemon_verbose=${daemon_verbose:-"false"}"
-    echo "lvm_external=${lvm_external:-"false"}"
-    echo "lxcfs_loadavg=${lxcfs_loadavg:-"false"}"
-    echo "lxcfs_pidfd=${lxcfs_pidfd:-"false"}"
-    echo "lxcfs_cfs=${lxcfs_cfs:-"false"}"
-    echo "lxcfs_debug=${lxcfs_debug:-"false"}"
-    echo "openvswitch_builtin=${openvswitch_builtin:-"false"}"
-    echo "openvswitch_external=${openvswitch_external:-"false"}"
-    echo "ovn_builtin=${ovn_builtin:-"false"}"
-    echo "shiftfs_enable=${shiftfs_enable:-"auto"}"
-    echo "ui_enable=${ui_enable:-"false"}"
-} > "${config}"
+cat << EOC > "${config}"
+# This file is auto-generated, do NOT manually edit
+ceph_builtin=${ceph_builtin:-"false"}
+ceph_external=${ceph_external:-"false"}
+criu_enable=${criu_enable:-"false"}
+daemon_debug=${daemon_debug:-"false"}
+daemon_group=${daemon_group:-"lxd"}
+daemon_syslog=${daemon_syslog:-"false"}
+daemon_user_group=${daemon_user_group:-"lxd"}
+daemon_verbose=${daemon_verbose:-"false"}
+lvm_external=${lvm_external:-"false"}
+lxcfs_loadavg=${lxcfs_loadavg:-"false"}
+lxcfs_pidfd=${lxcfs_pidfd:-"false"}
+lxcfs_cfs=${lxcfs_cfs:-"false"}
+lxcfs_debug=${lxcfs_debug:-"false"}
+openvswitch_builtin=${openvswitch_builtin:-"false"}
+openvswitch_external=${openvswitch_external:-"false"}
+ovn_builtin=${ovn_builtin:-"false"}
+shiftfs_enable=${shiftfs_enable:-"auto"}
+ui_enable=${ui_enable:-"false"}
+EOC
 
 # Set socket ownership in case it changed
 if getent group "${daemon_group}" >/dev/null 2>&1; then
