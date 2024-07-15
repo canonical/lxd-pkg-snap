@@ -213,9 +213,9 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
+    source-depth: 1
     source-tag: v3.19
     source-type: git
-    source-depth: 1
     plugin: nil
     build-packages:
       - asciidoc
@@ -260,8 +260,8 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -279,9 +279,9 @@ parts:
     after:
       - nasm
     source: https://github.com/tianocore/edk2
-    source-type: git
-    source-tag: IRRELEVANT
     source-depth: 1
+    source-tag: IRRELEVANT
+    source-type: git
     plugin: nil
     build-packages:
       - g++
@@ -359,8 +359,9 @@ parts:
 
   libmnl:
     source: https://git.netfilter.org/libmnl
-    source-type: git
+    source-depth: 1
     source-tag: libmnl-1.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -373,8 +374,9 @@ parts:
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
-    source-type: git
+    source-depth: 1
     source-tag: libnftnl-1.2.6
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -389,8 +391,9 @@ parts:
 
   libseccomp:
     source: https://github.com/seccomp/libseccomp
-    source-type: git
+    source-depth: 1
     source-tag: v2.5.5
+    source-type: git
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -404,9 +407,9 @@ parts:
 
   libtpms:
     source: https://github.com/stefanberger/libtpms
-    source-type: git
-    source-tag: v0.9.6
     source-depth: 1
+    source-tag: v0.9.6
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -419,9 +422,9 @@ parts:
 
   liburing:
     source: https://github.com/axboe/liburing
-    source-type: git
-    source-tag: liburing-2.5
     source-depth: 1
+    source-tag: liburing-2.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -438,9 +441,9 @@ parts:
 
   libusb:
     source: https://github.com/libusb/libusb
-    source-type: git
-    source-tag: v1.0.26
     source-depth: 1
+    source-tag: v1.0.26
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -505,9 +508,9 @@ parts:
 
   nasm:
     source: https://github.com/netwide-assembler/nasm
-    source-type: git
-    source-tag: nasm-2.15.05
     source-depth: 1
+    source-tag: nasm-2.15.05
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -528,6 +531,7 @@ parts:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
+    source-depth: 1
     source-type: git
     source-tag: v1.0.9
     plugin: autotools
@@ -561,9 +565,9 @@ parts:
     after:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
-    source-type: git
-    source-tag: v1.14.3
     source-depth: 1
+    source-tag: v1.14.3
+    source-type: git
     plugin: make
     build-packages:
       - bmake
@@ -598,9 +602,9 @@ parts:
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
-    source-type: git
-    source-tag: v3.2.1
     source-depth: 1
+    source-tag: v3.2.1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
@@ -622,9 +626,9 @@ parts:
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
-    source-type: git
-    source-tag: v23.09.1
     source-depth: 1
+    source-tag: v23.09.1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
@@ -636,9 +640,9 @@ parts:
 
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
-    source-type: git
-    source-tag: v0.14.4
     source-depth: 1
+    source-tag: v0.14.4
+    source-type: git
     plugin: meson
     prime: []
     build-packages:
@@ -649,9 +653,9 @@ parts:
     after:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
-    source-type: git
-    source-tag: v0.15.2
     source-depth: 1
+    source-tag: v0.15.2
+    source-type: git
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -685,9 +689,9 @@ parts:
       - libseccomp
       - libtpms
     source: https://github.com/stefanberger/swtpm
-    source-type: git
-    source-tag: v0.8.1
     source-depth: 1
+    source-tag: v0.8.1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -721,9 +725,9 @@ parts:
       - spice-protocol
       - spice-server
     source: https://gitlab.com/qemu-project/qemu
-    source-type: git
-    source-tag: v8.0.5
     source-depth: 1
+    source-tag: v8.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --disable-bochs
@@ -826,8 +830,8 @@ parts:
       - edk2
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - xorriso
@@ -873,8 +877,8 @@ parts:
 
   raft:
     source: https://github.com/canonical/raft
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -892,9 +896,9 @@ parts:
 
   sqlite:
     source: https://github.com/sqlite/sqlite
-    source-type: git
     source-depth: 1
     source-tag: version-3.44.2
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -906,9 +910,9 @@ parts:
 
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
-    source-type: git
-    source-tag: v1.2.0
     source-depth: 1
+    source-tag: v1.2.0
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -933,9 +937,9 @@ parts:
 
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
-    source-type: git
-    source-tag: v1.8.0
     source-depth: 1
+    source-tag: v1.8.0
+    source-type: git
     plugin: rust
     build-packages:
       - cargo
@@ -1004,8 +1008,9 @@ parts:
 
   zfs-0-6:
     source: https://github.com/openzfs/zfs
-    source-type: git
+    source-depth: 1
     source-tag: zfs-0.6.5.11
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1051,9 +1056,9 @@ parts:
 
   zfs-0-7:
     source: https://github.com/openzfs/zfs
-    source-type: git
-    source-tag: zfs-0.7.13
     source-depth: 1
+    source-tag: zfs-0.7.13
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1093,9 +1098,9 @@ parts:
 
   zfs-0-8:
     source: https://github.com/openzfs/zfs
-    source-type: git
-    source-tag: zfs-0.8.6
     source-depth: 1
+    source-tag: zfs-0.8.6
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1131,9 +1136,9 @@ parts:
 
   zfs-2-0:
     source: https://github.com/openzfs/zfs
-    source-type: git
-    source-tag: zfs-2.0.7
     source-depth: 1
+    source-tag: zfs-2.0.7
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1169,9 +1174,9 @@ parts:
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
-    source-type: git
-    source-tag: zfs-2.1.14
     source-depth: 1
+    source-tag: zfs-2.1.14
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1207,9 +1212,9 @@ parts:
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
-    source-type: git
-    source-tag: zfs-2.2.2-rc4
     source-depth: 1
+    source-tag: zfs-2.2.2
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1295,8 +1300,9 @@ parts:
       - libseccomp
       - apparmor
     source: https://github.com/lxc/lxc
-    source-type: git
     source-branch: stable-5.0
+    source-depth: 1
+    source-type: git
     build-packages:
       - dpkg-dev
       - libcap-dev
@@ -1349,8 +1355,9 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-type: git
     source-branch: stable-5.0
+    source-depth: 1
+    source-type: git
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1401,8 +1408,9 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-type: git
     source-branch: stable-5.0
+    source-depth: 1
+    source-type: git
     after:
       - lxc
       - dqlite
