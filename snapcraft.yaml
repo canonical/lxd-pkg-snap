@@ -1397,6 +1397,7 @@ parts:
       git cherry-pick -x af70982132866ffb9feb0f543b625abb238eb17a # lxd: Return an error if the client uses a trust password
       git cherry-pick -x b551f47dfdd8699772c7b8fd2cfb72fe439ad0c7 # lxd/certificates: Improve expiry validation checks in clusterMemberJoinTokenValid
       git cherry-pick -x 39f97587a2c30eb59ac78979d7b60e11dfd6132e # lxd/certificates: Improve validation in certificateTokenValid
+      git cherry-pick -x cd43ad507584dc4971c9ce3c8b12167a93fb75b7 # lxd/instance/drivers/driver/common: Fix crash when device doesn't return run config when being live updated
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
