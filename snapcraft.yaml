@@ -1041,6 +1041,7 @@ parts:
     source-tag: v1.10.1
     source-type: git
     plugin: rust
+    rust-channel: stable
     build-packages:
       - cargo
       - libseccomp-dev
@@ -1286,6 +1287,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
+    source-branch: stable-6.0
     source-depth: 1
     source-type: git
     build-packages:
