@@ -1436,7 +1436,7 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x db6b22f7f9008a3ee66892f9a13fb17acd783d5a # lxd/instance/drivers/driver/common: Fix crash when device doesn't return run config when being live updated
+      git cherry-pick -x eee1a0408d503b518523554969e5657ae2bd6e1f # lxd/instance/drivers/driver/common: Fix crash when device doesn't return run config when being live updated
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
