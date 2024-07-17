@@ -1287,6 +1287,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
+    source-branch: stable-6.0
     source-depth: 1
     source-type: git
     build-packages:
