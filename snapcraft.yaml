@@ -489,36 +489,6 @@ parts:
     prime:
       - lib/*/libatomic.so*
 
-  libmnl:
-    # XXX: Netfilter's git repo is unreliable
-    source: https://www.netfilter.org/projects/libmnl/files/libmnl-1.0.5.tar.bz2
-    source-checksum: sha256/274b9b919ef3152bfb3da3a13c950dd60d6e2bcd54230ffeca298d03b40d0525
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libmnl*so*
-
-  libnftnl:
-    after:
-      - libmnl
-    # XXX: Netfilter's git repo is unreliable
-    source: https://www.netfilter.org/projects/libnftnl/files/libnftnl-1.2.6.tar.xz
-    source-checksum: sha256/ceeaea2cd92147da19f13a35a7f1a4bc2767ff897e838e4b479cf54b59c777f4
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libnftnl*so*
-    override-build: |
-      craftctl default
-
-      sed -i "s# /lib/libmnl.la# ${CRAFT_STAGE}/lib/libmnl.la#g" "${CRAFT_PART_INSTALL}/lib/libnftnl.la"
-
   libtpms:
     source: https://github.com/stefanberger/libtpms
     source-depth: 1
@@ -614,41 +584,16 @@ parts:
       - lib/*/libreadline.so*
 
   nftables:
-    after:
-      - libmnl
-      - libnftnl
-    source: https://git.netfilter.org/nftables
-    # XXX: git.netfilter.org does not support depth/shallow clones
-    #source-depth: 1
-    source-tag: v1.0.9
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-      - --with-json
-      - --disable-man-doc
-    build-packages:
-      - libedit-dev
-      - libjansson-dev
-      - libreadline-dev
+    plugin: nil
     stage-packages:
-      - libjansson4
-    override-build: |
-      set -ex
-
-      # Git cherry-picks
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-
-      set +ex
-      craftctl default
+      - nftables
     organize:
-      sbin/: bin/
       usr/lib/: lib/
+      usr/sbin/: bin/
     prime:
       - bin/nft
       - lib/*/libjansson*so*
-      - lib/libnftables*so*
+      - lib/*/libnftables*so*
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
@@ -847,7 +792,7 @@ parts:
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
     source-depth: 1
-    source-tag: import/1%8.2.1+ds-1ubuntu5
+    source-tag: import/1%8.2.2+ds-0ubuntu1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
