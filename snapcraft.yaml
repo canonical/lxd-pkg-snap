@@ -1231,6 +1231,7 @@ parts:
   # Core components
   lxc:
     source: https://github.com/lxc/lxc
+    source-branch: stable-6.0
     source-depth: 1
     source-type: git
     build-packages:
