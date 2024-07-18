@@ -601,15 +601,6 @@ parts:
       - --prefix=
     stage-packages:
       - uuid-runtime
-    override-build: |
-      set -ex
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-
-      set +ex
-      snapcraftctl build
-      set -ex
     organize:
       sbin/: bin/
       usr/bin/: bin/
