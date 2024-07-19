@@ -154,7 +154,6 @@ hooks:
 parts:
   # Dependencies
   btrfs:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - btrfs-progs
@@ -166,7 +165,6 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - ceph-common
@@ -449,7 +447,6 @@ parts:
       - lib/libusb*so*
 
   logrotate:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - logrotate
@@ -463,7 +460,6 @@ parts:
       - bin/logrotate
 
   lvm:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - dmeventd
@@ -495,7 +491,6 @@ parts:
       - lib/*/libreadline.so*
 
   nano:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - nano
@@ -918,7 +913,6 @@ parts:
       craftctl default
 
   xfs:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - xfsprogs
@@ -936,7 +930,6 @@ parts:
       - lib/*/liburcu.so*
 
   xtables:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - arptables
@@ -952,7 +945,6 @@ parts:
       - lib/libebtc.so.*
 
   xz:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - xz-utils
@@ -1206,7 +1198,6 @@ parts:
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zstd:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - zstd
@@ -1551,7 +1542,6 @@ parts:
       - bin/snap-query
 
   strip:
-    source: snapcraft/empty
     after:
       - btrfs
       - ceph
