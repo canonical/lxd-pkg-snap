@@ -46,10 +46,10 @@ description: |-
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - shiftfs.enable: Enable shiftfs support [default=auto]
 
-contact: lxc-devel@lists.linuxcontainers.org
-issues: https://github.com/lxc/lxd/issues
-source-code: https://github.com/lxc/lxd
-website: https://linuxcontainers.org/lxd
+contact: lxd@lists.canonical.com
+issues: https://github.com/canonical/lxd/issues
+source-code: https://github.com/canonical/lxd
+website: https://ubuntu.com/lxd
 confinement: strict
 
 apps:
@@ -211,6 +211,7 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
+    source-commit: 50ee9af350b2fb4e79f9eb58db22c8a0927138de # few commits before v1.13.0
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -248,7 +249,7 @@ parts:
       set -ex
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
@@ -473,7 +474,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -504,7 +505,7 @@ parts:
 
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
@@ -533,7 +534,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -551,7 +552,7 @@ parts:
       - share/openvswitch/
 
   spice-protocol:
-    source: https://github.com/freedesktop/spice-protocol
+    source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
     source-tag: v0.14.4
     source-depth: 1
@@ -561,7 +562,7 @@ parts:
   spice-server:
     after:
       - spice-protocol
-    source: https://github.com/freedesktop/spice
+    source: https://gitlab.freedesktop.org/spice/spice
     source-type: git
     source-tag: v0.15.1
     source-depth: 1
@@ -703,6 +704,7 @@ parts:
       - edk2
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
+    source-commit: 4da81a4cbdd6d96b7a653239865d3b1d92cc6117 # master's HEAD
     source-type: git
     source-depth: 1
     plugin: nil
@@ -747,6 +749,7 @@ parts:
 
   raft:
     source: https://github.com/canonical/raft
+    source-commit: abf9c42a9bb63c24920ab9f0bfbc4b7a47e7e5f4 # no proximate release tag/version
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -875,7 +878,7 @@ parts:
         [ "$(uname -m)" != "s390x" ] && \
         [ "$(uname -m)" != "ppc64le" ] && exit 0
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
@@ -996,7 +999,7 @@ parts:
   zfs-2-1:
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.1.6
+    source-tag: zfs-2.1.15
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1081,7 +1084,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick ca4c25c6e9ebb92f9e241ef9a231d4a715cb812d  # lxc-net: don't start by default inside lxc
@@ -1133,7 +1136,7 @@ parts:
     override-build: |
       set -ex
 
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
@@ -1144,9 +1147,9 @@ parts:
       patch -p1 $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${SNAPCRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
-    source: https://github.com/lxc/lxd
+    source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-4.0.9
+    source-commit: 71874bffc9583716224b43e3781c5d924d4ff745 # Pre LXD 4.0.10
     after:
       - lxc
       - dqlite
@@ -1156,7 +1159,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go
+      - go/1.18/stable
     stage-packages:
       - acl
       - attr
@@ -1180,8 +1183,8 @@ parts:
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
-      mkdir -p "${GOPATH}/src/github.com/lxc"
-      ln -s "$(pwd)" "${GOPATH}/src/github.com/lxc/lxd"
+      mkdir -p "${GOPATH}/src/github.com/canonical"
+      ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
 
       # Download the dependencies
       go get -d -v ./...
@@ -1190,11 +1193,8 @@ parts:
 
       # Git cherry-picks
       cd ../src
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick 2c5b0078a0e84ab62c9494e32e131d0686bb0c18  # lxd/devlxd: Don't expand format strings
-      git cherry-pick af5c49e020877c238510eb096ac586e9708721a6  # lxd/instance/qemu: Set spawn=allow
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
@@ -1203,11 +1203,11 @@ parts:
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
       # Build the binaries
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/lxc/lxd/lxc
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/lxc/lxd/lxc-to-lxd
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/lxc/lxd/lxd
-      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/lxc/lxd/lxd-agent
-      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/lxc/lxd/lxd-benchmark
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
+      CGO_ENABLED=0 go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
+      go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
 
       # Setup bash completion
       mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
@@ -1249,7 +1249,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1287,7 +1287,7 @@ parts:
   snap-query:
     source: snap-query/
     build-snaps:
-      - go
+      - go/1.18/stable
     plugin: nil
     override-build: |
       set -ex
