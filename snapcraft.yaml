@@ -1504,6 +1504,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
         -not -path "${CRAFT_PRIME}/bin/snap-query" \
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
+        -not -path "${CRAFT_PRIME}/bin/virt-v2v-in-place" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
         -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -not -path "${CRAFT_PRIME}/bin/lxcfs" \
@@ -1562,3 +1563,4 @@ parts:
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/
       wrappers/sshfs: bin/
+      wrappers/virt-v2v-in-place: bin/
