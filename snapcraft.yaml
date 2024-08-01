@@ -1193,15 +1193,52 @@ parts:
       - bin/pzstd
       - bin/zstd
 
+  apparmor:
+    source: https://gitlab.com/apparmor/apparmor.git
+    source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
+    source-depth: 1
+    source-type: git
+    plugin: autotools
+    build-packages:
+      - g++
+      - bison
+      - flex
+      - autoconf-archive
+      - gettext
+    override-build: |-
+      set -ex
+
+      cd ./libraries/libapparmor
+      sh ./autogen.sh
+      sh ./configure --prefix=/
+      make
+      make install
+
+      cd ../../parser
+      make
+      make install
+
+      mkdir "${CRAFT_PART_INSTALL}/bin"
+      cp /sbin/apparmor_parser "${CRAFT_PART_INSTALL}/bin/"
+      mkdir "${CRAFT_PART_INSTALL}/lib"
+      cp /lib/libapparmor.so* "${CRAFT_PART_INSTALL}/lib/"
+
+      set +ex
+    prime:
+      - bin/apparmor_parser
+      - lib/libapparmor.so.1
+      - lib/libapparmor.so.1.*
+
   # Core components
   lxc:
+    after:
+      - apparmor
     source: https://github.com/lxc/lxc
     source-depth: 1
     source-type: git
     source-tag: v6.0.0
     build-packages:
       - dpkg-dev
-      - libapparmor-dev
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
@@ -1398,6 +1435,9 @@ parts:
       git cherry-pick -x b551f47dfdd8699772c7b8fd2cfb72fe439ad0c7 # lxd/certificates: Improve expiry validation checks in clusterMemberJoinTokenValid
       git cherry-pick -x 39f97587a2c30eb59ac78979d7b60e11dfd6132e # lxd/certificates: Improve validation in certificateTokenValid
       git cherry-pick -x cd43ad507584dc4971c9ce3c8b12167a93fb75b7 # lxd/instance/drivers/driver/common: Fix crash when device doesn't return run config when being live updated
+      git cherry-pick -x 47180a352654bee9a994db714801813a59cfbb18 # lxd/apparmor/feature_check: add infastructure to check AppArmor features
+      git cherry-pick -x b5a4a6540e793120b85a3b280003fce236e6a56f # lxd/apparmor/instance_lxc: allow nosymfollow mount flag
+      git cherry-pick -x 86c3d515662068d825d23387623932bca96bc6aa # lxd/apparmor/instance_lxc: allow nosymfollow mount flag in more cases
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
