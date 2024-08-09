@@ -695,6 +695,12 @@ if [ "${daemon_verbose:-"false"}" = "true" ]; then
     CMD="${CMD} --verbose"
 fi
 
+# Check if this is the first time LXD is started.
+FIRSTRUN="false"
+if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
+    FIRSTRUN="true"
+fi
+
 # We deal with errors ourselves from this point on
 set +e
 
@@ -740,12 +746,11 @@ if [ "${RET}" -gt "0" ]; then
     exit 1
 fi
 
-## Check if this is the first time LXD is started
-if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
+## Process preseed if present
+if [ "${FIRSTRUN}" = "true" ]; then
     set -e
     echo "=> First LXD execution on this system"
 
-    ## Process preseed if present
     if [ -e "${SNAP_COMMON}/init.yaml" ]; then
         echo "==> Running LXD preseed file"
         ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
