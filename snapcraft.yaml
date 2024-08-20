@@ -1238,15 +1238,52 @@ parts:
       - bin/pzstd
       - bin/zstd
 
+  apparmor:
+    source: https://gitlab.com/apparmor/apparmor.git
+    source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
+    source-depth: 1
+    source-type: git
+    plugin: autotools
+    build-packages:
+      - g++
+      - bison
+      - flex
+      - autoconf-archive
+      - gettext
+    override-build: |-
+      set -ex
+
+      cd ./libraries/libapparmor
+      sh ./autogen.sh
+      sh ./configure --prefix=/
+      make
+      make install
+
+      cd ../../parser
+      make
+      make install
+
+      mkdir "${CRAFT_PART_INSTALL}/bin"
+      cp /sbin/apparmor_parser "${CRAFT_PART_INSTALL}/bin/"
+      mkdir "${CRAFT_PART_INSTALL}/lib"
+      cp /lib/libapparmor.so* "${CRAFT_PART_INSTALL}/lib/"
+
+      set +ex
+    prime:
+      - bin/apparmor_parser
+      - lib/libapparmor.so.1
+      - lib/libapparmor.so.1.*
+
   # Core components
   lxc:
+    after:
+      - apparmor
     source: https://github.com/lxc/lxc
     source-depth: 1
     source-type: git
     source-tag: v6.0.0
     build-packages:
       - dpkg-dev
-      - libapparmor-dev
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
@@ -1437,6 +1474,12 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick -x eee1a0408d503b518523554969e5657ae2bd6e1f # lxd/instance/drivers/driver/common: Fix crash when device doesn't return run config when being live updated
+      git cherry-pick -x 79b83bba26795d98e1cf37eb53242962e1d849a0 # lxd/apparmor/feature_check: add infastructure to check AppArmor features
+      git cherry-pick -x bd2e4ed14e580eaea7d34fb72063ea1efdf04d84 # lxd/apparmor/instance_lxc: allow nosymfollow mount flag
+      git cherry-pick -x 83d0d7bf4d952c76a7beb1ddad00d824c04d10ee # lxd/apparmor/instance_lxc: allow nosymfollow mount flag in more cases
+      git cherry-pick -x d3f044ba23e9ef633e7c99e8c2468678a6a58e5a # lxd/storage/backend/lxd: Pass full snapshot name when validating import in CreateInstanceFromBackup
+      git cherry-pick -x c0cfe64000c4b7c658347cf4b2833594ae0e6fc3 # lxd/instance/instance/utils: Don't allow snapshots named ".." in ValidName
+      git cherry-pick -x 8415f4ada4800e547c7c8764f28d83e7b6cab6a0 # lxd/instance: if storage location is remote, make cluster self healing available, and vm can migrate when src member is offline also
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
