@@ -245,6 +245,9 @@ ln -s "${SNAP}/wrappers/run-host" "/run/bin/getent"
 # Redirect journalctl to the host
 ln -s "${SNAP}/wrappers/run-host" "/run/bin/journalctl"
 
+# Redirect pro to the host
+ln -s "${SNAP}/wrappers/run-host" "/run/bin/pro"
+
 # Redirect iscsiadm to the host.
 ln -s "${SNAP}/wrappers/run-host" "/run/bin/iscsiadm"
 
