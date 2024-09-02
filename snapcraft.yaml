@@ -1480,6 +1480,8 @@ parts:
       git cherry-pick -x d3f044ba23e9ef633e7c99e8c2468678a6a58e5a # lxd/storage/backend/lxd: Pass full snapshot name when validating import in CreateInstanceFromBackup
       git cherry-pick -x c0cfe64000c4b7c658347cf4b2833594ae0e6fc3 # lxd/instance/instance/utils: Don't allow snapshots named ".." in ValidName
       git cherry-pick -x 8415f4ada4800e547c7c8764f28d83e7b6cab6a0 # lxd/instance: if storage location is remote, make cluster self healing available, and vm can migrate when src member is offline also
+      git cherry-pick -x c94652490e8bf302ff63e199ce9bbacc11a50a29 # lxd/apparmor/instance_lxc: allow procfs for unprivileged containers
+      git cherry-pick -x 9365358d847fac1ce83329801f5b78374bb6726f # lxd/apparmor/instance_lxc: allow sysfs for unprivileged containers
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
