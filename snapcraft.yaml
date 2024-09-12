@@ -833,6 +833,7 @@ parts:
       - --disable-fuse
       - --disable-glusterfs
       - --disable-gnutls
+      - --disable-gtk
       - --disable-guest-agent
       - --disable-parallels
       - --disable-pvrdma
