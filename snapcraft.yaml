@@ -851,6 +851,7 @@ parts:
       - --disable-vdi
       - --disable-vmnet
       - --disable-vnc
+      - --disable-vvfat
       - --disable-xen
       - --disable-xkbcommon
       - --enable-attr
