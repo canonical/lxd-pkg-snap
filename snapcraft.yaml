@@ -840,6 +840,7 @@ parts:
       - --disable-libpmem
       - --disable-libssh
       - --disable-nettle
+      - --disable-oss
       - --disable-parallels
       - --disable-pvrdma
       - --disable-qed
