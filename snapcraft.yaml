@@ -836,6 +836,7 @@ parts:
       - --disable-gtk
       - --disable-guest-agent
       - --disable-libiscsi
+      - --disable-libnfs
       - --disable-parallels
       - --disable-pvrdma
       - --disable-qed
