@@ -823,6 +823,7 @@ parts:
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
+      - --disable-auth-pam
       - --disable-bochs
       - --disable-cloop
       - --disable-dmg
