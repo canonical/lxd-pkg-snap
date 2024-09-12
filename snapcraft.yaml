@@ -825,6 +825,7 @@ parts:
     autotools-configure-parameters:
       - --disable-auth-pam
       - --disable-bochs
+      - --disable-brlapi
       - --disable-cloop
       - --disable-dmg
       - --disable-docs
