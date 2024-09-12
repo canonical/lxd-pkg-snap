@@ -838,6 +838,7 @@ parts:
       - --disable-libiscsi
       - --disable-libnfs
       - --disable-libpmem
+      - --disable-libssh
       - --disable-parallels
       - --disable-pvrdma
       - --disable-qed
