@@ -827,6 +827,7 @@ parts:
       - --disable-bochs
       - --disable-brlapi
       - --disable-cloop
+      - --disable-curl
       - --disable-dmg
       - --disable-docs
       - --disable-guest-agent
