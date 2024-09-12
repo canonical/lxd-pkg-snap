@@ -830,6 +830,7 @@ parts:
       - --disable-curl
       - --disable-dmg
       - --disable-docs
+      - --disable-fuse
       - --disable-guest-agent
       - --disable-parallels
       - --disable-pvrdma
