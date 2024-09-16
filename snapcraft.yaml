@@ -231,7 +231,7 @@ parts:
   criu:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.19
+    source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
     source-type: git
     source-depth: 1
     plugin: nil
