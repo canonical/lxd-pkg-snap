@@ -231,7 +231,7 @@ parts:
   criu:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
-    source-tag: v3.19
+    source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
     source-type: git
     source-depth: 1
     plugin: nil
@@ -270,18 +270,20 @@ parts:
   dqlite:
     build-attributes: [core22-step-dependencies]
     after:
-      - raft
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-tag: v1.15.1
+    source-commit: eb777c2c083a18d4657d4ee4ef49ca1d547b2172 # v1.16.7
     source-type: git
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+      - --enable-build-raft
     stage-packages:
+      - liblz4-1
       - libuv1
     build-packages:
+      - liblz4-dev
       - libuv1-dev
     organize:
       usr/lib/: lib/
@@ -372,7 +374,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://git.netfilter.org/libmnl
     source-type: git
-    source-tag: libmnl-1.0.5
+    source-commit: 493aacf2ec9cc61a5b30d77cd55ec248f033bc74 # libmnl-1.0.5
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -387,7 +389,7 @@ parts:
       - libmnl
     source: https://git.netfilter.org/libnftnl
     source-type: git
-    source-tag: libnftnl-1.2.6
+    source-commit: 116e95aa7b6358c917de8c69f6f173874030b46b # libnftnl-1.2.7
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -404,7 +406,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.5
+    source-commit: f0b04ab0b4fc0bc2cde6da1f407b4a487fe6d78f # v2.5.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -420,7 +422,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/stefanberger/libtpms
     source-type: git
-    source-tag: v0.9.6
+    source-commit: f8c2dc7e12a730dcca4220d7ac5ad86d13dfd630 # v0.9.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -453,7 +455,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/libusb/libusb
     source-type: git
-    source-tag: v1.0.26
+    source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -547,7 +549,7 @@ parts:
       - libnftnl
     source: https://git.netfilter.org/nftables
     source-type: git
-    source-tag: v1.0.9
+    source-commit: d946842f576b422972212a2b83601bbd6204337c # v1.1.0
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -581,7 +583,7 @@ parts:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
     source-type: git
-    source-tag: v1.14.3
+    source-commit: 4c2494f16573b585788a42e9c7bee76ecd48c73d # v1.16.1
     source-depth: 1
     plugin: make
     build-packages:
@@ -612,7 +614,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openvswitch/ovs
     source-type: git
-    source-tag: v3.2.1
+    source-commit: 6c4da8cc29565506beacca16ac97645ae851009a # v3.3.0
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -646,7 +648,7 @@ parts:
       - openvswitch
     source: https://github.com/ovn-org/ovn
     source-type: git
-    source-tag: v23.09.1
+    source-commit: 41836afafd99d579bb277f638a31bffd5cf3efa3 # v24.03.2
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -661,7 +663,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
-    source-tag: v0.14.4
+    source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
     source-depth: 1
     plugin: meson
     prime: []
@@ -672,8 +674,7 @@ parts:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
     source-type: git
-    source-tag: v0.15.2
-    source-depth: 1
+    source-commit: 0c2c1413a8b387ea597a95b6c867470a7c56c8ab # v0.15.2
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -707,7 +708,7 @@ parts:
       - libtpms
     source: https://github.com/stefanberger/swtpm
     source-type: git
-    source-tag: v0.8.1
+    source-commit: f756ee8a281ddff7e09b49e1ef00d5cbb42abb63 # v0.9.0
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -891,33 +892,12 @@ parts:
     prime:
       - share/qemu/*
 
-  raft:
-    build-attributes: [core22-step-dependencies]
-    source: https://github.com/canonical/raft
-    source-tag: v0.18.0
-    source-type: git
-    source-depth: 1
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    stage-packages:
-      - libuv1
-      - liblz4-1
-    build-packages:
-      - libuv1-dev
-      - liblz4-dev
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libraft*so*
-      - lib/*/libuv.so*
-
   sqlite:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/sqlite/sqlite
     source-type: git
     source-depth: 1
-    source-tag: version-3.44.2
+    source-commit: f3d536d37825302e31ed0eddd811c689f38f85a3 # version-3.46.1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -931,7 +911,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
-    source-tag: v1.2.0
+    source-commit: 8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb # v1.3.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -947,7 +927,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://gitlab.com/virtio-fs/virtiofsd
     source-type: git
-    source-tag: v1.8.0
+    source-commit: d20f4d698c14ada07ea9ff5cb7050c2c4703ff66 # v1.11.1
     source-depth: 1
     plugin: rust
     build-packages:
@@ -1022,7 +1002,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.6.5.11
+    source-commit: 2bc71fa976bf34b41313928fd42e4d41f0c9cd1a # zfs-0.6.5.11
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1059,7 +1039,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.7.13
+    source-commit: a8c2b7ebc64d23ffe15e2b168aa0bea7a4897133 # zfs-0.7.13
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1093,7 +1073,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.8.6
+    source-commit: 2bc66898b7056140108a4937a6557d9fe27cafc6 # zfs-0.8.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1128,7 +1108,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.0.7
+    source-commit: ad81baab7779cd2113669d30de72bb925e684525 # zfs-2.0.7
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1163,7 +1143,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.1.14
+    source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1198,7 +1178,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.2.2
+    source-commit: baa50314567afd986a00838f0fa65fdacbd12daf # zfs-2.2.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1252,7 +1232,7 @@ parts:
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
-    source-tag: lxc-5.0.3
+    source-commit: cb8e38aca27a23964941f0f011a8919aab8bebab # lxc-5.0.3
     build-packages:
       - libapparmor-dev
       - libcap-dev
@@ -1303,7 +1283,7 @@ parts:
   lxcfs:
     source: https://github.com/lxc/lxcfs
     source-type: git
-    source-tag: lxcfs-5.0.4
+    source-commit: c1e2f51fbd97f042434f098d1d0f8e47ade5ad2a # lxcfs-5.0.4
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1351,7 +1331,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-5.0.3
+    source-commit: 227524b07a90cf5d0af14bed842530e13ba315c1 # lxd-5.0.3
     after:
       - lxc
       - dqlite
@@ -1361,7 +1341,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go/1.21/stable
+      - go/1.22/stable
     stage-packages:
       - acl
       - attr
@@ -1495,7 +1475,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go/1.21/stable
+      - go/1.22/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1561,7 +1541,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: snap-query/
     build-snaps:
-      - go/1.21/stable
+      - go/1.22/stable
     plugin: nil
     override-build: |
       set -ex
@@ -1588,7 +1568,6 @@ parts:
       - nvidia-container
       - openvswitch
       - ovn
-      - raft
       - sqlite
       - squashfs-tools-ng
       - swtpm
