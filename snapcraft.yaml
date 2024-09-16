@@ -911,7 +911,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/AgentD/squashfs-tools-ng
     source-type: git
-    source-tag: v1.2.0
+    source-commit: 8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb # v1.3.1
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
