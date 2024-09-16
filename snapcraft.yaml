@@ -375,7 +375,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://git.netfilter.org/libmnl
     source-type: git
-    source-tag: libmnl-1.0.5
+    source-commit: 493aacf2ec9cc61a5b30d77cd55ec248f033bc74 # libmnl-1.0.5
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
