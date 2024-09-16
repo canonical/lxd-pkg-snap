@@ -862,7 +862,7 @@ parts:
     source: https://github.com/sqlite/sqlite
     source-type: git
     source-depth: 1
-    source-tag: version-3.44.2
+    source-commit: f3d536d37825302e31ed0eddd811c689f38f85a3 # version-3.46.1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
