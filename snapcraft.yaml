@@ -1002,7 +1002,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.6.5.11
+    source-commit: 2bc71fa976bf34b41313928fd42e4d41f0c9cd1a # zfs-0.6.5.11
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1039,7 +1039,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.7.13
+    source-commit: a8c2b7ebc64d23ffe15e2b168aa0bea7a4897133 # zfs-0.7.13
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1073,7 +1073,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-0.8.6
+    source-commit: 2bc66898b7056140108a4937a6557d9fe27cafc6 # zfs-0.8.6
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1108,7 +1108,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-tag: zfs-2.0.7
+    source-commit: ad81baab7779cd2113669d30de72bb925e684525 # zfs-2.0.7
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
