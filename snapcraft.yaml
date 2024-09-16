@@ -380,7 +380,7 @@ parts:
   libseccomp:
     source: https://github.com/seccomp/libseccomp
     source-type: git
-    source-tag: v2.5.5
+    source-commit: f0b04ab0b4fc0bc2cde6da1f407b4a487fe6d78f # v2.5.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
