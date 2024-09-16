@@ -1331,7 +1331,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-tag: lxd-5.0.3
+    source-commit: 227524b07a90cf5d0af14bed842530e13ba315c1 # lxd-5.0.3
     after:
       - lxc
       - dqlite
