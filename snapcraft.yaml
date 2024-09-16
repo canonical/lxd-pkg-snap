@@ -273,15 +273,18 @@ parts:
       - raft
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-tag: v1.15.1
+    source-commit: eb777c2c083a18d4657d4ee4ef49ca1d547b2172 # v1.16.7
     source-type: git
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+      - --enable-build-raft
     stage-packages:
+      - liblz4-1
       - libuv1
     build-packages:
+      - liblz4-dev
       - libuv1-dev
     organize:
       usr/lib/: lib/
