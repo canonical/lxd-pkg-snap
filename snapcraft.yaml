@@ -664,7 +664,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://gitlab.freedesktop.org/spice/spice-protocol
     source-type: git
-    source-tag: v0.14.4
+    source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
     source-depth: 1
     plugin: meson
     prime: []
