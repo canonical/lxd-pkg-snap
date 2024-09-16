@@ -456,7 +456,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/libusb/libusb
     source-type: git
-    source-tag: v1.0.26
+    source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
