@@ -212,8 +212,8 @@ parts:
   criu:
     source: https://github.com/checkpoint-restore/criu
     source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - asciidoc
@@ -252,8 +252,8 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -274,9 +274,9 @@ parts:
     after:
       - nasm
     source: https://github.com/tianocore/edk2
-    source-type: git
-    source-tag: IRRELEVANT
     source-depth: 1
+    source-tag: IRRELEVANT
+    source-type: git
     plugin: nil
     build-packages:
       - on amd64:
@@ -359,8 +359,8 @@ parts:
 
   libmnl:
     source: https://git.netfilter.org/libmnl
-    source-type: git
     source-commit: 493aacf2ec9cc61a5b30d77cd55ec248f033bc74 # libmnl-1.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -373,8 +373,8 @@ parts:
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
-    source-type: git
     source-commit: 116e95aa7b6358c917de8c69f6f173874030b46b # libnftnl-1.2.7
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -389,9 +389,9 @@ parts:
 
   libseccomp:
     source: https://github.com/seccomp/libseccomp
-    source-type: git
     source-commit: f0b04ab0b4fc0bc2cde6da1f407b4a487fe6d78f # v2.5.5
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -404,9 +404,9 @@ parts:
 
   libtpms:
     source: https://github.com/stefanberger/libtpms
-    source-type: git
     source-commit: f8c2dc7e12a730dcca4220d7ac5ad86d13dfd630 # v0.9.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -419,9 +419,9 @@ parts:
 
   liburing:
     source: https://github.com/axboe/liburing
-    source-type: git
-    source-tag: liburing-2.5
     source-depth: 1
+    source-tag: liburing-2.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -441,9 +441,9 @@ parts:
 
   libusb:
     source: https://github.com/libusb/libusb
-    source-type: git
     source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -508,9 +508,9 @@ parts:
 
   nasm:
     source: https://github.com/netwide-assembler/nasm
-    source-type: git
-    source-tag: nasm-2.15.05
     source-depth: 1
+    source-tag: nasm-2.15.05
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -533,8 +533,8 @@ parts:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
-    source-type: git
     source-commit: d946842f576b422972212a2b83601bbd6204337c # v1.1.0
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -567,9 +567,9 @@ parts:
     after:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
-    source-type: git
     source-commit: 4c2494f16573b585788a42e9c7bee76ecd48c73d # v1.16.1
     source-depth: 1
+    source-type: git
     plugin: make
     build-packages:
       - bmake
@@ -607,9 +607,9 @@ parts:
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
-    source-type: git
     source-commit: 6c4da8cc29565506beacca16ac97645ae851009a # v3.3.0
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
@@ -631,9 +631,9 @@ parts:
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
-    source-type: git
     source-commit: 41836afafd99d579bb277f638a31bffd5cf3efa3 # v24.03.2
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
@@ -645,9 +645,9 @@ parts:
 
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
-    source-type: git
     source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
     source-depth: 1
+    source-type: git
     plugin: meson
     prime: []
     build-packages:
@@ -667,8 +667,8 @@ parts:
     after:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
-    source-type: git
     source-commit: 0c2c1413a8b387ea597a95b6c867470a7c56c8ab # v0.15.2
+    source-type: git
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -711,9 +711,9 @@ parts:
       - libseccomp
       - libtpms
     source: https://github.com/stefanberger/swtpm
-    source-type: git
     source-commit: f756ee8a281ddff7e09b49e1ef00d5cbb42abb63 # v0.9.0
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -747,9 +747,9 @@ parts:
       - spice-protocol
       - spice-server
     source: https://gitlab.com/qemu-project/qemu
-    source-type: git
-    source-tag: v8.0.5
     source-depth: 1
+    source-tag: v8.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --disable-bochs
@@ -855,8 +855,8 @@ parts:
       - edk2
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - xorriso
@@ -905,9 +905,9 @@ parts:
 
   sqlite:
     source: https://github.com/sqlite/sqlite
-    source-type: git
-    source-depth: 1
     source-commit: f3d536d37825302e31ed0eddd811c689f38f85a3 # version-3.46.1
+    source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -919,9 +919,9 @@ parts:
 
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
-    source-type: git
     source-commit: 8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb # v1.3.1
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -934,9 +934,9 @@ parts:
 
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
-    source-type: git
     source-commit: d20f4d698c14ada07ea9ff5cb7050c2c4703ff66 # v1.11.1
     source-depth: 1
+    source-type: git
     plugin: rust
     rust-channel: stable
     build-packages:
@@ -1010,8 +1010,8 @@ parts:
 
   zfs-0-6:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: 2bc71fa976bf34b41313928fd42e4d41f0c9cd1a # zfs-0.6.5.11
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1054,9 +1054,9 @@ parts:
 
   zfs-0-7:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: a8c2b7ebc64d23ffe15e2b168aa0bea7a4897133 # zfs-0.7.13
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1093,9 +1093,9 @@ parts:
 
   zfs-0-8:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: 2bc66898b7056140108a4937a6557d9fe27cafc6 # zfs-0.8.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1128,9 +1128,9 @@ parts:
 
   zfs-2-0:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: ad81baab7779cd2113669d30de72bb925e684525 # zfs-2.0.7
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1163,9 +1163,9 @@ parts:
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1198,9 +1198,9 @@ parts:
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: baa50314567afd986a00838f0fa65fdacbd12daf # zfs-2.2.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1283,8 +1283,8 @@ parts:
       - libseccomp
       - apparmor
     source: https://github.com/lxc/lxc
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     build-packages:
       - dpkg-dev
       - libcap-dev
@@ -1337,8 +1337,8 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1389,8 +1389,8 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     after:
       - lxc
       - dqlite
