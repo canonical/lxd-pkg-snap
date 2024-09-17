@@ -1331,7 +1331,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-commit: 227524b07a90cf5d0af14bed842530e13ba315c1 # lxd-5.0.3
+    source-commit: 74f9b301a8e82d5a546a29aae8aed42637124512 # pre lxd-5.0.4
     after:
       - lxc
       - dqlite
@@ -1377,48 +1377,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x 827f1fce57898467b6b5d6eb909a5eb639e95c3c # lxd/storage/drivers/ceph: Restore the filesystems UUID on the volume
-      git cherry-pick -x 53e017a1db6a7f0667c55855b50220479f6fb827 # test/suites/storage: Add check for UUID generation on restore
-      git cherry-pick -x b737ae50e2590c7aa367254237f89ddc4d388ffb # lxd/storage/drivers/ceph: Restore the VM block filesystem volume too
-      git cherry-pick -x b61ffddda691d553eab3fbf23fb25ef2185ed6de # lxd/storage/drivers/lvm: Restore the VM block filesystem volume for thin-pools too
-      git cherry-pick -x 59cdc0a758b627083f729cd4b81dbb69035cb04d # lxd/storage/drivers/ceph: Double check the volumes content type
-      git cherry-pick -x fe71f2135bdc3aa6ea28de7ed1ac324f7d689ed6 # shared/simplestreams/products: Fix regression in parsing version files
-      git cherry-pick -x d3253e4cbc85b97e3bc6dba9a27fd2ab0c4d8685 # shared/simplestreams/simplestreams: Improve error messages
-      git cherry-pick -x 55bd4024dbfc315c0f57da57f2f9bd9c5c97dad1 # shared/simplestreams/products: Search only for lxd archives
-      git cherry-pick -x f1c377195a1febda39d6d99ecfbc647ffcd5d740 # lxd/rsync: Merge sendSetup and Send functions
-      git cherry-pick -x e1a37a5c240e068ffaff4fe20fa8af612e4143fe # lxd/rsync: Add description of cleanup function to RunWrappers
-      git cherry-pick -x 0fefac32ccd543494c07008eddb0bb621c94b19d # lxd/instance/drivers/driver/qemu: Don't leak file descriptor when probing for Direct I/O support
-      git cherry-pick -x 8e22091af07f29c0c626b1746689491c8bedbaa8 # incusd/instance/qemu: Cap hotplug CPU slots to 64
-      git cherry-pick -x eff4a63e9b5804066437df995fbc4fbcddf4daf0 # incusd/instance/qemu: Fix handling of > 64 limits.cpu
-      git cherry-pick -x 67705c0681301a2574bfbc9eef56b55c9bdccb88 # lxd: Update instance types URL
-      git cherry-pick -x ea99778d412f7cb3995844fcf905e0695ba9291a # lxc/config/default: Add images remote for images.lxd.canonical.com
-      git cherry-pick -x 8a43bac4ae9e278f2197b0eaaa229ec3c242dd02 # lxd/config/default: Add images to DefaultRemotes
-      git cherry-pick -x 43dfdce8d90bd029a503fe94d7609cb34359c1c2 # instance/drivers/driver_lxc: do not set "soft" limit when hard limit is set
-      git cherry-pick -x 79dcfe6bced1998fdf1c213a6bbad17fce6e540a # lxd/instance: Reject limits.kernel config for VMs
-      git cherry-pick -x 2b62f940826bfe2e18112f19e827a61f8b659c9d # lxd/device/device_utils_disk: fix diskAddRootUserNSEntry to add root mapping only if it's required
-      git cherry-pick -x 482241ed1f692be3c0bd45161dd0a8beca7e85c5 # lxd/network/acl: Change protocol field for ovn logs
-      git cherry-pick -x c35ac36962dd5cf691ff2b464055648ff8bcf463 # lxd/device/nic_ovn: Only stop device if network is populated
-      git cherry-pick -x 551c252d1653360ccfda981b7a9a42fc8eed5370 # lxd/storage/drivers: Always use default block.filesysem for VM volumes
-      git cherry-pick -x 6ae9c4e522c226efed94af447dd9e92ef658e28a # doc: pin version of myst-parser
-      git cherry-pick -x 6e96624b1cf707cfc5b511dd6f91b5a34d4db9a3 # lxd/storage/drivers: Add volume param to roundVolumeBlockSizeBytes
-      git cherry-pick -x a6e08cc8b897ea149ee5fa395cb9e242749f7db1 # lxd/storage/drivers/zfs: Round to zfs.blocksize or 16KiB
-      git cherry-pick -x 33d712497bfc5d6a8892bd8f6e1ddb3583bee1eb # lxd/storage/drivers: Refactor volume size rounding logic
-      git cherry-pick -x a7477c4cb0056efeb2ba781fad9f51230e21a664 # lxd/storage/drivers: Fix linter errors
-      git cherry-pick -x 3d90268df9774994a7f2807d6e3deff06a8fe145 # lxd/storage/drivers/zfs: Wait for device to appear when activating a volume
-      git cherry-pick -x 98c3f36f64d9f03740a3216fe7c68861e57fd917 # lxd/storage/drivers/zfs: Check for non /dev/zvol/* paths
-      git cherry-pick -x 27ad4c72b0ef44c70ac17267a955842f2f2e30e9 # lxd/util: Split CheckTrustState into two functions.
-      git cherry-pick -x 578bf456c04bc05a7b8496f6eb8fadb9d9c9c61d # lxd/cluster: Update calls to util.CheckTrustState
-      git cherry-pick -x dd16b59f84638d1268474fb31ccb510c84db65d3 # lxd-agent: Update calls to util.CheckTrustState.
-      git cherry-pick -x 879ebd254145cee5af5f51d98eee988e4eebddba # lxd: Update calls to util.CheckTrustState.
-      git cherry-pick -x 7af75b2749639e7a4634d6d6de6b781aa9dd1ed4 # lxd: Refactor `(*Daemon).Authenticate` method.
-      git cherry-pick -x dfae473d6cd8ee0df0b90c8e74a66ca4645a2b84 # lxd: Update comment on server certificate mTLS checks.
-      git cherry-pick -x fb0525e1bdd6a99c4eedacbe9e6c2c7b8e0d9a89 # lxd: Disallow certificate creation in CA mode if cert is not signed by CA.
-      git cherry-pick -x 356268c34eb17bebb8de740aaa82740d6a68ee5d # lxd/util: Update info log to indicate CA restriction applies to clients.
-      git cherry-pick -x 45126f2a54079799066abf6477a252605709b8e5 # shared: Set `GetClientCertificate` in TLS config.
-      git cherry-pick -x 52eaf3efa780d68fa51a74d9631f3c5e7a7fc879 # shared: Add comments to exported functions (revive: exported).
-      git cherry-pick -x 75fbdaeebea454fd074c9efac7a2c584a78762c7 # test/suites: Improve PKI test coverage.
-      git cherry-pick -x ce66fe3c1404c82183711bf7e35889bf19cfd5b9 # lxd/instance/exec: Only use keepalives on TCP sockets
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
