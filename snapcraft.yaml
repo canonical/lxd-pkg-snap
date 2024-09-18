@@ -678,7 +678,7 @@ parts:
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
-    source-commit: 2b87b844dbedeb2582920634205b52f1eea7c0b7 # v3.3.1
+    source-commit: dfe601bbc154c836e6ec3526a1eb331c1c09a06e # v3.3.2
     source-depth: 1
     source-type: git
     plugin: autotools
