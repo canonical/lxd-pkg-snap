@@ -1005,7 +1005,7 @@ parts:
 
   sqlite:
     source: https://github.com/sqlite/sqlite
-    source-commit: 189e44dfecdc7868bb860dfb5d98eab371318c37 # version-3.45.1
+    source-commit: f3d536d37825302e31ed0eddd811c689f38f85a3 # version-3.46.1
     source-depth: 1
     source-type: git
     plugin: autotools
