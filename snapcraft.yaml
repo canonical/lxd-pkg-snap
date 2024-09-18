@@ -702,7 +702,7 @@ parts:
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
-    source-commit: 41836afafd99d579bb277f638a31bffd5cf3efa3 # v24.03.2
+    source-commit: 459a3bab4c4a11b904aa3c37015372d34e1e1209 # v24.03.3
     source-depth: 1
     source-type: git
     plugin: autotools
