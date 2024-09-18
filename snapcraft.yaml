@@ -251,8 +251,8 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
+    source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
     source-depth: 1
-    source-tag: v3.19
     source-type: git
     plugin: nil
     build-packages:
@@ -476,8 +476,8 @@ parts:
 
   libtpms:
     source: https://github.com/stefanberger/libtpms
+    source-commit: f8c2dc7e12a730dcca4220d7ac5ad86d13dfd630 # v0.9.6
     source-depth: 1
-    source-tag: v0.9.6
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -491,8 +491,8 @@ parts:
 
   liburing:
     source: https://github.com/axboe/liburing
+    source-commit: f4e42a515cd78c8c9cac2be14222834be5f8df2b # liburing-2.5
     source-depth: 1
-    source-tag: liburing-2.5
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -513,8 +513,8 @@ parts:
 
   libusb:
     source: https://github.com/libusb/libusb
+    source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
     source-depth: 1
-    source-tag: v1.0.27
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -629,8 +629,8 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
+    source-commit: d2eb0afe86f0b643e33624ee64f065dd60e952d4 # v1.14.6
     source-depth: 1
-    source-tag: v1.14.6
     source-type: git
     plugin: make
     build-packages:
@@ -682,8 +682,8 @@ parts:
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
+    source-commit: 2b87b844dbedeb2582920634205b52f1eea7c0b7 # v3.3.1
     source-depth: 1
-    source-tag: v3.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -706,8 +706,8 @@ parts:
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
+    source-commit: 41836afafd99d579bb277f638a31bffd5cf3efa3 # v24.03.2
     source-depth: 1
-    source-tag: v24.03.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -720,8 +720,8 @@ parts:
 
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
+    source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
     source-depth: 1
-    source-tag: v0.14.4
     source-type: git
     plugin: meson
     prime: []
@@ -742,8 +742,8 @@ parts:
     after:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
+    source-commit: 0c2c1413a8b387ea597a95b6c867470a7c56c8ab # v0.15.2
     source-depth: 1
-    source-tag: v0.15.2
     source-type: git
     plugin: meson
     meson-parameters:
@@ -786,8 +786,8 @@ parts:
     after:
       - libtpms
     source: https://github.com/stefanberger/swtpm
+    source-commit: 507d14219dde88eb3eb2d10d15872d4044aa9d3e # v0.8.2
     source-depth: 1
-    source-tag: v0.8.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -823,8 +823,8 @@ parts:
       - spice-protocol
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
+    source-commit: dace9112e7b63e52016227e4291db59383b2a2c5 # import/1%8.2.1+ds-1ubuntu5
     source-depth: 1
-    source-tag: import/1%8.2.1+ds-1ubuntu5
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1008,8 +1008,8 @@ parts:
 
   sqlite:
     source: https://github.com/sqlite/sqlite
+    source-commit: 189e44dfecdc7868bb860dfb5d98eab371318c37 # version-3.45.1
     source-depth: 1
-    source-tag: version-3.45.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1022,8 +1022,8 @@ parts:
 
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
+    source-commit: 8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb # v1.3.1
     source-depth: 1
-    source-tag: v1.3.1
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1037,8 +1037,8 @@ parts:
 
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
+    source-commit: 3988b7304ceb2fdb4eed2c8bf8682e6ea19c4ecc # v1.10.1
     source-depth: 1
-    source-tag: v1.10.1
     source-type: git
     plugin: rust
     rust-channel: stable
@@ -1148,8 +1148,8 @@ parts:
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
+    source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
     source-depth: 1
-    source-tag: zfs-2.1.15
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1183,8 +1183,8 @@ parts:
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
+    source-commit: 2566592045780e7be7afc899c2496b1ae3af4f4d # zfs-2.2.4
     source-depth: 1
-    source-tag: zfs-2.2.4
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1382,8 +1382,8 @@ parts:
       - qemu-ovmf-secureboot
       - nftables
     source: https://github.com/awslabs/python-uefivars
+    source-commit: 9679002a4392d8e7831d2dbda3fab41ccc5c6b8c # v1.0.0
     source-depth: 1
-    source-tag: v1.0.0
     source-type: git
     plugin: python
     override-prime: |-
