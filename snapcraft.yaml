@@ -1358,7 +1358,7 @@ parts:
     organize:
       lib/python3.12/site-packages/: lib/python3/dist-packages/
     prime:
-      - bin/uefivars
+      - bin/uefivars.py
       - lib/python3/dist-packages/google_crc32c*
       - lib/python3/dist-packages/pyuefivars*
 
@@ -1583,7 +1583,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/virt-v2v-in-place" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
-        -not -path "${CRAFT_PRIME}/bin/uefivars" \
+        -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -not -path "${CRAFT_PRIME}/bin/lxcfs" \
         -not -path "${CRAFT_PRIME}/bin/gpu-2404-custom-wrapper" \
         -exec strip -s {} +
