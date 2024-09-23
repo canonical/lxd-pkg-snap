@@ -505,28 +505,6 @@ parts:
     prime:
       - lib/libtpms*so*
 
-  liburing:
-    source: https://github.com/axboe/liburing
-    source-commit: f4e42a515cd78c8c9cac2be14222834be5f8df2b # liburing-2.5
-    source-depth: 1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/liburing*so*
-
   libusb:
     source: https://github.com/libusb/libusb
     source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
@@ -815,7 +793,6 @@ parts:
   qemu:
     after:
       - libatomic
-      - liburing
       - libusb
       - spice-protocol
       - spice-server
@@ -874,6 +851,7 @@ parts:
       - libnuma-dev
       - libpixman-1-dev
       - libseccomp-dev
+      - liburing-dev
       - libusbredirhost-dev
       - quilt
       - on amd64: # workaround for armhf, because it lacks of librbd-dev
@@ -893,6 +871,7 @@ parts:
       - libpixman-1-0
       - libusbredirhost1t64
       - libusbredirparser1t64
+      - liburing2
       - seabios # This is needed due to --disable-install-blobs.
       - qemu-system-data # This is needed due to --disable-install-blobs.
     override-prime: |-
@@ -945,6 +924,7 @@ parts:
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
+      - lib/*/liburing*so*
       - lib/*/libusbredir*so*
       - lib/*/libfdt*.so*
       - share/qemu/keymaps/*
