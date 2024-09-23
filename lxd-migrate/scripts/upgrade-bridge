@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 # Work from the snap
 export PATH=/snap/bin/:${PATH}
 export LANG=C.UTF-8

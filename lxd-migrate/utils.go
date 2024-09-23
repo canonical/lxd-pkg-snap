@@ -156,7 +156,7 @@ func packagesRemovable(names []string) error {
 		}
 
 		pkg := strings.TrimSpace(line)
-		if !shared.StringInSlice(pkg, rdepends) && !shared.StringInSlice(pkg, names) {
+		if !shared.ValueInSlice(pkg, rdepends) && !shared.ValueInSlice(pkg, names) {
 			rdepends = append(rdepends, pkg)
 		}
 	}
@@ -166,7 +166,7 @@ func packagesRemovable(names []string) error {
 	for _, pkg := range rdepends {
 		output, err := shared.RunCommand("dpkg-query", "-W", "-f=${Status}", pkg)
 		if err == nil && strings.HasSuffix(output, " installed") {
-			if shared.StringInSlice(pkg, []string{"adapt", "autopkgtest", "lxc2", "nova-compute-lxd", "snapcraft", "ubuntu-server"}) {
+			if shared.ValueInSlice(pkg, []string{"adapt", "autopkgtest", "lxc2", "nova-compute-lxd", "snapcraft", "ubuntu-server"}) {
 				continue
 			}
 

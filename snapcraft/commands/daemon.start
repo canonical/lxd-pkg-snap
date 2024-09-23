@@ -11,8 +11,10 @@ echo "=> Preparing the system (${SNAP_REVISION})"
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155
-export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
+# Turn `/snap/lxd/28637/lib/x86_64-linux-gnu` into `x86_64-linux-gnu`
+# Similar to `basename` but using variable substitution instead of external executable
+LIB_ARCH="$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)"
+export ARCH="${LIB_ARCH##*/}"
 
 export HOME="/tmp/"
 export LXD_DIR="${SNAP_COMMON}/lxd/"
@@ -25,11 +27,17 @@ export LXD_CLUSTER_UPDATE="${SNAP_CURRENT}/commands/refresh"
 export LXD_OVMF_PATH="${SNAP_CURRENT}/share/qemu"
 export PYTHONPATH=/snap/lxd/current/lib/python3/dist-packages/
 
-# Detect model
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | sed -n 's/^model: \(.\+\)/\1/p')"
+# Detect LXD appliance
+LXD_APPLIANCE="false"
+if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
+    LXD_APPLIANCE="true"
+fi
+
+# Detect base name
+SNAP_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' /meta/snap.yaml)"
 
 # Wait for appliance configuration
-if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+if [ "${LXD_APPLIANCE}" = "true" ]; then
     while :; do
         [ "$(nsenter -t 1 -m snap managed)" = "true" ] && break
         sleep 5
@@ -135,7 +143,8 @@ fi
 
 # Fix lsmod/modprobe
 echo "==> Setting up kmod wrapper"
-mountpoint -q /bin/kmod || mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
+mountpoint -q /bin/kmod && umount -l /bin/kmod
+mount -o ro,bind "${SNAP}/wrappers/kmod" "/bin/kmod"
 
 # Setup /boot
 if [ -e /var/lib/snapd/hostfs/boot ]; then
@@ -226,14 +235,9 @@ for entry in hostid hostname hosts nsswitch.conf os-release passwd group localti
     ln -s "/var/lib/snapd/hostfs/etc/${entry}" "/etc/${entry}"
 done
 
-## And the bits we need from the core snap
-for entry in alternatives apparmor apparmor.d; do
-    ln -s "/snap/core22/current/etc/${entry}" "/etc/${entry}"
-done
-
-## And those we directly ship in the snap
-for entry in ethertypes protocols; do
-    ln -s "${SNAP}/etc/${entry}" "/etc/${entry}"
+## And the bits we need from the base/core snap
+for entry in alternatives apparmor apparmor.d ethertypes protocols; do
+    ln -s "/snap/${SNAP_BASE}/current/etc/${entry}" "/etc/${entry}"
 done
 
 ## Setup mtab
@@ -244,7 +248,7 @@ if [ -e "/var/lib/snapd/hostfs/etc/ssl" ] && [ -e "/var/lib/snapd/hostfs/usr/sha
     ln -s "/var/lib/snapd/hostfs/etc/ssl" "/etc/ssl"
     mountpoint -q "/usr/share/ca-certificates" || mount -o ro,bind "/var/lib/snapd/hostfs/usr/share/ca-certificates" "/usr/share/ca-certificates"
 else
-    ln -s "/snap/core22/current/etc/ssl" "/etc/ssl"
+    ln -s "/snap/${SNAP_BASE}/current/etc/ssl" "/etc/ssl"
 fi
 
 ## Try to handle special /etc/resolv.conf setups
@@ -272,16 +276,6 @@ for entry in dev proc sys; do
     mount -o bind "/${entry}" "/var/lib/snapd/hostfs/${entry}"
 done
 
-# Setup the "lxd" user
-if ! getent passwd lxd >/dev/null 2>&1; then
-    echo "==> Creating \"lxd\" user"
-    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --extrausers lxd || true
-    else
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false lxd || true
-    fi
-fi
-
 # Setup the "lxd" group
 if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     echo "==> Creating \"lxd\" group"
@@ -292,13 +286,23 @@ if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
     fi
 fi
 
+# Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd --extrausers lxd || true
+    else
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd lxd || true
+    fi
+fi
+
 # Setup for ceph
 echo "==> Setting up ceph configuration"
 if [ "${ceph_builtin:-"false"}" = "true" ]; then
     mkdir -p "${SNAP_COMMON}/ceph"
     ln -s "${SNAP_COMMON}/ceph" /etc/ceph
-elif [ -e "/var/snap/microceph" ]; then
-    ln -s /var/snap/microceph/current/conf/ /etc/ceph
+elif [ -d "${SNAP_DATA}/microceph" ]; then
+    ln -snf "${SNAP_DATA}/microceph/conf/" /etc/ceph
 else
     ln -s /var/lib/snapd/hostfs/etc/ceph /etc/ceph
 fi
@@ -338,30 +342,16 @@ else
     VERSION=$(nsenter -t 1 -m modinfo -F version zfs 2>/dev/null || true)
 fi
 
-if echo "${VERSION}" | grep -q ^2\.2; then
-    echo "==> Setting up ZFS (2.2)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.2/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.2/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.1; then
-    echo "==> Setting up ZFS (2.1)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.1/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.1/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^2\.0; then
-    echo "==> Setting up ZFS (2.0)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-2.0/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-2.0/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.8; then
-    echo "==> Setting up ZFS (0.8)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.8/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.8/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.7; then
-    echo "==> Setting up ZFS (0.7)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.7/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.7/bin:${PATH}"
-elif echo "${VERSION}" | grep -q ^0\.6; then
-    echo "==> Setting up ZFS (0.6)"
-    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-0.6/lib/:${LD_LIBRARY_PATH}"
-    export PATH="${SNAP_CURRENT}/zfs-0.6/bin:${PATH}"
+ZFS_VER="$(echo "${VERSION}" | cut -c 1-3)"
+
+if [ -d "${SNAP_CURRENT}/zfs-${ZFS_VER}/bin" ]; then
+    echo "==> Setting up ZFS (${ZFS_VER})"
+    export LD_LIBRARY_PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/lib/:${LD_LIBRARY_PATH}"
+    export PATH="${SNAP_CURRENT}/zfs-${ZFS_VER}/bin:${PATH}"
+elif [ -n "${ZFS_VER}" ]; then
+    echo "==> Unsupported ZFS version (${ZFS_VER})"
+else
+    echo "==> No ZFS support"
 fi
 
 # Escape resource limits
@@ -436,17 +426,19 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
         fi
     fi
 
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged userns mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+    if [ "${apparmor_unprivileged_restrictions_disable:-"true"}" = "true" ]; then
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged userns mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_userns || true
+            fi
         fi
-    fi
 
-    if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
-        if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
-            echo "==> Disabling Apparmor unprivileged unconfined mediation"
-            echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
+            if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined)" = "1" ]; then
+                echo "==> Disabling Apparmor unprivileged unconfined mediation"
+                echo 0 > /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined || true
+            fi
         fi
     fi
 fi
@@ -514,17 +506,29 @@ fi
 # LXCFS
 if [ -e "${SNAP_COMMON}/var/lib/lxcfs/cgroup" ]; then
     echo "=> Re-using existing LXCFS"
-    NEW_FUSE=$(ldd "${SNAP_CURRENT}/bin/lxcfs" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
+
+    ## Get the libfuse soname the new lxcfs wants to use
+    NEW_FUSE="$(ldd "${SNAP_CURRENT}/bin/lxcfs" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
     CURRENT_FUSE="${NEW_FUSE}"
 
+    ## Get the name of the base (core2X) used by the new snap
+    NEW_BASE="${SNAP_BASE}"
+    CURRENT_BASE="${NEW_BASE}"
+
+    ## Use the old lxcfs instance to get the libfuse soname and old base it uses
     if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
         read -r CURRENT_PID < "${SNAP_COMMON}/lxcfs.pid"
         if [ -e "/proc/${CURRENT_PID}" ]; then
-            CURRENT_FUSE=$(ldd "/proc/${CURRENT_PID}/exe" | grep libfuse | sed -e "s/.*libfuse.so.//g" -e "s/ .*//g")
+            CURRENT_FUSE="$(ldd "/proc/${CURRENT_PID}/exe" | sed -n "/libfuse3\?\.so/ s/.*libfuse3\?\.so\.\([^ ]\+\) .*/\1/p")"
+            CURRENT_BASE="$(sed -n '/^name:/ s/^name:\s*\(core[0-9]\{2\}\)/\1/p' "/proc/${CURRENT_PID}/root/meta/snap.yaml")"
         fi
     fi
 
-    if [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
+    ## If the base snap or the libfuse soname changed, warn that a system restart is needed
+    ## otherwise, proceed with reloading lxcfs
+    if [ "${CURRENT_BASE}" != "${NEW_BASE}" ]; then
+        echo "==> snap base has changed, restart system to upgrade LXCFS"
+    elif [ "${CURRENT_FUSE}" != "${NEW_FUSE}" ]; then
         echo "==> FUSE version mismatch, restart system to upgrade LXCFS"
     elif [ -n "${CURRENT_PID:-}" ]; then
         echo "==> Reloading LXCFS"
@@ -590,16 +594,23 @@ fi
 
 # LXD
 ## Check for existing LXDs
-for pid in $(pgrep -f "lxd --logfile" ; pgrep -f "lxd.debug --logfile"); do
-    grep -qF "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
+for pid in $(pgrep --euid 0 --full "lxd(\.debug)? --logfile"); do
+    # Cheap confirmation that we likely have a LXD PID
+    grep -q --line-regexp --fixed-strings --max-count=1 "SNAP_NAME=lxd" "/proc/${pid}/environ" || continue
 
-    rm -f "/var/snap/lxd/common/lxd/.validate"
-    touch "/proc/${pid}/root/var/snap/lxd/common/lxd/.validate" 2>/dev/null || true
-    if [ -e "/var/snap/lxd/common/lxd/.validate" ]; then
+    # Confirm the PID found by pgrep is indeed ours and not one from
+    # a nested instance also running LXD or a recycled PID. By writing
+    # to a file using the `/proc` path and comparing the content seen from
+    # the `/var` path, we can conclude if the LXD daemon is executing
+    # in the same mount namespace as ours (safe to kill) or not (ignore).
+    # A priv nested LXD would pass the EUID=0 and SNAP_NAME=lxd tests but would
+    # fail the `.validate` test as it wouldn't be in the same mount namespace.
+    echo "$$" > "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate" 2>/dev/null || true
+    if [ "$(cat "${SNAP_COMMON}/lxd/.validate" 2>/dev/null)" = "$$" ]; then
         echo "=> Killing conflicting LXD (pid=${pid})"
         kill -9 "${pid}" || true
-        rm -f "/var/snap/lxd/common/lxd/.validate"
     fi
+    rm -f "/proc/${pid}/root${SNAP_COMMON}/lxd/.validate"
 done
 
 ## Move the database out of the versioned path if present
@@ -607,6 +618,11 @@ if [ -L "${SNAP_COMMON}/lxd/lxd.db" ]; then
     echo "=> Moving database from versioned path to common"
     rm "${SNAP_COMMON}/lxd/lxd.db"
     mv "${SNAP_DATA}/lxd/lxd.db" "${SNAP_COMMON}/lxd/lxd.db"
+fi
+
+# Warn the user if a debug LXC binary is found
+if [ -x "${SNAP_COMMON}/lxc.debug" ]; then
+    echo "==> WARNING: A custom debug LXC binary was found!"
 fi
 
 ## Start lxd
@@ -623,8 +639,8 @@ CMD="${LXD} --logfile ${SNAP_COMMON}/lxd/logs/lxd.log"
 
 if getent group "${daemon_group}" >/dev/null 2>&1; then
     CMD="${CMD} --group ${daemon_group}"
-    if [ -e "/var/snap/lxd/common/lxd/unix.socket" ]; then
-        chgrp "${daemon_group}" /var/snap/lxd/common/lxd/unix.socket
+    if [ -e "${SNAP_COMMON}/lxd/unix.socket" ]; then
+        chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
     fi
 else
     echo "==> No \"${daemon_group}\" group found, only root will be able to use LXD."
@@ -702,7 +718,7 @@ if [ "${FIRSTRUN}" = "true" ]; then
         echo "==> Running LXD preseed file"
         ${LXD} init --preseed < "${SNAP_COMMON}/init.yaml"
         mv "${SNAP_COMMON}/init.yaml" "${SNAP_COMMON}/init.yaml.applied"
-    elif echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+    elif [ "${LXD_APPLIANCE}" = "true" ]; then
         echo "==> Initializing LXD appliance"
 
         # Network (NIC with the default gateway)

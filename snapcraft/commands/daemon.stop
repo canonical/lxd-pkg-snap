@@ -6,24 +6,23 @@ if [ -d /sys/kernel/security/apparmor ] && [ "$(cat /proc/self/attr/current)" !=
     exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
-export LXD_DIR="${SNAP_COMMON}/lxd/"
-PID=$(cat "${SNAP_COMMON}/lxd.pid" || true)
-
-# FIXME: Detect stop reason
-#        This should be exposed by snapd directly
-STATUS=$(snap-query /run/snapd.socket lxd 2>/dev/null || true)
-
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
-    reason="$(cat "${SNAP_COMMON}/state")"
-elif [ "${STATUS}" = "auto-refresh" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "refresh-snap" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "install-snap" ]; then
-    reason="snap refresh"
-elif [ "${STATUS}" = "remove-snap" ]; then
-    reason="snap removal"
+    read -r reason < "${SNAP_COMMON}/state"
+else
+  # FIXME: Detect stop reason
+  #        This should be exposed by snapd directly
+  STATUS=$(snap-query 2>/dev/null || true)
+
+  if [ "${STATUS}" = "auto-refresh" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "refresh-snap" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "install-snap" ]; then
+      reason="snap refresh"
+  elif [ "${STATUS}" = "remove-snap" ]; then
+      reason="snap removal"
+  fi
 fi
 
 echo "=> Stop reason is: ${reason}"
@@ -37,6 +36,9 @@ fi
 if [ "${reason}" = "reload" ] || [ "${reason}" = "crashed" ]; then
     exit 0
 fi
+
+export LXD_DIR="${SNAP_COMMON}/lxd/"
+read -r PID < "${SNAP_COMMON}/lxd.pid" || true
 
 # Handle refreshes
 if [ "${reason}" = "snap refresh" ]; then
@@ -71,7 +73,7 @@ fi
 
 # Shutdown the daemons
 ## LXD
-echo "=> Stopping LXD (with container shutdown)"
+echo "=> Stopping LXD (with instance shutdown)"
 
 echo host-shutdown > "${SNAP_COMMON}/state"
 if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
@@ -101,8 +103,8 @@ fi
 
 ## OpenVswitch
 if [ -e "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" ]; then
-    PID=$(cat "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid")
-    if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
+    read -r OVS_PID < "${SNAP_COMMON}/openvswitch/run/ovs-vswitchd.pid" || true
+    if [ -n "${OVS_PID}" ] && kill -0 "${OVS_PID}" 2>/dev/null; then
         (
             echo "=> Stopping Open vSwitch"
 
@@ -126,17 +128,17 @@ fi
 
 ## LXCFS
 if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
-    echo "=> Stopping LXCFS"
+    read -r LXCFS_PID < "${SNAP_COMMON}/lxcfs.pid" || true
+    if [ -n "${LXCFS_PID}" ] && kill -0 "${LXCFS_PID}" 2>/dev/null; then
+        echo "=> Stopping LXCFS"
 
-    PID=$(cat "${SNAP_COMMON}/lxcfs.pid")
-    if [ -n "${PID}" ] && kill -0 "${PID}" 2>/dev/null; then
-        if ! kill "$PID"; then
+        if ! kill "${LXCFS_PID}"; then
             echo "==> Failed to signal LXCFS to stop"
         fi
 
         DEAD=0
         for _ in $(seq 30); do
-            if ! kill -0 "${PID}" 2>/dev/null; then
+            if ! kill -0 "${LXCFS_PID}" 2>/dev/null; then
                 DEAD=1
                 echo "==> Stopped LXCFS"
                 break
@@ -146,7 +148,7 @@ if [ -e "${SNAP_COMMON}/lxcfs.pid" ]; then
 
         if [ "${DEAD}" = "0" ]; then
             echo "==> Forcefully stopping LXCFS after 30 seconds wait"
-            if kill -9 "${PID}" 2>/dev/null; then
+            if kill -9 "${LXCFS_PID}" 2>/dev/null; then
                 echo "==> Stopped LXCFS"
             else
                 echo "==> Failed to stop LXCFS"
@@ -163,7 +165,7 @@ rm -f "${SNAP_COMMON}/lxcfs.pid" "${SNAP_COMMON}/lxd.pid"
 
 ## Flush our shared namespace from the host
 echo "=> Cleaning up namespaces"
-nsenter -t 1 -m umount -l /var/snap/lxd/common/ns 2>/dev/null || true
+nsenter -t 1 -m umount -l "${SNAP_COMMON}/ns" 2>/dev/null || true
 
 echo "=> All done"
 exit 0

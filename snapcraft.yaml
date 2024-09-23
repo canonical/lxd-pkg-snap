@@ -30,6 +30,7 @@ description: |-
 
  Supported configuration options for the snap (snap set lxd [<key>=<value>...]):
 
+   - apparmor.unprivileged-restrictions-disable: Whether to disable restrictions on unprivileged user namespaces [default=true]
    - ceph.builtin: Use snap-specific Ceph configuration [default=false]
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
    - criu.enable: Enable experimental live-migration support [default=false]
@@ -154,7 +155,6 @@ hooks:
 parts:
   # Dependencies
   btrfs:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - btrfs-progs
@@ -166,7 +166,6 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - ceph-common
@@ -186,6 +185,8 @@ parts:
       - lib/*/libboost_iostreams.so*
       - lib/*/libboost_program_options.so*
       - lib/*/libboost_thread.so*
+      - lib/*/libbrotlicommon.so*
+      - lib/*/libbrotlidec.so*
       - lib/*/libcurl-gnutls.so*
       - lib/*/libdaxctl.so*
       - lib/*/libibverbs.so*
@@ -211,8 +212,8 @@ parts:
   criu:
     source: https://github.com/checkpoint-restore/criu
     source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - asciidoc
@@ -227,18 +228,19 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
-    override-build: |
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && [ "$(uname -m)" != "armv7l" ] && exit 0
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "armv7l" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      make
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/criu/"
-      cp criu/criu "${SNAPCRAFT_PART_INSTALL}/criu/"
+      make USERCFLAGS=-Wno-error=format-truncation criu
+      mkdir -p "${CRAFT_PART_INSTALL}/criu/"
+      cp criu/criu "${CRAFT_PART_INSTALL}/criu/"
     organize:
       usr/lib/: lib/
     prime:
@@ -250,15 +252,15 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
       - --enable-build-raft
     stage-packages:
-      - libuv1
       - liblz4-1
+      - libuv1
     build-packages:
       - liblz4-dev
       - libuv1-dev
@@ -267,42 +269,51 @@ parts:
     prime:
       - lib/libdqlite*so*
       - lib/*/libuv*
+      #- lib/*/liblz4.so*  # use liblz4.so from the base snap
 
   edk2:
     after:
       - nasm
     source: https://github.com/tianocore/edk2
-    source-type: git
-    source-tag: IRRELEVANT
     source-depth: 1
+    source-tag: IRRELEVANT
+    source-type: git
     plugin: nil
     build-packages:
       - on amd64:
+        - g++
         - acpica-tools
         - uuid-dev
       - on arm64:
+        - g++
         - acpica-tools
         - uuid-dev
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
+      git config --global transfer.fsckobjects true
       git clone https://github.com/tianocore/edk2 . -b edk2-stable202208
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      set -ex
+
+      # Git cherry-picks
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
 
       # Fix submodules
       sed -i "s#https://git.cryptomilk.org/projects/cmocka#https://gitlab.com/cmocka/cmocka#g" .gitmodules
       git submodule update --init --recursive
 
       # Apply patches
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
-      cp "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
-      patch --binary -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/edk2-0007-Disable-the-Shell-when-SecureBoot-is-enabled.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
+      cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0004-gcc-errors.patch"
+      patch --binary -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0007-Disable-the-Shell-when-SecureBoot-is-enabled.patch"
 
       ARCH="X64"
       PKG="OvmfPkg/OvmfPkgX64.dsc"
@@ -335,13 +346,13 @@ parts:
       EOF
       ) | bash -e
 
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
-      cp Build/*/*/FV/${FV_CODE}.fd "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-      cp Build/*/*/FV/${FV_VARS}.fd "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
+      mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
+      cp Build/*/*/FV/${FV_CODE}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
+      cp Build/*/*/FV/${FV_VARS}.fd "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
 
       if [ "$(uname -m)" = "aarch64" ]; then
-          truncate -s 64m "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
-          truncate -s 64m "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
+          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.fd"
+          truncate -s 64m "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.fd"
       fi
 
     prime:
@@ -349,8 +360,8 @@ parts:
 
   libmnl:
     source: https://git.netfilter.org/libmnl
-    source-type: git
     source-commit: 493aacf2ec9cc61a5b30d77cd55ec248f033bc74 # libmnl-1.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -363,8 +374,8 @@ parts:
     after:
       - libmnl
     source: https://git.netfilter.org/libnftnl
-    source-type: git
     source-commit: 116e95aa7b6358c917de8c69f6f173874030b46b # libnftnl-1.2.7
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -373,15 +384,15 @@ parts:
     prime:
       - lib/libnftnl*so*
     override-build: |
-      snapcraftctl build
+      craftctl default
 
-      sed -i "s# /lib/libmnl.la# ${SNAPCRAFT_STAGE}/lib/libmnl.la#g" "${SNAPCRAFT_PART_INSTALL}/lib/libnftnl.la"
+      sed -i "s# /lib/libmnl.la# ${CRAFT_STAGE}/lib/libmnl.la#g" "${CRAFT_PART_INSTALL}/lib/libnftnl.la"
 
   libseccomp:
     source: https://github.com/seccomp/libseccomp
-    source-type: git
     source-commit: f0b04ab0b4fc0bc2cde6da1f407b4a487fe6d78f # v2.5.5
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -394,9 +405,9 @@ parts:
 
   libtpms:
     source: https://github.com/stefanberger/libtpms
-    source-type: git
     source-commit: f8c2dc7e12a730dcca4220d7ac5ad86d13dfd630 # v0.9.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -409,15 +420,21 @@ parts:
 
   liburing:
     source: https://github.com/axboe/liburing
-    source-type: git
-    source-tag: liburing-2.5
     source-depth: 1
+    source-tag: liburing-2.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      snapcraftctl build
+      craftctl default
     organize:
       usr/lib/: lib/
     prime:
@@ -425,9 +442,9 @@ parts:
 
   libusb:
     source: https://github.com/libusb/libusb
-    source-type: git
     source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -437,7 +454,6 @@ parts:
       - lib/libusb*so*
 
   logrotate:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - logrotate
@@ -451,7 +467,6 @@ parts:
       - bin/logrotate
 
   lvm:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - dmeventd
@@ -483,7 +498,6 @@ parts:
       - lib/*/libreadline.so*
 
   nano:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - nano
@@ -495,31 +509,38 @@ parts:
 
   nasm:
     source: https://github.com/netwide-assembler/nasm
-    source-type: git
-    source-tag: nasm-2.15.05
     source-depth: 1
+    source-tag: nasm-2.15.05
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
     organize:
       usr/bin/: bin/
-    prime:
-      - bin/nasm
+    override-prime:
+      # no need to prime anything as the nasm binary is only used by edk2
+      # and is not needed in the final snap artifact
+      exit 0
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-build: |
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/nasm-0000-disable-manpages.patch"
-      snapcraftctl build
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nasm-0000-disable-manpages.patch"
+      craftctl default
 
   nftables:
     after:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
-    source-type: git
     source-commit: d946842f576b422972212a2b83601bbd6204337c # v1.1.0
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
       - --with-json
+      - --disable-man-doc
     build-packages:
       - libedit-dev
       - libjansson-dev
@@ -529,12 +550,12 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       set +ex
-      snapcraftctl build
-      set -ex
+      craftctl default
     organize:
       sbin/: bin/
       usr/lib/: lib/
@@ -547,31 +568,39 @@ parts:
     after:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
-    source-type: git
-    source-commit: 4c2494f16573b585788a42e9c7bee76ecd48c73d # v1.16.1
+    # XXX: fails to build if using source-commit
     source-depth: 1
+    source-tag: v1.16.1
+    source-type: git
     plugin: make
     build-packages:
       - bmake
       - curl
       - libelf-dev
       - lsb-release
+      - libtirpc-dev
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
-
+      # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0001-Fix-for-22.04-build.patch"
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/nvidia-0002-pre-load-libdl.patch"
 
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/bin/"
-      cp ${SNAPCRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli "${SNAPCRAFT_PART_INSTALL}/bin/"
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+      cp "${CRAFT_PROJECT_DIR}/snapcraft/wrappers/nvidia-container-cli" "${CRAFT_PART_INSTALL}/bin/"
 
       set +ex
-      snapcraftctl build
+      craftctl default
     organize:
       usr/local/bin/nvidia-container-cli: bin/nvidia-container-cli.real
       usr/local/lib: lib/
@@ -581,24 +610,15 @@ parts:
 
   openvswitch:
     source: https://github.com/openvswitch/ovs
-    source-type: git
     source-commit: 6c4da8cc29565506beacca16ac97645ae851009a # v3.3.0
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
       - --prefix=
     stage-packages:
       - uuid-runtime
-    override-build: |
-      set -ex
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-
-      set +ex
-      snapcraftctl build
-      set -ex
     organize:
       sbin/: bin/
       usr/bin/: bin/
@@ -614,9 +634,9 @@ parts:
     after:
       - openvswitch
     source: https://github.com/ovn-org/ovn
-    source-type: git
     source-commit: 41836afafd99d579bb277f638a31bffd5cf3efa3 # v24.03.2
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --enable-ssl
@@ -628,21 +648,30 @@ parts:
 
   spice-protocol:
     source: https://gitlab.freedesktop.org/spice/spice-protocol
-    source-type: git
     source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
     source-depth: 1
+    source-type: git
     plugin: meson
     prime: []
     build-packages:
       - meson
       - ninja-build
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
 
   spice-server:
     after:
       - spice-protocol
     source: https://gitlab.freedesktop.org/spice/spice
-    source-type: git
     source-commit: 0c2c1413a8b387ea597a95b6c867470a7c56c8ab # v0.15.2
+    source-type: git
     plugin: meson
     meson-parameters:
       - --prefix=/
@@ -662,6 +691,15 @@ parts:
     stage-packages:
       - libjpeg-turbo8
       - libpixman-1-0
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     organize:
       sbin/: bin/
       usr/lib: lib/
@@ -676,9 +714,9 @@ parts:
       - libseccomp
       - libtpms
     source: https://github.com/stefanberger/swtpm
-    source-type: git
     source-commit: f756ee8a281ddff7e09b49e1ef00d5cbb42abb63 # v0.9.0
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -711,10 +749,10 @@ parts:
       - libusb
       - spice-protocol
       - spice-server
-    source: IRRELEVANT
-    source-type: git
-    source-tag: IRRELEVANT
+    source: https://gitlab.com/qemu-project/qemu
     source-depth: 1
+    source-tag: v8.0.5
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --disable-bochs
@@ -723,12 +761,14 @@ parts:
       - --disable-docs
       - --disable-guest-agent
       - --disable-parallels
+      - --disable-pvrdma
       - --disable-qed
       - --disable-slirp
       - --disable-user
       - --disable-vdi
       - --disable-vnc
       - --disable-xen
+      - --disable-xkbcommon
       - --enable-attr
       - --enable-cap-ng
       - --enable-kvm
@@ -753,6 +793,7 @@ parts:
       - --localstatedir=/var/
     build-packages:
       - bison
+      - bzip2
       - flex
       - pkg-config
       - libaio-dev
@@ -770,13 +811,14 @@ parts:
       - libpixman-1-0
       - libusbredirhost1
       - libusbredirparser1
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      set -ex
-      git clone https://gitlab.com/qemu/qemu . -b v8.0.5
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-
       set -ex
       # Mangle the configure a bit
       QEMUARCH="$(uname -m)"
@@ -785,7 +827,7 @@ parts:
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
 
       set +ex
-      snapcraftctl build
+      craftctl default
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -816,23 +858,29 @@ parts:
       - edk2
       - qemu
     source: https://github.com/puiterwijk/qemu-ovmf-secureboot
-    source-type: git
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - xorriso
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      export ARCH="$(basename $(readlink -f ${SNAPCRAFT_STAGE}/lib/*-linux-gnu*/))"
-      export LD_LIBRARY_PATH="${SNAPCRAFT_STAGE}/lib:${SNAPCRAFT_STAGE}/lib/${ARCH}"
+      export ARCH="$(basename "$(readlink -f "${CRAFT_STAGE}"/lib/*-linux-gnu*/)")"
+      export LD_LIBRARY_PATH="${CRAFT_STAGE}/lib:${CRAFT_STAGE}/lib/${ARCH}"
 
       set -ex
       rm -Rf iso-root vfat-root shell.iso
       mkdir -p iso-root vfat-root/efi/boot
       cp ../../edk2/build/Build/*/*/*/Shell.efi vfat-root/efi/boot/bootx64.efi
       cp ../../edk2/build/Build/*/*/*/EnrollDefaultKeys.efi vfat-root/
-      "${SNAPCRAFT_STAGE}/bin/qemu-img" convert --image-opts driver=vvfat,floppy=on,fat-type=12,label=UEFI_SHELL,dir=vfat-root iso-root/shell.img
+      "${CRAFT_STAGE}/bin/qemu-img" convert --image-opts driver=vvfat,floppy=on,fat-type=12,label=UEFI_SHELL,dir=vfat-root iso-root/shell.img
       xorriso --as mkisofs -input-charset ASCII -J -rational-rock -e shell.img -no-emul-boot -o shell.iso iso-root/
 
       # Basic aarch64 support
@@ -843,26 +891,26 @@ parts:
               -e "s/ide-cd/scsi-cd/" \
               -e "s/'-device',$/'-device', 'virtio-scsi-pci,id=scsi', '-device',/"
       elif [ "$(uname -m)" = "x86_64" ]; then
-          cp -f "${SNAPCRAFT_STAGE}/share/qemu/kvmvapic.bin" .
+          cp -f "${CRAFT_STAGE}/share/qemu/kvmvapic.bin" .
       fi
 
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/share/qemu/"
+      mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
       python3 ovmf-vars-generator \
-        --qemu-binary "${SNAPCRAFT_STAGE}/bin/qemu-system-$(uname -m)" \
+        --qemu-binary "${CRAFT_STAGE}/bin/qemu-system-$(uname -m)" \
         --print-output --disable-smm --skip-testing \
-        --oem-string "$(cat ${SNAPCRAFT_PROJECT_DIR}/snapcraft/etc/ubuntu-sb.crt)" \
-        --ovmf-binary "${SNAPCRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
-        --ovmf-template-vars "${SNAPCRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
+        --oem-string "$(cat ${CRAFT_PROJECT_DIR}/snapcraft/etc/ubuntu-sb.crt)" \
+        --ovmf-binary "${CRAFT_STAGE}/share/qemu/OVMF_CODE.fd" \
+        --ovmf-template-vars "${CRAFT_STAGE}/share/qemu/OVMF_VARS.fd" \
         --uefi-shell-iso shell.iso \
-        "${SNAPCRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
+        "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.ms.fd"
     prime:
       - share/qemu/*
 
   sqlite:
     source: https://github.com/sqlite/sqlite
-    source-type: git
-    source-depth: 1
     source-commit: f3d536d37825302e31ed0eddd811c689f38f85a3 # version-3.46.1
+    source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -874,9 +922,9 @@ parts:
 
   squashfs-tools-ng:
     source: https://github.com/AgentD/squashfs-tools-ng
-    source-type: git
     source-commit: 8f9966c8ea3ea8a854941d041e7fcb9eb4f772fb # v1.3.1
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=
@@ -889,10 +937,11 @@ parts:
 
   virtiofsd:
     source: https://gitlab.com/virtio-fs/virtiofsd
-    source-type: git
     source-commit: d20f4d698c14ada07ea9ff5cb7050c2c4703ff66 # v1.11.1
     source-depth: 1
+    source-type: git
     plugin: rust
+    rust-channel: stable
     build-packages:
       - cargo
       - libseccomp-dev
@@ -901,15 +950,17 @@ parts:
       usr/bin: bin/
     prime:
       - bin/virtiofsd*
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-pull: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      snapcraftctl pull
+      craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      snapcraftctl build
+      craftctl default
 
   xfs:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - xfsprogs
@@ -927,23 +978,22 @@ parts:
       - lib/*/liburcu.so*
 
   xtables:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - arptables
       - ebtables
+      - netbase
     organize:
       usr/lib/ebtables/: lib/
       usr/sbin/: bin/
     prime:
+      #- etc/ethertypes  # use ethertypes from the base snap
+      #- etc/protocols   # use protocols from the base snap
       - bin/arptables-legacy
       - bin/ebtables-legacy
-      - etc/ethertypes
-      - etc/protocols
       - lib/libebtc.so.*
 
   xz:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - xz-utils
@@ -956,15 +1006,15 @@ parts:
       - bin/xz
       - lib/*/liblzma*so*
     override-build: |
-      snapcraftctl build
+      craftctl default
 
       # Include the lzma symlink
-      ln -s xz "${SNAPCRAFT_PART_INSTALL}/usr/bin/lzma"
+      ln -s xz "${CRAFT_PART_INSTALL}/usr/bin/lzma"
 
   zfs-0-6:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: 2bc71fa976bf34b41313928fd42e4d41f0c9cd1a # zfs-0.6.5.11
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -972,42 +1022,44 @@ parts:
     build-packages:
       - uuid-dev
       - zlib1g-dev
-    override-build: |
-      set -ex
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-
-      git config user.email "noreply@linuxcontainers.org"
+      git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
       git cherry-pick fb963d33ee0dd350143ba1c9cd35d5f7d86910d2  # Fix endian build problem on ppc64el
 
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0001-Add-support-for-libtirpc.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0002-config-better-libtirpc-detection.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0003-explicitly-define-____cacheline_aligned.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0004-Fix-static-data-to-link-with-fno-common.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-6/0005-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-6/0001-Add-support-for-libtirpc.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-6/0002-config-better-libtirpc-detection.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-6/0003-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-6/0004-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-6/0005-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
 
-      set +ex
-      snapcraftctl build
+      craftctl default
       set -ex
 
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.6/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      ZFS_VER="0.6"
+
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-0-7:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: a8c2b7ebc64d23ffe15e2b168aa0bea7a4897133 # zfs-0.7.13
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1016,35 +1068,37 @@ parts:
       - libblkid-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-7/0001-explicitly-define-____cacheline_aligned.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-7/0002-Fix-static-data-to-link-with-fno-common.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/zfs-0-7/0003-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
+
+      craftctl default
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      ZFS_VER="0.7"
 
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0001-explicitly-define-____cacheline_aligned.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0002-Fix-static-data-to-link-with-fno-common.patch"
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/zfs-0-7/0003-A-simplified-backport-of-2faf05612f9-libshare-smb-cl.patch"
-
-      set +ex
-      snapcraftctl build
-      set -ex
-
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.7/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-0-8:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: 2bc66898b7056140108a4937a6557d9fe27cafc6 # zfs-0.8.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1054,31 +1108,32 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      ZFS_VER="0.8"
 
-      set +ex
-      snapcraftctl build
-      set -ex
-
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-0.8/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-0:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: ad81baab7779cd2113669d30de72bb925e684525 # zfs-2.0.7
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1088,31 +1143,32 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      ZFS_VER="2.0"
 
-      set +ex
-      snapcraftctl build
-      set -ex
-
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-2.0/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1122,31 +1178,32 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
-    override-build: |
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
       set -ex
 
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
+      ZFS_VER="2.1"
 
-      set +ex
-      snapcraftctl build
-      set -ex
-
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-2.1/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
-    source-type: git
     source-commit: baa50314567afd986a00838f0fa65fdacbd12daf # zfs-2.2.6
     source-depth: 1
+    source-type: git
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/
@@ -1156,32 +1213,28 @@ parts:
       - libssl-dev
       - uuid-dev
       - zlib1g-dev
+    override-prime: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-      snapcraftctl pull
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && \
-        [ "$(uname -m)" != "aarch64" ] && \
-        [ "$(uname -m)" != "s390x" ] && \
-        [ "$(uname -m)" != "ppc64le" ] && exit 0
-      snapcraftctl build
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      craftctl default
       set -ex
 
       ZFS_VER="2.2"
 
-      mv "${SNAPCRAFT_PART_INSTALL}" "${SNAPCRAFT_PART_INSTALL}.tmp"
-      mkdir -p "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zfs" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/sbin/zpool" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
-      mv "${SNAPCRAFT_PART_INSTALL}.tmp/lib/"*so* "${SNAPCRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
-      rm -Rf "${SNAPCRAFT_PART_INSTALL}.tmp"
+      mv "${CRAFT_PART_INSTALL}" "${CRAFT_PART_INSTALL}.tmp"
+      mkdir -p "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zfs" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/sbin/zpool" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/udev/zvol_id" "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/bin/"
+      mv "${CRAFT_PART_INSTALL}.tmp/lib/"*so* "${CRAFT_PART_INSTALL}/zfs-${ZFS_VER}/lib/"
+      rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zstd:
-    source: snapcraft/empty
     plugin: nil
     stage-packages:
       - zstd
@@ -1193,8 +1246,8 @@ parts:
 
   apparmor:
     source: https://gitlab.com/apparmor/apparmor.git
+    source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
     source-depth: 1
-    source-tag: v4.0.1
     source-type: git
     plugin: autotools
     build-packages:
@@ -1230,12 +1283,13 @@ parts:
   # Core components
   lxc:
     after:
-      - libseccomp
       - apparmor
+      - libseccomp
     source: https://github.com/lxc/lxc
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     build-packages:
+      - dpkg-dev
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
@@ -1270,6 +1324,7 @@ parts:
     override-build: |
       set -ex
 
+      # Git cherry-picks
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
@@ -1277,16 +1332,16 @@ parts:
       cd ../build
 
       set +ex
-      snapcraftctl build
+      craftctl default
       set -ex
 
-      mkdir -p $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/
-      ln -s /var/snap/lxd/common/lxc/local.conf $SNAPCRAFT_PART_INSTALL/lxc/config/common.conf.d/01-local.conf
+      mkdir -p "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/"
+      ln -s /var/snap/lxd/common/lxc/local.conf "${CRAFT_PART_INSTALL}/lxc/config/common.conf.d/01-local.conf"
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     build-packages:
       - libfuse3-dev
       - libpam0g-dev
@@ -1330,22 +1385,28 @@ parts:
       git config user.name "LXD snap builder"
 
       set +ex
-      snapcraftctl build
+      craftctl default
       set -ex
 
-      patch -p1 $SNAPCRAFT_PART_INSTALL/snap/lxd/current/lxcfs/lxc.mount.hook < "${SNAPCRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
+      patch -p1 "${CRAFT_PART_INSTALL}/snap/lxd/current/lxcfs/lxc.mount.hook" < "${CRAFT_PROJECT_DIR}/patches/lxcfs-0001-hook.patch"
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-type: git
     source-branch: stable-5.0
+    source-type: git
     after:
       - lxc
       - dqlite
       - sqlite
     build-packages:
+      - cmake
       - libacl1-dev
       - libudev-dev
+      - libxml2-dev
+      - libxslt1-dev
+      - libblas-dev
+      - libopenblas-dev
+      - liblapack-dev
       - pkg-config
     build-snaps:
       - go
@@ -1355,20 +1416,19 @@ parts:
       - dnsmasq-base
       - gdisk
       - iw
-      - netbase
-      - pciutils
+      - lshw
+      - pci.ids
       - pigz
       - rsync
-      - squashfs-tools
       - usb.ids
       - xdelta3
     plugin: nil
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
@@ -1386,22 +1446,22 @@ parts:
       git config user.name "LXD snap builder"
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
-      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
-      export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
+      export GOPATH="$(realpath ./.go)"
+      export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
+      export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
       # Build the binaries
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
-      CGO_ENABLED=0 go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd" -tags=libsqlite3 github.com/canonical/lxd/lxd
+      CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-benchmark" github.com/canonical/lxd/lxd-benchmark
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-user" github.com/canonical/lxd/lxd-user
 
       # Setup bash completion
-      mkdir -p ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/
-      cp scripts/bash/lxd-client ${SNAPCRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc
+      mkdir -p "${CRAFT_PART_INSTALL}/etc/bash_completion.d/"
+      cp scripts/bash/lxd-client "${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc"
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -1413,7 +1473,7 @@ parts:
       - bin/dnsmasq
       - bin/getfattr
       - bin/setfattr
-      - bin/iw
+      - bin/iw   # used by liblxc when moving the parent dev in a container
       - bin/pigz
       - bin/rsync
       - bin/setfacl
@@ -1424,7 +1484,8 @@ parts:
 
       - etc/bash_completion.d/snap.lxd.lxc
 
-      - share/misc
+      - share/misc/pci.ids
+      - share/misc/usb.ids
 
       - bin/lxc
       - bin/lxc-to-lxd
@@ -1442,11 +1503,11 @@ parts:
       - go
     plugin: nil
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
+      export GOPATH="$(realpath ./.go)"
 
       # Download the dependencies
       go get -d -v ./...
@@ -1454,16 +1515,16 @@ parts:
       set -ex
 
       # Setup build environment
-      export GOPATH=$(realpath ./.go)
-      export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
-      export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
+      export GOPATH="$(realpath ./.go)"
+      export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
+      export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
 
       # Build the binaries
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
+      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-migrate" -tags=libsqlite3 ./
 
       # Install bridge script
-      mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
-      cp scripts/upgrade-bridge ${SNAPCRAFT_PART_INSTALL}/bin/upgrade-bridge
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+      cp scripts/upgrade-bridge "${CRAFT_PART_INSTALL}/bin/upgrade-bridge"
     prime:
       - bin/lxd-migrate
       - bin/upgrade-bridge
@@ -1501,24 +1562,7 @@ parts:
     prime:
       - bin/setup-shmounts
 
-  snap-query:
-    source: snap-query/
-    build-snaps:
-      - go
-    plugin: nil
-    override-build: |
-      set -ex
-
-      # Setup build environment
-      export GOPATH=$(realpath ./.go)
-
-      # Build the binaries
-      go build -trimpath -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
-    prime:
-      - bin/snap-query
-
   strip:
-    source: snapcraft/empty
     after:
       - btrfs
       - ceph
@@ -1551,68 +1595,75 @@ parts:
       - lxd
       - lxd-migrate
       - shmounts
-      - snap-query
     plugin: nil
     override-prime: |
       set -x
 
       # XXX: remove unneeded files/directories
-      rm -rf "${SNAPCRAFT_PRIME}/usr/local/"
+      rm -rf "${CRAFT_PRIME}/lib/systemd/"
+      rm -rf "${CRAFT_PRIME}/lib/udev/"
+      rm -rf "${CRAFT_PRIME}/usr/local/"
 
       # Strip some of the heavy bits
-      strip -s ${SNAPCRAFT_PRIME}/bin/lxc
-      strip -s ${SNAPCRAFT_PRIME}/bin/lxd*
-      strip -s ${SNAPCRAFT_PRIME}/bin/snap*
-      strip -s ${SNAPCRAFT_PRIME}/lib/libdqlite*
-      strip -s ${SNAPCRAFT_PRIME}/lib/libsqlite*
+      strip -s ${CRAFT_PRIME}/bin/lxc
+      strip -s ${CRAFT_PRIME}/bin/lxd*
+      strip -s ${CRAFT_PRIME}/lib/libdqlite*
+      strip -s ${CRAFT_PRIME}/lib/libsqlite*
 
       # Strip binaries (excluding shell scripts and LXCFS)
-      find "${SNAPCRAFT_PRIME}"/bin -type f \
-        -not -path "${SNAPCRAFT_PRIME}/bin/ceph" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/editor" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/lxc-checkconfig" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/nvidia-container-cli" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/remote-viewer" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/sshfs" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/upgrade-bridge" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/xfs_admin" \
-        -not -path "${SNAPCRAFT_PRIME}/bin/lxcfs" \
+      find "${CRAFT_PRIME}"/bin -type f \
+        -not -path "${CRAFT_PRIME}/bin/ceph" \
+        -not -path "${CRAFT_PRIME}/bin/editor" \
+        -not -path "${CRAFT_PRIME}/bin/lxc-checkconfig" \
+        -not -path "${CRAFT_PRIME}/bin/nvidia-container-cli" \
+        -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
+        -not -path "${CRAFT_PRIME}/bin/snap-query" \
+        -not -path "${CRAFT_PRIME}/bin/sshfs" \
+        -not -path "${CRAFT_PRIME}/bin/upgrade-bridge" \
+        -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
+        -not -path "${CRAFT_PRIME}/bin/lxcfs" \
         -exec strip -s {} +
 
       # Strip binaries not under bin/ due to being dynamically
       # added to the path with `snap set lxd`, like `criu.enable=true`
-      for binary in "${SNAPCRAFT_PRIME}/criu/criu"; do
+      for binary in "${CRAFT_PRIME}/criu/criu"; do
         [ -e "${binary}" ] || continue
         strip -s "${binary}"
       done
 
       # Strip all versions of zfs utils
-      for v in "${SNAPCRAFT_PRIME}"/zfs-*; do
+      for v in "${CRAFT_PRIME}"/zfs-*; do
         [ -d "${v}" ] || continue
         find "${v}/" -type f -exec strip -s {} +
       done
 
       # Strip libraries (excluding python3 scripts and liblxcfs)
-      find "${SNAPCRAFT_PRIME}"/lib -type f \
-        -not -path "${SNAPCRAFT_PRIME}/lib/python3/*" \
-        -not -path "${SNAPCRAFT_PRIME}/lib/liblxcfs.so" \
+      find "${CRAFT_PRIME}"/lib -type f \
+        -not -path "${CRAFT_PRIME}/lib/python3/*" \
+        -not -path "${CRAFT_PRIME}/lib/liblxcfs.so" \
         -exec strip -s {} +
 
+      # Delete empty directories
+      find "${CRAFT_PRIME}/" -type d -empty -print -delete
+
       # XXX: look for broken symlinks indicating missing/invalid prime
-      broken_symlinks="$(find "${SNAPCRAFT_PRIME}/" -xtype l \
-                           -not -path "${SNAPCRAFT_PRIME}/lxc/config/common.conf.d/*")"
+      broken_symlinks="$(find "${CRAFT_PRIME}/" -xtype l \
+                           -not -path "${CRAFT_PRIME}/lxc/config/common.conf.d/*")"
       if [ -n "${broken_symlinks}" ]; then
           echo "Found broken symlinks:"
           echo "${broken_symlinks}"
           exit 1
       fi
 
+      # Fixup logrotate.conf permissions to not be group writable
+      chmod g-w "${CRAFT_PRIME}/etc/logrotate.conf"
       exit 0
 
   wrappers:
     plugin: dump
     source: snapcraft/
     organize:
+      commands/snap-query: bin/
       hooks/: snap/hooks/
       wrappers/editor: bin/
       wrappers/remote-viewer: bin/

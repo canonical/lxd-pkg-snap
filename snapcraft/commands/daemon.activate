@@ -15,8 +15,10 @@ fi
 # shellcheck disable=SC2155
 export SNAP_CURRENT="$(realpath "${SNAP}/..")/current"
 
-# shellcheck disable=SC2155
-export ARCH="$(basename "$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)")"
+# Turn `/snap/lxd/28637/lib/x86_64-linux-gnu` into `x86_64-linux-gnu`
+# Similar to `basename` but using variable substitution instead of external executable
+LIB_ARCH="$(readlink -f "${SNAP_CURRENT}"/lib/*-linux-gnu*/)"
+export ARCH="${LIB_ARCH##*/}"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
@@ -49,21 +51,10 @@ if ! nsenter -t 1 -m systemctl is-active -q snap."${SNAP_INSTANCE_NAME}".daemon.
 fi
 
 # Start LXD if running as an appliance
-SNAP_MODEL="$(nsenter -t 1 -m snap model --assertion | grep "^model: " | cut -d' ' -f2)"
-if echo "${SNAP_MODEL}" | grep -q "^lxd-core"; then
+if nsenter -t 1 -m snap model --assertion | grep -q "^model: lxd-core"; then
     echo "==> LXD appliance detected, starting LXD"
     nsenter -t 1 -m systemctl start snap."${SNAP_INSTANCE_NAME}".daemon --no-block
     exit 0
-fi
-
-# Setup the "lxd" user
-if ! getent passwd lxd >/dev/null 2>&1; then
-    echo "==> Creating \"lxd\" user"
-    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --extrausers lxd || true
-    else
-        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false lxd || true
-    fi
 fi
 
 # Setup the "lxd" group
@@ -73,6 +64,16 @@ if [ "${daemon_group}" = "lxd" ] && ! getent group lxd >/dev/null 2>&1; then
         nsenter -t 1 -m groupadd --system --extrausers lxd || true
     else
         nsenter -t 1 -m groupadd --system lxd || true
+    fi
+fi
+
+# Setup the "lxd" user
+if ! getent passwd lxd >/dev/null 2>&1; then
+    echo "==> Creating \"lxd\" user"
+    if grep -q "^passwd.*extrausers" /var/lib/snapd/hostfs/etc/nsswitch.conf; then
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd --extrausers lxd || true
+    else
+        nsenter -t 1 -m useradd --system -M -N --home "${SNAP_COMMON}/lxd" --shell /bin/false --gid lxd lxd || true
     fi
 fi
 
@@ -92,7 +93,7 @@ if getent group "${daemon_user_group}" >/dev/null 2>&1; then
 fi
 
 # Check if LXD ever started
-if [ ! -e "${SNAP_COMMON}/lxd/database" ]; then
+if [ ! -d "${SNAP_COMMON}/lxd/database" ]; then
     echo "==> LXD never started on this system, no need to start it now"
     exit 0
 fi
