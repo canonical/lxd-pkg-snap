@@ -595,9 +595,9 @@ parts:
       - libmnl
       - libnftnl
     source: https://git.netfilter.org/nftables
+    source-commit: 49151cd0709acbfb7c6c7f35c44fc12060b695d1 # v1.0.9
     # XXX: git.netfilter.org does not support depth/shallow clones
     #source-depth: 1
-    source-tag: v1.0.9
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
