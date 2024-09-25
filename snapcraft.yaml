@@ -509,8 +509,8 @@ parts:
 
   nasm:
     source: https://github.com/netwide-assembler/nasm
+    source-commit: 214f2d4c56925a280c480950bbf71389e2169e1a # nasm-2.15.05
     source-depth: 1
-    source-tag: nasm-2.15.05
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
