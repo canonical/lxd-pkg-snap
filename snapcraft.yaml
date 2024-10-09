@@ -1566,7 +1566,7 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/uefivars.py" \
         -not -path "${CRAFT_PRIME}/bin/lxcfs" \
         -not -path "${CRAFT_PRIME}/bin/gpu-2404-custom-wrapper" \
-        -exec strip -s {} +
+        -exec strip --strip-all {} +
 
       # This is the actual LXD binary.
       strip --strip-all "${CRAFT_PRIME}/sbin/lxd"
