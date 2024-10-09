@@ -1508,7 +1508,7 @@ parts:
     source: https://github.com/canonical/lxd-ui
     source-depth: 1
     source-type: git
-    source-commit: 4ab1839a557f8458a531c243ec14b245d64fe7c8 # 0.12
+    source-commit: 14d17a0941ec10c862e8a64bcdfc05e06268d3a6 # 0.13
     plugin: nil
     override-prime: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
