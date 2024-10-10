@@ -1,8 +1,0 @@
-#!/bin/sh
-# Use exec so that this script process is replaced.
-# This avoids polluting the process tree with this wrapper script.
-if [ "$1" = "callhook" ]; then
-    exec /snap/lxd/current/bin/lxd-user "$@"
-fi
-
-exec lxd "$@"
