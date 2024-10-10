@@ -71,7 +71,7 @@ config="${SNAP_COMMON}/config"
 
 cat << EOC > "${config}"
 # This file is auto-generated, do NOT manually edit
-apparmor_unprivileged_restrictions_disable=${apparmor_unprivileged_restrictions_disable:-"true"}
+apparmor_unprivileged_restrictions_disable=${apparmor_unprivileged_restrictions_disable:-"false"}
 ceph_builtin=${ceph_builtin:-"false"}
 ceph_external=${ceph_external:-"false"}
 criu_enable=${criu_enable:-"false"}
