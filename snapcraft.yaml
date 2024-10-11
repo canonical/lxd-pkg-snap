@@ -80,9 +80,6 @@ plugs:
    interface: content
    content: qemu-external-binaries
    target: $SNAP/external/qemu
- lxd-support-with-unconfined-mode:
-   interface: lxd-support
-   enable-unconfined-mode: true
 
 layout:
   /usr/share/libdrm:
@@ -96,7 +93,7 @@ apps:
     command: commands/daemon.activate
     daemon: oneshot
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
 
   daemon:
@@ -111,7 +108,7 @@ apps:
     slots:
       - lxd
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - network-bind
       - system-observe
     sockets:
@@ -125,7 +122,7 @@ apps:
     restart-condition: on-failure
     daemon: simple
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - network-bind
       - system-observe
     sockets:
@@ -137,68 +134,68 @@ apps:
     command: commands/lxc
     completer: etc/bash_completion.d/snap.lxd.lxc
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
 
   lxd:
     command: commands/lxd
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
 
   # Sub-commands
   buginfo:
     command: commands/buginfo
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   check-kernel:
     command: commands/lxd-check-kernel
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
 
 hooks:
   connect-plug-ceph-conf:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   disconnect-plug-ceph-conf:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   connect-plug-ovn-certificates:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   disconnect-plug-ovn-certificates:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   connect-plug-ovn-chassis:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   disconnect-plug-ovn-chassis:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   connect-plug-qemu-external:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   disconnect-plug-qemu-external:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
   configure:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - network
       - system-observe
   remove:
     plugs:
-      - lxd-support-with-unconfined-mode
+      - lxd-support
       - system-observe
 
 parts:
