@@ -1482,6 +1482,8 @@ parts:
       git cherry-pick -x 8415f4ada4800e547c7c8764f28d83e7b6cab6a0 # lxd/instance: if storage location is remote, make cluster self healing available, and vm can migrate when src member is offline also
       git cherry-pick -x c94652490e8bf302ff63e199ce9bbacc11a50a29 # lxd/apparmor/instance_lxc: allow procfs for unprivileged containers
       git cherry-pick -x 9365358d847fac1ce83329801f5b78374bb6726f # lxd/apparmor/instance_lxc: allow sysfs for unprivileged containers
+      git cherry-pick -x c802b03b89a03a4bb697621993740fc2312b85d8 # lxd/storage/drivers/powerflex: Use the Net* response variables for pool stats
+
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
