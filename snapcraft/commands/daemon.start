@@ -489,7 +489,7 @@ if [ "$(stat -c '%u' /proc)" = 0 ]; then
         fi
     fi
 
-    if [ "${apparmor_unprivileged_restrictions_disable:-"true"}" = "true" ]; then
+    if [ "${apparmor_unprivileged_restrictions_disable:-"false"}" = "true" ]; then
         if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
             if [ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns)" = "1" ]; then
                 echo "==> Disabling Apparmor unprivileged userns mediation"
