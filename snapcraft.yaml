@@ -188,6 +188,14 @@ hooks:
     plugs:
       - lxd-support
       - system-observe
+  connect-plug-gpu-2404:
+    plugs:
+      - lxd-support
+      - system-observe
+  disconnect-plug-gpu-2404:
+    plugs:
+      - lxd-support
+      - system-observe
   configure:
     plugs:
       - lxd-support
