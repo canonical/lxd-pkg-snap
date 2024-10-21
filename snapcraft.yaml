@@ -805,18 +805,35 @@ parts:
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
+      - --disable-auth-pam
       - --disable-bochs
+      - --disable-brlapi
       - --disable-cloop
+      - --disable-curl
       - --disable-dmg
       - --disable-docs
+      - --disable-fuse
+      - --disable-glusterfs
+      - --disable-gnutls
+      - --disable-gtk
       - --disable-guest-agent
+      - --disable-libiscsi
+      - --disable-libnfs
+      - --disable-libpmem
+      - --disable-libssh
+      - --disable-nettle
+      - --disable-oss
       - --disable-parallels
       - --disable-pvrdma
       - --disable-qed
+      - --disable-sdl
       - --disable-slirp
       - --disable-user
+      - --disable-vde
       - --disable-vdi
+      - --disable-vmnet
       - --disable-vnc
+      - --disable-vvfat
       - --disable-xen
       - --disable-xkbcommon
       - --enable-attr
