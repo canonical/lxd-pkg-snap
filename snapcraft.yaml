@@ -292,6 +292,7 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
+    source-branch: lts-1.17.x
     source-depth: 1
     source-type: git
     plugin: autotools
