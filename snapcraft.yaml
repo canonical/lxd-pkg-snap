@@ -1348,6 +1348,7 @@ parts:
       - libblas-dev
       - libopenblas-dev
       - liblapack-dev
+      - libsystemd-dev
       - pkg-config
       - pypy3-dev
       - python3-dev
@@ -1362,6 +1363,7 @@ parts:
       - gdisk
       - iw
       - lshw
+      - libsystemd0
       - pci.ids
       - pigz
       - rsync
