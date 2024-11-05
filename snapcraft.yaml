@@ -272,7 +272,7 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-commit: eb777c2c083a18d4657d4ee4ef49ca1d547b2172 # v1.16.7
+    source-commit: ee1766cba1b52317ba216c0fbddd8457a0241df6 # v1.17.1 LTS
     source-type: git
     source-depth: 1
     plugin: autotools
