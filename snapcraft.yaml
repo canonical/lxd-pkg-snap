@@ -1226,6 +1226,7 @@ parts:
       - bin/zstd
 
   apparmor:
+    build-attributes: [core22-step-dependencies]
     source: https://gitlab.com/apparmor/apparmor.git
     source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
     source-depth: 1
@@ -1250,10 +1251,10 @@ parts:
       make
       make install
 
-      mkdir "${CRAFT_PART_INSTALL}/bin"
-      cp /sbin/apparmor_parser "${CRAFT_PART_INSTALL}/bin/"
-      mkdir "${CRAFT_PART_INSTALL}/lib"
-      cp /lib/libapparmor.so* "${CRAFT_PART_INSTALL}/lib/"
+      mkdir "${SNAPCRAFT_PART_INSTALL}/bin"
+      cp /sbin/apparmor_parser "${SNAPCRAFT_PART_INSTALL}/bin/"
+      mkdir "${SNAPCRAFT_PART_INSTALL}/lib"
+      cp /lib/libapparmor.so* "${SNAPCRAFT_PART_INSTALL}/lib/"
 
       set +ex
     prime:
