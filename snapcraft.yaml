@@ -1225,16 +1225,53 @@ parts:
       - bin/pzstd
       - bin/zstd
 
+  apparmor:
+    build-attributes: [core22-step-dependencies]
+    source: https://gitlab.com/apparmor/apparmor.git
+    source-commit: 84a6bc1b6dcdfeabb1ed3597f01e314f3bcee5c1 # v4.0.2
+    source-depth: 1
+    source-type: git
+    plugin: autotools
+    build-packages:
+      - g++
+      - bison
+      - flex
+      - autoconf-archive
+      - gettext
+    override-build: |-
+      set -ex
+
+      cd ./libraries/libapparmor
+      sh ./autogen.sh
+      sh ./configure --prefix=/
+      make
+      make install
+
+      cd ../../parser
+      make
+      make install
+
+      mkdir "${SNAPCRAFT_PART_INSTALL}/bin"
+      cp /sbin/apparmor_parser "${SNAPCRAFT_PART_INSTALL}/bin/"
+      mkdir "${SNAPCRAFT_PART_INSTALL}/lib"
+      cp /lib/libapparmor.so* "${SNAPCRAFT_PART_INSTALL}/lib/"
+
+      set +ex
+    prime:
+      - bin/apparmor_parser
+      - lib/libapparmor.so.1
+      - lib/libapparmor.so.1.*
+
   # Core components
   lxc:
     build-attributes: [core22-step-dependencies]
     after:
+      - apparmor
       - libseccomp
     source: https://github.com/lxc/lxc
     source-type: git
     source-commit: cb8e38aca27a23964941f0f011a8919aab8bebab # lxc-5.0.3
     build-packages:
-      - libapparmor-dev
       - libcap-dev
       - libdbus-1-dev
       - libgnutls28-dev
