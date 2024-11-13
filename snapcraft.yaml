@@ -1256,6 +1256,8 @@ parts:
       cp /sbin/apparmor_parser "${SNAPCRAFT_PART_INSTALL}/bin/"
       mkdir "${SNAPCRAFT_PART_INSTALL}/lib"
       cp /lib/libapparmor.so* "${SNAPCRAFT_PART_INSTALL}/lib/"
+      mkdir "${SNAPCRAFT_PART_INSTALL}/lib/pkgconfig"
+      cp /lib/pkgconfig/libapparmor.pc "${SNAPCRAFT_PART_INSTALL}/lib/pkgconfig/"
 
       set +ex
     prime:
