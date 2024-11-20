@@ -272,7 +272,7 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-commit: ee1766cba1b52317ba216c0fbddd8457a0241df6 # v1.17.1 LTS
+    source-commit: 769a5ae21156ea7b1f01a937f80a3da60eb6a1bb # v1.16.5
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -1407,6 +1407,14 @@ parts:
       rm -Rf "${GOPATH}"
       mkdir -p "${GOPATH}/src/github.com/canonical"
       ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
+
+      # Switch dqlite to 1.16.5 and go-dqlite to 1.21.0 (known good from LXD v5.21.2)
+      # whilst crashes with go-dqlite v2 or dqlite 1.17 LTS are resolved.
+      git config user.email "noreply@lists.canonical.com"
+      git config user.name "LXD snap builder"
+      git revert e8a5357c63fb51b814e5d262479cc928fcba710d # Revert switch to go-dqlite v2
+      go get github.com/canonical/go-dqlite@v1.21.0 # Switch back to go-dqlite v1
+      go mod tidy
 
       # Download the dependencies
       go get -v ./...
