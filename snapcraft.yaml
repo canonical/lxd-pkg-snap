@@ -1512,7 +1512,7 @@ parts:
       snapcraftctl pull
       set -ex
 
-      snap install node --channel=20/stable --classic || true
+      snap install node --channel=18/stable --classic || true
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
