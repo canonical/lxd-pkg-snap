@@ -1505,19 +1505,17 @@ parts:
     source: https://github.com/canonical/lxd-ui
     source-depth: 1
     source-type: git
-    source-tag: "0.5"
+    source-commit: 9275167fe13162233bb9d7d1353d298539305b9d # 0.15
     plugin: nil
     override-pull: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
       snapcraftctl pull
       set -ex
 
-      snap install node --channel=18/stable --classic || true
+      snap install node --channel=20/stable --classic || true
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
-
-      patch -p1 < "${SNAPCRAFT_PROJECT_DIR}/patches/lxd-ui-0.5-lxd-5.0-compat.patch"
 
       npm install yarn --global
       yarn install
