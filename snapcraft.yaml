@@ -490,21 +490,6 @@ parts:
     prime:
       - lib/*/libatomic.so*
 
-  libtpms:
-    source: https://github.com/stefanberger/libtpms
-    source-commit: f8c2dc7e12a730dcca4220d7ac5ad86d13dfd630 # v0.9.6
-    source-depth: 1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-      - --with-tpm2
-      - --with-openssl
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libtpms*so*
-
   libusb:
     source: https://github.com/libusb/libusb
     source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
