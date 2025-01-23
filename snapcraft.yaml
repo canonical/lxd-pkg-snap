@@ -779,7 +779,6 @@ parts:
   qemu:
     after:
       - libatomic
-      - libusb
       - spice-protocol
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
@@ -855,6 +854,7 @@ parts:
       - libpixman-1-dev
       - libseccomp-dev
       - liburing-dev
+      - libusb-1.0-0-dev
       - libusbredirhost-dev
       - quilt
       - on amd64: # workaround for armhf, because it lacks of librbd-dev
@@ -872,6 +872,7 @@ parts:
       - libmagic1t64
       - libnuma1
       - libpixman-1-0
+      - libusb-1.0-0
       - libusbredirhost1t64
       - libusbredirparser1t64
       - liburing2
@@ -929,6 +930,7 @@ parts:
       - lib/*/libpixman*so*
       - lib/*/liburing*so*
       - lib/*/libusbredir*so*
+      - lib/*/libusb*so*
       - lib/*/libfdt*.so*
       - share/qemu/keymaps/*
       - share/qemu/bios-256k.bin
