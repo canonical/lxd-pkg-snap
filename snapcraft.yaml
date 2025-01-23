@@ -490,19 +490,6 @@ parts:
     prime:
       - lib/*/libatomic.so*
 
-  libusb:
-    source: https://github.com/libusb/libusb
-    source-commit: d52e355daa09f17ce64819122cb067b8a2ee0d4b # v1.0.27
-    source-depth: 1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/libusb*so*
-
   logrotate:
     plugin: nil
     stage-packages:
