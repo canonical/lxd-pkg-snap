@@ -665,7 +665,9 @@ parts:
       - bin/ovs-appctl
       - bin/ovs-vsctl
       - bin/ovs-vswitchd
-      - bin/ovsdb-*
+      - bin/ovsdb-client
+      - bin/ovsdb-server
+      - bin/ovsdb-tool
       - share/openvswitch/
 
   ovn:
