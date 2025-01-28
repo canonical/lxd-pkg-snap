@@ -650,23 +650,23 @@ parts:
       - lib/*/libnvme*
 
   openvswitch:
-    source: https://github.com/openvswitch/ovs
-    source-commit: dfe601bbc154c836e6ec3526a1eb331c1c09a06e # v3.3.2
-    source-depth: 1
-    source-type: git
-    plugin: autotools
-    autotools-configure-parameters:
-      - --enable-ssl
-      - --prefix=
+    plugin: nil
+    stage-packages:
+      - openvswitch-common
+      - openvswitch-switch
     organize:
       sbin/: bin/
       usr/bin/: bin/
+      usr/sbin/: bin/
+      usr/lib/: lib/
+      usr/share/: share/
     prime:
       - bin/ovs-appctl
       - bin/ovs-vsctl
       - bin/ovsdb-client
       - bin/ovsdb-server
       - bin/ovsdb-tool
+      - lib/*/libunbound*so*
       - share/openvswitch/
 
   ovn:
