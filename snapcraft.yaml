@@ -1143,10 +1143,8 @@ parts:
       - apparmor
     organize:
       sbin/: bin/
-      usr/lib/: lib/
     prime:
       - bin/apparmor_parser
-      - lib/*/libapparmor.so*
 
   # Core components
   lxc:
