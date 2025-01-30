@@ -683,26 +683,6 @@ parts:
       - bin/ovn-sbctl
       - lib/*/libunbound*so*
 
-  spice-protocol:
-    source: https://gitlab.freedesktop.org/spice/spice-protocol
-    source-commit: 6f453a775d87087c6ba59fc180c1a1e466631a47 # v0.14.4
-    source-depth: 1
-    source-type: git
-    plugin: meson
-    prime: []
-    build-packages:
-      - meson
-      - ninja-build
-    override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
-      craftctl default
-
   spice-server:
     source: https://git.launchpad.net/ubuntu/+source/spice
     source-commit: 085ca6b2bf58014ad8be571f3b601465c85ae931 # import/0.15.1-1build2
