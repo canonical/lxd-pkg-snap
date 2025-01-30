@@ -1304,6 +1304,8 @@ parts:
     source-depth: 1
     source-type: git
     plugin: python
+    stage-packages:
+      - python3-crc32c
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -1312,13 +1314,18 @@ parts:
       craftctl default
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+
+      # Apply patches
+      # XXX: taken from: https://git.launchpad.net/ubuntu/+source/python-uefivars/plain/debian/patches/Revert-Use-google-crc32c-instead-of-crc32c.patch?h=ubuntu/plucky
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/uefivars-Revert-Use-google-crc32c-instead-of-crc32c.patch"
+
       craftctl default
     organize:
       lib/python3.12/site-packages/: lib/python3/dist-packages/
       bin/uefivars: bin/uefivars.py
     prime:
       - bin/uefivars.py
-      - lib/python3/dist-packages/google_crc32c*
+      - lib/python3/dist-packages/crc32c*
       - lib/python3/dist-packages/pyuefivars*
 
   lxd:
