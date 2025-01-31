@@ -610,7 +610,7 @@ parts:
       usr/local/lib: lib/
     prime:
       - bin/nvidia-container-cli*
-      - lib/libnvidia-container*.so*
+      - lib/libnvidia-container.so*
 
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
