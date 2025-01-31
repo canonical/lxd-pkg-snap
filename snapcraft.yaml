@@ -881,7 +881,7 @@ parts:
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
-      - lib/*/liburing*so*
+      - lib/*/liburing.so*
       - lib/*/libusbredir*so*
       - lib/*/libusb*so*
       - lib/*/libfdt*.so*
