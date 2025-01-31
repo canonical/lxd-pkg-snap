@@ -214,8 +214,6 @@ parts:
       - bin/mkfs.btrfs
 
   ceph:
-    after:
-      - libatomic
     plugin: nil
     stage-packages:
       # XXX: explicitly depend on libsnappy1v5 due to https://bugs.launchpad.net/ubuntu/+source/ceph/+bug/2072656
@@ -481,15 +479,6 @@ parts:
     prime:
       - share/qemu/*
 
-  libatomic:
-    plugin: nil
-    stage-packages:
-      - libatomic1
-    organize:
-      usr/lib/: lib/
-    prime:
-      - lib/*/libatomic.so*
-
   logrotate:
     plugin: nil
     stage-packages:
@@ -748,7 +737,6 @@ parts:
 
   qemu:
     after:
-      - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
     source-commit: 50a4fe555e21d4b633580d63ae45e807de9e2f91 # import/1%8.2.2+ds-0ubuntu1.5
@@ -892,7 +880,6 @@ parts:
       - bin/qemu-system-*
       - bin/qemu-img*
       - bin/virtfs-proxy-helper*
-      - lib/*/libatomic.so*
       - lib/*/libmagic*so*
       - lib/*/libnuma*so*
       - lib/*/libpixman*so*
@@ -1108,8 +1095,6 @@ parts:
       rm -Rf "${CRAFT_PART_INSTALL}.tmp"
 
   zstd:
-    after:
-      - libatomic
     plugin: nil
     stage-packages:
       - zstd
