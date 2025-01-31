@@ -649,7 +649,6 @@ parts:
       usr/lib/: lib/
       usr/share/: share/
     prime:
-      - bin/ovs-appctl
       - bin/ovs-vsctl
       - lib/*/libunbound*so*
       - share/openvswitch/
