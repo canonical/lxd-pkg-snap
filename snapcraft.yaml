@@ -651,7 +651,7 @@ parts:
     prime:
       - bin/ovs-vsctl
       - lib/*/libunbound*so*
-      - share/openvswitch/
+      - share/openvswitch/*.ovsschema
 
   ovn:
     after:
