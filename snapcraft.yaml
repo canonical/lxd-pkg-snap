@@ -724,7 +724,6 @@ parts:
   swtpm:
     plugin: nil
     stage-packages:
-      - libjson-glib-1.0-0
       - swtpm
     organize:
       usr/bin/: bin/
@@ -733,7 +732,6 @@ parts:
       - bin/swtpm
       - lib/*/swtpm/libswtpm*so*
       - lib/*/libtpms*so*
-      - lib/*/libjson-glib-1.0.so*
 
   qemu:
     after:
