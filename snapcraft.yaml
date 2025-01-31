@@ -646,15 +646,11 @@ parts:
     organize:
       sbin/: bin/
       usr/bin/: bin/
-      usr/sbin/: bin/
       usr/lib/: lib/
       usr/share/: share/
     prime:
       - bin/ovs-appctl
       - bin/ovs-vsctl
-      - bin/ovsdb-client
-      - bin/ovsdb-server
-      - bin/ovsdb-tool
       - lib/*/libunbound*so*
       - share/openvswitch/
 
