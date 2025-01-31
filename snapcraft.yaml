@@ -824,7 +824,7 @@ parts:
       - libseccomp-dev
       - liburing-dev
       - libusb-1.0-0-dev
-      - libusbredirhost-dev
+      - libusbredirparser-dev
       - quilt
       - on amd64: # workaround for armhf, because it lacks of librbd-dev
         - librbd-dev
@@ -842,7 +842,6 @@ parts:
       - libnuma1
       - libpixman-1-0
       - libusb-1.0-0
-      - libusbredirhost1t64
       - libusbredirparser1t64
       - liburing2
       - seabios # This is needed due to --disable-install-blobs.
