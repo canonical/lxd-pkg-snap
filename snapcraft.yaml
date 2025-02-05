@@ -643,6 +643,15 @@ parts:
     stage-packages:
       - openvswitch-common
       - openvswitch-switch
+    override-prime: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      craftctl default
+    override-pull: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      craftctl default
+    override-build: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      craftctl default
     organize:
       sbin/: bin/
       usr/bin/: bin/
