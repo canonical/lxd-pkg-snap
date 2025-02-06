@@ -856,6 +856,10 @@ parts:
       - liburing2
       - seabios # This is needed due to --disable-install-blobs.
       - qemu-system-data # This is needed due to --disable-install-blobs.
+    override-stage: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+      craftctl default
     override-prime: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
