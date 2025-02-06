@@ -302,6 +302,9 @@ parts:
     stage-packages:
       - libnet1
       - libprotobuf-c1
+    override-stage: |-
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+      craftctl default
     override-prime: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
