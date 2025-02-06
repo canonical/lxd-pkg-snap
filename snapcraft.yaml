@@ -843,14 +843,7 @@ parts:
       - libusb-1.0-0-dev
       - libusbredirparser-dev
       - quilt
-      - on amd64: # workaround for armhf, because it lacks of librbd-dev
-        - librbd-dev
-      - on arm64:
-        - librbd-dev
-      - on ppc64el:
-        - librbd-dev
-      - on s390x:
-        - librbd-dev
+      - librbd-dev
     stage-packages:
       - genisoimage
       - ipxe-qemu # This is needed due to --disable-install-blobs.
@@ -864,13 +857,16 @@ parts:
       - seabios # This is needed due to --disable-install-blobs.
       - qemu-system-data # This is needed due to --disable-install-blobs.
     override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
       # Mangle the configure a bit
       QEMUARCH="$(uname -m)"
