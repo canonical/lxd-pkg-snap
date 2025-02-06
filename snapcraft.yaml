@@ -1308,6 +1308,9 @@ parts:
     plugin: python
     stage-packages:
       - python3-crc32c
+    override-stage: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
