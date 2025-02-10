@@ -1522,6 +1522,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 8a90bec80b6fba93f3055ba50280020c75b7482f # lxd/instance/drivers/driver/qemu: Fix regenerating nvram vars file when upgrading from LXD 4.0
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
