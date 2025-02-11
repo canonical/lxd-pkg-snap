@@ -1523,6 +1523,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick -x 8a90bec80b6fba93f3055ba50280020c75b7482f # lxd/instance/drivers/driver/qemu: Fix regenerating nvram vars file when upgrading from LXD 4.0
+      git cherry-pick -x 3a405c7019ff7d4eef230e5666bb9795e76221b2 # lxd/instance/drivers/qemu: Backport "Fix double-escaped device name"
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
