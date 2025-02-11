@@ -1156,8 +1156,6 @@ parts:
     build-packages:
       - to armhf:
         - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
-      - to riscv64:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
       - else:
         - libblkid-dev
         - libssl-dev
