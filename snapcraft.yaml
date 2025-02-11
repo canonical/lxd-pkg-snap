@@ -1068,7 +1068,10 @@ parts:
   virtiofsd:
     plugin: nil
     stage-packages:
-      - virtiofsd
+      - to armhf:
+        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - else:
+        - virtiofsd
     organize:
       usr/libexec/: bin/
     prime:
