@@ -1524,6 +1524,11 @@ parts:
 
       git cherry-pick -x 8a90bec80b6fba93f3055ba50280020c75b7482f # lxd/instance/drivers/driver/qemu: Fix regenerating nvram vars file when upgrading from LXD 4.0
       git cherry-pick -x 3a405c7019ff7d4eef230e5666bb9795e76221b2 # lxd/instance/drivers/qemu: Backport "Fix double-escaped device name"
+      git cherry-pick -x 64fc2c157b8c6a0c619a6e7474f7627c9e0466d5 # Modified ChassisGroupChassisDelete to convert chassis_name to _uuid to fix later comparison
+      git cherry-pick -x 3af3719ecaede8b7e7d02bd297e09e47047f2c3b # lxd/network/openvswitch/ovn: Fix escaping of values in ChassisGroupChassisDelete
+      git cherry-pick -x 0c8de15f7befc297a6405883cfe47bf16d6aabd9 # lxd/network/zone/reverse: move to shared/dnsutil/reverse
+      git cherry-pick -x 9c2d62fa9842eca74a6433c0a930683fe46642b9 # lxd/network/zone/zone: Switch to dnsutil package's Reverse function
+      git cherry-pick -x 7f3da9fb8ae9d80182d9af818354f5aa0583748d # lxd/network/openvswitch/ovn: Add PTR record generation for instance NIC IPs
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
