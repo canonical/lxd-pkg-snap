@@ -1529,6 +1529,7 @@ parts:
       git cherry-pick -x 0c8de15f7befc297a6405883cfe47bf16d6aabd9 # lxd/network/zone/reverse: move to shared/dnsutil/reverse
       git cherry-pick -x 9c2d62fa9842eca74a6433c0a930683fe46642b9 # lxd/network/zone/zone: Switch to dnsutil package's Reverse function
       git cherry-pick -x 7f3da9fb8ae9d80182d9af818354f5aa0583748d # lxd/network/openvswitch/ovn: Add PTR record generation for instance NIC IPs
+      git cherry-pick -x 135aea1fdd95b76f6f54e32edb85d60334f84044 # lxd/network: Fix OVN LogicalSwitchPortGetDNS to understand DNS records field that contains PTR records
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
