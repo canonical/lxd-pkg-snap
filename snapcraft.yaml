@@ -1194,6 +1194,10 @@ parts:
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
+      git cherry-pick -x aa0adcee9fc3f1fc40adc09cfb98611eb53f733e # lxd/apparmor/instance_lxc: allow devpts for unprivileged containers
+      git cherry-pick -x 73a796169cfe54f1953ac38c06022d5e38acb855 # lxd/apparmor/instance_lxc: allow procfs for unprivileged containers
+      git cherry-pick -x c572eb174ae179507c98a726939a3340f9d28d2d # lxd/apparmor/instance_lxc: allow sysfs for unprivileged containers
+
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc-to-lxd" github.com/canonical/lxd/lxc-to-lxd
