@@ -835,7 +835,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: 50a4fe555e21d4b633580d63ae45e807de9e2f91 # import/1%8.2.2+ds-0ubuntu1.5
+    source-commit: ea5d82865d36eb3052a3090db27cf96d1bf09da5 # import/1%8.2.2+ds-0ubuntu1.6
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1423,7 +1423,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 2e5ca4f50e83e53db3f5c16a0948b615c82dba31 # LXD pre-6.3
+    source-commit: d5ea81c66f41cdd8a1302d223a3bd169a9a4e21f # LXD pre-6.3
     source-type: git
     after:
       - lxc
