@@ -1537,6 +1537,7 @@ parts:
       set -ex
 
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
 
       # Setup the GOPATH
@@ -1567,6 +1568,7 @@ parts:
       git cherry-pick -x 135aea1fdd95b76f6f54e32edb85d60334f84044 # lxd/network: Fix OVN LogicalSwitchPortGetDNS to understand DNS records field that contains PTR records
 
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
