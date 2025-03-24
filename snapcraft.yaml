@@ -106,7 +106,7 @@ apps:
     stop-command: commands/daemon.stop
     stop-timeout: 600s
     restart-condition: on-failure
-    daemon: simple
+    daemon: notify
     slots:
       - lxd
     plugs:
