@@ -245,6 +245,9 @@ ln -s "${SNAP}/wrappers/run-host" "/run/bin/getent"
 # Redirect journalctl to the host
 ln -s "${SNAP}/wrappers/run-host" "/run/bin/journalctl"
 
+# Redirect systemctl to the host
+ln -s "${SNAP}/wrappers/run-host" "/run/bin/systemctl"
+
 # Redirect pro to the host
 ln -s "${SNAP}/wrappers/run-host" "/run/bin/pro"
 
