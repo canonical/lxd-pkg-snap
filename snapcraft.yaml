@@ -1681,6 +1681,7 @@ parts:
       - xtables
       - zfs-2-1
       - zfs-2-2
+      - zfs-2-3
       - zstd
       - lxc
       - lxcfs
