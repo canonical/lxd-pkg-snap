@@ -1335,7 +1335,7 @@ parts:
       - ninja-build
     plugin: meson
     meson-parameters:
-      - --prefix=/
+      - -Dprefix=/
       - -Dexamples=false
       - -Dman=false
       - -Dopenssl=false
