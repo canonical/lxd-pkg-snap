@@ -1328,7 +1328,6 @@ parts:
       - libapparmor-dev
       - libcap-dev
       - libseccomp-dev
-      - libselinux1-dev
       - pkg-config
       - meson
       - ninja-build
@@ -1345,7 +1344,7 @@ parts:
       - -Dprefix=/
       - -Drootfs-mount-path=/var/snap/lxd/common/lxc/
       - -Dseccomp=true
-      - -Dselinux=true
+      - -Dselinux=false
       - -Dtests=false
       - -Dtools=false
     organize:
