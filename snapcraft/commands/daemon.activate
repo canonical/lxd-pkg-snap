@@ -25,6 +25,7 @@ export ARCH="${LIB_ARCH##*/}"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:${SNAP_CURRENT}/lib:${SNAP_CURRENT}/lib/${ARCH}:${SNAP_CURRENT}/lib/${ARCH}/ceph"
 export PATH="${PATH}:${SNAP_CURRENT}/bin"
+export LXD_QEMU_FW_PATH="${SNAP_CURRENT}/share/qemu"
 export LXD_DIR="${LXD_DIR:-"${SNAP_COMMON}/lxd/"}"
 
 echo "=> Starting LXD activation"
