@@ -290,12 +290,12 @@ parts:
 
   criu:
     source: https://github.com/checkpoint-restore/criu
-    source-commit: c2b48ff423aa663b3534a5ba96907366e4c1b408 # v4.0
+    source-commit: b6059ff193a9b0dff98e997134d662c3ccfd1600 # v4.1
     source-depth: 1
     source-type: git
     plugin: nil
     build-packages:
-      - to riscv64:
+      - to armhf:
         - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
       - else:
         - asciidoc
@@ -314,15 +314,19 @@ parts:
         - libnet1
         - libprotobuf-c1
     override-stage: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-prime: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-pull: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-build: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
 
@@ -590,12 +594,12 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: f23e5e55ea27b3680aef363436d4bcf7659e0bfc # v1.17.4
+    source-commit: d26524ab5db96a55ae86033f53de50d3794fb547 # v1.17.7
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.17.4" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.17.7" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - to amd64:
         - bmake
@@ -612,7 +616,7 @@ parts:
         - lsb-release
         - libtirpc-dev
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     override-stage: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -625,6 +629,9 @@ parts:
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
+
+      # Setup build environment
+      export GOTOOLCHAIN="local"
 
       # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
@@ -649,10 +656,10 @@ parts:
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: 9b69590c7428470a72f2ae05f826412976af1395 # v1.17.4
+    source-commit: bae3e7842ebe26812d8bd6a9be6a14a83dc91d8f # v1.17.7
     source-type: git
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     plugin: make
     override-stage: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
@@ -670,6 +677,9 @@ parts:
       [ "$(uname -m)" = "armv7l" ] && exit 0
       [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
+
+      # Setup build environment
+      export GOTOOLCHAIN="local"
 
       make binaries
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
@@ -836,7 +846,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: ea5d82865d36eb3052a3090db27cf96d1bf09da5 # import/1%8.2.2+ds-0ubuntu1.6
+    source-commit: ed8ba3428bff0004d8b4961a85225a6ceb443d52 # import/1%8.2.2+ds-0ubuntu1.7
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -952,6 +962,12 @@ parts:
 
       # Apply patches from Ubuntu sources.
       QUILT_PATCHES=debian/patches quilt push -a
+
+      # Apply custom patches
+      # These patches enable more accurate error message returned in case of CPU registers mismatches.
+      # This is backported from QEMU v9.2.2.
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/qemu-0001-kvm-Allow-kvm_arch_get-put_registers-to-accept-Error.patch"
+      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/qemu-0002-target-i386-kvm-Report-which-action-failed-in-kvm_ar.patch"
 
       sed -i "s/^unset target_list$/target_list=\"${QEMUARCH}-softmmu\"/" configure
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
@@ -1249,7 +1265,7 @@ parts:
 
   zfs-2-3:
     source: https://github.com/openzfs/zfs
-    source-commit: f3e4043a36942e67ccbc05318479a07d242fc611 # zfs-2.3.1
+    source-commit: 92f430b00f42964b63aee373fbf6598a20f6c0cc # zfs-2.3.2
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1321,37 +1337,38 @@ parts:
     after:
       - apparmor
     source: https://github.com/lxc/lxc
-    source-commit: fe31d844e882d5cc176a7935a93b14b4b2823992 # v6.0.3
+    source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
     source-depth: 1
     source-type: git
     build-packages:
-      - dpkg-dev
       - libapparmor-dev
       - libcap-dev
-      - libdbus-1-dev
-      - libgnutls28-dev
       - libseccomp-dev
-      - libselinux1-dev
       - pkg-config
       - meson
       - ninja-build
     plugin: meson
     meson-parameters:
-      - --prefix=/
-      - -Dexamples=false
-      - -Dman=false
-      - -Dtools=false
-      - -Dtests=false
-      - -Dmemfd-rexec=false
+      - "--buildtype=release"
       - -Dapparmor=true
-      - -Dseccomp=true
-      - -Dselinux=true
       - -Dcapabilities=true
+      - -Dcommands=false
+      - -Ddbus=false
+      - -Dexamples=false
+      - -Dinstall-init-files=false
+      - -Dinstall-state-dirs=false
+      - -Dman=false
+      - -Dmemfd-rexec=false
+      - -Dopenssl=false
+      - -Dprefix=/
       - -Drootfs-mount-path=/var/snap/lxd/common/lxc/
-      - -Dlibexecdir=/snap/lxd/current/libexec/
+      - -Dseccomp=true
+      - -Dselinux=false
+      - -Dspecfile=false
+      - -Dtests=false
+      - -Dtools=false
     organize:
       snap/lxd/current/lxc: lxc
-      snap/lxd/current/libexec: libexec
       share/lxc/hooks: lxc/hooks
     prime:
       - bin/lxc-checkconfig
@@ -1367,6 +1384,10 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      # lxc-checkconfig.in does not need any preprocessing
+      mkdir -p "${CRAFT_PART_INSTALL}/bin/"
+      install --mode=0755 src/lxc/cmd/lxc-checkconfig.in "${CRAFT_PART_INSTALL}/bin/lxc-checkconfig"
+
       cd ../build
 
       set +ex
@@ -1378,7 +1399,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-commit: 998ed0e374f515ad09d88745a085e277ab4da7a6 # v6.0.3
+    source-commit: 45d026e3e7e46fbb293d977ef20854527b363e2a # v6.0.4
     source-depth: 1
     source-type: git
     build-packages:
@@ -1474,7 +1495,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: b11db8442a9a097aef9b191e0482c3db1e2271e4 # lxd-6.3
+    source-commit: bafdc4c506f0c9a3fac6ee41705b9d883fa53b5f # pre lxd-6.34
     source-type: git
     after:
       - lxc
@@ -1494,7 +1515,7 @@ parts:
       - python3-pip
       - python3-venv
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     stage-packages:
       - acl
       - attr
@@ -1513,6 +1534,7 @@ parts:
       set -ex
 
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
 
       # Setup the GOPATH
@@ -1530,15 +1552,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x c6bc0a628ffbe18f65cb2a26b3d8d03d2911adb1 # lxd/api_project: Fix condition checking associated profiles in projectIsEmpty
-      git cherry-pick -x 731bd0b5b38829a89c071b0477f773ca2601b559 # lxd/storage/drivers/pure: Unmap volume when connection is freshly created
-      git cherry-pick -x 0d3f8d25a9dbbdf22a8b05631d6f494c9971a5d7 # shared/validate: Support none for `cloud-init.ssh-keys.*`
-      git cherry-pick -x 197a0238f7f7d80c123f6e0c1716f4efc0e8de2f # lxd/network/driver_bridge: add "/" back into fanAddress() output
-      git revert cd8966843783eee339329f13e06f68cd2cfbb902 --no-edit # lxd/loki: Add checkLoki function to ensure Loki is ready when creating a new Loki client
-      git cherry-pick -x 77fa926d19ba16f57337f13e9d8a5aa434f302ae # lxd/firewall/drivers/driver/nftables: Fix regression in nftables port range rules
-      git cherry-pick -x efbf416099f1f6a56934d8a26d6e8e003ab4f2d6 # Revert "lxd/ubuntu-pro: Change Ubuntu Pro directory."
-
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
@@ -1556,6 +1571,16 @@ parts:
       # Build static binaries
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-user" -tags netgo github.com/canonical/lxd/lxd-user
+
+      # Check which Go version was used to compile each of the lxc/lxd binaries
+      # XXX: fail if an unexpected version (like a Go toolchain) was used
+      GOVER="$(snap list go | awk '{if ($1 == "go") print $2}')"
+      UNEXPECTED_GO_VER="$(go version -v "${CRAFT_PART_INSTALL}/bin/lxc"* "${CRAFT_PART_INSTALL}/bin/lxd"* | grep -vF ": go${GOVER}" || true)"
+      if [ -n "${UNEXPECTED_GO_VER:-}" ]; then
+        echo "Some binaries were compiled with an unexpected Go version (!= ${GOVER}):"
+        echo "${UNEXPECTED_GO_VER}"
+        exit 1
+      fi
 
       # Some python dependencies are not available for armhf/riscv64 or just require a build from source.
       # Not worth the effort for now.
@@ -1754,6 +1779,13 @@ parts:
 
       # Fixup logrotate.conf permissions to not be group writable
       chmod g-w "${CRAFT_PRIME}/etc/logrotate.conf"
+
+      # XXX: do not keep the duplicated and often outdated CA certificates
+      # store from Python `certifi`. This file is not even used as the
+      # `python3-certifi` package providing it is patched to always use:
+      # `/etc/ssl/certs/ca-certificates.crt`
+      truncate --no-create --size=0 "${CRAFT_PRIME}/lib/python3/dist-packages/certifi/cacert.pem"
+
       exit 0
 
   wrappers:
