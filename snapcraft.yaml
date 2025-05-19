@@ -1495,7 +1495,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: b11db8442a9a097aef9b191e0482c3db1e2271e4 # lxd-6.3
+    source-commit: bafdc4c506f0c9a3fac6ee41705b9d883fa53b5f # pre lxd-6.34
     source-type: git
     after:
       - lxc
@@ -1551,14 +1551,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x c6bc0a628ffbe18f65cb2a26b3d8d03d2911adb1 # lxd/api_project: Fix condition checking associated profiles in projectIsEmpty
-      git cherry-pick -x 731bd0b5b38829a89c071b0477f773ca2601b559 # lxd/storage/drivers/pure: Unmap volume when connection is freshly created
-      git cherry-pick -x 0d3f8d25a9dbbdf22a8b05631d6f494c9971a5d7 # shared/validate: Support none for `cloud-init.ssh-keys.*`
-      git cherry-pick -x 197a0238f7f7d80c123f6e0c1716f4efc0e8de2f # lxd/network/driver_bridge: add "/" back into fanAddress() output
-      git revert cd8966843783eee339329f13e06f68cd2cfbb902 --no-edit # lxd/loki: Add checkLoki function to ensure Loki is ready when creating a new Loki client
-      git cherry-pick -x 77fa926d19ba16f57337f13e9d8a5aa434f302ae # lxd/firewall/drivers/driver/nftables: Fix regression in nftables port range rules
-      git cherry-pick -x efbf416099f1f6a56934d8a26d6e8e003ab4f2d6 # Revert "lxd/ubuntu-pro: Change Ubuntu Pro directory."
 
       # Setup build environment
       export GOTOOLCHAIN="local"
