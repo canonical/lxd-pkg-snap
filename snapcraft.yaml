@@ -1384,6 +1384,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 2663712e8fa8f37e0bb873185e2d4526dc644764 # start: Re-introduce first SET_DUMPABLE call
+
       # lxc-checkconfig.in does not need any preprocessing
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
       install --mode=0755 src/lxc/cmd/lxc-checkconfig.in "${CRAFT_PART_INSTALL}/bin/lxc-checkconfig"
