@@ -1338,7 +1338,8 @@ parts:
       - apparmor
     source: https://github.com/lxc/lxc
     source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
-    source-depth: 1
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
+    #source-depth: 1
     source-type: git
     build-packages:
       - libapparmor-dev
@@ -1497,7 +1498,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: a565fc2f33b32de9df223f1d486834706031f097 # pre lxd-6.4
+    source-commit: ceb5897070d723d5c8a5147a290675779fb6e1af # pre lxd-6.4
     source-type: git
     after:
       - lxc
