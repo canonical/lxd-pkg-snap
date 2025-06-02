@@ -1555,6 +1555,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x d5fa552a273c21bec4612188d188dfe2ba042c4d # lxd/cloudinit: Fix other formats of cloud-init user configuration options
+
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
