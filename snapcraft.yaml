@@ -1556,6 +1556,8 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick -x d5fa552a273c21bec4612188d188dfe2ba042c4d # lxd/cloudinit: Fix other formats of cloud-init user configuration options
+      git cherry-pick -x 3142c2e88442a2a8d65d5366550f5fc48bf4e625 # lxd/cloudinit: Fix parsing of invalid cloud-init yaml
+      git cherry-pick -x 9c3e84b0d3d0052c093ca122336377bcecc29cdd # lxd/cloudinit: Fix behavior when vendor-data parsing fails and when user-data are not provided.
       git cherry-pick -x 0a8f83a62d882cd4a32c11759fea231e46e910bc # lxd: Add target request forwarding to storagePoolVolumeTypeStateGet
 
       # Setup build environment
