@@ -1645,16 +1645,11 @@ parts:
     source-type: git
     plugin: nil
     override-prime: |-
-      [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-pull: |-
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-
       snap install node --channel=22/stable --classic
       craftctl default
     override-build: |
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-
       craftctl default
 
       npm install yarn --global
