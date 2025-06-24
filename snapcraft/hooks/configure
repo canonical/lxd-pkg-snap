@@ -33,9 +33,12 @@ get_bool() {
     return
 }
 
-# Don't fail if the mount namespace isn't properly setup yet
+# Try to fix an improperly setup mount namespace
 if [ ! -e /run/snapd-snap.socket ]; then
-    exit 0
+    # Bail out if the socket is (still) not available in the hostfs
+    [ -e "/var/lib/snapd/hostfs/run/snapd-snap.socket" ] || exit 0
+
+    ln -s "/var/lib/snapd/hostfs/run/snapd-snap.socket" /run/snapd-snap.socket
 fi
 
 # Get the current config
