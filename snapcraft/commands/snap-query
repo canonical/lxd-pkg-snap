@@ -56,7 +56,7 @@ def main():
     # Try to connect to the Unix socket and request the in-progress changes for the lxd snap.
     # If an exception occurs, print an error message and return an empty string.
     try:
-        conn = UnixSocketHTTPConnection("/run/snapd.socket")
+        conn = UnixSocketHTTPConnection("/var/lib/snapd/hostfs/run/snapd.socket")
         conn.request("GET", "/v2/changes?select=in-progress&for=lxd")
         response = conn.getresponse()
         body = response.read().decode()
