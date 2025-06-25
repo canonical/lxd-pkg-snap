@@ -305,7 +305,7 @@ parts:
       - sqlite
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-commit: b18dfbc3f9f89ed219611e88bad1fa17d1e9e818 # v1.17.2 LTS
+    source-commit: 1c3f95492dfb4c649356d5b6f2c031bcd3fd7c0f # v1.17.2 LTS
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
