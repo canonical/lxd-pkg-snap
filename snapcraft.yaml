@@ -1488,24 +1488,6 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x d5fa552a273c21bec4612188d188dfe2ba042c4d # lxd/cloudinit: Fix other formats of cloud-init user configuration options
-      git cherry-pick -x 3142c2e88442a2a8d65d5366550f5fc48bf4e625 # lxd/cloudinit: Fix parsing of invalid cloud-init yaml
-      git cherry-pick -x 9c3e84b0d3d0052c093ca122336377bcecc29cdd # lxd/cloudinit: Fix behavior when vendor-data parsing fails and when user-data are not provided.
-      git cherry-pick -x 0a8f83a62d882cd4a32c11759fea231e46e910bc # lxd: Add target request forwarding to storagePoolVolumeTypeStateGet
-      git cherry-pick -x 8dd94afb840f6e1d0d385cb6c55ce3443862387f # lxd/device/device/utils/disk: Switch to modern --shared-dir virtiofsd flag to avoid path parsing bug in rust implementation
-      git cherry-pick -x bf72a125ce243357ea2622d3054b79c8be080688 # lxd/device/device/utils/disk: Switch to modern --xattr virtiofsd flag
-      git cherry-pick -x 86654608662e71755ea663e03264613f5286869d # lxd/device/device/utils/disk: Use explicit --cache auto virtiofsd flag
-      git cherry-pick -x 38e90ca2c7809ac51d3e039a32e0086af3cace05 # lxd/device/device/utils/disk: Enable --allow-direct-io virtiofsd flag
-      git cherry-pick -x 6f7f8f1cb80eb422d6b89351574303281b360110 # shared/validate: Adds IsUint16 function
-      git cherry-pick -x 28a8987dc66fb7a9847f43fd4ded0e69ee91b3d2 # api: Adds disk_io_threads_virtiofsd extension
-      git cherry-pick -x 512ab4e8d2e1acc76da2034e94414fb27520c2ba # lxd/device/device/utils/disk: Support specifying --thread-pool-size virtiofsd flag in DiskVMVirtiofsdStart
-      git cherry-pick -x fb6620fa054d991a1ed7590ac954b5fb22befd4e # lxd/instance/drivers/driver/qemu: Use default thread pool size of 0 for virtiofsd config drive share
-      git cherry-pick -x 65b6c0cb7f14ea608e11123e0f7566d2fd961c1f # lxd/device/disk: Adds io.threads option for controlling virtiofsd thread pool size
-      git cherry-pick -x 3a1e279e457abef3f67e1d88c1405048f8b35313 # doc: Update metadata
-      git cherry-pick -x b6e6503abac4f1d4621a5d446ac828df64714acb # lxd/project/limits/permissions: Allow multiple checks per device type in checkInstanceRestrictions
-      git cherry-pick -x 62de0586fbbde06f5aa84db43e4c19832316c505 # lxd/project/limits/permissions: Forbid use of disk io.threads option in restricted project without restricted.virtual-machines.lowlevel allowed
-      git cherry-pick -x 0142467b4894897c1f38e9bdad9176fa069e540d # doc/requirements: Document the requirement for virtiofsd rust version
-
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
