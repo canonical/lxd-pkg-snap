@@ -35,7 +35,6 @@ description: |-
    - apparmor.unprivileged-restrictions-disable: Whether to disable restrictions on unprivileged user namespaces [default=true]
    - ceph.builtin: Use snap-specific Ceph configuration [default=false]
    - ceph.external: Use the system's ceph tools (ignores ceph.builtin) [default=false]
-   - criu.enable: Enable experimental live-migration support [default=false]
    - daemon.debug: Increase logging to debug level [default=false]
    - daemon.group: Set group of users that have full control over LXD [default=lxd]
    - daemon.user.group: Set group of users that have restricted LXD access [default=lxd]
@@ -219,8 +218,7 @@ parts:
     plugin: nil
     stage-packages:
       # XXX: explicitly depend on libsnappy1v5 due to https://bugs.launchpad.net/ubuntu/+source/ceph/+bug/2072656
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - ceph-common
         - libsnappy1v5
@@ -287,61 +285,6 @@ parts:
       - lib/*/libssh.so*
       - lib/*/libtcmalloc.so*
       - lib/*/libunwind.so*
-
-  criu:
-    source: https://github.com/checkpoint-restore/criu
-    source-commit: b6059ff193a9b0dff98e997134d662c3ccfd1600 # v4.1
-    source-depth: 1
-    source-type: git
-    plugin: nil
-    build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
-      - else:
-        - asciidoc
-        - libcap-dev
-        - libnet1-dev
-        - libnl-3-dev
-        - libprotobuf-c-dev
-        - libprotobuf-dev
-        - protobuf-c-compiler
-        - protobuf-compiler
-        - xmlto
-    stage-packages:
-      - to riscv64:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
-      - else:
-        - libnet1
-        - libprotobuf-c1
-    override-stage: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      craftctl default
-    override-prime: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      craftctl default
-    override-pull: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      craftctl default
-    override-build: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
-      set -ex
-
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-
-      make criu
-      mkdir -p "${CRAFT_PART_INSTALL}/criu/"
-      cp criu/criu "${CRAFT_PART_INSTALL}/criu/"
-    organize:
-      usr/lib/: lib/
-    prime:
-      - criu/*
-      - lib/*/libnet*
-      - lib/*/libproto*
 
   dqlite:
     source: https://github.com/canonical/dqlite
@@ -594,12 +537,12 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: a198166e1c1166f4847598438115ea97dacc7a92 # v1.17.6
+    source-commit: 6eda4d76c8c5f8fc174e4abca83e513fb4dd63b0 # v1.17.8
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.17.6" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.17.8" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - to amd64:
         - bmake
@@ -656,7 +599,7 @@ parts:
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: bae3e7842ebe26812d8bd6a9be6a14a83dc91d8f # v1.17.7
+    source-commit: f202b80a9b9d0db00d9b1d73c0128c8962c55f4d # v1.17.8
     source-type: git
     build-snaps:
       - go/1.24/stable
@@ -703,8 +646,7 @@ parts:
   openvswitch:
     plugin: nil
     stage-packages:
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - openvswitch-common
         - openvswitch-switch
@@ -739,8 +681,7 @@ parts:
       - openvswitch
     plugin: nil
     stage-packages:
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - ovn-common
     override-stage: |-
@@ -783,8 +724,7 @@ parts:
       - -Dsmartcard=disabled
       - -Dtests=false
     build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
+      - to armhf: []
       - else:
         - libspice-protocol-dev
         - libjpeg-turbo8-dev
@@ -793,8 +733,7 @@ parts:
         - meson
         - ninja-build
     stage-packages:
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - libjpeg-turbo8
         - libpixman-1-0
@@ -846,7 +785,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: ed8ba3428bff0004d8b4961a85225a6ceb443d52 # import/1%8.2.2+ds-0ubuntu1.7
+    source-commit: e63cad5bb3e377aacfc808c2cf075e0613072b88 # import/1%8.2.2+ds-0ubuntu1.8
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -906,8 +845,7 @@ parts:
       - --localstatedir=/var/
       - --disable-install-blobs # Ubuntu sources don't have the ROM blobs in them.
     build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - bison
         - bzip2
@@ -926,8 +864,7 @@ parts:
         - quilt
         - librbd-dev
     stage-packages:
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - genisoimage
         - ipxe-qemu # This is needed due to --disable-install-blobs.
@@ -1087,8 +1024,7 @@ parts:
   virtiofsd:
     plugin: nil
     stage-packages:
-      - to armhf:
-        - acl      # placeholder pkg (actually used by lxd part) to avoid installing stage-packages on unsupported arches
+      - to armhf: []
       - else:
         - virtiofsd
     organize:
@@ -1173,8 +1109,7 @@ parts:
       - --prefix=/
       - --with-config=user
     build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
+      - to armhf: []
       - else:
         - libblkid-dev
         - libssl-dev
@@ -1215,7 +1150,7 @@ parts:
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
-    source-commit: e269af1b3c7b1b1c000d05f147a2f75e5e72e0ca # zfs-2.2.7
+    source-commit: 3e4a3e161c00273303cd9fa9e0dc09ead3499a8a # zfs-2.2.8
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1223,8 +1158,7 @@ parts:
       - --prefix=/
       - --with-config=user
     build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
+      - to armhf: []
       - else:
         - libblkid-dev
         - libssl-dev
@@ -1265,7 +1199,7 @@ parts:
 
   zfs-2-3:
     source: https://github.com/openzfs/zfs
-    source-commit: 92f430b00f42964b63aee373fbf6598a20f6c0cc # zfs-2.3.2
+    source-commit: 1af41fd203639818aa28cc624f144ef604a166d8 # zfs-2.3.3
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1273,8 +1207,7 @@ parts:
       - --prefix=/
       - --with-config=user
     build-packages:
-      - to armhf:
-        - cmake      # placeholder pkg (actually used by lxd part) to avoid installing build-packages on unsupported arches
+      - to armhf: []
       - else:
         - libblkid-dev
         - libssl-dev
@@ -1498,7 +1431,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 24eb1c0bc0220c712a5f8caf7ccd58a72acb4aa7 # lxd-6.4
+    source-commit: a0cbd538a7b69a97aa448feb89b2920ca139b7f1 # pre lxd-6.5
     source-type: git
     after:
       - lxc
@@ -1732,7 +1665,6 @@ parts:
       - zstd
       - lxc
       - lxcfs
-      - criu
       - lxd
       - shmounts
       - nvidia-container-toolkit
@@ -1768,11 +1700,6 @@ parts:
       strip --strip-all "${CRAFT_PRIME}/sbin/lxd"
 
       # Strip binaries not under bin/ due to being dynamically
-      # added to the path with `snap set lxd`, like `criu.enable=true`
-      for binary in "${CRAFT_PRIME}/criu/criu"; do
-        [ -e "${binary}" ] || continue
-        strip -s "${binary}"
-      done
 
       # Strip all versions of zfs utils
       for v in "${CRAFT_PRIME}"/zfs-*; do
