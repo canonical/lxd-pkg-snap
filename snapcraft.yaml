@@ -289,7 +289,7 @@ parts:
   dqlite:
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-commit: 7a37bdfbf0e83edc09ecc621f02a6c7159c9a816 # v1.18.1
+    source-commit: 1b78c9e487d9f582b75a2abe8066254c4c9b5255 # v1.18.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -537,12 +537,12 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: 6eda4d76c8c5f8fc174e4abca83e513fb4dd63b0 # v1.17.8
+    source-commit: a198166e1c1166f4847598438115ea97dacc7a92 # v1.17.6
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.17.8" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.17.6" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - to amd64:
         - bmake
@@ -599,7 +599,7 @@ parts:
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: f202b80a9b9d0db00d9b1d73c0128c8962c55f4d # v1.17.8
+    source-commit: bae3e7842ebe26812d8bd6a9be6a14a83dc91d8f # v1.17.7
     source-type: git
     build-snaps:
       - go/1.24/stable
@@ -1431,7 +1431,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: a0cbd538a7b69a97aa448feb89b2920ca139b7f1 # pre lxd-6.5
+    source-commit: 2b8aa253f8f26800fbc35a8554ff0ce60fe35712 # pre lxd-6.5
     source-type: git
     after:
       - lxc
