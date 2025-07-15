@@ -289,7 +289,7 @@ parts:
   dqlite:
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-commit: 1b78c9e487d9f582b75a2abe8066254c4c9b5255 # v1.18.2
+    source-commit: 559328ca8bdeca27cb24967ec632a2f1c68c9f18 # v1.18.2
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -1431,7 +1431,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 2b8aa253f8f26800fbc35a8554ff0ce60fe35712 # pre lxd-6.5
+    source-commit: 4531aace3470d6255f89af5d0a29915a54159f81 # pre lxd-6.5
     source-type: git
     after:
       - lxc
