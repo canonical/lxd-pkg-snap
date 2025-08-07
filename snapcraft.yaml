@@ -1545,7 +1545,7 @@ parts:
       - python3-pip
       - python3-venv
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     stage-packages:
       - acl
       - attr
