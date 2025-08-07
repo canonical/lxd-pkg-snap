@@ -42,6 +42,7 @@ description: |-
    - daemon.preseed: Pass a YAML configuration to `lxd init` on initial start
    - daemon.syslog: Send LXD log events to syslog [default=false]
    - daemon.verbose: Increase logging to verbose level [default=false]
+   - db.trace: Enable dqlite trace logging (very verbose) [default=false]
    - lvm.external: Use the system's LVM tools [default=false]
    - lxcfs.pidfd: Start per-container process tracking [default=false]
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
@@ -117,7 +118,7 @@ apps:
 
   lxc:
     command: commands/lxc
-    completer: etc/bash_completion.d/snap.lxd.lxc
+    completer: lxc-completer.sh
     plugs:
       - lxd-support
       - system-observe
@@ -651,19 +652,32 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: 63d366ee3b4183513c310ac557bf31b05b83328f # v1.17.2
+    source-commit: a198166e1c1166f4847598438115ea97dacc7a92 # v1.17.6
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.17.2" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.17.6" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
-      - bmake
-      - curl
-      - libelf-dev
-      - libseccomp-dev
-      - lsb-release
-      - libtirpc-dev
+      - to amd64:
+        - bmake
+        - curl
+        - libelf-dev
+        - libseccomp-dev
+        - lsb-release
+        - libtirpc-dev
+      - to arm64:
+        - bmake
+        - curl
+        - libelf-dev
+        - libseccomp-dev
+        - lsb-release
+        - libtirpc-dev
+    build-snaps:
+      - go/1.24/stable
+    override-stage: |-
+      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
+      craftctl default
     override-prime: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -673,6 +687,9 @@ parts:
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       set -ex
+
+      # Setup build environment
+      export GOTOOLCHAIN="local"
 
       # Git cherry-picks
       git config user.email "noreply@lists.canonical.com"
@@ -691,25 +708,36 @@ parts:
       usr/local/lib: lib/
     prime:
       - bin/nvidia-container-cli*
-      - lib/libnvidia-container*.so*
+      - lib/libnvidia-container.so*
+      - lib/libnvidia-container-go.so*  # dlopen()'ed by libnvidia-container.so
 
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: fa66e4cd562804509055e44a88f666673e6d27c0 # v1.17.2
+    source-commit: bae3e7842ebe26812d8bd6a9be6a14a83dc91d8f # v1.17.7
     source-type: git
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     plugin: make
+    override-stage: |-
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
+      craftctl default
     override-prime: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-pull: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       craftctl default
     override-build: |-
-      [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && [ "$(uname -m)" != "ppc64le" ] && [ "$(uname -m)" != "s390x" ] && exit 0
+      [ "$(uname -m)" = "armv7l" ] && exit 0
+      [ "$(uname -m)" = "riscv64" ] && exit 0
       set -ex
+
+      # Setup build environment
+      export GOTOOLCHAIN="local"
 
       make binaries
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
@@ -874,7 +902,7 @@ parts:
       - spice-protocol
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: 50a4fe555e21d4b633580d63ae45e807de9e2f91 # import/1%8.2.2+ds-0ubuntu1.5
+    source-commit: e63cad5bb3e377aacfc808c2cf075e0613072b88 # import/1%8.2.2+ds-0ubuntu1.8
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1202,7 +1230,7 @@ parts:
 
   zfs-2-1:
     source: https://github.com/openzfs/zfs
-    source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
+    source-commit: a7186651d3306debca6b4f72797239eea61db36c # zfs-2.1.16
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1237,7 +1265,7 @@ parts:
 
   zfs-2-2:
     source: https://github.com/openzfs/zfs
-    source-commit: baa50314567afd986a00838f0fa65fdacbd12daf # zfs-2.2.6
+    source-commit: 3e4a3e161c00273303cd9fa9e0dc09ead3499a8a # zfs-2.2.8
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1272,7 +1300,7 @@ parts:
 
   zfs-2-3:
     source: https://github.com/openzfs/zfs
-    source-commit: f3e4043a36942e67ccbc05318479a07d242fc611 # zfs-2.3.1
+    source-commit: 1af41fd203639818aa28cc624f144ef604a166d8 # zfs-2.3.3
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1358,7 +1386,7 @@ parts:
     after:
       - apparmor
     source: https://github.com/lxc/lxc
-    source-commit: 2444f5841444a0a33705e2418727c23c1f167d1e # v6.0.2
+    source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
     source-depth: 1
     source-type: git
     build-packages:
@@ -1403,6 +1431,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 2663712e8fa8f37e0bb873185e2d4526dc644764 # start: Re-introduce first SET_DUMPABLE call
+
       cd ../build
 
       set +ex
@@ -1414,7 +1444,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-commit: 5df434be88d69406985083a2f591278034a7227b # v6.0.2
+    source-commit: 45d026e3e7e46fbb293d977ef20854527b363e2a # v6.0.4
     source-depth: 1
     source-type: git
     build-packages:
@@ -1496,7 +1526,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 1d9ac8759979ba395a207f298605873e98de85b1 # LXD 5.21.3
+    source-commit: 42036c8076f31063532cd8371034ff266b29f637 # pre-LXD 5.21.4
     source-type: git
     after:
       - lxc
@@ -1517,7 +1547,7 @@ parts:
       - python3-pip
       - python3-venv
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     stage-packages:
       - acl
       - attr
@@ -1536,6 +1566,7 @@ parts:
       set -ex
 
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
 
       # Setup the GOPATH
@@ -1553,19 +1584,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x 8a90bec80b6fba93f3055ba50280020c75b7482f # lxd/instance/drivers/driver/qemu: Fix regenerating nvram vars file when upgrading from LXD 4.0
-      git cherry-pick -x 3a405c7019ff7d4eef230e5666bb9795e76221b2 # lxd/instance/drivers/qemu: Backport "Fix double-escaped device name"
-      git cherry-pick -x 64fc2c157b8c6a0c619a6e7474f7627c9e0466d5 # Modified ChassisGroupChassisDelete to convert chassis_name to _uuid to fix later comparison
-      git cherry-pick -x 3af3719ecaede8b7e7d02bd297e09e47047f2c3b # lxd/network/openvswitch/ovn: Fix escaping of values in ChassisGroupChassisDelete
-      git cherry-pick -x 0c8de15f7befc297a6405883cfe47bf16d6aabd9 # lxd/network/zone/reverse: move to shared/dnsutil/reverse
-      git cherry-pick -x 9c2d62fa9842eca74a6433c0a930683fe46642b9 # lxd/network/zone/zone: Switch to dnsutil package's Reverse function
-      git cherry-pick -x 7f3da9fb8ae9d80182d9af818354f5aa0583748d # lxd/network/openvswitch/ovn: Add PTR record generation for instance NIC IPs
-      git cherry-pick -x 0a7a5beacba226aa2272b64d9f37646e57711999 # lxd/network/openvswitch/ovn: Ignore prealloc warnings for complex loop
-      git cherry-pick -x 7ab73df89562308edea9770a434ec2c65db2ae85 # Linter fixes
-      git cherry-pick -x b18f1c371272a83fd233cc34c91dd69e7cbf608a # lxd/network/openvswitch/ovn: Don't initialise slices to empty capacity
-      git cherry-pick -x 135aea1fdd95b76f6f54e32edb85d60334f84044 # lxd/network: Fix OVN LogicalSwitchPortGetDNS to understand DNS records field that contains PTR records
-
       # Setup build environment
+      export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${CRAFT_STAGE}/lib/ -L${CRAFT_STAGE}/usr/local/lib/"
@@ -1584,7 +1604,17 @@ parts:
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-agent" -tags=agent,netgo github.com/canonical/lxd/lxd-agent
       CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxd-user" -tags netgo github.com/canonical/lxd/lxd-user
 
-      # Some python dependencies are not available for riscv64 or just require a build from source.
+      # Check which Go version was used to compile each of the lxc/lxd binaries
+      # XXX: fail if an unexpected version (like a Go toolchain) was used
+      GOVER="$(snap list go | awk '{if ($1 == "go") print $2}')"
+      UNEXPECTED_GO_VER="$(go version -v "${CRAFT_PART_INSTALL}/bin/lxc"* "${CRAFT_PART_INSTALL}/bin/lxd"* | grep -vF ": go${GOVER}" || true)"
+      if [ -n "${UNEXPECTED_GO_VER:-}" ]; then
+        echo "Some binaries were compiled with an unexpected Go version (!= ${GOVER}):"
+        echo "${UNEXPECTED_GO_VER}"
+        exit 1
+      fi
+
+      # Some python dependencies are not available for armhf/riscv64 or just require a build from source.
       # Not worth the effort for now.
       if [ "$(uname -m)" != "riscv64" ]; then
         # Build the static website
@@ -1610,9 +1640,10 @@ parts:
       # When executed by snapd, the `compopt` support detection doesn't work so fake that it is always `builtin`
       set_compopt='s|$(type -t compopt)|"builtin"|'
       # Modify requestComp variable to use lxc based on context ($SNAP/bin/lxc in Snap environment)
-      set_request_comp='s|requestComp="${words\[0\]} __complete ${args\[\*\]}"|requestComp="/snap/lxd/current/bin/lxc __complete ${args[*]}"|'
+      set_request_comp='s|requestComp="${words\[0\]} __complete ${args\[\*\]}"|requestComp="/snap/lxd/current/commands/lxc __complete ${args[*]}"|'
       # Generate completions script
-      "${CRAFT_PART_INSTALL}/bin/lxc" completion bash | sed -e "${set_cmds}" -e "${set_cols}" -e "${set_compopt}" -e "${set_request_comp}" > "${CRAFT_PART_INSTALL}/etc/bash_completion.d/snap.lxd.lxc"
+      "${CRAFT_PART_INSTALL}/bin/lxc" completion bash | sed -e "${set_cmds}" -e "${set_cols}" -e "${set_compopt}" -e "${set_request_comp}" > "${CRAFT_PART_INSTALL}/lxc-completer.sh"
+      chmod +x "${CRAFT_PART_INSTALL}/lxc-completer.sh"
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -1634,7 +1665,7 @@ parts:
 
       - lib/*/libidn.so.*
 
-      - etc/bash_completion.d/snap.lxd.lxc
+      - lxc-completer.sh
 
       - share/lxd-documentation*
       - share/misc/pci.ids
@@ -1657,7 +1688,7 @@ parts:
     override-pull: |-
       [ "$(uname -m)" = "riscv64" ] && exit 0
 
-      snap install node --channel=20/stable --classic
+      snap install node --channel=22/stable --classic
       craftctl default
     override-build: |
       [ "$(uname -m)" = "riscv64" ] && exit 0
@@ -1774,6 +1805,13 @@ parts:
 
       # Fixup logrotate.conf permissions to not be group writable
       chmod g-w "${CRAFT_PRIME}/etc/logrotate.conf"
+
+      # XXX: do not keep the duplicated and often outdated CA certificates
+      # store from Python `certifi`. This file is not even used as the
+      # `python3-certifi` package providing it is patched to always use:
+      # `/etc/ssl/certs/ca-certificates.crt`
+      truncate --no-create --size=0 "${CRAFT_PRIME}/lib/python3/dist-packages/certifi/cacert.pem"
+
       exit 0
 
   wrappers:
