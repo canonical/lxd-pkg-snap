@@ -1524,7 +1524,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 1d9ac8759979ba395a207f298605873e98de85b1 # LXD 5.21.3
+    source-commit: 42036c8076f31063532cd8371034ff266b29f637 # pre-LXD 5.21.4
     source-type: git
     after:
       - lxc
@@ -1581,18 +1581,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x 8a90bec80b6fba93f3055ba50280020c75b7482f # lxd/instance/drivers/driver/qemu: Fix regenerating nvram vars file when upgrading from LXD 4.0
-      git cherry-pick -x 3a405c7019ff7d4eef230e5666bb9795e76221b2 # lxd/instance/drivers/qemu: Backport "Fix double-escaped device name"
-      git cherry-pick -x 64fc2c157b8c6a0c619a6e7474f7627c9e0466d5 # Modified ChassisGroupChassisDelete to convert chassis_name to _uuid to fix later comparison
-      git cherry-pick -x 3af3719ecaede8b7e7d02bd297e09e47047f2c3b # lxd/network/openvswitch/ovn: Fix escaping of values in ChassisGroupChassisDelete
-      git cherry-pick -x 0c8de15f7befc297a6405883cfe47bf16d6aabd9 # lxd/network/zone/reverse: move to shared/dnsutil/reverse
-      git cherry-pick -x 9c2d62fa9842eca74a6433c0a930683fe46642b9 # lxd/network/zone/zone: Switch to dnsutil package's Reverse function
-      git cherry-pick -x 7f3da9fb8ae9d80182d9af818354f5aa0583748d # lxd/network/openvswitch/ovn: Add PTR record generation for instance NIC IPs
-      git cherry-pick -x 0a7a5beacba226aa2272b64d9f37646e57711999 # lxd/network/openvswitch/ovn: Ignore prealloc warnings for complex loop
-      git cherry-pick -x 7ab73df89562308edea9770a434ec2c65db2ae85 # Linter fixes
-      git cherry-pick -x b18f1c371272a83fd233cc34c91dd69e7cbf608a # lxd/network/openvswitch/ovn: Don't initialise slices to empty capacity
-      git cherry-pick -x 135aea1fdd95b76f6f54e32edb85d60334f84044 # lxd/network: Fix OVN LogicalSwitchPortGetDNS to understand DNS records field that contains PTR records
 
       # Setup build environment
       export GOTOOLCHAIN="local"
