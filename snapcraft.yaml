@@ -1488,6 +1488,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 545d18c6477543863e7e55c9803c878f8fc8d4ff # gomod: Update dependencies
+
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
