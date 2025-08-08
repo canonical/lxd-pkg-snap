@@ -1494,6 +1494,7 @@ parts:
       git cherry-pick -x 545d18c6477543863e7e55c9803c878f8fc8d4ff # gomod: Update dependencies
       git cherry-pick -x 1dcf39d4fa2a99149280c78595f8f4802336e6a6 # doc/requirements: update minimum Go to 1.24.5
       git cherry-pick -x 35375bd244d791d7c634f64ad9e2d895e92d3f43 # Makefile: bump Go min to 1.24.5
+      git cherry-pick -x db43b80da572fa51ac98502aaa1dcf6557b0c4e0 # Revert "lxd/cluster/gateway: stop checking for remnants of LXD pre 4.0"
 
       # Setup build environment
       export GOTOOLCHAIN="local"
