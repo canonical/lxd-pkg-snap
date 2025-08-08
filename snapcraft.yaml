@@ -1488,7 +1488,12 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x e61dc3b5d623c27e2e322db518aff5300d46f278 # build(deps): bump github.com/go-jose/go-jose/v4 from 4.1.1 to 4.1.2
+      git cherry-pick -x 6b4c07a4af84d32c4b228de5e5fb69364cbe5a69 # build(deps): bump github.com/zitadel/oidc/v3 from 3.42.0 to 3.43.0
+      git cherry-pick -x 7c0ce2a6ecb42795d7c1f5b6beeebb0bb24d5ee4 # build(deps): bump github.com/miekg/dns from 1.1.67 to 1.1.68
       git cherry-pick -x 545d18c6477543863e7e55c9803c878f8fc8d4ff # gomod: Update dependencies
+      git cherry-pick -x 1dcf39d4fa2a99149280c78595f8f4802336e6a6 # doc/requirements: update minimum Go to 1.24.5
+      git cherry-pick -x 35375bd244d791d7c634f64ad9e2d895e92d3f43 # Makefile: bump Go min to 1.24.5
 
       # Setup build environment
       export GOTOOLCHAIN="local"
