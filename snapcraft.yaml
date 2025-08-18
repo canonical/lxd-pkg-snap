@@ -1527,7 +1527,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 42036c8076f31063532cd8371034ff266b29f637 # pre-LXD 5.21.4
+    source-commit: 5fa06c1749047d28417d5859f711b13221e67b04 # pre-LXD 5.21.4
     source-type: git
     after:
       - lxc
