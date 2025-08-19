@@ -1386,8 +1386,9 @@ parts:
     after:
       - apparmor
     source: https://github.com/lxc/lxc
-    source-commit: 9e4e69ed1cb93159b0da99dad8d320b795887d07 # v6.0.5
-    source-depth: 1
+    source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
+    #source-depth: 1
     source-type: git
     build-packages:
       - dpkg-dev
@@ -1430,6 +1431,8 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
+
+      git cherry-pick -x 2663712e8fa8f37e0bb873185e2d4526dc644764 # start: Re-introduce first SET_DUMPABLE call
 
       cd ../build
 
