@@ -2,7 +2,7 @@ name: lxd
 base: core22
 assumes:
   - snapd2.39
-version: "5.21.3"
+version: "5.21.4"
 grade: stable
 summary: LXD - container and VM manager
 license: AGPL-3.0-only
@@ -1527,7 +1527,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 5fa06c1749047d28417d5859f711b13221e67b04 # pre-LXD 5.21.4
+    source-commit: 0494f5d47e41af69a8374568c0cb8b3eefd72a6a # lxd-5.21.4
     source-type: git
     after:
       - lxc
