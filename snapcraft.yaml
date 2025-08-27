@@ -1495,6 +1495,8 @@ parts:
       git cherry-pick -x 1dcf39d4fa2a99149280c78595f8f4802336e6a6 # doc/requirements: update minimum Go to 1.24.5
       git cherry-pick -x 35375bd244d791d7c634f64ad9e2d895e92d3f43 # Makefile: bump Go min to 1.24.5
       git cherry-pick -x db43b80da572fa51ac98502aaa1dcf6557b0c4e0 # Revert "lxd/cluster/gateway: stop checking for remnants of LXD pre 4.0"
+      git cherry-pick -x 07b1821ad34d12f5696fae031add6c956201b074 # lxd/storage/drivers/pure: Ensure volume is unmapped after changing quota
+      git cherry-pick -x f6a50a0be5e97ca9bca15666dc1be26902dbcee7 # shared/util: Break slice aliasing in RemoveElementsFromSlice
 
       # Setup build environment
       export GOTOOLCHAIN="local"
