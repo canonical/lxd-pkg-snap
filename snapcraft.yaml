@@ -1508,6 +1508,8 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick a014ad5514ee753d602b55ebce6f743a2efdbe5a # lxd/instance/drivers/driver/qemu: Fix nvram file update from 2MB OVMF and CSM mode
+      git cherry-pick 07b1821ad34d12f5696fae031add6c956201b074 # lxd/storage/drivers/pure: Ensure volume is unmapped after changing quota
+      git cherry-pick f6a50a0be5e97ca9bca15666dc1be26902dbcee7 # shared/util: Break slice aliasing in RemoveElementsFromSlice
 
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
