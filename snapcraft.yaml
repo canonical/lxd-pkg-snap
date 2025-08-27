@@ -1585,6 +1585,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x b9055c434d2cfc065cb02cc2651b87d5ab5b081d # api: fix file push bug about owner/group change not work on vm
+
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
