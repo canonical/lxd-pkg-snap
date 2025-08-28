@@ -1586,6 +1586,7 @@ parts:
       git config user.name "LXD snap builder"
 
       git cherry-pick -x b9055c434d2cfc065cb02cc2651b87d5ab5b081d # api: fix file push bug about owner/group change not work on vm
+      git cherry-pick -x 2c8afef50e455e826ea24b490999ec274008c385 # lxd/storage/drivers/pure: Ensure image size is applied if not specified otherwise
 
       # Setup build environment
       export GOTOOLCHAIN="local"
