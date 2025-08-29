@@ -1497,9 +1497,9 @@ parts:
       git cherry-pick -x db43b80da572fa51ac98502aaa1dcf6557b0c4e0 # Revert "lxd/cluster/gateway: stop checking for remnants of LXD pre 4.0"
       git cherry-pick -x 07b1821ad34d12f5696fae031add6c956201b074 # lxd/storage/drivers/pure: Ensure volume is unmapped after changing quota
       git cherry-pick -x f6a50a0be5e97ca9bca15666dc1be26902dbcee7 # shared/util: Break slice aliasing in RemoveElementsFromSlice
+      git cherry-pick -x 374ff20d0a4f8b3d4e19261152b4afc1bb9b162c # api: fix file push bug about owner/group change not work on vm
       git cherry-pick -x 987dea56abeb862cc50ebfa7eb557f0b6c7f51b0 # lxd/instance_file: Refactor effectiveFileOwnership()
       git cherry-pick -x 35c05e9c4c5687887cf6f6b7074505a45cd7e387 # lxd/instance_file: On directory push to containers, only change uid/gid if it fits within uidmap range
-      git cherry-pick -x 4fac9d3c73c1f9362d1fe5750da7d037c72fb1ca # test: Add test for `file push` of a directory owned by uid outside of container range
 
       # Setup build environment
       export GOTOOLCHAIN="local"
