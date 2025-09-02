@@ -1500,6 +1500,10 @@ parts:
       git cherry-pick -x 374ff20d0a4f8b3d4e19261152b4afc1bb9b162c # api: fix file push bug about owner/group change not work on vm
       git cherry-pick -x 987dea56abeb862cc50ebfa7eb557f0b6c7f51b0 # lxd/instance_file: Refactor effectiveFileOwnership()
       git cherry-pick -x 35c05e9c4c5687887cf6f6b7074505a45cd7e387 # lxd/instance_file: On directory push to containers, only change uid/gid if it fits within uidmap range
+      git cherry-pick -x df82b035fea2d585b879a6250917e5b93a4abcba # lxd/storage/drivers/pure: Helper func to round volume size
+      git cherry-pick -x fdcd161453ac6af7f07f9a6d3b11b7e8846bf0b0 # lxd/storage/drivers/pure: Round volume size when creating or resizing a volume
+      git cherry-pick -x 9e3c090801c07a9e291992494987e1ee2a5b9432 # lxd/storage/drivers/pure: Adjust volume size validation
+      git cherry-pick -x 0add0b2ea116829424458f7c03136ba5c2208716 # doc: Explain that LXD automatically rounds up PureStorage volume size
 
       # Setup build environment
       export GOTOOLCHAIN="local"
