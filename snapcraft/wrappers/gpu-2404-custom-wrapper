@@ -2,10 +2,10 @@
 
 # see also https://github.com/canonical/gpu-snap/blob/929a4228ebeb17dd1cb82c48346b192ac02ac1a3/bin/gpu-2404-wrapper#L1
 
-if snapctl is-connected gpu-2404
+if [ -x "/snap/mesa-2404/current/bin/gpu-2404-provider-wrapper" ] && snapctl is-connected gpu-2404
 then
     echo "INFO: the gpu-2404 interface is connected. Running with gpu-2404 wrapper."
-    exec "${SNAP}/gpu-2404/bin/gpu-2404-provider-wrapper" "$@"
+    exec "/snap/mesa-2404/current/bin/gpu-2404-provider-wrapper" "$@"
 else
     echo "INFO: the gpu-2404 interface isn't connected. Skipping gpu-2404 wrapper."
     exec "$@"
