@@ -16,7 +16,7 @@ snapcraft
 
 To build the snap for multiple architectures, Launchpad builders can be used.
 
-They are available for various architectures (`amd64`, `armhf`, `arm64`, `ppc64el`, `riscv64` and `s390x`) and you can ask for multiple to be built in parallel. Here's how to build for both `amd64` and `arm64`:
+They are available for various architectures (`amd64`, `arm64`, `ppc64el`, `riscv64` and `s390x`) and you can ask for multiple to be built in parallel. Here's how to build for both `amd64` and `arm64`:
 
 ```
 snapcraft remote-build --launchpad-accept-public-upload --build-for amd64,arm64
