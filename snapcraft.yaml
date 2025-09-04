@@ -1507,6 +1507,8 @@ parts:
       git cherry-pick --strategy-option theirs -x 74b3427531ec032b0595ca271a1608aa31315168 # lxd/storage: make (d *powerflex) discover() method to be a generic helper
       git cherry-pick -x 442872be7386d8da9075487a683ffde8f5980c05 # lxd/storage/drivers: de-duplicate Mount/UnmountVolume between Pure/PowerFlex
       git cherry-pick -x 9e26f38bdebf8aae13baa386e1ec207adf0e34ec # lxd/storage/drivers/{ceph,zfs,lvm,generic}: unmap block device for ISO volumes
+      git cherry-pick -x 7d6600ac1d9b64f10980215b436b0eda2263f5eb # lxd/patches: Fix DEBUG message
+      git cherry-pick -x 9d6b0802d9fc251234033db3121ba81cd60888c1 # lxd/api_project: Fix daemon storage unmount on project deletion
 
       # Setup build environment
       export GOTOOLCHAIN="local"
