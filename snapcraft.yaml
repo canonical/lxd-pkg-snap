@@ -1591,6 +1591,10 @@ parts:
       git cherry-pick -x 8f3caf043950ae3bc336e20b80d3c72b0d5e138a # lxd/storage/drivers/pure: Round volume size when creating or resizing a volume
       git cherry-pick -x 982505da97568df401072d94e7036c165b639dd1 # lxd/storage/drivers/pure: Adjust volume size validation
       git cherry-pick -x 7028f7cddaf1d56e3736e45be03a9c4d9ac05197 # doc: Explain that LXD automatically rounds up PureStorage volume size
+      git cherry-pick -x d2ddeb20983c074dab6db1552942b64de85de6b8 # lxd/storage: make (d *powerflex) discover() method to be a generic helper
+      git cherry-pick -x 2bbdb9fb0a567eea264c5806939bccbc5d9100cf # lxd/storage/connectors: fix NVMe Discovery() to filter out not valid NQNs
+      git cherry-pick -x a485632d5d65fdf73ece880eb02a14cd0852cf2f # lxd/storage/drivers: de-duplicate Mount/UnmountVolume between Pure/PowerFlex
+      git cherry-pick -x 5c17fd7c341e948fe17599809d23b4f68844cc0d # lxd/storage/drivers/{ceph,zfs,lvm,generic}: unmap block device for ISO volumes
 
       # Setup build environment
       export GOTOOLCHAIN="local"
