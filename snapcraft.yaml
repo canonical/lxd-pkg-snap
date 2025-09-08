@@ -1417,6 +1417,8 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x a26f9d0319d6d494e740b3d8592006a4cb8dd865 # lxd/storage/patches: Drop `size` from instance volume config on update
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
