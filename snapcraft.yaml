@@ -1595,6 +1595,9 @@ parts:
       git cherry-pick -x 2bbdb9fb0a567eea264c5806939bccbc5d9100cf # lxd/storage/connectors: fix NVMe Discovery() to filter out not valid NQNs
       git cherry-pick -x a485632d5d65fdf73ece880eb02a14cd0852cf2f # lxd/storage/drivers: de-duplicate Mount/UnmountVolume between Pure/PowerFlex
       git cherry-pick -x 5c17fd7c341e948fe17599809d23b4f68844cc0d # lxd/storage/drivers/{ceph,zfs,lvm,generic}: unmap block device for ISO volumes
+      git cherry-pick -x 45f7aa4cb31b1e4b035ea4b67e29454ccb301c65 # lxd/storage/patches: Drop `size` from instance volume config on update
+      git cherry-pick -x f1659c54b370eaeb25067640fbb7b2ce4420f168 # lxd/storage/patches: Remove nested cluster transaction
+      git cherry-pick -x 76111dd03636db3f920a2f7e20ff8d4a81d22059 # lxd/storage/patches: Remove more nested cluster transactions
 
       # Setup build environment
       export GOTOOLCHAIN="local"
