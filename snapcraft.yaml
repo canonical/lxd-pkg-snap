@@ -437,7 +437,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/axboe/liburing
     source-type: git
-    source-tag: liburing-2.5
+    source-commit: f4e42a515cd78c8c9cac2be14222834be5f8df2b # liburing-2.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
