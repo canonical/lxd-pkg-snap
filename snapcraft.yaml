@@ -528,7 +528,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/netwide-assembler/nasm
     source-type: git
-    source-tag: nasm-2.15.05
+    source-commit: 214f2d4c56925a280c480950bbf71389e2169e1a # nasm-2.15.05
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
