@@ -1362,7 +1362,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-commit: 2101d7f6efdaa7762e6593c857cb524bfcd2859b # lxd-5.0.4
+    source-commit: 33a093e8caba23a959b956c538366f66451db1b2 # pre lxd-5.0.5
     after:
       - lxc
       - dqlite
@@ -1416,8 +1416,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x a26f9d0319d6d494e740b3d8592006a4cb8dd865 # lxd/storage/patches: Drop `size` from instance volume config on update
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
