@@ -231,9 +231,9 @@ parts:
   criu:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/checkpoint-restore/criu
-    source-commit: f8b14286b092853a4485813e1efd564109df9123 # v3.19
-    source-type: git
+    source-commit: c2b48ff423aa663b3534a5ba96907366e4c1b408 # v4.0
     source-depth: 1
+    source-type: git
     plugin: nil
     build-packages:
       - asciidoc
@@ -272,7 +272,7 @@ parts:
     after:
       - sqlite
     source: https://github.com/canonical/dqlite
-    source-commit: 769a5ae21156ea7b1f01a937f80a3da60eb6a1bb # v1.16.5
+    source-commit: 1c3f95492dfb4c649356d5b6f2c031bcd3fd7c0f # v1.17.2 LTS
     source-type: git
     source-depth: 1
     plugin: autotools
@@ -437,7 +437,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/axboe/liburing
     source-type: git
-    source-tag: liburing-2.5
+    source-commit: f4e42a515cd78c8c9cac2be14222834be5f8df2b # liburing-2.5
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -528,7 +528,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/netwide-assembler/nasm
     source-type: git
-    source-tag: nasm-2.15.05
+    source-commit: 214f2d4c56925a280c480950bbf71389e2169e1a # nasm-2.15.05
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -572,12 +572,12 @@ parts:
     after:
       - libseccomp
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: 4c2494f16573b585788a42e9c7bee76ecd48c73d # v1.16.1
+    source-commit: a198166e1c1166f4847598438115ea97dacc7a92 # v1.17.6
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.16.1" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.17.6" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - bmake
       - curl
@@ -1135,7 +1135,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-commit: fb6d532066f23458f768a97ae94b158c42cbe484 # zfs-2.1.15
+    source-commit: a7186651d3306debca6b4f72797239eea61db36c # zfs-2.1.16
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1170,7 +1170,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/openzfs/zfs
     source-type: git
-    source-commit: baa50314567afd986a00838f0fa65fdacbd12daf # zfs-2.2.6
+    source-commit: 3e4a3e161c00273303cd9fa9e0dc09ead3499a8a # zfs-2.2.8
     source-depth: 1
     plugin: autotools
     autotools-configure-parameters:
@@ -1362,7 +1362,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-commit: 2101d7f6efdaa7762e6593c857cb524bfcd2859b # lxd-5.0.4
+    source-commit: 33a093e8caba23a959b956c538366f66451db1b2 # pre lxd-5.0.5
     after:
       - lxc
       - dqlite
@@ -1372,7 +1372,7 @@ parts:
       - libudev-dev
       - pkg-config
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     stage-packages:
       - acl
       - attr
@@ -1393,19 +1393,12 @@ parts:
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
+      export GOTOOLCHAIN="local"
 
       # Setup the GOPATH
       rm -Rf "${GOPATH}"
       mkdir -p "${GOPATH}/src/github.com/canonical"
       ln -s "$(pwd)" "${GOPATH}/src/github.com/canonical/lxd"
-
-      # Switch dqlite to 1.16.5 and go-dqlite to 1.21.0 (known good from LXD v5.21.2)
-      # whilst crashes with go-dqlite v2 or dqlite 1.17 LTS are resolved.
-      git config user.email "noreply@lists.canonical.com"
-      git config user.name "LXD snap builder"
-      git revert e8a5357c63fb51b814e5d262479cc928fcba710d # Revert switch to go-dqlite v2
-      go get github.com/canonical/go-dqlite@v1.21.0 # Switch back to go-dqlite v1
-      go mod tidy
 
       # Download the dependencies
       go get -v ./...
@@ -1416,8 +1409,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x a26f9d0319d6d494e740b3d8592006a4cb8dd865 # lxd/storage/patches: Drop `size` from instance volume config on update
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
@@ -1474,7 +1465,7 @@ parts:
       - lxd
       - sqlite
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     plugin: nil
     override-pull: |
       snapcraftctl pull
@@ -1490,6 +1481,7 @@ parts:
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
+      export GOTOOLCHAIN="local"
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
 
@@ -1541,13 +1533,14 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: snap-query/
     build-snaps:
-      - go/1.23/stable
+      - go/1.24/stable
     plugin: nil
     override-build: |
       set -ex
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
+      export GOTOOLCHAIN="local"
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/snap-query" snap-query.go
