@@ -2,7 +2,7 @@ name: lxd
 base: core20
 assumes:
   - snapd2.39
-version: "5.0.4"
+version: "5.0.5"
 grade: stable
 summary: LXD - container and VM manager
 description: |-
@@ -1362,7 +1362,7 @@ parts:
     build-attributes: [core22-step-dependencies]
     source: https://github.com/canonical/lxd
     source-type: git
-    source-commit: 33a093e8caba23a959b956c538366f66451db1b2 # pre lxd-5.0.5
+    source-commit: 4ef455e67d5ea672dc2602f41530b1683e1ab5f1 # lxd-5.0.5
     after:
       - lxc
       - dqlite
