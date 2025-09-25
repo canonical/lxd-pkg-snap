@@ -1598,6 +1598,8 @@ parts:
       git cherry-pick -x 45f7aa4cb31b1e4b035ea4b67e29454ccb301c65 # lxd/storage/patches: Drop `size` from instance volume config on update
       git cherry-pick -x f1659c54b370eaeb25067640fbb7b2ce4420f168 # lxd/storage/patches: Remove nested cluster transaction
       git cherry-pick -x 76111dd03636db3f920a2f7e20ff8d4a81d22059 # lxd/storage/patches: Remove more nested cluster transactions
+      git cherry-pick -x 2e6a8b1726af25f6c6366a9ff8cde1495b222d28 # lxd/auth/drivers: Remove 5s timeout on fine-grained auth checks.
+      git cherry-pick -x 4666c6644cd838c0833dd408148732c96380f177 # lxd/device/gpu_physical: fix stale CDI-related files cleanup logic
 
       # Setup build environment
       export GOTOOLCHAIN="local"
