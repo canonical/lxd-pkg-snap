@@ -1511,6 +1511,8 @@ parts:
       git cherry-pick -x 3944bcf24661b066991370bcbb55d2814a6502f0 # lxd/storage/patches: Remove nested cluster transaction
       git cherry-pick -x 70f259fdad6890a7af20ed78695a671d681c8add # lxd/storage/patches: Remove more nested cluster transactions
       git cherry-pick -x ddad511605a57c07ae88d5b5e3514d44a6a9b99c # lxd/device/gpu_physical: fix stale CDI-related files cleanup logic
+      git cherry-pick -x 9143d9e5c39dc8b061444fca2204de101edf6067 # lxd/storage/block/utils: Adds LoopDeviceSetupAlign
+      git cherry-pick -x 041375ef6603ec0de9f3231430b06f9bfbd5fb22 # lxd/storage/drivers/driver/common: Handle 4k sector sizes
 
       # Setup build environment
       export GOTOOLCHAIN="local"
