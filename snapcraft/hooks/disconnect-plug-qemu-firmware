@@ -9,7 +9,7 @@ if [ -d /sys/kernel/security/apparmor ]; then
   fi
 fi
 
-echo 1 > "${SNAP_COMMON}/use-qemu-external-snap"
+rm -f "${SNAP_COMMON}/use-qemu-firmware-snap"
 
 echo reload > "${SNAP_COMMON}/state"
 if [ -f "${SNAP_COMMON}/lxd.pid" ]; then

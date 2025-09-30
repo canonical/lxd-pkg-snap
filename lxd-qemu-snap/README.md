@@ -17,6 +17,7 @@ sudo snap install qemu-for-lxd_*.snap --devmode
 # connect snaps
 sudo snap connect lxd:gpu-2404 mesa-2404:gpu-2404
 sudo snap connect lxd:qemu-external qemu-for-lxd:qemu-external
+sudo snap connect lxd:qemu-firmware qemu-for-lxd:qemu-firmware
 ```
 
 ## How to use with virgl (only specific to this example of snapcraft.yaml)

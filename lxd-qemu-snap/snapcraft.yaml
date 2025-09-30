@@ -20,8 +20,21 @@ slots:
     content: qemu-external-binaries
     read:
       - $SNAP/external/qemu
+  qemu-firmware:
+    interface: content
+    content: qemu-firmware
+    read:
+      - $SNAP/external/firmware
 
 parts:
+  firmware:
+    plugin: dump
+    source: firmware/
+    organize:
+      '*': external/firmware/
+    stage:
+      - external/firmware/*
+
   #
   # This step is extremely important, as it ensures that no mesa libs will
   # be provided with this snap to prevent any possible version mistmatches

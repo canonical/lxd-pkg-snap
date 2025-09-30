@@ -81,6 +81,10 @@ plugs:
    interface: content
    content: qemu-external-binaries
    target: $SNAP/external/qemu
+ qemu-firmware:
+   interface: content
+   content: qemu-firmware
+   target: $SNAP/external/firmware
 
 layout:
   /usr/share/libdrm:
@@ -186,6 +190,14 @@ hooks:
       - lxd-support
       - system-observe
   disconnect-plug-qemu-external:
+    plugs:
+      - lxd-support
+      - system-observe
+  connect-plug-qemu-firmware:
+    plugs:
+      - lxd-support
+      - system-observe
+  disconnect-plug-qemu-firmware:
     plugs:
       - lxd-support
       - system-observe
@@ -1708,6 +1720,16 @@ parts:
       truncate --no-create --size=0 "${CRAFT_PRIME}/lib/python3/dist-packages/certifi/cacert.pem"
 
       exit 0
+
+  external-mount-points:
+    plugin: nil
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/external/qemu
+      mkdir -p $CRAFT_PART_INSTALL/external/firmware
+    stage:
+      - external/
+    prime:
+      - external/
 
   wrappers:
     plugin: dump
