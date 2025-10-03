@@ -1513,6 +1513,7 @@ parts:
       git cherry-pick -x ddad511605a57c07ae88d5b5e3514d44a6a9b99c # lxd/device/gpu_physical: fix stale CDI-related files cleanup logic
       git cherry-pick -x 9143d9e5c39dc8b061444fca2204de101edf6067 # lxd/storage/block/utils: Adds LoopDeviceSetupAlign
       git cherry-pick -x 041375ef6603ec0de9f3231430b06f9bfbd5fb22 # lxd/storage/drivers/driver/common: Handle 4k sector sizes
+      git cherry-pick -x a6c9f361eae184625943869d4dcd7ad7bebb4764 # lxd/resources/cpu: make /proc/cpuinfo parser less strict
 
       # Setup build environment
       export GOTOOLCHAIN="local"
