@@ -718,7 +718,6 @@ parts:
       - --prefix=/
       - -Dgstreamer=no
       - -Dmanual=false
-      - -Dlz4=false
       - -Dsasl=false
       - -Dopus=disabled
       - -Dsmartcard=disabled
@@ -728,6 +727,7 @@ parts:
       - else:
         - libspice-protocol-dev
         - libjpeg-turbo8-dev
+        - liblz4-dev
         - python3-pyparsing
         - python3-six
         - meson
