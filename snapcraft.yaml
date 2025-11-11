@@ -1603,6 +1603,10 @@ parts:
       git cherry-pick -x 4b24d3a79a86946388f1f1d33f42869cc298ccaf # lxd/storage/block/utils: Adds LoopDeviceSetupAlign
       git cherry-pick -x 674eebc6bd71a9d135d076a96769b23a670550b8 # lxd/storage/drivers/driver/common: Handle 4k sector sizes
       git cherry-pick -x fdfb09670c19ccd58f48065f12852edfda16a3a4 # lxd/resources/cpu: make /proc/cpuinfo parser less strict
+      git cherry-pick -x 049d86def7c26e8736bb991e4223ec89dab0b05e # lxd/storage: Tighten storage pool volume permissions
+      git cherry-pick -x 10ad9d7419b4127cd127d2850e79aee3e1dc07e1 # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
+      git cherry-pick -x 97219271d4c67e388e584944349a87f86647fcdb # lxd/storage/backend/lxd: Replace deprecated os.IsExist
+      git cherry-pick -x b2d38e82bda982e337a3cbdc173ec4b372ab8b24 # lxd/patches: Re-apply storage permissions on update
 
       # Setup build environment
       export GOTOOLCHAIN="local"
