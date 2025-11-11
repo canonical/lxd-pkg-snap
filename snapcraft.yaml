@@ -1410,6 +1410,11 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 2236fb7001bec8a4dd6a9070eb59d2cc818f833c # lxd/storage: Tighten storage pool volume permissions
+      git cherry-pick -x 54eca5752e47bd9443f43850ca8241074de49609 # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
+      git cherry-pick -x 693c65f114b7ab94f896e38f3deaa3b53a48c6e1 # lxd/storage/backend/lxd: Replace deprecated os.IsExist
+      git cherry-pick -x 849ed20a5fbb5229efec24c98ca3caee608fd87d # lxd/patches: Re-apply storage permissions on update
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
