@@ -1197,6 +1197,9 @@ parts:
       git cherry-pick -x aa0adcee9fc3f1fc40adc09cfb98611eb53f733e # lxd/apparmor/instance_lxc: allow devpts for unprivileged containers
       git cherry-pick -x 73a796169cfe54f1953ac38c06022d5e38acb855 # lxd/apparmor/instance_lxc: allow procfs for unprivileged containers
       git cherry-pick -x c572eb174ae179507c98a726939a3340f9d28d2d # lxd/apparmor/instance_lxc: allow sysfs for unprivileged containers
+      git cherry-pick -x bc9d5e7662c6311530ec292fa44227f67f7c023b # lxd/storage: Tighten storage pool volume permissions
+      git cherry-pick -x 48aba77c9fa253c15183e413131abcc67631b17d # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
+      git cherry-pick -x 0138ebc8b9036a73670847c1e708343b05efd95c # lxd/patches: Re-apply storage permissions on update
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
