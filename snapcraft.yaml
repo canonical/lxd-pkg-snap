@@ -861,6 +861,7 @@ parts:
         - liburing-dev
         - libusb-1.0-0-dev
         - libusbredirparser-dev
+        - liblz4-dev
         - quilt
         - librbd-dev
     stage-packages:
