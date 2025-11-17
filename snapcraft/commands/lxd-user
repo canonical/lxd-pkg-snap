@@ -2,11 +2,9 @@
 set -eu
 
 # Re-exec outside of apparmor confinement
-if [ -d /sys/kernel/security/apparmor ]; then
-  label="$(cat /proc/self/attr/current 2>/dev/null)"
-  if [ "$label" != "unconfined" ] && [ -n "${label##*(unconfined)}" ]; then
-    exec aa-exec -p unconfined -- "$0" "$@"
-  fi
+label="$(cat /proc/self/attr/current 2>/dev/null || echo "unconfined")"
+if [ "${label}" != "unconfined" ] && [ -n "${label##*(unconfined)}" ]; then
+  exec aa-exec -p unconfined -- "$0" "$@"
 fi
 
 # Set the environment
@@ -23,4 +21,9 @@ chmod 0711 "${SNAP_COMMON}/lxd-user/"
 cd "${SNAP_COMMON}/lxd-user/"
 
 # Run lxd-user
-exec lxd-user
+LXD_USER="lxd-user"
+if [ -x "${SNAP_COMMON}/lxd-user.debug" ]; then
+    LXD_USER="${SNAP_COMMON}/lxd-user.debug"
+fi
+
+exec "${LXD_USER}" "$@"

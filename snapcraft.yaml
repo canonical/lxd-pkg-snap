@@ -289,7 +289,7 @@ parts:
   dqlite:
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-commit: 559328ca8bdeca27cb24967ec632a2f1c68c9f18 # v1.18.2
+    source-commit: b6881488f39053ac5cc9996c7cf2196e56960cc6 # v1.18.3
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
@@ -303,6 +303,7 @@ parts:
       - liblz4-dev
       - libsqlite3-dev
       - libuv1-dev
+      - xfslibs-dev
     organize:
       usr/bin/: bin/
       usr/lib/: lib/
@@ -537,12 +538,12 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: a198166e1c1166f4847598438115ea97dacc7a92 # v1.17.6
+    source-commit: 889a3bb5408c195ed7897ba2cb8341c7d249672f # v1.18.0
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.17.6" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.18.0" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - to amd64:
         - bmake
@@ -559,7 +560,7 @@ parts:
         - lsb-release
         - libtirpc-dev
     build-snaps:
-      - go/1.24/stable
+      - go/1.25/stable
     override-stage: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -599,10 +600,10 @@ parts:
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: bae3e7842ebe26812d8bd6a9be6a14a83dc91d8f # v1.17.7
+    source-commit: f8daa5e26de9fd7eb79259040b6dd5a52060048c # v1.18.0
     source-type: git
     build-snaps:
-      - go/1.24/stable
+      - go/1.25/stable
     plugin: make
     override-stage: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
@@ -785,7 +786,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: e63cad5bb3e377aacfc808c2cf075e0613072b88 # import/1%8.2.2+ds-0ubuntu1.8
+    source-commit: bc0011afab01de8c41ec80fc8c24dd33fb30cd90 # import/1%8.2.2+ds-0ubuntu1.10
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1199,7 +1200,7 @@ parts:
 
   zfs-2-3:
     source: https://github.com/openzfs/zfs
-    source-commit: 1af41fd203639818aa28cc624f144ef604a166d8 # zfs-2.3.3
+    source-commit: 34f96a15c73eab27dd6ad17bb5f1263bf26e37d7 # zfs-2.3.4
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1270,9 +1271,8 @@ parts:
     after:
       - apparmor
     source: https://github.com/lxc/lxc
-    source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
-    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
-    #source-depth: 1
+    source-commit: 9e4e69ed1cb93159b0da99dad8d320b795887d07 # v6.0.5
+    source-depth: 1
     source-type: git
     build-packages:
       - libapparmor-dev
@@ -1291,6 +1291,7 @@ parts:
       - -Dexamples=false
       - -Dinstall-init-files=false
       - -Dinstall-state-dirs=false
+      - -Dlibdir=lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}
       - -Dman=false
       - -Dmemfd-rexec=false
       - -Dopenssl=false
@@ -1318,8 +1319,6 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
-      git cherry-pick -x 2663712e8fa8f37e0bb873185e2d4526dc644764 # start: Re-introduce first SET_DUMPABLE call
-
       # lxc-checkconfig.in does not need any preprocessing
       mkdir -p "${CRAFT_PART_INSTALL}/bin/"
       install --mode=0755 src/lxc/cmd/lxc-checkconfig.in "${CRAFT_PART_INSTALL}/bin/lxc-checkconfig"
@@ -1335,7 +1334,7 @@ parts:
 
   lxcfs:
     source: https://github.com/lxc/lxcfs
-    source-commit: 45d026e3e7e46fbb293d977ef20854527b363e2a # v6.0.4
+    source-commit: 16503df8e814d29b348e61abebc4f89b2e20f440 # v6.0.5
     source-depth: 1
     source-type: git
     build-packages:
@@ -1431,7 +1430,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: fec3cc832ca782d398c82d38f8532ef9d5be2e00 # lxd-6.5
+    source-commit: 002f3f61c5c34f03c0f55c6733374039eb24ddec # pre lxd-6.6
     source-type: git
     after:
       - lxc
@@ -1451,7 +1450,7 @@ parts:
       - python3-pip
       - python3-venv
     build-snaps:
-      - go/1.24/stable
+      - go/1.25/stable
     stage-packages:
       - acl
       - attr
@@ -1487,33 +1486,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x e61dc3b5d623c27e2e322db518aff5300d46f278 # build(deps): bump github.com/go-jose/go-jose/v4 from 4.1.1 to 4.1.2
-      git cherry-pick -x 6b4c07a4af84d32c4b228de5e5fb69364cbe5a69 # build(deps): bump github.com/zitadel/oidc/v3 from 3.42.0 to 3.43.0
-      git cherry-pick -x 7c0ce2a6ecb42795d7c1f5b6beeebb0bb24d5ee4 # build(deps): bump github.com/miekg/dns from 1.1.67 to 1.1.68
-      git cherry-pick -x 545d18c6477543863e7e55c9803c878f8fc8d4ff # gomod: Update dependencies
-      git cherry-pick -x 1dcf39d4fa2a99149280c78595f8f4802336e6a6 # doc/requirements: update minimum Go to 1.24.5
-      git cherry-pick -x 35375bd244d791d7c634f64ad9e2d895e92d3f43 # Makefile: bump Go min to 1.24.5
-      git cherry-pick -x db43b80da572fa51ac98502aaa1dcf6557b0c4e0 # Revert "lxd/cluster/gateway: stop checking for remnants of LXD pre 4.0"
-      git cherry-pick -x 07b1821ad34d12f5696fae031add6c956201b074 # lxd/storage/drivers/pure: Ensure volume is unmapped after changing quota
-      git cherry-pick -x f6a50a0be5e97ca9bca15666dc1be26902dbcee7 # shared/util: Break slice aliasing in RemoveElementsFromSlice
-      git cherry-pick -x 374ff20d0a4f8b3d4e19261152b4afc1bb9b162c # api: fix file push bug about owner/group change not work on vm
-      git cherry-pick -x 987dea56abeb862cc50ebfa7eb557f0b6c7f51b0 # lxd/instance_file: Refactor effectiveFileOwnership()
-      git cherry-pick -x 35c05e9c4c5687887cf6f6b7074505a45cd7e387 # lxd/instance_file: On directory push to containers, only change uid/gid if it fits within uidmap range
-      git cherry-pick -x df82b035fea2d585b879a6250917e5b93a4abcba # lxd/storage/drivers/pure: Helper func to round volume size
-      git cherry-pick -x fdcd161453ac6af7f07f9a6d3b11b7e8846bf0b0 # lxd/storage/drivers/pure: Round volume size when creating or resizing a volume
-      git cherry-pick -x 9e3c090801c07a9e291992494987e1ee2a5b9432 # lxd/storage/drivers/pure: Adjust volume size validation
-      git cherry-pick -x 0add0b2ea116829424458f7c03136ba5c2208716 # doc: Explain that LXD automatically rounds up PureStorage volume size
-      git cherry-pick --strategy-option theirs -x 74b3427531ec032b0595ca271a1608aa31315168 # lxd/storage: make (d *powerflex) discover() method to be a generic helper
-      git cherry-pick -x 442872be7386d8da9075487a683ffde8f5980c05 # lxd/storage/drivers: de-duplicate Mount/UnmountVolume between Pure/PowerFlex
-      git cherry-pick -x 9e26f38bdebf8aae13baa386e1ec207adf0e34ec # lxd/storage/drivers/{ceph,zfs,lvm,generic}: unmap block device for ISO volumes
-      git cherry-pick -x b104b62bca5ac797aaa496be728329190506552f # lxd/storage/patches: Drop `size` from instance volume config on update
-      git cherry-pick -x 3944bcf24661b066991370bcbb55d2814a6502f0 # lxd/storage/patches: Remove nested cluster transaction
-      git cherry-pick -x 70f259fdad6890a7af20ed78695a671d681c8add # lxd/storage/patches: Remove more nested cluster transactions
-      git cherry-pick -x ddad511605a57c07ae88d5b5e3514d44a6a9b99c # lxd/device/gpu_physical: fix stale CDI-related files cleanup logic
-      git cherry-pick -x 9143d9e5c39dc8b061444fca2204de101edf6067 # lxd/storage/block/utils: Adds LoopDeviceSetupAlign
-      git cherry-pick -x 041375ef6603ec0de9f3231430b06f9bfbd5fb22 # lxd/storage/drivers/driver/common: Handle 4k sector sizes
-      git cherry-pick -x a6c9f361eae184625943869d4dcd7ad7bebb4764 # lxd/resources/cpu: make /proc/cpuinfo parser less strict
 
       # Setup build environment
       export GOTOOLCHAIN="local"
