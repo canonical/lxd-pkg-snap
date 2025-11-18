@@ -1025,28 +1025,23 @@ parts:
   virtiofsd:
     plugin: nil
     stage-packages:
-      - to armhf: []
-      - else:
+      - to amd64:
         - virtiofsd
     organize:
       usr/libexec/: bin/
     prime:
       - bin/virtiofsd*
     override-stage: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && exit 0
       craftctl default
     override-prime: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && exit 0
       craftctl default
     override-pull: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && exit 0
       craftctl default
     override-build: |-
-      [ "$(uname -m)" = "armv7l" ] && exit 0
-      [ "$(uname -m)" = "riscv64" ] && exit 0
+      [ "$(uname -m)" != "x86_64" ] && exit 0
       craftctl default
 
   xfs:
@@ -1430,7 +1425,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 002f3f61c5c34f03c0f55c6733374039eb24ddec # pre lxd-6.6
+    source-commit: 858bc9bb2b99d09947f645b5266ec447a9f71d47 # pre lxd-6.6
     source-type: git
     after:
       - lxc
