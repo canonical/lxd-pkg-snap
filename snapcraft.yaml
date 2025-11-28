@@ -1607,6 +1607,7 @@ parts:
       git cherry-pick -x 10ad9d7419b4127cd127d2850e79aee3e1dc07e1 # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
       git cherry-pick -x 97219271d4c67e388e584944349a87f86647fcdb # lxd/storage/backend/lxd: Replace deprecated os.IsExist
       git cherry-pick -x b2d38e82bda982e337a3cbdc173ec4b372ab8b24 # lxd/patches: Re-apply storage permissions on update
+      git cherry-pick -x 5f4aa673c0cc219d878f160bbba557dbb831964e # lxd/apparmor/instance/lxc: Don't bother with sys/proc protections when nesting enabled
 
       # Setup build environment
       export GOTOOLCHAIN="local"
