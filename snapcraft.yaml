@@ -1414,6 +1414,7 @@ parts:
       git cherry-pick -x 54eca5752e47bd9443f43850ca8241074de49609 # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
       git cherry-pick -x 693c65f114b7ab94f896e38f3deaa3b53a48c6e1 # lxd/storage/backend/lxd: Replace deprecated os.IsExist
       git cherry-pick -x 849ed20a5fbb5229efec24c98ca3caee608fd87d # lxd/patches: Re-apply storage permissions on update
+      git cherry-pick -x 10111eeaaa7c0a1bba8f624a905d61d18ffb9fe8 # lxd/apparmor/instance/lxc: Don't bother with sys/proc protections when nesting enabled
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
