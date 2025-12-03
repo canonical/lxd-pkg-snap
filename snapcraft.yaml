@@ -289,7 +289,7 @@ parts:
   dqlite:
     source: https://github.com/canonical/dqlite
     source-depth: 1
-    source-commit: b6881488f39053ac5cc9996c7cf2196e56960cc6 # v1.18.3
+    source-commit: 7cd04f33159ca32ef554e2edf49c51b575ad349f # v1.18.3 + allow compression of big buffers patch
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
