@@ -1482,6 +1482,9 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 5761b33780109c4737149e445d5f673f9ac61da7 # lxd/main_callhook: Update symlink creation in applyCDIHooksToContainer
+      git cherry-pick -x e1b97783c9b231b1eb46382c57a68e4b6e2e3292 # lxd/apparmor: Allow all mounts in unprivileged containers
+
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
