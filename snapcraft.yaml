@@ -1608,6 +1608,8 @@ parts:
       git cherry-pick -x 97219271d4c67e388e584944349a87f86647fcdb # lxd/storage/backend/lxd: Replace deprecated os.IsExist
       git cherry-pick -x b2d38e82bda982e337a3cbdc173ec4b372ab8b24 # lxd/patches: Re-apply storage permissions on update
       git cherry-pick -x 5f4aa673c0cc219d878f160bbba557dbb831964e # lxd/apparmor/instance/lxc: Don't bother with sys/proc protections when nesting enabled
+      git cherry-pick -x 3f50e6d27d2dcd357ad77fa1408fd6c4cf940623 # lxd/seccomp/seccomp: mknod: continue syscall for whiteouts
+      git cherry-pick -x f45aa9a3fe6721b3a1815560b090da113a296d46 # lxd/apparmor: Allow all mounts in unprivileged containers
 
       # Setup build environment
       export GOTOOLCHAIN="local"
