@@ -1485,6 +1485,7 @@ parts:
       git cherry-pick -x 5761b33780109c4737149e445d5f673f9ac61da7 # lxd/main_callhook: Update symlink creation in applyCDIHooksToContainer
       git cherry-pick -x e1b97783c9b231b1eb46382c57a68e4b6e2e3292 # lxd/apparmor: Allow all mounts in unprivileged containers
       git cherry-pick -x cf3e6d2d32310094cb0bb560068a24852be5dfaf # lxd/seccomp/seccomp: mknod: continue syscall for whiteouts
+      git cherry-pick -x daff1facb10a53433f57b4a9c9222b4609491941 # doc: pin myst-parser version
 
       # Setup build environment
       export GOTOOLCHAIN="local"
