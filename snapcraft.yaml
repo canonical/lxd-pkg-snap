@@ -1494,6 +1494,7 @@ parts:
       git cherry-pick -x d1c8ba15d1602d72fcf4ca6783a204c7b6e6f358 # lxd/instance/drivers/driver/lxc: Restrict path of template files and targets
       git cherry-pick -x c981c478b5087c8d263097278be1e6becd4e672c # lxd/instance/drivers/driver/lxc: Rework template security checks to allow error wrapping
       git cherry-pick -x 09d90346be9e70d77b186459ac3694db390f73cb # shared/osarch/architectures: Work around CPC metadata duplicate architecture issue
+      git cherry-pick -x 8b67685a2e8677464bf8a24d5332097123002960 # lxd/instance/drivers: Fix backward compatibility for stateless migrations
       sed -i 's/requirements.append("myst-parser")/requirements.append("myst-parser==4.0.1")/g' doc/.sphinx/build_requirements.py
 
       # Setup build environment
