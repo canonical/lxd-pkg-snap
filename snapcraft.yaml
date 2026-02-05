@@ -1678,6 +1678,7 @@ parts:
 
   strip:
     after:
+      - amd-ctk
       - btrfs
       - ceph
       - dqlite
