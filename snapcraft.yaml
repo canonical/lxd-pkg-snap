@@ -1619,6 +1619,9 @@ parts:
       git cherry-pick -x 30243bf666cf158ba329bcaa2f9a89e11c5bbda6 # doc: Update metadata
       git cherry-pick -x 29ec347592d3e96f600b223b89dc26371b8888f6 # lxd/instance/drivers/driver/lxc: Restrict path of template files and targets
       git cherry-pick -x 27f35f471a7fd19f637f8b91d878f7460b16f0e9 # lxd/instance/drivers/driver/lxc: Rework template security checks to allow error wrapping
+      git cherry-pick -x 54aea63c88b78a2722b25663c3531d4dfda722b2 # doc: fix cloud-init cloud config link
+      git cherry-pick -x 4f044d3f4e10e780393fdcf10ab49ca61ac1fd2b # doc: fix cloud-init configuration types link
+      git cherry-pick -x cee09be9f098041e8ca8dc9d7fd4c6ac02a1fe82 # doc: fix cloud-init cloud-config ref link
 
       # Setup build environment
       export GOTOOLCHAIN="local"
