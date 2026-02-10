@@ -1646,7 +1646,6 @@ parts:
       - xz
       - wrappers
       - xtables
-      - zfs-2-1
       - zfs-2-2
       - zfs-2-3
       - zfs-2-4
