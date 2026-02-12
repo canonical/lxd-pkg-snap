@@ -1474,7 +1474,7 @@ parts:
     source: https://github.com/canonical/lxd
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone
     #source-depth: 1
-    source-commit: 49569b65625b9c53dc5dce885ca2cb1390fd6481 # lxd-6.6
+    source-commit: 30eed1a78bde74bf13309d5a134becff0edc7dae # pre lxd-6.7
     source-type: git
     after:
       - lxc
@@ -1530,21 +1530,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x 5761b33780109c4737149e445d5f673f9ac61da7 # lxd/main_callhook: Update symlink creation in applyCDIHooksToContainer
-      git cherry-pick -x e1b97783c9b231b1eb46382c57a68e4b6e2e3292 # lxd/apparmor: Allow all mounts in unprivileged containers
-      git cherry-pick -x cf3e6d2d32310094cb0bb560068a24852be5dfaf # lxd/seccomp/seccomp: mknod: continue syscall for whiteouts
-      git cherry-pick -x 6e6b022e5fd333b2f08fd3b38b4c12708f649407 # shared/util: Add SingleQuote
-      git cherry-pick -x 64337057969403b443d381a1e18a26c363492266 # shared/util: Rework SingleQuote to ShellQuote
-      git cherry-pick -x dbc132381807a8fee20cd4cfbd12065acb6c9971 # lxd/instance/drivers/lxc: Use ShellQuote instead of Quote
-      git cherry-pick -x 24fc8929b0a9b68fd9fec1d47a72cfda1594ec79 # lxd/instance/drivers/driver/lxc: Reduce duplicated calls to ShellQuote
-      git cherry-pick -x a53d166d34c7b7c5c0b90bc85276122c3f6142dd # lxd/instance/instancetype/instance: Prevent line breaks in environment variables
-      git cherry-pick -x 42d828736eec2275319da9724348fa827b04caaf # doc: Update metadata
-      git cherry-pick -x d1c8ba15d1602d72fcf4ca6783a204c7b6e6f358 # lxd/instance/drivers/driver/lxc: Restrict path of template files and targets
-      git cherry-pick -x c981c478b5087c8d263097278be1e6becd4e672c # lxd/instance/drivers/driver/lxc: Rework template security checks to allow error wrapping
-      git cherry-pick -x 09d90346be9e70d77b186459ac3694db390f73cb # shared/osarch/architectures: Work around CPC metadata duplicate architecture issue
-      git cherry-pick -x 8b67685a2e8677464bf8a24d5332097123002960 # lxd/instance/drivers: Fix backward compatibility for stateless migrations
-      sed -i 's/requirements.append("myst-parser")/requirements.append("myst-parser==4.0.1")/g' doc/.sphinx/build_requirements.py
 
       # Setup build environment
       export GOTOOLCHAIN="local"
