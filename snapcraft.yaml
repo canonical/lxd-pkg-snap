@@ -1675,6 +1675,23 @@ parts:
       git cherry-pick -x 54aea63c88b78a2722b25663c3531d4dfda722b2 # doc: fix cloud-init cloud config link
       git cherry-pick -x 4f044d3f4e10e780393fdcf10ab49ca61ac1fd2b # doc: fix cloud-init configuration types link
       git cherry-pick -x cee09be9f098041e8ca8dc9d7fd4c6ac02a1fe82 # doc: fix cloud-init cloud-config ref link
+      git cherry-pick -x dc4a4821cff7bb3f6f6b59a7f9af396c9690d006 # shared/version: Return error if user agent feature contains whitespace.
+      git cherry-pick -x b172f7156aa7f2d17980fa88bae58edb40d3eba7 # shared/version/useragent: handle additional feature flags
+      git cherry-pick -x 27392dd3483dcc3e7fdc6a57c74d5a0fb3353687 # lxd/ubuntupro/client: add helper to verify if the host is "pro attached"
+      git cherry-pick -x aca54385b9d1e86c9b2e4d8ee3a659459f1a051b # lxd/ubuntupro/client_test: extend mocking for `pro` flag
+      git cherry-pick -x 743bcaebbcee2e49055ff5bd29cf2c9a8dd8eee0 # lxd/daemon: do `pro` detection earlier during initialization
+      git cherry-pick -x 530066aa6a38e9ee8f848a00c33896899d0dcfbb # lxd/cluster/config: add helper to get `user.microcloud` server level config
+      git cherry-pick -x 62c44f93882cf8cde9498e5b44aa4ba7c8f0065b # lxd: Log a warning if LXD fails to configure the user agent.
+      git cherry-pick -x eb065a98d5a19348e934bc78b956791310d4baf4 # lxd/daemon: add `microcloud` feature flag along with `cluster`
+      git cherry-pick -x 955c1b074526b20a10f4cf727fd8e7def7ff72db # lxd/ubuntupro/client_test: slightly improve code coverage
+      git cherry-pick -x 67911e6f98233a195fdc50245c802ecd6486a777 # lxd/ubuntupro/client_test: use `t.Context()`
+      git cherry-pick -x 95ef9633c57ba41bf4feb5ccef788564e4c48748 # lxd/ubuntupro/client: move away from `pro status --format json` due to it being experimental
+      git cherry-pick -x 47c5f9cee1ac0e9d17c11b4d537671ac915bc6b9 # lxd/ubuntupro/client_test: add tests for the new `parseProAPIIsAttachedV1` helper
+      git cherry-pick -x 474bc610736d72d4a45796496b83b03b3a320fc0 # lxd/ubuntupro/client: remove `ctx` param to `shared.RunCommand`
+      git cherry-pick -x e98a0db0247fcd99b10d77206c3ba70ad47e57b7 # lxd/db/network_load_balancers: Skip internal OVN IPs when reporting listen addresses by uplink
+      git cherry-pick -x 4ffb5cadf21585a258143c20c6f4df1cdf9eb8d5 # lxd/db/network_load_balancers: Handle null strings when fetching load balancers by uplink
+      git cherry-pick -x 335fe45eb4a775678b7c3051e0c70261b857c701 # lxd/db/network_forwards: Skip internal OVN IPs when reporting listen addresses by uplink
+      git cherry-pick -x 01d574f23a6a36580aace70b0d4ba5fec5f12409 # lxd/db/network_forwards: Handle null strings when fetching forwards by uplink
 
       # Setup build environment
       export GOTOOLCHAIN="local"
