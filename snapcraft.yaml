@@ -1692,6 +1692,10 @@ parts:
       git cherry-pick -x 4ffb5cadf21585a258143c20c6f4df1cdf9eb8d5 # lxd/db/network_load_balancers: Handle null strings when fetching load balancers by uplink
       git cherry-pick -x 335fe45eb4a775678b7c3051e0c70261b857c701 # lxd/db/network_forwards: Skip internal OVN IPs when reporting listen addresses by uplink
       git cherry-pick -x 01d574f23a6a36580aace70b0d4ba5fec5f12409 # lxd/db/network_forwards: Handle null strings when fetching forwards by uplink
+      git cherry-pick -x 4c4cc3aa5d34fd074488c342b2961d9dcc81468e # lxc: Add utils to get entity name from operations.
+      git cherry-pick -x 3cfe414487a857de82e54ce14e2f25e386d3e16a # lxc/export: Get backup name from metadata if possible.
+      git cherry-pick -x fd063618c4a8aef3a043e45e7cc6e9638ea1ee43 # lxc/init: Get instance name from metadata if possible (and necessary).
+      git cherry-pick -x dd25561f81ae0e73a698232083296c3d7290bb3f # lxc/storage: Get custom volume backup name from metadata if possible.
 
       # Setup build environment
       export GOTOOLCHAIN="local"
