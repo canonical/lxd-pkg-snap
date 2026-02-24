@@ -1578,8 +1578,8 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
-    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
-    #source-depth: 1
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone (0 means full clone).
+    source-depth: 0
     source-commit: 0494f5d47e41af69a8374568c0cb8b3eefd72a6a # lxd-5.21.4
     source-type: git
     after:
