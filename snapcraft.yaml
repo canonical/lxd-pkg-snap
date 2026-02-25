@@ -822,7 +822,7 @@ parts:
     source: https://gitlab.freedesktop.org/spice/spice
     source-commit: 0c2c1413a8b387ea597a95b6c867470a7c56c8ab # v0.15.2
     # XXX: source-depth does not work with submodules
-    #source-depth: 1
+    source-depth: 0
     source-type: git
     plugin: meson
     meson-parameters:
@@ -1440,8 +1440,8 @@ parts:
       - apparmor
     source: https://github.com/lxc/lxc
     source-commit: 0fb6eb66d4641f6d791f8524154a18482d523ea3 # v6.0.4
-    # XXX: We often cherry-pick for candidate builds so don't do shallow clone
-    #source-depth: 1
+    # XXX: We often cherry-pick for candidate builds so don't do shallow clone (0 means full clone).
+    source-depth: 0
     source-type: git
     build-packages:
       - dpkg-dev
