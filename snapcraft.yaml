@@ -2,7 +2,7 @@ name: lxd
 base: core24
 assumes:
   - snapd2.39
-version: "6.6"
+version: "6.7"
 grade: stable
 summary: LXD - container and VM manager
 license: AGPL-3.0-only
@@ -809,7 +809,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: 2e1a011804dc347af61719fd2f58ff549fb6fa22 # import/1%10.2.0+ds-2
+    source-commit: 1a2f0d6c8d575fb42da22be7ce0a73a5b8d41b82 # import/1%10.2.1+ds-1ubuntu1
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -1404,7 +1404,7 @@ parts:
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-commit: 16f4b95e8a4e03c3814c40b2782b4bceb8ffce08 # pre lxd-6.7
+    source-commit: 736f34afb267a68f1f324979848db20ae30fe9d1 # lxd-6.7
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone (0 means full clone).
     source-depth: 0
     source-type: git
