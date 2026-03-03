@@ -1616,6 +1616,7 @@ parts:
     override-pull: |
       craftctl default
       set -ex
+      git fetch
 
       # Setup build environment
       export GOTOOLCHAIN="local"
