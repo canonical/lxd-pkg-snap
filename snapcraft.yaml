@@ -903,7 +903,8 @@ parts:
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
     source-commit: 63a0a19b660c2ca54eb72130600e563a0857a5f8 # import/1%8.2.2+ds-0ubuntu1.12
-    source-depth: 1
+    # XXX: source-depth 0 needed for git restore of vendored copies of meson and tomli Python wheels below
+    source-depth: 0
     source-type: git
     plugin: autotools
     autotools-configure-parameters:
