@@ -991,6 +991,8 @@ parts:
       QEMUARCH="$(uname -m)"
       [ "${QEMUARCH}" = "ppc64le" ] && QEMUARCH="ppc64"
 
+      git fetch
+
       # Apply patches from Ubuntu sources.
       QUILT_PATCHES=debian/patches quilt push -a
 
