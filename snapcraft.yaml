@@ -1425,6 +1425,9 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x a64ddd6518484475af6b451f56bc971ded17b6bd # lxd/storage_volume_snapshot: Fix entity URLs
+      git cherry-pick -x ed1d4aee441d4456fbd4254d453c3e1d0311b0d2 # lxc/storage_volume: Apply target flag for snapshots as well
+
       # Setup build environment
       export GOPATH="$(realpath ./.go)"
       export CGO_CFLAGS="-I${CRAFT_STAGE}/include/ -I${CRAFT_STAGE}/usr/local/include/"
