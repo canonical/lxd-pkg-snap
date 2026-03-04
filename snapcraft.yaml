@@ -1698,6 +1698,11 @@ parts:
       git cherry-pick -x 3cfe414487a857de82e54ce14e2f25e386d3e16a # lxc/export: Get backup name from metadata if possible.
       git cherry-pick -x fd063618c4a8aef3a043e45e7cc6e9638ea1ee43 # lxc/init: Get instance name from metadata if possible (and necessary).
       git cherry-pick -x dd25561f81ae0e73a698232083296c3d7290bb3f # lxc/storage: Get custom volume backup name from metadata if possible.
+      git cherry-pick -x 4a7736f60173e641e96a3ff631074b9d13e42690 # shared/validate: Tighten IsCompressionAlgorithm validator to only allow supported values
+      git cherry-pick -x 07f560b652ce1ff281f303e29c57040e5734613e # lxd/images: Validate compression algorithm in compressFile
+      git cherry-pick -x 083c0cc8936b0c8f568d655bfd37f06a03e82fd7 # lxd/images: Fail early if compression algorithm is unsupported
+      git cherry-pick -x e9f550df27d33d4cea8dccc843cfa84f26169602 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
+      git cherry-pick -x ed9d8a3d7900089f7cf22a96fa3a5d8e5a3aeab0 # lxd/storage_volumes_backup: Fail fast if compression algorith is unsupported
 
       # Setup build environment
       export GOTOOLCHAIN="local"
