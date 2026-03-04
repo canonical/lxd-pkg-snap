@@ -1465,7 +1465,7 @@ parts:
 
       git cherry-pick -x a64ddd6518484475af6b451f56bc971ded17b6bd # lxd/storage_volume_snapshot: Fix entity URLs
       git cherry-pick -x ed1d4aee441d4456fbd4254d453c3e1d0311b0d2 # lxc/storage_volume: Apply target flag for snapshots as well
-      git cherry-pick -x 96fe803f58946a57e5662c9701a232c1e47b888a # lxd/instances_post: Use correct name in create from backup entity URL
+      git cherry-pick -x 7b95008e6416c66ae08e4c6f28e1f55cbc2e53fa # lxd/instances_post: Use correct name in create from backup entity URL
 
       # Setup build environment
       export GOTOOLCHAIN="local"
