@@ -1141,7 +1141,7 @@ parts:
   lxd:
     source: https://github.com/canonical/lxd
     source-type: git
-    source-commit: fe00f562315c2f2c6d091713b0a828d36fdb0cc6 # pre lxd-4.0.11
+    source-commit: 2eacddbb65acf10b2fcea4ee92374a90d2376dc4 # LXD 4.0.10
     after:
       - lxc
       - dqlite
@@ -1193,6 +1193,27 @@ parts:
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
       export CGO_LDFLAGS="-L${SNAPCRAFT_STAGE}/lib/ -L${SNAPCRAFT_STAGE}/usr/local/lib/"
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
+
+      git cherry-pick -x aa0adcee9fc3f1fc40adc09cfb98611eb53f733e # lxd/apparmor/instance_lxc: allow devpts for unprivileged containers
+      git cherry-pick -x 73a796169cfe54f1953ac38c06022d5e38acb855 # lxd/apparmor/instance_lxc: allow procfs for unprivileged containers
+      git cherry-pick -x c572eb174ae179507c98a726939a3340f9d28d2d # lxd/apparmor/instance_lxc: allow sysfs for unprivileged containers
+      git cherry-pick -x bc9d5e7662c6311530ec292fa44227f67f7c023b # lxd/storage: Tighten storage pool volume permissions
+      git cherry-pick -x 48aba77c9fa253c15183e413131abcc67631b17d # lxd/storage/drivers/volume: Add comments explaining differences in BaseDirectories permissions
+      git cherry-pick -x 0138ebc8b9036a73670847c1e708343b05efd95c # lxd/patches: Re-apply storage permissions on update
+      git cherry-pick -x c7da9588d65d2a50e76dd0f69d5b744bed9e8af8 # shared/util: Add SingleQuote
+      git cherry-pick -x 222dd18222f49f27166c0883d8439ec945ba9c6a # shared/util: Rework SingleQuote to ShellQuote
+      git cherry-pick -x fdf59ba1b22b5b2cad3742f79cf50bd3536fd675 # lxd/instance/drivers/lxc: Use ShellQuote instead of Quote
+      git cherry-pick -x d671fb5b4c3b27d28c8e66e4510b96e90f702dc5 # lxd/instance/drivers/driver/lxc: Reduce duplicated calls to ShellQuote
+      git cherry-pick -x 3ddbafd5c8a07eca5155b12ede4731b1d5cbea74 # lxd/ubuntupro: adapted from `stable-5.0`
+      git cherry-pick -x 67574845359a6e1bdb15357caeee4fd92d8b7bf4 # shared/version/useragent: support adding more than one feature
+      git cherry-pick -x 201da8fbae4c7ea2b640375dae14dfb39ea7e608 # lxd/api_cluster: ignore failures to update the user agent
+      git cherry-pick -x 076152931f58e19469d0b8d7578f076f44341e4f # lxd/daemon: ignore failures to update the user agent
+      git cherry-pick -x 7d85a498ba66b80d0a835558d0d8784380a56540 # lxd/sys: Add ReleaseInfo
+      git cherry-pick -x b6185d83f88dc916ef74f81625559458d8214d97 # lxd/daemon: add `pro` feature if the host is pro attach
+      git cherry-pick -x 4fbe256d950802f03ee5a1db8abe083f80471955 # shared/validate: Tighten IsCompressionAlgorithm validator to only allow supported values
+      git cherry-pick -x 56db3e39d7ce2a7526e9612efadd8b59d588ad48 # lxd/images: Validate compression algorithm in compressFile
+      git cherry-pick -x 7f9f759062bff6815f9d297824181306f3cf65fe # lxd/images: Fail early if compression algorithm is unsupported
+      git cherry-pick -x 62dfadbd616ebc07d8d6f5b9b6bb0524ab520806 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
