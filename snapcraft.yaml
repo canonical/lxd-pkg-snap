@@ -1410,6 +1410,12 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 157f3aba15d47ade91ab5b94dcd9addcc9eb3472 # shared/validate: Tighten IsCompressionAlgorithm validator to only allow supported values
+      git cherry-pick -x 178adaba95428c58629589f6e56e7ed3797945f6 # lxd/images: Validate compression algorithm in compressFile
+      git cherry-pick -x 001d325b967629fb371d3020bcf6fc84793f0374 # lxd/images: Fail early if compression algorithm is unsupported
+      git cherry-pick -x 0b90dfadee4c8dcd6352d89af8fb52ae3d2a5988 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
+      git cherry-pick -x 11104c5bb61b2c7d3fc6a371d0525aca938ac19d # lxd/storage_volumes_backup: Fail fast if compression algorith is unsupported
+
       # Setup build environment
       export GOPATH=$(realpath ./.go)
       export CGO_CFLAGS="-I${SNAPCRAFT_STAGE}/include/ -I${SNAPCRAFT_STAGE}/usr/local/include/"
