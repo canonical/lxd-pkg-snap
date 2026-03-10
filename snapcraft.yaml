@@ -1468,7 +1468,8 @@ parts:
       export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 
       # Build the binaries
-      go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
+      # lxc is built statically (CGO_ENABLED=0) so it can be executed unconfined on hosts with different libc during shell completion
+      CGO_ENABLED=0 go build -trimpath -o "${CRAFT_PART_INSTALL}/bin/lxc" -tags netgo github.com/canonical/lxd/lxc
 
       # Build LXD server binary into ${CRAFT_PART_INSTALL}/sbin/lxd so that it does not conflict with the
       # lxd-stophook wrapper script which is stored in ${CRAFT_PART_INSTALL}/bin/lxd.
@@ -1515,8 +1516,8 @@ parts:
       set_cols='s/# $COLUMNS.*/COLUMN="$(tput cols)"  \# store the current shell width./'
       # When executed by snapd, the `compopt` support detection doesn't work so fake that it is always `builtin`
       set_compopt='s|$(type -t compopt)|"builtin"|'
-      # Modify requestComp variable to use lxc based on context ($SNAP/bin/lxc in Snap environment)
-      set_request_comp='s|requestComp="${words\[0\]} __complete ${args\[\*\]}"|requestComp="/snap/lxd/current/commands/lxc __complete ${args[*]}"|'
+      # Modify requestComp variable to invoke the raw unconfined binary to avoid AppArmor denials and snap run overhead
+      set_request_comp='s|requestComp="${words\[0\]} __complete ${args\[\*\]}"|requestComp="/snap/lxd/current/bin/lxc __complete ${args[*]}"|'
       # Generate completions script
       "${CRAFT_PART_INSTALL}/bin/lxc" completion bash | sed -e "${set_cmds}" -e "${set_cols}" -e "${set_compopt}" -e "${set_request_comp}" > "${CRAFT_PART_INSTALL}/lxc-completer.sh"
       chmod +x "${CRAFT_PART_INSTALL}/lxc-completer.sh"
