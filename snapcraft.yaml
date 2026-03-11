@@ -1470,6 +1470,7 @@ parts:
       git cherry-pick -x 008fbf2aeeac4d93c3119aaea233023023e7285d # lxd/operations: Configure type for operationWaitHandler()
       git cherry-pick -x 7fa7274d029772a688bbe24a008166a7041632a1 # lxd/db/operationtype: Add scheduled instance snapshot operation type.
       git cherry-pick -x ce813535e00c55ab940c8898d50495dab22829b5 # lxd: Use scheduled snapshot operation type for background task.
+      git cherry-pick -x cbb8ac9c550ca3003850db64f8a302c8f26d4cc7 # lxd: Set project name on bulk state update operation resources.
 
       # Setup build environment
       export GOTOOLCHAIN="local"
