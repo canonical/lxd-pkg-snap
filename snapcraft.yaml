@@ -1214,6 +1214,7 @@ parts:
       git cherry-pick -x 56db3e39d7ce2a7526e9612efadd8b59d588ad48 # lxd/images: Validate compression algorithm in compressFile
       git cherry-pick -x 7f9f759062bff6815f9d297824181306f3cf65fe # lxd/images: Fail early if compression algorithm is unsupported
       git cherry-pick -x 62dfadbd616ebc07d8d6f5b9b6bb0524ab520806 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
+      git cherry-pick -x af114c3bd28fcb58479373725ae8993f85f6d4ae # lxd: Improve validation when editing certificates
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
