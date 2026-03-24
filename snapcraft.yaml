@@ -1704,6 +1704,8 @@ parts:
       git cherry-pick -x e9f550df27d33d4cea8dccc843cfa84f26169602 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
       git cherry-pick -x ed9d8a3d7900089f7cf22a96fa3a5d8e5a3aeab0 # lxd/storage_volumes_backup: Fail fast if compression algorith is unsupported
       git cherry-pick -x a5c595f2e613f342b9a14d6e8adfc5f4c6386686 # lxd: Improve validation when editing certificates
+      git cherry-pick -x b0bf8db893ddcb08ff3a563bc72e11f6c804608d # lxd/project/limits: Add raw.apparmor and raw.qemu.conf to the list of forbidden low level VM options
+      git cherry-pick -x 5d5dcec356fed90ad70ee9ede9bf7584716f411a # lxd/project/limits: Set instance type in AllowInstanceCreation for consistency
 
       # Setup build environment
       export GOTOOLCHAIN="local"
