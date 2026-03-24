@@ -1471,6 +1471,7 @@ parts:
       git cherry-pick -x 7fa7274d029772a688bbe24a008166a7041632a1 # lxd/db/operationtype: Add scheduled instance snapshot operation type.
       git cherry-pick -x ce813535e00c55ab940c8898d50495dab22829b5 # lxd: Use scheduled snapshot operation type for background task.
       git cherry-pick -x cbb8ac9c550ca3003850db64f8a302c8f26d4cc7 # lxd: Set project name on bulk state update operation resources.
+      git cherry-pick -x 8c0c8dcc0f7b6ef59524bfeae198b6081248a88d # lxd: Improve validation when editing certificates.
 
       # Setup build environment
       export GOTOOLCHAIN="local"
