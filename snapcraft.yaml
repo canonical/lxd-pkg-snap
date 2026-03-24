@@ -1703,6 +1703,7 @@ parts:
       git cherry-pick -x 083c0cc8936b0c8f568d655bfd37f06a03e82fd7 # lxd/images: Fail early if compression algorithm is unsupported
       git cherry-pick -x e9f550df27d33d4cea8dccc843cfa84f26169602 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
       git cherry-pick -x ed9d8a3d7900089f7cf22a96fa3a5d8e5a3aeab0 # lxd/storage_volumes_backup: Fail fast if compression algorith is unsupported
+      git cherry-pick -x a5c595f2e613f342b9a14d6e8adfc5f4c6386686 # lxd: Improve validation when editing certificates
 
       # Setup build environment
       export GOTOOLCHAIN="local"
