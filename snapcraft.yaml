@@ -1216,6 +1216,15 @@ parts:
       git cherry-pick -x 62dfadbd616ebc07d8d6f5b9b6bb0524ab520806 # lxd/instance_backup: Fail fast if compression algorithm is unsupported
       git cherry-pick -x af114c3bd28fcb58479373725ae8993f85f6d4ae # lxd: Improve validation when editing certificates
       git cherry-pick -x b290960de053de3f934dff6c3430c03ba7bc9104 # lxd/project/limits: Add raw.apparmor to the list of forbidden low level VM options
+      git cherry-pick -x 56039df87b7da3c98d73a578d71a7bf6e3e54a1a # shared/util: block some pongo2 functions in templates
+      git cherry-pick -x 4dbb63cacb43b1df0c4eff7ee8f6d90a3fef0e2c # shared/util: don't leak output from failed pongo2 template execution
+      git cherry-pick -x 43b48b2cc6aca52dafc3de77c6c801707858a742 # shared/util: explicitly return nil error on success
+      git cherry-pick -x a0e64807f5b1d8aaebf9fcd17d825a0a78398930 # shared/util: introduce recursion limit to RenderTemplate()
+      git cherry-pick -x ca85b301e0cd61d83f29120e9a1f63e38422f35a # shared/util: rework pongo2 template recursion for efficiency
+      git cherry-pick -x 3ee70b8e99194bcd745ea9d53173282a4cb2d3ce # shared/util: Handle panics in the pongo2 package
+      git cherry-pick -x b01add9f28f26cbd52ffe49bca1bab8ca9358cad # lxd/instance: transition to standard RenderTemplate logic
+      git cherry-pick -x c59c985d467b0eb3932b376cde9cdcaf64f7893d # shared/util: capture panics from pongo2
+      git cherry-pick -x 2cc94ece8ec6eaecf0485f17ff17b589a314f4f1 # shared/util_test: add test for RenderTemplateFile
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
