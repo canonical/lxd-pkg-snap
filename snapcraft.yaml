@@ -1427,6 +1427,17 @@ parts:
       git cherry-pick -x 37cb2520e88d0d44c31b2104acc163cdc05ea1a0 # lxd/instance: transition to standard RenderTemplate logic
       git cherry-pick -x ed26a24ac0a961d22c58d6e8300b408ed7e1660a # shared/util: capture panics from pongo2
       git cherry-pick -x e99f9bacaddd1845f41682d30fec0e6e3dbb2f02 # shared/util_test: add test for RenderTemplateFile
+      git cherry-pick -x e397e74206fe0de45fffb7246fd1ba8eb7597625 # lxd: Pass backup index into internalImportFromBackup
+      git cherry-pick -x 06026e81e9231edd8ef089a8dd18bfae82474a01 # lxd/api_internal: Don't use backup config from disk
+      git cherry-pick -x ea467bb7623c06a8253ace4b198859fd555bd3aa # lxd/instances_post: Add a note when the backup config gets persisted
+      git cherry-pick -x 721a5259f8361e8ac9c2ff4ac17d1435216ce033 # lxd/backup: Don't anymore persist changes in UpdateInstanceConfig
+      git cherry-pick -x e4a1dd06c2e0cf2b064e82c61cb87f367b117a5c # lxd/instances_post: Don't update the instance's backup config during import
+      git cherry-pick -x b06046ae64de6a4edaf870285fde73114c6f5b95 # lxd/instances_post: Also update index' instance root volume name
+      git cherry-pick -x 8413f3c41db178f7bbf7e36ff42ee4ef1be8fd8a # lxd/storage: Don't update backup config prior to export
+      git cherry-pick -x 5fe95048b0385de14cd5ed7d192a8ab2ff5018d4 # lxd/storage/drivers/generic_vfs: Always exclude backup config from tarball
+      git cherry-pick -x fd9fa4b5c9ad796bff227c544f00afc9440156b2 # test/suites/backup: Add test_backup_inconsistent_config
+      git cherry-pick -x 7785837e7d37f4e58249b2c1cc92e2735c159e7e # lxd/api_internal: Update comment on internalImportFromBackup
+      git cherry-pick -x 8eabaed5887c0c648bd5d41dc0a36ff9fe0bf722 # test/suites/backup: Check for specific error during import
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
