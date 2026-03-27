@@ -1472,6 +1472,10 @@ parts:
       git cherry-pick -x ce813535e00c55ab940c8898d50495dab22829b5 # lxd: Use scheduled snapshot operation type for background task.
       git cherry-pick -x cbb8ac9c550ca3003850db64f8a302c8f26d4cc7 # lxd: Set project name on bulk state update operation resources.
       git cherry-pick -x 8c0c8dcc0f7b6ef59524bfeae198b6081248a88d # lxd: Improve validation when editing certificates.
+      git cherry-pick --strategy-option theirs -x 782b9b711d4a0b5ba814357a91c44cf525eb6d75 # lxd/instance: transition to standard RenderTemplate logic (PR #17971)
+      git cherry-pick -x 7b36822926528afe3dbc8eef87ccd2e663bab446 # shared/util: capture panics from pongo2 (PR #17971)
+      git cherry-pick -x 7c2fa8d86015415be6a617c9c367c5e9f0955d78 # shared/util_test: add test for RenderTemplateFile (PR #17971)
+      git cherry-pick -x 14a11ea73796df242aea943cab67488eca3ec779 # lxd/template/chroot_test: remove defunct tests (PR #17971)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
