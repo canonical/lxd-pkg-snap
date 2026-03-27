@@ -1706,6 +1706,11 @@ parts:
       git cherry-pick -x a5c595f2e613f342b9a14d6e8adfc5f4c6386686 # lxd: Improve validation when editing certificates
       git cherry-pick -x b0bf8db893ddcb08ff3a563bc72e11f6c804608d # lxd/project/limits: Add raw.apparmor and raw.qemu.conf to the list of forbidden low level VM options
       git cherry-pick -x 5d5dcec356fed90ad70ee9ede9bf7584716f411a # lxd/project/limits: Set instance type in AllowInstanceCreation for consistency
+      git rm lxd/template/chroot.go
+      git commit -m "remove lxd/template/chroot.go"
+      git cherry-pick -x dcd4329112323270ef35a68d04449dc8a4e7caaf # lxd/instance: transition to standard RenderTemplate logic (PR #17977)
+      git cherry-pick -x 71e34bc3aa7adaf26e08b69df57c9a5dd5b8ed4d # shared/util: capture panics from pongo2 (PR #17977)
+      git cherry-pick -x a5f01c971cc1bbcf5caaef13e6befdf90542de06 # shared/util_test: add test for RenderTemplateFile (PR #17977)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
