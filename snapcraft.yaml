@@ -1711,6 +1711,20 @@ parts:
       git cherry-pick -x dcd4329112323270ef35a68d04449dc8a4e7caaf # lxd/instance: transition to standard RenderTemplate logic (PR #17977)
       git cherry-pick -x 71e34bc3aa7adaf26e08b69df57c9a5dd5b8ed4d # shared/util: capture panics from pongo2 (PR #17977)
       git cherry-pick -x a5f01c971cc1bbcf5caaef13e6befdf90542de06 # shared/util_test: add test for RenderTemplateFile (PR #17977)
+      git cherry-pick -x 5cc13e889b7af3d07642952417a2a645a485fc19 # lxd: Pass backup index into internalImportFromBackup (PR #17967)
+      git cherry-pick -x 270248210df9b926919239be92e2bb92bf3458da # lxd/api_internal: Don't use backup config from disk (PR #17967)
+      git cherry-pick -x ef82bca55b5afa23e80c59cd0c77331c87204397 # lxd/instances_post: Add a note when the backup config gets persisted (PR #17967)
+      git cherry-pick -x 1823dde325b28b958ec20e147f794a6e9070b948 # lxd/backup: Don't anymore persist changes in UpdateInstanceConfig (PR #17967)
+      git cherry-pick -x 69af7b195069a23af5a662bce2e08bb4992eeaa3 # lxd/instances_post: Don't update the instance's backup config during creation (PR #17967)
+      git cherry-pick -x acb4c7499e83526cb75e8f394aa41df0aa34eb21 # lxd/instances_post: Also update index' instance root volume name (PR #17967)
+      git cherry-pick -x a0838b09a6429571d8d00931f4974e6df18397db # lxd/storage: Don't update backup config prior to export (PR #17967)
+      git cherry-pick -x 18e7fa9794361efa1db1b569ce10fc99211cf491 # lxd/storage/drivers/generic_vfs: Always exclude backup config from tarballs (PR #17967)
+      git cherry-pick -x 59fa041c558216cbcd01a2a25da70345029b30fe # test/suites/backup: Add test_backup_inconsistent_config (PR #17967)
+      git cherry-pick -x d60ea74e4735c6c6a1d970ac33cf2fa3627974e2 # lxd/api_internal: Update comment on internalImportFromBackup (PR #17967)
+      git cherry-pick -x 2b3c1f5247b768e9a6bed1ced7690000dff8d83b # lxd: Apply import device overrides before checking instance create permissions (PR #17967)
+      git cherry-pick -x fdebeef28eea26df701a817f9da284b5b979f73a # lxd: Stop passing device overrides into internalImportFromBackup (PR #17967)
+      git cherry-pick -x dab55d6a91ed5227ff4e73b847b488c12642fed0 # test/suites/backup: Check device overrides during import (PR #17967)
+      git cherry-pick -x a07ff871480b41c1038555ed601f268bb1c6020d # test/suites/backup: Check for specific error during import (PR #17967)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
