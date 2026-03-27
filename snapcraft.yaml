@@ -1418,6 +1418,15 @@ parts:
       git cherry-pick -x 8955439529204a4404b7ba4730d91f75dfe97a14 # lxd: Improve validation when editing certificates
       git cherry-pick -x 0451314ab5b0ceb9d941831b0b578527eaac9094 # lxd/project/limits: Add raw.apparmor and raw.qemu.conf to the list of forbidden low level VM options
       git cherry-pick -x 607770a1bc1b919eeb9faa4a2dbe21d107b06be7 # lxd/project/limits: Set instance type in AllowInstanceCreation for consistency
+      git cherry-pick -x 3f43d68cf47254dad194e14480003cc07376a166 # shared/util: block some pongo2 functions in templates
+      git cherry-pick -x 22e4705870a55f08311a961145375e7fd7c30f31 # shared/util: don't leak output from failed pongo2 template execution
+      git cherry-pick -x de1542a2d5dab92f6d52a3625f333f62a097f492 # shared/util: explicitly return nil error on success
+      git cherry-pick -x af6ec5e11b4d63b437b00704019f617947de028b # shared/util: introduce recursion limit to RenderTemplate()
+      git cherry-pick -x 926a99a611306b8e3a8e4a33f11af74d731c3421 # shared/util: rework pongo2 template recursion for efficiency
+      git cherry-pick -x ecee550d571f5fe33125278c6bd7accbca057e75 # shared/util: Handle panics in the pongo2 package
+      git cherry-pick -x 37cb2520e88d0d44c31b2104acc163cdc05ea1a0 # lxd/instance: transition to standard RenderTemplate logic
+      git cherry-pick -x ed26a24ac0a961d22c58d6e8300b408ed7e1660a # shared/util: capture panics from pongo2
+      git cherry-pick -x e99f9bacaddd1845f41682d30fec0e6e3dbb2f02 # shared/util_test: add test for RenderTemplateFile
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
