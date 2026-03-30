@@ -1490,6 +1490,8 @@ parts:
       git cherry-pick -x 319189ace9fd1162adb73c8f8bd56b6848871a57 # lxd: Apply import device overrides before checking instance create permissions (PR #17966)
       git cherry-pick -x 08a1a2e5ea5b2e11a34e3e90f2f47cacc5c6cc16 # lxd: Stop passing device overrides into internalImportFromBackup (PR #17966)
       git cherry-pick -x 351ff339f1df654f77a9a2651ff332bfe71cd37d # client/simplestream: Compute and verify combined hash during image downloads
+      git cherry-pick -x cced47af6ac4fa4244165cea60383258bf0d052d # lxd/project/limits/permissions: Prevent restricted projects from pulling data
+      git cherry-pick -x 08236ad6bfdb6fcf19cc89c747395c0a289c3ace # lxd/project/limits/permissions: Break out restricted project migration checks into checkSourceAllowed()
 
       # Setup build environment
       export GOTOOLCHAIN="local"
