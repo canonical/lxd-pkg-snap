@@ -1489,6 +1489,7 @@ parts:
       git cherry-pick -x f3837d5b0bc6a5d1aa8de6bd3b1c2f0a2c45e06b # lxd/api_internal: Remove dead code
       git cherry-pick -x 319189ace9fd1162adb73c8f8bd56b6848871a57 # lxd: Apply import device overrides before checking instance create permissions (PR #17966)
       git cherry-pick -x 08a1a2e5ea5b2e11a34e3e90f2f47cacc5c6cc16 # lxd: Stop passing device overrides into internalImportFromBackup (PR #17966)
+      git cherry-pick -x 351ff339f1df654f77a9a2651ff332bfe71cd37d # client/simplestream: Compute and verify combined hash during image downloads
 
       # Setup build environment
       export GOTOOLCHAIN="local"
