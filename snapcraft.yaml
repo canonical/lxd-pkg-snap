@@ -1725,6 +1725,7 @@ parts:
       git cherry-pick -x fdebeef28eea26df701a817f9da284b5b979f73a # lxd: Stop passing device overrides into internalImportFromBackup (PR #17967)
       git cherry-pick -x dab55d6a91ed5227ff4e73b847b488c12642fed0 # test/suites/backup: Check device overrides during import (PR #17967)
       git cherry-pick -x a07ff871480b41c1038555ed601f268bb1c6020d # test/suites/backup: Check for specific error during import (PR #17967)
+      git cherry-pick -x ec21300ff9e98824368cc1563e4338adac20633d # client/simplestream: Compute and verify combined hash during image downloads (PR #17993)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
