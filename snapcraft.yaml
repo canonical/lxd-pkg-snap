@@ -1438,6 +1438,7 @@ parts:
       git cherry-pick -x fd9fa4b5c9ad796bff227c544f00afc9440156b2 # test/suites/backup: Add test_backup_inconsistent_config
       git cherry-pick -x 7785837e7d37f4e58249b2c1cc92e2735c159e7e # lxd/api_internal: Update comment on internalImportFromBackup
       git cherry-pick -x 8eabaed5887c0c648bd5d41dc0a36ff9fe0bf722 # test/suites/backup: Check for specific error during import
+      git cherry-pick -x 439deb14ff744e574f9d876825ea3c00100e2043 # client/simplestream: Compute and verify combined hash during image downloads (PR #17994)
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
