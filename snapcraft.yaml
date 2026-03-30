@@ -1439,6 +1439,10 @@ parts:
       git cherry-pick -x 7785837e7d37f4e58249b2c1cc92e2735c159e7e # lxd/api_internal: Update comment on internalImportFromBackup
       git cherry-pick -x 8eabaed5887c0c648bd5d41dc0a36ff9fe0bf722 # test/suites/backup: Check for specific error during import
       git cherry-pick -x 439deb14ff744e574f9d876825ea3c00100e2043 # client/simplestream: Compute and verify combined hash during image downloads (PR #17994)
+      git cherry-pick -x a3495737091c4ff7b4d1e3a834f891dc6627cd48 # lxd/instances: Don't bypass instance limit check
+      git cherry-pick -x b499b4d03edb709d5e90944c1257fd85df9f2e08 # test/includes/logging: Add sub_test logging helper
+      git cherry-pick -x ac606473a865eaed01c4045a79fa465fed6fd9ca # test/suites/clustering: Add test for project limits.instances in cluster
+      git cherry-pick -x e2a50dd42a1326a65412a55138f8272beae151aa # test/main: run test_clustering_project_limits
 
       # Setup build environment
       export GOPATH=$(realpath ./.go)
