@@ -14,7 +14,7 @@ for path in "${SNAP_COMMON}/ns/shmounts" "${SNAP_COMMON}/ns/mntns" "${SNAP_COMMO
     nsenter -t 1 -m umount -l "${path}" >/dev/null 2>&1 || true
 done
 
-# Stop workaround unit
+# Stop workaround unit if started by a previous snap revision
 nsenter -t 1 -m systemctl stop snap.lxd.workaround >/dev/null 2>&1 || true
 
 # Remove systemd override snippet
