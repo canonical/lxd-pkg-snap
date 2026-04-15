@@ -1,7 +1,7 @@
 name: lxd
 base: core24
 assumes:
-  - snapd2.39
+  - snapd2.64
 version: "6.7"
 grade: stable
 summary: LXD - container and VM manager
@@ -43,11 +43,9 @@ description: |-
    - daemon.verbose: Increase logging to verbose level [default=false]
    - db.trace: Enable dqlite trace logging (very verbose) [default=false]
    - lvm.external: Use the system's LVM tools [default=false]
-   - lxcfs.pidfd: Start per-container process tracking [default=true]
    - lxcfs.loadavg: Start tracking per-container load average [default=false]
    - lxcfs.cfs: Consider CPU shares for CPU usage [default=false]
    - lxcfs.debug: Increase logging to debug level [default=false]
-   - minio.path: Path to the directory containing the minio and mc binaries to use with LXD [default=""]
    - openvswitch.builtin: Run a snap-specific OVS daemon [default=false]
    - openvswitch.external: Use the system's OVS tools (ignores openvswitch.builtin) [default=false]
    - ovn.builtin: Use snap-specific OVN configuration [default=false]
@@ -72,6 +70,9 @@ plugs:
  ovn-chassis:
    interface: content
    target: "$SNAP_DATA/microovn/chassis"
+ ovn-env:
+   interface: content
+   target: "$SNAP_DATA/microovn/ovn-env"
  gpu-2404:
    interface: content
    target: $SNAP/gpu-2404
@@ -207,7 +208,7 @@ parts:
     source-type: git
     plugin: go
     build-snaps:
-      - go/1.25/stable
+      - go/1.26/stable
     prime:
       - bin/amd-ctk
 
@@ -298,6 +299,7 @@ parts:
 
   dqlite:
     source: https://github.com/canonical/dqlite
+    source-branch: v1.18.x
     source-depth: 1
     source-commit: b0156f030b9273ae890b846f9a632cf696ace816 # v1.18.5
     source-type: git
@@ -329,7 +331,7 @@ parts:
       - qemu
     source: https://git.launchpad.net/ubuntu/+source/edk2
     source-depth: 1
-    source-commit: 0b1f127464c5e53bea2933e26a37155424974fdf # import/2025.02-8ubuntu3
+    source-commit: b922ebea8da4ddf4a59a652ac570f018672f4872 # import/2025.11-3ubuntu7
     source-type: git
     plugin: nil
     build-packages:
@@ -339,14 +341,19 @@ parts:
         - debhelper
         - dosfstools
         - g++
+        - grub-efi-amd64-signed
         - jq
         - lsb-release
         - mtools
         - nasm
+        - openssl
         - python3
         - python3-pexpect
         - python3-virt-firmware
         - quilt
+        - rsync
+        - sbsigntool
+        - shim-signed
         - uuid-dev
         - xorriso
       - to arm64:
@@ -355,14 +362,19 @@ parts:
         - debhelper
         - dosfstools
         - g++
+        - grub-efi-arm64-signed
         - jq
         - lsb-release
         - mtools
         - nasm
+        - openssl
         - python3
         - python3-pexpect
         - python3-virt-firmware
         - quilt
+        - rsync
+        - sbsigntool
+        - shim-signed
         - uuid-dev
         - xorriso
     override-stage: |-
@@ -384,12 +396,21 @@ parts:
       # Apply patches from Ubuntu sources.
       QUILT_PATCHES=debian/patches quilt push -a
 
-      # Enable KVM if available
-      if [ -c /dev/kvm ] && [ -w /dev/kvm ]; then
-          sed -i 's/accel=tcg/accel=kvm:tcg/' debian/python/UEFI/Qemu.py
+      # On arm64, the secboot firmware (SECURE_BOOT_ENABLE=TRUE) enforces strict W^X memory
+      # protection via EFI_MEMORY_ATTRIBUTE_PROTOCOL (new in EDK2 2025.11+). This causes a
+      # Synchronous Exception when BdsDxe hands off to the grub2/shim bootloader.
+      # Fix: add $(NO_STRICTNX_COMMON_FLAGS) (i.e. --pcd PcdUninstallMemAttrProtocol=TRUE)
+      # to AAVMF_SECBOOT_FLAGS so the protocol is uninstalled before the bootloader runs.
+      # Secure Boot signature verification (SECURE_BOOT_ENABLE=TRUE) remains active; only
+      # the W^X enforcement is disabled. This mirrors exactly what the Ubuntu debian/rules
+      # already does for AAVMF_NO_SECBOOT_FLAGS and OVMF_4M_NO_SECBOOT_FLAGS, and is the
+      # fix that should be applied upstream. Note: AAVMF_SECBOOT_STRICTNX_FLAGS intentionally
+      # omits NO_STRICTNX_COMMON_FLAGS (strict W^X for future grub/shim support), so we
+      # only patch AAVMF_SECBOOT_FLAGS.
+      # https://bugs.launchpad.net/ubuntu/+source/edk2/+bug/2145095
+      if [ "$(uname -m)" = "aarch64" ]; then
+          sed -i 's/^\(AAVMF_SECBOOT_FLAGS = .*\)$/\1 $(NO_STRICTNX_COMMON_FLAGS)/' debian/rules
       fi
-      # Ensure fast RNG in the build VM to speed up secure boot vars generation.
-      sed -i "s/'-serial', 'stdio',/'-serial', 'stdio', '-device', 'virtio-rng-pci',/" debian/python/UEFI/Qemu.py
 
       # Apply patches
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
@@ -401,8 +422,8 @@ parts:
 
       if [ "$(uname -m)" = "x86_64" ]; then
           DSC="OvmfPkg/OvmfPkgX64.dsc"
-          BUILD_TARGET="build-ovmf"
-          SRC_DIR="debian/ovmf-install"
+          BUILD_TARGET="install-ovmf"
+          SRC_DIR="debian/tmp/usr/share/OVMF"
           SRC_CODE="OVMF_CODE_4M.secboot.fd"
           SRC_VARS="OVMF_VARS_4M.fd"
           SRC_VARS_MS="OVMF_VARS_4M.ms.fd"
@@ -415,8 +436,8 @@ parts:
           SED_EXPR="s#PcdDebugPrintErrorLevel|0x8000004F#PcdDebugPrintErrorLevel|0x8040004F#g"
       elif [ "$(uname -m)" = "aarch64" ]; then
           DSC="ArmVirtPkg/ArmVirt.dsc.inc"
-          BUILD_TARGET="build-qemu-efi-aarch64"
-          SRC_DIR="debian/aavmf-install"
+          BUILD_TARGET="install-qemu-efi-aarch64"
+          SRC_DIR="debian/tmp/usr/share/AAVMF"
           SRC_CODE="AAVMF_CODE.secboot.fd"
           SRC_VARS="AAVMF_VARS.fd"
           SRC_VARS_MS="AAVMF_VARS.ms.fd"
@@ -431,7 +452,7 @@ parts:
 
           # Clean up previous build stamps/artifacts to ensure clean rebuild with new TYPE
           rm -f debian/setup-build-stamp
-          rm -rf debian/*-install
+          rm -rf debian/*-install debian/tmp
           rm -rf Build
 
           if [ "${TYPE}" = "DEBUG" ]; then
@@ -561,12 +582,12 @@ parts:
 
   nvidia-container:
     source: https://github.com/NVIDIA/libnvidia-container
-    source-commit: 584976abaef996d9466232a9bc7426fcdb0ed1e0 # v1.18.2
+    source-commit: 7585946c6471402577e14474d7c56ca5be0348d7 # v1.19.0
     source-depth: 1
     source-type: git
     plugin: make
     build-environment:
-      - GIT_TAG: "1.18.2" # Enables source-depth: 1, should match git tag without "v" prefix.
+      - GIT_TAG: "1.19.0" # Enables source-depth: 1, should match git tag without "v" prefix.
     build-packages:
       - to amd64:
         - bmake
@@ -583,7 +604,7 @@ parts:
         - lsb-release
         - libtirpc-dev
     build-snaps:
-      - go/1.25/stable
+      - go/1.26/stable
     override-stage: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
       craftctl default
@@ -623,10 +644,10 @@ parts:
   nvidia-container-toolkit:
     source: https://github.com/NVIDIA/nvidia-container-toolkit
     source-depth: 1
-    source-commit: 9e88ed39710fd94c7e49fbb26d96492c45e574fb # v1.18.2
+    source-commit: ec7b4e2fa2caecad6d89be4a26029b831fe7503a # v1.19.0
     source-type: git
     build-snaps:
-      - go/1.25/stable
+      - go/1.26/stable
     plugin: make
     override-stage: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
@@ -809,7 +830,7 @@ parts:
       - libatomic
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: 1a2f0d6c8d575fb42da22be7ce0a73a5b8d41b82 # import/1%10.2.1+ds-1ubuntu1
+    source-commit: 96cda2bbb2f530d08f6bda1f0dc186a0e0ce9674 # import/1%10.2.1+ds-1ubuntu3
     source-depth: 1
     source-type: git
     plugin: autotools
@@ -836,7 +857,7 @@ parts:
       - --disable-qed
       - --disable-sdl
       - --disable-slirp
-      - --disable-tcg  # See note about TCG in the override-build section
+      - --disable-tcg  # TCG is not used (nor supported) at runtime
       - --disable-user
       - --disable-vde
       - --disable-vdi
@@ -935,16 +956,6 @@ parts:
 
       sed -i "s/^unset target_list$/target_list=\"${QEMUARCH}-softmmu\"/" configure
       sed -i 's#libseccomp_minver=".*#libseccomp_minver="0.0"#g' configure
-
-      # TCG is not used (nor supported) at runtime however it may be needed at
-      # build time by the `edk2` part if KVM acceleration is not available.
-      # `edk2` is only built for `amd64` and `arm64` and Launchpad `amd64`
-      # builders support KVM acceleration so TCG is only needed on `arm64`.
-      if [ "${QEMUARCH}" = "aarch64" ]; then
-          # `set -- "$@"`: preserve arguments passed to `configure` and append
-          # `--enable-tcg` at the end to override the previous `--disable-tcg`.
-          sed -i '1 a set -- "$@" --enable-tcg' configure
-      fi
 
       # Extract efi-virtio.rom from ipxe-qemu.
       # This doesn't work in the organize section below.
@@ -1365,13 +1376,13 @@ parts:
       - spice-server
       - edk2
       - nftables
-    # XXX: cannot use python3-pyuefivars (1.0.0-0ubuntu2) from Noble as the Ubuntu patch breaks it
-    #      the version in Ubuntu 24.10 onward should be OK so let's revisit with core26.
-    source: https://github.com/awslabs/python-uefivars
-    source-commit: ec1eab1717c65ea36ca7160c96fe0e10e071fb66 # v1.2
+    source: https://git.launchpad.net/ubuntu/+source/python-uefivars
+    source-commit: f5390dfa5df2c99da84a471fe5b322020d78cb15 # import/1.2-0ubuntu1
     source-depth: 1
     source-type: git
     plugin: python
+    build-packages:
+      - quilt
     stage-packages:
       - to amd64:
         - python3-crc32c
@@ -1389,22 +1400,21 @@ parts:
     override-build: |-
       [ "$(uname -m)" != "x86_64" ] && [ "$(uname -m)" != "aarch64" ] && exit 0
 
-      # Apply patches
-      # XXX: taken from: https://git.launchpad.net/ubuntu/+source/python-uefivars/plain/debian/patches/Revert-Use-google-crc32c-instead-of-crc32c.patch?h=ubuntu/plucky
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/uefivars-Revert-Use-google-crc32c-instead-of-crc32c.patch"
+      # Apply patches from Ubuntu sources.
+      QUILT_PATCHES=debian/patches quilt push -a
 
       craftctl default
     organize:
       lib/python3.12/site-packages/: lib/python3/dist-packages/
       bin/uefivars: bin/uefivars.py
     prime:
-      - bin/uefivars.py
+      - bin/uefivars.py  # LXD expects the .py extension
       - lib/python3/dist-packages/crc32c*
       - lib/python3/dist-packages/pyuefivars*
 
   lxd:
     source: https://github.com/canonical/lxd
-    source-commit: 736f34afb267a68f1f324979848db20ae30fe9d1 # lxd-6.7
+    source-commit: fd1dd8d18a55da31c46c5aa00faab96c523aa915 # pre lxd-6.8
     # XXX: We often cherry-pick for candidate builds so don't do shallow clone (0 means full clone).
     source-depth: 0
     source-type: git
@@ -1426,7 +1436,7 @@ parts:
       - python3-pip
       - python3-venv
     build-snaps:
-      - go/1.25/stable
+      - go/1.26/stable
     stage-packages:
       - acl
       - attr
@@ -1462,36 +1472,6 @@ parts:
       cd ../src
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
-
-      git cherry-pick -x a64ddd6518484475af6b451f56bc971ded17b6bd # lxd/storage_volume_snapshot: Fix entity URLs
-      git cherry-pick -x ed1d4aee441d4456fbd4254d453c3e1d0311b0d2 # lxc/storage_volume: Apply target flag for snapshots as well
-      git cherry-pick -x 7b95008e6416c66ae08e4c6f28e1f55cbc2e53fa # lxd/instances_post: Use correct name in create from backup entity URL
-      git cherry-pick -x e914fbe436920e452345ae2336154edeb3d61ff4 # lxd/instances_post: Enforce project limits in clustered instance creation
-      git cherry-pick -x 008fbf2aeeac4d93c3119aaea233023023e7285d # lxd/operations: Configure type for operationWaitHandler()
-      git cherry-pick -x 7fa7274d029772a688bbe24a008166a7041632a1 # lxd/db/operationtype: Add scheduled instance snapshot operation type.
-      git cherry-pick -x ce813535e00c55ab940c8898d50495dab22829b5 # lxd: Use scheduled snapshot operation type for background task.
-      git cherry-pick -x cbb8ac9c550ca3003850db64f8a302c8f26d4cc7 # lxd: Set project name on bulk state update operation resources.
-      git cherry-pick -x 8c0c8dcc0f7b6ef59524bfeae198b6081248a88d # lxd: Improve validation when editing certificates.
-      git cherry-pick --strategy-option theirs -x 782b9b711d4a0b5ba814357a91c44cf525eb6d75 # lxd/instance: transition to standard RenderTemplate logic (PR #17971)
-      git cherry-pick -x 7b36822926528afe3dbc8eef87ccd2e663bab446 # shared/util: capture panics from pongo2 (PR #17971)
-      git cherry-pick -x 7c2fa8d86015415be6a617c9c367c5e9f0955d78 # shared/util_test: add test for RenderTemplateFile (PR #17971)
-      git cherry-pick -x 14a11ea73796df242aea943cab67488eca3ec779 # lxd/template/chroot_test: remove defunct tests (PR #17971)
-      git cherry-pick -x f78210df3487c581abcf2a64aee3005e40153ae1 # lxd: Pass backup index into internalImportFromBackup (PR #17921)
-      git cherry-pick -x 79dbba5fed73a08d0a8c0781c7ab2f9701e71f5a # lxd/api_internal: Don't use backup config from disk (PR #17921)
-      git cherry-pick -x dc2c416651ba1844cedfd7a1786f73515a9d73c1 # lxd/instances_post: Add a note when the backup config gets persisted (PR #17921)
-      git cherry-pick -x 40a324e0cdcafdaf8a5df649ab1190f2d294a3e2 # lxd/backup: Don't anymore persist changes in UpdateInstanceConfig (PR #17921)
-      git cherry-pick -x db1d50c7bb544934d03be9d38e9dac16e9e81c0b # lxd/instances_post: Don't update the instance's backup config during import (PR #17921)
-      git cherry-pick -x 17e8b418485a74ebbe41511e6c1f88889275ced5 # lxd/instances_post: Also update index' instance root volume name (PR #17921)
-      git cherry-pick -x f80b0d795d7ace6382f8820836fbd7f9659049f7 # lxd: Include all the backup configs data also in the index (PR #17921)
-      git cherry-pick -x 6174842e03d34d3e245462a375e6d74485572e74 # lxd/storage: Don't update backup config prior to export (PR #17921)
-      git cherry-pick -x 2031d7aae588c3659aa690631b4a81d8da58a5e8 # lxd/storage/drivers/generic_vfs: Always exclude backup config from tarball (PR #17921)
-      git cherry-pick -x 0fe9b1fdb4578c5c27e10b45bfc5ea4d23d0832c # lxd/api_internal: Update comment on internalImportFromBackup (PR #17921)
-      git cherry-pick -x f3837d5b0bc6a5d1aa8de6bd3b1c2f0a2c45e06b # lxd/api_internal: Remove dead code
-      git cherry-pick -x 319189ace9fd1162adb73c8f8bd56b6848871a57 # lxd: Apply import device overrides before checking instance create permissions (PR #17966)
-      git cherry-pick -x 08a1a2e5ea5b2e11a34e3e90f2f47cacc5c6cc16 # lxd: Stop passing device overrides into internalImportFromBackup (PR #17966)
-      git cherry-pick -x 351ff339f1df654f77a9a2651ff332bfe71cd37d # client/simplestream: Compute and verify combined hash during image downloads
-      git cherry-pick -x cced47af6ac4fa4244165cea60383258bf0d052d # lxd/project/limits/permissions: Prevent restricted projects from pulling data
-      git cherry-pick -x 08236ad6bfdb6fcf19cc89c747395c0a289c3ace # lxd/project/limits/permissions: Break out restricted project migration checks into checkSourceAllowed()
 
       # Setup build environment
       export GOTOOLCHAIN="local"

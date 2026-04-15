@@ -50,10 +50,8 @@ daemon_verbose=$(get_bool "$(snapctl get daemon.verbose)")
 db_trace=$(get_bool "$(snapctl get db.trace)")
 lvm_external=$(get_bool "$(snapctl get lvm.external)")
 lxcfs_loadavg=$(get_bool "$(snapctl get lxcfs.loadavg)")
-lxcfs_pidfd=$(get_bool "$(snapctl get lxcfs.pidfd)")
 lxcfs_cfs=$(get_bool "$(snapctl get lxcfs.cfs)")
 lxcfs_debug=$(get_bool "$(snapctl get lxcfs.debug)")
-minio_path="$(snapctl get minio.path)"
 openvswitch_builtin=$(get_bool "$(snapctl get openvswitch.builtin)")
 openvswitch_external=$(get_bool "$(snapctl get openvswitch.external)")
 ovn_builtin=$(get_bool "$(snapctl get ovn.builtin)")
@@ -83,8 +81,6 @@ lvm_external=${lvm_external:-"false"}
 lxcfs_cfs=${lxcfs_cfs:-"false"}
 lxcfs_debug=${lxcfs_debug:-"false"}
 lxcfs_loadavg=${lxcfs_loadavg:-"false"}
-lxcfs_pidfd=${lxcfs_pidfd:-"true"}
-minio_path=${minio_path:-""}
 openvswitch_builtin=${openvswitch_builtin:-"false"}
 openvswitch_external=${openvswitch_external:-"false"}
 ovn_builtin=${ovn_builtin:-"false"}
@@ -92,16 +88,12 @@ zfs_external=${zfs_external:-"false"}
 EOC
 
 # Set socket ownership in case it changed
-if getent group "${daemon_group}" >/dev/null 2>&1; then
-    if [ -e "${SNAP_COMMON}/lxd/unix.socket" ]; then
-        chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
-    fi
+if [ -e "${SNAP_COMMON}/lxd/unix.socket" ] && getent group "${daemon_group}" >/dev/null 2>&1; then
+    chgrp "${daemon_group}" "${SNAP_COMMON}/lxd/unix.socket"
 fi
 
-if getent group "${daemon_user_group}" >/dev/null 2>&1; then
-    if [ -e "${SNAP_COMMON}/lxd-user/unix.socket" ]; then
-        chgrp "${daemon_user_group}" "${SNAP_COMMON}/lxd-user/unix.socket"
-    fi
+if [ -e "${SNAP_COMMON}/lxd-user/unix.socket" ] && getent group "${daemon_user_group}" >/dev/null 2>&1; then
+    chgrp "${daemon_user_group}" "${SNAP_COMMON}/lxd-user/unix.socket"
 fi
 
 exit 0
