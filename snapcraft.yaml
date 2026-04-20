@@ -477,52 +477,6 @@ parts:
       # Build Debug
       run_build DEBUG ".debug"
 
-      # Firmware files summary
-      #
-      # The snap ships the following real files per architecture:
-      #
-      #   x86_64:
-      #     File                     | Role               | Used by
-      #     OVMF_CODE_4M.ms.fd       | SB CODE            | new LXD (secureboot)
-      #     OVMF_CODE_4M.fd          | non-SB CODE        | new LXD (non-secureboot)
-      #     OVMF_CODE_4M.ms.debug.fd | SB CODE (debug)    | new LXD (debug secureboot)
-      #     OVMF_CODE_4M.debug.fd    | non-SB CODE (debug)| new LXD (debug non-secureboot)
-      #     OVMF_VARS_4M.ms.fd       | pre-enrolled VARS  | new LXD (secureboot)
-      #     OVMF_VARS_4M.fd          | empty VARS         | new LXD (non-secureboot)
-      #
-      #   arm64:
-      #     File                     | Role               | Used by
-      #     AAVMF_CODE.ms.fd         | SB CODE            | new LXD (secureboot)
-      #     AAVMF_CODE.fd            | non-SB CODE        | new LXD (non-secureboot)
-      #     AAVMF_CODE.ms.debug.fd   | SB CODE (debug)    | new LXD (debug secureboot)
-      #     AAVMF_CODE.debug.fd      | non-SB CODE (debug)| new LXD (debug non-secureboot)
-      #     AAVMF_VARS.ms.fd         | pre-enrolled VARS  | new LXD (secureboot)
-      #     AAVMF_VARS.fd            | empty VARS         | new LXD (non-secureboot)
-      #
-      # Backward-compat symlinks for the LXD binary currently shipped in this
-      # snap, which still looks for the legacy OVMF_*.4MB* names on both arches.
-      # TODO: Remove these once the bundled LXD uses the new firmware names.
-      #
-      #   Symlink (both arches)    | Target
-      #   OVMF_CODE.4MB.fd         | SB CODE (was the only CODE shipped before)
-      #   OVMF_CODE.4MB.debug.fd   | SB CODE debug
-      #   OVMF_VARS.4MB.fd         | empty VARS
-      #   OVMF_VARS.4MB.ms.fd      | pre-enrolled VARS
-      #
-      DEST="${CRAFT_PART_INSTALL}/share/qemu"
-      if [ "$(uname -m)" = "x86_64" ]; then
-          ln -sf OVMF_CODE_4M.ms.fd        "${DEST}/OVMF_CODE.4MB.fd"
-          ln -sf OVMF_CODE_4M.ms.debug.fd  "${DEST}/OVMF_CODE.4MB.debug.fd"
-          ln -sf OVMF_VARS_4M.fd           "${DEST}/OVMF_VARS.4MB.fd"
-          ln -sf OVMF_VARS_4M.ms.fd        "${DEST}/OVMF_VARS.4MB.ms.fd"
-      elif [ "$(uname -m)" = "aarch64" ]; then
-          # Old snap shipped OVMF_*.4MB* on arm64 too
-          ln -sf AAVMF_CODE.ms.fd          "${DEST}/OVMF_CODE.4MB.fd"
-          ln -sf AAVMF_CODE.ms.debug.fd    "${DEST}/OVMF_CODE.4MB.debug.fd"
-          ln -sf AAVMF_VARS.fd             "${DEST}/OVMF_VARS.4MB.fd"
-          ln -sf AAVMF_VARS.ms.fd          "${DEST}/OVMF_VARS.4MB.ms.fd"
-      fi
-
       # Cleanup debug vars
       rm "${CRAFT_PART_INSTALL}/share/qemu/${DST_VARS}.debug.fd"
     prime:
