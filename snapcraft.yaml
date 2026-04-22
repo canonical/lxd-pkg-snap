@@ -1634,7 +1634,6 @@ parts:
         -not -path "${CRAFT_PRIME}/bin/lxd" \
         -not -path "${CRAFT_PRIME}/bin/nvidia-container-cli" \
         -not -path "${CRAFT_PRIME}/bin/remote-viewer" \
-        -not -path "${CRAFT_PRIME}/bin/snap-query" \
         -not -path "${CRAFT_PRIME}/bin/sshfs" \
         -not -path "${CRAFT_PRIME}/bin/virt-v2v-in-place" \
         -not -path "${CRAFT_PRIME}/bin/xfs_admin" \
@@ -1687,7 +1686,6 @@ parts:
     plugin: dump
     source: snapcraft/
     organize:
-      commands/snap-query: bin/
       hooks/: snap/hooks/
       wrappers/lxd-stophook: bin/lxd
       wrappers/gpu-2404-custom-wrapper: bin/
