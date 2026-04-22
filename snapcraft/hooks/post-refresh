@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+
+# Re-exec outside of apparmor confinement
+if [ -d /sys/kernel/security/apparmor ]; then
+  label="$(cat /proc/self/attr/current 2>/dev/null)"
+  if [ "$label" != "unconfined" ] && [ -n "${label##*(unconfined)}" ]; then
+    exec aa-exec -p unconfined -- "$0" "$@"
+  fi
+fi
+
+# Restart the daemon so it picks up the new snap revision.
+#
+# When "refresh-mode: endure" is used, the daemon is not stopped during a
+# snap refresh, which keeps snap.lxd.slice and all container/VM cgroup
+# hierarchies alive. However, the old binary keeps running until an explicit
+# restart is issued. This hook performs that restart automatically so that
+# refreshes are still applied promptly, matching the behaviour of the
+# previous workaround-based approach.
+#
+# Write the stop reason before requesting the restart so that daemon.stop
+# stops LXD gracefully without evicting running containers/VMs.
+echo "snap refresh" > "${SNAP_COMMON}/state"
+
+snapctl restart lxd.daemon
