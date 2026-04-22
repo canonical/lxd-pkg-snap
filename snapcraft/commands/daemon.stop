@@ -12,20 +12,6 @@ fi
 reason="host shutdown"
 if [ -s "${SNAP_COMMON}/state" ]; then
     read -r reason < "${SNAP_COMMON}/state"
-else
-  # FIXME: Detect stop reason
-  #        This should be exposed by snapd directly
-  STATUS=$(snap-query 2>/dev/null || true)
-
-  if [ "${STATUS}" = "auto-refresh" ]; then
-      reason="snap refresh"
-  elif [ "${STATUS}" = "refresh-snap" ]; then
-      reason="snap refresh"
-  elif [ "${STATUS}" = "install-snap" ]; then
-      reason="snap refresh"
-  elif [ "${STATUS}" = "remove-snap" ]; then
-      reason="snap removal"
-  fi
 fi
 
 echo "=> Stop reason is: ${reason}"
