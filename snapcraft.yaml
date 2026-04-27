@@ -1456,6 +1456,20 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git cherry-pick -x 38dc234e940d2392c95c922f95a65fb85aa9534d # test/suites/clustering: use storage_backend in replicator tests
+      git cherry-pick -x 861755dd1f66d471e618fd68da93d12c323f5824 # test/includes/test-groups: run replicator tests against all storage drivers
+      git cherry-pick -x 35f18ffe6f4fd829af4acd4566fe1856850cd943 # test/suites/migration: refresh zfs clone via pull mode suceeds when no shared snapshots exist
+      git cherry-pick -x 611da07cf67749be9cee4e604799128c9a6bfc17 # lxd/storage/drivers: Delete ZFS clone volume before refresh migration
+      git cherry-pick -x 532039ff489c1fa0dadf3e9ff56bd5bd0d1b58e3 # lxd/api_replicators: Use Required validator for cluster config key
+      git cherry-pick -x 0b0fa6f2c34be5fa611ffeb07699c738ce3e6dcb # lxd/api_replicators: Restrict config merge to PATCH operations
+      git cherry-pick -x 993f7cf87ddb8b922cbc49104339d06ac1f2f126 # doc: Update metadata
+      git cherry-pick -x 88acf0535d7cdecb958e5a640a75badc37eab884 # lxd/api_replicators: Simplify operation scheduling conditional
+      git cherry-pick -x e940291dabd71f82b5a5c5ac8859c61100ff078c # lxd/cluster: Fix standBys parameter naming in test helper
+      git cherry-pick -x 59f48a8df4717e21431cce28875bb810f0ec92ac # lxd/db/cluster: add GetClusterLinkUsedBy
+      git cherry-pick -x bb1854de71e2e0ee77a09deec07ce56f02148265 # lxd/api_cluster_link: Prevent deletion and rename of in-use cluster links
+      git cherry-pick -x 490900913b3b3dab5fa464e548a5123f8b1b3924 # test/suites/clustering: verify cluster link cannot be deleted while referenced by a replicator
+      git cherry-pick -x cb0ffffd151e6a4b4e14dac35952faa99de28155 # lxd: use s.Endpoints.NetworkCert() when loading cluster cert for cluster links
+
       # Setup build environment
       export GOTOOLCHAIN="local"
       export GOPATH="$(realpath ./.go)"
