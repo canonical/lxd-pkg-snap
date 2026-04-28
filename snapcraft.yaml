@@ -395,6 +395,22 @@ parts:
       # Apply patches from Ubuntu sources.
       QUILT_PATCHES=debian/patches quilt push -a
 
+      # Secboot firmware (SECURE_BOOT_ENABLE=TRUE) enforces strict W^X memory (NX protection)
+      # protection via EFI_MEMORY_ATTRIBUTE_PROTOCOL (new in EDK2 2025.11+).
+      # Older bootloaders might be unusable:
+      # * https://bugs.launchpad.net/ubuntu/+source/edk2/+bug/2149400 (Synchronous Exception)
+      # * https://github.com/canonical/lxd/issues/18187 (Exception Type - 0E(#PF - Page-Fault))
+      # Workaround: add $(NO_STRICTNX_COMMON_FLAGS) (i.e. --pcd PcdUninstallMemAttrProtocol=TRUE)
+      # to OVMF_4M_SECBOOT_FLAGS and AAVMF_SECBOOT_FLAGS so the protocol is
+      # uninstalled before the bootloader runs.
+      # Secure Boot signature verification (SECURE_BOOT_ENABLE=TRUE) remains active; only
+      # the W^X enforcement is disabled as if
+      # lxc config set <inst> raw.qemu="-fw_cfg name=opt/org.tianocore/UninstallMemAttrProtocol,string=y"
+      # had been used.
+      # The longer term plan is to stop disabling this protection and instead document that older guests
+      # require `boot.mode=uefi-nosecureboot`.
+      sed -i 's/^\(\(AAVMF\|OVMF_4M\)_SECBOOT_FLAGS = .*\)$/\1 $(NO_STRICTNX_COMMON_FLAGS)/' debian/rules
+
       # Apply patches
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
       cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
@@ -702,7 +718,7 @@ parts:
     prime:
       - bin/ovs-vsctl
       - lib/*/libunbound*so*
-      - share/openvswitch/*.ovsschema
+      - share/openvswitch/vswitch.ovsschema
 
   ovn:
     after:
@@ -919,12 +935,11 @@ parts:
 
       set -eux
 
-      # Download meson and pycotap Python wheels (normally shipped in upstream tarballs)
-      pip download --dest python/wheels meson==1.9.0 pycotap==1.3.1
+      # Download meson Python wheel (normally shipped in upstream tarballs)
+      pip download --dest python/wheels meson==1.9.0
 
       # Ensure the wheels were downloaded
       [ "$(sha256sum python/wheels/meson-1.9.0-py3-none-any.whl | awk '{print $1}')" = "45e51ddc41e37d961582d06e78c48e0f9039011587f3495c4d6b0781dad92357" ] || { echo "Invalid sha256sum for meson"; exit 1; }
-      [ "$(sha256sum python/wheels/pycotap-1.3.1-py3-none-any.whl | awk '{print $1}')" = "1c3a25b3ff89e48f4e00f1f71dbbc1642b4f65c65d416524d07e73492fff25ea" ] || { echo "Invalid sha256sum for pycotap"; exit 1; }
 
     override-build: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
@@ -1227,19 +1242,8 @@ parts:
       - bin/pzstd
       - bin/zstd
 
-  apparmor:
-    plugin: nil
-    stage-packages:
-      - apparmor
-    organize:
-      sbin/: bin/
-    prime:
-      - bin/apparmor_parser
-
   # Core components
   lxc:
-    after:
-      - apparmor
     source: https://github.com/lxc/lxc
     source-commit: 2597434ae2472114c70ad2bdf4ae5580c9e22717 # v6.0.6
     source-depth: 1
@@ -1322,6 +1326,7 @@ parts:
       - --datadir=/snap/lxd/current/
       - --localstatedir=/var/snap/lxd/common/var/
       - -Ddocs=false
+      - -Dinit-script=   # Disables generation of systemd/sysvinit scripts
       - -Dtests=false
     organize:
       lib/*/lxcfs/liblxcfs.so: lib/
@@ -1469,6 +1474,24 @@ parts:
       git cherry-pick -x bb1854de71e2e0ee77a09deec07ce56f02148265 # lxd/api_cluster_link: Prevent deletion and rename of in-use cluster links
       git cherry-pick -x 490900913b3b3dab5fa464e548a5123f8b1b3924 # test/suites/clustering: verify cluster link cannot be deleted while referenced by a replicator
       git cherry-pick -x cb0ffffd151e6a4b4e14dac35952faa99de28155 # lxd: use s.Endpoints.NetworkCert() when loading cluster cert for cluster links
+      git cherry-pick -x 1444c3fba8bb76ce8ae3d36cf7e11c20d058a648 # lxd/api: Don't mention node in error messages
+      git cherry-pick -x d94d0cba1512372959ffe9ecc6b89692edf07fed # lxd/api: Return HTTP 400 when trying to change cluster.https_address
+      git cherry-pick -x d3d59fa22c238e8e4de25619f270bb504da9436f # lxd/api: Only setup reverter if local config changed in doAPI10Update
+      git cherry-pick -x 8643250eeffbd9589829e75c9a57b84b00022d62 # lxd/api: Only setup reverter and cluster notification if global config changed
+      git cherry-pick -x c88b945f58d3c764ff9866877890360e6bf5677f # lxd/api: Remove unnecessary map.Copy in api10Put
+      git cherry-pick -x 38721c87b67607e9debc73e3b97959b1f3fc1490 # lxd/api: Remove unnecessary map.Copy in doAPI10Update
+      git cherry-pick -x 15a7c08914af1a5be54220a0abd1ddef7457f6f8 # lxd/api: Remove unnecessary map initialisation in doAPI10Update
+      git cherry-pick -x 6bf53893746bb3931a13f524eda661918df6b1fb # lxd/api: Use old config in revert rather than partial local config in PATCH requests
+      git cherry-pick -x 31bd70f472f05ea59be136abb13cf0af604705be # lxd/api: Use local var scope for reverters in doAPI10Update
+      git cherry-pick -x 98b01a30a979973424a27dd98bc77899a954b3f6 # lxd/api: Fix typo
+      git cherry-pick -x 3db81137d2ef5c35bdab9cd07b66c02e0c7754e5 # lxd/cluster/config/config: Fix incorrect mention of node config
+      git cherry-pick -x 77444b64a908d446c2ddbedd90c63f2d9defdcb8 # lxd: Don't mention node in errors
+      git cherry-pick -x e1bd711fc30b74538c1b6a4cd7a0aed56dd384ff # lxd/db/cluster/update: Remove trailing whitespace
+      git cherry-pick -x 41cfad1c05ccaa2f8a15f9d4b107ab803a6217db # test: Test that a covering core.https_address can be unset and the cluster.https_address is reinstated
+      git cherry-pick -x 116e7a2c3dfc1fe12eb14eadd35d6a0682da113b # lxd/api: Re-activate the cluster HTTPS address listener if a previously covering core.https_address is unset
+      git cherry-pick -x 5ee3f52c29e4263de165bcdb7787adcb4fa51fb6 # lxd/api: Fix potential crash if non string config sent as notification in api10Put
+      git cherry-pick -x a3f8ade2edadbd5826a73e5960b23aa7cfecb171 # lxd/endpoints: Improve logging of changes
+      git cherry-pick -x f8aa72ebc8efba4e9055b06648ed6fca5542f4c1 # lxd/endpoints/pprof: Fix incorrect address comparison when changing address
 
       # Setup build environment
       export GOTOOLCHAIN="local"
