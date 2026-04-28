@@ -1514,6 +1514,14 @@ parts:
       git cherry-pick -x f1f322e1e9a479ca77a55188870b04246a94e88d # lxd: Fix operation URLs for snapshot rename.
       git cherry-pick -x cb4e37d04acd0296620f7ab809a9821b075e5567 # lxd: Simplify operation URLs for snapshot edit/delete.
       git cherry-pick -x 6287fb3397ee8c6ff9b8528c821b9909f594ae01 # lxd: Add missing error message override when getting volume over devlxd.
+      git cherry-pick -x f6d8b412c2e346afe84a244665ac9c35a30b635c # lxd/db/cluster: Allow an error return in identity group filter.
+      git cherry-pick -x 6a9868581d246143f240e7c0d869e834f9b3a629 # lxd: Update calls to get identity groups.
+      git cherry-pick -x 342030ff8c9f256ade381276e2cf86f24d469619 # lxd: Fix how groups are set on identity patch.
+      git cherry-pick -x dccd70fab8f7f0bd6698798b2e90b62893509093 # lxd: Enforce that editor can view all of an identities' groups.
+      git cherry-pick -x 3cb4628a9c899da96aaff16d0ccd630bcdf5f4b6 # test/suites: Test group management when not all groups are visible.
+      git cherry-pick -x b3ae1fd21bac9605bfa41d7bbe97051e1bed1ac0 # lxd/auth/drivers: Update entitlement comments.
+      git cherry-pick -x 4e1369b515bfc5e8e1a64e1be3cfcd1b5c838436 # lxd/auth: Update auth
+      git cherry-pick -x 2bd9741fa5e65770d5647cb3d74a1a7674f6fe43 # doc: Update metadata
 
       # Setup build environment
       export GOTOOLCHAIN="local"
