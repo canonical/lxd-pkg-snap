@@ -1492,6 +1492,36 @@ parts:
       git cherry-pick -x 5ee3f52c29e4263de165bcdb7787adcb4fa51fb6 # lxd/api: Fix potential crash if non string config sent as notification in api10Put
       git cherry-pick -x a3f8ade2edadbd5826a73e5960b23aa7cfecb171 # lxd/endpoints: Improve logging of changes
       git cherry-pick -x f8aa72ebc8efba4e9055b06648ed6fca5542f4c1 # lxd/endpoints/pprof: Fix incorrect address comparison when changing address
+      git cherry-pick -x 090fca5b6c11cd8494cd9dc967dbcc9ebb088fe8 # lxd: Add snapshot, backup, and "full name" to storage volume details.
+      git cherry-pick -x 5dc8db822a81fc44873140cd596a17967528a7a4 # lxd: Use storage volume details to decide auth check URL.
+      git cherry-pick -x 34acb8f44c963375e8019c93dcfc17ae57211562 # lxd: Use storage volume details for DevLXD handlers.
+      git cherry-pick -x e34b374d2ca84f94e9a9cb1fe085d84edecc2617 # lxd: Use storage volume details for backup handlers.
+      git cherry-pick -x 27566c17b7aa2ac3c1a2432849f1b4871db4632d # lxd: Use storage volume details for snapshot handlers.
+      git cherry-pick -x 709859c8734cccd1cd38e91c954edbf7a49a092c # lxd: If not clustered, shortcut remote volume check.
+      git cherry-pick -x eea862106f6a4e150372a728d613a8c78063c169 # lxd: Indicate that the location is the current member if clustered.
+      git cherry-pick -x 1db46aa76a429bb22e0a366deb9d8a4822569f3d # lxd: Set location on refresh based on source pool.
+      git cherry-pick -x f0a0e8fe32875cc7b1834aee52c3e26d1a06a35f # lxd: Set location on copy operation URLs based on source pool.
+      git cherry-pick -x e1eb53ed66a4bc9bf417da9460adac1793e49818 # lxd: Set project on copy operation URLs.
+      git cherry-pick -x ed8b95537286b87332194ce8faed8d4b720f8568 # lxd: Fix project and entity URL for migration.
+      git cherry-pick -x 03bfde0d34ff340aefb7aa510be563b3ba44246f # lxd: Update volume POST migration function.
+      git cherry-pick -x 8c01eb8e4287a0a1cd47d3f27c99589e0aac0362 # lxd: Update volume POST rename function.
+      git cherry-pick -x 62b7071397e8fdbb492e5eb3d56c02be9fc85463 # lxd: Update volume POST move function.
+      git cherry-pick -x 9ac5c7d575ea0cb1d010f64caab3e21373205e69 # lxd: Update calls to refactored volume helpers.
+      git cherry-pick -x 39cba2bb769bb4d85434e7b573fe94c2bc7590df # lxd: Set target parameter on volume migration operation URL.
+      git cherry-pick -x 20aa40854921acb71d09993ed0066ea3470ffa4a # lxd: Indicate why `details.location` is not used as target in volume deletion helper.
+      git cherry-pick -x 5e0923c2bacc6491df377a4ff61652256d61a75d # lxd: Fix operation URLs for backup creation.
+      git cherry-pick -x 054338fcb4557fb637189454b17882d68c0f05d7 # lxd: Fix operation URLs for backup rename.
+      git cherry-pick -x f1f322e1e9a479ca77a55188870b04246a94e88d # lxd: Fix operation URLs for snapshot rename.
+      git cherry-pick -x cb4e37d04acd0296620f7ab809a9821b075e5567 # lxd: Simplify operation URLs for snapshot edit/delete.
+      git cherry-pick -x 6287fb3397ee8c6ff9b8528c821b9909f594ae01 # lxd: Add missing error message override when getting volume over devlxd.
+      git cherry-pick -x f6d8b412c2e346afe84a244665ac9c35a30b635c # lxd/db/cluster: Allow an error return in identity group filter.
+      git cherry-pick -x 6a9868581d246143f240e7c0d869e834f9b3a629 # lxd: Update calls to get identity groups.
+      git cherry-pick -x 342030ff8c9f256ade381276e2cf86f24d469619 # lxd: Fix how groups are set on identity patch.
+      git cherry-pick -x dccd70fab8f7f0bd6698798b2e90b62893509093 # lxd: Enforce that editor can view all of an identities' groups.
+      git cherry-pick -x 3cb4628a9c899da96aaff16d0ccd630bcdf5f4b6 # test/suites: Test group management when not all groups are visible.
+      git cherry-pick -x b3ae1fd21bac9605bfa41d7bbe97051e1bed1ac0 # lxd/auth/drivers: Update entitlement comments.
+      git cherry-pick -x 4e1369b515bfc5e8e1a64e1be3cfcd1b5c838436 # lxd/auth: Update auth
+      git cherry-pick -x 2bd9741fa5e65770d5647cb3d74a1a7674f6fe43 # doc: Update metadata
 
       # Setup build environment
       export GOTOOLCHAIN="local"
