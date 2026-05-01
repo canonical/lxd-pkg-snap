@@ -1522,6 +1522,11 @@ parts:
       git cherry-pick -x b3ae1fd21bac9605bfa41d7bbe97051e1bed1ac0 # lxd/auth/drivers: Update entitlement comments.
       git cherry-pick -x 4e1369b515bfc5e8e1a64e1be3cfcd1b5c838436 # lxd/auth: Update auth
       git cherry-pick -x 2bd9741fa5e65770d5647cb3d74a1a7674f6fe43 # doc: Update metadata
+      git cherry-pick -x b014fe2187d1211646bb13f707eb097664a6cb90 # lxd/sys/os: check if the kernel is supports the modern CephFS mount syntax (5.17+)
+      git cherry-pick -x 2cdf9bfb8afcfda7f2e1c8bf08acf64937a8d608 # lxd/storage/drivers/utils_ceph: use legacy CephFS mount syntax on kernel < 5.17
+      git cherry-pick -x 8e8bef60a7b6361767f2016ebaf44f5ec93fc551 # lxd/storage/drivers/utils_ceph_test: extend test cases
+      git cherry-pick -x 03b6dc0ab69acaca7ffbef51d18ff5dc7940e597 # lxd/device/device_utils_disk: accept a new parameter for modern mount syntax
+      git cherry-pick -x c0f5da928edc9448efc92f869bc229329051d415 # lxd/device/disk: pass a new parameter for modern mount syntax
 
       # Setup build environment
       export GOTOOLCHAIN="local"
