@@ -1225,6 +1225,7 @@ parts:
       git cherry-pick -x b01add9f28f26cbd52ffe49bca1bab8ca9358cad # lxd/instance: transition to standard RenderTemplate logic
       git cherry-pick -x c59c985d467b0eb3932b376cde9cdcaf64f7893d # shared/util: capture panics from pongo2
       git cherry-pick -x 2cc94ece8ec6eaecf0485f17ff17b589a314f4f1 # shared/util_test: add test for RenderTemplateFile
+      git cherry-pick -x 146ceaaf9ad847b5330137479e8f01198b22dd72 # lxd: Don't panic if backup config is invalid
 
       # Build the binaries
       go build -o "${SNAPCRAFT_PART_INSTALL}/bin/lxc" github.com/canonical/lxd/lxc
