@@ -1527,6 +1527,7 @@ parts:
       git cherry-pick -x 8e8bef60a7b6361767f2016ebaf44f5ec93fc551 # lxd/storage/drivers/utils_ceph_test: extend test cases
       git cherry-pick -x 03b6dc0ab69acaca7ffbef51d18ff5dc7940e597 # lxd/device/device_utils_disk: accept a new parameter for modern mount syntax
       git cherry-pick -x c0f5da928edc9448efc92f869bc229329051d415 # lxd/device/disk: pass a new parameter for modern mount syntax
+      git cherry-pick -x 540b15680592efedb9d7baa6ab19281e7150b82e # lxd/instance/drivers: Fix backup file error handling for refresh
 
       # Setup build environment
       export GOTOOLCHAIN="local"
