@@ -1726,6 +1726,9 @@ parts:
       git cherry-pick -x dab55d6a91ed5227ff4e73b847b488c12642fed0 # test/suites/backup: Check device overrides during import (PR #17967)
       git cherry-pick -x a07ff871480b41c1038555ed601f268bb1c6020d # test/suites/backup: Check for specific error during import (PR #17967)
       git cherry-pick -x ec21300ff9e98824368cc1563e4338adac20633d # client/simplestream: Compute and verify combined hash during image downloads (PR #17993)
+      git cherry-pick -x ff483bf743385efa159953aea9667280b15595a7 # lxd/backup: Check for missing .Config in GetInfo (PR #18226)
+      git cherry-pick -x 1d92da54a932dc7640b7d80b714c56038c75648b # lxd/backup: Validate all backup config slices for nil values (PR #18226)
+      git cherry-pick -x 4a165ccfe964c5beaa90fde1a6e9fdf7b344d308 # lxd/backup: Perform a defensive check against the config itself before trying to convert (PR #18226)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
