@@ -1528,6 +1528,9 @@ parts:
       git cherry-pick -x 03b6dc0ab69acaca7ffbef51d18ff5dc7940e597 # lxd/device/device_utils_disk: accept a new parameter for modern mount syntax
       git cherry-pick -x c0f5da928edc9448efc92f869bc229329051d415 # lxd/device/disk: pass a new parameter for modern mount syntax
       git cherry-pick -x 540b15680592efedb9d7baa6ab19281e7150b82e # lxd/instance/drivers: Fix backup file error handling for refresh
+      git cherry-pick -x e6843d8b8ea36b4d214bf7141430a80acecff011 # lxd/backup: Check for missing .Config in GetInfo
+      git cherry-pick -x 8cc93d51af3f49b87aa5166b9ed9b45a29b5d0d7 # lxd/backup: Validate all backup config slices for nil values
+      git cherry-pick -x 83685628089e431c7633cc4b03fa8e583d350f01 # lxd/backup: Perform a defensive check against the config itself before trying to convert
 
       # Setup build environment
       export GOTOOLCHAIN="local"
