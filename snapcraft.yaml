@@ -911,6 +911,7 @@ parts:
       - else:
         - bison
         - bzip2
+        - curl
         - flex
         - pkg-config
         - libaio-dev
@@ -923,7 +924,6 @@ parts:
         - liburing-dev
         - libusb-1.0-0-dev
         - libusbredirparser-dev
-        - python3-pip
         - quilt
         - librbd-dev
     stage-packages:
@@ -954,10 +954,14 @@ parts:
       set -eux
 
       # Download meson Python wheel (normally shipped in upstream tarballs)
-      pip download --dest python/wheels meson==1.9.0
+      # Equivalent to: pip download --dest python/wheels meson==1.9.0
+      # URL and hash from: https://pypi.org/project/meson/1.9.0/#files
+      mkdir -p python/wheels
+      MESON="meson-1.9.0-py3-none-any.whl"
+      curl --fail -sSL --output "python/wheels/${MESON}" "https://files.pythonhosted.org/packages/23/ed/a449e8fb5764a7f6df6e887a2d350001deca17efd6ecd5251d2fb6202009/${MESON}"
 
       # Ensure the wheels were downloaded
-      [ "$(sha256sum python/wheels/meson-1.9.0-py3-none-any.whl | awk '{print $1}')" = "45e51ddc41e37d961582d06e78c48e0f9039011587f3495c4d6b0781dad92357" ] || { echo "Invalid sha256sum for meson"; exit 1; }
+      [ "$(sha256sum "python/wheels/${MESON}" | awk '{print $1}')" = "45e51ddc41e37d961582d06e78c48e0f9039011587f3495c4d6b0781dad92357" ] || { echo "Invalid sha256sum for meson"; exit 1; }
 
     override-build: |-
       [ "$(uname -m)" = "armv7l" ] && exit 0
