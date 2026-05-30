@@ -432,7 +432,6 @@ parts:
       # Apply patches
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0001-force-DUID-LLT.patch"
       cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
-      patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
 
       # Install files destination
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
@@ -484,15 +483,18 @@ parts:
           if [ "${TYPE}" = "DEBUG" ]; then
               # Add `DEBUG_VERBOSE` to print error level for DEBUG build
               sed --in-place=.bak "${SED_EXPR}" "${DSC}"
+              # Bump boot timeout to 3s for DEBUG builds
+              sed -i 's/\(gEfiMdePkgTokenSpaceGuid\.PcdPlatformBootTimeOut\)|[0-9]\+$/\1|3/' "${DSC}"
+          else
+              # Normalize boot timeout to 0 for RELEASE builds (arm64/riscv64 default to 3 upstream)
+              sed --in-place=.bak 's/\(gEfiMdePkgTokenSpaceGuid\.PcdPlatformBootTimeOut\)|[0-9]\+$/\1|0/' "${DSC}"
           fi
 
           # Enable parallel builds to avoid lengthy build times due to LTO. amd64 build on LP goes from ~1h45m -> ~60m
           # lto-wrapper: note: see the ‘-flto’ option documentation for more information
           /usr/bin/make -j$(nproc) -f debian/rules "${BUILD_TARGET}" BUILD_TYPE="${TYPE}"
 
-          if [ "${TYPE}" = "DEBUG" ] && [ -f "${DSC}.bak" ]; then
-              mv "${DSC}.bak" "${DSC}"
-          fi
+          [ -f "${DSC}.bak" ] && mv "${DSC}.bak" "${DSC}"
 
           cp "${SRC_DIR}/${SRC_CODE}" "${CRAFT_PART_INSTALL}/share/qemu/OVMF_CODE.4MB${SUFFIX}.fd"
           cp "${SRC_DIR}/${SRC_VARS}" "${CRAFT_PART_INSTALL}/share/qemu/OVMF_VARS.4MB${SUFFIX}.fd"
