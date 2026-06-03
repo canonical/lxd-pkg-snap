@@ -465,6 +465,9 @@ parts:
       cp "${CRAFT_PROJECT_DIR}/patches/edk2-0002-logo.bmp" MdeModulePkg/Logo/Logo.bmp
       patch -p1 < "${CRAFT_PROJECT_DIR}/patches/edk2-0003-boot-delay.patch"
 
+      # Force parallel LTO by appending '=auto' to standalone '-flto' compiler/linker definitions (templates and generated .txt)
+      find BaseTools/Conf/ -type f \( -name "*.template" -o -name "*.txt" \) -exec sed -i 's/-flto\b/-flto=auto/g' {} +
+
       # Install files destination
       mkdir -p "${CRAFT_PART_INSTALL}/share/qemu/"
 
