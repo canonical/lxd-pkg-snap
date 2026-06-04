@@ -212,6 +212,9 @@ parts:
     plugin: go
     build-snaps:
       - go/1.26/stable
+    build-environment:
+      - GOTOOLCHAIN: "local"
+      - GOFLAGS: "-trimpath"
     prime:
       - bin/amd-ctk
 
