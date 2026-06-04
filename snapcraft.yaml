@@ -1357,6 +1357,13 @@ parts:
       git config user.email "noreply@lists.canonical.com"
       git config user.name "LXD snap builder"
 
+      git revert --no-edit 1815e800a31810744e5ad81f9ff1986eaf757cf4 # meson: don't forget to set PSI trigger mocks for liblxcfstest
+      git revert --no-edit 8faa12be3ea3b09cdd0353b2d2219c8d4859ad55 # github: enable mocks for CI upgrade tests
+      git revert --no-edit 8f4e5640ae84198760f4b5ff1c19f165013e35ea # github: pass LIBFUSE env variable to upgrade tests
+      git revert --no-edit d12887280194cdd6eec8549ab1f8d5713ce535bf # proc_fuse: move release/releasedir at the end
+      git revert --no-edit 77fece13e665cd502ed0af9c26b82e7832a1ee7b # lxcfs: wire up ->poll callback for /proc
+      git revert --no-edit 553e5a1951c25bc7088bb55223e036f1cab8cca3 # lxcfs: wire up ->write callback for /proc
+
       set +ex
       craftctl default
       set -ex
