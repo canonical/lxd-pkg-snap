@@ -1729,6 +1729,7 @@ parts:
       git cherry-pick -x ff483bf743385efa159953aea9667280b15595a7 # lxd/backup: Check for missing .Config in GetInfo (PR #18226)
       git cherry-pick -x 1d92da54a932dc7640b7d80b714c56038c75648b # lxd/backup: Validate all backup config slices for nil values (PR #18226)
       git cherry-pick -x 4a165ccfe964c5beaa90fde1a6e9fdf7b344d308 # lxd/backup: Perform a defensive check against the config itself before trying to convert (PR #18226)
+      git cherry-pick -x e89a318c72061e1ccd89378b67e4e6da04dd5b39 # lxd/backup: Don't always populate volumes in the new format (PR #17074)
 
       # Setup build environment
       export GOTOOLCHAIN="local"
