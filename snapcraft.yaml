@@ -903,7 +903,7 @@ parts:
       - spice-protocol
       - spice-server
     source: https://git.launchpad.net/ubuntu/+source/qemu
-    source-commit: cbc9464605aa15db0bbce833942c4ed8dcf33f5d # import/1%8.2.2+ds-0ubuntu1.14
+    source-commit: c003da9fa7abc4bdbfa7bfffccd1339f608dbd0f # import/1%8.2.2+ds-0ubuntu1.17
     # Avoid shallow clone (0 means full clone)
     source-depth: 0
     source-type: git
